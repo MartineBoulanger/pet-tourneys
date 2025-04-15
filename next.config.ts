@@ -17,6 +17,13 @@ const nextConfig: NextConfig = {
         pathname: '/images/**',
         search: '',
       },
+      {
+        protocol: 'https',
+        hostname: 'pet-tourneys.vercel.app', // only for local development
+        port: '',
+        pathname: '/images/**',
+        search: '',
+      },
     ],
     formats: ['image/avif', 'image/webp'],
   },
