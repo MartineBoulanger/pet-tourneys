@@ -5,6 +5,8 @@ import { getAdminSession, getUserSession } from '@/supabase/actions/auth';
 import { Footer } from '@/components/footer/Footer';
 import { Header } from '@/components/header/Header';
 import { BottomNavigation } from '@/components/header/BottomNavigation';
+import { SpeedInsights } from '@vercel/speed-insights/next';
+import { Analytics } from '@vercel/analytics/next';
 
 export const metadata: Metadata = {
   title: 'WoW Pet Community',
@@ -39,6 +41,8 @@ export default async function RootLayout({
         <main className='min-h-screen relative'>{children}</main>
         <Footer />
         <BottomNavigation user={isAdmin} />
+        <SpeedInsights />
+        <Analytics />
       </body>
     </html>
   );
