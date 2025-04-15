@@ -1,0 +1,85 @@
+@import 'tailwindcss';
+@import './theme.css';
+
+@layer base {
+  body {
+    background: var(--color-medium-grey);
+    color: var(--color-foreground);
+    font-size: 16px;
+    line-height: normal;
+    display: flexbox;
+  }
+  main {
+    padding: 20px;
+  }
+  button {
+    padding-inline: 16px;
+    padding-top: 8px;
+    padding-bottom: 10px;
+    border-radius: 8px;
+    text-transform: uppercase;
+    line-height: normal;
+    cursor: pointer;
+  }
+  h1,
+  h2 {
+    font-weight: 700;
+    line-height: normal;
+    font-family: var(--font-warcraft);
+    letter-spacing: 1.5px;
+  }
+  h1 {
+    font-size: 30px;
+    margin-bottom: 20px;
+    background: linear-gradient(to bottom, var(--color-blue), var(--color-red));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  h2 {
+    font-size: 20px;
+  }
+  @media screen and (min-width: 640px) {
+    h1 {
+      font-size: 60px;
+    }
+    h2 {
+      font-size: 30px;
+    }
+  }
+}
+
+@layer components {
+  .link {
+    line-height: normal;
+    background-color: transparent;
+    /* so this has not to be written separately like : .link:hover {} */
+    @apply hover:transition-all hover:duration-300 hover:underline hover:text-[var(--color-blue)];
+  }
+  .btn-submit {
+    background-color: var(--color-blue);
+    color: var(--color-foreground);
+    /* so this to avoid DRY and so this has not to be written separately like : .btn-submit:hover {} */
+    @apply hover:transition-all hover:duration-500 hover:bg-[var(--color-blue-grey)];
+  }
+  .btn-cancel {
+    background-color: var(--color-red);
+    color: var(--color-foreground);
+    /* so this to avoid DRY and so this has not to be written separately like : .btn-cancel:hover {} */
+    @apply hover:transition-all hover:duration-500 hover:bg-[var(--color-dark-red)];
+  }
+  .btn-link {
+    background-color: transparent;
+    color: inherit;
+    padding: 0;
+    font-weight: 700;
+    /* so this to avoid DRY and so this has not to be written separately like : .btn-link:hover {} */
+    @apply hover:transition-all hover:duration-500 hover:text-[var(--color-blue)];
+  }
+  .btn-inverted {
+    background-color: transparent;
+    color: var(--color-foreground);
+    border: 1px solid var(--color-foreground);
+    @apply hover:transition-all hover:duration-500 hover:bg-[var(--color-blue-grey)] hover:border-[var(--color-blue-grey)];
+  }
+}

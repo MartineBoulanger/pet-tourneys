@@ -1,0 +1,78 @@
+/* Custom project theme */
+@theme {
+  /* theme colors */
+  --color-background: #101010;
+  --color-foreground: #f1f1f1;
+  --color-dark-grey: #181818;
+  --color-medium-grey: #202020;
+  --color-light-grey: #303030;
+  --color-blue-grey: #2f3648;
+  --color-dark-blue: #1e3a8a;
+  --color-dark-red: #7f1d1d;
+  --color-blue: #2563eb;
+  --color-red: #dc2626;
+  --color-green: #00f300;
+  --color-yellow: #ffdf00;
+
+  /* pet type colors */
+  --color-aquatic: #11a5b5;
+  --color-beast: #ea2d21;
+  --color-critter: #795745;
+  --color-dragonkin: #44a511;
+  --color-elemental: #fece02;
+  --color-flying: #ddcf53;
+  --color-humanoid: #11a7f5;
+  --color-magic: #b278ff;
+  --color-mechanical: #777466;
+  --color-undead: #a8767b;
+
+  /* theme animations */
+  --animate-slide-in-top: slide-in-top 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+    0s 1 normal both;
+  --animate-slide-in-right: slide-in-right 0.4s
+    cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s 1 normal both;
+  --animate-fade-in: fade-in 0.5s cubic-bezier(0.39, 0.575, 0.565, 1) 0s 1
+    normal both;
+
+  /* spacings */
+  --spacing-5px: 5px;
+
+  /* border radius */
+  --radius-5px: 5px;
+}
+
+@theme inline {
+  /* theme fonts */
+  --font-sans: var(--font-roboto);
+  --font-serif: var(--font-charm);
+  --font-warcraft: var(--font-warcraft);
+}
+
+@keyframes slide-in-top {
+  0% {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@keyframes slide-in-right {
+  0% {
+    transform: translateX(300px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
