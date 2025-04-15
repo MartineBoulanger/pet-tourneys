@@ -4,11 +4,17 @@ import { MatchListItem } from '@/components/tournaments';
 import { Container } from '@/components/ui';
 import { getTournamentDetails } from '@/supabase/actions/tournaments';
 import { PageParams } from '@/types';
-import { Metadata } from 'next';
 
-export const metadata: Metadata = {
-  title: 'Tourney Matches List',
-};
+export async function generateMetadata({ params }: { params: PageParams }) {
+  const { id } = await params;
+  return {
+    title: 'Tourney Matches List',
+    alternates: {
+      canonical: `${process.env
+        .NEXT_PUBLIC_BASE_URL!}/tournaments/${id}/matches`,
+    },
+  };
+}
 
 export default async function MatchesPage({ params }: { params: PageParams }) {
   const { id } = await params;

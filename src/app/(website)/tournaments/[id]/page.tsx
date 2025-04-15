@@ -1,32 +1,51 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getTournamentDetails } from '@/supabase/actions/tournaments';
+import { getPaginatedMatches } from '@/supabase/actions/matches';
 import { MatchList } from '@/components/tournaments';
 import { Container } from '@/components/ui';
-import { PageParams } from '@/types';
-import { Metadata } from 'next';
+import { PageParams, PageSearchParams } from '@/types';
 
-export const metadata: Metadata = {
-  title: 'Tourney Details',
-};
+export async function generateMetadata({ params }: { params: PageParams }) {
+  const { id } = await params;
+  return {
+    title: 'Tourney Details',
+    alternates: {
+      canonical: `${process.env.NEXT_PUBLIC_BASE_URL!}/tournaments/${id}`,
+    },
+  };
+}
 
 export default async function TournamentPage({
   params,
+  searchParams,
 }: {
   params: PageParams;
+  searchParams: PageSearchParams;
 }) {
   const { id } = await params;
+  const { page } = await searchParams;
+  const currentPage = Number(page) || 1;
+  const MATCHES_PER_PAGE = 10;
+  const offset = (currentPage - 1) * MATCHES_PER_PAGE;
+
   const {
     success,
     status,
     message,
-    data: { tournament, matches },
+    data: { tournament },
   } = await getTournamentDetails(id);
 
-  if (!success) {
+  const {
+    success: succ,
+    status: stat,
+    data: { matches, totalPages },
+  } = await getPaginatedMatches(id, offset, MATCHES_PER_PAGE);
+
+  if (!success || !succ) {
     return (
       <Container className='text-center'>
-        <h1 className='text-red'>{`Error ${status}!`}</h1>
+        <h1 className='text-red'>{`Error ${status || stat}!`}</h1>
         <p>{message}</p>
       </Container>
     );
@@ -58,8 +77,14 @@ export default async function TournamentPage({
           {' participants'}
         </p>
       </div>
-      {matches.length > 0 ? (
-        <MatchList matches={matches} tournamentId={tournament.id} />
+      {matches && matches.length > 0 ? (
+        <MatchList
+          matches={matches}
+          tournamentId={tournament.id}
+          currentPage={currentPage}
+          totalPages={totalPages}
+          showPagination
+        />
       ) : (
         <p className='p-4 rounded-lg bg-light-grey text-center shadow-md'>
           {'There are no matches for this tournament available yet.'}

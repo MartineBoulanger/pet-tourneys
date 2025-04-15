@@ -2,11 +2,15 @@ import { notFound } from 'next/navigation';
 import { getTournaments } from '@/supabase/actions/tournaments';
 import { Container } from '@/components/ui';
 import { TournamentsList } from '@/components/tournaments';
-import { Metadata } from 'next';
 
-export const metadata: Metadata = {
-  title: 'Tourneys',
-};
+export async function generateMetadata() {
+  return {
+    title: 'Tourneys',
+    alternates: {
+      canonical: `${process.env.NEXT_PUBLIC_BASE_URL!}/tournaments`,
+    },
+  };
+}
 
 export default async function TournamentsPage() {
   const {

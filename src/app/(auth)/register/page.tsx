@@ -1,6 +1,15 @@
 import { SignUpForm } from '@/components/auth';
 import { Container } from '@/components/ui';
 
+export async function generateMetadata() {
+  return {
+    title: 'Sign Up',
+    alternates: {
+      canonical: `${process.env.NEXT_PUBLIC_BASE_URL!}/register`,
+    },
+  };
+}
+
 export default function SignUpPage() {
   return (
     <Container className='max-w-[512px]'>

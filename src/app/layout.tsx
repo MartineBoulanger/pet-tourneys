@@ -16,6 +16,9 @@ export const metadata: Metadata = {
   description:
     'The WoW Pet Community for all things pet battling and battle pets related',
   robots: { index: true, follow: true },
+  alternates: {
+    canonical: process.env.NEXT_PUBLIC_BASE_URL!,
+  },
 };
 
 export const viewport: Viewport = {

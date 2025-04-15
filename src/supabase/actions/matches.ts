@@ -269,3 +269,44 @@ export async function updateMatchWithLogs(
     };
   }
 }
+
+export async function getPaginatedMatches(
+  tournamentId: string,
+  offset: number,
+  matchesPerPage: number
+) {
+  const supabase = await createClient();
+  const matchesTable = getTournamentTableName('matches', tournamentId);
+
+  const {
+    data: matches,
+    count,
+    error,
+  } = await supabase
+    .schema('api')
+    .from(matchesTable)
+    .select('*', { count: 'exact' })
+    .order('date', { ascending: false })
+    .range(offset, offset + matchesPerPage - 1);
+
+  if (error) {
+    return {
+      success: false,
+      status: 500,
+      message: error.message,
+      data: {},
+    };
+  }
+
+  const totalPages = Math.ceil(Number(count) / matchesPerPage);
+
+  return {
+    success: true,
+    status: 200,
+    message: null,
+    data: {
+      matches,
+      totalPages,
+    },
+  };
+}

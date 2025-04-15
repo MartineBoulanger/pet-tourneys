@@ -16,6 +16,7 @@ export type TournamentTableName =
 export type PageParams = Promise<{ id: string }>;
 export type MatchPageParams = Promise<{ id: string; matchId: string }>;
 export type MatchSearchParams = Promise<{ matchId?: string }>;
+export type PageSearchParams = Promise<{ page?: string }>;
 
 export interface ChartDataItem {
   name: string;

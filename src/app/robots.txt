@@ -1,5 +1,7 @@
 User-Agent: *
 Allow: /
+Disallow: *?matchId
+Disallow: *?page
 Disallow: /login
 Disallow: /register
 Disallow: /reset-password

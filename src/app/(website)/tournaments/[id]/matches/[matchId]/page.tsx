@@ -6,11 +6,21 @@ import {
 import { Container } from '@/components/ui';
 import { getMatchDetails } from '@/supabase/actions/matches';
 import { MatchPageParams } from '@/types';
-import { Metadata } from 'next';
 
-export const metadata: Metadata = {
-  title: 'Tourney Match Details',
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: MatchPageParams;
+}) {
+  const { id, matchId } = await params;
+  return {
+    title: 'Tourney Match Details',
+    alternates: {
+      canonical: `${process.env
+        .NEXT_PUBLIC_BASE_URL!}/tournaments/${id}/matches/${matchId}`,
+    },
+  };
+}
 
 export default async function MatchPage({
   params,

@@ -19,11 +19,17 @@ import {
   PageParams,
   MatchSearchParams,
 } from '@/types';
-import { Metadata } from 'next';
 
-export const metadata: Metadata = {
-  title: 'Tourney Stats',
-};
+export async function generateMetadata({ params }: { params: PageParams }) {
+  const { id } = await params;
+  return {
+    title: 'Tourney Stats',
+    alternates: {
+      canonical: `${process.env
+        .NEXT_PUBLIC_BASE_URL!}/tournaments/${id}/statistics`,
+    },
+  };
+}
 
 export default async function StatisticsPage({
   params,
