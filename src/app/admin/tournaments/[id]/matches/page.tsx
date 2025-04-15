@@ -4,6 +4,12 @@ import { getTournamentDetails } from '@/supabase/actions/tournaments';
 import { Container } from '@/components/ui';
 import { AdminPanelButtons, AdminMatchListItem } from '@/components/admin';
 import { PageParams } from '@/types';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Admin Matches List',
+  robots: { index: false, follow: false },
+};
 
 export default async function AdminMatchesPage({
   params,

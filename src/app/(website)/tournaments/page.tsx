@@ -2,6 +2,11 @@ import { notFound } from 'next/navigation';
 import { getTournaments } from '@/supabase/actions/tournaments';
 import { Container } from '@/components/ui';
 import { TournamentsList } from '@/components/tournaments';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Tourneys',
+};
 
 export default async function TournamentsPage() {
   const {

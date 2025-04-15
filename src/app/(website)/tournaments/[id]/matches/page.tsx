@@ -4,6 +4,11 @@ import { MatchListItem } from '@/components/tournaments';
 import { Container } from '@/components/ui';
 import { getTournamentDetails } from '@/supabase/actions/tournaments';
 import { PageParams } from '@/types';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Tourney Matches List',
+};
 
 export default async function MatchesPage({ params }: { params: PageParams }) {
   const { id } = await params;

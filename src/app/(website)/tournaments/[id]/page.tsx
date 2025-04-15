@@ -4,6 +4,11 @@ import { getTournamentDetails } from '@/supabase/actions/tournaments';
 import { MatchList } from '@/components/tournaments';
 import { Container } from '@/components/ui';
 import { PageParams } from '@/types';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Tourney Details',
+};
 
 export default async function TournamentPage({
   params,

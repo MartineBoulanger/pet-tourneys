@@ -12,7 +12,7 @@ export const MatchList = ({ matches, tournamentId }: MatchListProps) => {
     <>
       <h2 className='text-xl mb-5'>{'Recent Matches'}</h2>
       <div className='grid gap-4'>
-        {matches?.slice(0, 5).map((match) => (
+        {matches?.slice(0, 10).map((match) => (
           <MatchListItem
             key={match.id}
             tournamentId={tournamentId}

@@ -9,10 +9,13 @@ import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Analytics } from '@vercel/analytics/next';
 
 export const metadata: Metadata = {
-  title: 'WoW Pet Community',
+  title: {
+    template: '%s | Pet Tourneys',
+    default: 'Pet Tourneys',
+  },
   description:
-    'WoW Pet Community for all things pet battling and battle pets related',
-  robots: { index: false, follow: false },
+    'The WoW Pet Community for all things pet battling and battle pets related',
+  robots: { index: true, follow: true },
 };
 
 export const viewport: Viewport = {

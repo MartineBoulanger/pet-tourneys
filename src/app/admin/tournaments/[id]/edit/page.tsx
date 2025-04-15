@@ -2,6 +2,12 @@ import { TournamentForm } from '@/components/admin';
 import { Container } from '@/components/ui';
 import { getTournament } from '@/supabase/actions/tournaments';
 import { PageParams } from '@/types';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Edit Tourney',
+  robots: { index: false, follow: false },
+};
 
 export default async function EditTournamentPage({
   params,

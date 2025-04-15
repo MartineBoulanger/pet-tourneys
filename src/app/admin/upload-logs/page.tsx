@@ -2,6 +2,13 @@ import { getTournaments } from '@/supabase/actions/tournaments';
 import { UploadForm } from '@/components/admin';
 import { Container } from '@/components/ui';
 
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Upload Logs',
+  robots: { index: false, follow: false },
+};
+
 export default async function UploadLogsPage() {
   const {
     success,

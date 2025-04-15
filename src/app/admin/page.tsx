@@ -3,6 +3,12 @@ import { getUserSession } from '@/supabase/actions/auth';
 import { getTournaments } from '@/supabase/actions/tournaments';
 import { Container } from '@/components/ui';
 import { TournamentsListItem, AdminPanelButtons } from '@/components/admin';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Admin Panel',
+  robots: { index: false, follow: false },
+};
 
 export default async function AdminPage() {
   const response = await getUserSession();
@@ -56,7 +62,9 @@ export default async function AdminPage() {
             ))
           ) : (
             <p className='p-4 rounded-lg bg-light-grey text-center shadow-md'>
-              {'There are no tournaments available yet, please create a tournament.'}
+              {
+                'There are no tournaments available yet, please create a tournament.'
+              }
             </p>
           )}
         </div>

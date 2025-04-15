@@ -1,5 +1,10 @@
 import Image from 'next/image';
 import { Container } from '@/components/ui';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Home',
+};
 
 export default async function HomePage() {
   return (

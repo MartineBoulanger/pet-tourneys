@@ -6,6 +6,11 @@ import {
 import { Container } from '@/components/ui';
 import { getMatchDetails } from '@/supabase/actions/matches';
 import { MatchPageParams } from '@/types';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Tourney Match Details',
+};
 
 export default async function MatchPage({
   params,

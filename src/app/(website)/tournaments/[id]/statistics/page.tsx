@@ -19,6 +19,11 @@ import {
   PageParams,
   MatchSearchParams,
 } from '@/types';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Tourney Stats',
+};
 
 export default async function StatisticsPage({
   params,
