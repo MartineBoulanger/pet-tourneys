@@ -49,6 +49,7 @@ export const withSupabase = (middleware: CustomMiddleware) => {
       !request.nextUrl.pathname.startsWith('/matches') &&
       !request.nextUrl.pathname.startsWith('/tournaments') &&
       !request.nextUrl.pathname.startsWith('/auth') &&
+      !request.nextUrl.pathname.startsWith('/sitemap.xml') &&
       !request.nextUrl.pathname.endsWith('/')
     ) {
       // no user, potentially respond by redirecting the user to the login page

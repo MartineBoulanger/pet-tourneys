@@ -40,6 +40,20 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: 0.8,
       };
 
+      const tournamentStatisticsEntry = {
+        url: `${url}/tournaments/${tournament.id}/statistics`,
+        lastModified: new Date(tournament.created_at || new Date()),
+        changeFrequency: 'monthly' as const,
+        priority: 0.8,
+      };
+
+      const tournamentMatchesEntry = {
+        url: `${url}/tournaments/${tournament.id}/matches`,
+        lastModified: new Date(tournament.created_at || new Date()),
+        changeFrequency: 'monthly' as const,
+        priority: 0.8,
+      };
+
       const matchEntries =
         matches?.map((match) => ({
           url: `${url}/tournaments/${tournament.id}/matches/${match.id}`,
@@ -48,7 +62,21 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
           priority: 0.5,
         })) || [];
 
-      return [tournamentEntry, ...matchEntries];
+      const matchStatsEntries =
+        matches?.map((match) => ({
+          url: `${url}/tournaments/${tournament.id}/matches/${match.id}/statistics?matchId=${match.id}`,
+          lastModified: new Date(match.date || new Date()),
+          changeFrequency: 'monthly' as const,
+          priority: 0.5,
+        })) || [];
+
+      return [
+        tournamentEntry,
+        tournamentStatisticsEntry,
+        tournamentMatchesEntry,
+        ...matchEntries,
+        ...matchStatsEntries,
+      ];
     })
   );
 
