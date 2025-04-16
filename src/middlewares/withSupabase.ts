@@ -46,10 +46,10 @@ export const withSupabase = (middleware: CustomMiddleware) => {
       !request.nextUrl.pathname.includes('/register') &&
       !request.nextUrl.pathname.includes('/forgot-password') &&
       !request.nextUrl.pathname.includes('/reset-password') &&
-      !request.nextUrl.pathname.startsWith('/matches') &&
       !request.nextUrl.pathname.startsWith('/tournaments') &&
       !request.nextUrl.pathname.startsWith('/auth') &&
-      !request.nextUrl.pathname.startsWith('/sitemap.xml') &&
+      !request.nextUrl.pathname.endsWith('/sitemap.xml') &&
+      !request.nextUrl.pathname.endsWith('/robots.txt') &&
       !request.nextUrl.pathname.endsWith('/')
     ) {
       // no user, potentially respond by redirecting the user to the login page
