@@ -1,4 +1,4 @@
-import { StatDistribution, TournamentPetStat } from '@/types';
+import { BreedStats, StatDistribution, TournamentPetStat } from '@/types';
 
 export function parseAndAggregateStats(
   pets: TournamentPetStat[]
@@ -10,7 +10,7 @@ export function parseAndAggregateStats(
   };
 
   pets.forEach((pet) => {
-    pet.breed_stats.forEach((breed: any) => {
+    pet.breed_stats.forEach((breed: BreedStats) => {
       if (!breed.stats) return;
 
       // Split stats string like "H1404/P342/S236"
