@@ -25,7 +25,7 @@ export const MatchHeading = ({ match, tournamentId }: MatchHeadingProps) => {
             href={`/tournaments/${tournamentId}/statistics?matchId=${match.id}`}
             className='btn-submit py-2 px-4 rounded-lg uppercase mb-10 lg:mb-0 w-fit'
           >
-            {'View Match Statistics'}
+            {'View Match Pet Usage'}
           </Link>
         </div>
       )}

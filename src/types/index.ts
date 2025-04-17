@@ -41,6 +41,8 @@ export interface PetData {
     stats: string[];
     breeds: string[];
     times_played: number[];
+    wins?: number;
+    losses?: number;
   };
   total_played: number;
 }
@@ -52,11 +54,16 @@ export interface BreedStats {
   breed: string;
   stats: string;
   times_played: number;
+  wins?: number;
+  losses?: number;
 }
 export interface TournamentPetStat extends PetData {
   id: string;
   breed_stats: BreedStats[];
   match_count: number;
+  wins?: number;
+  losses?: number;
+  win_rate?: number;
 }
 export interface PetListProps {
   stats: TournamentPetStat[];

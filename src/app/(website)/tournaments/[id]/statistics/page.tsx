@@ -43,7 +43,7 @@ export default async function StatisticsPage({
   const isMatchView = !!matchId;
 
   let stats;
-  let title = 'Tournament Pet Usage Statistics';
+  let title = 'Tournament Statistics';
   let entityName = '';
   let chartData: ChartData = {
     petUsageData: [],
@@ -57,7 +57,7 @@ export default async function StatisticsPage({
     if (!match) return notFound();
 
     stats = await getMatchPetUsage(id, matchId);
-    title = 'Match Pet Usage Statistics';
+    title = 'Match Pet Usage';
     entityName = `Match: ${match.player1} vs ${match.player2}`;
   } else {
     // Fetch tournament-wide data
