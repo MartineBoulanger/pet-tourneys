@@ -61,7 +61,7 @@ export default async function TournamentPage({
           href={`/tournaments/${tournament.id}/statistics`}
           className='btn-submit py-2 px-4 rounded-lg uppercase w-fit mb-0 min-[1200px]:mb-5'
         >
-          {'View Tournament Statistics'}
+          {'View Tourney Pets Statistics'}
         </Link>
       </div>
       <div className='mb-10 text-gray-500'>

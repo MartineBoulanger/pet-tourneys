@@ -1,2 +1,3 @@
 export * from './battleLogParser';
 export * from './petUsageParser';
+export * from './statsParser';

@@ -46,7 +46,7 @@ export const DeleteTournament = ({
             <h2 className='mb-4'>{'Confirm Deletion'}</h2>
             <p className='mb-6'>
               {'Are you sure you want to delete the tournament '}
-              <strong className='text-blue-300'>{name}</strong>
+              <strong className='text-light-blue'>{name}</strong>
               {'? This action cannot be undone.'}
             </p>
 

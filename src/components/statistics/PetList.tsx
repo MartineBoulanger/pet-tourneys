@@ -63,7 +63,7 @@ export function PetList({ stats, matchView = false }: PetListProps) {
 
                   return (
                     <tr key={`${pet.pet_data.name}-${pet.pet_data.type}`}>
-                      <td className='px-6 py-4 whitespace-nowrap text-sm font-bold text-blue-300'>
+                      <td className='px-6 py-4 whitespace-nowrap text-sm font-bold text-light-blue'>
                         {pet.pet_data.name}
                       </td>
                       <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
@@ -72,27 +72,27 @@ export function PetList({ stats, matchView = false }: PetListProps) {
                       <td className='px-6 py-4 text-sm text-gray-500'>
                         {pet.breed_stats.map((bs, i) => (
                           <div key={i} className='mb-1'>
-                            <span className='font-bold text-blue-300'>
+                            <span className='font-bold text-light-blue'>
                               {bs.breed}
                             </span>
                             : {bs.stats}
                           </div>
                         ))}
                       </td>
-                      <td className='px-6 py-4 whitespace-nowrap text-sm text-blue-300 font-bold'>
+                      <td className='px-6 py-4 whitespace-nowrap text-sm text-light-blue font-bold'>
                         {pet.breed_stats.map((bs, i) => (
                           <div key={i}>{bs.times_played}</div>
                         ))}
                       </td>
                       {!matchView && (
                         <>
-                          <td className='px-6 py-4 whitespace-nowrap text-sm text-blue-300 font-bold'>
+                          <td className='px-6 py-4 whitespace-nowrap text-sm text-light-blue font-bold'>
                             {pet.total_played}
                           </td>
-                          <td className='px-6 py-4 whitespace-nowrap text-sm text-blue-300 font-bold'>
+                          <td className='px-6 py-4 whitespace-nowrap text-sm text-light-blue font-bold'>
                             {pet.match_count}
                           </td>
-                          <td className='px-6 py-4 whitespace-nowrap text-sm text-blue-300 font-bold'>
+                          <td className='px-6 py-4 whitespace-nowrap text-sm text-light-blue font-bold'>
                             {winRate}%
                           </td>
                         </>

@@ -3,18 +3,19 @@
 import { useState, useEffect } from 'react';
 import { PieChart, Pie, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { ChartSkeleton } from '@/components/ui';
-import { ChartProps } from '@/types';
+import { PieGraphProps } from '@/types';
 
-export const PieGraph = ({ data, children }: ChartProps) => {
+export const PieGraph = ({ data, children }: PieGraphProps) => {
   const [isMounted, setIsMounted] = useState(false);
-  // Calculate the total count
-  const total = data?.reduce((sum, entry) => sum + entry.value, 0);
 
   useEffect(() => {
     setIsMounted(true);
   }, []);
 
   if (!isMounted) return <ChartSkeleton />;
+
+  // Calculate the total count
+  const total = data?.reduce((sum, entry) => sum + entry.value, 0);
 
   return (
     <div className='rounded-lg bg-background w-full h-[425px] md:h-[450px]'>

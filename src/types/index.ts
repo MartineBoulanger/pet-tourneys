@@ -169,6 +169,13 @@ export interface BarGraphProps {
   tooltipTextColor?: string;
   tooltipHoverColor?: string;
 }
+export interface PieGraphProps {
+  data: { name: string; value: number }[] | undefined;
+  children: ReactNode;
+}
+export interface LineGraphProps {
+  data: { count: number; value: number }[] | undefined;
+}
 
 export interface ButtonProps
   extends DetailedHTMLProps<
@@ -215,11 +222,6 @@ export interface FormErrorMessageProps {
   message?: string | undefined | null;
 }
 
-export interface ChartProps {
-  data: { name: string; value: number }[] | undefined;
-  children: ReactNode;
-}
-
 export interface PopupProps {
   children: ReactNode;
   className?: string;
@@ -238,4 +240,10 @@ export interface FooterData {
   url: string;
   Icon: IconType;
   name: string;
+}
+
+export interface StatDistribution {
+  health: Record<number, number>;
+  power: Record<number, number>;
+  speed: Record<number, number>;
 }

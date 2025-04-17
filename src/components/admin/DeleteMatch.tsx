@@ -54,7 +54,7 @@ export const DeleteMatch = ({
               {
                 'Are you sure you want to delete the match with the battle logs '
               }
-              <strong className='text-blue-300'>
+              <strong className='text-light-blue'>
                 {player1 + ' vs ' + player2}
               </strong>
               {'? This action cannot be undone.'}

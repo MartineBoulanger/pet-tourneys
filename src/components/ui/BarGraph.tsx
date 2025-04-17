@@ -16,7 +16,7 @@ export const BarGraph = ({
   data,
   defaultColor = '#2f3648',
   tooltipTextColor = '#111111',
-  tooltipHoverColor = '#f3f4f6',
+  tooltipHoverColor = '#f1f1f1',
 }: BarGraphProps) => {
   const [isMounted, setIsMounted] = useState(false);
 

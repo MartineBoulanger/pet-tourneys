@@ -5,6 +5,7 @@ import {
   PetTypeChart,
   PetList,
   PetBreedChart,
+  PetStatsChart,
 } from '@/components/statistics';
 import {
   getMatchPetUsage,
@@ -171,6 +172,9 @@ export default async function StatisticsPage({
                 <PetBreedChart breeds={chartData.petBreedData} />
               )}
             </div>
+          </div>
+          <div className='mb-6 lg:mb-10'>
+            <PetStatsChart pets={stats} />
           </div>
         </div>
       )}
