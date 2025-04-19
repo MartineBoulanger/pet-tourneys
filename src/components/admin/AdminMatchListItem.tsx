@@ -1,12 +1,6 @@
 import Link from 'next/link';
-import { Match, Tournament } from '@/types';
+import { AdminMatchListItemProps } from '@/types';
 import { AdminTournamentMatchActions } from './AdminTournamentMatchActions';
-import { PopUp } from '@/components/ui';
-
-interface AdminMatchListItemProps {
-  match: Match;
-  tournament: Tournament;
-}
 
 export const AdminMatchListItem = ({
   match,
@@ -38,22 +32,12 @@ export const AdminMatchListItem = ({
           <div className='text-sm text-gray-500'>{match.region}</div>
         </div>
       </div>
-      <div className='hidden lg:block'>
-        <AdminTournamentMatchActions
-          id={tournament.id}
-          matchId={match.id}
-          player1={match.player1}
-          player2={match.player2}
-        />
-      </div>
-      <PopUp className='lg:hidden' divClassName='w-[150px] right-0'>
-        <AdminTournamentMatchActions
-          id={tournament.id}
-          matchId={match.id}
-          player1={match.player1}
-          player2={match.player2}
-        />
-      </PopUp>
+      <AdminTournamentMatchActions
+        tournamentId={tournament.id}
+        matchId={match.id}
+        player1={match.player1}
+        player2={match.player2}
+      />
     </div>
   );
 };

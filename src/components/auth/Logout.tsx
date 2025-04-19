@@ -15,10 +15,14 @@ export const Logout = ({ className }: { className?: string }) => {
   };
 
   return (
-    <form onSubmit={handleLogout} className={className}>
-      <Button type='submit' variant='link' disabled={loading}>
-        {loading ? '...' : <BiLogOut className='h-6 w-6' />}
-      </Button>
-    </form>
+    <Button
+      type='submit'
+      variant='link'
+      disabled={loading}
+      className={className}
+      onClick={handleLogout}
+    >
+      {loading ? '...' : <BiLogOut className='h-6 w-6' />}
+    </Button>
   );
 };

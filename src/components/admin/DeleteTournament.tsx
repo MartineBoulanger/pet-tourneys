@@ -4,14 +4,9 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { FaTrash } from 'react-icons/fa';
 import { deleteTournament } from '@/supabase/actions/tournaments';
+import { DeleteTournamentProps } from '@/types';
 
-export const DeleteTournament = ({
-  id,
-  name,
-}: {
-  id: string;
-  name: string;
-}) => {
+export const DeleteTournament = ({ id, name }: DeleteTournamentProps) => {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -41,9 +36,15 @@ export const DeleteTournament = ({
       </button>
       {/* Confirmation Modal */}
       {isOpen && (
-        <div className='fixed inset-0 bg-background/80 flex items-center justify-center p-4 z-50'>
-          <div className='bg-light-grey rounded-lg p-5 max-w-md w-full'>
-            <h2 className='mb-4'>{'Confirm Deletion'}</h2>
+        <div
+          className='fixed inset-0 bg-background/80 flex items-center justify-center p-4 z-50'
+          onClick={() => setIsOpen(false)}
+        >
+          <div
+            className='bg-light-grey rounded-lg p-5 max-w-md w-full'
+            onClick={(e) => e.stopPropagation()}
+          >
+            <h1 className='mb-4'>{'Confirm Deletion'}</h1>
             <p className='mb-6'>
               {'Are you sure you want to delete the tournament '}
               <strong className='text-light-blue'>{name}</strong>

@@ -1,15 +1,12 @@
 import Link from 'next/link';
-import { Tournament } from '@/types';
+import { TournamentsListItemProps } from '@/types';
 import { AdminTournamentActions } from './AdminTournamentActions';
-import { PopUp } from '@/components/ui';
-
-interface TournamentsListItemProps {
-  tournament: Tournament;
-}
 
 export const TournamentsListItem = ({
   tournament,
 }: TournamentsListItemProps) => {
+  if (!tournament) return null;
+
   return (
     <div className='p-4 rounded-lg shadow-md bg-light-grey'>
       <div className='flex justify-between items-center'>
@@ -30,12 +27,7 @@ export const TournamentsListItem = ({
             {' participants'}
           </p>
         </div>
-        <div className='hidden lg:block'>
-          <AdminTournamentActions id={tournament.id} name={tournament.name} />
-        </div>
-        <PopUp className='lg:hidden' divClassName='w-[150px] right-0'>
-          <AdminTournamentActions id={tournament.id} name={tournament.name} />
-        </PopUp>
+        <AdminTournamentActions id={tournament.id} name={tournament.name} />
       </div>
     </div>
   );

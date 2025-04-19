@@ -9,7 +9,7 @@ export const AdminPanelButtons = () => {
       <div className='flex items-center gap-5'>
         {adminData.map(({ linkText, imageSrc, id, url }) => (
           <Link
-            className='btn-link flex items-center gap-2 border py-1 px-3 rounded-lg border-blue-grey hover:bg-blue-grey'
+            className='btn-link flex items-center gap-2 border py-1 px-3 rounded-lg border-blue-grey hover:bg-blue-grey hover:text-foreground'
             key={id}
             href={url}
           >

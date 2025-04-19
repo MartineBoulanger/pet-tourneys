@@ -1,15 +1,7 @@
 import Link from 'next/link';
 import { MatchListItem } from './MatchListItem';
-import { Match } from '@/types';
+import { MatchListProps } from '@/types';
 import { Pagination } from '@/components/ui';
-
-interface MatchListProps {
-  matches: Match[];
-  tournamentId: string;
-  currentPage?: number;
-  totalPages?: number;
-  showPagination?: boolean;
-}
 
 export const MatchList = ({
   matches,

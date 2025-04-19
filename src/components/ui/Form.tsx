@@ -3,15 +3,6 @@ import { Button } from './Button';
 import { FormErrorMessage } from './FormErrorMessage';
 import { FormProps } from '@/types';
 
-/**
- * Custom form component to use on all forms
- * @param onSubmit - submit function to set/sent data
- * @param handleClick - function that can be used on button 2 when onClick is needed
- * @param message - text for setting to the error message component
- * @param button1 - only use this when button 1 is needed, and when the onClick is needed
- * @param button2 - only use this when button 2 is needed
- * @returns
- */
 export const Form = ({
   handleSubmit,
   button1,

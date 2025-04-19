@@ -1,13 +1,9 @@
 'use client';
 
 import { BarGraph } from '@/components/ui';
-import { PetUsageChartData } from '@/types';
+import { PetUsageChartProps } from '@/types';
 
-export const PetUsageChart = ({
-  pets,
-}: {
-  pets: PetUsageChartData[] | undefined;
-}) => {
+export const PetUsageChart = ({ pets }: PetUsageChartProps) => {
   if (!pets || pets.length === 0) {
     return (
       <p className='text-center py-8'>{'No pet usage data available yet.'}</p>

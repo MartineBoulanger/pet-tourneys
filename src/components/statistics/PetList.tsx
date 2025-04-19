@@ -2,8 +2,7 @@
 
 import { useState } from 'react';
 import { PetListProps } from '@/types';
-
-const PETS_PER_PAGE = 20;
+import { PETS_PER_PAGE } from '@/types/constants';
 
 export function PetList({ stats, matchView = false }: PetListProps) {
   const [visiblePets, setVisiblePets] = useState(PETS_PER_PAGE);
@@ -50,70 +49,67 @@ export function PetList({ stats, matchView = false }: PetListProps) {
                       <th className='px-6 py-3 text-left text-xs font-medium text-foreground uppercase tracking-wider'>
                         Win Rate
                       </th>
+                      <th className='px-6 py-3 text-left text-xs font-medium text-foreground uppercase tracking-wider'>
+                        Win/Loss
+                      </th>
                     </>
                   )}
                 </tr>
               </thead>
               <tbody className='bg-medium-grey divide-y divide-light-grey'>
-                {stats.slice(0, visiblePets).map((pet) => {
-                  const winRate =
-                    pet.wins && pet.total_played > 0
-                      ? Math.round((pet.wins / pet.total_played) * 100)
-                      : 0;
-
-                  return (
-                    <tr key={`${pet.pet_data.name}-${pet.pet_data.type}`}>
-                      <td className='px-6 py-4 whitespace-nowrap text-sm font-bold text-light-blue'>
-                        {pet.pet_data.name}
-                      </td>
-                      <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
-                        {pet.pet_data.type}
-                      </td>
-                      <td className='px-6 py-4 text-sm text-gray-500'>
-                        {pet.breed_stats.map((bs, i) => (
-                          <div key={i} className='mb-1'>
-                            <span className='font-bold text-light-blue'>
-                              {bs.breed}
-                            </span>
-                            : {bs.stats}
-                          </div>
-                        ))}
-                      </td>
-                      <td className='px-6 py-4 whitespace-nowrap text-sm text-light-blue font-bold'>
-                        {pet.breed_stats.map((bs, i) => (
-                          <div key={i}>{bs.times_played}</div>
-                        ))}
-                      </td>
-                      {!matchView && (
-                        <>
-                          <td className='px-6 py-4 whitespace-nowrap text-sm text-light-blue font-bold'>
-                            {pet.total_played}
-                          </td>
-                          <td className='px-6 py-4 whitespace-nowrap text-sm text-light-blue font-bold'>
-                            {pet.match_count}
-                          </td>
-                          <td className='px-6 py-4 whitespace-nowrap text-sm text-light-blue font-bold'>
-                            {winRate}%
-                          </td>
-                        </>
-                      )}
-                    </tr>
-                  );
-                })}
+                {stats.slice(0, visiblePets).map((pet) => (
+                  <tr key={`${pet.pet_data.name}-${pet.pet_data.type}`}>
+                    <td className='px-6 py-4 whitespace-nowrap text-sm font-bold text-light-blue'>
+                      {pet.pet_data.name}
+                    </td>
+                    <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
+                      {pet.pet_data.type}
+                    </td>
+                    <td className='px-6 py-4 text-sm text-gray-500'>
+                      {pet.breed_stats.map((bs, i) => (
+                        <div key={i} className='mb-1'>
+                          <span className='font-bold text-light-blue'>
+                            {bs.breed}
+                          </span>
+                          : {bs.stats}
+                        </div>
+                      ))}
+                    </td>
+                    <td className='px-6 py-4 whitespace-nowrap text-sm text-light-blue font-bold'>
+                      {pet.breed_stats.map((bs, i) => (
+                        <div key={i}>{bs.times_played}</div>
+                      ))}
+                    </td>
+                    {!matchView && (
+                      <>
+                        <td className='px-6 py-4 whitespace-nowrap text-sm text-light-blue font-bold'>
+                          {pet.total_played}
+                        </td>
+                        <td className='px-6 py-4 whitespace-nowrap text-sm text-light-blue font-bold'>
+                          {pet.match_count}
+                        </td>
+                        <td className='px-6 py-4 whitespace-nowrap text-sm text-light-blue font-bold'>
+                          {pet.win_rate}%
+                        </td>
+                        <td className='px-6 py-4 whitespace-nowrap text-sm text-light-blue font-bold'>
+                          {pet.w_l}
+                        </td>
+                      </>
+                    )}
+                  </tr>
+                ))}
               </tbody>
             </table>
             {/* Show More/Less Buttons */}
             <div className='flex justify-center gap-4 mt-4'>
               {visiblePets < stats.length && (
                 <button onClick={showMorePets} className='btn-submit'>
-                  Show More (+
-                  {Math.min(PETS_PER_PAGE, stats.length - visiblePets)})
+                  Show More
                 </button>
               )}
               {visiblePets > PETS_PER_PAGE && (
                 <button onClick={showLessPets} className='btn-inverted'>
-                  Show Less (-
-                  {Math.min(PETS_PER_PAGE, stats.length - visiblePets)})
+                  Show Less
                 </button>
               )}
             </div>

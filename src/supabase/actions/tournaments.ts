@@ -2,8 +2,7 @@
 
 import { createClient } from '@/supabase/server';
 import { getTournamentTableName } from '@/utils/getTournamentTableName';
-
-type Action = 'create' | 'drop';
+import { Action } from '@/types';
 
 export async function manageTournamentTables(
   action: Action,

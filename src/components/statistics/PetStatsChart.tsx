@@ -1,16 +1,11 @@
 'use client';
 
 import { LineGraph } from '@/components/ui';
-import { TournamentPetStat } from '@/types';
+import { PetStatsChartProps } from '@/types';
 import { parseAndAggregateStats, convertToGraphData } from '@/utils/parsers';
 
-interface StatsOverviewProps {
-  pets: TournamentPetStat[];
-}
-
-export function PetStatsChart({ pets }: StatsOverviewProps) {
+export function PetStatsChart({ pets }: PetStatsChartProps) {
   const stats = parseAndAggregateStats(pets);
-
   const healthData = convertToGraphData(stats.health);
   const powerData = convertToGraphData(stats.power);
   const speedData = convertToGraphData(stats.speed);

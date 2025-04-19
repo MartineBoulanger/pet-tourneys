@@ -4,19 +4,14 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { FaTrash } from 'react-icons/fa';
 import { deleteMatch } from '@/supabase/actions/matches';
+import { DeleteMatchProps } from '@/types';
 
 export const DeleteMatch = ({
   tournamentId,
   matchId,
   player1,
   player2,
-}: {
-  tournamentId: string;
-  matchId: string;
-  player1: string;
-  player2: string;
-}) => {
-  // const supabase = createClient();
+}: DeleteMatchProps) => {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -47,9 +42,15 @@ export const DeleteMatch = ({
       </button>
       {/* Confirmation Modal */}
       {isOpen && (
-        <div className='fixed inset-0 bg-background/80 flex items-center justify-center p-4 z-50'>
-          <div className='bg-light-grey rounded-lg p-5 max-w-md w-full'>
-            <h2 className='mb-4'>{'Confirm Deletion'}</h2>
+        <div
+          className='fixed inset-0 bg-background/80 flex items-center justify-center p-4 z-50'
+          onClick={() => setIsOpen(false)}
+        >
+          <div
+            className='bg-light-grey rounded-lg p-5 max-w-md w-full'
+            onClick={(e) => e.stopPropagation()}
+          >
+            <h1 className='mb-4'>{'Confirm Deletion'}</h1>
             <p className='mb-6'>
               {
                 'Are you sure you want to delete the match with the battle logs '

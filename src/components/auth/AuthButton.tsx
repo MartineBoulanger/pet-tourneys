@@ -1,15 +1,8 @@
 import React from 'react';
 import { cn } from '@/utils/cn';
+import { AuthButtonProps } from '@/types';
 
-export const AuthButton = ({
-  type,
-  loading,
-  className,
-}: {
-  type: 'login' | 'Sign up' | 'Reset Password' | 'Forgot Password';
-  loading: boolean;
-  className?: string;
-}) => {
+export const AuthButton = ({ type, loading, className }: AuthButtonProps) => {
   return (
     <button
       disabled={loading}

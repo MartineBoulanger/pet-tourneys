@@ -7,13 +7,9 @@ import {
   createTournament,
   updateTournament,
 } from '@/supabase/actions/tournaments';
-import { Tournament } from '@/types';
+import { TournamentFormProps } from '@/types';
 
-export function TournamentForm({
-  initialData = null,
-}: {
-  initialData?: Tournament | null;
-}) {
+export function TournamentForm({ initialData = null }: TournamentFormProps) {
   const router = useRouter();
   const [isMounted, setIsMounted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);

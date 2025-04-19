@@ -1,13 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { BattleLog, BattleRound } from '@/types';
-
-interface BattleLogViewerProps {
-  battleLog: BattleLog;
-}
-
-const ROUNDS_PER_PAGE = 5;
+import { BattleLogViewerProps, BattleRound } from '@/types';
+import { ROUNDS_PER_PAGE } from '@/types/constants';
 
 export function BattleLogViewer({ battleLog }: BattleLogViewerProps) {
   // Assert that battle is an array of BattleRound

@@ -1,6 +1,6 @@
-import { Match } from '@/types';
+import { MatchScoreProps } from '@/types';
 
-export const MatchScore = ({ match }: { match: Match }) => {
+export const MatchScore = ({ match }: MatchScoreProps) => {
   return (
     <>
       <div className='mb-8 p-4 bg-light-grey rounded-lg shadow-md'>

@@ -2,11 +2,11 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { BiLogIn } from 'react-icons/bi';
 import { cn } from '@/utils/cn';
+import { BottomNavigationProps } from '@/types';
 import { Logout } from '@/components/auth/Logout';
-import { Profile } from '@/types';
-import { Menu } from '../navigation/Menu';
+import { Menu } from './Menu';
 
-export const BottomNavigation = ({ user }: { user?: Profile | null }) => {
+export const BottomNavigation = ({ user }: BottomNavigationProps) => {
   return (
     <div
       className={cn(

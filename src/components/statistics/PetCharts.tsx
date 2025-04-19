@@ -1,16 +1,10 @@
-import { ChartData, TournamentPetStat } from '@/types';
+import { PetChartsProps } from '@/types';
 import { PetBreedChart } from './PetBreedChart';
 import { PetStatsChart } from './PetStatsChart';
 import { PetTypeChart } from './PetTypeChart';
 import { PetUsageChart } from './PetUsageChart';
 
-export const PetCharts = ({
-  chartData,
-  stats,
-}: {
-  chartData: ChartData;
-  stats: TournamentPetStat[];
-}) => {
+export const PetCharts = ({ chartData, stats }: PetChartsProps) => {
   return (
     <div className='mb-6 lg:mb-10'>
       <div className='bg-light-grey p-2.5 sm:p-4 rounded-lg shadow-md'>

@@ -7,14 +7,9 @@ import { IoMdClose } from 'react-icons/io';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { Button } from '@/components/ui';
 import { headerData } from '@/lib/headerData';
+import { MenuProps } from '@/types';
 
-export const Menu = ({
-  className,
-  buttonVariant = 'primary',
-}: {
-  className?: string;
-  buttonVariant?: 'link' | 'primary' | 'secondary' | undefined;
-}) => {
+export const Menu = ({ className, buttonVariant = 'primary' }: MenuProps) => {
   const [isOpen, setOpen] = useState<boolean>(false);
 
   function toggleMenu() {
@@ -38,7 +33,7 @@ export const Menu = ({
       {isOpen ? (
         <>
           <div
-            className='fixed w-full h-full inset-0 flex items-center justify-center bg-background/70'
+            className='fixed w-full h-full inset-0 flex items-center justify-center bg-transparent'
             onClick={() => setOpen(false)}
           />
           <div className='fixed top-0 bottom-0 right-0 w-full max-w-[430px] shadow-md text-center flex flex-col bg-background animate-slide-in-right'>

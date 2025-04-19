@@ -12,13 +12,12 @@ export async function getTournamentPetStats(
   const matchesTable = getTournamentTableName('matches', tournamentId);
   const battleLogsTable = getTournamentTableName('battle_logs', tournamentId);
 
-  // Get all necessary data in one go
+  // Get all necessary data
   const { data: matches } = await supabase
     .schema('api')
     .from(matchesTable)
-    .select('id, player1, player2, outcome');
+    .select('id, player1, player2');
 
-  // Only use aggregated records for tournament view
   const { data: records, error } = await supabase
     .schema('api')
     .from(petUsageTable)
@@ -34,39 +33,62 @@ export async function getTournamentPetStats(
 
   const petMap = new Map<string, TournamentPetStat>();
 
-  for (const record of records) {
-    const match = matches.find((m) => m.id === record.match_id);
-    const battleLog = allBattleLogs.find(
-      (bl) => bl.match_id === record.match_id
-    );
-
-    if (!match || !battleLog) continue;
-
-    const isPlayerPet = battleLog.player_team?.includes(record.pet_data.name);
-    const isOpponentPet = battleLog.opponent_team?.includes(
-      record.pet_data.name
-    );
-    const isSamePetOnBothTeams = isPlayerPet && isOpponentPet;
-
-    // Calculate wins and losses for this record
-    let wins = 0;
-    let losses = 0;
-
-    if (isSamePetOnBothTeams) {
-      // Split 50/50 if pet appears on both teams
-      wins = match.outcome === 'WIN' ? 0.5 * record.total_played : 0;
-      losses = match.outcome === 'LOSS' ? 0.5 * record.total_played : 0;
-    } else if (isPlayerPet) {
-      // Player pet - normal win/loss assignment
-      wins = match.outcome === 'WIN' ? record.total_played : 0;
-      losses = match.outcome === 'LOSS' ? record.total_played : 0;
-    } else if (isOpponentPet) {
-      // Opponent pet - reverse win/loss assignment
-      wins = match.outcome === 'LOSS' ? record.total_played : 0;
-      losses = match.outcome === 'WIN' ? record.total_played : 0;
+  // First pass: process all battle logs to track pet participation and outcomes
+  const petBattleStats = new Map<
+    string,
+    {
+      totalBattles: number;
+      wins: number;
+      losses: number;
+      matchesParticipated: Set<string>;
     }
+  >();
+
+  for (const battleLog of allBattleLogs) {
+    const battleResult = battleLog.result;
+    const playerTeam = battleLog.player_team || [];
+    const opponentTeam = battleLog.opponent_team || [];
+
+    // Process all pets in this battle
+    const allPets = [...new Set([...playerTeam, ...opponentTeam])];
+    for (const petName of allPets) {
+      if (!petBattleStats.has(petName)) {
+        petBattleStats.set(petName, {
+          totalBattles: 0,
+          wins: 0,
+          losses: 0,
+          matchesParticipated: new Set(),
+        });
+      }
+      const stats = petBattleStats.get(petName)!;
+      stats.matchesParticipated.add(battleLog.match_id);
+
+      const isPlayerPet = playerTeam.includes(petName);
+      const isOpponentPet = opponentTeam.includes(petName);
+      const isBoth = isPlayerPet && isOpponentPet;
+
+      if (isBoth || battleResult === 'DRAW') {
+        stats.totalBattles += 0;
+      } else if (isPlayerPet) {
+        stats.totalBattles += 1;
+        if (battleResult === 'WIN') stats.wins += 1;
+        else stats.losses += 1;
+      } else if (isOpponentPet) {
+        stats.totalBattles += 1;
+        if (battleResult === 'WIN') stats.losses += 1;
+        else stats.wins += 1;
+      }
+    }
+  }
+
+  // Second pass: process pet usage records and combine with battle stats
+  for (const record of records) {
+    const battleStats = petBattleStats.get(record.pet_data.name);
+    if (!battleStats) continue;
 
     const existing = petMap.get(record.pet_data.name);
+    const totalBattles = battleStats.totalBattles;
+    const winRate = totalBattles > 0 ? battleStats.wins / totalBattles : 0;
 
     if (existing) {
       // Merge with existing record
@@ -76,10 +98,11 @@ export async function getTournamentPetStats(
         );
         const breedPlayCount = record.pet_data.times_played[i] || 0;
         const breedRatio = breedPlayCount / record.total_played;
+
         if (existingBreed) {
           existingBreed.times_played += breedPlayCount;
-          existingBreed.wins! += wins * breedRatio;
-          existingBreed.losses! += losses * breedRatio;
+          existingBreed.wins! += Math.round(battleStats.wins * breedRatio);
+          existingBreed.losses! += Math.round(battleStats.losses * breedRatio);
           if (record.pet_data.stats[i]) {
             existingBreed.stats = record.pet_data.stats[i];
           }
@@ -88,25 +111,25 @@ export async function getTournamentPetStats(
             breed,
             stats: record.pet_data.stats[i] || '',
             times_played: breedPlayCount,
-            wins: wins * breedRatio,
-            losses: losses * breedRatio,
+            wins: Math.round(battleStats.wins * breedRatio),
+            losses: Math.round(battleStats.losses * breedRatio),
           });
         }
       });
 
       // Update totals
       existing.total_played += record.total_played;
-      existing.wins! += wins;
-      existing.losses! += losses;
-      existing.match_count += 1;
+      existing.wins = battleStats.wins;
+      existing.losses = battleStats.losses;
+      existing.match_count = battleStats.matchesParticipated.size;
     } else {
-      // Create new entry with win/loss stats
+      // Create new entry
       petMap.set(record.pet_data.name, {
         id: record.id,
         pet_data: {
           ...record.pet_data,
-          wins,
-          losses,
+          wins: battleStats.wins,
+          losses: battleStats.losses,
         },
         total_played: record.total_played,
         breed_stats: record.pet_data.breeds.map((breed: string, i: number) => {
@@ -116,20 +139,32 @@ export async function getTournamentPetStats(
             breed,
             stats: record.pet_data.stats[i] || '',
             times_played: breedPlayCount,
-            wins: wins * breedRatio,
-            losses: losses * breedRatio,
+            wins: Math.round(battleStats.wins * breedRatio),
+            losses: Math.round(battleStats.losses * breedRatio),
           };
         }),
-        wins,
-        losses,
-        match_count: 1,
+        wins: battleStats.wins,
+        losses: battleStats.losses,
+        win_rate: winRate,
+        match_count: battleStats.matchesParticipated.size,
       });
     }
   }
 
-  return Array.from(petMap.values()).sort(
-    (a, b) => b.total_played - a.total_played
-  );
+  // Final processing with win rates
+  return Array.from(petMap.values())
+    .map((pet) => {
+      const totalGames = (pet.wins || 0) + (pet.losses || 0);
+      const winRate =
+        totalGames > 0 ? Math.round((pet.wins! / totalGames) * 100) : 0;
+
+      return {
+        ...pet,
+        win_rate: winRate,
+        w_l: `${pet.wins || 0}/${pet.losses || 0}`,
+      };
+    })
+    .sort((a, b) => b.total_played - a.total_played);
 }
 
 export async function getMatchPetUsage(

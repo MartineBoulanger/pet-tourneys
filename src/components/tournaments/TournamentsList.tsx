@@ -1,9 +1,5 @@
 import Link from 'next/link';
-import { Tournament } from '@/types';
-
-interface TournamentsListProps {
-  tournaments: Tournament[];
-}
+import { TournamentsListProps } from '@/types';
 
 export const TournamentsList = ({ tournaments }: TournamentsListProps) => {
   return (

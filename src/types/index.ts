@@ -8,6 +8,8 @@ import {
 } from 'react';
 import { IconType } from 'react-icons';
 
+export type Action = 'create' | 'drop';
+
 export type TournamentTableName =
   | 'matches'
   | 'battle_logs'
@@ -47,10 +49,6 @@ export interface PetData {
   };
   total_played: number;
 }
-export interface PetUsage extends PetData {
-  id: string;
-  match_id: string;
-}
 export interface BreedStats {
   breed: string;
   stats: string;
@@ -65,6 +63,11 @@ export interface TournamentPetStat extends PetData {
   wins?: number;
   losses?: number;
   win_rate?: number;
+  w_l?: string;
+}
+export interface PetUsage extends PetData {
+  id: string;
+  match_id: string;
 }
 export interface PetListProps {
   stats: TournamentPetStat[];
@@ -93,6 +96,9 @@ export interface BattleLog {
   opponent_team: string[];
   battle: BattleRound[];
 }
+export interface BattleLogViewerProps {
+  battleLog: BattleLog;
+}
 
 export interface Match {
   id: string;
@@ -104,6 +110,10 @@ export interface Match {
   owner_score: number;
   opponent_score: number;
   outcome: string;
+}
+
+export interface MatchScoreProps {
+  match: Match;
 }
 
 export interface Tournament {
@@ -238,6 +248,15 @@ export interface NavigationData {
   imageSrc: string;
 }
 
+export interface BottomNavigationProps {
+  user?: Profile | null;
+}
+
+export interface MenuProps {
+  className?: string;
+  buttonVariant?: 'link' | 'primary' | 'secondary' | undefined;
+}
+
 export interface FooterData {
   id: number;
   url: string;
@@ -251,10 +270,83 @@ export interface StatDistribution {
   speed: Record<number, number>;
 }
 
+export interface PetChartsProps {
+  chartData: ChartData;
+  stats: TournamentPetStat[];
+}
+
+export interface PetBreedChartProps {
+  breeds: { name: string; value: number }[] | undefined;
+}
+
+export interface PetStatsChartProps {
+  pets: TournamentPetStat[];
+}
+
+export interface PetTypeChartProps {
+  types: { name: string; value: number }[] | undefined;
+}
+
+export interface PetUsageChartProps {
+  pets: PetUsageChartData[] | undefined;
+}
+
 export interface PaginationProps {
   currentPage: number;
   totalPages: number;
   baseUrl: string;
   queryParam?: string;
   className?: string;
+}
+
+export interface AdminMatchListItemProps {
+  match: Match;
+  tournament: Tournament;
+}
+
+export interface DeleteMatchProps {
+  tournamentId: string;
+  matchId: string;
+  player1: string;
+  player2: string;
+}
+
+export interface DeleteTournamentProps {
+  id: string;
+  name: string;
+}
+
+export interface TournamentsListItemProps {
+  tournament: Tournament;
+}
+
+export interface TournamentFormProps {
+  initialData?: Tournament | null;
+}
+
+export interface AuthButtonProps {
+  type: 'login' | 'Sign up' | 'Reset Password' | 'Forgot Password';
+  loading: boolean;
+  className?: string;
+}
+
+export interface MatchListProps {
+  matches: Match[];
+  tournamentId: string;
+  currentPage?: number;
+  totalPages?: number;
+  showPagination?: boolean;
+}
+
+export interface MatchListItemProps {
+  tournamentId: string;
+  match: Match;
+}
+
+export interface TournamentsListProps {
+  tournaments: Tournament[];
+}
+
+export interface PageHeadingProps extends HTMLProps<HTMLElement> {
+  heading: string | JSX.Element | React.ReactNode;
 }

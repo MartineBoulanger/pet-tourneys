@@ -1,12 +1,7 @@
 import Link from 'next/link';
-import { Match } from '@/types';
+import { MatchListItemProps } from '@/types';
 
-interface MatchListItem {
-  tournamentId: string;
-  match: Match;
-}
-
-export const MatchListItem = ({ tournamentId, match }: MatchListItem) => {
+export const MatchListItem = ({ tournamentId, match }: MatchListItemProps) => {
   return (
     <Link
       key={match.id}

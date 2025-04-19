@@ -1,11 +1,7 @@
-import { HTMLProps, JSX } from 'react';
 import { FaChevronDown } from 'react-icons/fa';
 import { cn } from '@/utils/cn';
 import { PopUp } from './PopUp';
-
-interface PageHeadingProps extends HTMLProps<HTMLElement> {
-  heading: string | JSX.Element | React.ReactNode;
-}
+import { PageHeadingProps } from '@/types';
 
 export const PageHeading = ({
   heading,
