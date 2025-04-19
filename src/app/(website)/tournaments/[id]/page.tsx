@@ -3,8 +3,9 @@ import { notFound } from 'next/navigation';
 import { getTournamentDetails } from '@/supabase/actions/tournaments';
 import { getPaginatedMatches } from '@/supabase/actions/matches';
 import { MatchList } from '@/components/tournaments';
-import { Container } from '@/components/ui';
+import { Container, PopUp, PageHeading } from '@/components/ui';
 import { PageParams, PageSearchParams } from '@/types';
+import { FaChevronDown } from 'react-icons/fa';
 
 export async function generateMetadata({ params }: { params: PageParams }) {
   const { id } = await params;
@@ -55,15 +56,20 @@ export default async function TournamentPage({
 
   return (
     <Container>
-      <div className='flex flex-wrap items-center justify-between mb-10 min-[1200px]:mb-0'>
-        <h1>{tournament.name}</h1>
-        <Link
-          href={`/tournaments/${tournament.id}/statistics`}
-          className='btn-submit py-2 px-4 rounded-lg uppercase w-fit mb-0 min-[1200px]:mb-5'
-        >
-          {'View Tourney Pets Statistics'}
-        </Link>
-      </div>
+      <PageHeading heading={tournament.name}>
+        <div className='flex flex-col gap-2.5'>
+          <Link
+            href={`/tournaments/${tournament.id}/statistics`}
+            className='link'
+          >
+            {'View Tourney Pets Statistics'}
+          </Link>
+          <div className='h-0.5 rounded-lg w-full bg-blue-grey' />
+          <Link href={`/tournaments`} className='link'>
+            {'Back To Tournaments List'}
+          </Link>
+        </div>
+      </PageHeading>
       <div className='mb-10 text-gray-500'>
         <p>
           {new Date(tournament.start_date).toLocaleDateString()} -{' '}

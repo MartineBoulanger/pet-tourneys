@@ -38,7 +38,7 @@ export const AdminMatchListItem = ({
           <div className='text-sm text-gray-500'>{match.region}</div>
         </div>
       </div>
-      <div className='hidden md:block'>
+      <div className='hidden lg:block'>
         <AdminTournamentMatchActions
           id={tournament.id}
           matchId={match.id}
@@ -46,7 +46,7 @@ export const AdminMatchListItem = ({
           player2={match.player2}
         />
       </div>
-      <PopUp className='md:hidden'>
+      <PopUp className='lg:hidden' divClassName='w-[150px] right-0'>
         <AdminTournamentMatchActions
           id={tournament.id}
           matchId={match.id}

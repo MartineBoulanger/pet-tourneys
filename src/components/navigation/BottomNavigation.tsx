@@ -4,7 +4,7 @@ import { BiLogIn } from 'react-icons/bi';
 import { cn } from '@/utils/cn';
 import { Logout } from '@/components/auth/Logout';
 import { Profile } from '@/types';
-import { Mobile } from './Mobile';
+import { Menu } from '../navigation/Menu';
 
 export const BottomNavigation = ({ user }: { user?: Profile | null }) => {
   return (
@@ -42,7 +42,7 @@ export const BottomNavigation = ({ user }: { user?: Profile | null }) => {
       ) : null}
 
       <div className='w-0.5 h-10 rounded-lg bg-blue-grey' />
-      <Mobile />
+      <Menu buttonVariant='link' className='md:hidden' />
     </div>
   );
 };

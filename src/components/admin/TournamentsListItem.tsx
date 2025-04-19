@@ -30,10 +30,10 @@ export const TournamentsListItem = ({
             {' participants'}
           </p>
         </div>
-        <div className='hidden md:block'>
+        <div className='hidden lg:block'>
           <AdminTournamentActions id={tournament.id} name={tournament.name} />
         </div>
-        <PopUp className='md:hidden'>
+        <PopUp className='lg:hidden' divClassName='w-[150px] right-0'>
           <AdminTournamentActions id={tournament.id} name={tournament.name} />
         </PopUp>
       </div>

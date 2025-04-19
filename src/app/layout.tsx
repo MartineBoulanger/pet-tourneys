@@ -4,9 +4,11 @@ import '@/styles/globals.css';
 import { getAdminSession, getUserSession } from '@/supabase/actions/auth';
 import { Footer } from '@/components/footer/Footer';
 import { Header } from '@/components/header/Header';
-import { BottomNavigation } from '@/components/header/BottomNavigation';
+import { BottomNavigation } from '@/components/navigation';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Analytics } from '@vercel/analytics/next';
+
+export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: {
@@ -16,8 +18,12 @@ export const metadata: Metadata = {
   description:
     'The WoW Pet Community for all things pet battling and battle pets related',
   robots: { index: true, follow: true },
+  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL!),
   alternates: {
-    canonical: process.env.NEXT_PUBLIC_BASE_URL!,
+    canonical: '/',
+  },
+  openGraph: {
+    images: '/opengraph-image.png',
   },
 };
 
@@ -44,11 +50,15 @@ export default async function RootLayout({
         className={`${roboto.variable} ${warcraft.variable} antialiased font-sans`}
       >
         <Header />
-        <main className='min-h-screen relative'>{children}</main>
+        <main className='min-h-[85vh] relative'>{children}</main>
         <Footer />
         <BottomNavigation user={isAdmin} />
-        <SpeedInsights />
-        <Analytics />
+        {process.env.NODE_ENV === 'production' && (
+          <>
+            <SpeedInsights />
+            <Analytics />
+          </>
+        )}
       </body>
     </html>
   );

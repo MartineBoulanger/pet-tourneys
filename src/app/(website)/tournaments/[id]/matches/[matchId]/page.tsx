@@ -1,11 +1,8 @@
-import {
-  BattleLogViewer,
-  MatchHeading,
-  MatchScore,
-} from '@/components/matches';
-import { Container } from '@/components/ui';
+import { BattleLogViewer, MatchScore } from '@/components/matches';
+import { Container, PageHeading } from '@/components/ui';
 import { getMatchDetails } from '@/supabase/actions/matches';
 import { MatchPageParams } from '@/types';
+import Link from 'next/link';
 
 export async function generateMetadata({
   params,
@@ -46,7 +43,28 @@ export default async function MatchPage({
 
   return (
     <Container>
-      {match && <MatchHeading match={match} tournamentId={id} />}
+      <PageHeading
+        heading={
+          <>
+            {match.player1} vs {match.player2}{' '}
+            <span className='text-xl text-gray-500'>{match.region}</span>
+          </>
+        }
+        className='lg:mb-5'
+      >
+        <div className='flex flex-col gap-2.5'>
+          <Link
+            href={`/tournaments/${id}/statistics?matchId=${matchId}`}
+            className='link'
+          >
+            {'View Match Pet Usage'}
+          </Link>
+          <div className='h-0.5 rounded-lg w-full bg-blue-grey' />
+          <Link href={`/tournaments/${id}`} className='link'>
+            {'Back to Tournament'}
+          </Link>
+        </div>
+      </PageHeading>
       {match && <MatchScore match={match} />}
       <div className='mb-10'>
         {battleLogs?.length ? (

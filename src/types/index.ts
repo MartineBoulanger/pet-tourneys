@@ -3,6 +3,7 @@ import {
   DetailedHTMLProps,
   HTMLProps,
   InputHTMLAttributes,
+  JSX,
   ReactNode,
 } from 'react';
 import { IconType } from 'react-icons';
@@ -223,8 +224,10 @@ export interface FormErrorMessageProps {
 }
 
 export interface PopupProps {
+  text?: ReactNode | JSX.Element | string | number;
   children: ReactNode;
   className?: string;
+  divClassName?: string;
 }
 
 export interface NavigationData {
@@ -246,4 +249,12 @@ export interface StatDistribution {
   health: Record<number, number>;
   power: Record<number, number>;
   speed: Record<number, number>;
+}
+
+export interface PaginationProps {
+  currentPage: number;
+  totalPages: number;
+  baseUrl: string;
+  queryParam?: string;
+  className?: string;
 }
