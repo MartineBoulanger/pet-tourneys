@@ -3,9 +3,8 @@ import { notFound } from 'next/navigation';
 import { getTournamentDetails } from '@/supabase/actions/tournaments';
 import { getPaginatedMatches } from '@/supabase/actions/matches';
 import { MatchList } from '@/components/tournaments';
-import { Container, PopUp, PageHeading } from '@/components/ui';
+import { Container, PageHeading } from '@/components/ui';
 import { PageParams, PageSearchParams } from '@/types';
-import { FaChevronDown } from 'react-icons/fa';
 
 export async function generateMetadata({ params }: { params: PageParams }) {
   const { id } = await params;
