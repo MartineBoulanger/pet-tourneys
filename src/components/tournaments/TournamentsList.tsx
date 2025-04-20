@@ -11,7 +11,9 @@ export const TournamentsList = ({ tournaments }: TournamentsListProps) => {
           className='p-4 rounded-lg shadow-md bg-light-grey hover:bg-blue-grey transition'
         >
           <span className='flex flex-wrap justify-between items-center'>
-            <h2 className='text-lg font-medium'>{tournament.name}</h2>
+            <span className='text-lg font-medium leading-normal font-warcraft tracking-[1.5px]'>
+              {tournament.name}
+            </span>
             <span className='flex'>
               <span className='text-sm text-gray-500'>
                 {new Date(tournament.start_date).toLocaleDateString()} -{' '}

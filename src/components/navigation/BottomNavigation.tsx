@@ -30,13 +30,15 @@ export const BottomNavigation = ({ user }: BottomNavigationProps) => {
         <>
           <div className='w-0.5 h-10 rounded-lg bg-blue-grey' />
           <Link href='/admin' className='btn-link p-5'>
-            <Image
-              src={user?.avatar_url || ''}
-              alt={user?.username || ''}
-              width={25}
-              height={25}
-              className='rounded-full'
-            />
+            <span>
+              <Image
+                src={user?.avatar_url || ''}
+                alt={user?.username || ''}
+                width={25}
+                height={25}
+                className='rounded-full'
+              />
+            </span>
           </Link>
         </>
       ) : null}
