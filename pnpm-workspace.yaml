@@ -1,6 +1,4 @@
 onlyBuiltDependencies:
   - '@vercel/speed-insights'
-  - supabase
-
-ignoredBuiltDependencies:
   - sharp
+  - unrs-resolver

@@ -53,12 +53,8 @@ export default async function RootLayout({
         <main className='min-h-[85vh] relative'>{children}</main>
         <Footer />
         <BottomNavigation user={isAdmin} />
-        {process.env.NODE_ENV === 'production' && (
-          <>
-            <SpeedInsights />
-            <Analytics />
-          </>
-        )}
+        <SpeedInsights />
+        <Analytics />
       </body>
     </html>
   );

@@ -198,14 +198,12 @@ export function BattleLogViewer({ battleLog }: BattleLogViewerProps) {
         <div className='flex justify-center gap-4 mt-4'>
           {visibleRounds < battleRounds.length && (
             <button onClick={showMoreRounds} className='btn-submit'>
-              Show More (+
-              {Math.min(ROUNDS_PER_PAGE, battleRounds.length - visibleRounds)})
+              Show More
             </button>
           )}
           {visibleRounds > ROUNDS_PER_PAGE && (
             <button onClick={showLessRounds} className='btn-inverted'>
-              Show Less (-
-              {Math.min(ROUNDS_PER_PAGE, battleRounds.length - visibleRounds)})
+              Show Less
             </button>
           )}
         </div>
