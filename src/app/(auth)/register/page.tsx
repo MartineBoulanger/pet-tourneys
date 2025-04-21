@@ -1,5 +1,5 @@
 import { SignUpForm } from '@/components/auth';
-import { Container } from '@/components/ui';
+import { Container, Heading, Paragraph } from '@/components/ui';
 
 export async function generateMetadata() {
   return {
@@ -13,10 +13,10 @@ export async function generateMetadata() {
 export default function SignUpPage() {
   return (
     <Container className='max-w-[512px]'>
-      <h1 className='text-center'>{'Sign Up'}</h1>
-      <p className='text-center mb-5'>
+      <Heading className='text-center'>{'Sign Up'}</Heading>
+      <Paragraph className='text-center mb-5'>
         {'Email and password sign up is only for the community staff.'}
-      </p>
+      </Paragraph>
       <SignUpForm />
     </Container>
   );

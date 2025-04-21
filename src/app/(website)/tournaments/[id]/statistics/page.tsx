@@ -8,7 +8,7 @@ import {
 } from '@/supabase/actions/statistics';
 import { getTournament } from '@/supabase/actions/tournaments';
 import { getMatch } from '@/supabase/actions/matches';
-import { Container, PageHeading } from '@/components/ui';
+import { Container, PageHeading, Heading, Paragraph } from '@/components/ui';
 import {
   ChartDataItem,
   ChartData,
@@ -49,15 +49,13 @@ export default async function StatisticsPage({
   };
 
   if (isMatchView) {
-    // Fetch match-specific data
     const match = await getMatch(id, matchId);
     if (!match) return notFound();
 
     stats = await getMatchPetUsage(id, matchId);
     title = 'Match Pet Usage';
-    entityName = `Match: ${match.player1} vs ${match.player2}`;
+    entityName = `${match.player1} vs ${match.player2}`;
   } else {
-    // Fetch tournament-wide data
     const {
       success,
       status,
@@ -68,8 +66,8 @@ export default async function StatisticsPage({
     if (!success) {
       return (
         <Container className='text-center'>
-          <h1 className='text-red'>{`Error ${status}!`}</h1>
-          <p>{message}</p>
+          <Heading className='text-red'>{`Error ${status}!`}</Heading>
+          <Paragraph>{message}</Paragraph>
         </Container>
       );
     }
@@ -78,8 +76,6 @@ export default async function StatisticsPage({
 
     stats = await getTournamentPetStats(id);
     entityName = tournament.name;
-
-    // Prepare tournament-wide chart data
     chartData = {
       petUsageData: stats.slice(0, 10).map((pet) => ({
         name: pet.pet_data.name,
@@ -154,7 +150,9 @@ export default async function StatisticsPage({
             })}
           </div>
         </PageHeading>
-        {entityName && <p className='text-gray-500'>{entityName}</p>}
+        {entityName && (
+          <Paragraph className='text-light-blue'>{entityName}</Paragraph>
+        )}
       </div>
       {!isMatchView && <PetCharts chartData={chartData} stats={stats} />}
       {stats && <PetList stats={stats} matchView={isMatchView} />}

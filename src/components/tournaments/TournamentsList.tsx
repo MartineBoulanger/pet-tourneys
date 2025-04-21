@@ -16,8 +16,8 @@ export const TournamentsList = ({ tournaments }: TournamentsListProps) => {
             <span className='text-lg font-medium leading-normal font-warcraft tracking-[1.5px]'>
               {tournament.name}
             </span>
-            <span className='flex'>
-              <span className='text-sm text-gray-500'>
+            <span className='flex text-light-blue'>
+              <span className='text-sm'>
                 {new Date(tournament.start_date).toLocaleDateString()} -{' '}
                 {tournament.end_date === '1999-12-31T22:00:00' ||
                 tournament.end_date === null
@@ -26,7 +26,7 @@ export const TournamentsList = ({ tournaments }: TournamentsListProps) => {
                     new Date(tournament.end_date).toLocaleDateString()}
               </span>
               <span className='w-[1px] h-5 bg-gray-500 mx-5 rounded-full' />
-              <span className='text-sm text-gray-500'>
+              <span className='text-sm'>
                 {tournament.participant_count}
                 {' participants'}
               </span>

@@ -1,5 +1,5 @@
 import { TournamentForm } from '@/components/admin';
-import { Container } from '@/components/ui';
+import { Container, Heading, Paragraph } from '@/components/ui';
 import { getTournament } from '@/supabase/actions/tournaments';
 import { PageParams } from '@/types';
 import { Metadata } from 'next';
@@ -25,8 +25,8 @@ export default async function EditTournamentPage({
   if (!success) {
     return (
       <Container className='text-center'>
-        <h1 className='text-red'>{`Error ${status}!`}</h1>
-        <p>{message}</p>
+        <Heading className='text-red'>{`Error ${status}!`}</Heading>
+        <Paragraph>{message}</Paragraph>
       </Container>
     );
   }
@@ -34,15 +34,17 @@ export default async function EditTournamentPage({
   if (!tournament) {
     return (
       <Container className='text-center'>
-        <h1 className='text-red'>{'No Tournament Found!'}</h1>
-        <p>{'Please create a tournament first before you can edit one.'}</p>
+        <Heading className='text-red'>{'No Tournament Found!'}</Heading>
+        <Paragraph>
+          {'Please create a tournament first before you can edit one.'}
+        </Paragraph>
       </Container>
     );
   }
 
   return (
     <Container className='w-full flex flex-col justify-center max-w-[500px]'>
-      <h1 className='text-center'>{'Edit Tournament'}</h1>
+      <Heading className='text-center'>{'Edit Tournament'}</Heading>
       <TournamentForm initialData={tournament} />
     </Container>
   );

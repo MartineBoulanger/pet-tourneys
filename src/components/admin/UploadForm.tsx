@@ -4,7 +4,13 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { uploadBattleLog } from '@/supabase/actions/uploadLogs';
 import { updateMatchWithLogs } from '@/supabase/actions/matches';
-import { Form, Input, UploadFormSkeleton } from '@/components/ui';
+import {
+  Form,
+  Input,
+  UploadFormSkeleton,
+  Heading,
+  Paragraph,
+} from '@/components/ui';
 import { UploadFormProps } from '@/types';
 
 export function UploadForm({
@@ -115,9 +121,11 @@ export function UploadForm({
         <div className='rounded-md bg-red-50 p-4 mb-5'>
           <div className='flex'>
             <div className='ml-3'>
-              <h3 className='text-sm font-medium text-red-800'>{'Error'}</h3>
+              <Heading as='h3' className='text-sm font-medium text-red-800'>
+                {'Error'}
+              </Heading>
               <div className='mt-2 text-sm text-red-700'>
-                <p>{submitError}</p>
+                <Paragraph>{submitError}</Paragraph>
               </div>
             </div>
           </div>
@@ -127,11 +135,11 @@ export function UploadForm({
         <div className='rounded-md bg-green-50 p-4 mb-5'>
           <div className='flex'>
             <div className='ml-3'>
-              <h3 className='text-sm font-medium text-green-800'>
+              <Heading as='h3' className='text-sm font-medium text-green-800'>
                 {'Success'}
-              </h3>
+              </Heading>
               <div className='mt-2 text-sm text-green-700'>
-                <p>{'Battle logs uploaded successfully!'}</p>
+                <Paragraph>{'Battle logs uploaded successfully!'}</Paragraph>
               </div>
             </div>
           </div>

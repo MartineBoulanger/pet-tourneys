@@ -1,9 +1,9 @@
+import { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 import { getUserSession } from '@/supabase/actions/auth';
 import { getTournaments } from '@/supabase/actions/tournaments';
-import { Container } from '@/components/ui';
+import { Container, Heading, Paragraph } from '@/components/ui';
 import { TournamentsListItem, AdminPanelButtons } from '@/components/admin';
-import { Metadata } from 'next';
 
 // TODO: In future maybe add pagination to the tournaments list
 
@@ -29,8 +29,8 @@ export default async function AdminPage() {
   if (!success) {
     return (
       <Container className='text-center'>
-        <h1 className='text-red'>{`Error ${status}!`}</h1>
-        <p>{message}</p>
+        <Heading className='text-red'>{`Error ${status}!`}</Heading>
+        <Paragraph>{message}</Paragraph>
       </Container>
     );
   }
@@ -38,12 +38,12 @@ export default async function AdminPage() {
   if (!tournaments) {
     return (
       <Container className='text-center'>
-        <h1 className='text-red'>{'No Tournaments Found!'}</h1>
-        <p>
+        <Heading className='text-red'>{'No Tournaments Found!'}</Heading>
+        <Paragraph>
           {
             'Please create a tournament first before you upload the battle logs to create matches and statistics.'
           }
-        </p>
+        </Paragraph>
       </Container>
     );
   }
@@ -52,10 +52,12 @@ export default async function AdminPage() {
 
   return (
     <Container>
-      <h1>{`${username}'s Admin Panel`}</h1>
+      <Heading>{`${username}'s Admin Panel`}</Heading>
       <AdminPanelButtons />
       <div>
-        <h2 className='text-xl mb-5'>{'Tournaments List'}</h2>
+        <Heading as='h2' className='text-xl mb-5'>
+          {'Tournaments List'}
+        </Heading>
         <div className='grid gap-4'>
           {tournaments.length > 0 ? (
             tournaments.map((tournament) => (
@@ -65,11 +67,11 @@ export default async function AdminPage() {
               />
             ))
           ) : (
-            <p className='p-4 rounded-lg bg-light-grey text-center shadow-md'>
+            <Paragraph className='p-4 rounded-lg bg-light-grey text-center shadow-md'>
               {
                 'There are no tournaments available yet, please create a tournament.'
               }
-            </p>
+            </Paragraph>
           )}
         </div>
       </div>

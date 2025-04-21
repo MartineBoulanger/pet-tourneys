@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { PetListProps } from '@/types';
 import { PETS_PER_PAGE } from '@/types/constants';
+import { Heading, Button, Paragraph } from '@/components/ui';
 
 export function PetList({ stats, matchView = false }: PetListProps) {
   const [visiblePets, setVisiblePets] = useState(PETS_PER_PAGE);
@@ -17,9 +18,9 @@ export function PetList({ stats, matchView = false }: PetListProps) {
 
   return (
     <div className='bg-light-grey shadow-md rounded-lg p-4'>
-      <h2 className='text-xl mb-4'>
+      <Heading as='h2' className='text-xl mb-4'>
         {matchView ? 'Match Pet Usage' : 'Tournament Pet Usage'}
-      </h2>
+      </Heading>
       <div className='overflow-x-auto'>
         {stats && stats.length > 0 ? (
           <>
@@ -62,12 +63,12 @@ export function PetList({ stats, matchView = false }: PetListProps) {
                     <td className='px-6 py-4 whitespace-nowrap text-sm font-bold text-light-blue'>
                       {pet.pet_data.name}
                     </td>
-                    <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
+                    <td className='px-6 py-4 whitespace-nowrap text-sm'>
                       {pet.pet_data.type}
                     </td>
                     <td className='px-6 py-4 text-sm text-gray-500'>
                       {pet.breed_stats.map((bs, i) => (
-                        <div key={i} className='mb-1'>
+                        <div key={i} className='mb-1 text-foreground'>
                           <span className='font-bold text-light-blue'>
                             {bs.breed}
                           </span>
@@ -85,13 +86,13 @@ export function PetList({ stats, matchView = false }: PetListProps) {
                         <td className='px-6 py-4 whitespace-nowrap text-sm text-light-blue font-bold'>
                           {pet.total_played}
                         </td>
-                        <td className='px-6 py-4 whitespace-nowrap text-sm text-light-blue font-bold'>
+                        <td className='px-6 py-4 whitespace-nowrap text-sm text-foreground font-bold'>
                           {pet.match_count}
                         </td>
                         <td className='px-6 py-4 whitespace-nowrap text-sm text-light-blue font-bold'>
                           {pet.win_rate}%
                         </td>
-                        <td className='px-6 py-4 whitespace-nowrap text-sm text-light-blue font-bold'>
+                        <td className='px-6 py-4 whitespace-nowrap text-sm text-foreground font-bold'>
                           {pet.w_l}
                         </td>
                       </>
@@ -103,31 +104,30 @@ export function PetList({ stats, matchView = false }: PetListProps) {
             {/* Show More/Less Buttons */}
             <div className='flex justify-center gap-4 mt-4'>
               {visiblePets < stats.length && (
-                <button
+                <Button
                   onClick={showMorePets}
-                  className='btn-submit'
                   title='Show More'
                   aria-label='Show More'
                 >
                   Show More
-                </button>
+                </Button>
               )}
               {visiblePets > PETS_PER_PAGE && (
-                <button
+                <Button
                   onClick={showLessPets}
                   className='btn-inverted'
                   title='Show Less'
                   aria-label='Show Less'
                 >
                   Show Less
-                </button>
+                </Button>
               )}
             </div>
           </>
         ) : (
-          <p className='p-4 rounded-lg text-center'>
+          <Paragraph className='p-4 rounded-lg text-center'>
             {'No pet usage data available yet.'}
-          </p>
+          </Paragraph>
         )}
       </div>
     </div>

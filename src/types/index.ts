@@ -21,6 +21,18 @@ export type MatchPageParams = Promise<{ id: string; matchId: string }>;
 export type MatchSearchParams = Promise<{ matchId?: string }>;
 export type PageSearchParams = Promise<{ page?: string }>;
 
+type HeadingTags = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+export interface HeadingProps {
+  as?: HeadingTags;
+  className?: string;
+  children: ReactNode;
+}
+
+export interface ParagraphProps {
+  className?: string;
+  children: ReactNode;
+}
+
 export interface ChartDataItem {
   name: string;
   value: number;

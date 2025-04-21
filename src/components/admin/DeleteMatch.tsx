@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { FaTrash } from 'react-icons/fa';
 import { deleteMatch } from '@/supabase/actions/matches';
 import { DeleteMatchProps } from '@/types';
+import { Heading, Button, Paragraph } from '@/components/ui';
 
 export const DeleteMatch = ({
   tournamentId,
@@ -21,7 +22,6 @@ export const DeleteMatch = ({
     try {
       await deleteMatch(tournamentId, matchId);
       router.refresh();
-      // Close modal after successful deletion
       setIsOpen(false);
     } catch (error) {
       console.error('Error deleting tournament:', error);
@@ -32,16 +32,16 @@ export const DeleteMatch = ({
   };
   return (
     <>
-      <button
-        className='btn-link hover:text-red'
+      <Button
+        variant='link'
+        className='hover:text-red'
         type='button'
         onClick={() => setIsOpen(true)}
         title={`Delete match ${player1} vs ${player2}`}
         aria-label={`Delete match ${player1} vs ${player2}`}
       >
         <FaTrash />
-      </button>
-      {/* Confirmation Modal */}
+      </Button>
       {isOpen && (
         <div
           className='fixed inset-0 bg-background/80 flex items-center justify-center p-4 z-50'
@@ -51,8 +51,8 @@ export const DeleteMatch = ({
             className='bg-light-grey rounded-lg p-5 max-w-md w-full'
             onClick={(e) => e.stopPropagation()}
           >
-            <h1 className='mb-4'>{'Confirm Deletion'}</h1>
-            <p className='mb-6'>
+            <Heading className='mb-4'>{'Confirm Deletion'}</Heading>
+            <Paragraph className='mb-6'>
               {
                 'Are you sure you want to delete the match with the battle logs '
               }
@@ -60,27 +60,25 @@ export const DeleteMatch = ({
                 {player1 + ' vs ' + player2}
               </strong>
               {'? This action cannot be undone.'}
-            </p>
-
+            </Paragraph>
             <div className='flex justify-end gap-3'>
-              <button
+              <Button
                 onClick={() => setIsOpen(false)}
-                className='btn-cancel px-4 py-2'
+                variant='secondary'
                 disabled={isDeleting}
                 title='cancel delete match'
                 aria-label='cancel delete match'
               >
                 {'Cancel'}
-              </button>
-              <button
+              </Button>
+              <Button
                 onClick={handleDeleteMatch}
-                className='btn-submit px-4 py-2'
                 disabled={isDeleting}
                 title='delete match'
                 aria-label='delete match'
               >
                 {isDeleting ? 'Deleting...' : 'Delete'}
-              </button>
+              </Button>
             </div>
           </div>
         </div>

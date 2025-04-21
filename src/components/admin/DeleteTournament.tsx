@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { FaTrash } from 'react-icons/fa';
 import { deleteTournament } from '@/supabase/actions/tournaments';
 import { DeleteTournamentProps } from '@/types';
+import { Heading, Button, Paragraph } from '@/components/ui';
 
 export const DeleteTournament = ({ id, name }: DeleteTournamentProps) => {
   const router = useRouter();
@@ -26,16 +27,16 @@ export const DeleteTournament = ({ id, name }: DeleteTournamentProps) => {
 
   return (
     <>
-      <button
-        className='btn-link hover:text-red'
+      <Button
+        variant='link'
+        className='hover:text-red'
         type='button'
         onClick={() => setIsOpen(true)}
         title={`Delete tournament ${name}`}
         aria-label={`Delete tournament ${name}`}
       >
         <FaTrash />
-      </button>
-      {/* Confirmation Modal */}
+      </Button>
       {isOpen && (
         <div
           className='fixed inset-0 bg-background/80 flex items-center justify-center p-4 z-50'
@@ -45,32 +46,30 @@ export const DeleteTournament = ({ id, name }: DeleteTournamentProps) => {
             className='bg-light-grey rounded-lg p-5 max-w-md w-full'
             onClick={(e) => e.stopPropagation()}
           >
-            <h1 className='mb-4'>{'Confirm Deletion'}</h1>
-            <p className='mb-6'>
+            <Heading className='mb-4'>{'Confirm Deletion'}</Heading>
+            <Paragraph className='mb-6'>
               {'Are you sure you want to delete the tournament '}
               <strong className='text-light-blue'>{name}</strong>
               {'? This action cannot be undone.'}
-            </p>
-
+            </Paragraph>
             <div className='flex justify-end gap-3'>
-              <button
+              <Button
                 onClick={() => setIsOpen(false)}
-                className='btn-cancel px-4 py-2'
+                variant='secondary'
                 disabled={isDeleting}
                 title='cancel delete tournament'
                 aria-label='cancel delete tournament'
               >
                 {'Cancel'}
-              </button>
-              <button
+              </Button>
+              <Button
                 onClick={handleDelete}
-                className='btn-submit px-4 py-2'
                 disabled={isDeleting}
                 title='delete tournament'
                 aria-label='delete tournament'
               >
                 {isDeleting ? 'Deleting...' : 'Delete'}
-              </button>
+              </Button>
             </div>
           </div>
         </div>

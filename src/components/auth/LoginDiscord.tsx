@@ -3,6 +3,7 @@
 import { useTransition } from 'react';
 import { FaDiscord } from 'react-icons/fa';
 import { signInWithDiscord } from '@/supabase/actions/auth';
+import { Button } from '@/components/ui';
 
 export const LoginDiscord = () => {
   const [isPending, startTransition] = useTransition();
@@ -14,10 +15,10 @@ export const LoginDiscord = () => {
   };
 
   return (
-    <button
+    <Button
       type='button'
       onClick={handleDiscordLogin}
-      className='btn-submit rounded-lg gap-4 h-12 bg-blue-grey hover:bg-blue-grey/70 p-4 flex justify-center items-center'
+      className=' bg-blue-grey hover:bg-blue-grey/70 flex justify-center items-center gap-4'
       title='Login with Discord'
       aria-label='Login with Discord'
     >
@@ -25,6 +26,6 @@ export const LoginDiscord = () => {
       <span className='text-foreground uppercase'>
         {isPending ? 'Redirecting...' : 'Login with Discord'}
       </span>
-    </button>
+    </Button>
   );
 };

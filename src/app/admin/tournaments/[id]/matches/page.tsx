@@ -1,11 +1,12 @@
+import { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 import { getUserSession } from '@/supabase/actions/auth';
 import { getTournamentDetails } from '@/supabase/actions/tournaments';
 import { getPaginatedMatches } from '@/supabase/actions/matches';
-import { Container, Pagination } from '@/components/ui';
+import { Container, Pagination, Heading, Paragraph } from '@/components/ui';
 import { AdminPanelButtons, AdminMatchListItem } from '@/components/admin';
 import { PageParams, PageSearchParams } from '@/types';
-import { Metadata } from 'next';
+import { MATCHES_PER_PAGE } from '@/types/constants';
 
 export const metadata: Metadata = {
   title: 'Admin Matches List',
@@ -22,7 +23,6 @@ export default async function AdminMatchesPage({
   const { id } = await params;
   const { page } = await searchParams;
   const currentPage = Number(page) || 1;
-  const MATCHES_PER_PAGE = 10;
   const offset = (currentPage - 1) * MATCHES_PER_PAGE;
   const response = await getUserSession();
 
@@ -46,8 +46,8 @@ export default async function AdminMatchesPage({
   if (!success || !succ) {
     return (
       <Container className='text-center'>
-        <h1 className='text-red'>{`Error ${status || stat}!`}</h1>
-        <p>{message}</p>
+        <Heading className='text-red'>{`Error ${status || stat}!`}</Heading>
+        <Paragraph>{message}</Paragraph>
       </Container>
     );
   }
@@ -55,12 +55,12 @@ export default async function AdminMatchesPage({
   if (!tournament) {
     return (
       <Container className='text-center'>
-        <h1 className='text-red'>{'No Tournament Found!'}</h1>
-        <p>
+        <Heading className='text-red'>{'No Tournament Found!'}</Heading>
+        <Paragraph>
           {
             'Please create a tournament first, so you can upload battle logs and create matches.'
           }
-        </p>
+        </Paragraph>
       </Container>
     );
   }
@@ -68,20 +68,26 @@ export default async function AdminMatchesPage({
   if (!matches) {
     return (
       <Container className='text-center'>
-        <h1 className='text-red'>{'No Matches Found!'}</h1>
-        <p>{'Please upload battle logs, so you can create matches.'}</p>
+        <Heading className='text-red'>{'No Matches Found!'}</Heading>
+        <Paragraph>
+          {'Please upload battle logs, so you can create matches.'}
+        </Paragraph>
       </Container>
     );
   }
 
+  const username = response?.user && response?.user?.username;
+
   return (
     <Container>
-      <h1>{'Admin Panel'}</h1>
+      <Heading>{`${username}'s Admin Panel`}</Heading>
       <AdminPanelButtons isMatchesPage />
       <div>
         <div className='mb-5'>
-          <h2 className='text-xl mb-2'>{'Tournament Matches'}</h2>
-          <p className='text-gray-500'>{tournament.name}</p>
+          <Heading as='h2' className='text-xl mb-2'>
+            {'Tournament Matches'}
+          </Heading>
+          <Paragraph className='text-light-blue'>{tournament.name}</Paragraph>
         </div>
         <div className='grid gap-4'>
           {matches && matches.length > 0 ? (
@@ -102,11 +108,11 @@ export default async function AdminMatchesPage({
               )}
             </>
           ) : (
-            <p className='p-4 rounded-lg bg-light-grey text-center shadow-md'>
+            <Paragraph className='p-4 rounded-lg bg-light-grey text-center shadow-md'>
               {
                 'There are no matches for this tournament yet, please upload some battle logs.'
               }
-            </p>
+            </Paragraph>
           )}
         </div>
       </div>

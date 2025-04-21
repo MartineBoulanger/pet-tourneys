@@ -4,8 +4,9 @@ import { notFound } from 'next/navigation';
 import { getTournamentDetails } from '@/supabase/actions/tournaments';
 import { getPaginatedMatches } from '@/supabase/actions/matches';
 import { MatchList } from '@/components/tournaments';
-import { Container, PageHeading } from '@/components/ui';
+import { Container, PageHeading, Heading, Paragraph } from '@/components/ui';
 import { PageParams, PageSearchParams } from '@/types';
+import { MATCHES_PER_PAGE } from '@/types/constants';
 import { linksData } from '@/lib/linksData';
 
 export async function generateMetadata({ params }: { params: PageParams }) {
@@ -28,7 +29,6 @@ export default async function TournamentPage({
   const { id } = await params;
   const { page } = await searchParams;
   const currentPage = Number(page) || 1;
-  const MATCHES_PER_PAGE = 10;
   const offset = (currentPage - 1) * MATCHES_PER_PAGE;
 
   const {
@@ -47,8 +47,8 @@ export default async function TournamentPage({
   if (!success || !succ) {
     return (
       <Container className='text-center'>
-        <h1 className='text-red'>{`Error ${status || stat}!`}</h1>
-        <p>{message}</p>
+        <Heading className='text-red'>{`Error ${status || stat}!`}</Heading>
+        <Paragraph>{message}</Paragraph>
       </Container>
     );
   }
@@ -81,18 +81,18 @@ export default async function TournamentPage({
           })}
         </div>
       </PageHeading>
-      <div className='mb-10 text-gray-500'>
-        <p>
+      <div className='mb-10 text-foreground'>
+        <Paragraph>
           {new Date(tournament.start_date).toLocaleDateString()} -{' '}
           {tournament.end_date === '1999-12-31T22:00:00' ||
           tournament.end_date === null
             ? 'Ongoing'
             : new Date(tournament.end_date).toLocaleDateString()}
-        </p>
-        <p>
+        </Paragraph>
+        <Paragraph className='font-bold text-light-blue'>
           {tournament.participant_count}
           {' participants'}
-        </p>
+        </Paragraph>
       </div>
       {matches && matches.length > 0 ? (
         <MatchList
@@ -102,9 +102,9 @@ export default async function TournamentPage({
           totalPages={totalPages}
         />
       ) : (
-        <p className='p-4 rounded-lg bg-light-grey text-center shadow-md'>
+        <Paragraph className='p-4 rounded-lg bg-light-grey text-center shadow-md'>
           {'There are no matches for this tournament available yet.'}
-        </p>
+        </Paragraph>
       )}
     </Container>
   );

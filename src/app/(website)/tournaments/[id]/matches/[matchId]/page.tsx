@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { Fragment } from 'react';
 import { BattleLogViewer, MatchScore } from '@/components/matches';
-import { Container, PageHeading } from '@/components/ui';
+import { Container, PageHeading, Heading, Paragraph } from '@/components/ui';
 import { getMatchDetails } from '@/supabase/actions/matches';
 import { MatchPageParams } from '@/types';
 import { linksData } from '@/lib/linksData';
@@ -37,8 +37,8 @@ export default async function MatchPage({
   if (!success) {
     return (
       <Container className='text-center'>
-        <h1 className='text-red'>{`Error ${status}!`}</h1>
-        <p>{message}</p>
+        <Heading className='text-red'>{`Error ${status}!`}</Heading>
+        <Paragraph>{message}</Paragraph>
       </Container>
     );
   }
@@ -47,10 +47,12 @@ export default async function MatchPage({
     <Container>
       <PageHeading
         heading={
-          <>
-            {match.player1} vs {match.player2}{' '}
-            <span className='text-xl text-gray-500'>{match.region}</span>
-          </>
+          <span className='flex gap-2.5'>
+            <span>
+              {match.player1} vs {match.player2}
+            </span>
+            <span className='text-xl text-foreground/50'>{match.region}</span>
+          </span>
         }
         className='lg:mb-5'
       >
@@ -82,15 +84,17 @@ export default async function MatchPage({
         {battleLogs?.length ? (
           battleLogs.map((battle, index) => (
             <div key={battle.id} className='mb-5 lg:mb-10'>
-              <h2 className='text-lg font-bold font-sans'>
+              <Heading as='h2' className='text-lg font-bold font-sans'>
                 {'Battle '}
                 {index + 1}
-              </h2>
+              </Heading>
               <BattleLogViewer battleLog={battle} />
             </div>
           ))
         ) : (
-          <p className='text-gray-500'>{'No battle logs available.'}</p>
+          <Paragraph className='text-gray-500'>
+            {'No battle logs available.'}
+          </Paragraph>
         )}
       </div>
     </Container>

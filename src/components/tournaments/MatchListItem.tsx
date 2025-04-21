@@ -16,12 +16,12 @@ export const MatchListItem = ({ tournamentId, match }: MatchListItemProps) => {
           {' vs '}
           {match.player2}
         </span>
-        <span className='flex'>
-          <span className='text-sm text-gray-500'>
+        <span className='flex text-light-blue'>
+          <span className='text-sm'>
             {new Date(match.date).toLocaleDateString()}
           </span>
           <span className='w-[1px] h-5 bg-gray-500 mx-5 rounded-full' />
-          <span className='text-sm text-gray-500'>{match.region}</span>
+          <span className='text-sm'>{match.region}</span>
         </span>
       </span>
     </Link>

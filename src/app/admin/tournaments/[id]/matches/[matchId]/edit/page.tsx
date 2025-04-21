@@ -1,6 +1,6 @@
 import { getTournaments } from '@/supabase/actions/tournaments';
 import { UploadForm } from '@/components/admin';
-import { Container } from '@/components/ui';
+import { Container, Heading, Paragraph } from '@/components/ui';
 import { getTournamentTableName } from '@/utils/getTournamentTableName';
 import { createClient } from '@/supabase/server';
 import { MatchPageParams } from '@/types';
@@ -20,7 +20,6 @@ export default async function AdminEditMatchPage({
   const supabase = await createClient();
   const matchesTable = getTournamentTableName('matches', id);
 
-  // Fetch existing match data
   const { data: match } = await supabase
     .schema('api')
     .from(matchesTable)
@@ -35,12 +34,12 @@ export default async function AdminEditMatchPage({
   if (!tournaments) {
     return (
       <Container className='text-center'>
-        <h1 className='text-red'>{'No Tournaments Found!'}</h1>
-        <p>
+        <Heading className='text-red'>{'No Tournaments Found!'}</Heading>
+        <Paragraph>
           {
             'Please create a tournament first before you upload the battle logs to create matches and statistics.'
           }
-        </p>
+        </Paragraph>
       </Container>
     );
   }
@@ -48,14 +47,14 @@ export default async function AdminEditMatchPage({
   if (!match) {
     return (
       <Container className='text-center'>
-        <h1 className='text-red'>{'Match not found!'}</h1>
+        <Heading className='text-red'>{'Match not found!'}</Heading>
       </Container>
     );
   }
 
   return (
     <Container className='max-w-[1024px]'>
-      <h1 className='text-center'>{'Edit Match'}</h1>
+      <Heading className='text-center'>{'Edit Match'}</Heading>
       <UploadForm
         tournaments={tournaments || []}
         initialData={{

@@ -1,6 +1,7 @@
 import { FaChevronDown } from 'react-icons/fa';
 import { cn } from '@/utils/cn';
 import { PopUp } from './PopUp';
+import { Heading } from './Heading';
 import { PageHeadingProps } from '@/types';
 
 export const PageHeading = ({
@@ -15,7 +16,7 @@ export const PageHeading = ({
         className
       )}
     >
-      <h1>{heading}</h1>
+      <Heading>{heading}</Heading>
       <PopUp
         text={
           <span className='flex gap-2'>

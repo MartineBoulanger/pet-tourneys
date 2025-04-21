@@ -26,12 +26,12 @@ export const AdminMatchListItem = ({
             : match.opponent_score}
           )
         </Link>
-        <div className='flex mt-2'>
-          <div className='text-sm text-gray-500'>
+        <div className='flex mt-2 text-light-blue'>
+          <div className='text-sm'>
             {new Date(match.date).toLocaleDateString()}
           </div>
           <div className='mx-5 text-gray-500'>•</div>
-          <div className='text-sm text-gray-500'>{match.region}</div>
+          <div className='text-sm'>{match.region}</div>
         </div>
       </div>
       <AdminTournamentMatchActions

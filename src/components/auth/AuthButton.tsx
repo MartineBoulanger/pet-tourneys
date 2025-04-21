@@ -1,17 +1,18 @@
 import React from 'react';
 import { cn } from '@/utils/cn';
 import { AuthButtonProps } from '@/types';
+import { Button } from '@/components/ui';
 
 export const AuthButton = ({ type, loading, className }: AuthButtonProps) => {
   return (
-    <button
+    <Button
       disabled={loading}
       type='submit'
-      className={cn('btn-submit w-full', className)}
+      className={cn('w-full', className)}
       title={type}
       aria-label={type}
     >
       {loading ? 'Loading...' : type}
-    </button>
+    </Button>
   );
 };

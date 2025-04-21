@@ -3,9 +3,10 @@
 import { useState } from 'react';
 import { BattleLogViewerProps, BattleRound } from '@/types';
 import { ROUNDS_PER_PAGE } from '@/types/constants';
+import { cn } from '@/utils/cn';
+import { Heading, Button } from '@/components/ui';
 
 export function BattleLogViewer({ battleLog }: BattleLogViewerProps) {
-  // Assert that battle is an array of BattleRound
   const battleRounds = battleLog.battle as unknown as BattleRound[];
   const [expandedRounds, setExpandedRounds] = useState<Record<number, boolean>>(
     {}
@@ -19,7 +20,6 @@ export function BattleLogViewer({ battleLog }: BattleLogViewerProps) {
     }));
   };
 
-  // Now use battleRounds instead of battleLog.battle everywhere
   const showMoreRounds = () => {
     setVisibleRounds((prev) =>
       Math.min(prev + ROUNDS_PER_PAGE, battleRounds.length)
@@ -42,14 +42,13 @@ export function BattleLogViewer({ battleLog }: BattleLogViewerProps) {
 
   return (
     <div className='rounded-lg overflow-hidden shadow-md'>
-      {/* Battle Header */}
       <div className='bg-light-grey p-4'>
         <div className='flex justify-between items-center'>
           <div>
-            <h3 className='font-medium'>
+            <Heading as='h3' className='font-medium'>
               {'Battle on '}
               {formatTimestamp(battleLog.timestamp)}
-            </h3>
+            </Heading>
             <div className='flex items-center mt-1'>
               <span
                 className={`text-sm px-2 py-1 rounded mr-2 ${
@@ -73,10 +72,11 @@ export function BattleLogViewer({ battleLog }: BattleLogViewerProps) {
         </div>
       </div>
 
-      {/* Teams */}
       <div className='grid grid-cols-1 md:grid-cols-2 gap-4 p-4 border-b border-light-grey bg-dark-grey'>
         <div>
-          <h4 className='font-medium text-blue mb-2'>{'Log Owner Team'}</h4>
+          <Heading as='h4' className='font-medium text-cyan-400 mb-2'>
+            {'Log Owner Team'}
+          </Heading>
           <ul className='space-y-1'>
             {battleLog.player_team.map((pet, index) => (
               <li key={index} className='flex items-center'>
@@ -86,7 +86,9 @@ export function BattleLogViewer({ battleLog }: BattleLogViewerProps) {
           </ul>
         </div>
         <div>
-          <h4 className='font-medium text-red mb-2'>{'Opponent Team'}</h4>
+          <Heading as='h4' className='font-medium text-purple-400 mb-2'>
+            {'Opponent Team'}
+          </Heading>
           <ul className='space-y-1'>
             {battleLog.opponent_team.map((pet, index) => (
               <li key={index} className='flex items-center'>
@@ -97,78 +99,71 @@ export function BattleLogViewer({ battleLog }: BattleLogViewerProps) {
         </div>
       </div>
 
-      {/* Rounds */}
       <div className='p-4 bg-dark-grey'>
-        <h4 className='font-medium mb-3'>{'Battle Rounds'}</h4>
+        <Heading as='h4' className='font-medium mb-3'>
+          {'Battle Rounds'}
+        </Heading>
         <div className='space-y-2'>
           {battleRounds.slice(0, visibleRounds).map((round) => (
             <div key={round.round} className='rounded-md overflow-hidden'>
-              <button
+              <Button
                 onClick={() => toggleRound(round.round)}
-                className='w-full flex justify-between items-center p-3 bg-light-grey hover:bg-medium-grey rounded-none'
+                className='w-full p-3 bg-light-grey hover:bg-medium-grey rounded-none'
                 title='Toggle round'
                 aria-label='Toggle round'
               >
-                <span className='font-medium'>
-                  {'Round '}
-                  {round.round}
+                <span className='flex justify-between items-center'>
+                  <span className='font-medium'>
+                    {'Round '}
+                    {round.round}
+                  </span>
+                  <span>{expandedRounds[round.round] ? '−' : '+'}</span>
                 </span>
-                <span className='text-gray-500'>
-                  {expandedRounds[round.round] ? '−' : '+'}
-                </span>
-              </button>
+              </Button>
 
               {expandedRounds[round.round] && (
                 <div className='p-3 pt-0 border border-light-grey rounded-b-md'>
                   <ul className='space-y-2'>
                     {round.events.map((event, index) => {
-                      // Remove the round number from the beginning of each event
                       const cleanedEvent = event.replace(/^\d+\s*/, '');
 
                       const isPlayer = event.includes('your');
                       const isEnemy = event.includes('enemy');
-                      const hasDodged = event.includes('dodged');
-                      const hasBlocked = event.includes('blocked');
-                      const hasMissed = event.includes('missed');
-                      const isDamage = event.includes('damage');
+                      const isDead = event.includes('died');
+                      const isDodged = event.includes('dodged');
+                      const isBlocked = event.includes('blocked');
+                      const isMissed = event.includes('missed');
                       const isCritical = event.includes('Critical');
                       const isStrong = event.includes('Strong');
+                      const isWeak = event.includes('Weak');
 
                       return (
                         <li
                           key={index}
                           className={`text-sm ${
                             isPlayer
-                              ? 'text-blue'
+                              ? 'text-cyan-400'
                               : isEnemy
-                              ? 'text-red'
-                              : 'text-gray-500'
+                              ? 'text-purple-400'
+                              : isDead
+                              ? 'text-light-red'
+                              : 'text-orange-300'
                           }`}
                         >
-                          <div className='flex items-start'>
-                            {cleanedEvent.split('[').map((part, i) => {
-                              if (i === 0) return part;
-                              const [ability, rest] = part.split(']');
-                              return (
-                                <span key={i}>
-                                  <span className='font-bold'>[{ability}]</span>
-                                  {rest}
-                                </span>
-                              );
-                            })}
-                            {isDamage && (
+                          <div className='flex items-center justify-between max-w-[600px]'>
+                            <span>{cleanedEvent}</span>
+                            {isStrong ||
+                            isWeak ||
+                            isCritical ||
+                            isDodged ||
+                            isBlocked ||
+                            isMissed ? (
                               <span
-                                className={`ml-1 px-1 rounded text-xs ${
-                                  isCritical
+                                className={`ml-1 px-1 rounded text-xs ml-2.5 ${
+                                  isCritical || isMissed
                                     ? 'bg-red-100 text-red-800'
-                                    : isStrong
+                                    : isStrong || isDodged
                                     ? 'bg-blue-100 text-blue-800'
-                                    : hasMissed
-                                    ? 'bg-cyan-100 text-cyan-800'
-                                    : hasDodged
-                                    ? 'bg-purple-100 text-purple-800'
-                                    : hasBlocked
-                                    ? 'bg-rose-100 text-rose-800'
                                     : 'bg-yellow-100 text-yellow-800'
                                 }`}
                               >
@@ -176,15 +171,15 @@ export function BattleLogViewer({ battleLog }: BattleLogViewerProps) {
                                   ? 'CRIT'
                                   : isStrong
                                   ? 'STRONG'
-                                  : hasMissed
-                                  ? 'MISS'
-                                  : hasDodged
+                                  : isWeak
+                                  ? 'WEAK'
+                                  : isDodged
                                   ? 'DODGE'
-                                  : hasBlocked
+                                  : isBlocked
                                   ? 'BLOCK'
-                                  : 'ATTACK'}
+                                  : 'MISS'}
                               </span>
-                            )}
+                            ) : null}
                           </div>
                         </li>
                       );
@@ -196,27 +191,25 @@ export function BattleLogViewer({ battleLog }: BattleLogViewerProps) {
           ))}
         </div>
 
-        {/* Show More/Less Buttons */}
         <div className='flex justify-center gap-4 mt-4'>
           {visibleRounds < battleRounds.length && (
-            <button
+            <Button
               onClick={showMoreRounds}
-              className='btn-submit'
               title='Show More'
               aria-label='Show More'
             >
               Show More
-            </button>
+            </Button>
           )}
           {visibleRounds > ROUNDS_PER_PAGE && (
-            <button
+            <Button
               onClick={showLessRounds}
               className='btn-inverted'
               title='Show Less'
               aria-label='Show Less'
             >
               Show Less
-            </button>
+            </Button>
           )}
         </div>
       </div>

@@ -10,3 +10,5 @@ export * from './Skeletons';
 export * from './PopUp';
 export * from './Pagination';
 export * from './PageHeading';
+export * from './Heading';
+export * from './Paragraph';

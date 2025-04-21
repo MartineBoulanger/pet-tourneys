@@ -1,8 +1,7 @@
+import { Metadata } from 'next';
 import { getTournaments } from '@/supabase/actions/tournaments';
 import { UploadForm } from '@/components/admin';
-import { Container } from '@/components/ui';
-
-import { Metadata } from 'next';
+import { Container, Heading, Paragraph } from '@/components/ui';
 
 export const metadata: Metadata = {
   title: 'Upload Logs',
@@ -20,8 +19,8 @@ export default async function UploadLogsPage() {
   if (!success) {
     return (
       <Container className='text-center'>
-        <h1 className='text-red'>{`Error ${status}!`}</h1>
-        <p>{message}</p>
+        <Heading className='text-red'>{`Error ${status}!`}</Heading>
+        <Paragraph>{message}</Paragraph>
       </Container>
     );
   }
@@ -29,24 +28,24 @@ export default async function UploadLogsPage() {
   if (!tournaments) {
     return (
       <Container className='text-center'>
-        <h1 className='text-red'>{'No Tournaments Found!'}</h1>
-        <p>
+        <Heading className='text-red'>{'No Tournaments Found!'}</Heading>
+        <Paragraph>
           {
             'Please create a tournament first before you upload the battle logs to create matches and statistics.'
           }
-        </p>
+        </Paragraph>
       </Container>
     );
   }
 
   return (
     <Container className='max-w-[1024px]'>
-      <h1 className='text-center'>{'Pet Battle Logs Uploader'}</h1>
-      <p className='text-center mb-5'>
+      <Heading className='text-center'>{'Pet Battle Logs Uploader'}</Heading>
+      <Paragraph className='text-center mb-5'>
         {
           'Upload the PvP pet battle logs and pet usage, fill in the match information, and track the match and logs.'
         }
-      </p>
+      </Paragraph>
       <UploadForm tournaments={tournaments || []} />
     </Container>
   );

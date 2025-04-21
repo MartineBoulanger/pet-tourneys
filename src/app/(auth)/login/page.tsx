@@ -1,5 +1,5 @@
 import { LoginForm } from '@/components/auth';
-import { Container } from '@/components/ui';
+import { Container, Heading, Paragraph } from '@/components/ui';
 
 export async function generateMetadata() {
   return {
@@ -13,8 +13,10 @@ export async function generateMetadata() {
 export default function LoginPage() {
   return (
     <Container className='max-w-[512px]'>
-      <h1 className='text-center'>{'Sign in'}</h1>
-      <p className='text-center mb-5'>{'Logins are only for admin users.'}</p>
+      <Heading className='text-center'>{'Sign in'}</Heading>
+      <Paragraph className='text-center mb-5'>
+        {'Logins are only for admin users.'}
+      </Paragraph>
       <LoginForm />
     </Container>
   );

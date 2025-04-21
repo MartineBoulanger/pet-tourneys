@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { signIn } from '@/supabase/actions/auth';
-import { Form, Input, LoginFormSkeleton } from '@/components/ui';
+import { Form, Input, LoginFormSkeleton, Paragraph } from '@/components/ui';
 import { AuthButton } from './AuthButton';
 import { LoginDiscord } from './LoginDiscord';
 
@@ -46,9 +46,9 @@ export const LoginForm = () => {
           <AuthButton type='login' loading={loading} className='mt-4' />
         </Form>
         <div className='mt-4 flex items-center'>
-          <p>{`Don't have an account?`}</p>
+          <Paragraph>{`Don't have an account?`}</Paragraph>
           <Link
-            className='link font-bold ml-2'
+            className='link font-bold ml-2 text-light-blue'
             href='/register'
             title='sign up'
             aria-label='sign up'
@@ -57,9 +57,9 @@ export const LoginForm = () => {
           </Link>
         </div>
         <div className='mt-2 flex items-center'>
-          <p>{`Forgot your password?`}</p>
+          <Paragraph>{`Forgot your password?`}</Paragraph>
           <Link
-            className='link font-bold ml-2'
+            className='link font-bold ml-2 text-light-blue'
             href='/forgot-password'
             title='reset password'
             aria-label='reset password'
@@ -68,7 +68,7 @@ export const LoginForm = () => {
           </Link>
         </div>
       </div>
-      <div className='mt-5 p-5 place-self-center bg-dark-grey rounded-lg shadow-md'>
+      <div className='mt-5 p-5 bg-dark-grey rounded-lg shadow-md w-full flex justify-center'>
         <LoginDiscord />
       </div>
     </>

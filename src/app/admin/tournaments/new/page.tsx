@@ -1,5 +1,5 @@
 import { TournamentForm } from '@/components/admin';
-import { Container } from '@/components/ui';
+import { Container, Heading } from '@/components/ui';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 export default function NewTournamentPage() {
   return (
     <Container className='w-full flex flex-col justify-center max-w-[500px]'>
-      <h1 className='text-center'>{'Create Tournament'}</h1>
+      <Heading className='text-center'>{'Create Tournament'}</Heading>
       <TournamentForm />
     </Container>
   );

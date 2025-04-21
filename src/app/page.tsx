@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { Container } from '@/components/ui';
+import { Container, Heading, Paragraph } from '@/components/ui';
 
 export default async function HomePage() {
   return (
@@ -15,15 +15,15 @@ export default async function HomePage() {
         />
       </div>
       <Container className='text-center'>
-        <h1>{'WoW Pet Community'}</h1>
-        <p className='font-warcraft text-xl'>
+        <Heading>{'WoW Pet Community'}</Heading>
+        <Paragraph className='font-warcraft text-xl'>
           {
             'The World of Warcraft community for all things Battle Pets and Pet Battling! '
           }
-        </p>
-        <p className='mb-10 font-warcraft text-xl'>
+        </Paragraph>
+        <Paragraph className='mb-10 font-warcraft text-xl'>
           {'Also the Community for the Pet Battle PvP Tournaments!'}
-        </p>
+        </Paragraph>
       </Container>
     </>
   );

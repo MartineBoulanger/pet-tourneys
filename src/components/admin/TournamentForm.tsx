@@ -46,7 +46,6 @@ export function TournamentForm({ initialData = null }: TournamentFormProps) {
     return true;
   };
 
-  // In your TournamentForm component, replace the handleSubmit logic with:
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validateForm()) return;
@@ -66,14 +65,12 @@ export function TournamentForm({ initialData = null }: TournamentFormProps) {
       };
 
       if (initialData?.id) {
-        // Update existing tournament
         const { success } = await updateTournament(
           initialData.id,
           submissionData
         );
         if (!success) setError('Failed to update the tournament.');
       } else {
-        // Create new tournament
         const { success } = await createTournament(submissionData);
         if (!success) setError('Failed to create the tournament.');
       }

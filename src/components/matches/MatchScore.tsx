@@ -1,45 +1,46 @@
 import { MatchScoreProps } from '@/types';
+import { Paragraph } from '@/components/ui';
 
 export const MatchScore = ({ match }: MatchScoreProps) => {
   return (
     <>
       <div className='mb-8 p-4 bg-light-grey rounded-lg shadow-md'>
         <div className='flex justify-between items-center'>
-          {/* Player 1 Score */}
           <div className='text-center'>
-            <p className='text-lg font-medium'>{match.player1}</p>
-            <p className='text-3xl font-bold'>
+            <Paragraph className='text-lg font-medium'>
+              {match.player1}
+            </Paragraph>
+            <Paragraph className='text-3xl font-bold'>
               {match.owner === match.player1
                 ? match.owner_score
                 : match.opponent_score}
-            </p>
+            </Paragraph>
           </div>
-
-          <div className='text-xl font-bold text-blue'>{'vs'}</div>
-
-          {/* Player 2 Score */}
+          <div className='text-xl font-bold text-light-blue'>{'vs'}</div>
           <div className='text-center'>
-            <p className='text-lg font-medium'>{match.player2}</p>
-            <p className='text-3xl font-bold'>
+            <Paragraph className='text-lg font-medium'>
+              {match.player2}
+            </Paragraph>
+            <Paragraph className='text-3xl font-bold'>
               {match.owner === match.player2
                 ? match.owner_score
                 : match.opponent_score}
-            </p>
+            </Paragraph>
           </div>
         </div>
       </div>
 
-      <div className='mb-5 md:mb-10 text-gray-500'>
-        <p>
-          {'Played on '}
-          <span className='font-bold text-foreground'>
+      <div className='mb-5 md:mb-10 text-foreground'>
+        <Paragraph>
+          <span>{'Played on '}</span>
+          <span className='font-bold text-light-blue'>
             {new Date(match.date).toLocaleString()}
           </span>
-        </p>
-        <p>
-          {'Logs submitted by '}
-          <span className='font-bold text-foreground'>{match.owner}</span>
-        </p>
+        </Paragraph>
+        <Paragraph>
+          <span>{'Logs submitted by '}</span>
+          <span className='font-bold text-light-blue'>{match.owner}</span>
+        </Paragraph>
       </div>
     </>
   );

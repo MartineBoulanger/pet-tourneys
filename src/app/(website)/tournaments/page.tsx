@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import { getTournaments } from '@/supabase/actions/tournaments';
-import { Container } from '@/components/ui';
+import { Container, Heading, Paragraph } from '@/components/ui';
 import { TournamentsList } from '@/components/tournaments';
 
 export async function generateMetadata() {
@@ -23,8 +23,8 @@ export default async function TournamentsPage() {
   if (!success) {
     return (
       <Container className='text-center'>
-        <h1 className='text-red'>{`Error ${status}!`}</h1>
-        <p>{message}</p>
+        <Heading className='text-red'>{`Error ${status}!`}</Heading>
+        <Paragraph>{message}</Paragraph>
       </Container>
     );
   }
@@ -33,13 +33,13 @@ export default async function TournamentsPage() {
 
   return (
     <Container>
-      <h1>{'Tournaments'}</h1>
+      <Heading>{'Tournaments'}</Heading>
       {tournaments.length > 0 ? (
         <TournamentsList tournaments={tournaments} />
       ) : (
-        <p className='p-4 rounded-lg bg-light-grey text-center shadow-md'>
+        <Paragraph className='p-4 rounded-lg bg-light-grey text-center shadow-md'>
           {'There are no tournaments available yet.'}
-        </p>
+        </Paragraph>
       )}
     </Container>
   );

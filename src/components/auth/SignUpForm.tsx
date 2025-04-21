@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { signUp } from '@/supabase/actions/auth';
 import { AuthButton } from '@/components/auth/AuthButton';
-import { Form, Input, SignUpFormSkeleton } from '@/components/ui';
+import { Form, Input, SignUpFormSkeleton, Paragraph } from '@/components/ui';
 
 export const SignUpForm = () => {
   const router = useRouter();
@@ -51,9 +51,9 @@ export const SignUpForm = () => {
         <AuthButton type='Sign up' loading={loading} className='mt-4' />
       </Form>
       <div className='mt-4 flex items-center'>
-        <p>{'Already have an account?'}</p>
+        <Paragraph>{'Already have an account?'}</Paragraph>
         <Link
-          className='link font-bold ml-2'
+          className='link font-bold ml-2 text-light-blue'
           href='/login'
           title='login'
           aria-label='login'

@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { adminData } from '@/lib/adminData';
+import { Heading } from '@/components/ui';
 
 export const AdminPanelButtons = ({
   isMatchesPage = false,
@@ -9,7 +10,9 @@ export const AdminPanelButtons = ({
 }) => {
   return (
     <div className='mb-10'>
-      <h2 className='text-xl mb-2'>{'What do you want to do?'}</h2>
+      <Heading as='h2' className='text-xl mb-2'>
+        {'What do you want to do?'}
+      </Heading>
       <div className='flex items-center gap-5'>
         {adminData.map(({ linkText, imageSrc, id, url }) => (
           <Link

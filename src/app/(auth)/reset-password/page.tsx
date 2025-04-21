@@ -1,5 +1,5 @@
 import { ResetPasswordForm } from '@/components/auth';
-import { Container } from '@/components/ui';
+import { Container, Heading } from '@/components/ui';
 
 export async function generateMetadata() {
   return {
@@ -13,7 +13,7 @@ export async function generateMetadata() {
 export default function ResetPasswordPage() {
   return (
     <Container className='max-w-[512px]'>
-      <h1 className='text-center'>{'Reset Password'}</h1>
+      <Heading className='text-center'>{'Reset Password'}</Heading>
       <ResetPasswordForm />
     </Container>
   );

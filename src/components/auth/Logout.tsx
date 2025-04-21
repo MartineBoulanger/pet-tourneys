@@ -16,7 +16,7 @@ export const Logout = ({ className }: { className?: string }) => {
 
   return (
     <Button
-      type='submit'
+      type='button'
       variant='link'
       disabled={loading}
       className={className}
