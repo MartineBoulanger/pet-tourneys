@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import { BattleLogViewerProps, BattleRound } from '@/types';
 import { ROUNDS_PER_PAGE } from '@/types/constants';
-import { cn } from '@/utils/cn';
 import { Heading, Button } from '@/components/ui';
 
 export function BattleLogViewer({ battleLog }: BattleLogViewerProps) {
