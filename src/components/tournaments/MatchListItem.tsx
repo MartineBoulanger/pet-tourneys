@@ -7,6 +7,8 @@ export const MatchListItem = ({ tournamentId, match }: MatchListItemProps) => {
       key={match.id}
       href={`/tournaments/${tournamentId}/matches/${match.id}`}
       className='p-4 rounded-lg shadow-md bg-light-grey hover:bg-blue-grey'
+      title={`${match.player1} vs ${match.player2}`}
+      aria-label={`${match.player1} vs ${match.player2}`}
     >
       <span className='flex flex-wrap justify-between items-center'>
         <span>

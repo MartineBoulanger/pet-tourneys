@@ -20,7 +20,12 @@ export const PopUp = ({
 
   return (
     <div className={cn('relative', className)}>
-      <Button type='button' onClick={toggleActionMenu}>
+      <Button
+        type='button'
+        onClick={toggleActionMenu}
+        title={typeof text === 'string' && text ? text : 'popup menu'}
+        aria-label={typeof text === 'string' && text ? text : 'popup menu'}
+      >
         {text ? text : <PiDotsThreeOutlineVertical className='w-6 h-6' />}
       </Button>
       {isOpen && (

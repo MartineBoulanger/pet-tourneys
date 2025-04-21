@@ -30,6 +30,7 @@ export const DeleteTournament = ({ id, name }: DeleteTournamentProps) => {
         className='btn-link hover:text-red'
         type='button'
         onClick={() => setIsOpen(true)}
+        title={`Delete tournament ${name}`}
         aria-label={`Delete tournament ${name}`}
       >
         <FaTrash />
@@ -56,6 +57,8 @@ export const DeleteTournament = ({ id, name }: DeleteTournamentProps) => {
                 onClick={() => setIsOpen(false)}
                 className='btn-cancel px-4 py-2'
                 disabled={isDeleting}
+                title='cancel delete tournament'
+                aria-label='cancel delete tournament'
               >
                 {'Cancel'}
               </button>
@@ -63,6 +66,8 @@ export const DeleteTournament = ({ id, name }: DeleteTournamentProps) => {
                 onClick={handleDelete}
                 className='btn-submit px-4 py-2'
                 disabled={isDeleting}
+                title='delete tournament'
+                aria-label='delete tournament'
               >
                 {isDeleting ? 'Deleting...' : 'Delete'}
               </button>

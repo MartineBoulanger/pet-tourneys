@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { MatchListItem } from './MatchListItem';
 import { MatchListProps } from '@/types';
 import { Pagination } from '@/components/ui';
@@ -8,7 +7,6 @@ export const MatchList = ({
   tournamentId,
   currentPage = 1,
   totalPages = 1,
-  showPagination = false,
 }: MatchListProps) => {
   return (
     <>
@@ -22,18 +20,13 @@ export const MatchList = ({
           />
         ))}
       </div>
-      {showPagination && totalPages > 1 && (
+      {totalPages > 1 ? (
         <Pagination
           currentPage={currentPage}
           totalPages={totalPages}
           baseUrl={`/tournaments/${tournamentId}`}
         />
-      )}
-      {!showPagination && matches.length > 10 && (
-        <Link href={`/tournaments/${tournamentId}/matches`} className='link'>
-          {'View all matches '}({matches.length})
-        </Link>
-      )}
+      ) : null}
     </>
   );
 };

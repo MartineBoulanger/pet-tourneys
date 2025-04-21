@@ -77,7 +77,7 @@ export default async function AdminMatchesPage({
   return (
     <Container>
       <h1>{'Admin Panel'}</h1>
-      <AdminPanelButtons />
+      <AdminPanelButtons isMatchesPage />
       <div>
         <div className='mb-5'>
           <h2 className='text-xl mb-2'>{'Tournament Matches'}</h2>

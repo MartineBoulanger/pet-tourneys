@@ -146,7 +146,7 @@ export function UploadForm({
           variant: 'primary',
           text: submitButtonText,
         }}
-        handleClick={() => router.push('/admin')}
+        handleClick={() => router.back()}
       >
         <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
           <Input

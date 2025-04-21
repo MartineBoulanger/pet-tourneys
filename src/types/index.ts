@@ -264,6 +264,20 @@ export interface FooterData {
   name: string;
 }
 
+interface LinksData {
+  id: number;
+  full_url?: string;
+  url_prefix?: string;
+  url_suffix?: string;
+  text?: string;
+}
+
+export interface LinksDataArray {
+  tournament: LinksData[];
+  statistics: LinksData[];
+  match: LinksData[];
+}
+
 export interface StatDistribution {
   health: Record<number, number>;
   power: Record<number, number>;
@@ -335,7 +349,6 @@ export interface MatchListProps {
   tournamentId: string;
   currentPage?: number;
   totalPages?: number;
-  showPagination?: boolean;
 }
 
 export interface MatchListItemProps {

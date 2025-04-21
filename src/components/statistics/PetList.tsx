@@ -103,12 +103,22 @@ export function PetList({ stats, matchView = false }: PetListProps) {
             {/* Show More/Less Buttons */}
             <div className='flex justify-center gap-4 mt-4'>
               {visiblePets < stats.length && (
-                <button onClick={showMorePets} className='btn-submit'>
+                <button
+                  onClick={showMorePets}
+                  className='btn-submit'
+                  title='Show More'
+                  aria-label='Show More'
+                >
                   Show More
                 </button>
               )}
               {visiblePets > PETS_PER_PAGE && (
-                <button onClick={showLessPets} className='btn-inverted'>
+                <button
+                  onClick={showLessPets}
+                  className='btn-inverted'
+                  title='Show Less'
+                  aria-label='Show Less'
+                >
                   Show Less
                 </button>
               )}

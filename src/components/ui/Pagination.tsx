@@ -66,6 +66,8 @@ export const Pagination = ({
               : 'hover:bg-blue-grey'
           }`}
           aria-disabled={currentPage === page}
+          title={`Page ${page}`}
+          aria-label={`Page ${page}`}
         >
           {page}
         </Link>
@@ -85,6 +87,8 @@ export const Pagination = ({
         }`}
         aria-disabled={currentPage === 1}
         tabIndex={currentPage === 1 ? -1 : undefined}
+        title='Previous'
+        aria-label='Previous'
       >
         <FaChevronLeft className='h-6 w-6' />
         <span className='sr-only'>Previous</span>
@@ -103,6 +107,8 @@ export const Pagination = ({
         }`}
         aria-disabled={currentPage === totalPages}
         tabIndex={currentPage === totalPages ? -1 : undefined}
+        title='Next'
+        aria-label='Next'
       >
         <FaChevronRight className='h-6 w-6' />
         <span className='sr-only'>Next</span>

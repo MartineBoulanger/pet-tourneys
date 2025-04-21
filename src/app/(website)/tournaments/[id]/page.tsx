@@ -1,10 +1,12 @@
 import Link from 'next/link';
+import { Fragment } from 'react';
 import { notFound } from 'next/navigation';
 import { getTournamentDetails } from '@/supabase/actions/tournaments';
 import { getPaginatedMatches } from '@/supabase/actions/matches';
 import { MatchList } from '@/components/tournaments';
 import { Container, PageHeading } from '@/components/ui';
 import { PageParams, PageSearchParams } from '@/types';
+import { linksData } from '@/lib/linksData';
 
 export async function generateMetadata({ params }: { params: PageParams }) {
   const { id } = await params;
@@ -57,16 +59,26 @@ export default async function TournamentPage({
     <Container>
       <PageHeading heading={tournament.name}>
         <div className='flex flex-col gap-2.5'>
-          <Link
-            href={`/tournaments/${tournament.id}/statistics`}
-            className='link'
-          >
-            {'View Tourney Pets Statistics'}
-          </Link>
-          <div className='h-0.5 rounded-lg w-full bg-blue-grey' />
-          <Link href={`/tournaments`} className='link'>
-            {'Back To Tournaments List'}
-          </Link>
+          {linksData.tournament.map((link) => {
+            const url = link.full_url
+              ? link.full_url
+              : `${link.url_prefix}${tournament.id}${
+                  link.url_suffix ? link.url_suffix : ''
+                }`;
+            return (
+              <Fragment key={link.id}>
+                <Link
+                  href={url}
+                  className='link'
+                  title={link.text}
+                  aria-label={link.text}
+                >
+                  {link.text}
+                </Link>
+                <div className='h-0.5 rounded-lg w-full bg-blue-grey last-of-type:hidden' />
+              </Fragment>
+            );
+          })}
         </div>
       </PageHeading>
       <div className='mb-10 text-gray-500'>
@@ -88,7 +100,6 @@ export default async function TournamentPage({
           tournamentId={tournament.id}
           currentPage={currentPage}
           totalPages={totalPages}
-          showPagination
         />
       ) : (
         <p className='p-4 rounded-lg bg-light-grey text-center shadow-md'>

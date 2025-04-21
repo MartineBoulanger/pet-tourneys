@@ -5,7 +5,7 @@ import { footerData } from '@/lib/footerData';
 
 export const Footer = async () => {
   return (
-    <footer className='w-full bg-background p-5 pt-10 mb-15 md:mb-0'>
+    <footer className='w-full bg-background p-5 pt-10 mb-13 md:mb-0'>
       <div className='flex flex-col md:flex-row items-center justify-evenly max-w-screen-2xl mx-auto bg-light-grey rounded-lg'>
         {footerData?.map(({ id, url, Icon, name }) => (
           <Link

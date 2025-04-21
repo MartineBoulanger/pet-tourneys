@@ -12,8 +12,13 @@ export const AdminNav = async () => {
     <div className='w-full py-2.5 px-5 hidden md:flex md:justify-end md:items-center'>
       {admin ? (
         <>
-          <Link href='/admin' className='btn-link mr-6'>
-            <span className='flex items-center gap-2 uppercase'>
+          <Link
+            href='/admin'
+            className='btn-link w-[25px] h-[25px]'
+            title='Admin Panel'
+            aria-label='Admin Panel'
+          >
+            <span>
               <Image
                 src={admin?.admin?.avatar_url || ''}
                 alt={admin?.admin?.username || ''}
@@ -21,7 +26,6 @@ export const AdminNav = async () => {
                 height={25}
                 className='rounded-full'
               />
-              <span>{admin?.admin?.username}</span>
             </span>
           </Link>
           <div className='w-0.5 h-9 bg-blue-grey mx-5 rounded-full' />
@@ -30,7 +34,12 @@ export const AdminNav = async () => {
       {user ? (
         <Logout />
       ) : (
-        <Link href='/login' className='btn-link'>
+        <Link
+          href='/login'
+          className='btn-link'
+          title='Login'
+          aria-label='Login'
+        >
           <BiLogIn className='h-6 w-6' />
         </Link>
       )}

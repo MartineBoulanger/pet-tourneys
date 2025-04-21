@@ -1,8 +1,10 @@
+import Link from 'next/link';
+import { Fragment } from 'react';
 import { BattleLogViewer, MatchScore } from '@/components/matches';
 import { Container, PageHeading } from '@/components/ui';
 import { getMatchDetails } from '@/supabase/actions/matches';
 import { MatchPageParams } from '@/types';
-import Link from 'next/link';
+import { linksData } from '@/lib/linksData';
 
 export async function generateMetadata({
   params,
@@ -53,16 +55,26 @@ export default async function MatchPage({
         className='lg:mb-5'
       >
         <div className='flex flex-col gap-2.5'>
-          <Link
-            href={`/tournaments/${id}/statistics?matchId=${matchId}`}
-            className='link'
-          >
-            {'View Match Pet Usage'}
-          </Link>
-          <div className='h-0.5 rounded-lg w-full bg-blue-grey' />
-          <Link href={`/tournaments/${id}`} className='link'>
-            {'Back to Tournament'}
-          </Link>
+          {linksData.match.map((link) => {
+            const url = link.full_url
+              ? link.full_url
+              : `${link.url_prefix}${id}${
+                  link.url_suffix ? link.url_suffix : ''
+                }${link.url_suffix && matchId ? matchId : ''}`;
+            return (
+              <Fragment key={link.id}>
+                <Link
+                  href={url}
+                  className='link'
+                  title={link.text}
+                  aria-label={link.text}
+                >
+                  {link.text}
+                </Link>
+                <div className='h-0.5 rounded-lg w-full bg-blue-grey last-of-type:hidden' />
+              </Fragment>
+            );
+          })}
         </div>
       </PageHeading>
       {match && <MatchScore match={match} />}

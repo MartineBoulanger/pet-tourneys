@@ -8,6 +8,8 @@ export const AuthButton = ({ type, loading, className }: AuthButtonProps) => {
       disabled={loading}
       type='submit'
       className={cn('btn-submit w-full', className)}
+      title={type}
+      aria-label={type}
     >
       {loading ? 'Loading...' : type}
     </button>

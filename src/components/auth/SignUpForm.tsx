@@ -52,7 +52,12 @@ export const SignUpForm = () => {
       </Form>
       <div className='mt-4 flex items-center'>
         <p>{'Already have an account?'}</p>
-        <Link className='link font-bold ml-2' href='/login'>
+        <Link
+          className='link font-bold ml-2'
+          href='/login'
+          title='login'
+          aria-label='login'
+        >
           {'Sign In'}
         </Link>
       </div>

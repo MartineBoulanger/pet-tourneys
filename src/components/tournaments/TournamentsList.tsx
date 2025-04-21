@@ -9,6 +9,8 @@ export const TournamentsList = ({ tournaments }: TournamentsListProps) => {
           key={tournament.id}
           href={`/tournaments/${tournament.id}`}
           className='p-4 rounded-lg shadow-md bg-light-grey hover:bg-blue-grey transition'
+          title={tournament.name}
+          aria-label={tournament.name}
         >
           <span className='flex flex-wrap justify-between items-center'>
             <span className='text-lg font-medium leading-normal font-warcraft tracking-[1.5px]'>

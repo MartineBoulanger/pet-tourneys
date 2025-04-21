@@ -21,6 +21,8 @@ export const Logout = ({ className }: { className?: string }) => {
       disabled={loading}
       className={className}
       onClick={handleLogout}
+      title='Logout'
+      aria-label='Logout'
     >
       {loading ? '...' : <BiLogOut className='h-6 w-6' />}
     </Button>

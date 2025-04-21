@@ -36,7 +36,7 @@ export const Menu = ({ className, buttonVariant = 'primary' }: MenuProps) => {
             className='fixed w-full h-full inset-0 flex items-center justify-center bg-transparent'
             onClick={() => setOpen(false)}
           />
-          <div className='fixed top-0 bottom-0 right-0 w-full max-w-[430px] shadow-md text-center flex flex-col bg-background animate-slide-in-right'>
+          <div className='fixed top-0 bottom-0 right-0 w-full max-w-[430px] shadow-lg text-center flex flex-col bg-background animate-slide-in-right'>
             <div className='p-5 w-full flex items-center mb-5 bg-dark-grey justify-end'>
               <Button
                 title='Close Nav Menu'
@@ -55,6 +55,8 @@ export const Menu = ({ className, buttonVariant = 'primary' }: MenuProps) => {
                   key={link.id}
                   href={link.url}
                   onClick={() => setOpen(false)}
+                  title={link.linkText}
+                  aria-label={link.linkText}
                 >
                   <span className='max-w-[40px] max-h-[40px]'>
                     <Image

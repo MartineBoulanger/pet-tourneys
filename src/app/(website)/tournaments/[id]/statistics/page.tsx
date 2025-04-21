@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { Fragment } from 'react';
 import { notFound } from 'next/navigation';
 import { PetList, PetCharts } from '@/components/statistics';
 import {
@@ -14,6 +15,7 @@ import {
   PageParams,
   MatchSearchParams,
 } from '@/types';
+import { linksData } from '@/lib/linksData';
 
 export async function generateMetadata({ params }: { params: PageParams }) {
   const { id } = await params;
@@ -124,16 +126,33 @@ export default async function StatisticsPage({
     <Container>
       <div className='mb-6'>
         <PageHeading heading={title}>
-          <Link
-            href={
-              isMatchView
-                ? `/tournaments/${id}/matches/${matchId}`
-                : `/tournaments/${id}`
-            }
-            className='link'
-          >
-            {isMatchView ? 'Back to match' : 'Back to tournament'}
-          </Link>
+          <div className='flex flex-col gap-2.5'>
+            {linksData.statistics.map((link) => {
+              const url = link.full_url
+                ? link.full_url
+                : isMatchView
+                ? `${link.url_prefix}${id}${link.url_suffix}${matchId}`
+                : `${link.url_prefix}${id}`;
+              const linkText = link.text
+                ? link.text
+                : isMatchView
+                ? 'Back to match'
+                : 'Back to tournament';
+              return (
+                <Fragment key={link.id}>
+                  <Link
+                    href={url}
+                    className='link'
+                    title={linkText}
+                    aria-label={linkText}
+                  >
+                    {linkText}
+                  </Link>
+                  <div className='h-0.5 rounded-lg w-full bg-blue-grey last-of-type:hidden' />
+                </Fragment>
+              );
+            })}
+          </div>
         </PageHeading>
         {entityName && <p className='text-gray-500'>{entityName}</p>}
       </div>

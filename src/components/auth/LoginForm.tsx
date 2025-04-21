@@ -47,13 +47,23 @@ export const LoginForm = () => {
         </Form>
         <div className='mt-4 flex items-center'>
           <p>{`Don't have an account?`}</p>
-          <Link className='link font-bold ml-2' href='/register'>
+          <Link
+            className='link font-bold ml-2'
+            href='/register'
+            title='sign up'
+            aria-label='sign up'
+          >
             {'Sign Up'}
           </Link>
         </div>
         <div className='mt-2 flex items-center'>
           <p>{`Forgot your password?`}</p>
-          <Link className='link font-bold ml-2' href='/forgot-password'>
+          <Link
+            className='link font-bold ml-2'
+            href='/forgot-password'
+            title='reset password'
+            aria-label='reset password'
+          >
             {'Reset Password'}
           </Link>
         </div>

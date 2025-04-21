@@ -14,13 +14,13 @@ export const BottomNavigation = ({ user }: BottomNavigationProps) => {
       )}
     >
       {user ? (
-        <Logout className='p-5' />
+        <Logout className='px-5' />
       ) : (
         <Link
-          title='Login'
-          className='btn-link p-5'
-          aria-label='Login'
           href='/login'
+          className='btn-link p-5'
+          title='Login'
+          aria-label='Login'
         >
           <BiLogIn className='w-6 h-6' />
         </Link>
@@ -29,7 +29,12 @@ export const BottomNavigation = ({ user }: BottomNavigationProps) => {
       {user?.role === 'admin' ? (
         <>
           <div className='w-0.5 h-10 rounded-lg bg-blue-grey' />
-          <Link href='/admin' className='btn-link p-5'>
+          <Link
+            href='/admin'
+            className='btn-link px-5'
+            title='Admin Panel'
+            aria-label='Admin Panel'
+          >
             <span>
               <Image
                 src={user?.avatar_url || ''}

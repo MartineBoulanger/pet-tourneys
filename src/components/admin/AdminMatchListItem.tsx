@@ -13,6 +13,8 @@ export const AdminMatchListItem = ({
           key={match.id}
           href={`/tournaments/${tournament.id}/matches/${match.id}`}
           className='link'
+          title={`${match.player1} vs ${match.player2}`}
+          aria-label={`${match.player1} vs ${match.player2}`}
         >
           {match.player1} vs {match.player2} (
           {match.owner === match.player1

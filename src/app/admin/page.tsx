@@ -5,6 +5,8 @@ import { Container } from '@/components/ui';
 import { TournamentsListItem, AdminPanelButtons } from '@/components/admin';
 import { Metadata } from 'next';
 
+// TODO: In future maybe add pagination to the tournaments list
+
 export const metadata: Metadata = {
   title: 'Admin Panel',
   robots: { index: false, follow: false },
@@ -46,9 +48,11 @@ export default async function AdminPage() {
     );
   }
 
+  const username = response?.user && response?.user?.username;
+
   return (
     <Container>
-      <h1>{'Admin Panel'}</h1>
+      <h1>{`${username}'s Admin Panel`}</h1>
       <AdminPanelButtons />
       <div>
         <h2 className='text-xl mb-5'>{'Tournaments List'}</h2>

@@ -11,7 +11,12 @@ export const TournamentsListItem = ({
     <div className='p-4 rounded-lg shadow-md bg-light-grey'>
       <div className='flex justify-between items-center'>
         <div>
-          <Link href={`/tournaments/${tournament.id}`} className='link'>
+          <Link
+            href={`/tournaments/${tournament.id}`}
+            className='link'
+            title={tournament.name}
+            aria-label={tournament.name}
+          >
             {tournament.name}
           </Link>
           <p className='text-sm text-gray-500 mt-2'>

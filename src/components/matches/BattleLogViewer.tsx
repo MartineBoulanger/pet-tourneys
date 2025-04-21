@@ -106,6 +106,8 @@ export function BattleLogViewer({ battleLog }: BattleLogViewerProps) {
               <button
                 onClick={() => toggleRound(round.round)}
                 className='w-full flex justify-between items-center p-3 bg-light-grey hover:bg-medium-grey rounded-none'
+                title='Toggle round'
+                aria-label='Toggle round'
               >
                 <span className='font-medium'>
                   {'Round '}
@@ -197,12 +199,22 @@ export function BattleLogViewer({ battleLog }: BattleLogViewerProps) {
         {/* Show More/Less Buttons */}
         <div className='flex justify-center gap-4 mt-4'>
           {visibleRounds < battleRounds.length && (
-            <button onClick={showMoreRounds} className='btn-submit'>
+            <button
+              onClick={showMoreRounds}
+              className='btn-submit'
+              title='Show More'
+              aria-label='Show More'
+            >
               Show More
             </button>
           )}
           {visibleRounds > ROUNDS_PER_PAGE && (
-            <button onClick={showLessRounds} className='btn-inverted'>
+            <button
+              onClick={showLessRounds}
+              className='btn-inverted'
+              title='Show Less'
+              aria-label='Show Less'
+            >
               Show Less
             </button>
           )}

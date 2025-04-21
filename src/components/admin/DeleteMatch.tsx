@@ -36,6 +36,7 @@ export const DeleteMatch = ({
         className='btn-link hover:text-red'
         type='button'
         onClick={() => setIsOpen(true)}
+        title={`Delete match ${player1} vs ${player2}`}
         aria-label={`Delete match ${player1} vs ${player2}`}
       >
         <FaTrash />
@@ -66,6 +67,8 @@ export const DeleteMatch = ({
                 onClick={() => setIsOpen(false)}
                 className='btn-cancel px-4 py-2'
                 disabled={isDeleting}
+                title='cancel delete match'
+                aria-label='cancel delete match'
               >
                 {'Cancel'}
               </button>
@@ -73,6 +76,8 @@ export const DeleteMatch = ({
                 onClick={handleDeleteMatch}
                 className='btn-submit px-4 py-2'
                 disabled={isDeleting}
+                title='delete match'
+                aria-label='delete match'
               >
                 {isDeleting ? 'Deleting...' : 'Delete'}
               </button>
