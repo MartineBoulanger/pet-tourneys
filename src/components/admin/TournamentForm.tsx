@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
 import { TournamentFormSkeleton, Form, Input } from '@/components/ui';
 import {
   createTournament,
@@ -51,7 +52,6 @@ export function TournamentForm({ initialData = null }: TournamentFormProps) {
     if (!validateForm()) return;
 
     setIsSubmitting(true);
-    setError('');
 
     try {
       const submissionData = {
@@ -69,21 +69,43 @@ export function TournamentForm({ initialData = null }: TournamentFormProps) {
           initialData.id,
           submissionData
         );
-        if (!success) setError('Failed to update the tournament.');
+        if (!success) {
+          toast.error('Failed to update!', {
+            className: 'toast-error',
+            description: 'Failed to update the tournament.',
+          });
+        }
+        toast.success('Tournament updated successfully!', {
+          className: 'toast-success',
+          description: 'Tournament has been successfully updated.',
+        });
       } else {
         const { success } = await createTournament(submissionData);
-        if (!success) setError('Failed to create the tournament.');
+        if (!success) {
+          toast.error('Failed to create!', {
+            className: 'toast-error',
+            description: 'Failed to create the tournament.',
+          });
+        }
+        toast.success('Tournament created successfully!', {
+          className: 'toast-success',
+          description: 'Tournament has been successfully created.',
+        });
       }
 
       router.push('/admin');
       router.refresh();
     } catch (error) {
       console.error(error);
-      setError('Failed to save tournament');
+      toast.error('Failed to save!', {
+        className: 'toast-error',
+        description: 'Failed to save tournament',
+      });
     } finally {
       setIsSubmitting(false);
     }
   };
+
   if (!isMounted) return <TournamentFormSkeleton />;
 
   return (

@@ -2,14 +2,16 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
 import { uploadBattleLog } from '@/supabase/actions/uploadLogs';
 import { updateMatchWithLogs } from '@/supabase/actions/matches';
 import {
   Form,
   Input,
   UploadFormSkeleton,
-  Heading,
-  Paragraph,
+  Textarea,
+  Select,
+  Option,
 } from '@/components/ui';
 import { UploadFormProps } from '@/types';
 
@@ -32,8 +34,6 @@ export function UploadForm({
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitSuccess, setSubmitSuccess] = useState(false);
-  const [submitError, setSubmitError] = useState('');
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
@@ -52,8 +52,6 @@ export function UploadForm({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setSubmitError('');
-    setSubmitSuccess(false);
 
     try {
       const result = isEditMode
@@ -80,10 +78,13 @@ export function UploadForm({
           });
 
       if (!result.success) {
+        toast.error('Error!', {
+          className: 'toast-error',
+          description: result.error,
+        });
         throw new Error(result.error);
       }
 
-      setSubmitSuccess(true);
       // Reset form after successful submission
       setFormData({
         player1: '',
@@ -95,11 +96,18 @@ export function UploadForm({
         tournament_id: '',
         region: '',
       });
+
+      toast.success('Success!', {
+        className: 'toast-success',
+        description: 'Battle logs uploaded successfully!',
+      });
     } catch (error) {
       console.error('Error submitting form:', error);
-      setSubmitError(
-        error instanceof Error ? error.message : 'Failed to upload logs'
-      );
+      toast.error('Error!', {
+        className: 'toast-error',
+        description:
+          typeof error === 'string' ? error : 'Failed to submit the form',
+      });
     } finally {
       setIsSubmitting(false);
     }
@@ -117,35 +125,6 @@ export function UploadForm({
 
   return (
     <div className='bg-light-grey shadow-md rounded-lg p-5'>
-      {submitError && (
-        <div className='rounded-md bg-red-50 p-4 mb-5'>
-          <div className='flex'>
-            <div className='ml-3'>
-              <Heading as='h3' className='text-sm font-medium text-red-800'>
-                {'Error'}
-              </Heading>
-              <div className='mt-2 text-sm text-red-700'>
-                <Paragraph>{submitError}</Paragraph>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-      {submitSuccess && (
-        <div className='rounded-md bg-green-50 p-4 mb-5'>
-          <div className='flex'>
-            <div className='ml-3'>
-              <Heading as='h3' className='text-sm font-medium text-green-800'>
-                {'Success'}
-              </Heading>
-              <div className='mt-2 text-sm text-green-700'>
-                <Paragraph>{'Battle logs uploaded successfully!'}</Paragraph>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
       <Form
         handleSubmit={handleSubmit}
         button1={{ type: 'button', variant: 'secondary', text: 'Cancel' }}
@@ -175,25 +154,24 @@ export function UploadForm({
             onChange={handleChange}
             required
           />
-          <div>
-            <label htmlFor='owner'>{'Log Owner:'}</label>
-            <select
-              id='owner'
-              name='owner'
-              value={formData.owner}
-              onChange={handleChange}
-              className='block w-full p-2 border rounded-md text-background bg-foreground mt-0.5'
-              required
-            >
-              <option value=''>{'Select owner'}</option>
-              <option value={formData.player1}>
-                {formData.player1 || 'Player 1'}
-              </option>
-              <option value={formData.player2}>
-                {formData.player2 || 'Player 2'}
-              </option>
-            </select>
-          </div>
+          <Select
+            label='Log Owner'
+            id='owner'
+            name='owner'
+            required
+            value={formData.owner}
+            onChange={handleChange}
+          >
+            <Option value='' label='Select owner' />
+            <Option
+              value={formData.player1}
+              label={formData.player1 || 'Player 1'}
+            />
+            <Option
+              value={formData.player2}
+              label={formData.player2 || 'Player 2'}
+            />
+          </Select>
           <Input
             label='Match Date & Time'
             id='date'
@@ -203,23 +181,27 @@ export function UploadForm({
             onChange={handleChange}
             required
           />
-          <div>
-            <label htmlFor='tournament_id'>{'Tournament:'}</label>
-            <select
-              id='tournament_id'
-              name='tournament_id'
-              value={formData.tournament_id}
-              onChange={handleChange}
-              className='block w-full p-2 border rounded-md text-background bg-foreground mt-0.5'
-            >
-              <option value=''>{'Select a tournament'}</option>
-              {tournaments.map((tournament) => (
-                <option key={tournament.id} value={tournament.id}>
-                  {tournament.name}
-                </option>
-              ))}
-            </select>
-          </div>
+          <Select
+            label='Choose Tournament'
+            id='tournament_id'
+            name='tournament_id'
+            value={formData.tournament_id}
+            onChange={handleChange}
+            required
+          >
+            <Option
+              value=''
+              label='Select a tournament that the logs belong to'
+            />
+
+            {tournaments.map((tournament) => (
+              <Option
+                key={tournament.id}
+                value={tournament.id}
+                label={tournament.name}
+              />
+            ))}
+          </Select>
           <Input
             label='Match Region (EU, NA, ...)'
             id='region'
@@ -230,34 +212,26 @@ export function UploadForm({
             required
           />
         </div>
-
-        <div>
-          <label htmlFor='logs'>{'Battle Logs:'}</label>
-          <textarea
-            id='logs'
-            name='logs'
-            rows={10}
-            value={formData.logs}
-            onChange={handleChange}
-            className='block w-full p-2 border rounded-md text-background bg-foreground mt-0.5'
-            placeholder='Paste your battle logs here...'
-            required={!isEditMode}
-          />
-        </div>
-
-        <div>
-          <label htmlFor='petUsage'>{'Pet Usage Summary:'}</label>
-          <textarea
-            id='petUsage'
-            name='petUsage'
-            rows={5}
-            value={formData.petUsage}
-            onChange={handleChange}
-            className='block w-full p-2 border rounded-md text-background bg-foreground mt-0.5'
-            placeholder='Paste your pet usage summary here...'
-            required={!isEditMode}
-          />
-        </div>
+        <Textarea
+          label='Battle Logs'
+          id='logs'
+          name='logs'
+          rows={10}
+          value={formData.logs}
+          onChange={handleChange}
+          placeholder='Paste your battle logs here...'
+          required={!isEditMode}
+        />
+        <Textarea
+          label='Pet Usage Summary'
+          id='petUsage'
+          name='petUsage'
+          rows={5}
+          value={formData.petUsage}
+          onChange={handleChange}
+          placeholder='Paste your pet usage summary here...'
+          required={!isEditMode}
+        />
       </Form>
     </div>
   );

@@ -7,14 +7,20 @@
   --color-medium-grey: #202020;
   --color-light-grey: #303030;
   --color-blue-grey: #2f3648;
-  --color-dark-blue: #1e3a8a;
-  --color-dark-red: #7f1d1d;
   --color-blue: #2563eb;
   --color-light-blue: #8ec5ff;
+  --color-dark-blue: #1e3a8a;
   --color-red: #dc2626;
-  --color-light-red: #ffa2a2;
+  --color-light-red: #ffe2e2;
+  --color-dark-red: #9f0712;
   --color-green: #00f300;
+  --color-light-green: #dcfce7;
+  --color-dark-green: #016630;
   --color-yellow: #ffdf00;
+  --color-light-yellow: #fef9c2;
+  --color-dark-yellow: #894b00;
+  --color-cyan: #00d3f2;
+  --color-purple: #c27aff;
 
   /* pet type colors */
   --color-aquatic: #11a5b5;

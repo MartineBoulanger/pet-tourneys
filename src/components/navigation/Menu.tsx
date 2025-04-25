@@ -48,7 +48,7 @@ export const Menu = ({ className, buttonVariant = 'primary' }: MenuProps) => {
               </Button>
             </div>
 
-            <div className='my-5 mx-5 flex flex-col items-center'>
+            <div className='my-5 mx-5 flex flex-col items-center gap-2.5'>
               {headerData.map((link) => (
                 <Link
                   className='btn-link flex items-center justify-center gap-2.5 border w-full py-2.5 rounded-lg border-blue-grey hover:bg-blue-grey hover:text-foreground'

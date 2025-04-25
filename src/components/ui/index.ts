@@ -12,3 +12,6 @@ export * from './Pagination';
 export * from './PageHeading';
 export * from './Heading';
 export * from './Paragraph';
+export * from './Textarea';
+export * from './Select';
+export * from './Option';

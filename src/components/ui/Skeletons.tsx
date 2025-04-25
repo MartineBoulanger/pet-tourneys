@@ -98,3 +98,21 @@ export const ChartSkeleton = () => {
     </div>
   );
 };
+
+export const AnalyzeToolFormSkeleton = () => {
+  return (
+    <div className='bg-light-grey shadow-md rounded-lg p-5'>
+      <div className='bg-dark-grey shadow-md rounded-lg p-5'>
+        <div className='w-full flex flex-col gap-8'>
+          <div className='animate-pulse w-full p-2 border rounded-md bg-foreground h-10'></div>
+          <div className='animate-pulse w-full p-2 border rounded-md bg-foreground h-30'></div>
+          <div className='animate-pulse w-full p-2 border rounded-md bg-foreground h-15'></div>
+          <div className='flex gap-5'>
+            <div className='animate-pulse w-full p-2 rounded-lg bg-red h-10'></div>
+            <div className='animate-pulse w-full p-2 rounded-lg bg-blue h-10'></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};

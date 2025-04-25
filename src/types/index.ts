@@ -5,6 +5,8 @@ import {
   InputHTMLAttributes,
   JSX,
   ReactNode,
+  SelectHTMLAttributes,
+  TextareaHTMLAttributes,
 } from 'react';
 import { IconType } from 'react-icons';
 
@@ -241,6 +243,35 @@ export interface InputProps
   required?: boolean;
 }
 
+export interface TextareaProps
+  extends Omit<
+    DetailedHTMLProps<
+      TextareaHTMLAttributes<HTMLTextAreaElement>,
+      HTMLTextAreaElement
+    >,
+    'required' | 'rows'
+  > {
+  label: string;
+  id: string;
+  name: string;
+  rows: number;
+  required?: boolean;
+}
+
+export interface SelectProps
+  extends Omit<
+    DetailedHTMLProps<
+      SelectHTMLAttributes<HTMLSelectElement>,
+      HTMLSelectElement
+    >,
+    'required'
+  > {
+  label: string;
+  id: string;
+  name: string;
+  required?: boolean;
+}
+
 export interface FormErrorMessageProps {
   message?: string | undefined | null;
 }
@@ -374,4 +405,10 @@ export interface TournamentsListProps {
 
 export interface PageHeadingProps extends HTMLProps<HTMLElement> {
   heading: string | JSX.Element | React.ReactNode;
+}
+
+export interface DownloadPDFProps {
+  playerName?: string;
+  parsedBattleLogs: BattleLog[];
+  parsedPetUsage: PetData[];
 }

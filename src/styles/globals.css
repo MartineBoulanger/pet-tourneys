@@ -79,3 +79,18 @@
     @apply hover:transition-all hover:duration-500 hover:bg-[var(--color-blue-grey)] hover:border-[var(--color-blue-grey)];
   }
 }
+
+@layer utilities {
+  .toast-error {
+    @apply bg-light-red! text-dark-red!;
+  }
+  .toast-success {
+    @apply bg-light-green! text-dark-green!;
+  }
+  .toast-info {
+    @apply bg-light-blue! text-dark-blue!;
+  }
+  .toast-warning {
+    @apply bg-light-yellow! text-dark-yellow!;
+  }
+}

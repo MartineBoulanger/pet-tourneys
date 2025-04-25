@@ -7,6 +7,10 @@ import { Header } from '@/components/header/Header';
 import { BottomNavigation } from '@/components/navigation';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Analytics } from '@vercel/analytics/next';
+import { Toaster } from 'sonner';
+import { FaCheck, FaInfo } from 'react-icons/fa';
+import { IoWarningOutline } from 'react-icons/io5';
+import { BiErrorAlt } from 'react-icons/bi';
 
 export const revalidate = 3600;
 
@@ -53,6 +57,16 @@ export default async function RootLayout({
         <main className='min-h-[85vh] relative'>{children}</main>
         <Footer />
         <BottomNavigation user={isAdmin} />
+        <Toaster
+          expand
+          position='top-center'
+          icons={{
+            success: <FaCheck />,
+            info: <FaInfo />,
+            warning: <IoWarningOutline />,
+            error: <BiErrorAlt />,
+          }}
+        />
         <SpeedInsights />
         <Analytics />
       </body>
