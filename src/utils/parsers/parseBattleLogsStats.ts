@@ -34,7 +34,7 @@ export function parseBattleStatistics(
     if (!battle || !battle.battle) return;
 
     const battlePets = new Set<string>();
-    let activePets: ActivePets = { player: null, opponent: null };
+    const activePets: ActivePets = { player: null, opponent: null };
 
     // Safe pet initialization
     const trackPetSwap = (
