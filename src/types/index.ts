@@ -412,3 +412,52 @@ export interface DownloadPDFProps {
   parsedBattleLogs: BattleLog[];
   parsedPetUsage: PetData[];
 }
+
+export interface BattleStatistics {
+  totalPetSwaps: {
+    player: number;
+    opponent: number;
+  };
+  petSwapDetails: Record<
+    string,
+    {
+      totalSwaps: number;
+      battlesAppeared: number;
+    }
+  >;
+  weatherChanges: {
+    total: number;
+    byType: Record<string, number>;
+  };
+  abilityUsage: Record<string, number>;
+  petDeaths: Record<
+    string,
+    {
+      totalDeaths: number;
+      deathRound: number[];
+      battlesAppeared: number;
+    }
+  >;
+  activePetsHistory: Array<{
+    round: number;
+    playerPet: string;
+    opponentPet: string;
+  }>;
+  // New stats
+  totalAbilityUsage: number;
+  totalWeatherChanges: number;
+  totalDeaths: number;
+  petPerformance: Record<
+    string,
+    {
+      totalBattles: number;
+      deaths: number;
+      kills: number;
+    }
+  >;
+}
+
+export interface ActivePets {
+  player: string | null;
+  opponent: string | null;
+}

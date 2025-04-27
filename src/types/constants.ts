@@ -28,3 +28,30 @@ export const petTypeColors = {
   Flying: '#dfcf5b',
   Critter: '#775845',
 };
+
+// List of abilities to exclude -> like effects from abilities or from the pet types
+export const EXCLUDED_ABILITIES = new Set([
+  'Battle Recovery',
+  'Turret',
+  'Stunned',
+  'Partially Blinded',
+  'Resilient',
+  'Reforging',
+  'Leaping',
+  'Sting',
+  'Bleeding',
+  'Speed Reduction',
+  'Underwater',
+  'Poisoned',
+  'Shattered Defenses',
+  'Failsafe', // pet type effect - Mechanical
+  'Damned', // pet type effect - Undead
+  'Undead', // pet type effect - Undead
+  'Magic', // pet type effect - Magic
+  'Recovery', // pet type effect - Humanoid
+  'Dragonkin', // pet type effect - Dragonkin
+  'Toxic Gas', // name of the weather, not the name of the ability
+  'Sunny Day', // name of the weather, not the name of the ability
+  'Arcane Winds', // name of the weather, not the name of the ability
+  // TODO: add all other ability effects and pet type effects here!!
+]);
