@@ -57,12 +57,9 @@ export function GeneratePDF({
       {/* ========== MAIN CONTENT PAGE ========== */}
       <Page size='A4' style={styles.page}>
         {/* Header Section */}
-        <Text style={styles.header}>{'Battle Logs Analysis'}</Text>
-
+        <Text style={styles.header}>{'Battle Logs & Pet Usage Analysis'}</Text>
         {/* Battle Statistics */}
-        <Text style={styles.sectionHeader}>
-          {'Battles Overview Statistics'}
-        </Text>
+        <Text style={styles.sectionHeader}>{'Battles Overview'}</Text>
         <View style={styles.tableRow}>
           <Text style={[styles.tableCell, styles.tableHeader]}>{'Metric'}</Text>
           <Text style={[styles.tableCell, styles.tableHeader]}>{'Value'}</Text>
@@ -107,7 +104,6 @@ export function GeneratePDF({
             <Text>{calculateAverageDuration(parsedBattleLogs)}</Text>
           </View>
         </View>
-
         {/* Most Used Pets */}
         {mostUsedPets.length > 0 && (
           <>
@@ -152,55 +148,8 @@ export function GeneratePDF({
             ))}
           </>
         )}
-
-        {/* Pet Usage Details */}
-        {parsedPetUsage.length > 0 && (
-          <>
-            <Text style={styles.sectionHeader}>{'Pet Usage Statistics'}</Text>
-            <View style={styles.tableRow}>
-              <Text style={[styles.tableCell, styles.tableHeader]}>
-                {'Pet'}
-              </Text>
-              <Text style={[styles.tableCell, styles.tableHeader]}>
-                {'Type'}
-              </Text>
-              <Text style={[styles.tableCell, styles.tableHeader]}>
-                {'Breeds'}
-              </Text>
-              <Text style={[styles.tableCell, styles.tableHeader]}>
-                {'Times Played'}
-              </Text>
-              <Text style={[styles.tableCell, styles.tableHeader]}>
-                {'Played'}
-              </Text>
-            </View>
-
-            {parsedPetUsage.map((pet, index) => (
-              <View
-                key={index}
-                style={[
-                  styles.tableRow,
-                  { backgroundColor: index % 2 === 0 ? '#f1f1f1' : '#ffffff' },
-                ]}
-              >
-                <Text style={styles.tableCell}>{pet.pet_data.name}</Text>
-                <Text style={styles.tableCell}>{pet.pet_data.type}</Text>
-                <Text style={styles.tableCell}>
-                  {pet.pet_data.breeds.join(', ')}
-                </Text>
-                <Text style={styles.tableCell}>
-                  {pet.pet_data.times_played.join(', ')}
-                </Text>
-                <Text style={styles.tableCell}>{pet.total_played}</Text>
-              </View>
-            ))}
-          </>
-        )}
-
         {/* Individual Battles */}
-        <Text style={styles.sectionHeader}>
-          {'Battle Logs Battles Overview'}
-        </Text>
+        <Text style={styles.sectionHeader}>{'Battle Logs Overview'}</Text>
         {parsedBattleLogs.map((battle, index) => (
           <View key={index} wrap={false}>
             <View style={styles.divider} />
@@ -255,6 +204,49 @@ export function GeneratePDF({
           </View>
         ))}
 
+        {/* Pet Usage Details */}
+        {parsedPetUsage.length > 0 && (
+          <>
+            <Text style={styles.sectionHeader}>{'Pet Usage Overview'}</Text>
+            <View style={styles.tableRow}>
+              <Text style={[styles.tableCell, styles.tableHeader]}>
+                {'Pet'}
+              </Text>
+              <Text style={[styles.tableCell, styles.tableHeader]}>
+                {'Type'}
+              </Text>
+              <Text style={[styles.tableCell, styles.tableHeader]}>
+                {'Breeds'}
+              </Text>
+              <Text style={[styles.tableCell, styles.tableHeader]}>
+                {'Times Played'}
+              </Text>
+              <Text style={[styles.tableCell, styles.tableHeader]}>
+                {'Played'}
+              </Text>
+            </View>
+
+            {parsedPetUsage.map((pet, index) => (
+              <View
+                key={index}
+                style={[
+                  styles.tableRow,
+                  { backgroundColor: index % 2 === 0 ? '#f1f1f1' : '#ffffff' },
+                ]}
+              >
+                <Text style={styles.tableCell}>{pet.pet_data.name}</Text>
+                <Text style={styles.tableCell}>{pet.pet_data.type}</Text>
+                <Text style={styles.tableCell}>
+                  {pet.pet_data.breeds.join(', ')}
+                </Text>
+                <Text style={styles.tableCell}>
+                  {pet.pet_data.times_played.join(', ')}
+                </Text>
+                <Text style={styles.tableCell}>{pet.total_played}</Text>
+              </View>
+            ))}
+          </>
+        )}
         {/* Pet Performance Overview */}
         <Text style={styles.sectionHeader}>{'Pets Performance Overview'}</Text>
         <View style={styles.tableRow}>
@@ -273,7 +265,6 @@ export function GeneratePDF({
           <Text style={styles.tableCell}>{'Total Pet Deaths'}</Text>
           <Text style={styles.tableCell}>{safeStats.totalDeaths}</Text>
         </View>
-
         {/* Pet Performance */}
         {safeStats.petPerformance &&
           Object.keys(safeStats.petPerformance).length > 0 && (
@@ -316,7 +307,6 @@ export function GeneratePDF({
                 ))}
             </>
           )}
-
         {/* Pet Swap Statistics */}
         <Text style={styles.sectionHeader}>{'Pet Swaps Overview'}</Text>
         <View style={styles.tableRow}>
@@ -333,7 +323,6 @@ export function GeneratePDF({
             {safeStats.totalPetSwaps.opponent}
           </Text>
         </View>
-
         {/* Most Swapped Pets */}
         <Text style={styles.sectionHeader}>{'Pet Swaps'}</Text>
         <View style={styles.tableRow}>
@@ -345,7 +334,6 @@ export function GeneratePDF({
             {'Battles Appeared'}
           </Text>
         </View>
-
         {Object.entries(safeStats.petSwapDetails)
           .sort((a, b) => b[1].totalSwaps - a[1].totalSwaps)
           .map(([pet, data], index) => (
@@ -361,7 +349,6 @@ export function GeneratePDF({
               <Text style={styles.tableCell}>{data.battlesAppeared}</Text>
             </View>
           ))}
-
         {/* Weather Analysis */}
         <Text style={styles.sectionHeader}>{'Weather Usage Overview'}</Text>
         <View style={styles.tableRow}>
@@ -375,7 +362,6 @@ export function GeneratePDF({
             {'Usage %'}
           </Text>
         </View>
-
         {Object.entries(safeStats.weatherChanges.byType)
           .sort((a, b) => b[1] - a[1])
           .map(([weather, count], index) => (
@@ -394,9 +380,8 @@ export function GeneratePDF({
               </Text>
             </View>
           ))}
-
         {/* Ability Analysis */}
-        <Text style={styles.sectionHeader}>{'Abilities Usage Overview'}</Text>
+        <Text style={styles.sectionHeader}>{'Pets Abilities Usage'}</Text>
         <View style={styles.tableRow}>
           <Text style={[styles.tableCell, styles.tableHeader]}>
             {'Ability'}
@@ -408,7 +393,6 @@ export function GeneratePDF({
             {'Usage %'}
           </Text>
         </View>
-
         {Object.entries(safeStats.abilityUsage)
           .sort((a, b) => b[1] - a[1])
           .map(([ability, count], index) => (

@@ -71,7 +71,7 @@ export const AnalyzeToolDetails = ({
           {parsedBattleLogs && parsedBattleLogs.length > 0 && (
             <div className='mb-5'>
               <Heading as='h4' className='text-lg font-semibold mb-2'>
-                {'Battles Overview Statistics'}
+                {'Battles Overview'}
               </Heading>
               <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-4'>
                 <div className='bg-dark-grey p-4 rounded-lg shadow-md'>
@@ -127,10 +127,79 @@ export const AnalyzeToolDetails = ({
             </div>
           )}
 
+          {parsedBattleLogs && parsedBattleLogs.length > 0 && (
+            <div className='mb-5'>
+              <Heading as='h4' className='text-lg font-bold mb-2'>
+                {'Battle Logs Overview'}
+              </Heading>
+              <div className='space-y-5'>
+                {parsedBattleLogs.map((battle, i) => (
+                  <div
+                    key={i}
+                    className='bg-dark-grey p-4 rounded-lg shadow-md'
+                  >
+                    <div className='flex justify-between mb-2'>
+                      <Paragraph className='font-bold'>
+                        <span>{`Battle ${i + 1} - `}</span>
+                        <span className='text-light-blue'>
+                          {new Date(battle.timestamp).toLocaleString()}
+                        </span>
+                      </Paragraph>
+                      <Paragraph
+                        className={`text-sm px-2 py-1 rounded ${
+                          battle.result === 'WIN'
+                            ? 'bg-light-green text-dark-green'
+                            : battle.result === 'LOSS'
+                            ? 'bg-light-red text-dark-red'
+                            : 'bg-light-yellow text-dark-yellow'
+                        }`}
+                      >
+                        {battle.result}
+                      </Paragraph>
+                    </div>
+                    <div className='grid grid-cols-2 gap-4 text-sm'>
+                      <div>
+                        <Paragraph className='font-medium text-cyan mb-2'>
+                          {'Your Team'}
+                        </Paragraph>
+                        <ul className='list-disc pl-5'>
+                          {battle.player_team?.map((pet, j) => (
+                            <li key={j}>{pet}</li>
+                          ))}
+                        </ul>
+                      </div>
+                      <div>
+                        <Paragraph className='font-medium text-purple mb-2'>
+                          {'Opponent Team'}
+                        </Paragraph>
+                        <ul className='list-disc pl-5'>
+                          {battle.opponent_team?.map((pet, j) => (
+                            <li key={j}>{pet}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                    <Paragraph className='text-sm py-1 px-2 bg-light-grey w-fit rounded mt-2.5'>
+                      <span>
+                        {'Duration: '}
+                        {battle.duration}
+                      </span>
+                      <span>{' • '}</span>
+                      <span>
+                        {'Rounds: '}
+                        {battle.rounds}
+                      </span>
+                    </Paragraph>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
           {parsedPetUsage.length > 0 && (
             <div className='mb-5'>
               <Heading as='h4' className='text-lg font-bold mb-2'>
-                {'Pet Usage Statistics'}
+                {'Pet Usage Overview'}
               </Heading>
               <div className='overflow-x-auto'>
                 <table className='border-collapse border border-medium-grey min-w-full bg-dark-grey'>
@@ -204,75 +273,6 @@ export const AnalyzeToolDetails = ({
                     ))}
                   </tbody>
                 </table>
-              </div>
-            </div>
-          )}
-
-          {parsedBattleLogs && parsedBattleLogs.length > 0 && (
-            <div className='mb-5'>
-              <Heading as='h4' className='text-lg font-bold mb-2'>
-                {'Battle Logs Battles Overview'}
-              </Heading>
-              <div className='space-y-5'>
-                {parsedBattleLogs.map((battle, i) => (
-                  <div
-                    key={i}
-                    className='bg-dark-grey p-4 rounded-lg shadow-md'
-                  >
-                    <div className='flex justify-between mb-2'>
-                      <Paragraph className='font-bold'>
-                        <span>{`Battle ${i + 1} - `}</span>
-                        <span className='text-light-blue'>
-                          {new Date(battle.timestamp).toLocaleString()}
-                        </span>
-                      </Paragraph>
-                      <Paragraph
-                        className={`text-sm px-2 py-1 rounded ${
-                          battle.result === 'WIN'
-                            ? 'bg-light-green text-dark-green'
-                            : battle.result === 'LOSS'
-                            ? 'bg-light-red text-dark-red'
-                            : 'bg-light-yellow text-dark-yellow'
-                        }`}
-                      >
-                        {battle.result}
-                      </Paragraph>
-                    </div>
-                    <div className='grid grid-cols-2 gap-4 text-sm'>
-                      <div>
-                        <Paragraph className='font-medium text-cyan mb-2'>
-                          {'Your Team'}
-                        </Paragraph>
-                        <ul className='list-disc pl-5'>
-                          {battle.player_team?.map((pet, j) => (
-                            <li key={j}>{pet}</li>
-                          ))}
-                        </ul>
-                      </div>
-                      <div>
-                        <Paragraph className='font-medium text-purple mb-2'>
-                          {'Opponent Team'}
-                        </Paragraph>
-                        <ul className='list-disc pl-5'>
-                          {battle.opponent_team?.map((pet, j) => (
-                            <li key={j}>{pet}</li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
-                    <Paragraph className='text-sm py-1 px-2 bg-light-grey w-fit rounded mt-2.5'>
-                      <span>
-                        {'Duration: '}
-                        {battle.duration}
-                      </span>
-                      <span>{' • '}</span>
-                      <span>
-                        {'Rounds: '}
-                        {battle.rounds}
-                      </span>
-                    </Paragraph>
-                  </div>
-                ))}
               </div>
             </div>
           )}
@@ -481,68 +481,27 @@ export const AnalyzeToolDetails = ({
                 <Heading as='h4' className='text-lg font-bold mb-2'>
                   {'Weather Usage Overview'}
                 </Heading>
-                <table className='border-collapse border border-medium-grey min-w-full bg-dark-grey'>
-                  <thead>
-                    <tr>
-                      <th className='py-2 px-4 text-left border-r border-r-light-grey'>
-                        {'Weather'}
-                      </th>
-                      <th className='py-2 px-4 text-left border-r border-r-light-grey'>
-                        {'Times Used'}
-                      </th>
-                      <th className='py-2 px-4 text-left border-r border-r-light-grey'>
-                        {'Usage %'}
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {Object.entries(safeStats.weatherChanges.byType)
-                      .sort((a, b) => b[1] - a[1])
-                      .map(([weather, count], index) => (
-                        <tr
-                          key={index}
-                          className={
-                            index % 2 === 0 ? 'bg-light-grey' : 'bg-medium-grey'
-                          }
-                        >
-                          <td
-                            className={cn(
-                              'py-2 px-4',
-                              index % 2 === 0
-                                ? 'bg-light-grey border-r border-r-medium-grey'
-                                : 'bg-medium-grey border-r border-r-light-grey'
-                            )}
-                          >
-                            {weather}
-                          </td>
-                          <td
-                            className={cn(
-                              'py-2 px-4',
-                              index % 2 === 0
-                                ? 'bg-light-grey border-r border-r-medium-grey'
-                                : 'bg-medium-grey border-r border-r-light-grey'
-                            )}
-                          >
-                            {count}
-                          </td>
-                          <td
-                            className={cn(
-                              'py-2 px-4',
-                              index % 2 === 0
-                                ? 'bg-light-grey border-r border-r-medium-grey'
-                                : 'bg-medium-grey border-r border-r-light-grey'
-                            )}
-                          >
-                            {(
-                              (count / safeStats.weatherChanges.total) *
-                              100
-                            ).toFixed(1)}
-                            {'%'}
-                          </td>
-                        </tr>
-                      ))}
-                  </tbody>
-                </table>
+                <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-4'>
+                  {Object.entries(safeStats.weatherChanges.byType)
+                    .sort((a, b) => b[1] - a[1])
+                    .map(([weather, count], index) => (
+                      <div
+                        className='bg-dark-grey p-4 rounded-lg shadow-md'
+                        key={index}
+                      >
+                        <Paragraph className='font-medium'>{weather}</Paragraph>
+                        <Paragraph className='text-4xl font-bold text-light-blue'>
+                          {count}
+                          {' - '}
+                          {(
+                            (count / safeStats.weatherChanges.total) *
+                            100
+                          ).toFixed(1)}
+                          {'%'}
+                        </Paragraph>
+                      </div>
+                    ))}
+                </div>
               </div>
             )}
 
@@ -550,7 +509,7 @@ export const AnalyzeToolDetails = ({
             Object.keys(safeStats.abilityUsage).length > 0 && (
               <div>
                 <Heading as='h4' className='text-lg font-bold mb-2'>
-                  {'Abilities Usage Overview'}
+                  {'Pets Abilities Usage'}
                 </Heading>
                 <table className='border-collapse border border-medium-grey min-w-full bg-dark-grey'>
                   <thead>

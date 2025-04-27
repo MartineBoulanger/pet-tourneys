@@ -118,14 +118,16 @@ export function parseBattleStatistics(
           }
         }
 
-        const firstAbilityMatch = event.match(/^\[([^\]]+)\]/);
-        if (firstAbilityMatch?.[1]) {
-          const ability = firstAbilityMatch[1];
-
-          // Skip if this is a non-combat ability or status effect
-          if (EXCLUDED_ABILITIES.has(ability)) {
+        // ability tracking -> only tracks the ability in the first brackets of the event
+        // makes sure that ability effects are not counted
+        const abilityMatch = event.match(
+          /^\[([^\]]+)\](?!.*\[[^\]]+\].*applied|weather)/
+        );
+        if (abilityMatch?.[1] && !EXCLUDED_ABILITIES.has(abilityMatch[1])) {
+          if (event.includes('] fades')) {
             return;
           }
+          const ability = abilityMatch[1];
           stats.totalAbilityUsage = (stats.totalAbilityUsage || 0) + 1;
           stats.abilityUsage[ability] = (stats.abilityUsage[ability] || 0) + 1;
         }
