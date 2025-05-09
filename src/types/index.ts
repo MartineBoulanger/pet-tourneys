@@ -9,6 +9,7 @@ import {
   TextareaHTMLAttributes,
 } from 'react';
 import { IconType } from 'react-icons';
+import { Document } from '@contentful/rich-text-types';
 
 // Admin types/interfaces
 export type Action = 'create' | 'drop';
@@ -531,7 +532,7 @@ export interface ContentTypeAsset {
 }
 export interface ContentTypeRichText {
   text: {
-    json: JSON;
+    json: Document;
   };
   textAligned?: string;
 }
@@ -586,4 +587,9 @@ export interface AllPagesFragment {
 }
 export interface PageCardProps {
   page: AllPagesFragment;
+}
+export interface RichTextProps {
+  json: Document;
+  textAlign?: string;
+  className?: string;
 }

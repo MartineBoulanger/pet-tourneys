@@ -1,5 +1,3 @@
-import Link from 'next/link';
-import { Fragment } from 'react';
 import { notFound } from 'next/navigation';
 import { getTournamentDetails } from '@/supabase/actions/tournaments';
 import { getPaginatedMatches } from '@/supabase/actions/matches';

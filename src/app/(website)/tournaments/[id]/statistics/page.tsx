@@ -1,5 +1,3 @@
-import Link from 'next/link';
-import { Fragment } from 'react';
 import { notFound } from 'next/navigation';
 import { PetList, PetCharts } from '@/components/statistics';
 import {

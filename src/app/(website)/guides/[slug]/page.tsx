@@ -1,8 +1,8 @@
 import { notFound } from 'next/navigation';
 import { getPage } from '@/contentful/actions/getPage';
 import { Container, PageHeading, ActionDropdownItem } from '@/components/ui';
-import Link from 'next/link';
-import { Fragment } from 'react';
+import { RichText } from '@/components/contentful';
+import { ContentTypePage } from '@/types';
 
 export async function generateMetadata({
   params,
@@ -40,7 +40,7 @@ export default async function GuidePage({
   const { slug } = await params;
   const { preview } = await searchParams;
   const isPreview = preview === 'true' ? true : false;
-  const page = await getPage(isPreview, slug);
+  const page: ContentTypePage = await getPage(isPreview, slug);
 
   if (!page) notFound();
 
@@ -50,15 +50,23 @@ export default async function GuidePage({
     <Container>
       <PageHeading heading={page.pageTitle}>
         <div className='flex flex-col gap-2.5'>
-          {page.ctAsCollection?.items.map((link: any, index: number) => (
-            <ActionDropdownItem
-              key={index}
-              url={link.ctaUrl}
-              text={link.ctaText}
-            />
-          ))}
+          {page.ctAsCollection && page.ctAsCollection.items
+            ? page.ctAsCollection.items.map((link: any, index: number) => (
+                <ActionDropdownItem
+                  key={index}
+                  url={link.ctaUrl}
+                  text={link.ctaText}
+                />
+              ))
+            : null}
         </div>
       </PageHeading>
+      {page.pageDescription ? (
+        <RichText
+          json={page.pageDescription.text.json}
+          className='max-w-[800px]'
+        />
+      ) : null}
     </Container>
   );
 }

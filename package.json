@@ -11,6 +11,8 @@
     "generate": "npx supabase gen types typescript --project-id sixzjnpdrixxkkkjaaai --schema api > ./src/types/database.types.ts"
   },
   "dependencies": {
+    "@contentful/rich-text-react-renderer": "^16.0.1",
+    "@contentful/rich-text-types": "^17.0.0",
     "@react-pdf/renderer": "^4.3.0",
     "@supabase/ssr": "^0.6.1",
     "@supabase/supabase-js": "^2.49.4",
