@@ -1,7 +1,13 @@
 import Link from 'next/link';
 import { Fragment } from 'react';
 import { BattleLogViewer, MatchScore } from '@/components/matches';
-import { Container, PageHeading, Heading, Paragraph } from '@/components/ui';
+import {
+  Container,
+  PageHeading,
+  Heading,
+  Paragraph,
+  ActionDropdownItem,
+} from '@/components/ui';
 import { getMatchDetails } from '@/supabase/actions/matches';
 import { MatchPageParams } from '@/types';
 import { linksData } from '@/lib/linksData';
@@ -64,17 +70,11 @@ export default async function MatchPage({
                   link.url_suffix ? link.url_suffix : ''
                 }${link.url_suffix && matchId ? matchId : ''}`;
             return (
-              <Fragment key={link.id}>
-                <Link
-                  href={url}
-                  className='link'
-                  title={link.text}
-                  aria-label={link.text}
-                >
-                  {link.text}
-                </Link>
-                <div className='h-0.5 rounded-lg w-full bg-blue-grey last-of-type:hidden' />
-              </Fragment>
+              <ActionDropdownItem
+                key={link.id}
+                url={url}
+                text={link.text || ''}
+              />
             );
           })}
         </div>

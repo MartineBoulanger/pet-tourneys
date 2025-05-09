@@ -25,6 +25,13 @@ const nextConfig: NextConfig = {
         pathname: '/images/**',
         search: '',
       },
+      {
+        protocol: 'https',
+        hostname: 'images.ctfassets.net',
+        port: '',
+        pathname: '/**',
+        search: '',
+      },
     ],
     formats: ['image/avif', 'image/webp'],
   },

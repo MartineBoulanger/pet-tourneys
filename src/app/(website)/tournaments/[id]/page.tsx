@@ -4,7 +4,13 @@ import { notFound } from 'next/navigation';
 import { getTournamentDetails } from '@/supabase/actions/tournaments';
 import { getPaginatedMatches } from '@/supabase/actions/matches';
 import { MatchList } from '@/components/tournaments';
-import { Container, PageHeading, Heading, Paragraph } from '@/components/ui';
+import {
+  Container,
+  PageHeading,
+  Heading,
+  Paragraph,
+  ActionDropdownItem,
+} from '@/components/ui';
 import { PageParams, PageSearchParams } from '@/types';
 import { MATCHES_PER_PAGE } from '@/types/constants';
 import { linksData } from '@/lib/linksData';
@@ -66,17 +72,11 @@ export default async function TournamentPage({
                   link.url_suffix ? link.url_suffix : ''
                 }`;
             return (
-              <Fragment key={link.id}>
-                <Link
-                  href={url}
-                  className='link'
-                  title={link.text}
-                  aria-label={link.text}
-                >
-                  {link.text}
-                </Link>
-                <div className='h-0.5 rounded-lg w-full bg-blue-grey last-of-type:hidden' />
-              </Fragment>
+              <ActionDropdownItem
+                key={link.id}
+                url={url}
+                text={link.text || ''}
+              />
             );
           })}
         </div>

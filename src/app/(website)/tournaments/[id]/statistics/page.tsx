@@ -8,7 +8,13 @@ import {
 } from '@/supabase/actions/statistics';
 import { getTournament } from '@/supabase/actions/tournaments';
 import { getMatch } from '@/supabase/actions/matches';
-import { Container, PageHeading, Heading, Paragraph } from '@/components/ui';
+import {
+  Container,
+  PageHeading,
+  Heading,
+  Paragraph,
+  ActionDropdownItem,
+} from '@/components/ui';
 import {
   ChartDataItem,
   ChartData,
@@ -135,17 +141,7 @@ export default async function StatisticsPage({
                 ? 'Back to match'
                 : 'Back to tournament';
               return (
-                <Fragment key={link.id}>
-                  <Link
-                    href={url}
-                    className='link'
-                    title={linkText}
-                    aria-label={linkText}
-                  >
-                    {linkText}
-                  </Link>
-                  <div className='h-0.5 rounded-lg w-full bg-blue-grey last-of-type:hidden' />
-                </Fragment>
+                <ActionDropdownItem key={link.id} url={url} text={linkText} />
               );
             })}
           </div>

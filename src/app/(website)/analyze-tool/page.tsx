@@ -1,4 +1,4 @@
-import { Heading, Paragraph } from '@/components/ui';
+import { Heading, Paragraph, Container } from '@/components/ui';
 import { AnalyzeToolForm } from '@/components/analyze-tool/AnalyzeToolForm';
 
 export async function generateMetadata() {
@@ -12,7 +12,7 @@ export async function generateMetadata() {
 
 export default function AnalyzerPage() {
   return (
-    <div className='container mx-auto py-8'>
+    <Container>
       <Heading className='text-center'>
         {'Pet Battle PvP Logs Analyzer'}
       </Heading>
@@ -25,6 +25,6 @@ export default function AnalyzerPage() {
         }
       </Paragraph>
       <AnalyzeToolForm />
-    </div>
+    </Container>
   );
 }

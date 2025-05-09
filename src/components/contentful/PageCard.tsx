@@ -1,0 +1,19 @@
+import Image from 'next/image';
+import Link from 'next/link';
+import { Heading } from '@/components/ui';
+import { PageCardProps } from '@/types';
+
+export const PageCard = ({ page }: PageCardProps) => {
+  return (
+    <div className='border-2 border-light-grey bg-dark-grey shadow-md rounded-lg flex flex-col gap-5 p-5'>
+      <Heading as='h2' className='text-center text-5xl'>{page.pageTitle}</Heading>
+      <Image
+        src={page?.banner?.bannerImage?.media?.url || ''}
+        alt={page?.banner?.bannerImage?.media?.title || ''}
+        width={500}
+        height={500}
+      />
+      <Link href={`/guides/${page.urlSlug}`} className='btn-submit py-2 px-4 rounded w-fit mx-auto text-2xl uppercase font-bold'>{'View Guide'}</Link>
+    </div>
+  );
+};

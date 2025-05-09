@@ -46,8 +46,9 @@ export const withSupabase = (middleware: CustomMiddleware) => {
       !request.nextUrl.pathname.includes('/register') &&
       !request.nextUrl.pathname.includes('/forgot-password') &&
       !request.nextUrl.pathname.includes('/reset-password') &&
+      !request.nextUrl.pathname.includes('/analyze-tool') &&
       !request.nextUrl.pathname.startsWith('/tournaments') &&
-      !request.nextUrl.pathname.startsWith('/analyze-tool') &&
+      !request.nextUrl.pathname.startsWith('/guides') &&
       !request.nextUrl.pathname.startsWith('/auth') &&
       !request.nextUrl.pathname.endsWith('/sitemap.xml') &&
       !request.nextUrl.pathname.endsWith('/robots.txt') &&

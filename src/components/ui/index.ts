@@ -15,3 +15,4 @@ export * from './Paragraph';
 export * from './Textarea';
 export * from './Select';
 export * from './Option';
+export * from './ActionDropdownItem';
