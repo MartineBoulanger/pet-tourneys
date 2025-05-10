@@ -5,7 +5,7 @@ import { PageCardProps } from '@/types';
 
 export const PageCard = ({ page }: PageCardProps) => {
   return (
-    <div className='border-2 border-light-grey bg-dark-grey shadow-md rounded-lg flex flex-col gap-5 p-5'>
+    <div className='border-2 border-light-grey bg-dark-grey shadow-md rounded-lg flex flex-col items-center justify-between gap-5 p-5'>
       <Heading as='h2' className='text-center text-5xl'>
         {page.pageTitle}
       </Heading>
@@ -19,10 +19,12 @@ export const PageCard = ({ page }: PageCardProps) => {
         height={500}
       />
       <Link
-        href={`/guides/${page.urlSlug}`}
+        href={`/${page.pageType === 'Article' ? 'articles' : 'guides'}/${
+          page.urlSlug
+        }`}
         className='btn-submit py-2 px-4 rounded w-fit mx-auto text-2xl uppercase font-bold'
       >
-        {'View Guide'}
+        {page.pageType === 'Article' ? 'Read Article' : 'View Guide'}
       </Link>
     </div>
   );

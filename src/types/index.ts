@@ -523,7 +523,7 @@ export interface ContentTypeSeoMetadata {
   indexable?: boolean;
   keywords?: string[] | null;
   image?: {
-    media: Media;
+    media?: Media;
   };
 }
 export interface ContentTypeCta {
@@ -565,13 +565,14 @@ export interface ContentTypePage {
     id: string;
   };
   __typename: 'Page';
+  pageType: string;
   urlSlug?: string | null;
   pageTitle?: string | null;
   pageDescription?: Maybe<ContentTypeRichText>;
   ctAsCollection?: {
     items: Maybe<ContentTypeCta>[];
   };
-  seoMetadata?: Maybe<ContentTypeSeoMetadata>;
+  seoMetadata?: Maybe<ContentTypeSeoMetadata> | null;
   banner?: Maybe<ContentTypeBanner>;
   pageContentCollection?: {
     items: Maybe<PageContentItem>[];
@@ -582,6 +583,7 @@ export interface AllPagesFragment {
     id: string;
   };
   __typename: 'Page';
+  pageType: string;
   urlSlug?: string | null;
   pageTitle?: string | null;
   banner?: {

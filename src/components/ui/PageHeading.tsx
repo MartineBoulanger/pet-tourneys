@@ -9,6 +9,8 @@ export const PageHeading = ({
   className,
   children,
 }: PageHeadingProps) => {
+  if (!heading) return null;
+
   return (
     <div
       className={cn(
@@ -17,16 +19,18 @@ export const PageHeading = ({
       )}
     >
       <Heading>{heading}</Heading>
-      <PopUp
-        text={
-          <span className='flex gap-2'>
-            {'Go To'} <FaChevronDown />
-          </span>
-        }
-        divClassName='w-[250px] lg:right-0'
-      >
-        {children}
-      </PopUp>
+      {children ? (
+        <PopUp
+          text={
+            <span className='flex gap-2'>
+              {'Go To'} <FaChevronDown />
+            </span>
+          }
+          divClassName='w-[250px] lg:right-0'
+        >
+          {children}
+        </PopUp>
+      ) : null}
     </div>
   );
 };

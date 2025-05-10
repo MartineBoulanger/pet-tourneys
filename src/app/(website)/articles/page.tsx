@@ -6,24 +6,24 @@ import { AllPagesFragment } from '@/types';
 
 export async function generateMetadata() {
   return {
-    title: 'Our Guides',
+    title: 'Pet Battle Articles',
     alternates: {
-      canonical: `${process.env.NEXT_PUBLIC_BASE_URL!}/guides`,
+      canonical: `${process.env.NEXT_PUBLIC_BASE_URL!}/articles`,
     },
   };
 }
 
-export default async function GuidesPage() {
-  const pages: AllPagesFragment[] = await getAllPages(false, 'Guide');
+export default async function ArticlesPage() {
+  const pages: AllPagesFragment[] = await getAllPages(false, 'Article');
 
   if (!pages) notFound();
   // TODO: add pagination with 12 page cards  per page -> see commercial LLBG for implementing pagination for Contentful
   return (
     <Container>
-      <Heading className='text-center'>{'Our Guides'}</Heading>
+      <Heading className='text-center'>{'Pet Battle Articles'}</Heading>
       <Paragraph className='max-w-[700px] text-center mx-auto'>
         {
-          'If you are looking for some guides about pet battling, or you need to remind yourself how to report a win-ticket in Discord, our guides will help you with all your questions and help you to achieve what you are looking for.'
+          'You want to learn how to and what pets to use in Pet Battling? Especially in PvP? You want to know what strategies would work, or which pet would be good to use? Then these articles could be of use for you. Have a look around, and hopefully you find what you were looking for.'
         }
       </Paragraph>
       {/* Page cards list */}

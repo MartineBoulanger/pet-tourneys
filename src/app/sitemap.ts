@@ -1,12 +1,15 @@
 import type { MetadataRoute } from 'next';
 import { getTournaments } from '@/supabase/actions/tournaments';
 import { getMatches } from '@/supabase/actions/matches';
+import { getAllPages } from '@/contentful/actions/getAllPages';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const url = process.env.NEXT_PUBLIC_BASE_URL!;
   const {
     data: { tournaments },
   } = await getTournaments();
+  const allGuidePages = await getAllPages(false, 'Guide');
+  const allArticlePages = await getAllPages(false, 'Article');
 
   // Base URLs that don't depend on dynamic data
   const staticUrls = [
@@ -22,9 +25,26 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'monthly' as const,
       priority: 0.8,
     },
+    {
+      url: `${url}/guides`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.8,
+    },
+    {
+      url: `${url}/articles`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.8,
+    },
   ];
 
-  if (!tournaments || tournaments.length === 0) {
+  if (
+    !tournaments ||
+    tournaments.length === 0 ||
+    !allGuidePages ||
+    !allArticlePages
+  ) {
     return staticUrls;
   }
 
@@ -83,5 +103,29 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Flatten the array of arrays into a single array
   const dynamicUrls = tournamentEntries.flat();
 
-  return [...staticUrls, ...dynamicUrls];
+  const allGuides = allGuidePages
+    .map((guide: { urlSlug: string }) => {
+      const guideEntry = {
+        url: `${url}/guides/${guide.urlSlug}`,
+        lastModified: new Date(),
+        changeFrequency: 'monthly' as const,
+        priority: 0.8,
+      };
+      return [guideEntry];
+    })
+    .flat();
+
+  const allArticles = allArticlePages
+    .map((article: { urlSlug: string }) => {
+      const articleEntry = {
+        url: `${url}/articles/${article.urlSlug}`,
+        lastModified: new Date(),
+        changeFrequency: 'monthly' as const,
+        priority: 0.8,
+      };
+      return [articleEntry];
+    })
+    .flat();
+
+  return [...staticUrls, ...dynamicUrls, ...allGuides, ...allArticles];
 }

@@ -17,12 +17,12 @@ export async function generateMetadata({
   const seoData = page && page.seoMetadata;
 
   return {
-    title: seoData.title || 'Our Guides',
+    title: seoData.title || 'Pet Battle Articles',
     description:
-      seoData.description || 'Our Guides for all that want to know things.',
-    keywords: seoData.keywords || ['WoW, guides, pet'],
+      seoData.description || 'Pet Battle Articles for all pet masters',
+    keywords: seoData.keywords || ['WoW, articles, pet'],
     alternates: {
-      canonical: `${process.env.NEXT_PUBLIC_BASE_URL!}/guides/${slug}`,
+      canonical: `${process.env.NEXT_PUBLIC_BASE_URL!}/articles/${slug}`,
     },
     robots: {
       index: seoData.indexable === true || false,
@@ -34,7 +34,7 @@ export async function generateMetadata({
   };
 }
 
-export default async function GuidePage({
+export default async function ArticlePage({
   params,
   searchParams,
 }: {

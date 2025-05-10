@@ -17,9 +17,16 @@ export const headerData: NavigationData[] = [
   },
   {
     id: 3,
+    url: '/articles',
+    linkText: 'Pet Battle Articles',
+    text: 'Looking for a specific article about Pet Battle strategies? Checkout out all our articles on our articles page!',
+    imageSrc: `${process.env.NEXT_PUBLIC_BASE_URL!}/images/greenrex.png`,
+  },
+  {
+    id: 4,
     url: '/analyze-tool',
     linkText: 'Our Analysis Tool',
     text: 'Want to see the analysis of your personal pvp battle log? Check out our analysis tool and download the PDF of your battle logs analysis!',
-    imageSrc: `${process.env.NEXT_PUBLIC_BASE_URL!}/images/greenrex.png`,
+    imageSrc: `${process.env.NEXT_PUBLIC_BASE_URL!}/images/bluegor.png`,
   },
 ];
