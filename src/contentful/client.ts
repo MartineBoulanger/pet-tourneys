@@ -54,7 +54,9 @@ export const contentful = async (
     if (data.errors) {
       console.error('GraphQL errors:', data.errors);
       throw new Error(
-        `GraphQL errors: ${data.errors.map((e: any) => e.message).join(', ')}`
+        `GraphQL errors: ${data.errors
+          .map((e: { message: string }) => e.message)
+          .join(', ')}`
       );
     }
 
