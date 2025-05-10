@@ -28,9 +28,13 @@ export default async function ArticlesPage() {
       </Paragraph>
       {/* Page cards list */}
       <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-10 sm:mt-20 gap-5'>
-        {pages && pages.length > 0
-          ? pages.map((page) => <PageCard key={page.sys.id} page={page} />)
-          : null}
+        {pages && pages.length > 0 ? (
+          pages.map((page) => <PageCard key={page.sys.id} page={page} />)
+        ) : (
+          <div className='py-5 px-2.5 bg-light-grey rounded-lg text-center lg:col-start-2'>
+            {'No articles are online yet. Please come back later!'}
+          </div>
+        )}
       </div>
     </Container>
   );
