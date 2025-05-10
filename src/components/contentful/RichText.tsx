@@ -36,7 +36,7 @@ const options = (): Options => {
         const h3 = node?.nodeType === 'heading-3';
         if (!h3) return null;
         return (
-          <Heading as='h3' className='font-bold text-xl mb-1.5'>
+          <Heading as='h3' className='font-bold text-xl text-light-blue mb-1.5'>
             {children}
           </Heading>
         );
@@ -54,7 +54,7 @@ const options = (): Options => {
         const h5 = node?.nodeType === 'heading-5';
         if (!h5) return null;
         return (
-          <Heading as='h5' className='text-light-blue text-base mb-1'>
+          <Heading as='h5' className='text-blue font-bold text-base mb-1'>
             {children}
           </Heading>
         );
@@ -63,7 +63,7 @@ const options = (): Options => {
         const h6 = node?.nodeType === 'heading-6';
         if (!h6) return null;
         return (
-          <Heading as='h6' className='text-sm font-bold mb-1'>
+          <Heading as='h6' className='text-sm font-bold text-blue mb-1'>
             {children}
           </Heading>
         );
@@ -99,7 +99,7 @@ const options = (): Options => {
         return (
           <Link
             title={typeof children === 'string' ? children : 'inline text link'}
-            className='btn-link'
+            className='btn-link text-light-blue underline hover:text-blue'
             href={url}
           >
             {children}
@@ -112,33 +112,33 @@ const options = (): Options => {
         <span className='font-bold text-light-blue'>{text}</span>
       ),
       [MARKS.ITALIC]: (text) => (
-        <span className='italic text-light-blue'>{text}</span>
+        <span className='italic text-light-red'>{text}</span>
       ),
-      [MARKS.UNDERLINE]: (text) => (
-        <span className='underline text-light-blue'>{text}</span>
-      ),
+      [MARKS.UNDERLINE]: (text) => <span className='underline'>{text}</span>,
       [MARKS.STRIKETHROUGH]: (text) => (
-        <span className='line-through text-light-blue'>{text}</span>
+        <span className='line-through text-foreground/60'>{text}</span>
       ),
     },
   };
 };
 
-export const RichText = ({
-  json,
-  textAlign = 'lft',
-  className,
-}: RichTextProps) => {
+const RichText = ({ component, className }: RichTextProps) => {
+  if (!component) return null;
+  const { text, textAligned } = component;
+  const aligned = textAligned ? textAligned : 'left';
   const textOptions = options();
-  return json ? (
+
+  return text && text.json ? (
     <div
       className={cn(
         'leading-normal w-full',
-        textAlign && `text-${textAlign}`,
+        textAligned && `text-${aligned}`,
         className
       )}
     >
-      {documentToReactComponents(json, textOptions)}
+      {documentToReactComponents(text.json, textOptions)}
     </div>
   ) : null;
 };
+
+export default RichText;

@@ -1,11 +1,10 @@
 export const PAGE_FRAGMENT = `
   sys {
     id
-    spaceId
-    environmentId
-    publishedAt
   }
+  __typename
   seoMetadata {
+    __typename
     title
     description
     indexable
@@ -18,8 +17,10 @@ export const PAGE_FRAGMENT = `
       }
     }
   }
+  pageType
   urlSlug
   banner {
+    __typename
     bannerImage {
       media {
         title
@@ -42,6 +43,7 @@ export const PAGE_FRAGMENT = `
   }
   pageTitle
   pageDescription {
+    __typename
     text {
       json
     }
@@ -49,12 +51,14 @@ export const PAGE_FRAGMENT = `
   }
   ctAsCollection {
     items {
+      __typename
       ctaText
       ctaUrl
     }
   }
   pageContentCollection {
     items {
+      __typename
       ... on Banner {
         bannerImage {
           media {
@@ -80,6 +84,7 @@ export const PAGE_FRAGMENT = `
         layout
         contentCollection {
           items {
+            __typename
             ... on ContentTypeAsset {
               media {
                 title
@@ -96,10 +101,6 @@ export const PAGE_FRAGMENT = `
                 json
               }
               textAligned
-            }
-            ... on Cta {
-              ctaText
-              ctaUrl
             }
           }
         }

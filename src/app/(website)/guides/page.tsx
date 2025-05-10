@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import { Container, Heading, Paragraph } from '@/components/ui';
-import { PageCard } from '@/components/contentful';
+import { PageCard } from '@/components/contentful/PageCard';
 import { getAllPages } from '@/contentful/actions/getAllPages';
 import { AllPagesFragment } from '@/types';
 
@@ -14,7 +14,7 @@ export async function generateMetadata() {
 }
 
 export default async function GuidesPage() {
-  const pages: AllPagesFragment[] = await getAllPages();
+  const pages: AllPagesFragment[] = await getAllPages(false, 'Guide');
 
   if (!pages) notFound();
   // TODO: add pagination with 12 page cards  per page -> see commercial LLBG for implementing pagination for Contentful

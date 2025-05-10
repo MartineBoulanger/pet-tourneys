@@ -11,6 +11,9 @@ import {
 import { IconType } from 'react-icons';
 import { Document } from '@contentful/rich-text-types';
 
+// Generic types/interfaces
+export type Maybe<T> = T | null;
+
 // Admin types/interfaces
 export type Action = 'create' | 'drop';
 export type TournamentTableName =
@@ -514,74 +517,76 @@ interface Media {
   url: string;
 }
 export interface ContentTypeSeoMetadata {
-  title?: string;
-  description?: string;
+  __typename: 'SeoMetadata';
+  title?: string | null;
+  description?: string | null;
   indexable?: boolean;
-  keywords?: string[];
+  keywords?: string[] | null;
   image?: {
     media: Media;
   };
 }
 export interface ContentTypeCta {
+  __typename: 'Cta';
   ctaText: string;
-  ctaUrl?: string;
+  ctaUrl?: string | null;
 }
 export interface ContentTypeAsset {
+  __typename: 'ContentTypeAsset';
   media: Media;
-  cta?: ContentTypeCta;
+  cta?: Maybe<ContentTypeCta>;
 }
 export interface ContentTypeRichText {
-  text: {
+  __typename: 'ContentTypeRichText';
+  text?: {
     json: Document;
   };
   textAligned?: string;
 }
 export interface ContentTypeBanner {
+  __typename: 'Banner';
   bannerImage?: ContentTypeAsset;
   bannerText?: ContentTypeRichText;
   bannerActionsCollection?: {
     items?: ContentTypeCta[];
   };
 }
-type ContentLayoutItem =
-  | ContentTypeAsset
-  | ContentTypeRichText
-  | ContentTypeCta;
+export type ContentLayoutItem = ContentTypeAsset | ContentTypeRichText;
 export interface ContentTypeContentLayout {
+  __typename: 'ContentLayout';
   layout?: string;
   contentCollection: {
-    items: ContentLayoutItem[];
+    items: Maybe<ContentLayoutItem>[];
   };
 }
-type PageContentItem = ContentTypeBanner | ContentTypeContentLayout;
+export type PageContentItem = ContentTypeBanner | ContentTypeContentLayout;
 export interface ContentTypePage {
   sys: {
     id: string;
-    spaceId: string;
-    environmentId: string;
-    publishedAt: string;
   };
-  urlSlug?: string;
-  pageTitle?: string;
-  pageDescription?: ContentTypeRichText;
+  __typename: 'Page';
+  urlSlug?: string | null;
+  pageTitle?: string | null;
+  pageDescription?: Maybe<ContentTypeRichText>;
   ctAsCollection?: {
-    items?: ContentTypeCta[];
+    items: Maybe<ContentTypeCta>[];
   };
-  seoMetadata?: ContentTypeSeoMetadata;
-  banner?: ContentTypeBanner;
+  seoMetadata?: Maybe<ContentTypeSeoMetadata>;
+  banner?: Maybe<ContentTypeBanner>;
   pageContentCollection?: {
-    items?: PageContentItem[];
+    items: Maybe<PageContentItem>[];
   };
 }
 export interface AllPagesFragment {
   sys: {
     id: string;
   };
-  urlSlug?: string;
-  pageTitle?: string;
+  __typename: 'Page';
+  urlSlug?: string | null;
+  pageTitle?: string | null;
   banner?: {
     bannerImage?: {
-      media?: Media;
+      media: Media;
     };
   };
 }
@@ -589,7 +594,28 @@ export interface PageCardProps {
   page: AllPagesFragment;
 }
 export interface RichTextProps {
-  json: Document;
-  textAlign?: string;
+  component: ContentTypeRichText;
   className?: string;
+}
+export interface AssetProps {
+  component: ContentTypeAsset;
+  isBanner?: boolean;
+  isPage?: boolean;
+  className?: string;
+}
+export interface CtaProps {
+  component: ContentTypeCta;
+  className?: string;
+}
+export interface BannerProps {
+  component: ContentTypeBanner;
+  isPage?: boolean;
+  className?: string;
+}
+export interface ContentLayoutProps {
+  component: ContentTypeContentLayout;
+  className?: string;
+}
+export interface PageContentProps {
+  components: Maybe<PageContentItem>[];
 }

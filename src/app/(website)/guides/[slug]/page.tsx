@@ -1,8 +1,11 @@
 import { notFound } from 'next/navigation';
+import { TbSquareChevronsDown } from 'react-icons/tb';
 import { getPage } from '@/contentful/actions/getPage';
 import { Container, PageHeading, ActionDropdownItem } from '@/components/ui';
-import { RichText } from '@/components/contentful';
-import { ContentTypePage } from '@/types';
+import RichText from '@/components/contentful/RichText';
+import PageContent from '@/components/contentful/PageContent';
+import Banner from '@/components/contentful/Banner';
+import { ContentTypeCta, ContentTypePage } from '@/types';
 
 export async function generateMetadata({
   params,
@@ -44,29 +47,45 @@ export default async function GuidePage({
 
   if (!page) notFound();
 
-  console.log('page data', page);
-
   return (
-    <Container>
-      <PageHeading heading={page.pageTitle}>
-        <div className='flex flex-col gap-2.5'>
-          {page.ctAsCollection && page.ctAsCollection.items
-            ? page.ctAsCollection.items.map((link: any, index: number) => (
-                <ActionDropdownItem
-                  key={index}
-                  url={link.ctaUrl}
-                  text={link.ctaText}
-                />
-              ))
-            : null}
-        </div>
-      </PageHeading>
-      {page.pageDescription ? (
-        <RichText
-          json={page.pageDescription.text.json}
-          className='max-w-[800px]'
-        />
+    <div className='flex flex-col'>
+      {page.banner ? (
+        <>
+          <Banner component={page.banner} isPage />
+          <div className='hidden md:block md:w-[40px] md:mx-auto text-light-blue animate-bounce mb-10'>
+            <TbSquareChevronsDown className='w-10 h-10' />
+          </div>
+        </>
       ) : null}
-    </Container>
+      <Container className='p-2.5 sm:p-5 bg-light-grey rounded-lg shadow-md'>
+        <div className='p-5 rounded-lg bg-background mb-5'>
+          <PageHeading heading={page.pageTitle} className='md:items-start'>
+            <div className='flex flex-col gap-2.5'>
+              {page.ctAsCollection && page.ctAsCollection.items
+                ? page.ctAsCollection.items.map(
+                    (link: ContentTypeCta | null, index: number) => (
+                      <ActionDropdownItem
+                        key={index}
+                        url={link?.ctaUrl || ''}
+                        text={link?.ctaText || ''}
+                      />
+                    )
+                  )
+                : null}
+            </div>
+          </PageHeading>
+          {page.pageDescription ? (
+            <RichText component={page.pageDescription} />
+          ) : null}
+        </div>
+        {/* <div className='h-0.5 rounded-lg w-full bg-medium-grey my-10' /> */}
+        <div>
+          {page.pageContentCollection &&
+          page.pageContentCollection.items.length > 0 ? (
+            <PageContent components={page.pageContentCollection.items} />
+          ) : null}
+        </div>
+      </Container>
+    </div>
   );
 }
