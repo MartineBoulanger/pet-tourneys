@@ -510,6 +510,36 @@ export interface AbilityCategories {
   team_buff: string[];
 }
 
+// Battle logs statistics interfaces
+export type AbilityAnalysisResult = AbilityCategories & {
+  categorizationLog?: { [ability: string]: string[] };
+  totalUniqueAbilitiesUsed?: number;
+};
+export interface BattleAnalysisStatsProps {
+  stats: {
+    generalStats: {
+      averageDuration: string;
+      totalBattles: number;
+      totalMatches?: number;
+      matchesByRegion?: {
+        EU: number;
+        NA: number;
+        other: number;
+      };
+    };
+    petStats: Array<{
+      name: string;
+      count: number;
+      playerCount: number;
+      opponentCount: number;
+      team: 'player' | 'opponent' | 'both';
+    }>;
+    abilityStats: AbilityAnalysisResult;
+    battleStats: BattleStatistics;
+  };
+  isMatchView: boolean;
+}
+
 // Contentful components interfaces
 interface Media {
   title: string;

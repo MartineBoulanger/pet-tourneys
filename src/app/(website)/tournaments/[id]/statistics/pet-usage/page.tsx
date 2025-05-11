@@ -3,7 +3,7 @@ import { PetList, PetCharts } from '@/components/statistics';
 import {
   getMatchPetUsage,
   getTournamentPetStats,
-} from '@/supabase/actions/statistics';
+} from '@/supabase/actions/pet-usage-statistics';
 import { getTournament } from '@/supabase/actions/tournaments';
 import { getMatch } from '@/supabase/actions/matches';
 import {
@@ -32,7 +32,7 @@ export async function generateMetadata({ params }: { params: PageParams }) {
   };
 }
 
-export default async function StatisticsPage({
+export default async function PetUsageStatisticsPage({
   params,
   searchParams,
 }: {
@@ -44,7 +44,7 @@ export default async function StatisticsPage({
   const isMatchView = !!matchId;
 
   let stats;
-  let title = 'Tournament Statistics';
+  let title = 'Tournament Pet Usage Statistics';
   let entityName = '';
   let chartData: ChartData = {
     petUsageData: [],
@@ -57,7 +57,7 @@ export default async function StatisticsPage({
     if (!match) return notFound();
 
     stats = await getMatchPetUsage(id, matchId);
-    title = 'Match Pet Usage';
+    title = 'Match Pet Usage Statistics';
     entityName = `${match.player1} vs ${match.player2}`;
   } else {
     const {
