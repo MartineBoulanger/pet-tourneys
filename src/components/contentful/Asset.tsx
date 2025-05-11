@@ -39,10 +39,7 @@ const Asset = ({
         alt={title}
         width={getSizes().width}
         height={getSizes().height}
-        className={cn(
-          'w-full h-full',
-          isPage ? 'object-contain' : 'object-cover'
-        )}
+        className={cn('w-full h-full object-contain')}
         priority={isPage}
       />
       {cta && !isBanner ? (

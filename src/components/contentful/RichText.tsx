@@ -71,7 +71,7 @@ const options = (): Options => {
       [BLOCKS.QUOTE]: (node, children) => {
         const quote = node?.nodeType === 'blockquote';
         if (!quote) return null;
-        return <q className='text-light-blue flex italic'>{children}</q>;
+        return <q className='text-light-blue flex italic mb-5'>{children}</q>;
       },
       [BLOCKS.HR]: (node) => {
         const hr = node?.nodeType === 'hr';
