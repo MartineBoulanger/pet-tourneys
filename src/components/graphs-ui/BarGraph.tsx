@@ -52,41 +52,6 @@ export const BarGraph = ({
           />
           <Bar dataKey='value' fill={defaultColor} radius={[0, 4, 4, 0]} />
         </BarChart>
-        {/* <RadialBarChart
-          cx='50%'
-          cy='50%'
-          innerRadius='10%'
-          outerRadius='80%'
-          barSize={10}
-          data={data}
-        >
-          <RadialBar
-            // minAngle={15}
-            label={{ position: 'insideStart', fill: '#101010' }}
-            background
-            // clockWise
-            dataKey='name'
-          />
-          <Legend
-            iconSize={10}
-            layout='vertical'
-            verticalAlign='middle'
-            wrapperStyle={style}
-          />
-          <Tooltip
-            contentStyle={{
-              backgroundColor: tooltipHoverColor,
-              color: tooltipTextColor,
-              borderRadius: '0.5rem',
-              border: 'none',
-            }}
-            formatter={(value, name, props) => [
-              `Times played: ${value}`,
-              `Type: ${props.payload.type || 'N/A'}`,
-              `Stats: ${props.payload.stats || 'N/A'}`,
-            ]}
-          />
-        </RadialBarChart> */}
       </ResponsiveContainer>
     </div>
   );
