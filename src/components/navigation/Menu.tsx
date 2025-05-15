@@ -6,8 +6,12 @@ import { useState } from 'react';
 import { IoMdClose } from 'react-icons/io';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { Button } from '@/components/ui';
-import { headerData } from '@/lib/headerData';
-import { MenuProps } from '@/types';
+import { headerData } from '@/lib/navigationData';
+
+interface MenuProps {
+  className?: string;
+  buttonVariant?: 'link' | 'primary' | 'secondary' | undefined;
+}
 
 export const Menu = ({ className, buttonVariant = 'primary' }: MenuProps) => {
   const [isOpen, setOpen] = useState<boolean>(false);

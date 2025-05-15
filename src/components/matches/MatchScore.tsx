@@ -1,5 +1,9 @@
-import { MatchScoreProps } from '@/types';
 import { Paragraph } from '@/components/ui';
+import { Match } from '@/components/tournaments/types';
+
+interface MatchScoreProps {
+  match: Match;
+}
 
 export const MatchScore = ({ match }: MatchScoreProps) => {
   return (

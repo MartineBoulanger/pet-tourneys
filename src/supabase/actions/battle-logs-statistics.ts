@@ -8,7 +8,7 @@ import {
   getMostUsedPets,
   analyzeUsedAbilities,
 } from '@/utils/analyzeToolHelpers';
-import { AbilityAnalysisResult, BattleStatistics } from '@/types';
+import { AbilityAnalysisResult, BattleStatistics } from '@/utils/types';
 
 export async function getTournamentBattleStats(tournamentId: string): Promise<{
   generalStats: {

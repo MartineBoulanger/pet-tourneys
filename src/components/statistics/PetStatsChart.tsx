@@ -1,7 +1,7 @@
 'use client';
 
 import { LineGraph, Heading } from '@/components/ui';
-import { PetStatsChartProps } from '@/types';
+import { PetStatsChartProps } from './types';
 import { parseAndAggregateStats, convertToGraphData } from '@/utils/parsers';
 
 export function PetStatsChart({ pets }: PetStatsChartProps) {

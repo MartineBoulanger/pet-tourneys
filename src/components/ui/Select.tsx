@@ -1,7 +1,21 @@
 'use client';
 
-import { SelectProps } from '@/types';
 import { cn } from '@/utils/cn';
+import { DetailedHTMLProps, SelectHTMLAttributes } from 'react';
+
+interface SelectProps
+  extends Omit<
+    DetailedHTMLProps<
+      SelectHTMLAttributes<HTMLSelectElement>,
+      HTMLSelectElement
+    >,
+    'required'
+  > {
+  label: string;
+  id: string;
+  name: string;
+  required?: boolean;
+}
 
 export const Select = ({
   label,

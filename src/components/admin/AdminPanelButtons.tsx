@@ -1,13 +1,12 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { adminData } from '@/lib/adminData';
+import { adminData } from '@/lib/navigationData';
 import { Heading } from '@/components/ui';
+import { AdminPanelButtonsProps } from './types';
 
 export const AdminPanelButtons = ({
   isMatchesPage = false,
-}: {
-  isMatchesPage?: boolean;
-}) => {
+}: AdminPanelButtonsProps) => {
   return (
     <div className='mb-10'>
       <Heading as='h2' className='text-xl mb-2'>

@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { TournamentsListItemProps } from '@/types';
+import { TournamentsListItemProps } from './types';
 import { AdminTournamentActions } from './AdminTournamentActions';
 import { Paragraph } from '@/components/ui';
 

@@ -1,7 +1,12 @@
 import React from 'react';
 import { cn } from '@/utils/cn';
-import { AuthButtonProps } from '@/types';
 import { Button } from '@/components/ui';
+
+interface AuthButtonProps {
+  type: 'login' | 'Sign up' | 'Reset Password' | 'Forgot Password';
+  loading: boolean;
+  className?: string;
+}
 
 export const AuthButton = ({ type, loading, className }: AuthButtonProps) => {
   return (

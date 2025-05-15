@@ -28,3 +28,5 @@ export const petTypeColors = {
   Flying: '#dfcf5b',
   Critter: '#775845',
 };
+
+// TODO: make sure these colors can be used in the new created generic components for the graphs + fix that navigation goes fast and immediately shows skeletons instead of waiting every time -> probably has to be done with the loading.tsx in each page folder

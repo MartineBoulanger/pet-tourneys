@@ -10,7 +10,7 @@ import {
   Cell,
 } from 'recharts';
 import { ChartSkeleton } from '@/components/ui';
-import { iPieGraphProps } from '@/types';
+import { iPieGraphProps } from './types';
 
 export const PieGraph = ({
   data,

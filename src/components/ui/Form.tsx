@@ -1,7 +1,23 @@
+import { HTMLProps } from 'react';
 import { cn } from '@/utils/cn';
 import { Button } from './Button';
 import { FormErrorMessage } from './FormErrorMessage';
-import { FormProps } from '@/types';
+
+export interface FormProps extends HTMLProps<HTMLFormElement> {
+  handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+  button1?: {
+    variant?: 'secondary' | 'link' | 'primary' | undefined;
+    type?: 'button' | 'submit' | 'reset' | undefined;
+    text?: string;
+  };
+  button2?: {
+    variant?: 'secondary' | 'link' | 'primary' | undefined;
+    type?: 'button' | 'submit' | 'reset' | undefined;
+    text?: string;
+  };
+  handleClick?: () => void; // if a onClick is needed, use the button2 prop, only this button has the onClick set
+  message?: string;
+}
 
 export const Form = ({
   handleSubmit,

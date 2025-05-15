@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { MatchListItemProps } from '@/types';
+import { MatchListItemProps } from './types';
 
 export const MatchListItem = ({ tournamentId, match }: MatchListItemProps) => {
   return (

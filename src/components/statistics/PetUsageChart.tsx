@@ -1,7 +1,7 @@
 'use client';
 
 import { BarGraph } from '@/components/ui';
-import { PetUsageChartProps } from '@/types';
+import { PetUsageChartProps } from './types';
 
 export const PetUsageChart = ({ pets }: PetUsageChartProps) => {
   if (!pets || pets.length === 0) {

@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation';
 import { Container, Heading, Paragraph } from '@/components/ui';
 import { PageCard } from '@/components/contentful/PageCard';
 import { getAllPages } from '@/contentful/actions/getAllPages';
-import { AllPagesFragment } from '@/types';
+import { AllPagesFragment } from '@/components/contentful/types';
 
 export async function generateMetadata() {
   return {

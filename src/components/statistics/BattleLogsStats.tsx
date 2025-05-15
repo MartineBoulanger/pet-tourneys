@@ -1,4 +1,4 @@
-import { BattleAnalysisStatsProps } from '@/types';
+import { BattleAnalysisStatsProps } from './types';
 import { abilitiesCategoryNames } from '@/utils/analyzeToolHelpers';
 
 export function BattleLogsStats({

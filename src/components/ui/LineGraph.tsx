@@ -10,8 +10,11 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from 'recharts';
-import { LineGraphProps } from '@/types';
 import { ChartSkeleton } from '@/components/ui';
+
+interface LineGraphProps {
+  data: { count: number; value: number }[] | undefined;
+}
 
 export const LineGraph = ({ data }: LineGraphProps) => {
   const [isMounted, setIsMounted] = useState(false);

@@ -1,6 +1,6 @@
 import Link from 'next/link';
-import { AdminMatchListItemProps } from '@/types';
 import { AdminTournamentMatchActions } from './AdminTournamentMatchActions';
+import { AdminMatchListItemProps } from './types';
 
 export const AdminMatchListItem = ({
   match,

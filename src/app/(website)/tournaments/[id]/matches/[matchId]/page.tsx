@@ -4,11 +4,11 @@ import {
   PageHeading,
   Heading,
   Paragraph,
-  ActionDropdownItem,
+  ActionDropdown,
 } from '@/components/ui';
 import { getMatchDetails } from '@/supabase/actions/matches';
 import { MatchPageParams } from '@/types';
-import { linksData } from '@/lib/linksData';
+import { Links } from '@/lib/types';
 
 export async function generateMetadata({
   params,
@@ -47,6 +47,25 @@ export default async function MatchPage({
     );
   }
 
+  // make links data for the dropdown menu on the page
+  const links: Links = [
+    {
+      id: 1,
+      url: `/tournaments/${id}/statistics/pet-usage?matchId=${matchId}`,
+      text: 'Pet Usage Statistics',
+    },
+    {
+      id: 2,
+      url: `/tournaments/${id}/statistics/battle-logs?matchId=${matchId}`,
+      text: 'Battle Logs Statistics',
+    },
+    {
+      id: 3,
+      url: `/tournaments/${id}`,
+      text: 'Back To Tournament',
+    },
+  ];
+
   return (
     <Container>
       <PageHeading
@@ -60,22 +79,7 @@ export default async function MatchPage({
         }
         className='lg:mb-5'
       >
-        <div className='flex flex-col gap-2.5'>
-          {linksData.match.map((link) => {
-            const url = link.full_url
-              ? link.full_url
-              : `${link.url_prefix}${id}${
-                  link.url_suffix ? link.url_suffix : ''
-                }${link.url_suffix && matchId ? matchId : ''}`;
-            return (
-              <ActionDropdownItem
-                key={link.id}
-                url={url}
-                text={link.text || ''}
-              />
-            );
-          })}
-        </div>
+        <ActionDropdown links={links} />
       </PageHeading>
       {match && <MatchScore match={match} />}
       <div className='mb-10'>

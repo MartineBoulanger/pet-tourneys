@@ -7,11 +7,11 @@ import {
   PageHeading,
   Heading,
   Paragraph,
-  ActionDropdownItem,
+  ActionDropdown,
 } from '@/components/ui';
 import { PageParams, PageSearchParams } from '@/types';
-import { MATCHES_PER_PAGE } from '@/types/constants';
-import { linksData } from '@/lib/linksData';
+import { Links } from '@/lib/types';
+import { MATCHES_PER_PAGE } from '@/utils/constants';
 
 export async function generateMetadata({ params }: { params: PageParams }) {
   const { id } = await params;
@@ -59,25 +59,29 @@ export default async function TournamentPage({
 
   if (!tournament || !matches) return notFound();
 
+  // make links data for the dropdown menu on the page
+  const links: Links = [
+    {
+      id: 1,
+      url: `/tournaments/${tournament.id}/statistics/pet-usage`,
+      text: 'Pet Usage Statistics',
+    },
+    {
+      id: 2,
+      url: `/tournaments/${tournament.id}/statistics/battle-logs`,
+      text: 'Battle Logs Statistics',
+    },
+    {
+      id: 3,
+      url: '/tournaments',
+      text: 'Back To Tournaments',
+    },
+  ];
+
   return (
     <Container>
       <PageHeading heading={tournament.name}>
-        <div className='flex flex-col gap-2.5'>
-          {linksData.tournament.map((link) => {
-            const url = link.full_url
-              ? link.full_url
-              : `${link.url_prefix}${tournament.id}${
-                  link.url_suffix ? link.url_suffix : ''
-                }`;
-            return (
-              <ActionDropdownItem
-                key={link.id}
-                url={url}
-                text={link.text || ''}
-              />
-            );
-          })}
-        </div>
+        <ActionDropdown links={links} />
       </PageHeading>
       <div className='mb-10 text-foreground'>
         <Paragraph>

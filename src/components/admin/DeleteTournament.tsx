@@ -4,8 +4,8 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { FaTrash } from 'react-icons/fa';
 import { deleteTournament } from '@/supabase/actions/tournaments';
-import { DeleteTournamentProps } from '@/types';
 import { Heading, Button, Paragraph } from '@/components/ui';
+import { DeleteTournamentProps } from './types';
 
 export const DeleteTournament = ({ id, name }: DeleteTournamentProps) => {
   const router = useRouter();

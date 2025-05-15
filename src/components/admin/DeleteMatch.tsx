@@ -4,8 +4,8 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { FaTrash } from 'react-icons/fa';
 import { deleteMatch } from '@/supabase/actions/matches';
-import { DeleteMatchProps } from '@/types';
 import { Heading, Button, Paragraph } from '@/components/ui';
+import { DeleteMatchProps } from './types';
 
 export const DeleteMatch = ({
   tournamentId,

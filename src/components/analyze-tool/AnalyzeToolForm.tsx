@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { toast } from 'sonner';
 import { parseBattleLog, parsePetUsage } from '@/utils/parsers';
-import { BattleLog, PetData } from '@/types';
+import { BattleLog, PetData } from '@/utils/types';
 import {
   Form,
   Input,

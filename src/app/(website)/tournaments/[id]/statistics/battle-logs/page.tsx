@@ -9,19 +9,19 @@ import {
   Container,
   PageHeading,
   Paragraph,
-  ActionDropdownItem,
+  ActionDropdown,
 } from '@/components/ui';
-import { linksData } from '@/lib/linksData';
 import { BattleLogsStats } from '@/components/statistics';
 import { PageParams, MatchSearchParams } from '@/types';
+import { Links } from '@/lib/types';
 
 export async function generateMetadata({ params }: { params: PageParams }) {
   const { id } = await params;
   return {
-    title: 'Battle Analysis',
+    title: 'Battle Logs Statistics',
     alternates: {
       canonical: `${process.env
-        .NEXT_PUBLIC_BASE_URL!}/tournaments/${id}/statistics/battle-analysis`,
+        .NEXT_PUBLIC_BASE_URL!}/tournaments/${id}/statistics/battle-logs`,
     },
   };
 }
@@ -56,27 +56,29 @@ export default async function BattleLogsStatisticsPage({
     entityName = tournament.data.tournament.name;
   }
 
+  // make links data for the dropdown menu on the page
+  const links: Links = [
+    {
+      id: 1,
+      url: `/tournaments/${id}/statistics/pet-usage${
+        isMatchView ? `?matchId=${matchId}` : ''
+      }`,
+      text: 'Pet Usage Statistics',
+    },
+    {
+      id: 2,
+      url: isMatchView
+        ? `/tournaments/${id}/matches/${matchId}`
+        : `/tournaments/${id}`,
+      text: isMatchView ? 'Back to match' : 'Back to tournament',
+    },
+  ];
+
   return (
     <Container>
       <div className='mb-6'>
         <PageHeading heading={title}>
-          <div className='flex flex-col gap-2.5'>
-            {linksData.statistics.map((link) => {
-              const url = link.full_url
-                ? link.full_url
-                : isMatchView
-                ? `${link.url_prefix}${id}${link.url_suffix}${matchId}`
-                : `${link.url_prefix}${id}`;
-              const linkText = link.text
-                ? link.text
-                : isMatchView
-                ? 'Back to match'
-                : 'Back to tournament';
-              return (
-                <ActionDropdownItem key={link.id} url={url} text={linkText} />
-              );
-            })}
-          </div>
+          <ActionDropdown links={links} />
         </PageHeading>
         {entityName && (
           <Paragraph className='text-light-blue'>{entityName}</Paragraph>

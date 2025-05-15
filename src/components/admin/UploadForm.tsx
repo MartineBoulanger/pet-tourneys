@@ -13,7 +13,7 @@ import {
   Select,
   Option,
 } from '@/components/ui';
-import { UploadFormProps } from '@/types';
+import { UploadFormProps } from './types';
 
 export function UploadForm({
   tournaments,

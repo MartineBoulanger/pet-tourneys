@@ -1,5 +1,13 @@
+import { ButtonHTMLAttributes, DetailedHTMLProps } from 'react';
 import { cn } from '@/utils/cn';
-import { ButtonProps } from '@/types';
+
+interface ButtonProps
+  extends DetailedHTMLProps<
+    ButtonHTMLAttributes<HTMLButtonElement>,
+    HTMLButtonElement
+  > {
+  variant?: 'primary' | 'secondary' | 'link';
+}
 
 export const Button = ({
   variant = 'primary',

@@ -1,4 +1,4 @@
-import { BattleLog, BattleRound } from '@/types';
+import { BattleLog, BattleRound } from '../types';
 
 export function parseBattleLog(rawLog: string) {
   const battles = rawLog.split(

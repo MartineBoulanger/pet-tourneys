@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { FiExternalLink } from 'react-icons/fi';
 import { FaRegCopyright } from 'react-icons/fa';
-import { footerData } from '@/lib/footerData';
+import { footerData } from '@/lib/navigationData';
 
 export const Footer = async () => {
   return (

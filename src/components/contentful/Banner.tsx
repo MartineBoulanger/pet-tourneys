@@ -1,7 +1,7 @@
 import RichText from './RichText';
 import Asset from './Asset';
 import Cta from './Cta';
-import { BannerProps } from '@/types';
+import { BannerProps } from './types';
 import { cn } from '@/utils/cn';
 
 const Banner = ({ component, isPage = false, className }: BannerProps) => {

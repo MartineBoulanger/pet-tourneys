@@ -1,4 +1,4 @@
-import { BreedStats, StatDistribution, TournamentPetStat } from '@/types';
+import { BreedStats, StatDistribution, TournamentPetStat } from '../types';
 
 export function parseAndAggregateStats(
   pets: TournamentPetStat[]

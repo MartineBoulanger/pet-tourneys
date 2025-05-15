@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { PetListProps } from '@/types';
-import { PETS_PER_PAGE } from '@/types/constants';
+import { PetListProps } from './types';
+import { PETS_PER_PAGE } from '@/utils/constants';
 import { Heading, Button, Paragraph } from '@/components/ui';
 
 export function PetList({ stats, matchView = false }: PetListProps) {

@@ -1,9 +1,13 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, ReactNode } from 'react';
 import { PieChart, Pie, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { ChartSkeleton } from '@/components/ui';
-import { PieGraphProps } from '@/types';
+
+interface PieGraphProps {
+  data: { name: string; value: number }[] | undefined;
+  children: ReactNode;
+}
 
 export const PieGraph = ({ data, children }: PieGraphProps) => {
   const [isMounted, setIsMounted] = useState(false);

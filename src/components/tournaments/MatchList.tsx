@@ -1,5 +1,5 @@
 import { MatchListItem } from './MatchListItem';
-import { MatchListProps } from '@/types';
+import { MatchListProps } from './types';
 import { Pagination, Heading } from '@/components/ui';
 
 export const MatchList = ({

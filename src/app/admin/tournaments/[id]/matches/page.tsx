@@ -6,7 +6,7 @@ import { getPaginatedMatches } from '@/supabase/actions/matches';
 import { Container, Pagination, Heading, Paragraph } from '@/components/ui';
 import { AdminPanelButtons, AdminMatchListItem } from '@/components/admin';
 import { PageParams, PageSearchParams } from '@/types';
-import { MATCHES_PER_PAGE } from '@/types/constants';
+import { MATCHES_PER_PAGE } from '@/utils/constants';
 
 export const metadata: Metadata = {
   title: 'Admin Matches List',

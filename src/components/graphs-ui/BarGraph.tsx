@@ -10,7 +10,7 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 import { ChartSkeleton } from '@/components/ui';
-import { BarGraphProps } from '@/types';
+import { BarGraphProps } from './types';
 
 export const BarGraph = ({
   data,

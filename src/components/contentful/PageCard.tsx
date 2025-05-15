@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { Heading } from '@/components/ui';
-import { PageCardProps } from '@/types';
+import { PageCardProps } from './types';
 
 export const PageCard = ({ page }: PageCardProps) => {
   return (

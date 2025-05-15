@@ -1,7 +1,8 @@
 'use client';
 
 import { PDFDownloadLink } from '@react-pdf/renderer';
-import { DownloadPDFProps, AbilityCategories } from '@/types';
+import { DownloadPDFProps } from './types';
+import { AbilityCategories } from '@/utils/types';
 import { Heading, Paragraph } from '@/components/ui';
 import {
   calculateAverageDuration,

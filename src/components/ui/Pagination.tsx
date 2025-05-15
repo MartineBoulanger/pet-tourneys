@@ -1,6 +1,13 @@
 import Link from 'next/link';
 import { FaChevronRight, FaChevronLeft } from 'react-icons/fa6';
-import { PaginationProps } from '@/types';
+
+interface PaginationProps {
+  currentPage: number;
+  totalPages: number;
+  baseUrl: string;
+  queryParam?: string;
+  className?: string;
+}
 
 export const Pagination = ({
   currentPage,

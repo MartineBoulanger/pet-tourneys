@@ -1,7 +1,8 @@
 'use client';
 
 import { Document, Page, Text, View, Image } from '@react-pdf/renderer';
-import { AbilityCategories, DownloadPDFProps } from '@/types';
+import { DownloadPDFProps } from './types';
+import { AbilityCategories } from '@/utils/types';
 import {
   calculateAverageDuration,
   getMostUsedPets,

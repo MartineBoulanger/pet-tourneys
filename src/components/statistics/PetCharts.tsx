@@ -1,4 +1,4 @@
-import { PetChartsProps } from '@/types';
+import { PetChartsProps } from './types';
 import { PetBreedChart } from './PetBreedChart';
 import { PetStatsChart } from './PetStatsChart';
 import { PetTypeChart } from './PetTypeChart';

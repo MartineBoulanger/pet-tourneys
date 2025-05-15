@@ -1,9 +1,13 @@
 'use client';
 
 import { useState } from 'react';
-import { BattleLogViewerProps, BattleRound } from '@/types';
-import { ROUNDS_PER_PAGE } from '@/types/constants';
+import { ROUNDS_PER_PAGE } from '@/utils/constants';
 import { Heading, Button } from '@/components/ui';
+import { BattleLog, BattleRound } from '@/utils/types';
+
+interface BattleLogViewerProps {
+  battleLog: BattleLog;
+}
 
 export function BattleLogViewer({ battleLog }: BattleLogViewerProps) {
   const battleRounds = battleLog.battle as unknown as BattleRound[];

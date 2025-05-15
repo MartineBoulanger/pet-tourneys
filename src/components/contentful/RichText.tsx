@@ -4,7 +4,7 @@ import {
 } from '@contentful/rich-text-react-renderer';
 import { BLOCKS, INLINES, MARKS } from '@contentful/rich-text-types';
 import Link from 'next/link';
-import { RichTextProps } from '@/types';
+import { RichTextProps } from './types';
 import { cn } from '@/utils/cn';
 import { Heading } from '@/components/ui';
 

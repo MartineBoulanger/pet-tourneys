@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { TournamentsListProps } from '@/types';
+import { TournamentsListProps } from './types';
 
 export const TournamentsList = ({ tournaments }: TournamentsListProps) => {
   return (

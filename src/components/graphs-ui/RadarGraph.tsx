@@ -12,7 +12,7 @@ import {
   Tooltip,
 } from 'recharts';
 import { ChartSkeleton } from '@/components/ui';
-import { iRadarGraphProps } from '@/types';
+import { iRadarGraphProps } from './types';
 
 export const RadarGraph = ({
   data,

@@ -10,7 +10,20 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 import { ChartSkeleton } from '@/components/ui';
-import { BarGraphProps } from '@/types';
+
+interface BarGraphProps {
+  data:
+    | {
+        name: string;
+        type?: string;
+        stats?: string[];
+        breeds?: string[];
+      }[]
+    | undefined;
+  defaultColor?: string;
+  tooltipTextColor?: string;
+  tooltipHoverColor?: string;
+}
 
 export const BarGraph = ({
   data,

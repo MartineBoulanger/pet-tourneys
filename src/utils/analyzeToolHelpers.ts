@@ -3,7 +3,7 @@ import {
   AbilityCategories,
   BattleStatistics,
   ActivePets,
-} from '@/types';
+} from './types';
 import { allAbilities, EXCLUDED_ABILITIES } from '@/lib/logs-data';
 
 // Helper functions for analysis

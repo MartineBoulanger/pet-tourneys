@@ -11,23 +11,19 @@ import {
   PageHeading,
   Heading,
   Paragraph,
-  ActionDropdownItem,
+  ActionDropdown,
 } from '@/components/ui';
-import {
-  ChartDataItem,
-  ChartData,
-  PageParams,
-  MatchSearchParams,
-} from '@/types';
-import { linksData } from '@/lib/linksData';
+import { PageParams, MatchSearchParams } from '@/types';
+import { ChartDataItem, ChartData } from '@/components/statistics/types';
+import { Links } from '@/lib/types';
 
 export async function generateMetadata({ params }: { params: PageParams }) {
   const { id } = await params;
   return {
-    title: 'Tourney Stats',
+    title: 'Pet Usage Statistics',
     alternates: {
       canonical: `${process.env
-        .NEXT_PUBLIC_BASE_URL!}/tournaments/${id}/statistics`,
+        .NEXT_PUBLIC_BASE_URL!}/tournaments/${id}/statistics/pet-usage`,
     },
   };
 }
@@ -122,27 +118,29 @@ export default async function PetUsageStatisticsPage({
 
   if (!stats) return notFound();
 
+  // make links data for the dropdown menu on the page
+  const links: Links = [
+    {
+      id: 1,
+      url: `/tournaments/${id}/statistics/battle-logs${
+        isMatchView ? `?matchId=${matchId}` : ''
+      }`,
+      text: 'Battle Logs Statistics',
+    },
+    {
+      id: 2,
+      url: isMatchView
+        ? `/tournaments/${id}/matches/${matchId}`
+        : `/tournaments/${id}`,
+      text: isMatchView ? 'Back to match' : 'Back to tournament',
+    },
+  ];
+
   return (
     <Container>
       <div className='mb-6'>
         <PageHeading heading={title}>
-          <div className='flex flex-col gap-2.5'>
-            {linksData.statistics.map((link) => {
-              const url = link.full_url
-                ? link.full_url
-                : isMatchView
-                ? `${link.url_prefix}${id}${link.url_suffix}${matchId}`
-                : `${link.url_prefix}${id}`;
-              const linkText = link.text
-                ? link.text
-                : isMatchView
-                ? 'Back to match'
-                : 'Back to tournament';
-              return (
-                <ActionDropdownItem key={link.id} url={url} text={linkText} />
-              );
-            })}
-          </div>
+          <ActionDropdown links={links} />
         </PageHeading>
         {entityName && (
           <Paragraph className='text-light-blue'>{entityName}</Paragraph>

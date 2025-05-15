@@ -1,11 +1,12 @@
 import { notFound } from 'next/navigation';
 import { TbSquareChevronsDown } from 'react-icons/tb';
 import { getPage } from '@/contentful/actions/getPage';
-import { Container, PageHeading, ActionDropdownItem } from '@/components/ui';
+import { Container, PageHeading, ActionDropdown } from '@/components/ui';
 import RichText from '@/components/contentful/RichText';
 import PageContent from '@/components/contentful/PageContent';
 import Banner from '@/components/contentful/Banner';
-import { ContentTypeCta, ContentTypePage } from '@/types';
+import { ContentTypePage } from '@/components/contentful/types';
+import { Links } from '@/lib/types';
 
 export async function generateMetadata({
   params,
@@ -48,6 +49,16 @@ export default async function ArticlePage({
 
   if (!page) notFound();
 
+  // make links data for the dropdown menu on the page
+  const links: Links =
+    page.ctAsCollection && page.ctAsCollection.items.length > 0
+      ? page.ctAsCollection.items.map((link, index) => ({
+          id: index,
+          url: link?.ctaUrl || '',
+          text: link?.ctaText || '',
+        }))
+      : [];
+
   return (
     <div className='flex flex-col'>
       {page.banner ? (
@@ -63,19 +74,7 @@ export default async function ArticlePage({
           <div className='p-5 rounded-lg bg-background mb-5'>
             {page.pageTitle ? (
               <PageHeading heading={page.pageTitle} className='md:items-start'>
-                {page.ctAsCollection && page.ctAsCollection.items.length > 0 ? (
-                  <div className='flex flex-col gap-2.5'>
-                    {page.ctAsCollection.items.map(
-                      (link: ContentTypeCta | null, index: number) => (
-                        <ActionDropdownItem
-                          key={index}
-                          url={link?.ctaUrl || ''}
-                          text={link?.ctaText || ''}
-                        />
-                      )
-                    )}
-                  </div>
-                ) : null}
+                <ActionDropdown links={links} />
               </PageHeading>
             ) : null}
             {page.pageDescription ? (

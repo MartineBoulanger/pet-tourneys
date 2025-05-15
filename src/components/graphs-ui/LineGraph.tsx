@@ -11,7 +11,7 @@ import {
   ResponsiveContainer,
   Legend,
 } from 'recharts';
-import { iLineGraphProps } from '@/types';
+import { iLineGraphProps } from './types';
 import { ChartSkeleton } from '@/components/ui';
 
 export const LineGraph = ({

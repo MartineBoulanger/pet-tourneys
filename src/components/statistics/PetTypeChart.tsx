@@ -2,8 +2,8 @@
 
 import { Cell } from 'recharts';
 import { PieGraph } from '@/components/ui/PieGraph';
-import { PetTypeChartProps } from '@/types';
-import { petTypeColors } from '@/types/constants';
+import { PetTypeChartProps } from './types';
+import { petTypeColors } from '@/utils/constants';
 
 export const PetTypeChart = ({ types }: PetTypeChartProps) => {
   if (!types || types.length === 0) {
