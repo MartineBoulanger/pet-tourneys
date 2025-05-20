@@ -31,7 +31,11 @@
   h1 {
     font-size: 30px;
     margin-bottom: 20px;
-    background: linear-gradient(to bottom, var(--color-blue), var(--color-red));
+     background: linear-gradient(
+      to right,
+      var(--color-magic),
+      var(--color-humanoid)
+    );
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;

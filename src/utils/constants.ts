@@ -15,6 +15,34 @@ export const breedColors = {
   'H/P': '#BA68C8',
   'H/B': '#FFD54F',
 };
+
+// Color palette for general usage
+export const COLORS = [
+  '#11a7f6',
+  '#81C784',
+  '#FFBB28',
+  '#FF8042',
+  '#d52824',
+  '#F06292',
+  '#a56dfd',
+];
+
+// color palette for the battle results
+export const resultsColors = {
+  WINS: '#016630',
+  LOSSES: '#9f0712',
+  DRAWS: '#894b00',
+};
+
+// color palette for the match regions
+export const regionsColors = {
+  EU: '#11a7f6',
+  NA: '#d52824',
+  OCE: '#2d9318',
+  CN: '#FFBB28',
+  Other: '#99988f',
+};
+
 // Define color palette for types (extend as needed)
 export const petTypeColors = {
   Beast: '#d52824',

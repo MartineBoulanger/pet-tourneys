@@ -1,5 +1,10 @@
-import { notFound } from 'next/navigation';
-import { PetList, PetCharts } from '@/components/statistics';
+import { notFound, redirect } from 'next/navigation';
+import {
+  PetList,
+  PetCharts,
+  OverviewCard,
+  BattleCharts,
+} from '@/components/statistics';
 import {
   getMatchPetUsage,
   getTournamentPetStats,
@@ -16,6 +21,10 @@ import {
 import { PageParams, MatchSearchParams } from '@/types';
 import { ChartDataItem, ChartData } from '@/components/statistics/types';
 import { Links } from '@/lib/types';
+import {
+  getMatchBattleStats,
+  getTournamentBattleStats,
+} from '@/supabase/actions/battle-logs-statistics';
 
 export async function generateMetadata({ params }: { params: PageParams }) {
   const { id } = await params;
@@ -40,7 +49,8 @@ export default async function PetUsageStatisticsPage({
   const isMatchView = !!matchId;
 
   let stats;
-  let title = 'Tournament Pet Usage Statistics';
+  let battleStats;
+  let title = 'Tournament Statistics';
   let entityName = '';
   let chartData: ChartData = {
     petUsageData: [],
@@ -53,7 +63,8 @@ export default async function PetUsageStatisticsPage({
     if (!match) return notFound();
 
     stats = await getMatchPetUsage(id, matchId);
-    title = 'Match Pet Usage Statistics';
+    battleStats = await getMatchBattleStats(id, matchId);
+    title = 'Match Statistics';
     entityName = `${match.player1} vs ${match.player2}`;
   } else {
     const {
@@ -75,6 +86,7 @@ export default async function PetUsageStatisticsPage({
     if (!tournament) return notFound();
 
     stats = await getTournamentPetStats(id);
+    battleStats = await getTournamentBattleStats(id);
     entityName = tournament.name;
     chartData = {
       petUsageData: stats.slice(0, 10).map((pet) => ({
@@ -143,10 +155,45 @@ export default async function PetUsageStatisticsPage({
           <ActionDropdown links={links} />
         </PageHeading>
         {entityName && (
-          <Paragraph className='text-light-blue'>{entityName}</Paragraph>
+          <Paragraph className='text-foreground'>{entityName}</Paragraph>
         )}
       </div>
-      {!isMatchView && <PetCharts chartData={chartData} stats={stats} />}
+      {!isMatchView ? (
+        <div className='flex flex-wrap flex-col md:flex-row gap-5 mb-6 lg:mb-10'>
+          {battleStats.generalStats &&
+            battleStats.generalStats?.totalMatches && (
+              <OverviewCard
+                title='Total Matches'
+                value={battleStats.generalStats?.totalMatches || 0}
+              />
+            )}
+          <OverviewCard
+            title='Total Battles'
+            value={battleStats.generalStats?.totalBattles}
+          />
+          <OverviewCard
+            title='Average Battle Duration'
+            value={battleStats.generalStats?.averageDuration}
+          />
+        </div>
+      ) : (
+        <div className='flex gap-5 mb-6 lg:mb-10'>
+          <OverviewCard
+            title='Total Battles'
+            value={battleStats.generalStats?.totalBattles}
+          />
+          <OverviewCard
+            title='Average Battle Duration'
+            value={battleStats.generalStats?.averageDuration}
+          />
+        </div>
+      )}
+      {!isMatchView && (
+        <>
+          <BattleCharts matchesStats={battleStats.generalStats} />
+          <PetCharts chartData={chartData} stats={stats} />
+        </>
+      )}
       {stats && <PetList stats={stats} matchView={isMatchView} />}
     </Container>
   );

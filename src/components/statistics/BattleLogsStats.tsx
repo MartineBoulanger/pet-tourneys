@@ -5,27 +5,27 @@ export function BattleLogsStats({
   stats,
   isMatchView,
 }: BattleAnalysisStatsProps) {
-  const totalEUMatches =
-    stats &&
-    stats.generalStats.totalMatches &&
-    stats.generalStats.matchesByRegion &&
-    (stats.generalStats.matchesByRegion.EU / stats.generalStats.totalMatches) *
-      100;
+  // const totalEUMatches =
+  //   stats &&
+  //   stats.generalStats.totalMatches &&
+  //   stats.generalStats.matchesByRegion &&
+  //   (stats.generalStats.matchesByRegion.EU / stats.generalStats.totalMatches) *
+  //     100;
 
-  const totalNAMatches =
-    stats &&
-    stats.generalStats.totalMatches &&
-    stats.generalStats.matchesByRegion &&
-    (stats.generalStats.matchesByRegion.NA / stats.generalStats.totalMatches) *
-      100;
+  // const totalNAMatches =
+  //   stats &&
+  //   stats.generalStats.totalMatches &&
+  //   stats.generalStats.matchesByRegion &&
+  //   (stats.generalStats.matchesByRegion.NA / stats.generalStats.totalMatches) *
+  //     100;
 
-  const totalOtherMatches =
-    stats &&
-    stats.generalStats.totalMatches &&
-    stats.generalStats.matchesByRegion &&
-    (stats.generalStats.matchesByRegion.other /
-      stats.generalStats.totalMatches) *
-      100;
+  // const totalOtherMatches =
+  //   stats &&
+  //   stats.generalStats.totalMatches &&
+  //   stats.generalStats.matchesByRegion &&
+  //   (stats.generalStats.matchesByRegion.other /
+  //     stats.generalStats.totalMatches) *
+  //     100;
 
   return (
     <div className='space-y-8'>
@@ -35,7 +35,7 @@ export function BattleLogsStats({
           {'General Battle Statistics'}
         </h2>
         <div className='grid grid-cols-1 md:grid-cols-4 gap-4'>
-          {!isMatchView && (
+          {/* {!isMatchView && (
             <>
               <StatCard
                 title='Total Matches'
@@ -60,7 +60,7 @@ export function BattleLogsStats({
                 }
               />
             </>
-          )}
+          )} */}
           <StatCard
             title='Average Duration'
             value={stats.generalStats.averageDuration}
@@ -76,7 +76,7 @@ export function BattleLogsStats({
             <h3 className='text-lg font-semibold mb-2'>
               {'Regional Distribution'}
             </h3>
-            <div className='flex items-center h-8 bg-gray-200 rounded-full overflow-hidden'>
+            {/* <div className='flex items-center h-8 bg-gray-200 rounded-full overflow-hidden'>
               <div
                 className='h-full bg-blue-600'
                 style={{
@@ -98,7 +98,7 @@ export function BattleLogsStats({
                 }}
                 title={`Other: ${stats.generalStats?.matchesByRegion?.other} matches`}
               ></div>
-            </div>
+            </div> */}
             <div className='flex justify-between mt-2 text-sm'>
               <span>{'EU'}</span>
               <span>{'NA'}</span>

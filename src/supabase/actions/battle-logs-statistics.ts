@@ -16,11 +16,14 @@ export async function getTournamentBattleStats(tournamentId: string): Promise<{
     totalBattles: number;
     totalMatches: number;
     matchesByRegion: {
-      EU: number;
-      NA: number;
-      other: number;
-    };
-  };
+      region: string;
+      value: number;
+    }[];
+    battleResults: {
+      result: string;
+      value: number;
+    }[];
+  }; // TODO: make graphs for these petStats and battleStats, abilityStats should be like the totalMatches,
   petStats: Array<{
     name: string;
     count: number;
@@ -42,11 +45,30 @@ export async function getTournamentBattleStats(tournamentId: string): Promise<{
 
   if (matchesError) throw matchesError;
 
-  const matchesByRegion = {
-    EU: matches?.filter((m) => m.region === 'EU').length || 0,
-    NA: matches?.filter((m) => m.region === 'NA').length || 0,
-    other: matches?.filter((m) => !['EU', 'NA'].includes(m.region)).length || 0,
-  };
+  const matchesByRegion = [
+    {
+      region: 'EU',
+      value: matches?.filter((m) => m.region === 'EU').length || 0,
+    },
+    {
+      region: 'NA',
+      value: matches?.filter((m) => m.region === 'NA').length || 0,
+    },
+    {
+      region: 'OCE',
+      value: matches?.filter((m) => m.region === 'OCE').length || 0,
+    },
+    {
+      region: 'CN',
+      value: matches?.filter((m) => m.region === 'CN').length || 0,
+    },
+    {
+      region: 'Other',
+      value:
+        matches?.filter((m) => !['EU', 'NA', 'OCE', 'CN'].includes(m.region))
+          .length || 0,
+    },
+  ];
 
   const { data: battleLogs, error } = await supabase
     .schema('api')
@@ -60,11 +82,8 @@ export async function getTournamentBattleStats(tournamentId: string): Promise<{
         averageDuration: 'N/A',
         totalBattles: 0,
         totalMatches: 0,
-        matchesByRegion: {
-          EU: 0,
-          NA: 0,
-          other: 0,
-        },
+        matchesByRegion: [],
+        battleResults: [],
       },
       petStats: [],
       abilityStats: {} as ReturnType<typeof analyzeUsedAbilities>,
@@ -80,19 +99,35 @@ export async function getTournamentBattleStats(tournamentId: string): Promise<{
     };
   }
 
+  const battleResults = [
+    {
+      result: 'WINS',
+      value: battleLogs.filter((b) => b.result === 'WIN').length || 0,
+    },
+    {
+      result: 'LOSSES',
+      value: battleLogs.filter((b) => b.result === 'LOSS').length || 0,
+    },
+    {
+      result: 'DRAWS',
+      value: battleLogs.filter((b) => b.result === 'DRAW').length || 0,
+    },
+  ];
+
   return {
     generalStats: {
       averageDuration: calculateAverageDuration(battleLogs),
       totalBattles: battleLogs.length,
       totalMatches: matches?.length,
       matchesByRegion,
+      battleResults,
     },
     petStats: getMostUsedPets(battleLogs),
     abilityStats: analyzeUsedAbilities(battleLogs),
     battleStats: parseBattleStatistics(battleLogs),
   };
 }
-
+// TODO: for later to set the battle result per match as well
 export async function getMatchBattleStats(
   tournamentId: string,
   matchId: string
@@ -100,6 +135,15 @@ export async function getMatchBattleStats(
   generalStats: {
     averageDuration: string;
     totalBattles: number;
+    totalMatches?: number;
+    matchesByRegion?: {
+      region: string;
+      value: number;
+    }[];
+    battleResults?: {
+      result: string;
+      value: number;
+    }[];
   };
   petStats: ReturnType<typeof getMostUsedPets>;
   abilityStats: ReturnType<typeof analyzeUsedAbilities>;
@@ -120,6 +164,9 @@ export async function getMatchBattleStats(
       generalStats: {
         averageDuration: 'N/A',
         totalBattles: 0,
+        totalMatches: 0,
+        matchesByRegion: [],
+        battleResults: [],
       },
       petStats: [],
       abilityStats: {} as ReturnType<typeof analyzeUsedAbilities>,
@@ -135,10 +182,28 @@ export async function getMatchBattleStats(
     };
   }
 
+  const battleResults = [
+    {
+      result: 'WINS',
+      value: battleLogs.filter((b) => b.result === 'WIN').length || 0,
+    },
+    {
+      result: 'LOSSES',
+      value: battleLogs.filter((b) => b.result === 'LOSS').length || 0,
+    },
+    {
+      result: 'DRAWS',
+      value: battleLogs.filter((b) => b.result === 'DRAW').length || 0,
+    },
+  ];
+
   return {
     generalStats: {
       averageDuration: calculateAverageDuration(battleLogs),
       totalBattles: battleLogs.length,
+      totalMatches: 0,
+      matchesByRegion: [],
+      battleResults,
     },
     petStats: getMostUsedPets(battleLogs),
     abilityStats: analyzeUsedAbilities(battleLogs),

@@ -18,7 +18,7 @@ export function PetList({ stats, matchView = false }: PetListProps) {
 
   return (
     <div className='bg-light-grey shadow-md rounded-lg p-4'>
-      <Heading as='h2' className='text-xl mb-4'>
+      <Heading as='h2' className='mb-2.5 text-lg font-sans'>
         {matchView ? 'Match Pet Usage' : 'Tournament Pet Usage'}
       </Heading>
       <div className='overflow-x-auto'>

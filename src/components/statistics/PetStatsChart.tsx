@@ -1,6 +1,7 @@
 'use client';
 
-import { LineGraph, Heading } from '@/components/ui';
+import { Heading } from '@/components/ui';
+import { PetUsageScatterChart } from '@/components/graphs';
 import { PetStatsChartProps } from './types';
 import { parseAndAggregateStats, convertToGraphData } from '@/utils/parsers';
 
@@ -11,24 +12,24 @@ export function PetStatsChart({ pets }: PetStatsChartProps) {
   const speedData = convertToGraphData(stats.speed);
 
   return (
-    <div className='flex flex-col gap-6 lg:gap-10'>
-      <div className='bg-light-grey p-4 rounded-lg shadow-md'>
-        <Heading as='h2' className='mb-2.5 sm:mb-5 text-lg sm:text-xl'>
-          {'Pet Health Distribution'}
+    <div className='bg-light-grey rounded-lg shadow-md grid grid-cols-1 md:grid-cols-3 mb-6 lg:mb-10'>
+      <div className='p-2.5 sm:p-4 sm:pr-2.5'>
+        <Heading as='h2' className='mb-2.5 text-lg font-sans'>
+          {'Health'}
         </Heading>
-        <LineGraph data={healthData} />
+        <PetUsageScatterChart data={healthData} stat=' H' />
       </div>
-      <div className='bg-light-grey p-4 rounded-lg shadow-md'>
-        <Heading as='h2' className='mb-2.5 sm:mb-5 text-lg sm:text-xl'>
-          {'Pet Power Distribution'}
+      <div className='p-2.5 sm:p-4 sm:pr-2.5'>
+        <Heading as='h2' className='mb-2.5 text-lg font-sans'>
+          {'Power'}
         </Heading>
-        <LineGraph data={powerData} />
+        <PetUsageScatterChart data={powerData} stat=' P' />
       </div>
-      <div className='bg-light-grey p-4 rounded-lg shadow-md'>
-        <Heading as='h2' className='mb-2.5 sm:mb-5 text-lg sm:text-xl'>
-          {'Pet Speed Distribution'}
+      <div className='p-2.5 sm:p-4 sm:pr-2.5'>
+        <Heading as='h2' className='mb-2.5 text-lg font-sans'>
+          {'Speed'}
         </Heading>
-        <LineGraph data={speedData} />
+        <PetUsageScatterChart data={speedData} stat=' S' />
       </div>
     </div>
   );

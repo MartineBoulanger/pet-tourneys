@@ -29,10 +29,13 @@ export interface BattleAnalysisStatsProps {
       totalBattles: number;
       totalMatches?: number;
       matchesByRegion?: {
-        EU: number;
-        NA: number;
-        other: number;
-      };
+        region: string;
+        value: number;
+      }[];
+      battleResults?: {
+        result: string;
+        value: number;
+      }[];
     };
     petStats: Array<{
       name: string;
@@ -80,4 +83,22 @@ export interface PetTypeChartProps {
 
 export interface PetUsageChartProps {
   pets: PetUsageChartData[] | undefined;
+}
+
+export interface BattleChartsProps {
+  matchesStats?: {
+    averageDuration?: string;
+    totalBattles?: number;
+    totalMatches?: number;
+    matchesByRegion?: {
+      region: string;
+      value: number;
+    }[];
+    battleResults?: {
+      result: string;
+      value: number;
+    }[];
+  };
+  abilityStats?: AbilityAnalysisResult;
+  battleStats?: BattleStatistics;
 }
