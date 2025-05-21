@@ -1,10 +1,11 @@
-import { notFound, redirect } from 'next/navigation';
+import { notFound } from 'next/navigation';
+import { OverviewCard } from '@/components/statistics';
 import {
-  PetList,
   PetCharts,
-  OverviewCard,
   BattleCharts,
-} from '@/components/statistics';
+  PetPerformanceCharts,
+  PetSwapsCharts,
+} from '@/components/statistics/charts';
 import {
   getMatchPetUsage,
   getTournamentPetStats,
@@ -134,13 +135,6 @@ export default async function PetUsageStatisticsPage({
   const links: Links = [
     {
       id: 1,
-      url: `/tournaments/${id}/statistics/battle-logs${
-        isMatchView ? `?matchId=${matchId}` : ''
-      }`,
-      text: 'Battle Logs Statistics',
-    },
-    {
-      id: 2,
       url: isMatchView
         ? `/tournaments/${id}/matches/${matchId}`
         : `/tournaments/${id}`,
@@ -158,25 +152,7 @@ export default async function PetUsageStatisticsPage({
           <Paragraph className='text-foreground'>{entityName}</Paragraph>
         )}
       </div>
-      {!isMatchView ? (
-        <div className='flex flex-wrap flex-col md:flex-row gap-5 mb-6 lg:mb-10'>
-          {battleStats.generalStats &&
-            battleStats.generalStats?.totalMatches && (
-              <OverviewCard
-                title='Total Matches'
-                value={battleStats.generalStats?.totalMatches || 0}
-              />
-            )}
-          <OverviewCard
-            title='Total Battles'
-            value={battleStats.generalStats?.totalBattles}
-          />
-          <OverviewCard
-            title='Average Battle Duration'
-            value={battleStats.generalStats?.averageDuration}
-          />
-        </div>
-      ) : (
+      {isMatchView ? (
         <div className='flex gap-5 mb-6 lg:mb-10'>
           <OverviewCard
             title='Total Battles'
@@ -187,14 +163,16 @@ export default async function PetUsageStatisticsPage({
             value={battleStats.generalStats?.averageDuration}
           />
         </div>
-      )}
+      ) : null}
       {!isMatchView && (
         <>
           <BattleCharts matchesStats={battleStats.generalStats} />
           <PetCharts chartData={chartData} stats={stats} />
+          <PetPerformanceCharts battleStats={battleStats.battleStats} />
+          <PetSwapsCharts battleStats={battleStats.battleStats} />
         </>
       )}
-      {stats && <PetList stats={stats} matchView={isMatchView} />}
+      {/* {stats && <PetList stats={stats} matchView={isMatchView} />} */}
     </Container>
   );
 }

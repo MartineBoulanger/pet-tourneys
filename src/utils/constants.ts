@@ -34,6 +34,11 @@ export const resultsColors = {
   DRAWS: '#894b00',
 };
 
+export const swapsColors = {
+  player: '#2563eb',
+  opponent: '#dc2626',
+};
+
 // color palette for the match regions
 export const regionsColors = {
   EU: '#11a7f6',
@@ -57,4 +62,23 @@ export const petTypeColors = {
   Critter: '#775845',
 };
 
+// color palette for the weather changes
+export const weatherColors: Record<string, string> = {
+  'Scorched Earth': '#d52824',
+  'Cleansing Rain': '#45B7D1',
+  Sandstorm: '#FFD54F',
+  'Arcane Winds': '#BA68C8',
+  Blizzard: '#64B5F6',
+  'Lightning Storm': '#11a7f6',
+  Darkness: '#a56dfd',
+  Moonlight: '#98D8C8',
+  'Sunny Day': '#dfcf5b',
+  Mudslide: '#775845',
+  'Toxic Gas': '#2d9318',
+};
+
+export const petPerformanceLegendValues = {
+  value1: 'Kills',
+  value2: 'Deaths',
+};
 // TODO: make sure these colors can be used in the new created generic components for the graphs + fix that navigation goes fast and immediately shows skeletons instead of waiting every time -> probably has to be done with the loading.tsx in each page folder

@@ -16,11 +16,11 @@ export async function getTournamentBattleStats(tournamentId: string): Promise<{
     totalBattles: number;
     totalMatches: number;
     matchesByRegion: {
-      region: string;
+      name: string;
       value: number;
     }[];
     battleResults: {
-      result: string;
+      name: string;
       value: number;
     }[];
   }; // TODO: make graphs for these petStats and battleStats, abilityStats should be like the totalMatches,
@@ -47,23 +47,23 @@ export async function getTournamentBattleStats(tournamentId: string): Promise<{
 
   const matchesByRegion = [
     {
-      region: 'EU',
+      name: 'EU',
       value: matches?.filter((m) => m.region === 'EU').length || 0,
     },
     {
-      region: 'NA',
+      name: 'NA',
       value: matches?.filter((m) => m.region === 'NA').length || 0,
     },
     {
-      region: 'OCE',
+      name: 'OCE',
       value: matches?.filter((m) => m.region === 'OCE').length || 0,
     },
     {
-      region: 'CN',
+      name: 'CN',
       value: matches?.filter((m) => m.region === 'CN').length || 0,
     },
     {
-      region: 'Other',
+      name: 'Other',
       value:
         matches?.filter((m) => !['EU', 'NA', 'OCE', 'CN'].includes(m.region))
           .length || 0,
@@ -101,15 +101,15 @@ export async function getTournamentBattleStats(tournamentId: string): Promise<{
 
   const battleResults = [
     {
-      result: 'WINS',
+      name: 'WINS',
       value: battleLogs.filter((b) => b.result === 'WIN').length || 0,
     },
     {
-      result: 'LOSSES',
+      name: 'LOSSES',
       value: battleLogs.filter((b) => b.result === 'LOSS').length || 0,
     },
     {
-      result: 'DRAWS',
+      name: 'DRAWS',
       value: battleLogs.filter((b) => b.result === 'DRAW').length || 0,
     },
   ];
@@ -137,11 +137,11 @@ export async function getMatchBattleStats(
     totalBattles: number;
     totalMatches?: number;
     matchesByRegion?: {
-      region: string;
+      name: string;
       value: number;
     }[];
     battleResults?: {
-      result: string;
+      name: string;
       value: number;
     }[];
   };
@@ -184,15 +184,15 @@ export async function getMatchBattleStats(
 
   const battleResults = [
     {
-      result: 'WINS',
+      name: 'WINS',
       value: battleLogs.filter((b) => b.result === 'WIN').length || 0,
     },
     {
-      result: 'LOSSES',
+      name: 'LOSSES',
       value: battleLogs.filter((b) => b.result === 'LOSS').length || 0,
     },
     {
-      result: 'DRAWS',
+      name: 'DRAWS',
       value: battleLogs.filter((b) => b.result === 'DRAW').length || 0,
     },
   ];

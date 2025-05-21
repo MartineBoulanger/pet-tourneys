@@ -63,16 +63,11 @@ export default async function TournamentPage({
   const links: Links = [
     {
       id: 1,
-      url: `/tournaments/${tournament.id}/statistics/pet-usage`,
-      text: 'Pet Usage Statistics',
+      url: `/tournaments/${tournament.id}/statistics`,
+      text: 'Tournament Statistics',
     },
     {
       id: 2,
-      url: `/tournaments/${tournament.id}/statistics/battle-logs`,
-      text: 'Battle Logs Statistics',
-    },
-    {
-      id: 3,
       url: '/tournaments',
       text: 'Back To Tournaments',
     },

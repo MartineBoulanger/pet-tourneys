@@ -47,7 +47,7 @@ export interface BattleAnalysisStatsProps {
     abilityStats: AbilityAnalysisResult;
     battleStats: BattleStatistics;
   };
-  isMatchView: boolean;
+  isMatchView?: boolean;
 }
 
 export interface PetBreedChartProps {
@@ -91,14 +91,20 @@ export interface BattleChartsProps {
     totalBattles?: number;
     totalMatches?: number;
     matchesByRegion?: {
-      region: string;
+      name: string;
       value: number;
     }[];
     battleResults?: {
-      result: string;
+      name: string;
       value: number;
     }[];
   };
-  abilityStats?: AbilityAnalysisResult;
-  battleStats?: BattleStatistics;
+}
+
+export interface PetPerformanceChartsProps {
+  battleStats: BattleStatistics;
+}
+
+export interface PetSwapsChartsProps {
+  battleStats: BattleStatistics;
 }

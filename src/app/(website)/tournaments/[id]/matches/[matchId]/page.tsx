@@ -51,16 +51,11 @@ export default async function MatchPage({
   const links: Links = [
     {
       id: 1,
-      url: `/tournaments/${id}/statistics/pet-usage?matchId=${matchId}`,
-      text: 'Pet Usage Statistics',
+      url: `/tournaments/${id}/statistics?matchId=${matchId}`,
+      text: 'Match Statistics',
     },
     {
       id: 2,
-      url: `/tournaments/${id}/statistics/battle-logs?matchId=${matchId}`,
-      text: 'Battle Logs Statistics',
-    },
-    {
-      id: 3,
       url: `/tournaments/${id}`,
       text: 'Back To Tournament',
     },

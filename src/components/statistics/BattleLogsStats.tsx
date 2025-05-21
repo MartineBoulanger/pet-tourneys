@@ -3,113 +3,12 @@ import { abilitiesCategoryNames } from '@/utils/analyzeToolHelpers';
 
 export function BattleLogsStats({
   stats,
-  isMatchView,
+  // isMatchView,
 }: BattleAnalysisStatsProps) {
-  // const totalEUMatches =
-  //   stats &&
-  //   stats.generalStats.totalMatches &&
-  //   stats.generalStats.matchesByRegion &&
-  //   (stats.generalStats.matchesByRegion.EU / stats.generalStats.totalMatches) *
-  //     100;
-
-  // const totalNAMatches =
-  //   stats &&
-  //   stats.generalStats.totalMatches &&
-  //   stats.generalStats.matchesByRegion &&
-  //   (stats.generalStats.matchesByRegion.NA / stats.generalStats.totalMatches) *
-  //     100;
-
-  // const totalOtherMatches =
-  //   stats &&
-  //   stats.generalStats.totalMatches &&
-  //   stats.generalStats.matchesByRegion &&
-  //   (stats.generalStats.matchesByRegion.other /
-  //     stats.generalStats.totalMatches) *
-  //     100;
-
   return (
     <div className='space-y-8'>
-      {/* General Statistics */}
-      <section className='bg-card p-6 rounded-lg'>
-        <h2 className='text-xl font-bold mb-4'>
-          {'General Battle Statistics'}
-        </h2>
-        <div className='grid grid-cols-1 md:grid-cols-4 gap-4'>
-          {/* {!isMatchView && (
-            <>
-              <StatCard
-                title='Total Matches'
-                value={stats.generalStats?.totalMatches?.toString() || '0'}
-              />
-              <StatCard
-                title='EU Matches'
-                value={
-                  stats.generalStats?.matchesByRegion?.EU.toString() || '0'
-                }
-              />
-              <StatCard
-                title='NA Matches'
-                value={
-                  stats.generalStats?.matchesByRegion?.NA.toString() || '0'
-                }
-              />
-              <StatCard
-                title='Other Regions'
-                value={
-                  stats.generalStats?.matchesByRegion?.other.toString() || '0'
-                }
-              />
-            </>
-          )} */}
-          <StatCard
-            title='Average Duration'
-            value={stats.generalStats.averageDuration}
-          />
-          <StatCard
-            title='Total Battles'
-            value={stats.generalStats.totalBattles.toString()}
-          />
-        </div>
-        {/* Regional Distribution Chart (visual) */}
-        {!isMatchView && (
-          <div className='mt-6'>
-            <h3 className='text-lg font-semibold mb-2'>
-              {'Regional Distribution'}
-            </h3>
-            {/* <div className='flex items-center h-8 bg-gray-200 rounded-full overflow-hidden'>
-              <div
-                className='h-full bg-blue-600'
-                style={{
-                  width: `${totalEUMatches}%`,
-                }}
-                title={`EU: ${stats.generalStats?.matchesByRegion?.EU} matches`}
-              ></div>
-              <div
-                className='h-full bg-red-600'
-                style={{
-                  width: `${totalNAMatches}%`,
-                }}
-                title={`NA: ${stats.generalStats?.matchesByRegion?.NA} matches`}
-              ></div>
-              <div
-                className='h-full bg-gray-600'
-                style={{
-                  width: `${totalOtherMatches}%`,
-                }}
-                title={`Other: ${stats.generalStats?.matchesByRegion?.other} matches`}
-              ></div>
-            </div> */}
-            <div className='flex justify-between mt-2 text-sm'>
-              <span>{'EU'}</span>
-              <span>{'NA'}</span>
-              <span>{'Other'}</span>
-            </div>
-          </div>
-        )}
-      </section>
-
       {/* Most Used Pets */}
-      <section className='bg-card p-6 rounded-lg'>
+      {/* <section className='bg-card p-6 rounded-lg'>
         <h2 className='text-xl font-bold mb-4'>{'Most Used Pets'}</h2>
         <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4'>
           {stats.petStats.map((pet) => (
@@ -142,13 +41,12 @@ export function BattleLogsStats({
             </div>
           ))}
         </div>
-      </section>
+      </section> */}
 
       {/* Battle Mechanics */}
-      <section className='bg-card p-6 rounded-lg'>
+      {/* <section className='bg-card p-6 rounded-lg'>
         <h2 className='text-xl font-bold mb-4'>{'Battle Mechanics'}</h2>
         <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
-          {/* Weather Changes */}
           <div>
             <h3 className='text-lg font-semibold mb-2'>{'Weather Changes'}</h3>
             <div className='space-y-2'>
@@ -169,7 +67,6 @@ export function BattleLogsStats({
             </div>
           </div>
 
-          {/* Pet Performance */}
           <div>
             <h3 className='text-lg font-semibold mb-2'>
               {'Top Performing Pets'}
@@ -194,7 +91,7 @@ export function BattleLogsStats({
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       <div className='bg-card p-6 rounded-lg mt-4'>
         <h2 className='text-xl font-bold mb-4'>{'Ability Insights'}</h2>
@@ -255,11 +152,11 @@ export function BattleLogsStats({
   );
 }
 
-function StatCard({ title, value }: { title: string; value: string }) {
-  return (
-    <div className='border p-4 rounded-lg'>
-      <h3 className='text-sm font-medium text-muted-foreground'>{title}</h3>
-      <p className='text-2xl font-bold'>{value}</p>
-    </div>
-  );
-}
+// function StatCard({ title, value }: { title: string; value: string }) {
+//   return (
+//     <div className='border p-4 rounded-lg'>
+//       <h3 className='text-sm font-medium text-muted-foreground'>{title}</h3>
+//       <p className='text-2xl font-bold'>{value}</p>
+//     </div>
+//   );
+// }

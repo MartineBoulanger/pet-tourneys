@@ -46,8 +46,8 @@ export function parseAndAggregateStats(
 export function convertToGraphData(stats: Record<number, number>) {
   return Object.entries(stats)
     .map(([value, count]) => ({
-      value: parseInt(value),
-      count,
+      name: parseInt(value),
+      value: count,
     }))
-    .sort((a, b) => a.value - b.value);
+    .sort((a, b) => a.name - b.name);
 }

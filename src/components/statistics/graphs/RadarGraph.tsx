@@ -1,0 +1,81 @@
+'use client';
+
+import {
+  Legend,
+  Radar,
+  RadarChart,
+  PolarGrid,
+  PolarAngleAxis,
+  PolarRadiusAxis,
+  Tooltip,
+  TooltipProps,
+} from 'recharts';
+import { GraphWrapper } from './GraphWrapper';
+import { RadarGraphProps } from './types';
+import { useWindowSize } from '@/hooks/useWindowSize';
+
+export const RadarGraph = ({
+  data,
+  color = '#1e3a8a',
+  texts,
+}: RadarGraphProps) => {
+  const { isMobile } = useWindowSize();
+
+  if (!data || data.length === 0) {
+    return (
+      <p className='text-center text-dark-red py-5'>
+        {'No data available yet.'}
+      </p>
+    );
+  }
+
+  const CustomTooltip = ({
+    active,
+    payload,
+  }: TooltipProps<string | number, string | number>) => {
+    if (!active || !payload || !payload.length) return null;
+
+    const data = payload[0].payload;
+
+    return (
+      <div className='bg-light-grey p-2.5 rounded-lg shadow-md'>
+        <p className='font-bold text-humanoid'>{data.name}</p>
+        <p>
+          {texts.tooltip}
+          {data.value}
+        </p>
+      </div>
+    );
+  };
+
+  const renderCustomLegendText = () => {
+    return <span className='text-foreground text-sm'>{texts.legend}</span>;
+  };
+
+  return (
+    <GraphWrapper className='p-2.5 md:p-5 pt-5 md:pt-7.5 h-[425px] md:h-[450px]'>
+      <RadarChart
+        cx='50%'
+        cy='50%'
+        outerRadius={isMobile ? '65%' : '80%'}
+        data={data}
+      >
+        <Tooltip content={<CustomTooltip />} />
+        <PolarGrid style={{ stroke: '#303030' }} />
+        <PolarAngleAxis
+          dataKey='name'
+          tick={{ fontSize: isMobile ? 12 : 14, fill: '#f1f1f1', width: 100 }}
+        />
+        <PolarRadiusAxis angle={60} stroke='#303030' />
+        <Radar
+          name={texts.radarName}
+          dataKey='value'
+          stroke={color}
+          fill={color}
+          fillOpacity={0.3}
+        />
+        <Legend formatter={renderCustomLegendText} />
+      </RadarChart>
+    </GraphWrapper>
+  );
+};

@@ -1,0 +1,64 @@
+import { PetChartsProps } from '../types';
+import { PetStatsCharts } from './PetStatsCharts';
+import { RadarGraph, DoublePieGraph } from '../graphs';
+import { Heading } from '@/components/ui';
+import { petTypeColors, breedColors } from '@/utils/constants';
+
+export const PetCharts = ({ chartData, stats }: PetChartsProps) => {
+  if (!chartData) {
+    return (
+      <p className='text-center text-dark-red py-5'>
+        {'No chart data available yet.'}
+      </p>
+    );
+  }
+  const playedPets = chartData.petUsageData?.slice(0, 5).map((pet) => ({
+    name: pet.name,
+    value: pet.total_played,
+  }));
+
+  return (
+    <div className='mb-5 sm:mb-10'>
+      <Heading as='h2' className='text-xl sm:text-3xl mb-2.5'>
+        {'Overall Pet Usage Statistics'}
+      </Heading>
+      <div className='bg-light-grey rounded-lg shadow-md grid grid-cols-1 md:grid-cols-2 gap-5 p-2.5 sm:p-5 mb-5 sm:mb-10'>
+        <div>
+          <Heading as='h2' className='mb-2.5 text-lg font-sans'>
+            {'Top 5 Most Played Pets'}
+          </Heading>
+          {chartData.petUsageData && (
+            <RadarGraph
+              data={playedPets}
+              texts={{
+                tooltip: 'Played: ',
+                legend: 'Times Played',
+                radarName: 'Top 5 Most Played Pets',
+              }}
+            />
+          )}
+        </div>
+        <div>
+          <Heading as='h2' className='mb-2.5 text-lg font-sans'>
+            {'Types And Breeds'}
+          </Heading>
+          {chartData.petTypeData && chartData.petBreedData && (
+            <DoublePieGraph
+              dataInner={chartData.petTypeData}
+              dataOuter={chartData.petBreedData}
+              fillColorsInner={petTypeColors}
+              fillColorsOuter={breedColors}
+              tooltip={'Times Used: '}
+            />
+          )}
+        </div>
+      </div>
+      <div>
+        <Heading as='h2' className='text-xl sm:text-3xl mb-2.5'>
+          {'Overall Pet Stats Distributions'}
+        </Heading>
+        <PetStatsCharts pets={stats} />
+      </div>
+    </div>
+  );
+};
