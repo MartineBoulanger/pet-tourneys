@@ -1,0 +1,48 @@
+export enum PET_SOURCES {
+  BATTLE = 'Pet Battle',
+  PROFESSION = 'Profession',
+  VENDOR = 'Vendor',
+  WORLDDROP = 'World Drop',
+  DROP = 'Drop',
+  PARAGON = 'Paragon Reward',
+  TCG = 'Trading Card Game',
+  PROMOTION = 'Promotion',
+  QUEST = 'Quest',
+  ACHIEVEMENT = 'Achievement',
+  SHOP = 'In-Game Shop',
+  WORLDEVENT = 'World Event',
+  FISHING = 'Fishing',
+  ARCHAEOLOGY = 'Archaeology',
+  DISCOVERY = 'Discovery',
+  BLACKMARKET = 'Black Market',
+  TREASURE = 'Treasure',
+  MISSION = 'Mission',
+  ORDERHALL = 'Order Hall',
+  TRADINGPOST = 'Trading Post',
+}
+
+export const PET_TYPES = {
+  1: 'Humanoid',
+  2: 'Dragonkin',
+  3: 'Flying',
+  4: 'Undead',
+  5: 'Critter',
+  6: 'Magic',
+  7: 'Elemental',
+  8: 'Beast',
+  9: 'Aquatic',
+  10: 'Mechanical',
+};
+
+export const PET_BREEDS = {
+  1: 'B/B',
+  2: 'P/P',
+  3: 'S/S',
+  4: 'H/H',
+  5: 'H/P',
+  6: 'P/S',
+  7: 'H/S',
+  8: 'P/B',
+  9: 'S/B',
+  10: 'H/B',
+};
