@@ -8,11 +8,11 @@ export const PetCharts = ({ chartData, stats }: PetChartsProps) => {
   if (!chartData) {
     return (
       <p className='text-center text-dark-red py-5'>
-        {'No chart data available yet.'}
+        {'No pet charts data available.'}
       </p>
     );
   }
-  const playedPets = chartData.petUsageData?.slice(0, 5).map((pet) => ({
+  const playedPets = chartData.petUsageData?.slice(0, 6).map((pet) => ({
     name: pet.name,
     value: pet.total_played,
   }));
@@ -25,16 +25,15 @@ export const PetCharts = ({ chartData, stats }: PetChartsProps) => {
       <div className='bg-light-grey rounded-lg shadow-md grid grid-cols-1 md:grid-cols-2 gap-5 p-2.5 sm:p-5 mb-5 sm:mb-10'>
         <div>
           <Heading as='h2' className='mb-2.5 text-lg font-sans'>
-            {'Top 5 Most Played Pets'}
+            {'Top 6 Most Played Pets'}
           </Heading>
           {chartData.petUsageData && (
             <RadarGraph
               data={playedPets}
-              texts={{
-                tooltip: 'Played: ',
-                legend: 'Times Played',
-                radarName: 'Top 5 Most Played Pets',
-              }}
+              tooltip={'Played: '}
+              legendText={'Times Played'}
+              radarName={'Top 6 Most Played Pets'}
+              showLegend
             />
           )}
         </div>
@@ -44,10 +43,10 @@ export const PetCharts = ({ chartData, stats }: PetChartsProps) => {
           </Heading>
           {chartData.petTypeData && chartData.petBreedData && (
             <DoublePieGraph
-              dataInner={chartData.petTypeData}
-              dataOuter={chartData.petBreedData}
-              fillColorsInner={petTypeColors}
-              fillColorsOuter={breedColors}
+              data={chartData.petTypeData}
+              data2={chartData.petBreedData}
+              fillColors={petTypeColors}
+              fillColors2={breedColors}
               tooltip={'Times Used: '}
             />
           )}

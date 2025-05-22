@@ -50,41 +50,6 @@ export interface BattleAnalysisStatsProps {
   isMatchView?: boolean;
 }
 
-export interface PetBreedChartProps {
-  breeds: { name: string; value: number }[] | undefined;
-}
-
-export interface PetChartsProps {
-  chartData: ChartData;
-  stats: TournamentPetStat[];
-}
-
-export interface PetListProps {
-  stats: TournamentPetStat[];
-  matchView?: boolean;
-}
-
-export interface PetStatCardProps {
-  petStat: TournamentPetStat;
-  rank?: number;
-}
-
-export interface PetStatListProps {
-  petStats: TournamentPetStat[];
-}
-
-export interface PetStatsChartProps {
-  pets: TournamentPetStat[];
-}
-
-export interface PetTypeChartProps {
-  types: { name: string; value: number }[] | undefined;
-}
-
-export interface PetUsageChartProps {
-  pets: PetUsageChartData[] | undefined;
-}
-
 export interface BattleChartsProps {
   matchesStats?: {
     averageDuration?: string;
@@ -101,10 +66,50 @@ export interface BattleChartsProps {
   };
 }
 
+export interface PetChartsProps {
+  chartData: ChartData;
+  stats: TournamentPetStat[];
+}
+
+export interface PetStatsChartsProps {
+  pets: TournamentPetStat[];
+}
+
 export interface PetPerformanceChartsProps {
   battleStats: BattleStatistics;
 }
 
 export interface PetSwapsChartsProps {
   battleStats: BattleStatistics;
+}
+
+export interface PetAbilitiesChartsProps {
+  abilityStats: AbilityAnalysisResult;
+}
+
+export interface PetListProps {
+  stats: TournamentPetStat[];
+  matchView?: boolean;
+}
+
+// ------------------------------------------------
+export interface PetStatCardProps {
+  petStat: TournamentPetStat;
+  rank?: number;
+}
+
+export interface PetStatListProps {
+  petStats: TournamentPetStat[];
+}
+
+export interface PetBreedChartProps {
+  breeds: { name: string; value: number }[] | undefined;
+}
+
+export interface PetTypeChartProps {
+  types: { name: string; value: number }[] | undefined;
+}
+
+export interface PetUsageChartProps {
+  pets: PetUsageChartData[] | undefined;
 }

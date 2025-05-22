@@ -5,6 +5,12 @@ import { Heading } from '@/components/ui';
 import { regionsColors, resultsColors } from '@/utils/constants';
 
 export const BattleCharts = ({ matchesStats }: BattleChartsProps) => {
+  if (!matchesStats) {
+    return (
+      <p className='text-center py-8'>{'No matches stats data available.'}</p>
+    );
+  }
+
   return (
     <div className='mb-5 lg:mb-10'>
       <Heading as='h2' className='text-xl sm:text-3xl mb-2.5'>

@@ -15,7 +15,8 @@ import { useWindowSize } from '@/hooks/useWindowSize';
 
 export const ScatterGraph = ({
   data,
-  fillColors,
+  colors,
+  color = '#303030',
   tooltipNamePrefix,
   tooltip,
 }: ScatterGraphProps) => {
@@ -79,9 +80,7 @@ export const ScatterGraph = ({
           {data.map((entry, index) => (
             <Cell
               key={`${entry.name}-cell-${index}`}
-              fill={
-                fillColors ? fillColors[index % fillColors.length] : '#303030'
-              }
+              fill={colors ? colors[index % colors.length] : color}
             />
           ))}
         </Scatter>

@@ -9,10 +9,10 @@ import { useWindowSize } from '@/hooks/useWindowSize';
 
 export const DoubleBarGraph = ({
   data,
-  fillColorValue1,
-  fillColorValue2,
-  tooltipValue1,
-  tooltipValue2,
+  color,
+  color2,
+  tooltip,
+  tooltip2,
   legendValues = {},
   showLegend = false,
 }: DoubleBarGraphProps) => {
@@ -34,11 +34,11 @@ export const DoubleBarGraph = ({
       <div className='bg-light-grey p-2.5 rounded-lg shadow-md'>
         <p className='font-bold text-humanoid'>{label}</p>
         <p>
-          {tooltipValue1}
+          {tooltip}
           {payload[0].value}
         </p>
         <p>
-          {tooltipValue2}
+          {tooltip2}
           {payload[1].value}
         </p>
       </div>
@@ -49,7 +49,7 @@ export const DoubleBarGraph = ({
     const { payload } = props;
 
     return (
-      <ul>
+      <ul className='flex gap-5 items-center justify-center'>
         {payload &&
           payload.map(
             (
@@ -57,6 +57,7 @@ export const DoubleBarGraph = ({
               index: number
             ) => (
               <li key={`${entry.name}-item-${index}`}>
+                <span>{''}</span>
                 {legendValues[entry.value]}
               </li>
             )
@@ -74,11 +75,12 @@ export const DoubleBarGraph = ({
           dataKey='name'
           tick={{ fontSize: isMobile ? 12 : 14, width: 100, fill: '#f1f1f1' }}
           height={50}
-          angle={-16}
+          angle={-10}
+          stroke='transparent'
         />
         <Bar
           dataKey='value1'
-          fill={fillColorValue1}
+          fill={color}
           radius={[8, 8, 0, 0]}
           label={{
             position: 'top',
@@ -90,7 +92,7 @@ export const DoubleBarGraph = ({
         />
         <Bar
           dataKey='value2'
-          fill={fillColorValue2}
+          fill={color2}
           radius={[8, 8, 0, 0]}
           label={{
             position: 'top',

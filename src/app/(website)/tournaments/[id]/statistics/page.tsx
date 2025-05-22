@@ -1,10 +1,10 @@
 import { notFound } from 'next/navigation';
-import { OverviewCard } from '@/components/statistics';
 import {
   PetCharts,
   BattleCharts,
   PetPerformanceCharts,
   PetSwapsCharts,
+  PetAbilitiesCharts,
 } from '@/components/statistics/charts';
 import {
   getMatchPetUsage,
@@ -152,24 +152,13 @@ export default async function PetUsageStatisticsPage({
           <Paragraph className='text-foreground'>{entityName}</Paragraph>
         )}
       </div>
-      {isMatchView ? (
-        <div className='flex gap-5 mb-6 lg:mb-10'>
-          <OverviewCard
-            title='Total Battles'
-            value={battleStats.generalStats?.totalBattles}
-          />
-          <OverviewCard
-            title='Average Battle Duration'
-            value={battleStats.generalStats?.averageDuration}
-          />
-        </div>
-      ) : null}
       {!isMatchView && (
         <>
           <BattleCharts matchesStats={battleStats.generalStats} />
           <PetCharts chartData={chartData} stats={stats} />
           <PetPerformanceCharts battleStats={battleStats.battleStats} />
           <PetSwapsCharts battleStats={battleStats.battleStats} />
+          <PetAbilitiesCharts abilityStats={battleStats.abilityStats} />
         </>
       )}
       {/* {stats && <PetList stats={stats} matchView={isMatchView} />} */}

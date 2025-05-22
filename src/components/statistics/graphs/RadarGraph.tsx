@@ -16,8 +16,12 @@ import { useWindowSize } from '@/hooks/useWindowSize';
 
 export const RadarGraph = ({
   data,
-  color = '#1e3a8a',
-  texts,
+  color = '#11a7f5',
+  tooltip,
+  legendText,
+  radarName,
+  angle = 60,
+  showLegend = false,
 }: RadarGraphProps) => {
   const { isMobile } = useWindowSize();
 
@@ -41,7 +45,7 @@ export const RadarGraph = ({
       <div className='bg-light-grey p-2.5 rounded-lg shadow-md'>
         <p className='font-bold text-humanoid'>{data.name}</p>
         <p>
-          {texts.tooltip}
+          {tooltip}
           {data.value}
         </p>
       </div>
@@ -49,7 +53,7 @@ export const RadarGraph = ({
   };
 
   const renderCustomLegendText = () => {
-    return <span className='text-foreground text-sm'>{texts.legend}</span>;
+    return <span className='text-foreground text-sm'>{legendText}</span>;
   };
 
   return (
@@ -61,20 +65,20 @@ export const RadarGraph = ({
         data={data}
       >
         <Tooltip content={<CustomTooltip />} />
-        <PolarGrid style={{ stroke: '#303030' }} />
+        <PolarGrid style={{ stroke: '#666666' }} />
         <PolarAngleAxis
           dataKey='name'
           tick={{ fontSize: isMobile ? 12 : 14, fill: '#f1f1f1', width: 100 }}
         />
-        <PolarRadiusAxis angle={60} stroke='#303030' />
+        <PolarRadiusAxis angle={angle} stroke='#666666' />
         <Radar
-          name={texts.radarName}
+          name={radarName}
           dataKey='value'
           stroke={color}
           fill={color}
-          fillOpacity={0.3}
+          fillOpacity={0.5}
         />
-        <Legend formatter={renderCustomLegendText} />
+        {showLegend && <Legend formatter={renderCustomLegendText} />}
       </RadarChart>
     </GraphWrapper>
   );

@@ -2,13 +2,9 @@
 
 import { useEffect, useState } from 'react';
 import { ResponsiveContainer } from 'recharts';
-import { Props } from 'recharts/types/component/ResponsiveContainer';
 import { ChartSkeleton } from '@/components/ui';
 import { cn } from '@/utils/cn';
-
-interface GraphWrapperProps extends Props {
-  containerHeight?: number | string;
-}
+import { GraphWrapperProps } from './types';
 
 export const GraphWrapper = ({
   children,

@@ -1,13 +1,19 @@
 'use client';
 
 import { Heading } from '@/components/ui';
-import { PetStatsChartProps } from '../types';
+import { PetStatsChartsProps } from '../types';
 import { ScatterGraph } from '../graphs';
 import { parseAndAggregateStats, convertToGraphData } from '@/utils/parsers';
 import { COLORS } from '@/utils/constants';
 
-export function PetStatsCharts({ pets }: PetStatsChartProps) {
-  const stats = parseAndAggregateStats(pets);
+export function PetStatsCharts({ pets }: PetStatsChartsProps) {
+  if (!pets) {
+    return (
+      <p className='text-center py-8'>{'No pet stats chart data available.'}</p>
+    );
+  }
+
+  const stats = parseAndAggregateStats(pets); // get parsed pet stats data
   const healthData = convertToGraphData(stats.health);
   const powerData = convertToGraphData(stats.power);
   const speedData = convertToGraphData(stats.speed);
@@ -20,9 +26,9 @@ export function PetStatsCharts({ pets }: PetStatsChartProps) {
         </Heading>
         <ScatterGraph
           data={healthData}
-          fillColors={COLORS}
-          tooltip='Times Used: '
-          tooltipNamePrefix='Health - '
+          colors={COLORS}
+          tooltip={'Times Used: '}
+          tooltipNamePrefix={'Health - '}
         />
       </div>
       <div>
@@ -31,9 +37,9 @@ export function PetStatsCharts({ pets }: PetStatsChartProps) {
         </Heading>
         <ScatterGraph
           data={powerData}
-          fillColors={COLORS}
-          tooltip='Times Used: '
-          tooltipNamePrefix='Power - '
+          colors={COLORS}
+          tooltip={'Times Used: '}
+          tooltipNamePrefix={'Power - '}
         />
       </div>
       <div>
@@ -42,9 +48,9 @@ export function PetStatsCharts({ pets }: PetStatsChartProps) {
         </Heading>
         <ScatterGraph
           data={speedData}
-          fillColors={COLORS}
-          tooltip='Times Used: '
-          tooltipNamePrefix='Speed - '
+          colors={COLORS}
+          tooltip={'Times Used: '}
+          tooltipNamePrefix={'Speed - '}
         />
       </div>
     </div>

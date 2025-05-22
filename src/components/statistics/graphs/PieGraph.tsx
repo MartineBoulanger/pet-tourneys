@@ -10,8 +10,9 @@ import { capitalizeWord } from '@/utils/cn';
 
 export const PieGraph = ({
   data,
-  hasLegend = false,
+  showLegend = false,
   fillColors,
+  color = '#303030',
   tooltip,
 }: PieGraphProps) => {
   const { isMobile } = useWindowSize();
@@ -79,6 +80,7 @@ export const PieGraph = ({
           dataKey='value'
           label={renderCustomizedLabel}
           labelLine={false}
+          stroke='#f1f1f1'
         >
           {data.map((entry, index) => (
             <Cell
@@ -86,13 +88,13 @@ export const PieGraph = ({
               fill={
                 fillColors
                   ? fillColors[entry.name as keyof typeof fillColors]
-                  : '#303030'
+                  : color
               }
             />
           ))}
         </Pie>
 
-        {hasLegend ? <Legend /> : null}
+        {showLegend ? <Legend /> : null}
       </PieChart>
     </GraphWrapper>
   );

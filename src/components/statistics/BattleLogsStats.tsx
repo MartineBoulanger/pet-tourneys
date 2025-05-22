@@ -93,13 +93,13 @@ export function BattleLogsStats({
         </div>
       </section> */}
 
-      <div className='bg-card p-6 rounded-lg mt-4'>
+      {/* <div className='bg-card p-6 rounded-lg mt-4'>
         <h2 className='text-xl font-bold mb-4'>{'Ability Insights'}</h2>
         <p>
           {'Total unique abilities used: '}
           {stats.abilityStats.totalUniqueAbilitiesUsed || 0}
         </p>
-      </div>
+      </div> */}
 
       {/* Ability Analysis */}
       <section className='bg-card p-6 rounded-lg'>

@@ -9,22 +9,20 @@ import { capitalizeWord } from '@/utils/cn';
 import { useWindowSize } from '@/hooks/useWindowSize';
 
 export const DoublePieGraph = ({
-  dataInner,
-  dataOuter,
-  fillColorsInner,
-  fillColorsOuter,
+  data,
+  data2,
+  color = '#303030',
+  fillColors,
+  fillColors2,
   tooltip,
 }: DoublePieGraphProps) => {
   const { isMobile } = useWindowSize();
 
-  if (
-    !dataInner ||
-    !dataOuter ||
-    dataInner.length === 0 ||
-    dataOuter.length === 0
-  ) {
+  if (!data || !data2 || data.length === 0 || data2.length === 0) {
     return (
-      <p className='text-center py-8'>{'No double pie data available yet.'}</p>
+      <p className='text-center py-8'>
+        {'No double pie chart data available.'}
+      </p>
     );
   }
 
@@ -96,8 +94,8 @@ export const DoublePieGraph = ({
         x={x}
         y={y}
         fill={
-          fillColorsOuter
-            ? fillColorsOuter[name as keyof typeof fillColorsOuter]
+          fillColors2
+            ? fillColors2[name as keyof typeof fillColors2]
             : '#f1f1f1'
         }
         textAnchor={textAnchor}
@@ -116,40 +114,40 @@ export const DoublePieGraph = ({
         <Tooltip content={<CustomTooltip />} />
 
         <Pie
-          data={dataInner}
+          data={data}
           outerRadius={isMobile ? 80 : 100}
           minAngle={20}
           dataKey='value'
           label={renderCustomizedLabelInnerPie}
           labelLine={false}
         >
-          {dataInner.map((entry, index) => (
+          {data.map((entry, index) => (
             <Cell
               key={`${entry.name}-cell-${index}`}
               fill={
-                fillColorsInner
-                  ? fillColorsInner[entry.name as keyof typeof fillColorsInner]
-                  : '#303030'
+                fillColors
+                  ? fillColors[entry.name as keyof typeof fillColors]
+                  : color
               }
             />
           ))}
         </Pie>
 
         <Pie
-          data={dataOuter}
+          data={data2}
           innerRadius={isMobile ? 95 : 115}
           outerRadius={isMobile ? 115 : 145}
           dataKey='value'
           label={renderCustomizedLabelOuterPie}
           paddingAngle={3}
         >
-          {dataOuter.map((entry, index) => (
+          {data2.map((entry, index) => (
             <Cell
               key={`${entry.name}-cell-${index}`}
               fill={
-                fillColorsOuter
-                  ? fillColorsOuter[entry.name as keyof typeof fillColorsOuter]
-                  : '#303030'
+                fillColors2
+                  ? fillColors2[entry.name as keyof typeof fillColors2]
+                  : color
               }
             />
           ))}

@@ -8,7 +8,7 @@ export const PetSwapsCharts = ({ battleStats }: PetSwapsChartsProps) => {
   if (!battleStats) {
     return (
       <p className='text-center py-8'>
-        {'No battle stats data available yet.'}
+        {'No battle stats chart data available.'}
       </p>
     );
   }
@@ -20,7 +20,7 @@ export const PetSwapsCharts = ({ battleStats }: PetSwapsChartsProps) => {
   const petSwaps = Object.entries(battleStats.petSwapDetails)
     .map(([name, value]) => ({ name, value }))
     .sort((a, b) => b.value - a.value)
-    .slice(0, 5);
+    .slice(0, 6);
 
   return (
     <div className='mb-5 sm:mb-10'>
@@ -35,23 +35,22 @@ export const PetSwapsCharts = ({ battleStats }: PetSwapsChartsProps) => {
           {battleStats.totalPetSwaps && (
             <PieGraph
               data={swaps}
-              tooltip={'Swaps: '}
+              tooltip={'Swaps done: '}
               fillColors={swapsColors}
             />
           )}
         </div>
         <div>
           <Heading as='h2' className='mb-2.5 text-lg font-sans'>
-            {'Top 5 Pet Swaps'}
+            {'Top 6 Pet Swaps'}
           </Heading>
           {battleStats.petSwapDetails && (
             <RadarGraph
               data={petSwaps}
-              texts={{
-                tooltip: 'Total Swaps: ',
-                legend: 'Times Swapped',
-                radarName: 'Top 5 Pet Swaps',
-              }}
+              tooltip={'Total Swaps: '}
+              legendText={'Times Swapped'}
+              radarName={'Top 6 Pet Swaps'}
+              showLegend
             />
           )}
         </div>

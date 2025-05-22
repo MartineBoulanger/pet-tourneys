@@ -1,59 +1,59 @@
-export interface RadarGraphProps {
-  data: { name: number | string; value: number | string }[] | undefined;
+import { Props } from 'recharts/types/component/ResponsiveContainer';
+
+// Types that set the structure of the data/objects
+type DataType = {
+  name: string | number;
+  value: number | string;
+};
+type DataTypeWithFill = {
+  name: string | number;
+  value: number | string;
+  fill: string;
+};
+type DataTypeWithMultiValues = {
+  name: string | number;
+  value1: number | string;
+  value2: number | string;
+};
+type StringObjType = Record<string, string>;
+
+// Generic interface with props that can be used in all graphs components
+interface GraphsProps<T> {
+  data: T[] | undefined;
+  fillColors?: StringObjType;
+  tooltip?: string;
+  showLegend?: boolean;
   color?: string;
-  texts: {
-    tooltip: string;
-    legend: string;
-    radarName: string;
-  };
 }
 
-export interface PieGraphProps {
-  data: { name: string | number; value: number | string }[] | undefined;
-  hasLegend?: boolean;
-  fillColors?: Record<string, string>;
-  tooltip: string;
+// Component interfaces
+export interface GraphWrapperProps extends Props {
+  containerHeight?: number | string;
 }
 
-export interface DoublePieGraphProps {
-  dataInner: { name: string; value: number }[] | undefined;
-  dataOuter: { name: string; value: number }[] | undefined;
-  fillColorsInner?: Record<string, string>;
-  fillColorsOuter?: Record<string, string>;
-  tooltip: string;
+export interface PieGraphProps extends GraphsProps<DataType> {}
+
+export interface RadarGraphProps extends GraphsProps<DataType> {
+  legendText?: string;
+  radarName?: string;
+  angle?: number;
 }
 
-export interface ScatterGraphProps {
-  data: { name: string | number; value: number | string }[] | undefined;
-  fillColors?: string[];
+export interface ScatterGraphProps extends GraphsProps<DataType> {
   tooltipNamePrefix?: string;
-  tooltip: string;
+  colors?: string[];
 }
 
-export interface DoubleBarGraphProps {
-  data:
-    | {
-        name: string | number;
-        value1: number | string;
-        value2: number | string;
-      }[]
-    | undefined;
-  fillColorValue1?: string;
-  fillColorValue2?: string;
-  tooltipValue1: string;
-  tooltipValue2: string;
-  legendValues?: Record<string, string>;
-  showLegend?: boolean;
+export interface DoublePieGraphProps extends GraphsProps<DataType> {
+  data2: DataType[] | undefined;
+  fillColors2?: StringObjType;
 }
 
-export interface RadialGraphProps {
-  data:
-    | {
-        name: string | number;
-        value: number | string;
-        fill: string;
-      }[]
-    | undefined;
-  tooltip: string;
-  showLegend?: boolean;
+export interface DoubleBarGraphProps
+  extends GraphsProps<DataTypeWithMultiValues> {
+  color2?: string;
+  tooltip2?: string;
+  legendValues?: StringObjType;
 }
+
+export interface RadialGraphProps extends GraphsProps<DataTypeWithFill> {}

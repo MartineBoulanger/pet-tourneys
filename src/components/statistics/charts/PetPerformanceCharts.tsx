@@ -3,10 +3,19 @@ import { DoubleBarGraph, RadialGraph } from '../graphs';
 import { Heading } from '@/components/ui';
 import { OverviewCard } from '../OverviewCard';
 import { weatherColors } from '@/utils/constants';
+import { petPerformanceLegendValues } from '@/utils/constants';
 
 export const PetPerformanceCharts = ({
   battleStats,
 }: PetPerformanceChartsProps) => {
+  if (!battleStats) {
+    return (
+      <p className='text-center py-8'>
+        {'No battle stats chart data available.'}
+      </p>
+    );
+  }
+
   const pets =
     battleStats.petPerformance &&
     Object.entries(battleStats.petPerformance)
@@ -55,10 +64,12 @@ export const PetPerformanceCharts = ({
           {battleStats.petPerformance && (
             <DoubleBarGraph
               data={pets}
-              tooltipValue1={'Kills: '}
-              tooltipValue2={'Deaths: '}
-              fillColorValue1={'#11a7f6'}
-              fillColorValue2={'#d52824'}
+              tooltip={'Kills: '}
+              tooltip2={'Deaths: '}
+              color={'#11a7f6'}
+              color2={'#d52824'}
+              legendValues={petPerformanceLegendValues}
+              showLegend
             />
           )}
         </div>
