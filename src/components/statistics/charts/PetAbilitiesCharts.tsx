@@ -50,7 +50,10 @@ export const PetAbilitiesCharts = ({
                 );
               }
               return (
-                <p className='text-center bg-background rounded-lg py-5'>
+                <p
+                  key={`${category}-${index}`}
+                  className='text-center bg-background rounded-lg py-5'
+                >
                   {'No abilities data available.'}
                 </p>
               );
