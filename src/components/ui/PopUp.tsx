@@ -37,7 +37,7 @@ export const PopUp = ({
       {isOpen && (
         <div
           className={cn(
-            'absolute top-full bg-dark-grey p-4 rounded-lg shadow-md animate-slide-in-top',
+            'absolute top-full bg-background p-5 rounded-lg shadow-md animate-slide-in-top',
             divClassName
           )}
         >

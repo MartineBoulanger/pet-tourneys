@@ -3,6 +3,7 @@
 'use client';
 
 import { BarChart, Bar, XAxis, Legend, Tooltip, TooltipProps } from 'recharts';
+import { GoDotFill } from 'react-icons/go';
 import { GraphWrapper } from './GraphWrapper';
 import { DoubleBarGraphProps } from './types';
 import { useWindowSize } from '@/hooks/useWindowSize';
@@ -13,6 +14,7 @@ export const DoubleBarGraph = ({
   color2,
   tooltip,
   tooltip2,
+  fillColors,
   legendValues = {},
   showLegend = false,
 }: DoubleBarGraphProps) => {
@@ -20,7 +22,9 @@ export const DoubleBarGraph = ({
 
   if (!data || data.length === 0) {
     return (
-      <p className='text-center py-8'>{'No double bar data available yet.'}</p>
+      <p className='text-center bg-background rounded-lg py-5'>
+        {'No double bar chart data available.'}
+      </p>
     );
   }
 
@@ -56,8 +60,14 @@ export const DoubleBarGraph = ({
               entry: { name: string | number; value: string | number },
               index: number
             ) => (
-              <li key={`${entry.name}-item-${index}`}>
-                <span>{''}</span>
+              <li
+                key={`${entry.name}-item-${index}`}
+                className='flex items-center'
+                style={{
+                  color: fillColors ? fillColors[entry.value] : '#f1f1f1',
+                }}
+              >
+                <GoDotFill />
                 {legendValues[entry.value]}
               </li>
             )

@@ -64,6 +64,7 @@ export interface BattleChartsProps {
       value: number;
     }[];
   };
+  isMatchView: boolean;
 }
 
 export interface PetChartsProps {

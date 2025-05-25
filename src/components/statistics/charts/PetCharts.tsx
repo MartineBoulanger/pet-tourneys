@@ -7,7 +7,7 @@ import { petTypeColors, breedColors } from '@/utils/constants';
 export const PetCharts = ({ chartData, stats }: PetChartsProps) => {
   if (!chartData) {
     return (
-      <p className='text-center text-dark-red py-5'>
+      <p className='text-center bg-background rounded-lg py-5'>
         {'No pet charts data available.'}
       </p>
     );

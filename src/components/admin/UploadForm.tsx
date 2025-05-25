@@ -135,7 +135,7 @@ export function UploadForm({
         }}
         handleClick={() => router.back()}
       >
-        <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
+        <div className='grid grid-cols-1 md:grid-cols-2 gap-5'>
           <Input
             label='Player 1'
             id='player1'

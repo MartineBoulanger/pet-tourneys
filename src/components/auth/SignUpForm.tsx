@@ -48,12 +48,12 @@ export const SignUpForm = () => {
           id='password'
           required
         />
-        <AuthButton type='Sign up' loading={loading} className='mt-4' />
+        <AuthButton type='Sign up' loading={loading} className='mt-5' />
       </Form>
-      <div className='mt-4 flex items-center'>
+      <div className='mt-5 flex items-center'>
         <Paragraph>{'Already have an account?'}</Paragraph>
         <Link
-          className='link font-bold ml-2 text-light-blue'
+          className='link font-bold ml-2.5'
           href='/login'
           title='login'
           aria-label='login'

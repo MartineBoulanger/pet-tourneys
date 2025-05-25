@@ -67,47 +67,47 @@ export const AnalyzeToolDetails = ({
           {playerName && (
             <Heading as='h3' className='text-2xl mb-5 text-center'>
               <span>{'Logs from '}</span>
-              <span className='font-bold text-light-blue'>{playerName}</span>
+              <span className='font-bold text-humanoid'>{playerName}</span>
             </Heading>
           )}
 
           {parsedBattleLogs && parsedBattleLogs.length > 0 && (
             <div className='mb-10'>
-              <Heading as='h4' className='text-xl font-semibold mb-2'>
+              <Heading as='h4' className='text-xl font-semibold mb-2.5'>
                 {'Total Logs Overview'}
               </Heading>
-              <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-4'>
-                <div className='bg-dark-grey p-4 rounded-lg shadow-md'>
+              <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5 mb-5'>
+                <div className='bg-background p-5 rounded-lg shadow-md'>
                   <Paragraph className='font-medium'>
                     {'Total Battles'}
                   </Paragraph>
-                  <Paragraph className='text-4xl font-bold text-light-blue'>
+                  <Paragraph className='text-4xl font-bold text-humanoid'>
                     {parsedBattleLogs.length}
                   </Paragraph>
                 </div>
-                <div className='bg-dark-grey  p-4 rounded-lg shadow-md'>
+                <div className='bg-background p-5 rounded-lg shadow-md'>
                   <Paragraph className='font-medium'>{'Wins'}</Paragraph>
-                  <Paragraph className='text-4xl text-light-blue font-bold'>
+                  <Paragraph className='text-4xl text-humanoid font-bold'>
                     {parsedBattleLogs.filter((b) => b.result === 'WIN').length}
                   </Paragraph>
                 </div>
-                <div className='bg-dark-grey p-4 rounded-lg shadow-md'>
+                <div className='bg-background p-5 rounded-lg shadow-md'>
                   <Paragraph className='font-medium'>{'Losses'}</Paragraph>
-                  <Paragraph className='text-4xl text-light-blue font-bold'>
+                  <Paragraph className='text-4xl text-humanoid font-bold'>
                     {parsedBattleLogs.filter((b) => b.result === 'LOSS').length}
                   </Paragraph>
                 </div>
-                <div className='bg-dark-grey p-4 rounded-lg shadow-md'>
+                <div className='bg-background p-5 rounded-lg shadow-md'>
                   <Paragraph className='font-medium'>{'Draws'}</Paragraph>
-                  <Paragraph className='text-4xl text-light-blue font-bold'>
+                  <Paragraph className='text-4xl text-humanoid font-bold'>
                     {parsedBattleLogs.filter((b) => b.result === 'DRAW').length}
                   </Paragraph>
                 </div>
               </div>
 
-              <div className='mb-4 flex gap-2.5'>
+              <div className='mb-5 flex gap-2.5'>
                 <Heading as='h4'>{'Average Battle Duration:'}</Heading>
-                <Paragraph className='text-light-blue font-bold'>
+                <Paragraph className='text-humanoid font-bold'>
                   {calculateAverageDuration(parsedBattleLogs)}
                 </Paragraph>
               </div>
@@ -116,19 +116,19 @@ export const AnalyzeToolDetails = ({
 
           {parsedBattleLogs && parsedBattleLogs.length > 0 && (
             <div className='mb-10'>
-              <Heading as='h4' className='text-lg font-bold mb-2'>
+              <Heading as='h4' className='text-lg font-bold mb-2.5'>
                 {'Battle Logs Overview'}
               </Heading>
               <div className='space-y-5'>
                 {parsedBattleLogs.map((battle, i) => (
                   <div
                     key={i}
-                    className='bg-dark-grey p-4 rounded-lg shadow-md'
+                    className='bg-background p-5 rounded-lg shadow-md'
                   >
-                    <div className='flex justify-between mb-2'>
+                    <div className='flex justify-between mb-2.5'>
                       <Paragraph className='font-bold'>
                         <span>{`Battle ${i + 1} - `}</span>
-                        <span className='text-light-blue'>
+                        <span className='text-humanoid'>
                           {new Date(battle.timestamp).toLocaleString()}
                         </span>
                       </Paragraph>
@@ -144,9 +144,9 @@ export const AnalyzeToolDetails = ({
                         {battle.result}
                       </Paragraph>
                     </div>
-                    <div className='grid grid-cols-2 gap-4 text-sm'>
+                    <div className='grid grid-cols-2 gap-5 text-sm'>
                       <div>
-                        <Paragraph className='font-medium text-cyan mb-2'>
+                        <Paragraph className='font-medium text-cyan mb-2.5'>
                           {'Your Team'}
                         </Paragraph>
                         <ul className='list-disc pl-5'>
@@ -156,7 +156,7 @@ export const AnalyzeToolDetails = ({
                         </ul>
                       </div>
                       <div>
-                        <Paragraph className='font-medium text-purple mb-2'>
+                        <Paragraph className='font-medium text-purple mb-2.5'>
                           {'Opponent Team'}
                         </Paragraph>
                         <ul className='list-disc pl-5'>
@@ -191,7 +191,7 @@ export const AnalyzeToolDetails = ({
               {getMostUsedPets(parsedBattleLogs).map((pet, i) => (
                 <div
                   key={i}
-                  className='bg-dark-grey p-2 rounded-lg text-sm shadow-md'
+                  className='bg-background p-2.5 rounded-lg text-sm shadow-md'
                 >
                   {pet.name} ({pet.count})
                 </div>
@@ -201,11 +201,11 @@ export const AnalyzeToolDetails = ({
 
           {parsedPetUsage.length > 0 && (
             <div className='mb-10'>
-              <Heading as='h4' className='text-lg font-bold mb-2'>
+              <Heading as='h4' className='text-lg font-bold mb-2.5'>
                 {'Pet Usage List'}
               </Heading>
               <div className='overflow-x-auto'>
-                <table className='border-collapse border border-medium-grey min-w-full bg-dark-grey'>
+                <table className='border-collapse border border-medium-grey min-w-full bg-background'>
                   <thead>
                     <tr>
                       <th className='py-2 px-4 text-left border-r border-r-light-grey'>
@@ -284,35 +284,35 @@ export const AnalyzeToolDetails = ({
           safeStats.totalWeatherChanges &&
           safeStats.totalDeaths ? (
             <div className='mb-10'>
-              <Heading as='h4' className='text-lg font-bold mb-2'>
+              <Heading as='h4' className='text-lg font-bold mb-2.5'>
                 {'Total Performance Overview'}
               </Heading>
-              <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-4'>
-                <div className='bg-dark-grey p-4 rounded-lg shadow-md'>
+              <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5 mb-5'>
+                <div className='bg-background p-5 rounded-lg shadow-md'>
                   <Paragraph className='font-medium'>
                     {'Abilities Used'}
                   </Paragraph>
-                  <Paragraph className='text-4xl font-bold text-light-blue'>
+                  <Paragraph className='text-4xl font-bold text-humanoid'>
                     {usedAbilities.totalUniqueAbilitiesUsed}
                   </Paragraph>
                 </div>
-                <div className='bg-dark-grey  p-4 rounded-lg shadow-md'>
+                <div className='bg-background p-5 rounded-lg shadow-md'>
                   <Paragraph className='font-medium'>
                     {'Weather Changes'}
                   </Paragraph>
-                  <Paragraph className='text-4xl text-light-blue font-bold'>
+                  <Paragraph className='text-4xl text-humanoid font-bold'>
                     {safeStats.totalWeatherChanges}
                   </Paragraph>
                 </div>
-                <div className='bg-dark-grey p-4 rounded-lg shadow-md'>
+                <div className='bg-background p-5 rounded-lg shadow-md'>
                   <Paragraph className='font-medium'>{'Pet Deaths'}</Paragraph>
-                  <Paragraph className='text-4xl text-light-blue font-bold'>
+                  <Paragraph className='text-4xl text-humanoid font-bold'>
                     {safeStats.totalDeaths}
                   </Paragraph>
                 </div>
-                <div className='bg-dark-grey p-4 rounded-lg shadow-md'>
+                <div className='bg-background p-5 rounded-lg shadow-md'>
                   <Paragraph className='font-medium'>{'Pet Kills'}</Paragraph>
-                  <Paragraph className='text-4xl text-light-blue font-bold'>
+                  <Paragraph className='text-4xl text-humanoid font-bold'>
                     {safeStats.totalKills}
                   </Paragraph>
                 </div>
@@ -323,10 +323,10 @@ export const AnalyzeToolDetails = ({
           {safeStats.petPerformance &&
             Object.keys(safeStats.petPerformance).length > 0 && (
               <div className='mb-10'>
-                <Heading as='h4' className='text-lg font-bold mb-2'>
+                <Heading as='h4' className='text-lg font-bold mb-2.5'>
                   {'Pet Performance Overview'}
                 </Heading>
-                <table className='border-collapse border border-medium-grey min-w-full bg-dark-grey'>
+                <table className='border-collapse border border-medium-grey min-w-full bg-background'>
                   <thead>
                     <tr>
                       <th className='py-2 px-4 text-left border-r border-r-light-grey'>
@@ -391,23 +391,23 @@ export const AnalyzeToolDetails = ({
           {safeStats.totalPetSwaps &&
             Object.keys(safeStats.totalPetSwaps).length > 0 && (
               <div className='mb-10'>
-                <Heading as='h4' className='text-lg font-bold mb-2'>
+                <Heading as='h4' className='text-lg font-bold mb-2.5'>
                   {'Pet Swaps Overview'}
                 </Heading>
-                <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-4'>
-                  <div className='bg-dark-grey p-4 rounded-lg shadow-md'>
+                <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5 mb-5'>
+                  <div className='bg-background p-5 rounded-lg shadow-md'>
                     <Paragraph className='font-medium'>
                       {'Total Swaps Player'}
                     </Paragraph>
-                    <Paragraph className='text-4xl font-bold text-light-blue'>
+                    <Paragraph className='text-4xl font-bold text-humanoid'>
                       {safeStats.totalPetSwaps.player}
                     </Paragraph>
                   </div>
-                  <div className='bg-dark-grey  p-4 rounded-lg shadow-md'>
+                  <div className='bg-background p-5 rounded-lg shadow-md'>
                     <Paragraph className='font-medium'>
                       {'Total Swaps Opponent'}
                     </Paragraph>
-                    <Paragraph className='text-4xl text-light-blue font-bold'>
+                    <Paragraph className='text-4xl text-humanoid font-bold'>
                       {safeStats.totalPetSwaps.opponent}
                     </Paragraph>
                   </div>
@@ -418,7 +418,7 @@ export const AnalyzeToolDetails = ({
           {safeStats.petSwapDetails &&
             Object.keys(safeStats.petSwapDetails).length > 0 && (
               <div className='mb-10'>
-                <Heading as='h4' className='text-lg font-bold mb-2'>
+                <Heading as='h4' className='text-lg font-bold mb-2.5'>
                   {'Pet Swaps List'}
                 </Heading>
                 <div className='grid grid-cols-2 md:grid-cols-4 gap-2.5'>
@@ -427,7 +427,7 @@ export const AnalyzeToolDetails = ({
                     .map(([pet, totalSwaps], index) => (
                       <div
                         key={index}
-                        className='bg-dark-grey p-2 rounded-lg text-sm shadow-md'
+                        className='bg-background p-2.5 rounded-lg text-sm shadow-md'
                       >
                         {pet} ({totalSwaps})
                       </div>
@@ -438,10 +438,10 @@ export const AnalyzeToolDetails = ({
 
           {usedAbilities && (
             <div className='mb-10'>
-              <Heading as='h4' className='text-lg font-bold mb-2'>
+              <Heading as='h4' className='text-lg font-bold mb-2.5'>
                 {'Total Abilities Overview'}
               </Heading>
-              <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-4'>
+              <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5 mb-5'>
                 {(
                   Object.entries(usedAbilities) as [
                     keyof AbilityCategories,
@@ -453,13 +453,13 @@ export const AnalyzeToolDetails = ({
                     const categoryName = abilitiesCategoryNames[category];
                     return (
                       <div
-                        className='bg-dark-grey p-4 rounded-lg shadow-md'
+                        className='bg-background p-5 rounded-lg shadow-md'
                         key={index}
                       >
                         <Paragraph className='font-medium'>
                           {categoryName}
                         </Paragraph>
-                        <Paragraph className='text-4xl font-bold text-light-blue'>
+                        <Paragraph className='text-4xl font-bold text-humanoid'>
                           {count.length}
                         </Paragraph>
                       </div>
@@ -472,19 +472,19 @@ export const AnalyzeToolDetails = ({
           {safeStats.weatherChanges &&
             Object.keys(safeStats.weatherChanges).length > 0 && (
               <div className='mb-10'>
-                <Heading as='h4' className='text-lg font-bold mb-2'>
+                <Heading as='h4' className='text-lg font-bold mb-2.5'>
                   {'Weather Changes Overview'}
                 </Heading>
-                <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-4'>
+                <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5 mb-5'>
                   {Object.entries(safeStats.weatherChanges.byType)
                     .sort((a, b) => b[1] - a[1])
                     .map(([weather, count], index) => (
                       <div
-                        className='bg-dark-grey p-4 rounded-lg shadow-md'
+                        className='bg-background p-5 rounded-lg shadow-md'
                         key={index}
                       >
                         <Paragraph className='font-medium'>{weather}</Paragraph>
-                        <Paragraph className='text-4xl font-bold text-light-blue'>
+                        <Paragraph className='text-4xl font-bold text-humanoid'>
                           {count}
                         </Paragraph>
                       </div>
@@ -495,7 +495,7 @@ export const AnalyzeToolDetails = ({
 
           {usedAbilities && (
             <div>
-              <Heading as='h4' className='text-lg font-bold mb-2'>
+              <Heading as='h4' className='text-lg font-bold mb-2.5'>
                 {'Abilities Usage Lists'}
               </Heading>
               {(
@@ -509,7 +509,7 @@ export const AnalyzeToolDetails = ({
                   <div key={index} className='mb-5 last-of-type:mb-0'>
                     <Heading
                       as='h5'
-                      className='text-md font-bold text-light-blue mb-2'
+                      className='text-md font-bold text-humanoid mb-2.5'
                     >
                       {abilitiesCategoryNames[category]}
                     </Heading>
@@ -517,7 +517,7 @@ export const AnalyzeToolDetails = ({
                       {abilities.map((ability, i) => (
                         <div
                           key={i}
-                          className='bg-dark-grey p-2 rounded-lg text-sm shadow-md'
+                          className='bg-background p-2.5 rounded-lg text-sm shadow-md'
                         >
                           {ability}
                         </div>

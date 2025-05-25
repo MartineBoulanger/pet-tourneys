@@ -45,7 +45,7 @@ export const styles = StyleSheet.create({
   coverImage: {
     width: 250,
     height: 250,
-    marginBottom: 30,
+    marginBottom: 40,
   },
   coverMeta: {
     fontSize: 12,

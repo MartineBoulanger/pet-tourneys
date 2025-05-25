@@ -43,12 +43,12 @@ export const LoginForm = () => {
             type='password'
             required
           />
-          <AuthButton type='login' loading={loading} className='mt-4' />
+          <AuthButton type='login' loading={loading} className='mt-5' />
         </Form>
-        <div className='mt-4 flex items-center'>
+        <div className='mt-5 flex items-center'>
           <Paragraph>{`Don't have an account?`}</Paragraph>
           <Link
-            className='link font-bold ml-2 text-light-blue'
+            className='link font-bold ml-2.5'
             href='/register'
             title='sign up'
             aria-label='sign up'
@@ -56,10 +56,10 @@ export const LoginForm = () => {
             {'Sign Up'}
           </Link>
         </div>
-        <div className='mt-2 flex items-center'>
+        <div className='mt-2.5 flex items-center'>
           <Paragraph>{`Forgot your password?`}</Paragraph>
           <Link
-            className='link font-bold ml-2 text-light-blue'
+            className='link font-bold ml-2.5'
             href='/forgot-password'
             title='reset password'
             aria-label='reset password'
@@ -68,7 +68,7 @@ export const LoginForm = () => {
           </Link>
         </div>
       </div>
-      <div className='mt-5 p-5 bg-dark-grey rounded-lg shadow-md w-full flex justify-center'>
+      <div className='mt-5 p-5 bg-background rounded-lg shadow-md w-full flex justify-center'>
         <LoginDiscord />
       </div>
     </>

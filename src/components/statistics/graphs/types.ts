@@ -1,24 +1,24 @@
 import { Props } from 'recharts/types/component/ResponsiveContainer';
 
 // Types that set the structure of the data/objects
-type DataType = {
+export type DataType = {
   name: string | number;
   value: number | string;
 };
-type DataTypeWithFill = {
+export type DataTypeWithFill = {
   name: string | number;
   value: number | string;
   fill: string;
 };
-type DataTypeWithMultiValues = {
+export type DataTypeWithMultiValues = {
   name: string | number;
   value1: number | string;
   value2: number | string;
 };
-type StringObjType = Record<string, string>;
+export type StringObjType = Record<string, string>;
 
 // Generic interface with props that can be used in all graphs components
-interface GraphsProps<T> {
+export interface GraphsProps<T> {
   data: T[] | undefined;
   fillColors?: StringObjType;
   tooltip?: string;
@@ -30,8 +30,6 @@ interface GraphsProps<T> {
 export interface GraphWrapperProps extends Props {
   containerHeight?: number | string;
 }
-
-export interface PieGraphProps extends GraphsProps<DataType> {}
 
 export interface RadarGraphProps extends GraphsProps<DataType> {
   legendText?: string;
@@ -55,5 +53,3 @@ export interface DoubleBarGraphProps
   tooltip2?: string;
   legendValues?: StringObjType;
 }
-
-export interface RadialGraphProps extends GraphsProps<DataTypeWithFill> {}

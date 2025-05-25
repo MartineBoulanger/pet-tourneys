@@ -5,7 +5,7 @@ import { PageCardProps } from './types';
 
 export const PageCard = ({ page }: PageCardProps) => {
   return (
-    <div className='border-2 border-light-grey bg-dark-grey shadow-md rounded-lg flex flex-col items-center justify-between gap-5 p-5'>
+    <div className='bg-background shadow-md rounded-lg flex flex-col items-center justify-between gap-5 p-5'>
       <Heading as='h2' className='text-center text-5xl'>
         {page.pageTitle}
       </Heading>

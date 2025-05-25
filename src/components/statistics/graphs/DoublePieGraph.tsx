@@ -20,7 +20,7 @@ export const DoublePieGraph = ({
 
   if (!data || !data2 || data.length === 0 || data2.length === 0) {
     return (
-      <p className='text-center py-8'>
+      <p className='text-center bg-background rounded-lg py-5'>
         {'No double pie chart data available.'}
       </p>
     );

@@ -9,7 +9,9 @@ import { COLORS } from '@/utils/constants';
 export function PetStatsCharts({ pets }: PetStatsChartsProps) {
   if (!pets) {
     return (
-      <p className='text-center py-8'>{'No pet stats chart data available.'}</p>
+      <p className='text-center bg-background rounded-lg py-5'>
+        {'No pet stats data available.'}
+      </p>
     );
   }
 

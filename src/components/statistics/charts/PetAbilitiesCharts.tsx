@@ -8,24 +8,24 @@ export const PetAbilitiesCharts = ({
 }: PetAbilitiesChartsProps) => {
   if (!abilityStats) {
     return (
-      <p className='text-center py-8'>
-        {'No pet abilities charts data available.'}
+      <p className='text-center bg-background rounded-lg py-5'>
+        {'No pet abilities data available.'}
       </p>
     );
   }
 
   return (
-    <div className='mb-5 lg:mb-10'>
+    <div className='mb-5 lg:mb-10 z-0'>
       <Heading as='h2' className='text-xl sm:text-3xl mb-2.5'>
         {'Overall Pet Abilities Statistics'}
       </Heading>
       <div className='flex flex-wrap flex-col md:flex-row gap-5 mb-5'>
-        {abilityStats?.totalUniqueAbilitiesUsed && (
+        {abilityStats?.totalUniqueAbilitiesUsed ? (
           <OverviewCard
             title='Total Unique Abilities Used'
-            value={abilityStats?.totalUniqueAbilitiesUsed || 0}
+            value={abilityStats?.totalUniqueAbilitiesUsed}
           />
-        )}
+        ) : null}
       </div>
       <div className='bg-light-grey rounded-lg shadow-md p-2.5 sm:p-5'>
         <Heading as='h2' className='text-lg mb-2.5 font-sans'>
@@ -49,7 +49,11 @@ export const PetAbilitiesCharts = ({
                   />
                 );
               }
-              return null;
+              return (
+                <p className='text-center bg-background rounded-lg py-5'>
+                  {'No abilities data available.'}
+                </p>
+              );
             })}
         </div>
       </div>

@@ -27,8 +27,8 @@ export const RadarGraph = ({
 
   if (!data || data.length === 0) {
     return (
-      <p className='text-center text-dark-red py-5'>
-        {'No data available yet.'}
+      <p className='text-center bg-background rounded-lg py-5'>
+        {'No radar chart data available.'}
       </p>
     );
   }

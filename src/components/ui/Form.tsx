@@ -32,7 +32,7 @@ export const Form = ({
     <form
       onSubmit={handleSubmit}
       className={cn(
-        'p-5 bg-dark-grey rounded-lg flex flex-col w-full gap-4',
+        'p-5 bg-background rounded-lg flex flex-col w-full gap-5',
         className
       )}
     >

@@ -84,12 +84,12 @@ export default async function AdminMatchesPage({
       <AdminPanelButtons isMatchesPage />
       <div>
         <div className='mb-5'>
-          <Heading as='h2' className='text-xl mb-2'>
+          <Heading as='h2' className='text-xl mb-2.5'>
             {'Tournament Matches'}
           </Heading>
-          <Paragraph className='text-light-blue'>{tournament.name}</Paragraph>
+          <Paragraph className='text-humanoid'>{tournament.name}</Paragraph>
         </div>
-        <div className='grid gap-4'>
+        <div className='grid gap-2.5 bg-light-grey p-5 rounded-lg shadow-md'>
           {matches && matches.length > 0 ? (
             <>
               {matches.map((match) => (
@@ -108,7 +108,7 @@ export default async function AdminMatchesPage({
               )}
             </>
           ) : (
-            <Paragraph className='p-4 rounded-lg bg-light-grey text-center shadow-md'>
+            <Paragraph className='p-5 rounded-lg bg-background text-center shadow-md'>
               {
                 'There are no matches for this tournament yet, please upload some battle logs.'
               }

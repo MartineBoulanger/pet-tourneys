@@ -77,8 +77,13 @@ export const weatherColors: Record<string, string> = {
   'Toxic Gas': '#2d9318',
 };
 
+// color palette and values names for the oet performance bar chart
 export const petPerformanceLegendValues = {
   value1: 'Kills',
   value2: 'Deaths',
+};
+export const petPerformanceLegendValuesColor = {
+  value1: '#11a7f6',
+  value2: '#dc2626',
 };
 // TODO: make sure these colors can be used in the new created generic components for the graphs + fix that navigation goes fast and immediately shows skeletons instead of waiting every time -> probably has to be done with the loading.tsx in each page folder

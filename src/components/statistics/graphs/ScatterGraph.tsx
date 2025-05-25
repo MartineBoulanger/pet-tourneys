@@ -24,7 +24,9 @@ export const ScatterGraph = ({
 
   if (!data || data.length === 0) {
     return (
-      <p className='text-center py-8'>{'No scatter data available yet.'}</p>
+      <p className='text-center bg-background rounded-lg py-5'>
+        {'No scatter chart data available.'}
+      </p>
     );
   }
 

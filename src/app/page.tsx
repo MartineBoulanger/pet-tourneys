@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { Container, Heading, Paragraph } from '@/components/ui';
 
-export default async function HomePage() {
+export default function HomePage() {
   return (
     <>
       <div className='w-full h-full lg:h-[768px]'>
@@ -16,12 +16,12 @@ export default async function HomePage() {
       </div>
       <Container className='text-center'>
         <Heading>{'WoW Pet Community'}</Heading>
-        <Paragraph className='font-warcraft text-xl'>
+        <Paragraph className='text-xl'>
           {
             'The World of Warcraft community for all things Battle Pets and Pet Battling! '
           }
         </Paragraph>
-        <Paragraph className='mb-10 font-warcraft text-xl'>
+        <Paragraph className='mb-10 text-xl'>
           {'Also the Community for the Pet Battle PvP Tournaments!'}
         </Paragraph>
       </Container>

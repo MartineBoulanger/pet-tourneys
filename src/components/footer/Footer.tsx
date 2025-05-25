@@ -20,7 +20,7 @@ export const Footer = async () => {
           </Link>
         ))}
       </div>
-      <div className='pt-5 flex items-center justify-center text-sm text-light-blue'>
+      <div className='pt-5 flex items-center justify-center text-sm text-humanoid'>
         <FaRegCopyright />
         {new Date().getFullYear()} {'WoW Pet Community'}
       </div>

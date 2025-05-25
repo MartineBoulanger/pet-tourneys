@@ -29,10 +29,7 @@ export interface ActivePets {
 }
 
 export interface BattleStatistics {
-  totalPetSwaps: {
-    player: number;
-    opponent: number;
-  };
+  totalPetSwaps: Record<string, number>;
   petSwapDetails: Record<string, number>;
   weatherChanges: {
     total: number;

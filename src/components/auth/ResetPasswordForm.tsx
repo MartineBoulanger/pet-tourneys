@@ -46,7 +46,7 @@ export const ResetPasswordForm = () => {
           name='password'
           required
         />
-        <AuthButton type='Reset Password' loading={loading} className='mt-4' />
+        <AuthButton type='Reset Password' loading={loading} className='mt-5' />
       </Form>
     </div>
   );

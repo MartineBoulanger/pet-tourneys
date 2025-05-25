@@ -17,7 +17,7 @@ export async function generateMetadata({
 }) {
   const { id, matchId } = await params;
   return {
-    title: 'Tourney Match Details',
+    title: 'Match Details',
     alternates: {
       canonical: `${process.env
         .NEXT_PUBLIC_BASE_URL!}/tournaments/${id}/matches/${matchId}`,
@@ -56,6 +56,11 @@ export default async function MatchPage({
     },
     {
       id: 2,
+      url: `/tournaments/${id}/statistics/pet-stats?matchId=${matchId}`,
+      text: 'Match Pets Statistics',
+    },
+    {
+      id: 3,
       url: `/tournaments/${id}`,
       text: 'Back To Tournament',
     },
@@ -89,7 +94,7 @@ export default async function MatchPage({
             </div>
           ))
         ) : (
-          <Paragraph className='text-gray-500'>
+          <Paragraph className='p-5 rounded-lg bg-light-grey text-center shadow-md'>
             {'No battle logs available.'}
           </Paragraph>
         )}

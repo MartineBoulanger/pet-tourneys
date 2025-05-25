@@ -44,24 +44,24 @@ export const DeleteMatch = ({
       </Button>
       {isOpen && (
         <div
-          className='fixed inset-0 bg-background/80 flex items-center justify-center p-4 z-50'
+          className='fixed inset-0 bg-background/80 flex items-center justify-center z-50'
           onClick={() => setIsOpen(false)}
         >
           <div
             className='bg-light-grey rounded-lg p-5 max-w-md w-full'
             onClick={(e) => e.stopPropagation()}
           >
-            <Heading className='mb-4'>{'Confirm Deletion'}</Heading>
-            <Paragraph className='mb-6'>
+            <Heading className='mb-5'>{'Confirm Deletion'}</Heading>
+            <Paragraph className='mb-5'>
               {
                 'Are you sure you want to delete the match with the battle logs '
               }
-              <strong className='text-light-blue'>
+              <strong className='text-humanoid'>
                 {player1 + ' vs ' + player2}
               </strong>
               {'? This action cannot be undone.'}
             </Paragraph>
-            <div className='flex justify-end gap-3'>
+            <div className='flex justify-end gap-5'>
               <Button
                 onClick={() => setIsOpen(false)}
                 variant='secondary'

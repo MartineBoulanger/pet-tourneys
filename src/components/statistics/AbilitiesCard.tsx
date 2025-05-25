@@ -2,7 +2,8 @@
 
 import { useState } from 'react';
 import { abilitiesCategoryNames } from '@/utils/analyzeToolHelpers';
-import { AbilityPopup } from './AbilityPopup';
+import { AbilitiesPopup } from './AbilitiesPopup';
+import { Modal, Heading, Paragraph } from '@/components/ui';
 
 export function AbilitiesCard({
   category,
@@ -11,44 +12,47 @@ export function AbilitiesCard({
   category: string;
   abilities: string[];
 }) {
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <>
-      <div className='bg-background p-5 rounded-lg shadow-md w-full flex flex-wrap items-start justify-between'>
+      <div
+        className='bg-background p-5 rounded-lg shadow-md w-full flex flex-wrap items-start justify-between cursor-pointer lg:hover:scale-[1.03] lg:hover:transition-all lg:hover:duration-500'
+        onClick={() => setIsOpen(true)}
+      >
         <div className='w-[40%]'>
-          <h3 className='text-xl text-muted-foreground'>
+          <Heading as='h3' className='text-xl'>
             {abilitiesCategoryNames[
               category as keyof typeof abilitiesCategoryNames
             ] || category}
-          </h3>
-          <p className='text-4xl text-humanoid font-bold mb-2.5'>
+          </Heading>
+          <Paragraph className='text-4xl text-humanoid font-bold mb-2.5'>
             {abilities.length}
-          </p>
+          </Paragraph>
         </div>
         <div className='w-0.5 h-full bg-light-grey rounded-full' />
         <div className='space-y-1 w-[40%]'>
           {abilities.slice(0, 3).map((ability) => (
-            <p key={ability} className='text-sm'>
+            <Paragraph key={ability} className='text-sm'>
               {ability}
-            </p>
+            </Paragraph>
           ))}
           {abilities.length > 3 && (
-            <p className='text-sm text-muted-foreground text-humanoid'>
+            <Paragraph className='text-sm text-muted-foreground text-humanoid'>
               {'+'}
               {abilities.length - 3}
               {' more...'}
-            </p>
+            </Paragraph>
           )}
         </div>
       </div>
-
-      <AbilityPopup
-        category={category}
-        abilities={abilities}
-        open={isPopupOpen}
-        onClose={() => setIsPopupOpen(false)}
-      />
+      <Modal
+        show={isOpen}
+        onClose={() => setIsOpen(false)}
+        className='bg-light-grey'
+      >
+        <AbilitiesPopup category={category} abilities={abilities} />
+      </Modal>
     </>
   );
 }

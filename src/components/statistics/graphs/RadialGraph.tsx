@@ -9,20 +9,20 @@ import {
   TooltipProps,
 } from 'recharts';
 import { GraphWrapper } from './GraphWrapper';
-import { RadialGraphProps } from './types';
+import { GraphsProps, DataTypeWithFill } from './types';
 import { useWindowSize } from '@/hooks/useWindowSize';
 
 export const RadialGraph = ({
   data,
   tooltip,
   showLegend = true,
-}: RadialGraphProps) => {
+}: GraphsProps<DataTypeWithFill>) => {
   const { isMobile } = useWindowSize();
 
   if (!data || data.length === 0) {
     return (
-      <p className='text-center py-8'>
-        {'No radial chart data available yet.'}
+      <p className='text-center bg-background rounded-lg py-5'>
+        {'No radial chart data available.'}
       </p>
     );
   }

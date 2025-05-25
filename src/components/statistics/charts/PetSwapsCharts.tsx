@@ -7,8 +7,8 @@ import { transformPetSwapData } from '@/utils/analyzeToolHelpers';
 export const PetSwapsCharts = ({ battleStats }: PetSwapsChartsProps) => {
   if (!battleStats) {
     return (
-      <p className='text-center py-8'>
-        {'No battle stats chart data available.'}
+      <p className='text-center bg-background rounded-lg py-5'>
+        {'No pet swaps data available.'}
       </p>
     );
   }

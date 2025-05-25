@@ -23,7 +23,7 @@ export async function getTournamentBattleStats(tournamentId: string): Promise<{
       name: string;
       value: number;
     }[];
-  }; // TODO: make graphs for these petStats and battleStats, abilityStats should be like the totalMatches,
+  };
   petStats: Array<{
     name: string;
     count: number;
@@ -79,7 +79,7 @@ export async function getTournamentBattleStats(tournamentId: string): Promise<{
   if (!battleLogs || battleLogs.length === 0) {
     return {
       generalStats: {
-        averageDuration: 'N/A',
+        averageDuration: '',
         totalBattles: 0,
         totalMatches: 0,
         matchesByRegion: [],
@@ -88,7 +88,7 @@ export async function getTournamentBattleStats(tournamentId: string): Promise<{
       petStats: [],
       abilityStats: {} as ReturnType<typeof analyzeUsedAbilities>,
       battleStats: {
-        totalPetSwaps: { player: 0, opponent: 0 },
+        totalPetSwaps: {},
         petSwapDetails: {},
         weatherChanges: { total: 0, byType: {} },
         totalWeatherChanges: 0,
@@ -127,7 +127,7 @@ export async function getTournamentBattleStats(tournamentId: string): Promise<{
     battleStats: parseBattleStatistics(battleLogs),
   };
 }
-// TODO: for later to set the battle result per match as well
+
 export async function getMatchBattleStats(
   tournamentId: string,
   matchId: string
@@ -162,7 +162,7 @@ export async function getMatchBattleStats(
   if (!battleLogs || battleLogs.length === 0) {
     return {
       generalStats: {
-        averageDuration: 'N/A',
+        averageDuration: '',
         totalBattles: 0,
         totalMatches: 0,
         matchesByRegion: [],
@@ -171,7 +171,7 @@ export async function getMatchBattleStats(
       petStats: [],
       abilityStats: {} as ReturnType<typeof analyzeUsedAbilities>,
       battleStats: {
-        totalPetSwaps: { player: 0, opponent: 0 },
+        totalPetSwaps: {},
         petSwapDetails: {},
         weatherChanges: { total: 0, byType: {} },
         totalWeatherChanges: 0,

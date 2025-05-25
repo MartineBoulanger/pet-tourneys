@@ -2,7 +2,10 @@ import { PetPerformanceChartsProps } from '../types';
 import { DoubleBarGraph, RadialGraph } from '../graphs';
 import { Heading } from '@/components/ui';
 import { OverviewCard } from '../OverviewCard';
-import { weatherColors } from '@/utils/constants';
+import {
+  petPerformanceLegendValuesColor,
+  weatherColors,
+} from '@/utils/constants';
 import { petPerformanceLegendValues } from '@/utils/constants';
 
 export const PetPerformanceCharts = ({
@@ -10,8 +13,8 @@ export const PetPerformanceCharts = ({
 }: PetPerformanceChartsProps) => {
   if (!battleStats) {
     return (
-      <p className='text-center py-8'>
-        {'No battle stats chart data available.'}
+      <p className='text-center bg-background rounded-lg py-5'>
+        {'No pet performance chart data available.'}
       </p>
     );
   }
@@ -43,18 +46,18 @@ export const PetPerformanceCharts = ({
         {'Overall Pet Performance Statistics'}
       </Heading>
       <div className='flex flex-wrap flex-col md:flex-row gap-5 mb-5'>
-        {battleStats?.totalWeatherChanges && (
+        {battleStats?.totalWeatherChanges ? (
           <OverviewCard
             title='Total Weather Changes'
-            value={battleStats.totalWeatherChanges || 0}
+            value={battleStats.totalWeatherChanges}
           />
-        )}
-        {battleStats?.totalKills && (
+        ) : null}
+        {battleStats?.totalKills ? (
           <OverviewCard title='Total Kills' value={battleStats.totalKills} />
-        )}
-        {battleStats?.totalDeaths && (
+        ) : null}
+        {battleStats?.totalDeaths ? (
           <OverviewCard title='Total Deaths' value={battleStats.totalDeaths} />
-        )}
+        ) : null}
       </div>
       <div className='bg-light-grey rounded-lg shadow-md grid grid-cols-1 md:grid-cols-2 gap-5 p-2.5 sm:p-5'>
         <div>
@@ -68,6 +71,7 @@ export const PetPerformanceCharts = ({
               tooltip2={'Deaths: '}
               color={'#11a7f6'}
               color2={'#d52824'}
+              fillColors={petPerformanceLegendValuesColor}
               legendValues={petPerformanceLegendValues}
               showLegend
             />

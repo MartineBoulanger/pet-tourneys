@@ -4,7 +4,7 @@
 
 import { Cell, PieChart, Pie, Tooltip, Legend, TooltipProps } from 'recharts';
 import { GraphWrapper } from './GraphWrapper';
-import { PieGraphProps } from './types';
+import { GraphsProps, DataType } from './types';
 import { useWindowSize } from '@/hooks/useWindowSize';
 import { capitalizeWord } from '@/utils/cn';
 
@@ -14,11 +14,15 @@ export const PieGraph = ({
   fillColors,
   color = '#303030',
   tooltip,
-}: PieGraphProps) => {
+}: GraphsProps<DataType>) => {
   const { isMobile } = useWindowSize();
 
   if (!data || data.length === 0) {
-    return <p className='text-center py-8'>{'No pie data available yet.'}</p>;
+    return (
+      <p className='text-center bg-background rounded-lg py-5'>
+        {'No pie chart data available.'}
+      </p>
+    );
   }
 
   const CustomTooltip = ({
