@@ -7,16 +7,16 @@ import {
   PageHeading,
   Heading,
   Paragraph,
-  ActionDropdownItem,
+  ActionDropdown,
 } from '@/components/ui';
 import { PageParams, PageSearchParams } from '@/types';
-import { MATCHES_PER_PAGE } from '@/types/constants';
-import { linksData } from '@/lib/linksData';
+import { Links } from '@/lib/types';
+import { MATCHES_PER_PAGE } from '@/utils/constants';
 
 export async function generateMetadata({ params }: { params: PageParams }) {
   const { id } = await params;
   return {
-    title: 'Tourney Details',
+    title: 'Tournament Details',
     alternates: {
       canonical: `${process.env.NEXT_PUBLIC_BASE_URL!}/tournaments/${id}`,
     },
@@ -59,27 +59,31 @@ export default async function TournamentPage({
 
   if (!tournament || !matches) return notFound();
 
+  // make links data for the dropdown menu on the page
+  const links: Links = [
+    {
+      id: 1,
+      url: `/tournaments/${tournament.id}/statistics`,
+      text: 'Tournament Statistics',
+    },
+    {
+      id: 2,
+      url: `/tournaments/${tournament.id}/statistics/pet-stats`,
+      text: 'Tournament Pets Statistics',
+    },
+    {
+      id: 3,
+      url: '/tournaments',
+      text: 'Back To Tournaments',
+    },
+  ];
+
   return (
     <Container>
       <PageHeading heading={tournament.name}>
-        <div className='flex flex-col gap-2.5'>
-          {linksData.tournament.map((link) => {
-            const url = link.full_url
-              ? link.full_url
-              : `${link.url_prefix}${tournament.id}${
-                  link.url_suffix ? link.url_suffix : ''
-                }`;
-            return (
-              <ActionDropdownItem
-                key={link.id}
-                url={url}
-                text={link.text || ''}
-              />
-            );
-          })}
-        </div>
+        <ActionDropdown links={links} />
       </PageHeading>
-      <div className='mb-10 text-foreground'>
+      <div className='mb-10'>
         <Paragraph>
           {new Date(tournament.start_date).toLocaleDateString()} -{' '}
           {tournament.end_date === '1999-12-31T22:00:00' ||
@@ -87,7 +91,7 @@ export default async function TournamentPage({
             ? 'Ongoing'
             : new Date(tournament.end_date).toLocaleDateString()}
         </Paragraph>
-        <Paragraph className='font-bold text-light-blue'>
+        <Paragraph className='font-bold text-humanoid'>
           {tournament.participant_count}
           {' participants'}
         </Paragraph>
@@ -100,7 +104,7 @@ export default async function TournamentPage({
           totalPages={totalPages}
         />
       ) : (
-        <Paragraph className='p-4 rounded-lg bg-light-grey text-center shadow-md'>
+        <Paragraph className='p-5 rounded-lg bg-background text-center shadow-md'>
           {'There are no matches for this tournament available yet.'}
         </Paragraph>
       )}

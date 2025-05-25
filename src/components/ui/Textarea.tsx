@@ -1,7 +1,22 @@
 'use client';
 
+import { DetailedHTMLProps, TextareaHTMLAttributes } from 'react';
 import { cn } from '@/utils/cn';
-import { TextareaProps } from '@/types';
+
+interface TextareaProps
+  extends Omit<
+    DetailedHTMLProps<
+      TextareaHTMLAttributes<HTMLTextAreaElement>,
+      HTMLTextAreaElement
+    >,
+    'required' | 'rows'
+  > {
+  label: string;
+  id: string;
+  name: string;
+  rows: number;
+  required?: boolean;
+}
 
 export const Textarea = ({
   label,

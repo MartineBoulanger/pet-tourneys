@@ -1,10 +1,16 @@
 'use client';
 
-import { useState } from 'react';
+import { JSX, ReactNode, useState } from 'react';
 import { PiDotsThreeOutlineVertical } from 'react-icons/pi';
 import { cn } from '@/utils/cn';
-import { PopupProps } from '@/types';
 import { Button } from '@/components/ui';
+
+interface PopupProps {
+  text?: ReactNode | JSX.Element | string | number;
+  children: ReactNode;
+  className?: string;
+  divClassName?: string;
+}
 
 export const PopUp = ({
   text = '',
@@ -31,7 +37,7 @@ export const PopUp = ({
       {isOpen && (
         <div
           className={cn(
-            'absolute top-full bg-dark-grey p-4 rounded-lg shadow-md animate-slide-in-top',
+            'absolute top-full bg-background p-5 rounded-lg shadow-md animate-slide-in-top',
             divClassName
           )}
         >

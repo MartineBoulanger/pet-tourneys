@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { toast } from 'sonner';
 import { parseBattleLog, parsePetUsage } from '@/utils/parsers';
-import { BattleLog, PetData } from '@/types';
+import { BattleLog, PetData } from '@/utils/types';
 import {
   Form,
   Input,
@@ -112,7 +112,7 @@ export const AnalyzeToolForm = () => {
       <div className='bg-light-grey shadow-md rounded-lg p-5'>
         <Form
           handleSubmit={handleSubmit}
-          className='space-y-4'
+          className='space-y-5'
           button1={{
             variant: 'secondary',
             type: 'button',

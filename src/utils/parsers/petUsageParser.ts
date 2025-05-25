@@ -1,4 +1,4 @@
-import { PetUsageData } from '@/types';
+import { PetUsageData } from '../types';
 
 export function parsePetUsage(rawUsage: string) {
   if (!rawUsage) return [];

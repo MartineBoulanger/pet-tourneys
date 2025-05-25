@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { AssetProps } from '@/types';
+import { AssetProps } from './types';
 import { cn } from '@/utils/cn';
 
 const Asset = ({

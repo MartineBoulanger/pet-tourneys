@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui';
-import { CtaProps } from '@/types';
+import { CtaProps } from './types';
 
 const Cta = ({ component }: CtaProps) => {
   if (!component) return null;

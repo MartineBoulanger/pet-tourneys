@@ -1,5 +1,8 @@
-import { FormErrorMessageProps } from '@/types';
 import { Paragraph } from './Paragraph';
+
+interface FormErrorMessageProps {
+  message?: string | undefined | null;
+}
 
 export const FormErrorMessage = ({ message }: FormErrorMessageProps) => {
   return message ? (

@@ -2,11 +2,11 @@ import Link from 'next/link';
 import { FaEdit } from 'react-icons/fa';
 import { GiBattleGear } from 'react-icons/gi';
 import { DeleteTournament } from './DeleteTournament';
-import { DeleteTournamentProps } from '@/types';
+import { DeleteTournamentProps } from './types';
 
 export const AdminTournamentActions = ({ id, name }: DeleteTournamentProps) => {
   return (
-    <div className='flex flex-col-reverse md:flex-row items-center justify-center md:justify-evenly gap-4'>
+    <div className='flex flex-col-reverse md:flex-row items-center justify-center md:justify-evenly gap-5'>
       <Link
         className='btn-link'
         href={`/admin/tournaments/${id}/matches`}

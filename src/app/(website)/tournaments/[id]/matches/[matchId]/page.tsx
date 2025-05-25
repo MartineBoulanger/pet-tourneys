@@ -4,11 +4,11 @@ import {
   PageHeading,
   Heading,
   Paragraph,
-  ActionDropdownItem,
+  ActionDropdown,
 } from '@/components/ui';
 import { getMatchDetails } from '@/supabase/actions/matches';
 import { MatchPageParams } from '@/types';
-import { linksData } from '@/lib/linksData';
+import { Links } from '@/lib/types';
 
 export async function generateMetadata({
   params,
@@ -17,7 +17,7 @@ export async function generateMetadata({
 }) {
   const { id, matchId } = await params;
   return {
-    title: 'Tourney Match Details',
+    title: 'Match Details',
     alternates: {
       canonical: `${process.env
         .NEXT_PUBLIC_BASE_URL!}/tournaments/${id}/matches/${matchId}`,
@@ -47,6 +47,25 @@ export default async function MatchPage({
     );
   }
 
+  // make links data for the dropdown menu on the page
+  const links: Links = [
+    {
+      id: 1,
+      url: `/tournaments/${id}/statistics?matchId=${matchId}`,
+      text: 'Match Statistics',
+    },
+    {
+      id: 2,
+      url: `/tournaments/${id}/statistics/pet-stats?matchId=${matchId}`,
+      text: 'Match Pets Statistics',
+    },
+    {
+      id: 3,
+      url: `/tournaments/${id}`,
+      text: 'Back To Tournament',
+    },
+  ];
+
   return (
     <Container>
       <PageHeading
@@ -60,22 +79,7 @@ export default async function MatchPage({
         }
         className='lg:mb-5'
       >
-        <div className='flex flex-col gap-2.5'>
-          {linksData.match.map((link) => {
-            const url = link.full_url
-              ? link.full_url
-              : `${link.url_prefix}${id}${
-                  link.url_suffix ? link.url_suffix : ''
-                }${link.url_suffix && matchId ? matchId : ''}`;
-            return (
-              <ActionDropdownItem
-                key={link.id}
-                url={url}
-                text={link.text || ''}
-              />
-            );
-          })}
-        </div>
+        <ActionDropdown links={links} />
       </PageHeading>
       {match && <MatchScore match={match} />}
       <div className='mb-10'>
@@ -90,7 +94,7 @@ export default async function MatchPage({
             </div>
           ))
         ) : (
-          <Paragraph className='text-gray-500'>
+          <Paragraph className='p-5 rounded-lg bg-light-grey text-center shadow-md'>
             {'No battle logs available.'}
           </Paragraph>
         )}

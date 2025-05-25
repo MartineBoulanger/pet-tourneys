@@ -34,7 +34,7 @@ export const ForgotPasswordForm = () => {
     <div className='bg-light-grey shadow-md rounded-lg p-5'>
       <Form handleSubmit={handleSubmit} message={error}>
         <Input type='email' label='Email' id='email' name='email' required />
-        <AuthButton type='Forgot Password' loading={loading} className='mt-4' />
+        <AuthButton type='Forgot Password' loading={loading} className='mt-5' />
       </Form>
     </div>
   );

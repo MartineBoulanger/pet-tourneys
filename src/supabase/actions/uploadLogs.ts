@@ -3,7 +3,7 @@
 import { createClient } from '@/supabase/server';
 import { parseBattleLog, parsePetUsage } from '@/utils/parsers';
 import { getTournamentTableName } from '@/utils/getTournamentTableName';
-import { UploadProps, PetData, PetUsageData } from '@/types';
+import { UploadProps, PetData, PetUsageData } from '@/utils/types';
 
 export async function uploadBattleLog(props: UploadProps) {
   const supabase = await createClient();

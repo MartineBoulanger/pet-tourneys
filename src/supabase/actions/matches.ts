@@ -2,9 +2,14 @@
 
 import { createClient } from '@/supabase/server';
 import { getTournamentTableName } from '@/utils/getTournamentTableName';
-import { PetUsage } from '@/types';
 import { parseBattleLog, parsePetUsage } from '@/utils/parsers';
 import { updateTournamentPetStats } from './uploadLogs';
+import { PetData } from '@/utils/types';
+
+interface PetUsage extends PetData {
+  id: string;
+  match_id: string;
+}
 
 export async function getMatch(tournamentId: string, matchId: string) {
   const supabase = await createClient();

@@ -1,5 +1,5 @@
 import dynamic from 'next/dynamic';
-import { PageContentItem, PageContentProps } from '@/types';
+import { PageContentItem, PageContentProps } from './types';
 
 const REGISTERED_COMPONENTS = {
   Banner: () => dynamic(() => import('@/components/contentful/Banner')),

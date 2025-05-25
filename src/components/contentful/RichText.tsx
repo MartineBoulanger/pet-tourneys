@@ -4,7 +4,7 @@ import {
 } from '@contentful/rich-text-react-renderer';
 import { BLOCKS, INLINES, MARKS } from '@contentful/rich-text-types';
 import Link from 'next/link';
-import { RichTextProps } from '@/types';
+import { RichTextProps } from './types';
 import { cn } from '@/utils/cn';
 import { Heading } from '@/components/ui';
 
@@ -36,7 +36,7 @@ const options = (): Options => {
         const h3 = node?.nodeType === 'heading-3';
         if (!h3) return null;
         return (
-          <Heading as='h3' className='font-bold text-xl text-light-blue mb-1.5'>
+          <Heading as='h3' className='font-bold text-xl text-humanoid mb-1.5'>
             {children}
           </Heading>
         );
@@ -45,7 +45,7 @@ const options = (): Options => {
         const h4 = node?.nodeType === 'heading-4';
         if (!h4) return null;
         return (
-          <Heading as='h4' className='font-bold text-lg text-light-blue mb-1'>
+          <Heading as='h4' className='font-bold text-lg text-humanoid mb-1'>
             {children}
           </Heading>
         );
@@ -71,7 +71,7 @@ const options = (): Options => {
       [BLOCKS.QUOTE]: (node, children) => {
         const quote = node?.nodeType === 'blockquote';
         if (!quote) return null;
-        return <q className='text-light-blue flex italic mb-5'>{children}</q>;
+        return <q className='text-humanoid flex italic mb-5'>{children}</q>;
       },
       [BLOCKS.HR]: (node) => {
         const hr = node?.nodeType === 'hr';
@@ -99,7 +99,7 @@ const options = (): Options => {
         return (
           <Link
             title={typeof children === 'string' ? children : 'inline text link'}
-            className='btn-link text-light-blue underline hover:text-blue'
+            className='btn-link text-humanoid underline hover:text-light-blue'
             href={url}
           >
             {children}
@@ -109,10 +109,10 @@ const options = (): Options => {
     },
     renderMark: {
       [MARKS.BOLD]: (text) => (
-        <span className='font-bold text-light-blue'>{text}</span>
+        <span className='font-bold text-humanoid'>{text}</span>
       ),
       [MARKS.ITALIC]: (text) => (
-        <span className='italic text-light-red'>{text}</span>
+        <span className='italic text-light-blue'>{text}</span>
       ),
       [MARKS.UNDERLINE]: (text) => <span className='underline'>{text}</span>,
       [MARKS.STRIKETHROUGH]: (text) => (

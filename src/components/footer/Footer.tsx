@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { FiExternalLink } from 'react-icons/fi';
 import { FaRegCopyright } from 'react-icons/fa';
-import { footerData } from '@/lib/footerData';
+import { footerData } from '@/lib/navigationData';
 
 export const Footer = async () => {
   return (
@@ -20,7 +20,7 @@ export const Footer = async () => {
           </Link>
         ))}
       </div>
-      <div className='pt-5 flex items-center justify-center text-sm text-light-blue'>
+      <div className='pt-5 flex items-center justify-center text-sm text-humanoid'>
         <FaRegCopyright />
         {new Date().getFullYear()} {'WoW Pet Community'}
       </div>

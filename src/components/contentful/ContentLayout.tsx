@@ -1,5 +1,5 @@
 import dynamic from 'next/dynamic';
-import { ContentLayoutItem, ContentLayoutProps } from '@/types';
+import { ContentLayoutItem, ContentLayoutProps } from './types';
 import { cn } from '@/utils/cn';
 
 const REGISTERED_COMPONENTS = {

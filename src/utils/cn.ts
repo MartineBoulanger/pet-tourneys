@@ -10,3 +10,8 @@ export function calculatePercentage(part: number, total: number): string {
   if (total === 0) return '0%';
   return `${Math.round((part / total) * 100)}%`;
 }
+
+export function capitalizeWord(str: string) {
+  if (!str) return '';
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}

@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { FaEdit } from 'react-icons/fa';
 import { DeleteMatch } from './DeleteMatch';
-import { DeleteMatchProps } from '@/types';
+import { DeleteMatchProps } from './types';
 
 export const AdminTournamentMatchActions = ({
   tournamentId,
@@ -10,7 +10,7 @@ export const AdminTournamentMatchActions = ({
   player2,
 }: DeleteMatchProps) => {
   return (
-    <div className='flex flex-col-reverse md:flex-row items-center justify-center md:justify-evenly gap-4'>
+    <div className='flex flex-col-reverse md:flex-row items-center justify-center md:justify-evenly gap-5'>
       <Link
         className='btn-link'
         href={`/admin/tournaments/${tournamentId}/matches/${matchId}/edit`}

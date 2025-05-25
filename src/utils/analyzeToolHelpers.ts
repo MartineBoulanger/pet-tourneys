@@ -3,7 +3,7 @@ import {
   AbilityCategories,
   BattleStatistics,
   ActivePets,
-} from '@/types';
+} from './types';
 import { allAbilities, EXCLUDED_ABILITIES } from '@/lib/logs-data';
 
 // Helper functions for analysis
@@ -475,4 +475,12 @@ export function parseBattleStatistics(
   });
 
   return stats;
+}
+
+export function transformPetSwapData(
+  petSwapDetails: Record<string, number>
+): { name: string; value: number }[] {
+  return Object.entries(petSwapDetails)
+    .map(([name, value]) => ({ name, value }))
+    .sort((a, b) => b.value - a.value); // Sort by swap count descending
 }

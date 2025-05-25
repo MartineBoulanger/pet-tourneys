@@ -2,9 +2,13 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { BiLogIn } from 'react-icons/bi';
 import { cn } from '@/utils/cn';
-import { BottomNavigationProps } from '@/types';
+import { Profile } from '@/types';
 import { Logout } from '@/components/auth/Logout';
 import { Menu } from './Menu';
+
+interface BottomNavigationProps {
+  user?: Profile | null;
+}
 
 export const BottomNavigation = ({ user }: BottomNavigationProps) => {
   return (

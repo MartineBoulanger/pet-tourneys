@@ -4,8 +4,8 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { FaTrash } from 'react-icons/fa';
 import { deleteTournament } from '@/supabase/actions/tournaments';
-import { DeleteTournamentProps } from '@/types';
 import { Heading, Button, Paragraph } from '@/components/ui';
+import { DeleteTournamentProps } from './types';
 
 export const DeleteTournament = ({ id, name }: DeleteTournamentProps) => {
   const router = useRouter();
@@ -39,20 +39,20 @@ export const DeleteTournament = ({ id, name }: DeleteTournamentProps) => {
       </Button>
       {isOpen && (
         <div
-          className='fixed inset-0 bg-background/80 flex items-center justify-center p-4 z-50'
+          className='fixed inset-0 bg-background/80 flex items-center justify-center z-[123]'
           onClick={() => setIsOpen(false)}
         >
           <div
             className='bg-light-grey rounded-lg p-5 max-w-md w-full'
             onClick={(e) => e.stopPropagation()}
           >
-            <Heading className='mb-4'>{'Confirm Deletion'}</Heading>
-            <Paragraph className='mb-6'>
+            <Heading className='mb-5'>{'Confirm Deletion'}</Heading>
+            <Paragraph className='mb-5'>
               {'Are you sure you want to delete the tournament '}
-              <strong className='text-light-blue'>{name}</strong>
+              <strong className='text-humanoid'>{name}</strong>
               {'? This action cannot be undone.'}
             </Paragraph>
-            <div className='flex justify-end gap-3'>
+            <div className='flex justify-end gap-5'>
               <Button
                 onClick={() => setIsOpen(false)}
                 variant='secondary'

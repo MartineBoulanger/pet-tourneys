@@ -8,7 +8,7 @@ import {
   createTournament,
   updateTournament,
 } from '@/supabase/actions/tournaments';
-import { TournamentFormProps } from '@/types';
+import { TournamentFormProps } from './types';
 
 export function TournamentForm({ initialData = null }: TournamentFormProps) {
   const router = useRouter();
@@ -152,11 +152,6 @@ export function TournamentForm({ initialData = null }: TournamentFormProps) {
               setFormData({ ...formData, end_date: e.target.value })
             }
           />
-          <span className='font-bold text-red text-xs'>
-            {
-              'Leave the date "31-12-1999 23:00" as is when the tournament is still ongoing, this can be edited later when the tournament has ended!'
-            }
-          </span>
         </div>
         <Input
           type='number'

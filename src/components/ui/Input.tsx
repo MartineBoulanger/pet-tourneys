@@ -1,7 +1,19 @@
 'use client';
 
+import { DetailedHTMLProps, InputHTMLAttributes } from 'react';
 import { cn } from '@/utils/cn';
-import { InputProps } from '@/types';
+
+interface InputProps
+  extends Omit<
+    DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>,
+    'required' | 'type'
+  > {
+  label: string;
+  id: string;
+  name: string;
+  type?: 'text' | 'email' | 'password' | 'number' | 'date' | 'datetime-local';
+  required?: boolean;
+}
 
 export const Input = ({
   label,

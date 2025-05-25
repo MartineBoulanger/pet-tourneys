@@ -37,7 +37,7 @@ export default async function TournamentsPage() {
       {tournaments.length > 0 ? (
         <TournamentsList tournaments={tournaments} />
       ) : (
-        <Paragraph className='p-4 rounded-lg bg-light-grey text-center shadow-md'>
+        <Paragraph className='p-5 rounded-lg bg-light-grey text-center shadow-md'>
           {'There are no tournaments available yet.'}
         </Paragraph>
       )}

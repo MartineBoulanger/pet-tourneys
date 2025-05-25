@@ -1,9 +1,13 @@
 'use client';
 
 import { useState } from 'react';
-import { BattleLogViewerProps, BattleRound } from '@/types';
-import { ROUNDS_PER_PAGE } from '@/types/constants';
+import { ROUNDS_PER_PAGE } from '@/utils/constants';
 import { Heading, Button } from '@/components/ui';
+import { BattleLog, BattleRound } from '@/utils/types';
+
+interface BattleLogViewerProps {
+  battleLog: BattleLog;
+}
 
 export function BattleLogViewer({ battleLog }: BattleLogViewerProps) {
   const battleRounds = battleLog.battle as unknown as BattleRound[];
@@ -41,16 +45,16 @@ export function BattleLogViewer({ battleLog }: BattleLogViewerProps) {
 
   return (
     <div className='rounded-lg overflow-hidden shadow-md'>
-      <div className='bg-light-grey p-4'>
+      <div className='bg-light-grey p-5'>
         <div className='flex justify-between items-center'>
           <div>
             <Heading as='h3' className='font-medium'>
               {'Battle on '}
               {formatTimestamp(battleLog.timestamp)}
             </Heading>
-            <div className='flex items-center mt-1'>
+            <div className='flex items-center mt-2.5'>
               <span
-                className={`text-sm px-2 py-1 rounded mr-2 ${
+                className={`text-sm px-2 py-1 rounded mr-2.5 ${
                   battleLog.result === 'WIN'
                     ? 'bg-green-100 text-green-800'
                     : battleLog.result === 'LOSS'
@@ -60,7 +64,7 @@ export function BattleLogViewer({ battleLog }: BattleLogViewerProps) {
               >
                 {battleLog.result}
               </span>
-              <span className='text-sm px-2 py-1 rounded text-foreground bg-medium-grey'>
+              <span className='text-sm px-2 py-1 rounded text-foreground bg-background'>
                 {battleLog.duration}
                 {' • '}
                 {battleLog.rounds}
@@ -71,9 +75,9 @@ export function BattleLogViewer({ battleLog }: BattleLogViewerProps) {
         </div>
       </div>
 
-      <div className='grid grid-cols-1 md:grid-cols-2 gap-4 p-4 border-b border-light-grey bg-dark-grey'>
+      <div className='grid grid-cols-1 md:grid-cols-2 gap-5 p-5 border-b border-light-grey bg-background'>
         <div>
-          <Heading as='h4' className='font-medium text-cyan-400 mb-2'>
+          <Heading as='h4' className='font-medium text-cyan-400 mb-2.5'>
             {'Log Owner Team'}
           </Heading>
           <ul className='space-y-1'>
@@ -85,7 +89,7 @@ export function BattleLogViewer({ battleLog }: BattleLogViewerProps) {
           </ul>
         </div>
         <div>
-          <Heading as='h4' className='font-medium text-purple-400 mb-2'>
+          <Heading as='h4' className='font-medium text-purple-400 mb-2.5'>
             {'Opponent Team'}
           </Heading>
           <ul className='space-y-1'>
@@ -98,16 +102,16 @@ export function BattleLogViewer({ battleLog }: BattleLogViewerProps) {
         </div>
       </div>
 
-      <div className='p-4 bg-dark-grey'>
+      <div className='p-5 bg-background'>
         <Heading as='h4' className='font-medium mb-3'>
           {'Battle Rounds'}
         </Heading>
-        <div className='space-y-2'>
+        <div className='space-y-2.5'>
           {battleRounds.slice(0, visibleRounds).map((round) => (
             <div key={round.round} className='rounded-md overflow-hidden'>
               <Button
                 onClick={() => toggleRound(round.round)}
-                className='w-full p-3 bg-light-grey hover:bg-medium-grey rounded-none'
+                className='w-full p-5 bg-light-grey hover:bg-medium-grey rounded-none'
                 title='Toggle round'
                 aria-label='Toggle round'
               >
@@ -121,8 +125,8 @@ export function BattleLogViewer({ battleLog }: BattleLogViewerProps) {
               </Button>
 
               {expandedRounds[round.round] && (
-                <div className='p-3 pt-0 border border-light-grey rounded-b-md'>
-                  <ul className='space-y-2'>
+                <div className='p-5 pt-2.5 border border-light-grey bg-dark-grey rounded-b-md'>
+                  <ul className='space-y-2.5'>
                     {round.events.map((event, index) => {
                       const cleanedEvent = event.replace(/^\d+\s*/, '');
 
@@ -190,7 +194,7 @@ export function BattleLogViewer({ battleLog }: BattleLogViewerProps) {
           ))}
         </div>
 
-        <div className='flex justify-center gap-4 mt-4'>
+        <div className='flex justify-center gap-5 mt-5'>
           {visibleRounds < battleRounds.length && (
             <Button
               onClick={showMoreRounds}

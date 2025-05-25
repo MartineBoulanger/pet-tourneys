@@ -2,7 +2,7 @@
 
 import { createClient } from '@/supabase/server';
 import { getTournamentTableName } from '@/utils/getTournamentTableName';
-import { TournamentPetStat } from '@/types';
+import { TournamentPetStat } from '@/utils/types';
 
 export async function getTournamentPetStats(
   tournamentId: string

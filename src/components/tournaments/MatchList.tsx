@@ -1,5 +1,5 @@
 import { MatchListItem } from './MatchListItem';
-import { MatchListProps } from '@/types';
+import { MatchListProps } from './types';
 import { Pagination, Heading } from '@/components/ui';
 
 export const MatchList = ({
@@ -13,7 +13,7 @@ export const MatchList = ({
       <Heading as='h2' className='text-xl mb-5'>
         {'Tournament Matches'}
       </Heading>
-      <div className='grid gap-4 mb-6'>
+      <div className='grid gap-2.5 mb-5 bg-light-grey p-2.5 sm:p-5 rounded-lg'>
         {matches.map((match) => (
           <MatchListItem
             key={match.id}
