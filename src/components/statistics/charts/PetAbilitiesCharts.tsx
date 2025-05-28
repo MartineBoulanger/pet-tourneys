@@ -1,11 +1,9 @@
 import { Heading } from '@/components/ui';
 import { OverviewCard } from '../OverviewCard';
 import { AbilitiesCard } from '../AbilitiesCard';
-import { PetAbilitiesChartsProps } from '../types';
+import { PetAbilitiesProps } from '../types';
 
-export const PetAbilitiesCharts = ({
-  abilityStats,
-}: PetAbilitiesChartsProps) => {
+export const PetAbilitiesCharts = ({ abilityStats }: PetAbilitiesProps) => {
   if (!abilityStats) {
     return (
       <p className='text-center bg-background rounded-lg py-5'>

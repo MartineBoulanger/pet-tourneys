@@ -72,11 +72,13 @@ export const ScatterGraph = ({
           type='number'
           dataKey='name'
           tick={{ fontSize: isMobile ? 12 : 14, fill: '#f1f1f1' }}
+          domain={['dataMin', 'dataMax']}
         />
         <YAxis
           type='number'
           dataKey='value'
           tick={{ fontSize: isMobile ? 12 : 14 }}
+          domain={['dataMin', 'dataMax']}
         />
         <Scatter data={data} shape='diamond'>
           {data.map((entry, index) => (

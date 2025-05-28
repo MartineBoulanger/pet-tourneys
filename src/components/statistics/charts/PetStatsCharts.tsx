@@ -1,13 +1,14 @@
 'use client';
 
 import { Heading } from '@/components/ui';
-import { PetStatsChartsProps } from '../types';
+import { ChartsProps } from '../types';
 import { ScatterGraph } from '../graphs';
 import { parseAndAggregateStats, convertToGraphData } from '@/utils/parsers';
 import { COLORS } from '@/utils/constants';
+import { TournamentPetStat } from '@/utils/types';
 
-export function PetStatsCharts({ pets }: PetStatsChartsProps) {
-  if (!pets) {
+export function PetStatsCharts({ data }: ChartsProps<TournamentPetStat>) {
+  if (!data) {
     return (
       <p className='text-center bg-background rounded-lg py-5'>
         {'No pet stats data available.'}
@@ -15,10 +16,10 @@ export function PetStatsCharts({ pets }: PetStatsChartsProps) {
     );
   }
 
-  const stats = parseAndAggregateStats(pets); // get parsed pet stats data
-  const healthData = convertToGraphData(stats.health);
-  const powerData = convertToGraphData(stats.power);
-  const speedData = convertToGraphData(stats.speed);
+  const stats = parseAndAggregateStats(data); // get parsed pet stats data
+  const healthData = convertToGraphData(stats.health, 900);
+  const powerData = convertToGraphData(stats.power, 150);
+  const speedData = convertToGraphData(stats.speed, 150);
 
   return (
     <div className='bg-light-grey rounded-lg shadow-md grid grid-cols-1 md:grid-cols-3 gap-5 p-2.5 sm:p-5'>

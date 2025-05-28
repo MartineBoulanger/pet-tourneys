@@ -21,14 +21,15 @@ export const MatchList = ({
             match={match}
           />
         ))}
+        {totalPages > 1 ? (
+          <Pagination
+            className='mt-2.5'
+            currentPage={currentPage}
+            totalPages={totalPages}
+            baseUrl={`/tournaments/${tournamentId}`}
+          />
+        ) : null}
       </div>
-      {totalPages > 1 ? (
-        <Pagination
-          currentPage={currentPage}
-          totalPages={totalPages}
-          baseUrl={`/tournaments/${tournamentId}`}
-        />
-      ) : null}
     </>
   );
 };

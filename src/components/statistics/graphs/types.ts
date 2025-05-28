@@ -24,6 +24,7 @@ export interface GraphsProps<T> {
   tooltip?: string;
   showLegend?: boolean;
   color?: string;
+  showWholeLabel?: boolean;
 }
 
 // Component interfaces
@@ -35,6 +36,10 @@ export interface RadarGraphProps extends GraphsProps<DataType> {
   legendText?: string;
   radarName?: string;
   angle?: number;
+}
+
+export interface BarGraphProps extends GraphsProps<DataType> {
+  color2?: string;
 }
 
 export interface ScatterGraphProps extends GraphsProps<DataType> {

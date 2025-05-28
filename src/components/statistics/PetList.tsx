@@ -5,11 +5,15 @@ import { PetListProps } from './types';
 import { PETS_PER_PAGE } from '@/utils/constants';
 import { Heading, Button, Paragraph } from '@/components/ui';
 
-export function PetList({ stats, matchView = false }: PetListProps) {
+export function PetList({ data, isMatchView = false }: PetListProps) {
   const [visiblePets, setVisiblePets] = useState(PETS_PER_PAGE);
 
+  if (!data) {
+    return null;
+  }
+
   const showMorePets = () => {
-    setVisiblePets((prev) => Math.min(prev + PETS_PER_PAGE, stats.length));
+    setVisiblePets((prev) => Math.min(prev + PETS_PER_PAGE, data.length));
   };
 
   const showLessPets = () => {
@@ -19,10 +23,10 @@ export function PetList({ stats, matchView = false }: PetListProps) {
   return (
     <div className='bg-light-grey shadow-md rounded-lg p-4'>
       <Heading as='h2' className='mb-2.5 text-lg font-sans'>
-        {matchView ? 'Match Pet Usage' : 'Tournament Pet Usage'}
+        {isMatchView ? 'Match Pet Usage' : 'Tournament Pet Usage'}
       </Heading>
       <div className='overflow-x-auto'>
-        {stats && stats.length > 0 ? (
+        {data && data.length > 0 ? (
           <>
             <table className='min-w-full'>
               <thead className='bg-background'>
@@ -39,7 +43,7 @@ export function PetList({ stats, matchView = false }: PetListProps) {
                   <th className='px-5 py-2.5 text-left text-xs font-medium text-foreground uppercase tracking-wider'>
                     Times Played
                   </th>
-                  {!matchView && (
+                  {!isMatchView && (
                     <>
                       <th className='px-5 py-2.5 text-left text-xs font-medium text-foreground uppercase tracking-wider'>
                         Total Played
@@ -58,7 +62,7 @@ export function PetList({ stats, matchView = false }: PetListProps) {
                 </tr>
               </thead>
               <tbody className='bg-medium-grey divide-y divide-light-grey'>
-                {stats.slice(0, visiblePets).map((pet) => (
+                {data.slice(0, visiblePets).map((pet) => (
                   <tr key={`${pet.pet_data.name}-${pet.pet_data.type}`}>
                     <td className='p-5 whitespace-nowrap text-sm font-bold text-humanoid'>
                       {pet.pet_data.name}
@@ -81,7 +85,7 @@ export function PetList({ stats, matchView = false }: PetListProps) {
                         <div key={i}>{bs.times_played}</div>
                       ))}
                     </td>
-                    {!matchView && (
+                    {!isMatchView && (
                       <>
                         <td className='p-5 whitespace-nowrap text-sm text-humanoid font-bold'>
                           {pet.total_played}
@@ -103,7 +107,7 @@ export function PetList({ stats, matchView = false }: PetListProps) {
             </table>
             {/* Show More/Less Buttons */}
             <div className='flex justify-center gap-5 mt-5'>
-              {visiblePets < stats.length && (
+              {visiblePets < data.length && (
                 <Button
                   onClick={showMorePets}
                   title='Show More'

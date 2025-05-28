@@ -2,12 +2,16 @@ import { BattleChartsProps } from '../types';
 import { PieGraph } from '../graphs';
 import { OverviewCard } from '../OverviewCard';
 import { Heading } from '@/components/ui';
-import { regionsColors, resultsColors } from '@/utils/constants';
+import {
+  regionsColors,
+  resultsColors,
+  matchResultsColors,
+} from '@/utils/constants';
 import { cn } from '@/utils/cn';
 
 export const BattleCharts = ({
   matchesStats,
-  isMatchView,
+  isMatchView = false,
 }: BattleChartsProps) => {
   if (!matchesStats) {
     return (
@@ -37,6 +41,15 @@ export const BattleCharts = ({
             value={matchesStats.totalBattles}
           />
         ) : null}
+        {!isMatchView && matchesStats.battleResults ? (
+          <OverviewCard
+            title='Total Battle Draws'
+            value={
+              matchesStats.battleResults.filter((m) => m.name === 'DRAWS')[0]
+                .value
+            }
+          />
+        ) : null}
         {matchesStats?.averageDuration ? (
           <OverviewCard
             title='Average Battle Duration'
@@ -50,32 +63,52 @@ export const BattleCharts = ({
           isMatchView ? 'md:grid-cols-1' : ''
         )}
       >
-        {!isMatchView ? (
+        {!isMatchView && matchesStats ? (
+          <>
+            <div>
+              <Heading as='h2' className='mb-2.5 text-lg font-sans'>
+                {'Matches Per Region'}
+              </Heading>
+              {matchesStats.matchesByRegion && (
+                <PieGraph
+                  data={matchesStats.matchesByRegion.filter(
+                    (m) => m.value !== 0
+                  )}
+                  tooltip={'Matches Played: '}
+                  fillColors={regionsColors}
+                />
+              )}
+            </div>
+            <div>
+              <Heading as='h2' className='mb-2.5 text-lg font-sans'>
+                {'Match Results'}
+              </Heading>
+              {matchesStats.matchResults && (
+                <PieGraph
+                  data={matchesStats.matchResults.filter((m) => m.value !== 0)}
+                  tooltip={'Count: '}
+                  fillColors={matchResultsColors}
+                  showWholeLabel={false}
+                  showLegend
+                />
+              )}
+            </div>
+          </>
+        ) : null}
+        {isMatchView && matchesStats ? (
           <div>
             <Heading as='h2' className='mb-2.5 text-lg font-sans'>
-              {'Matches Per Region'}
+              {'Battle Results'}
             </Heading>
-            {matchesStats && matchesStats.matchesByRegion && (
+            {matchesStats.battleResults && (
               <PieGraph
-                data={matchesStats.matchesByRegion.filter((m) => m.value !== 0)}
-                tooltip={'Matches Played: '}
-                fillColors={regionsColors}
+                data={matchesStats.battleResults.filter((m) => m.value !== 0)}
+                tooltip={'Result Count: '}
+                fillColors={resultsColors}
               />
             )}
           </div>
         ) : null}
-        <div>
-          <Heading as='h2' className='mb-2.5 text-lg font-sans'>
-            {'Battle Results'}
-          </Heading>
-          {matchesStats && matchesStats.battleResults && (
-            <PieGraph
-              data={matchesStats.battleResults.filter((m) => m.value !== 0)}
-              tooltip={'Result Count: '}
-              fillColors={resultsColors}
-            />
-          )}
-        </div>
       </div>
     </div>
   );

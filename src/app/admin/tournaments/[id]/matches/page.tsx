@@ -1,4 +1,3 @@
-import { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 import { getUserSession } from '@/supabase/actions/auth';
 import { getTournamentDetails } from '@/supabase/actions/tournaments';
@@ -8,10 +7,12 @@ import { AdminPanelButtons, AdminMatchListItem } from '@/components/admin';
 import { PageParams, PageSearchParams } from '@/types';
 import { MATCHES_PER_PAGE } from '@/utils/constants';
 
-export const metadata: Metadata = {
-  title: 'Admin Matches List',
-  robots: { index: false, follow: false },
-};
+export async function generateMetadata() {
+  return {
+    title: 'Admin Matches List',
+    robots: { index: false, follow: false },
+  };
+}
 
 export default async function AdminMatchesPage({
   params,
@@ -101,6 +102,7 @@ export default async function AdminMatchesPage({
               ))}
               {totalPages > 1 && (
                 <Pagination
+                  className='mt-2.5'
                   currentPage={currentPage}
                   totalPages={totalPages}
                   baseUrl={`/admin/tournaments/${tournament.id}/matches`}

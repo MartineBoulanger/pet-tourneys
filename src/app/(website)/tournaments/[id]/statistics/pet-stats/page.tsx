@@ -103,7 +103,7 @@ export default async function PetUsageStatisticsPage({
           <Paragraph className='text-humanoid'>{entityName}</Paragraph>
         )}
       </div>
-      {stats && <PetList stats={stats} matchView={isMatchView} />}
+      {stats && <PetList data={stats} isMatchView={isMatchView} />}
     </Container>
   );
 }
