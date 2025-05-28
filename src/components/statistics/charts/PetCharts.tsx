@@ -1,18 +1,18 @@
 import { PetChartsProps } from '../types';
 import { PetStatsCharts } from './PetStatsCharts';
-import { RadarGraph, DoublePieGraph } from '../graphs';
+import { BarGraph, DoublePieGraph } from '../graphs';
 import { Heading } from '@/components/ui';
 import { petTypeColors, breedColors } from '@/utils/constants';
 
-export const PetCharts = ({ chartData, stats }: PetChartsProps) => {
-  if (!chartData) {
+export const PetCharts = ({ chartData, data }: PetChartsProps) => {
+  if (!chartData || !data) {
     return (
       <p className='text-center bg-background rounded-lg py-5'>
         {'No pet charts data available.'}
       </p>
     );
   }
-  const playedPets = chartData.petUsageData?.slice(0, 6).map((pet) => ({
+  const playedPets = chartData.petUsageData?.slice(0, 5).map((pet) => ({
     name: pet.name,
     value: pet.total_played,
   }));
@@ -25,15 +25,14 @@ export const PetCharts = ({ chartData, stats }: PetChartsProps) => {
       <div className='bg-light-grey rounded-lg shadow-md grid grid-cols-1 md:grid-cols-2 gap-5 p-2.5 sm:p-5 mb-5 sm:mb-10'>
         <div>
           <Heading as='h2' className='mb-2.5 text-lg font-sans'>
-            {'Top 6 Most Played Pets'}
+            {'Top 5 Most Played Pets'}
           </Heading>
           {chartData.petUsageData && (
-            <RadarGraph
+            <BarGraph
               data={playedPets}
               tooltip={'Played: '}
-              legendText={'Times Played'}
-              radarName={'Top 6 Most Played Pets'}
-              showLegend
+              color='#1e3a8a'
+              color2='#f1f1f1'
             />
           )}
         </div>
@@ -56,7 +55,7 @@ export const PetCharts = ({ chartData, stats }: PetChartsProps) => {
         <Heading as='h2' className='text-xl sm:text-3xl mb-2.5'>
           {'Overall Pet Stats Distributions'}
         </Heading>
-        <PetStatsCharts pets={stats} />
+        <PetStatsCharts data={data} />
       </div>
     </div>
   );

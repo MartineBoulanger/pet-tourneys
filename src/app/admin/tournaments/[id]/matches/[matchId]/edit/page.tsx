@@ -4,12 +4,13 @@ import { Container, Heading, Paragraph } from '@/components/ui';
 import { getTournamentTableName } from '@/utils/getTournamentTableName';
 import { createClient } from '@/supabase/server';
 import { MatchPageParams } from '@/types';
-import { Metadata } from 'next';
 
-export const metadata: Metadata = {
-  title: 'Edit Match',
-  robots: { index: false, follow: false },
-};
+export async function generateMetadata() {
+  return {
+    title: 'Edit Match',
+    robots: { index: false, follow: false },
+  };
+}
 
 export default async function AdminEditMatchPage({
   params,

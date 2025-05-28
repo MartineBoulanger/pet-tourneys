@@ -8,32 +8,11 @@ import {
   getMostUsedPets,
   analyzeUsedAbilities,
 } from '@/utils/analyzeToolHelpers';
-import { AbilityAnalysisResult, BattleStatistics } from '@/utils/types';
+import { BattleLogsStatistics } from '@/utils/types';
 
-export async function getTournamentBattleStats(tournamentId: string): Promise<{
-  generalStats: {
-    averageDuration: string;
-    totalBattles: number;
-    totalMatches: number;
-    matchesByRegion: {
-      name: string;
-      value: number;
-    }[];
-    battleResults: {
-      name: string;
-      value: number;
-    }[];
-  };
-  petStats: Array<{
-    name: string;
-    count: number;
-    playerCount: number;
-    opponentCount: number;
-    team: 'player' | 'opponent' | 'both';
-  }>;
-  abilityStats: AbilityAnalysisResult;
-  battleStats: BattleStatistics;
-}> {
+export async function getTournamentBattleStats(
+  tournamentId: string
+): Promise<BattleLogsStatistics> {
   const supabase = await createClient();
   const matchesTable = getTournamentTableName('matches', tournamentId);
   const battleLogsTable = getTournamentTableName('battle_logs', tournamentId);
@@ -41,9 +20,30 @@ export async function getTournamentBattleStats(tournamentId: string): Promise<{
   const { data: matches, error: matchesError } = await supabase
     .schema('api')
     .from(matchesTable)
-    .select('id, region');
+    .select('id, region, owner_score, opponent_score');
 
   if (matchesError) throw matchesError;
+
+  const matchResultsMap = new Map<string, number>();
+
+  matches?.forEach((match) => {
+    let ownerScore = match.owner_score;
+    let opponentScore = match.opponent_score;
+
+    if (ownerScore < opponentScore) {
+      [ownerScore, opponentScore] = [opponentScore, ownerScore];
+    }
+
+    const scoreKey = `${ownerScore}:${opponentScore}`;
+    matchResultsMap.set(scoreKey, (matchResultsMap.get(scoreKey) || 0) + 1);
+  });
+
+  const matchResults = Array.from(matchResultsMap.entries())
+    .map(([name, value]) => ({ name, value }))
+    .sort((a, b) => {
+      if (b.value !== a.value) return b.value - a.value;
+      return a.name.localeCompare(b.name);
+    });
 
   const matchesByRegion = [
     {
@@ -84,6 +84,7 @@ export async function getTournamentBattleStats(tournamentId: string): Promise<{
         totalMatches: 0,
         matchesByRegion: [],
         battleResults: [],
+        matchResults: [],
       },
       petStats: [],
       abilityStats: {} as ReturnType<typeof analyzeUsedAbilities>,
@@ -121,6 +122,7 @@ export async function getTournamentBattleStats(tournamentId: string): Promise<{
       totalMatches: matches?.length,
       matchesByRegion,
       battleResults,
+      matchResults,
     },
     petStats: getMostUsedPets(battleLogs),
     abilityStats: analyzeUsedAbilities(battleLogs),
@@ -131,24 +133,7 @@ export async function getTournamentBattleStats(tournamentId: string): Promise<{
 export async function getMatchBattleStats(
   tournamentId: string,
   matchId: string
-): Promise<{
-  generalStats: {
-    averageDuration: string;
-    totalBattles: number;
-    totalMatches?: number;
-    matchesByRegion?: {
-      name: string;
-      value: number;
-    }[];
-    battleResults?: {
-      name: string;
-      value: number;
-    }[];
-  };
-  petStats: ReturnType<typeof getMostUsedPets>;
-  abilityStats: ReturnType<typeof analyzeUsedAbilities>;
-  battleStats: BattleStatistics;
-}> {
+): Promise<BattleLogsStatistics> {
   const supabase = await createClient();
   const battleLogsTable = getTournamentTableName('battle_logs', tournamentId);
 
@@ -167,6 +152,7 @@ export async function getMatchBattleStats(
         totalMatches: 0,
         matchesByRegion: [],
         battleResults: [],
+        matchResults: [],
       },
       petStats: [],
       abilityStats: {} as ReturnType<typeof analyzeUsedAbilities>,
@@ -204,6 +190,7 @@ export async function getMatchBattleStats(
       totalMatches: 0,
       matchesByRegion: [],
       battleResults,
+      matchResults: [],
     },
     petStats: getMostUsedPets(battleLogs),
     abilityStats: analyzeUsedAbilities(battleLogs),

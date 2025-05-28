@@ -11,6 +11,7 @@ import { capitalizeWord } from '@/utils/cn';
 export const PieGraph = ({
   data,
   showLegend = false,
+  showWholeLabel = true,
   fillColors,
   color = '#303030',
   tooltip,
@@ -67,7 +68,7 @@ export const PieGraph = ({
         fontSize={isMobile ? 12 : 14}
         fontWeight='bold'
       >
-        {`${capitalizeWord(name)}: ${value}`}
+        {showWholeLabel ? `${capitalizeWord(name)}: ${value}` : value}
       </text>
     );
   };

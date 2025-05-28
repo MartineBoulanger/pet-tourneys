@@ -34,6 +34,21 @@ export const resultsColors = {
   DRAWS: '#894b00',
 };
 
+export const matchResultsColors = {
+  '3:0': '#81C784',
+  '3:1': '#a56dfd',
+  '3:2': '#FF8042',
+  '4:0': '#4ECDC4',
+  '4:1': '#FFA07A',
+  '4:2': '#FFD54F',
+  '4:3': '#F06292',
+  '5:0': '#10abb2',
+  '5:1': '#dfcf5b',
+  '5:2': '#2d9318',
+  '5:3': '#11a7f6',
+  '5:4': '#FF6B6B',
+};
+
 export const swapsColors = {
   player: '#2563eb',
   opponent: '#dc2626',

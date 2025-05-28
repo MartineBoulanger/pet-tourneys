@@ -1,4 +1,4 @@
-import { PetPerformanceChartsProps } from '../types';
+import { PetBattleLogProps } from '../types';
 import { DoubleBarGraph, RadialGraph } from '../graphs';
 import { Heading } from '@/components/ui';
 import { OverviewCard } from '../OverviewCard';
@@ -8,9 +8,7 @@ import {
 } from '@/utils/constants';
 import { petPerformanceLegendValues } from '@/utils/constants';
 
-export const PetPerformanceCharts = ({
-  battleStats,
-}: PetPerformanceChartsProps) => {
+export const PetPerformanceCharts = ({ battleStats }: PetBattleLogProps) => {
   if (!battleStats) {
     return (
       <p className='text-center bg-background rounded-lg py-5'>
@@ -48,7 +46,7 @@ export const PetPerformanceCharts = ({
       <div className='flex flex-wrap flex-col md:flex-row gap-5 mb-5'>
         {battleStats?.totalWeatherChanges ? (
           <OverviewCard
-            title='Total Weather Changes'
+            title='Total Weather Conditions'
             value={battleStats.totalWeatherChanges}
           />
         ) : null}
@@ -62,7 +60,7 @@ export const PetPerformanceCharts = ({
       <div className='bg-light-grey rounded-lg shadow-md grid grid-cols-1 md:grid-cols-2 gap-5 p-2.5 sm:p-5'>
         <div>
           <Heading as='h2' className='mb-2.5 text-lg font-sans'>
-            {'Top 5 Top Performing Pets'}
+            {'Top 5 Pet Assassins'}
           </Heading>
           {battleStats.petPerformance && (
             <DoubleBarGraph
@@ -79,7 +77,7 @@ export const PetPerformanceCharts = ({
         </div>
         <div>
           <Heading as='h2' className='mb-2.5 text-lg font-sans'>
-            {'Weather Changes'}
+            {'Weather Condition Applied'}
           </Heading>
           {battleStats.weatherChanges && (
             <RadialGraph

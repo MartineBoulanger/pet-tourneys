@@ -6,7 +6,7 @@ export const MatchListItem = ({ tournamentId, match }: MatchListItemProps) => {
     <Link
       key={match.id}
       href={`/tournaments/${tournamentId}/matches/${match.id}`}
-      className='p-5 rounded-lg shadow-md bg-background hover:bg-blue-grey'
+      className='p-5 rounded-lg shadow-md bg-background hover:bg-medium-grey'
       title={`${match.player1} vs ${match.player2}`}
       aria-label={`${match.player1} vs ${match.player2}`}
     >

@@ -12,6 +12,7 @@ export const DoublePieGraph = ({
   data,
   data2,
   color = '#303030',
+  showWholeLabel = true,
   fillColors,
   fillColors2,
   tooltip,
@@ -68,7 +69,9 @@ export const DoublePieGraph = ({
         fontSize={isMobile ? 10 : 12}
         fontWeight='bold'
       >
-        {`${capitalizeWord(name.slice(0, 2))}: ${value}`}
+        {showWholeLabel
+          ? `${capitalizeWord(name.slice(0, 2))}: ${value}`
+          : value}
       </text>
     );
   };
@@ -103,7 +106,7 @@ export const DoublePieGraph = ({
         fontSize={isMobile ? 10 : 12}
         fontWeight='bold'
       >
-        {`${capitalizeWord(name)}: ${value}`}
+        {showWholeLabel ? `${capitalizeWord(name)}: ${value}` : value}
       </text>
     );
   };

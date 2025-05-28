@@ -43,11 +43,15 @@ export function parseAndAggregateStats(
   return stats;
 }
 
-export function convertToGraphData(stats: Record<number, number>) {
+export function convertToGraphData(
+  stats: Record<number, number>,
+  minStat: number
+) {
   return Object.entries(stats)
     .map(([value, count]) => ({
       name: parseInt(value),
       value: count,
     }))
-    .sort((a, b) => a.name - b.name);
+    .sort((a, b) => a.name - b.name)
+    .filter((f) => f.name > minStat);
 }

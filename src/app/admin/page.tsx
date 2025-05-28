@@ -1,4 +1,3 @@
-import { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 import { getUserSession } from '@/supabase/actions/auth';
 import { getTournaments } from '@/supabase/actions/tournaments';
@@ -7,10 +6,12 @@ import { TournamentsListItem, AdminPanelButtons } from '@/components/admin';
 
 // TODO: In future maybe add pagination to the tournaments list
 
-export const metadata: Metadata = {
-  title: 'Admin Panel',
-  robots: { index: false, follow: false },
-};
+export async function generateMetadata() {
+  return {
+    title: 'Admin Panel',
+    robots: { index: false, follow: false },
+  };
+}
 
 export default async function AdminPage() {
   const response = await getUserSession();
