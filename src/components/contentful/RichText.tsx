@@ -14,7 +14,7 @@ const options = (): Options => {
       [BLOCKS.PARAGRAPH]: (node, children) => {
         const p = node?.nodeType === 'paragraph';
         if (!p) return null;
-        return <p className='mb-5 last:mb-0'>{children}</p>;
+        return <p className='mb-2.5 sm:mb-5 last:mb-0'>{children}</p>;
       },
       [BLOCKS.HEADING_1]: (node, children) => {
         const h1 = node?.nodeType === 'heading-1';
@@ -71,22 +71,26 @@ const options = (): Options => {
       [BLOCKS.QUOTE]: (node, children) => {
         const quote = node?.nodeType === 'blockquote';
         if (!quote) return null;
-        return <q className='text-humanoid flex italic mb-5'>{children}</q>;
+        return (
+          <q className='text-humanoid flex italic mb-1.5 sm:mb-5'>{children}</q>
+        );
       },
       [BLOCKS.HR]: (node) => {
         const hr = node?.nodeType === 'hr';
         if (!hr) return null;
-        return <div className='h-0.5 rounded-lg w-full bg-blue-grey my-5' />;
+        return (
+          <div className='h-0.5 rounded-lg w-full bg-light-grey my-2.5 sm:my-5' />
+        );
       },
       [BLOCKS.UL_LIST]: (node, children) => {
         const ul = node?.nodeType === 'unordered-list';
         if (!ul) return null;
-        return <ul className='mb-5 ml-5'>{children}</ul>;
+        return <ul className='mb-2.5 sm:mb-5 ml-5'>{children}</ul>;
       },
       [BLOCKS.OL_LIST]: (node, children) => {
         const ol = node?.nodeType === 'ordered-list';
         if (!ol) return null;
-        return <ol className='mb-5 ml-5'>{children}</ol>;
+        return <ol className='mb-2.5 sm:mb-5 ml-5'>{children}</ol>;
       },
       [BLOCKS.LIST_ITEM]: (node, children) => {
         const listItem = node?.nodeType === 'list-item';

@@ -15,7 +15,7 @@ export const BattleCharts = ({
 }: BattleChartsProps) => {
   if (!matchesStats) {
     return (
-      <p className='text-center bg-background rounded-lg py-5'>
+      <p className='text-center bg-background rounded-lg p-2.5 sm:p-5'>
         {'No battle charts data available.'}
       </p>
     );
@@ -28,7 +28,7 @@ export const BattleCharts = ({
           ? 'Overall Match Statistics'
           : 'Overall Tournament Statistics'}
       </Heading>
-      <div className='flex flex-wrap flex-col md:flex-row gap-5 mb-5'>
+      <div className='flex flex-wrap flex-col md:flex-row gap-2.5 sm:gap-5 mb-5'>
         {!isMatchView && matchesStats?.totalMatches ? (
           <OverviewCard
             title='Total Matches'
@@ -59,7 +59,7 @@ export const BattleCharts = ({
       </div>
       <div
         className={cn(
-          'bg-light-grey rounded-lg shadow-md grid grid-cols-1 md:grid-cols-2 gap-5 p-2.5 sm:p-5',
+          'bg-light-grey rounded-lg shadow-md grid grid-cols-1 md:grid-cols-2 gap-2.5 sm:gap-5 p-2.5 sm:p-5',
           isMatchView ? 'md:grid-cols-1' : ''
         )}
       >

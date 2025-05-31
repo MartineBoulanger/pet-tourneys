@@ -17,7 +17,7 @@ export function AbilitiesCard({
   return (
     <>
       <div
-        className='bg-background p-5 rounded-lg shadow-md w-full flex flex-wrap items-start justify-between cursor-pointer lg:hover:scale-[1.03] lg:hover:transition-all lg:hover:duration-500'
+        className='bg-background p-2.5 sm:p-5 rounded-lg shadow-md w-full flex flex-wrap items-start justify-between cursor-pointer lg:hover:scale-[1.03] lg:hover:transition-all lg:hover:duration-500'
         onClick={() => setIsOpen(true)}
       >
         <div className='w-[40%]'>
@@ -46,11 +46,7 @@ export function AbilitiesCard({
           )}
         </div>
       </div>
-      <Modal
-        show={isOpen}
-        onClose={() => setIsOpen(false)}
-        className='bg-light-grey'
-      >
+      <Modal show={isOpen} onClose={() => setIsOpen(false)}>
         <AbilitiesPopup category={category} abilities={abilities} />
       </Modal>
     </>

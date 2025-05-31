@@ -1,5 +1,5 @@
 import type { MetadataRoute } from 'next';
-import { getTournaments } from '@/supabase/actions/tournaments';
+import { getTournamentsForForm } from '@/supabase/actions/tournaments';
 import { getMatches } from '@/supabase/actions/matches';
 import { getAllPages } from '@/contentful/actions/getAllPages';
 
@@ -7,7 +7,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const url = process.env.NEXT_PUBLIC_BASE_URL!;
   const {
     data: { tournaments },
-  } = await getTournaments();
+  } = await getTournamentsForForm();
   const allGuidePages = await getAllPages(false, 'Guide');
   const allArticlePages = await getAllPages(false, 'Article');
 
@@ -33,6 +33,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
     {
       url: `${url}/articles`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.8,
+    },
+    {
+      url: `${url}/analyze-tool`,
       lastModified: new Date(),
       changeFrequency: 'monthly' as const,
       priority: 0.8,
@@ -67,8 +73,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: 0.8,
       };
 
-      const tournamentMatchesEntry = {
-        url: `${url}/tournaments/${tournament.id}/matches`,
+      const tournamentPetsStatisticsEntry = {
+        url: `${url}/tournaments/${tournament.id}/statistics/pet-stats`,
         lastModified: new Date(tournament.created_at || new Date()),
         changeFrequency: 'monthly' as const,
         priority: 0.8,
@@ -90,12 +96,21 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
           priority: 0.5,
         })) || [];
 
+      const matchPetsStatsEntries =
+        matches?.map((match) => ({
+          url: `${url}/tournaments/${tournament.id}/matches/${match.id}/statistics/pet-stats?matchId=${match.id}`,
+          lastModified: new Date(match.date || new Date()),
+          changeFrequency: 'monthly' as const,
+          priority: 0.5,
+        })) || [];
+
       return [
         tournamentEntry,
         tournamentStatisticsEntry,
-        tournamentMatchesEntry,
+        tournamentPetsStatisticsEntry,
         ...matchEntries,
         ...matchStatsEntries,
+        ...matchPetsStatsEntries,
       ];
     })
   );

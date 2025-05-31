@@ -1,4 +1,4 @@
-import { getTournaments } from '@/supabase/actions/tournaments';
+import { getTournamentsForForm } from '@/supabase/actions/tournaments';
 import { UploadForm } from '@/components/admin';
 import { Container, Heading, Paragraph } from '@/components/ui';
 import { getTournamentTableName } from '@/utils/getTournamentTableName';
@@ -30,7 +30,7 @@ export default async function AdminEditMatchPage({
 
   const {
     data: { tournaments },
-  } = await getTournaments();
+  } = await getTournamentsForForm();
 
   if (!tournaments) {
     return (

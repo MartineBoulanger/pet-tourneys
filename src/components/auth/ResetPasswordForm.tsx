@@ -37,7 +37,7 @@ export const ResetPasswordForm = () => {
   if (!isMounted) return <ForgotResetFormSkeleton />;
 
   return (
-    <div className='bg-light-grey shadow-md rounded-lg p-5'>
+    <div className='bg-light-grey shadow-md rounded-lg p-2.5 sm:p-5'>
       <Form handleSubmit={handleSubmit} message={error}>
         <Input
           type='password'
@@ -46,7 +46,11 @@ export const ResetPasswordForm = () => {
           name='password'
           required
         />
-        <AuthButton type='Reset Password' loading={loading} className='mt-5' />
+        <AuthButton
+          type='Reset Password'
+          loading={loading}
+          className='mt-2.5 sm:mt-5'
+        />
       </Form>
     </div>
   );

@@ -6,7 +6,7 @@ import { PetAbilitiesProps } from '../types';
 export const PetAbilitiesCharts = ({ abilityStats }: PetAbilitiesProps) => {
   if (!abilityStats) {
     return (
-      <p className='text-center bg-background rounded-lg py-5'>
+      <p className='text-center bg-background rounded-lg p-2.5 sm:p-5'>
         {'No pet abilities data available.'}
       </p>
     );
@@ -27,9 +27,9 @@ export const PetAbilitiesCharts = ({ abilityStats }: PetAbilitiesProps) => {
       </div>
       <div className='bg-light-grey rounded-lg shadow-md p-2.5 sm:p-5'>
         <Heading as='h2' className='text-lg mb-2.5 font-sans'>
-          {'Ability Per Category'}
+          {'Abilities Per Category'}
         </Heading>
-        <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5'>
+        <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 sm:gap-5'>
           {Object.entries(abilityStats)
             .filter(
               ([key]) =>
@@ -50,7 +50,7 @@ export const PetAbilitiesCharts = ({ abilityStats }: PetAbilitiesProps) => {
               return (
                 <p
                   key={`${category}-${index}`}
-                  className='text-center bg-background rounded-lg py-5'
+                  className='text-center bg-background rounded-lg p-2.5 sm:p-5'
                 >
                   {'No abilities data available.'}
                 </p>

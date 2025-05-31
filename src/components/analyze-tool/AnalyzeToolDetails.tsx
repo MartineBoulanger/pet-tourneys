@@ -8,11 +8,24 @@ import {
   calculateAverageDuration,
   getMostUsedPets,
   analyzeUsedAbilities,
-  abilitiesCategoryNames,
   parseBattleStatistics,
+  transformPetSwapData,
 } from '@/utils/analyzeToolHelpers';
-import { cn } from '@/utils/cn';
 import { GeneratePDF } from './GeneratePDF';
+import { AbilitiesCard, OverviewCard } from '../statistics';
+import {
+  BarGraph,
+  DoubleBarGraph,
+  PieGraph,
+  RadialGraph,
+} from '../statistics/graphs';
+import {
+  petPerformanceLegendValues,
+  petPerformanceLegendValuesColor,
+  resultsColors,
+  swapsColors,
+  weatherColors,
+} from '@/utils/constants';
 
 export const AnalyzeToolDetails = ({
   parsedBattleLogs,
@@ -34,14 +47,70 @@ export const AnalyzeToolDetails = ({
     petPerformance: battleStats.petPerformance || {},
   };
 
+  const battleResults = [
+    {
+      name: 'WINS',
+      value: parsedBattleLogs.filter((b) => b.result === 'WIN').length || 0,
+    },
+    {
+      name: 'LOSSES',
+      value: parsedBattleLogs.filter((b) => b.result === 'LOSS').length || 0,
+    },
+    {
+      name: 'DRAWS',
+      value: parsedBattleLogs.filter((b) => b.result === 'DRAW').length || 0,
+    },
+  ];
+
+  const topUsedPets = getMostUsedPets(parsedBattleLogs, 5).map((pet) => ({
+    name: pet.name,
+    value: pet.count,
+  }));
+
+  const swaps = transformPetSwapData(safeStats.totalPetSwaps);
+  const totalSwaps = swaps && swaps.map((t) => t.value).reduce((a, b) => a + b);
+
+  const petSwaps = Object.entries(safeStats.petSwapDetails)
+    .map(([name, value]) => ({ name, value }))
+    .sort((a, b) => b.value - a.value)
+    .slice(0, 5);
+
+  const pets =
+    safeStats.petPerformance &&
+    Object.entries(safeStats.petPerformance)
+      .map(([petName, stats]) => ({
+        name: petName,
+        value1: stats.kills,
+        value2: stats.deaths,
+      }))
+      .sort((a, b) => b.value1 - a.value1)
+      .slice(0, 5);
+
+  const weathers =
+    safeStats.weatherChanges &&
+    Object.entries(safeStats.weatherChanges.byType)
+      .map(([type, count]) => ({
+        name: type,
+        value: count,
+        fill: weatherColors[type] || '#303030',
+      }))
+      .sort((a, b) => b.value - a.value);
+
   return (
     parsedBattleLogs.length > 0 && (
       <div className='mt-10'>
-        {/* Title & action button */}
-        <div className='flex justify-between items-center mb-5'>
-          <Heading as='h2' className='text-2xl font-bold'>
-            {'Battle Logs Analysis Report'}
-          </Heading>
+        {/* Title & action button above the content */}
+        <div className='flex flex-col sm:flex-row justify-between items-end sm:items-center mb-5'>
+          <div>
+            <Heading as='h2' className='text-3xl text-humanoid font-bold'>
+              {'Battle Logs Analysis Report'}
+            </Heading>
+            <Paragraph className='max-w-[550px] italic mt-2.5 text-sm'>
+              {
+                '**Note : The charts are in most cases just showing a part of the whole data. To see all the data, download the PDF.'
+              }
+            </Paragraph>
+          </div>
           <PDFDownloadLink
             document={
               <GeneratePDF
@@ -51,7 +120,7 @@ export const AnalyzeToolDetails = ({
               />
             }
             fileName={`${playerName + '-' || ''}battle-logs-analysis.pdf`}
-            className='btn-submit py-2 px-4 rounded border-none uppercase'
+            className='btn-submit py-2 px-4 rounded border-none uppercase mt-5 sm:mt-0'
           >
             {({ loading }) =>
               loading ? 'Preparing PDF...' : 'Download as PDF'
@@ -59,71 +128,63 @@ export const AnalyzeToolDetails = ({
           </PDFDownloadLink>
         </div>
 
-        {/* Analysis results */}
+        {/* Statistics results */}
         <div
           id='analysis-results'
-          className='bg-light-grey p-5 rounded-lg shadow-md'
+          className='bg-light-grey p-2.5 sm:p-5 rounded-lg shadow-md'
         >
-          {playerName && (
-            <Heading as='h3' className='text-2xl mb-5 text-center'>
+          {playerName ? (
+            <Heading
+              as='h3'
+              className='text-2xl mb-5 text-center p-2.5 sm:p-5 rounded-lg bg-background'
+            >
               <span>{'Logs from '}</span>
               <span className='font-bold text-humanoid'>{playerName}</span>
             </Heading>
+          ) : null}
+
+          {parsedBattleLogs && parsedBattleLogs.length > 0 && (
+            <>
+              <div className='mb-5'>
+                <Heading as='h4' className='text-xl font-semibold mb-2.5'>
+                  {'Overall Match Statistics'}
+                </Heading>
+                <div className='flex flex-wrap flex-col md:flex-row gap-2.5 sm:gap-5 mb-5'>
+                  <OverviewCard
+                    title='Total Battles'
+                    value={parsedBattleLogs.length}
+                  />
+                  <OverviewCard
+                    title='Average Battle Duration'
+                    value={calculateAverageDuration(parsedBattleLogs)}
+                  />
+                </div>
+              </div>
+              <div className='mb-5'>
+                <Heading as='h4' className='text-xl font-semibold mb-2.5'>
+                  {'Battle Results'}
+                </Heading>
+                {parsedBattleLogs && (
+                  <PieGraph
+                    data={battleResults.filter((m) => m.value !== 0)}
+                    tooltip={'Result Count: '}
+                    fillColors={resultsColors}
+                  />
+                )}
+              </div>
+            </>
           )}
 
           {parsedBattleLogs && parsedBattleLogs.length > 0 && (
-            <div className='mb-10'>
-              <Heading as='h4' className='text-xl font-semibold mb-2.5'>
-                {'Total Logs Overview'}
-              </Heading>
-              <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5 mb-5'>
-                <div className='bg-background p-5 rounded-lg shadow-md'>
-                  <Paragraph className='font-medium'>
-                    {'Total Battles'}
-                  </Paragraph>
-                  <Paragraph className='text-4xl font-bold text-humanoid'>
-                    {parsedBattleLogs.length}
-                  </Paragraph>
-                </div>
-                <div className='bg-background p-5 rounded-lg shadow-md'>
-                  <Paragraph className='font-medium'>{'Wins'}</Paragraph>
-                  <Paragraph className='text-4xl text-humanoid font-bold'>
-                    {parsedBattleLogs.filter((b) => b.result === 'WIN').length}
-                  </Paragraph>
-                </div>
-                <div className='bg-background p-5 rounded-lg shadow-md'>
-                  <Paragraph className='font-medium'>{'Losses'}</Paragraph>
-                  <Paragraph className='text-4xl text-humanoid font-bold'>
-                    {parsedBattleLogs.filter((b) => b.result === 'LOSS').length}
-                  </Paragraph>
-                </div>
-                <div className='bg-background p-5 rounded-lg shadow-md'>
-                  <Paragraph className='font-medium'>{'Draws'}</Paragraph>
-                  <Paragraph className='text-4xl text-humanoid font-bold'>
-                    {parsedBattleLogs.filter((b) => b.result === 'DRAW').length}
-                  </Paragraph>
-                </div>
-              </div>
-
-              <div className='mb-5 flex gap-2.5'>
-                <Heading as='h4'>{'Average Battle Duration:'}</Heading>
-                <Paragraph className='text-humanoid font-bold'>
-                  {calculateAverageDuration(parsedBattleLogs)}
-                </Paragraph>
-              </div>
-            </div>
-          )}
-
-          {parsedBattleLogs && parsedBattleLogs.length > 0 && (
-            <div className='mb-10'>
+            <div className='mb-5 sm:mb-10'>
               <Heading as='h4' className='text-lg font-bold mb-2.5'>
                 {'Battle Logs Overview'}
               </Heading>
-              <div className='space-y-5'>
+              <div className='space-y-2.5 sm:space-y-5'>
                 {parsedBattleLogs.map((battle, i) => (
                   <div
                     key={i}
-                    className='bg-background p-5 rounded-lg shadow-md'
+                    className='bg-background p-2.5 sm:p-5 rounded-lg shadow-md'
                   >
                     <div className='flex justify-between mb-2.5'>
                       <Paragraph className='font-bold'>
@@ -144,7 +205,7 @@ export const AnalyzeToolDetails = ({
                         {battle.result}
                       </Paragraph>
                     </div>
-                    <div className='grid grid-cols-2 gap-5 text-sm'>
+                    <div className='grid grid-cols-2 gap-2.5 sm:gap-5 text-sm'>
                       <div>
                         <Paragraph className='font-medium text-cyan mb-2.5'>
                           {'Your Team'}
@@ -183,265 +244,139 @@ export const AnalyzeToolDetails = ({
             </div>
           )}
 
-          <div className='mb-10'>
+          <div className='mb-5 sm:mb-10'>
             <Heading as='h4' className='text-lg font-bold mb-2.5'>
-              {'Top 8 Most Used Pets'}
+              {'Top 5 Most Used Pets'}
             </Heading>
-            <div className='grid grid-cols-2 md:grid-cols-4 gap-2.5'>
-              {getMostUsedPets(parsedBattleLogs).map((pet, i) => (
-                <div
-                  key={i}
-                  className='bg-background p-2.5 rounded-lg text-sm shadow-md'
-                >
-                  {pet.name} ({pet.count})
-                </div>
-              ))}
-            </div>
+            <BarGraph
+              data={topUsedPets}
+              tooltip={'Played: '}
+              color='#1e3a8a'
+              color2='#f1f1f1'
+            />
           </div>
 
-          {parsedPetUsage.length > 0 && (
-            <div className='mb-10'>
+          {safeStats.totalDeaths ? (
+            <div
+              className={
+                Object.keys(safeStats.petPerformance).length > 0
+                  ? 'mb-5'
+                  : 'mb-5 sm:mb-10'
+              }
+            >
               <Heading as='h4' className='text-lg font-bold mb-2.5'>
-                {'Pet Usage List'}
+                {'Overall Pet Performance Statistics'}
               </Heading>
-              <div className='overflow-x-auto'>
-                <table className='border-collapse border border-medium-grey min-w-full bg-background'>
-                  <thead>
-                    <tr>
-                      <th className='py-2 px-4 text-left border-r border-r-light-grey'>
-                        {'Pet'}
-                      </th>
-                      <th className='py-2 px-4 text-left border-r border-r-light-grey'>
-                        {'Type'}
-                      </th>
-                      <th className='py-2 px-4 text-left border-r border-r-light-grey'>
-                        {'Breeds'}
-                      </th>
-                      <th className='py-2 px-4 text-left border-r border-r-light-grey'>
-                        {'Played Per Breed'}
-                      </th>
-                      <th className='py-2 px-4 text-left'>{'Total Played'}</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {parsedPetUsage.map((pet, i) => (
-                      <tr
-                        key={i}
-                        className={
-                          i % 2 === 0 ? 'bg-light-grey' : 'bg-medium-grey'
-                        }
-                      >
-                        <td
-                          className={cn(
-                            'py-2 px-4',
-                            i % 2 === 0
-                              ? 'bg-light-grey border-r border-r-medium-grey'
-                              : 'bg-medium-grey border-r border-r-light-grey'
-                          )}
-                        >
-                          {pet.pet_data.name}
-                        </td>
-                        <td
-                          className={cn(
-                            'py-2 px-4',
-                            i % 2 === 0
-                              ? 'bg-light-grey border-r border-r-medium-grey'
-                              : 'bg-medium-grey border-r border-r-light-grey'
-                          )}
-                        >
-                          {pet.pet_data.type}
-                        </td>
-                        <td
-                          className={cn(
-                            'py-2 px-4',
-                            i % 2 === 0
-                              ? 'bg-light-grey border-r border-r-medium-grey'
-                              : 'bg-medium-grey border-r border-r-light-grey'
-                          )}
-                        >
-                          {pet.pet_data.breeds.join(', ')}
-                        </td>
-                        <td
-                          className={cn(
-                            'py-2 px-4',
-                            i % 2 === 0
-                              ? 'bg-light-grey border-r border-r-medium-grey'
-                              : 'bg-medium-grey border-r border-r-light-grey'
-                          )}
-                        >
-                          {pet.pet_data.times_played.join(', ')}
-                        </td>
-                        <td className='py-2 px-4'>{pet.total_played}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          )}
-
-          {usedAbilities &&
-          safeStats.totalWeatherChanges &&
-          safeStats.totalDeaths ? (
-            <div className='mb-10'>
-              <Heading as='h4' className='text-lg font-bold mb-2.5'>
-                {'Total Performance Overview'}
-              </Heading>
-              <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5 mb-5'>
-                <div className='bg-background p-5 rounded-lg shadow-md'>
-                  <Paragraph className='font-medium'>
-                    {'Abilities Used'}
-                  </Paragraph>
-                  <Paragraph className='text-4xl font-bold text-humanoid'>
-                    {usedAbilities.totalUniqueAbilitiesUsed}
-                  </Paragraph>
-                </div>
-                <div className='bg-background p-5 rounded-lg shadow-md'>
-                  <Paragraph className='font-medium'>
-                    {'Weather Changes'}
-                  </Paragraph>
-                  <Paragraph className='text-4xl text-humanoid font-bold'>
-                    {safeStats.totalWeatherChanges}
-                  </Paragraph>
-                </div>
-                <div className='bg-background p-5 rounded-lg shadow-md'>
-                  <Paragraph className='font-medium'>{'Pet Deaths'}</Paragraph>
-                  <Paragraph className='text-4xl text-humanoid font-bold'>
-                    {safeStats.totalDeaths}
-                  </Paragraph>
-                </div>
-                <div className='bg-background p-5 rounded-lg shadow-md'>
-                  <Paragraph className='font-medium'>{'Pet Kills'}</Paragraph>
-                  <Paragraph className='text-4xl text-humanoid font-bold'>
-                    {safeStats.totalKills}
-                  </Paragraph>
-                </div>
+              <div className='flex flex-wrap flex-col md:flex-row gap-2.5 sm:gap-5 mb-5'>
+                <OverviewCard
+                  title='Total Pet Kills'
+                  value={safeStats.totalKills}
+                />
+                <OverviewCard
+                  title='Total Pet Deaths'
+                  value={safeStats.totalDeaths}
+                />
               </div>
             </div>
           ) : null}
 
-          {safeStats.petPerformance &&
-            Object.keys(safeStats.petPerformance).length > 0 && (
-              <div className='mb-10'>
-                <Heading as='h4' className='text-lg font-bold mb-2.5'>
-                  {'Pet Performance Overview'}
-                </Heading>
-                <table className='border-collapse border border-medium-grey min-w-full bg-background'>
-                  <thead>
-                    <tr>
-                      <th className='py-2 px-4 text-left border-r border-r-light-grey'>
-                        {'Pet'}
-                      </th>
-                      <th className='py-2 px-4 text-left border-r border-r-light-grey'>
-                        {'Kills'}
-                      </th>
-                      <th className='py-2 px-4 text-left border-r border-r-light-grey'>
-                        {'Deaths'}
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {Object.entries(safeStats.petPerformance)
-                      .filter(([pet]) => pet)
-                      .sort((a, b) => (b[1]?.kills || 0) - (a[1]?.kills || 0))
-                      .map(([pet, performance], index) => (
-                        <tr
-                          key={index}
-                          className={
-                            index % 2 === 0 ? 'bg-light-grey' : 'bg-medium-grey'
-                          }
-                        >
-                          <td
-                            className={cn(
-                              'py-2 px-4',
-                              index % 2 === 0
-                                ? 'bg-light-grey border-r border-r-medium-grey'
-                                : 'bg-medium-grey border-r border-r-light-grey'
-                            )}
-                          >
-                            {pet}
-                          </td>
-                          <td
-                            className={cn(
-                              'py-2 px-4',
-                              index % 2 === 0
-                                ? 'bg-light-grey border-r border-r-medium-grey'
-                                : 'bg-medium-grey border-r border-r-light-grey'
-                            )}
-                          >
-                            {performance?.kills || 0}
-                          </td>
-                          <td
-                            className={cn(
-                              'py-2 px-4',
-                              index % 2 === 0
-                                ? 'bg-light-grey border-r border-r-medium-grey'
-                                : 'bg-medium-grey border-r border-r-light-grey'
-                            )}
-                          >
-                            {performance?.deaths || 0}
-                          </td>
-                        </tr>
-                      ))}
-                  </tbody>
-                </table>
-              </div>
+          <div className='mb-5 sm:mb-10'>
+            <Heading as='h4' className='text-lg font-bold mb-2.5'>
+              {'Top 5 Pet Assassins'}
+            </Heading>
+            {battleStats.petPerformance && (
+              <DoubleBarGraph
+                data={pets}
+                tooltip={'Kills: '}
+                tooltip2={'Deaths: '}
+                color={'#11a7f6'}
+                color2={'#d52824'}
+                fillColors={petPerformanceLegendValuesColor}
+                legendValues={petPerformanceLegendValues}
+                showLegend
+              />
             )}
+          </div>
 
           {safeStats.totalPetSwaps &&
             Object.keys(safeStats.totalPetSwaps).length > 0 && (
-              <div className='mb-10'>
+              <div className='mb-5 sm:mb-10'>
                 <Heading as='h4' className='text-lg font-bold mb-2.5'>
-                  {'Pet Swaps Overview'}
+                  {'Overall Pet Swaps Statistics'}
                 </Heading>
-                <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5 mb-5'>
-                  <div className='bg-background p-5 rounded-lg shadow-md'>
-                    <Paragraph className='font-medium'>
-                      {'Total Swaps Player'}
-                    </Paragraph>
-                    <Paragraph className='text-4xl font-bold text-humanoid'>
-                      {safeStats.totalPetSwaps.player}
-                    </Paragraph>
+                <div className='flex flex-wrap flex-col md:flex-row gap-2.5 sm:gap-5 mb-5'>
+                  <OverviewCard title='Total Pet Swaps' value={totalSwaps} />
+                </div>
+                <div className='grid grid-cols-1 lg:grid-cols-2 gap-2.5 sm:gap-5 mt-5'>
+                  <div>
+                    <Heading as='h4' className='text-lg font-bold mb-2.5'>
+                      {'Pet Swaps'}
+                    </Heading>
+                    {safeStats.totalPetSwaps && (
+                      <PieGraph
+                        data={swaps}
+                        tooltip={'Swaps done: '}
+                        fillColors={swapsColors}
+                      />
+                    )}
                   </div>
-                  <div className='bg-background p-5 rounded-lg shadow-md'>
-                    <Paragraph className='font-medium'>
-                      {'Total Swaps Opponent'}
-                    </Paragraph>
-                    <Paragraph className='text-4xl text-humanoid font-bold'>
-                      {safeStats.totalPetSwaps.opponent}
-                    </Paragraph>
+                  <div>
+                    <Heading as='h4' className='text-lg font-bold mb-2.5'>
+                      {'Top 5 Pet Swaps'}
+                    </Heading>
+                    {battleStats.petSwapDetails && (
+                      <BarGraph
+                        data={petSwaps}
+                        tooltip={'Total Swaps: '}
+                        color='#016630'
+                        color2='#f1f1f1'
+                      />
+                    )}
                   </div>
                 </div>
               </div>
             )}
 
-          {safeStats.petSwapDetails &&
-            Object.keys(safeStats.petSwapDetails).length > 0 && (
-              <div className='mb-10'>
+          {safeStats.weatherChanges &&
+            Object.keys(safeStats.weatherChanges).length > 0 && (
+              <div className='mb-5 sm:mb-10'>
                 <Heading as='h4' className='text-lg font-bold mb-2.5'>
-                  {'Pet Swaps List'}
+                  {'Overall Weather Conditions Statistics'}
                 </Heading>
-                <div className='grid grid-cols-2 md:grid-cols-4 gap-2.5'>
-                  {Object.entries(safeStats.petSwapDetails)
-                    .sort((a, b) => b[1] - a[1])
-                    .map(([pet, totalSwaps], index) => (
-                      <div
-                        key={index}
-                        className='bg-background p-2.5 rounded-lg text-sm shadow-md'
-                      >
-                        {pet} ({totalSwaps})
-                      </div>
-                    ))}
+                <div className='flex flex-wrap flex-col md:flex-row gap-2.5 sm:gap-5 mb-5'>
+                  <OverviewCard
+                    title='Total Weather Conditions'
+                    value={safeStats.totalWeatherChanges}
+                  />
                 </div>
+                <Heading as='h4' className='text-lg font-bold mb-2.5'>
+                  {'Weather Condition Applied'}
+                </Heading>
+                {battleStats.weatherChanges && (
+                  <RadialGraph
+                    data={weathers}
+                    tooltip={'Times Changed: '}
+                    showLegend
+                  />
+                )}
               </div>
             )}
 
           {usedAbilities && (
-            <div className='mb-10'>
+            <>
               <Heading as='h4' className='text-lg font-bold mb-2.5'>
-                {'Total Abilities Overview'}
+                {'Overall Pet Abilities Statistics'}
               </Heading>
-              <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5 mb-5'>
+              <div className='flex flex-wrap flex-col md:flex-row gap-2.5 sm:gap-5 mb-5'>
+                <OverviewCard
+                  title='Total Unique Abilities Used'
+                  value={usedAbilities.totalUniqueAbilitiesUsed || 0}
+                />
+              </div>
+              <Heading as='h4' className='text-lg font-bold mb-2.5'>
+                {'All Used Abilities Per Category'}
+              </Heading>
+              <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 sm:gap-5'>
                 {(
                   Object.entries(usedAbilities) as [
                     keyof AbilityCategories,
@@ -449,91 +384,32 @@ export const AnalyzeToolDetails = ({
                   ][]
                 )
                   .filter(([_, abilities]) => abilities && abilities.length > 0)
-                  .map(([category, count], index) => {
-                    const categoryName = abilitiesCategoryNames[category];
+                  .map(([category, abilities], index) => {
+                    if (Array.isArray(abilities)) {
+                      return (
+                        <AbilitiesCard
+                          key={`${category}-${index}`}
+                          category={category}
+                          abilities={abilities}
+                        />
+                      );
+                    }
                     return (
-                      <div
-                        className='bg-background p-5 rounded-lg shadow-md'
-                        key={index}
+                      <p
+                        key={`${category}-${index}`}
+                        className='text-center bg-background rounded-lg py-5'
                       >
-                        <Paragraph className='font-medium'>
-                          {categoryName}
-                        </Paragraph>
-                        <Paragraph className='text-4xl font-bold text-humanoid'>
-                          {count.length}
-                        </Paragraph>
-                      </div>
+                        {'No abilities data available.'}
+                      </p>
                     );
                   })}
               </div>
-            </div>
-          )}
-
-          {safeStats.weatherChanges &&
-            Object.keys(safeStats.weatherChanges).length > 0 && (
-              <div className='mb-10'>
-                <Heading as='h4' className='text-lg font-bold mb-2.5'>
-                  {'Weather Changes Overview'}
-                </Heading>
-                <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5 mb-5'>
-                  {Object.entries(safeStats.weatherChanges.byType)
-                    .sort((a, b) => b[1] - a[1])
-                    .map(([weather, count], index) => (
-                      <div
-                        className='bg-background p-5 rounded-lg shadow-md'
-                        key={index}
-                      >
-                        <Paragraph className='font-medium'>{weather}</Paragraph>
-                        <Paragraph className='text-4xl font-bold text-humanoid'>
-                          {count}
-                        </Paragraph>
-                      </div>
-                    ))}
-                </div>
-              </div>
-            )}
-
-          {usedAbilities && (
-            <div>
-              <Heading as='h4' className='text-lg font-bold mb-2.5'>
-                {'Abilities Usage Lists'}
-              </Heading>
-              {(
-                Object.entries(usedAbilities) as [
-                  keyof AbilityCategories,
-                  string[]
-                ][]
-              )
-                .filter(([_, abilities]) => abilities && abilities.length > 0)
-                .map(([category, abilities], index) => (
-                  <div key={index} className='mb-5 last-of-type:mb-0'>
-                    <Heading
-                      as='h5'
-                      className='text-md font-bold text-humanoid mb-2.5'
-                    >
-                      {abilitiesCategoryNames[category]}
-                    </Heading>
-                    <div className='grid grid-cols-2 md:grid-cols-4 gap-2.5'>
-                      {abilities.map((ability, i) => (
-                        <div
-                          key={i}
-                          className='bg-background p-2.5 rounded-lg text-sm shadow-md'
-                        >
-                          {ability}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                ))}
-            </div>
+            </>
           )}
         </div>
 
-        {/* Title & action button */}
-        <div className='flex justify-between items-center mt-5'>
-          <Heading as='h2' className='text-2xl font-bold'>
-            {'Battle Logs Analysis Report'}
-          </Heading>
+        {/* Title & action button at the bottom of the page */}
+        <div className='flex justify-end items-center mt-5'>
           <PDFDownloadLink
             document={
               <GeneratePDF

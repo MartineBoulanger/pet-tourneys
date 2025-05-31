@@ -26,7 +26,7 @@ const PageContent = ({ components }: PageContentProps) => {
   if (!components) return null;
 
   return (
-    <div className='flex flex-col gap-5'>
+    <div className='flex flex-col gap-2.5 sm:gap-5'>
       {components.map((component, index) => {
         const Block = getRegisteredComponent(component);
         if (!Block) return null;

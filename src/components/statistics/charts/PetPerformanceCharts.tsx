@@ -11,7 +11,7 @@ import { petPerformanceLegendValues } from '@/utils/constants';
 export const PetPerformanceCharts = ({ battleStats }: PetBattleLogProps) => {
   if (!battleStats) {
     return (
-      <p className='text-center bg-background rounded-lg py-5'>
+      <p className='text-center bg-background rounded-lg p-2.5 sm:p-5'>
         {'No pet performance chart data available.'}
       </p>
     );
@@ -43,7 +43,7 @@ export const PetPerformanceCharts = ({ battleStats }: PetBattleLogProps) => {
       <Heading as='h2' className='text-xl sm:text-3xl mb-2.5'>
         {'Overall Pet Performance Statistics'}
       </Heading>
-      <div className='flex flex-wrap flex-col md:flex-row gap-5 mb-5'>
+      <div className='flex flex-wrap flex-col md:flex-row gap-2.5 sm:gap-5 mb-5'>
         {battleStats?.totalWeatherChanges ? (
           <OverviewCard
             title='Total Weather Conditions'
@@ -57,7 +57,7 @@ export const PetPerformanceCharts = ({ battleStats }: PetBattleLogProps) => {
           <OverviewCard title='Total Deaths' value={battleStats.totalDeaths} />
         ) : null}
       </div>
-      <div className='bg-light-grey rounded-lg shadow-md grid grid-cols-1 md:grid-cols-2 gap-5 p-2.5 sm:p-5'>
+      <div className='bg-light-grey rounded-lg shadow-md grid grid-cols-1 md:grid-cols-2 gap-2.5 sm:gap-5 p-2.5 sm:p-5'>
         <div>
           <Heading as='h2' className='mb-2.5 text-lg font-sans'>
             {'Top 5 Pet Assassins'}

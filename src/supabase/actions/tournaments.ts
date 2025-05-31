@@ -117,21 +117,57 @@ export async function updateTournament(
   return { success: true };
 }
 
-// Get all tournaments sorted on start date
-export const getTournaments = async () => {
+// Get all tournaments sorted on start date and with pagination
+export const getTournaments = async (
+  offset: number,
+  tournamentsPerPage: number
+) => {
   const supabase = await createClient();
 
-  const { data: tournaments, error } = await supabase
+  const {
+    data: tournaments,
+    count,
+    error,
+  } = await supabase
     .schema('api')
     .from('tournaments')
-    .select('*')
-    .order('start_date', { ascending: false });
+    .select('*', { count: 'exact' })
+    .order('start_date', { ascending: false })
+    .range(offset, offset + tournamentsPerPage - 1);
 
   if (error) {
     return {
       success: false,
       status: 500,
       message: error.message,
+      data: {},
+    };
+  }
+
+  const totalPages = Math.ceil(Number(count) / tournamentsPerPage);
+
+  return {
+    success: true,
+    status: 200,
+    message: null,
+    data: { tournaments, totalPages },
+  };
+};
+
+// This is used for the upload form
+export const getTournamentsForForm = async () => {
+  const supabase = await createClient();
+
+  const { data: tournaments, error: tournamentsError } = await supabase
+    .schema('api')
+    .from('tournaments')
+    .select('*');
+
+  if (tournamentsError) {
+    return {
+      success: false,
+      status: 500,
+      message: tournamentsError.message,
       data: {},
     };
   }

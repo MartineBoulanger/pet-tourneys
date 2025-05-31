@@ -45,7 +45,7 @@ export function GeneratePDF({
           src={`${process.env.NEXT_PUBLIC_BASE_URL!}/images/tourney-logo.png`}
           style={styles.coverImage}
         />
-        <Text style={styles.coverTitle}>{'Battle Logs Analysis Report'}</Text>
+        <Text style={styles.coverTitle}>{'Battle Logs Statistics Report'}</Text>
         <Text style={styles.coverSubtitle}>
           {playerName || 'Anonymous Battler'}
         </Text>
@@ -55,13 +55,10 @@ export function GeneratePDF({
         </Text>
       </Page>
 
-      {/* ========== TOTAL LOGS OVERVIEW PAGE ========== */}
+      {/* ========== OVERALL MATCH STATISTICS PAGE ========== */}
       <Page size='A4' style={styles.page}>
         {/* Title */}
-        <Text style={styles.header}>{'Battle Logs Analysis'}</Text>
-
-        {/* Total Logs Overview */}
-        <Text style={styles.sectionHeader}>{'Total Logs Overview'}</Text>
+        <Text style={styles.header}>{'Overall Match Statistics'}</Text>
         <View style={styles.blocksGrid}>
           <View style={styles.overviewBlock}>
             <Text style={styles.overviewBlockTitle}>{'Total Battles'}</Text>
@@ -80,7 +77,9 @@ export function GeneratePDF({
             <Text style={styles.overviewBlockValue}>{draws}</Text>
           </View>
           <View style={styles.overviewBlock}>
-            <Text style={styles.overviewBlockTitle}>{'Avg Duration'}</Text>
+            <Text style={styles.overviewBlockTitle}>
+              {'Avg Battle Duration'}
+            </Text>
             <Text style={styles.overviewBlockValue}>
               {calculateAverageDuration(parsedBattleLogs)}
             </Text>
@@ -90,10 +89,7 @@ export function GeneratePDF({
 
       {/* ========== BATTLE LOGS OVERVIEW PAGE ========== */}
       <Page size='A4' style={styles.page}>
-        {/* Sub Title */}
-        <Text style={styles.sectionHeader}>{'Battle Logs Overview'}</Text>
-
-        {/* Battle Logs Overview */}
+        <Text style={styles.header}>{'Battle Logs Overview'}</Text>
         {parsedBattleLogs.map((battle, index) => (
           <View
             key={index}
@@ -154,16 +150,12 @@ export function GeneratePDF({
         ))}
       </Page>
 
-      {/* ========== PET USAGE OVERVIEW PAGE ========== */}
+      {/* ========== OVERALL PET USAGE STATISTICS PAGE ========== */}
       <Page size='A4' style={styles.page}>
-        {/* Title */}
-        <Text style={styles.header}>{'Pet Usage Analysis'}</Text>
-
-        {/* Most Used Pets */}
+        <Text style={styles.header}>{'Overall Pet Usage Statistics'}</Text>
         {mostUsedPets.length > 0 && (
           <View style={{ marginBottom: 8 }}>
             <Text style={styles.sectionHeader}>{'Top 5 Most Used Pets'}</Text>
-
             <View style={styles.tableRow}>
               <Text style={[styles.tableCell, styles.tableHeader]}>
                 {'Pet'}
@@ -204,12 +196,11 @@ export function GeneratePDF({
             ))}
           </View>
         )}
-
-        {/* Pet Usage List */}
         {parsedPetUsage.length > 0 && (
           <View style={{ marginBottom: 8 }}>
-            <Text style={styles.sectionHeader}>{'Pet Usage List'}</Text>
-
+            <Text style={[styles.sectionHeader, { marginTop: 30 }]}>
+              {'Pet Usage List'}
+            </Text>
             <View style={styles.tableRow}>
               <Text style={[styles.tableCell, styles.tableHeader]}>
                 {'Pet'}
@@ -227,7 +218,6 @@ export function GeneratePDF({
                 {'Total Played'}
               </Text>
             </View>
-
             {parsedPetUsage.map((pet, index) => (
               <View
                 key={index}
@@ -251,24 +241,16 @@ export function GeneratePDF({
         )}
       </Page>
 
-      {/* ========== PET PERFORMANCES OVERVIEW PAGE ========== */}
+      {/* ========== OVERALL PET PERFORMANCE STATISTICS PAGE ========== */}
       <Page size='A4' style={styles.page}>
-        {/* Title */}
-        <Text style={styles.header}>{'Pet Performance Analysis'}</Text>
-
-        {/* Total Performance Overview */}
-        <Text style={styles.sectionHeader}>{'Total Performance Overview'}</Text>
+        <Text style={styles.header}>
+          {'Overall Pet Performance Statistics'}
+        </Text>
         <View style={styles.blocksGrid}>
           <View style={styles.overviewBlock}>
-            <Text style={styles.overviewBlockTitle}>{'Abilities Used'}</Text>
+            <Text style={styles.overviewBlockTitle}>{'Pet Kills'}</Text>
             <Text style={styles.overviewBlockValue}>
-              {usedAbilities.totalUniqueAbilitiesUsed}
-            </Text>
-          </View>
-          <View style={styles.overviewBlock}>
-            <Text style={styles.overviewBlockTitle}>{'Weather Changes'}</Text>
-            <Text style={styles.overviewBlockValue}>
-              {safeStats.totalWeatherChanges}
+              {safeStats.totalKills}
             </Text>
           </View>
           <View style={styles.overviewBlock}>
@@ -277,20 +259,12 @@ export function GeneratePDF({
               {safeStats.totalDeaths}
             </Text>
           </View>
-          <View style={styles.overviewBlock}>
-            <Text style={styles.overviewBlockTitle}>{'Pet Kills'}</Text>
-            <Text style={styles.overviewBlockValue}>
-              {safeStats.totalKills}
-            </Text>
-          </View>
         </View>
-
-        {/* Pet Performance Overview */}
         {safeStats.petPerformance &&
           Object.keys(safeStats.petPerformance).length > 0 && (
             <View style={{ marginBottom: 8 }}>
-              <Text style={styles.sectionHeader}>
-                {'Pet Performance Overview'}
+              <Text style={[styles.sectionHeader, { marginTop: 30 }]}>
+                {'Pet Performance List'}
               </Text>
               <View style={styles.tableRow}>
                 <Text style={[styles.tableCell, styles.tableHeader]}>
@@ -303,7 +277,6 @@ export function GeneratePDF({
                   {'Deaths'}
                 </Text>
               </View>
-
               {Object.entries(safeStats.petPerformance)
                 .filter(([pet]) => pet)
                 .sort((a, b) => (b[1]?.kills || 0) - (a[1]?.kills || 0))
@@ -329,9 +302,11 @@ export function GeneratePDF({
                 ))}
             </View>
           )}
+      </Page>
 
-        {/* Pet Swaps Overview */}
-        <Text style={styles.sectionHeader}>{'Pet Swaps Overview'}</Text>
+      {/* ========== OVERALL PET SWAPS STATISTICS PAGE ========== */}
+      <Page size='A4' style={styles.page}>
+        <Text style={styles.header}>{'Overall Pet Swaps Statistics'}</Text>
         <View style={styles.blocksGrid}>
           <View style={styles.overviewBlock}>
             <Text style={styles.overviewBlockTitle}>
@@ -350,9 +325,9 @@ export function GeneratePDF({
             </Text>
           </View>
         </View>
-
-        {/* Pet Swaps List */}
-        <Text style={styles.sectionHeader}>{'Pet Swaps List'}</Text>
+        <Text style={[styles.sectionHeader, { marginTop: 30 }]}>
+          {'Pet Swaps List'}
+        </Text>
         <View style={styles.tableRow}>
           <Text style={[styles.tableCell, styles.tableHeader]}>{'Pet'}</Text>
           <Text style={[styles.tableCell, styles.tableHeader]}>{'Swaps'}</Text>
@@ -373,35 +348,22 @@ export function GeneratePDF({
           ))}
       </Page>
 
-      {/* ========== PET ABILITIES OVERVIEW PAGE ========== */}
+      {/* ========== OVERALL WEATHER CONDITIONS STATISTICS PAGE ========== */}
       <Page size='A4' style={styles.page}>
-        {/* Title */}
-        <Text style={styles.header}>{'Pet Abilities Analysis'}</Text>
-
-        {/* Pets abilities overview */}
-        <Text style={styles.sectionHeader}>{'Total Abilities Overview'}</Text>
-        <View style={styles.blocksGrid}>
-          {(
-            Object.entries(usedAbilities) as [
-              keyof AbilityCategories,
-              string[]
-            ][]
-          )
-            .filter(([_, abilities]) => abilities && abilities.length > 0)
-            .map(([category, count], index) => {
-              const categoryName = abilitiesCategoryNames[category];
-              return (
-                <View key={index} style={styles.overviewBlock}>
-                  <Text style={styles.overviewBlockTitle}>{categoryName}</Text>
-                  <Text style={styles.overviewBlockValue}>{count.length}</Text>
-                </View>
-              );
-            })}
+        <Text style={styles.header}>
+          {'Overall Weather Conditions Statistics'}
+        </Text>
+        <View style={[styles.overviewBlock, { width: '100%' }]}>
+          <Text style={styles.overviewBlockTitle}>
+            {'Total Weather Conditions'}
+          </Text>
+          <Text style={styles.overviewBlockValue}>
+            {safeStats.totalWeatherChanges}
+          </Text>
         </View>
-      </Page>
-      <Page size='A4' style={styles.page}>
-        {/* Weather Analysis */}
-        <Text style={styles.sectionHeader}>{'Weather Changes Overview'}</Text>
+        <Text style={[styles.sectionHeader, { marginTop: 30 }]}>
+          {'Weather Condition Applied'}
+        </Text>
         <View style={styles.blocksGrid}>
           {Object.entries(safeStats.weatherChanges.byType)
             .sort((a, b) => b[1] - a[1])
@@ -412,9 +374,22 @@ export function GeneratePDF({
               </View>
             ))}
         </View>
+      </Page>
 
-        {/* Pets abilities usage lists */}
-        <Text style={styles.sectionHeader}>{'Abilities Usage Lists'}</Text>
+      {/* ========== OVERALL PET ABILITIES STATISTICS PAGE ========== */}
+      <Page size='A4' style={styles.page}>
+        <Text style={styles.header}>{'Overall Pet Abilities Statistics'}</Text>
+        <View style={[styles.overviewBlock, { width: '100%' }]}>
+          <Text style={styles.overviewBlockTitle}>
+            {'Total Unique Abilities Used'}
+          </Text>
+          <Text style={styles.overviewBlockValue}>
+            {usedAbilities.totalUniqueAbilitiesUsed}
+          </Text>
+        </View>
+        <Text style={[styles.sectionHeader, { marginTop: 30 }]}>
+          {'All Used Abilities Per Category'}
+        </Text>
         <View style={styles.blocksGrid}>
           {(
             Object.entries(usedAbilities) as [
@@ -426,7 +401,7 @@ export function GeneratePDF({
             .map(([category, abilities], index) => (
               <View key={index} style={styles.overviewBlock}>
                 <Text style={styles.overviewBlockTitle}>
-                  {abilitiesCategoryNames[category]}
+                  {abilitiesCategoryNames[category]} ({abilities.length})
                 </Text>
                 <Text style={styles.overviewBlockValueList}>
                   {abilities.map((ability, i) => (

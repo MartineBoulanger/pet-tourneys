@@ -23,3 +23,9 @@ export type Links = {
   url: string;
   text: string;
 }[];
+
+// Type for the partners data for the partners carousel on the homepage
+export type PartnersData = {
+  name: string;
+  image: string;
+}[];

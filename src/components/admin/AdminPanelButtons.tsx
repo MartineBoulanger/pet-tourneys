@@ -12,7 +12,7 @@ export const AdminPanelButtons = ({
       <Heading as='h2' className='text-xl mb-2.5'>
         {'What do you want to do?'}
       </Heading>
-      <div className='flex items-center gap-5'>
+      <div className='flex flex-wrap items-center gap-2.5 sm:gap-5'>
         {adminData.map(({ linkText, imageSrc, id, url }) => (
           <Link
             className='btn-link flex items-center gap-2.5 border py-1 px-3 rounded-lg border-blue-grey hover:bg-blue-grey hover:text-foreground'

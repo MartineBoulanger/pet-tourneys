@@ -12,7 +12,7 @@ export const Footer = async () => {
             title={name}
             aria-label={name}
             key={id}
-            className='btn-link py-5 flex items-center gap-1'
+            className='btn-link p-2.5 sm:p-5 flex items-center gap-1'
             href={url}
             target='_blank'
           >

@@ -1,14 +1,19 @@
 import Link from 'next/link';
 import { TournamentsListProps } from './types';
+import { Pagination } from '@/components/ui';
 
-export const TournamentsList = ({ tournaments }: TournamentsListProps) => {
+export const TournamentsList = ({
+  tournaments,
+  currentPage = 1,
+  totalPages = 1,
+}: TournamentsListProps) => {
   return (
-    <div className='grid gap-2.5'>
+    <div className='grid gap-2.5 sm:gap-5 bg-light-grey rounded-lg p-2.5 sm:p-5'>
       {tournaments.map((tournament) => (
         <Link
           key={tournament.id}
           href={`/tournaments/${tournament.id}`}
-          className='p-5 rounded-lg shadow-md bg-background hover:bg-blue-grey transition'
+          className='p-2.5 sm:p-5 rounded-lg shadow-md bg-background hover:bg-medium-grey transition-all duration-300'
           title={tournament.name}
           aria-label={tournament.name}
         >
@@ -34,6 +39,14 @@ export const TournamentsList = ({ tournaments }: TournamentsListProps) => {
           </span>
         </Link>
       ))}
+      {totalPages > 1 ? (
+        <Pagination
+          className='mt-2.5'
+          currentPage={currentPage}
+          totalPages={totalPages}
+          baseUrl={'/tournaments'}
+        />
+      ) : null}
     </div>
   );
 };

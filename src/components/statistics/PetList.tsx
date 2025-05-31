@@ -21,7 +21,7 @@ export function PetList({ data, isMatchView = false }: PetListProps) {
   };
 
   return (
-    <div className='bg-light-grey shadow-md rounded-lg p-4'>
+    <div className='bg-light-grey shadow-md rounded-lg p-2.5 sm:p-5'>
       <Heading as='h2' className='mb-2.5 text-lg font-sans'>
         {isMatchView ? 'Match Pet Usage' : 'Tournament Pet Usage'}
       </Heading>
@@ -31,30 +31,30 @@ export function PetList({ data, isMatchView = false }: PetListProps) {
             <table className='min-w-full'>
               <thead className='bg-background'>
                 <tr>
-                  <th className='px-5 py-2.5 text-left text-xs font-medium text-foreground uppercase tracking-wider'>
+                  <th className='px-2.5 sm:px-5 py-2.5 text-left text-xs font-medium text-foreground uppercase tracking-wider'>
                     Pet Name
                   </th>
-                  <th className='px-5 py-2.5 text-left text-xs font-medium text-foreground uppercase tracking-wider'>
+                  <th className='px-2.5 sm:px-5 py-2.5 text-left text-xs font-medium text-foreground uppercase tracking-wider'>
                     Type
                   </th>
-                  <th className='px-5 py-2.5 text-left text-xs font-medium text-foreground uppercase tracking-wider'>
+                  <th className='px-2.5 sm:px-5 py-2.5 text-left text-xs font-medium text-foreground uppercase tracking-wider'>
                     Breed/Stats
                   </th>
-                  <th className='px-5 py-2.5 text-left text-xs font-medium text-foreground uppercase tracking-wider'>
+                  <th className='px-2.5 sm:px-5 py-2.5 text-left text-xs font-medium text-foreground uppercase tracking-wider'>
                     Times Played
                   </th>
                   {!isMatchView && (
                     <>
-                      <th className='px-5 py-2.5 text-left text-xs font-medium text-foreground uppercase tracking-wider'>
+                      <th className='px-2.5 sm:px-5 py-2.5 text-left text-xs font-medium text-foreground uppercase tracking-wider'>
                         Total Played
                       </th>
-                      <th className='px-5 py-2.5 text-left text-xs font-medium text-foreground uppercase tracking-wider'>
+                      <th className='px-2.5 sm:px-5 py-2.5 text-left text-xs font-medium text-foreground uppercase tracking-wider'>
                         Matches
                       </th>
-                      <th className='px-5 py-2.5 text-left text-xs font-medium text-foreground uppercase tracking-wider'>
+                      <th className='px-2.5 sm:px-5 py-2.5 text-left text-xs font-medium text-foreground uppercase tracking-wider'>
                         Win Rate
                       </th>
-                      <th className='px-5 py-2.5 text-left text-xs font-medium text-foreground uppercase tracking-wider'>
+                      <th className='px-2.5 sm:px-5 py-2.5 text-left text-xs font-medium text-foreground uppercase tracking-wider'>
                         Win/Loss
                       </th>
                     </>
@@ -64,13 +64,13 @@ export function PetList({ data, isMatchView = false }: PetListProps) {
               <tbody className='bg-medium-grey divide-y divide-light-grey'>
                 {data.slice(0, visiblePets).map((pet) => (
                   <tr key={`${pet.pet_data.name}-${pet.pet_data.type}`}>
-                    <td className='p-5 whitespace-nowrap text-sm font-bold text-humanoid'>
+                    <td className='p-2.5 sm:p-5 whitespace-nowrap text-sm font-bold text-humanoid'>
                       {pet.pet_data.name}
                     </td>
-                    <td className='p-5 whitespace-nowrap text-sm'>
+                    <td className='p-2.5 sm:p-5 whitespace-nowrap text-sm'>
                       {pet.pet_data.type}
                     </td>
-                    <td className='p-5 text-sm'>
+                    <td className='p-2.5 sm:p-5 text-sm'>
                       {pet.breed_stats.map((bs, i) => (
                         <div key={i}>
                           <span className='font-bold text-humanoid'>
@@ -80,23 +80,23 @@ export function PetList({ data, isMatchView = false }: PetListProps) {
                         </div>
                       ))}
                     </td>
-                    <td className='p-5 whitespace-nowrap text-sm text-humanoid font-bold'>
+                    <td className='p-2.5 sm:p-5 whitespace-nowrap text-sm text-humanoid font-bold'>
                       {pet.breed_stats.map((bs, i) => (
                         <div key={i}>{bs.times_played}</div>
                       ))}
                     </td>
                     {!isMatchView && (
                       <>
-                        <td className='p-5 whitespace-nowrap text-sm text-humanoid font-bold'>
+                        <td className='p-2.5 sm:p-5 whitespace-nowrap text-sm text-humanoid font-bold'>
                           {pet.total_played}
                         </td>
-                        <td className='p-5 whitespace-nowrap text-sm font-bold'>
+                        <td className='p-2.5 sm:p-5 whitespace-nowrap text-sm font-bold'>
                           {pet.match_count}
                         </td>
-                        <td className='p-5 whitespace-nowrap text-sm text-humanoid font-bold'>
+                        <td className='p-2.5 sm:p-5 whitespace-nowrap text-sm text-humanoid font-bold'>
                           {pet.win_rate}%
                         </td>
-                        <td className='p-5 whitespace-nowrap text-sm font-bold'>
+                        <td className='p-2.5 sm:p-5 whitespace-nowrap text-sm font-bold'>
                           {pet.w_l}
                         </td>
                       </>
@@ -106,7 +106,7 @@ export function PetList({ data, isMatchView = false }: PetListProps) {
               </tbody>
             </table>
             {/* Show More/Less Buttons */}
-            <div className='flex justify-center gap-5 mt-5'>
+            <div className='flex justify-center gap-2.5 sm:gap-5 mt-2.5 sm:mt-5'>
               {visiblePets < data.length && (
                 <Button
                   onClick={showMorePets}
@@ -129,7 +129,7 @@ export function PetList({ data, isMatchView = false }: PetListProps) {
             </div>
           </>
         ) : (
-          <Paragraph className='p-5 bg-background rounded-lg text-center'>
+          <Paragraph className='p-2.5 sm:p-5 bg-background rounded-lg text-center'>
             {'No pet usage data available yet.'}
           </Paragraph>
         )}

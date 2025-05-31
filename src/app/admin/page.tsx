@@ -1,10 +1,10 @@
 import { redirect } from 'next/navigation';
 import { getUserSession } from '@/supabase/actions/auth';
 import { getTournaments } from '@/supabase/actions/tournaments';
-import { Container, Heading, Paragraph } from '@/components/ui';
+import { Container, Heading, Paragraph, Pagination } from '@/components/ui';
 import { TournamentsListItem, AdminPanelButtons } from '@/components/admin';
-
-// TODO: In future maybe add pagination to the tournaments list
+import { PageSearchParams } from '@/types';
+import { TOURNAMENTS_PER_PAGE } from '@/utils/constants';
 
 export async function generateMetadata() {
   return {
@@ -13,7 +13,15 @@ export async function generateMetadata() {
   };
 }
 
-export default async function AdminPage() {
+export default async function AdminPage({
+  searchParams,
+}: {
+  searchParams: PageSearchParams;
+}) {
+  const { page } = await searchParams;
+  const currentPage = Number(page) || 1;
+  const offset = (currentPage - 1) * TOURNAMENTS_PER_PAGE;
+
   const response = await getUserSession();
 
   if (!response?.user || response?.user?.role !== 'admin') {
@@ -24,8 +32,8 @@ export default async function AdminPage() {
     success,
     status,
     message,
-    data: { tournaments },
-  } = await getTournaments();
+    data: { tournaments, totalPages },
+  } = await getTournaments(offset, TOURNAMENTS_PER_PAGE);
 
   if (!success) {
     return (
@@ -56,19 +64,29 @@ export default async function AdminPage() {
       <Heading>{`${username}'s Admin Panel`}</Heading>
       <AdminPanelButtons />
       <div>
-        <Heading as='h2' className='text-xl mb-5'>
+        <Heading as='h2' className='text-xl mb-2.5'>
           {'Tournaments List'}
         </Heading>
-        <div className='grid gap-2.5'>
+        <div className='grid gap-2.5 sm:gap-5 bg-light-grey p-2.5 sm:p-5 rounded-lg shadow-md'>
           {tournaments.length > 0 ? (
-            tournaments.map((tournament) => (
-              <TournamentsListItem
-                key={tournament.id}
-                tournament={tournament}
-              />
-            ))
+            <>
+              {tournaments.map((tournament) => (
+                <TournamentsListItem
+                  key={tournament.id}
+                  tournament={tournament}
+                />
+              ))}
+              {totalPages > 1 ? (
+                <Pagination
+                  className='mt-2.5'
+                  currentPage={currentPage}
+                  totalPages={totalPages}
+                  baseUrl={'/admin/tournaments'}
+                />
+              ) : null}
+            </>
           ) : (
-            <Paragraph className='p-5 rounded-lg bg-light-grey text-center shadow-md'>
+            <Paragraph className='p-2.5 sm:p-5 rounded-lg bg-background text-center shadow-md'>
               {
                 'There are no tournaments available yet, please create a tournament.'
               }

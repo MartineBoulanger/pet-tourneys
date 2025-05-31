@@ -22,7 +22,7 @@ export const DoubleBarGraph = ({
 
   if (!data || data.length === 0) {
     return (
-      <p className='text-center bg-background rounded-lg py-5'>
+      <p className='text-center bg-background rounded-lg p-2.5 sm:p-5'>
         {'No double bar chart data available.'}
       </p>
     );
@@ -35,7 +35,7 @@ export const DoubleBarGraph = ({
   }: TooltipProps<string | number, string | number>) => {
     if (!active || !payload || !payload.length) return null;
     return (
-      <div className='bg-light-grey p-2.5 rounded-lg shadow-md'>
+      <div className='bg-light-grey p-2.5 sm:p-5 rounded-lg shadow-md'>
         <p className='font-bold text-humanoid'>{label}</p>
         <p>
           {tooltip}
@@ -53,7 +53,7 @@ export const DoubleBarGraph = ({
     const { payload } = props;
 
     return (
-      <ul className='flex gap-5 items-center justify-center'>
+      <ul className='flex gap-2.5 sm:gap-5 items-center justify-center'>
         {payload &&
           payload.map(
             (
@@ -77,7 +77,7 @@ export const DoubleBarGraph = ({
   };
 
   return (
-    <GraphWrapper className='p-2.5 md:p-5 h-[425px] md:h-[450px]'>
+    <GraphWrapper className='p-2.5 sm:p-5 h-[425px] md:h-[450px]'>
       <BarChart data={data} layout='horizontal'>
         <Tooltip content={<CustomTooltip />} />
         <XAxis

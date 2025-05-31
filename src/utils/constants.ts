@@ -1,5 +1,6 @@
 export const PETS_PER_PAGE = 20;
 export const MATCHES_PER_PAGE = 10;
+export const TOURNAMENTS_PER_PAGE = 10;
 export const ROUNDS_PER_PAGE = 5;
 
 // Define color palette for breeds (extend as needed)

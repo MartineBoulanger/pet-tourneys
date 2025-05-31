@@ -18,7 +18,7 @@ export const LoginDiscord = () => {
     <Button
       type='button'
       onClick={handleDiscordLogin}
-      className='flex justify-center items-center gap-5'
+      className='flex justify-center items-center gap-2.5 sm:gap-5'
       title='Login with Discord'
       aria-label='Login with Discord'
     >

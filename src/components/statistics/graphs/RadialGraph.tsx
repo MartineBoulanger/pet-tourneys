@@ -36,7 +36,7 @@ export const RadialGraph = ({
     const data = payload[0].payload;
 
     return (
-      <div className='bg-light-grey p-2.5 rounded-lg shadow-md'>
+      <div className='bg-light-grey p-2.5 sm:p-5 rounded-lg shadow-md'>
         <p className='font-bold text-humanoid'>{data.name}</p>
         <p>
           {tooltip}

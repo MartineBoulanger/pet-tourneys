@@ -83,7 +83,7 @@ export default async function TournamentPage({
       <PageHeading heading={tournament.name}>
         <ActionDropdown links={links} />
       </PageHeading>
-      <div className='mb-10'>
+      <div className='mb-5 sm:mb-10'>
         <Paragraph>
           {new Date(tournament.start_date).toLocaleDateString()} -{' '}
           {tournament.end_date === '1999-12-31T22:00:00' ||
@@ -104,7 +104,7 @@ export default async function TournamentPage({
           totalPages={totalPages}
         />
       ) : (
-        <Paragraph className='p-5 rounded-lg bg-background text-center shadow-md'>
+        <Paragraph className='p-2.5 sm:p-5 rounded-lg bg-background text-center shadow-md'>
           {'There are no matches for this tournament available yet.'}
         </Paragraph>
       )}

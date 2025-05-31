@@ -42,7 +42,7 @@ export const RadarGraph = ({
     const data = payload[0].payload;
 
     return (
-      <div className='bg-light-grey p-2.5 rounded-lg shadow-md'>
+      <div className='bg-light-grey p-2.5 sm:p-5 rounded-lg shadow-md'>
         <p className='font-bold text-humanoid'>{data.name}</p>
         <p>
           {tooltip}
@@ -57,7 +57,7 @@ export const RadarGraph = ({
   };
 
   return (
-    <GraphWrapper className='p-2.5 md:p-5 pt-5 md:pt-7.5 h-[425px] md:h-[450px]'>
+    <GraphWrapper className='p-2.5 md:p-5 h-[425px] md:h-[450px]'>
       <RadarChart
         cx='50%'
         cy='50%'

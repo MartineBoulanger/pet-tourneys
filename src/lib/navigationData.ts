@@ -1,4 +1,10 @@
-import { FaPatreon, FaDiscord, FaYoutube, FaShoppingBag } from 'react-icons/fa';
+import {
+  FaPatreon,
+  FaDiscord,
+  FaYoutube,
+  FaShoppingBag,
+  FaPaypal,
+} from 'react-icons/fa';
 import { TbWorldWww } from 'react-icons/tb';
 import { NavigationData, FooterData } from './types';
 
@@ -6,8 +12,8 @@ export const headerData: NavigationData = [
   {
     id: 1,
     url: '/tournaments',
-    linkText: 'Tournaments List',
-    text: 'Check out the tournament match results!',
+    linkText: 'Our Tournaments',
+    text: 'Our tournaments are what we are living for! Here you can check all the matches and statistics of each our tournaments!',
     imageSrc: `${process.env.NEXT_PUBLIC_BASE_URL!}/images/redrex.png`,
   },
   {
@@ -20,15 +26,15 @@ export const headerData: NavigationData = [
   {
     id: 3,
     url: '/articles',
-    linkText: 'Pet Battle Articles',
+    linkText: 'Our Articles',
     text: 'Looking for a specific article about Pet Battle strategies? Checkout out all our articles on our articles page!',
     imageSrc: `${process.env.NEXT_PUBLIC_BASE_URL!}/images/greenrex.png`,
   },
   {
     id: 4,
     url: '/analyze-tool',
-    linkText: 'Our Analysis Tool',
-    text: 'Want to see the analysis of your personal pvp battle log? Check out our analysis tool and download the PDF of your battle logs analysis!',
+    linkText: 'Our Analyze Tool',
+    text: 'Want to check your personal battle statistics? Check out our analyze tool and download the PDF of your battle result!',
     imageSrc: `${process.env.NEXT_PUBLIC_BASE_URL!}/images/bluegor.png`,
   },
 ];
@@ -55,30 +61,36 @@ export const footerData: FooterData = [
     id: 1,
     url: 'https://www.petbattlepvp.com/home',
     Icon: TbWorldWww,
-    name: 'website',
+    name: 'Website',
   },
   {
     id: 2,
     url: 'http://www.google.com/url?q=http%3A%2F%2Fdiscord.gg%2Fg6Y2D7Gtew&sa=D&sntz=1&usg=AOvVaw2O2u0NiXvNkTvCDX8p5LNJ',
     Icon: FaDiscord,
-    name: 'discord',
+    name: 'Discord',
   },
   {
     id: 3,
     url: 'https://www.youtube.com/channel/UC99EpJ3nOedPOlGKXmlV25A',
     Icon: FaYoutube,
-    name: 'youTube',
+    name: 'YouTube',
   },
   {
     id: 4,
-    url: 'https://www.patreon.com/WarcraftPetBattleTournaments',
-    Icon: FaPatreon,
-    name: 'patreon',
+    url: 'https://petbattlepvp-shop.fourthwall.com/',
+    Icon: FaShoppingBag,
+    name: 'Merchandise',
   },
   {
     id: 5,
-    url: 'https://petbattlepvp-shop.fourthwall.com/',
-    Icon: FaShoppingBag,
-    name: 'merch',
+    url: 'https://www.patreon.com/WarcraftPetBattleTournaments',
+    Icon: FaPatreon,
+    name: 'Support Us',
+  },
+  {
+    id: 6,
+    url: 'https://www.google.com/url?q=https%3A%2F%2Fwww.paypal.com%2Fncp%2Fpayment%2F9PRLQWUF22E3Q&sa=D&sntz=1&usg=AOvVaw1IhWJF7DQUhPGjUpTmJwVY',
+    Icon: FaPaypal,
+    name: 'Prize Support',
   },
 ];

@@ -48,11 +48,11 @@ export const DeleteMatch = ({
           onClick={() => setIsOpen(false)}
         >
           <div
-            className='bg-light-grey rounded-lg p-5 max-w-md w-full'
+            className='bg-light-grey rounded-lg p-2.5 sm:p-5 m-5 sm:m-0 max-w-md w-full'
             onClick={(e) => e.stopPropagation()}
           >
-            <Heading className='mb-5'>{'Confirm Deletion'}</Heading>
-            <Paragraph className='mb-5'>
+            <Heading className='mb-2.5 sm:mb-5'>{'Confirm Deletion'}</Heading>
+            <Paragraph className='mb-2.5 sm:mb-5'>
               {
                 'Are you sure you want to delete the match with the battle logs '
               }
@@ -61,7 +61,7 @@ export const DeleteMatch = ({
               </strong>
               {'? This action cannot be undone.'}
             </Paragraph>
-            <div className='flex justify-end gap-5'>
+            <div className='flex justify-end gap-2.5 sm:gap-5'>
               <Button
                 onClick={() => setIsOpen(false)}
                 variant='secondary'

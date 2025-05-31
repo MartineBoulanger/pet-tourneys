@@ -71,7 +71,7 @@ export default async function GuidePage({
       ) : null}
       <Container className='p-2.5 sm:p-5 bg-light-grey rounded-lg shadow-md'>
         {page.pageTitle || page.pageDescription ? (
-          <div className='p-5 rounded-lg bg-background mb-5'>
+          <div className='p-2.5 sm:p-5 rounded-lg bg-background mb-5'>
             {page.pageTitle ? (
               <PageHeading heading={page.pageTitle} className='md:items-start'>
                 <ActionDropdown links={links} />

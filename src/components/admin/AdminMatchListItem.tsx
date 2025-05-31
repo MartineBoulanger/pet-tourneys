@@ -7,7 +7,7 @@ export const AdminMatchListItem = ({
   tournament,
 }: AdminMatchListItemProps) => {
   return (
-    <div className='p-5 rounded-lg shadow-md bg-background flex justify-between items-center'>
+    <div className='p-2.5 sm:p-5 rounded-lg shadow-md bg-background flex justify-between items-center'>
       <div>
         <Link
           key={match.id}
@@ -27,11 +27,11 @@ export const AdminMatchListItem = ({
           )
         </Link>
         <div className='flex mt-2.5 text-humanoid'>
-          <div className='text-sm'>
+          <div className='text-sm sm:text-base'>
             {new Date(match.date).toLocaleDateString()}
           </div>
-          <div className='mx-5 text-gray-500'>•</div>
-          <div className='text-sm'>{match.region}</div>
+          <div className='mx-5 text-light-grey'>•</div>
+          <div className='text-sm sm:text-base'>{match.region}</div>
         </div>
       </div>
       <AdminTournamentMatchActions

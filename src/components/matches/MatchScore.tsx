@@ -8,7 +8,7 @@ interface MatchScoreProps {
 export const MatchScore = ({ match }: MatchScoreProps) => {
   return (
     <>
-      <div className='mb-5 p-5 bg-background rounded-lg shadow-md'>
+      <div className='mb-5 p-2.5 sm:p-5 bg-background rounded-lg shadow-md'>
         <div className='flex justify-between items-center'>
           <div className='text-center'>
             <Paragraph className='text-lg font-medium'>
@@ -33,7 +33,6 @@ export const MatchScore = ({ match }: MatchScoreProps) => {
           </div>
         </div>
       </div>
-
       <div className='mb-5 md:mb-10'>
         <Paragraph>
           <span>{'Played on '}</span>

@@ -90,7 +90,7 @@ export default async function AdminMatchesPage({
           </Heading>
           <Paragraph className='text-humanoid'>{tournament.name}</Paragraph>
         </div>
-        <div className='grid gap-2.5 bg-light-grey p-5 rounded-lg shadow-md'>
+        <div className='grid gap-2.5 sm:gap-5 bg-light-grey p-2.5 sm:p-5 rounded-lg shadow-md'>
           {matches && matches.length > 0 ? (
             <>
               {matches.map((match) => (
@@ -100,19 +100,19 @@ export default async function AdminMatchesPage({
                   tournament={tournament}
                 />
               ))}
-              {totalPages > 1 && (
+              {totalPages > 1 ? (
                 <Pagination
                   className='mt-2.5'
                   currentPage={currentPage}
                   totalPages={totalPages}
                   baseUrl={`/admin/tournaments/${tournament.id}/matches`}
                 />
-              )}
+              ) : null}
             </>
           ) : (
-            <Paragraph className='p-5 rounded-lg bg-background text-center shadow-md'>
+            <Paragraph className='p-2.5 sm:p-5 rounded-lg bg-background text-center shadow-md'>
               {
-                'There are no matches for this tournament yet, please upload some battle logs.'
+                'There are no matches for this tournament yet, please upload some battle logs to see the matches here.'
               }
             </Paragraph>
           )}

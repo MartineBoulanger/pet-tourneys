@@ -24,7 +24,7 @@ export const ScatterGraph = ({
 
   if (!data || data.length === 0) {
     return (
-      <p className='text-center bg-background rounded-lg py-5'>
+      <p className='text-center bg-background rounded-lg p-2.5 sm:p-5'>
         {'No scatter chart data available.'}
       </p>
     );
@@ -39,7 +39,7 @@ export const ScatterGraph = ({
     const data = payload[0].payload;
 
     return (
-      <div className='bg-light-grey p-2.5 rounded-lg shadow-md'>
+      <div className='bg-light-grey p-2.5 sm:p-5 rounded-lg shadow-md'>
         <p className='font-bold text-humanoid'>
           {tooltipNamePrefix}
           {data.name}
