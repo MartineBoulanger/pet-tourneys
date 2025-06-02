@@ -1,4 +1,3 @@
-import { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 import { getUserSession } from '@/supabase/actions/auth';
 import { getTournamentDetails } from '@/supabase/actions/tournaments';
@@ -8,10 +7,12 @@ import { AdminPanelButtons, AdminMatchListItem } from '@/components/admin';
 import { PageParams, PageSearchParams } from '@/types';
 import { MATCHES_PER_PAGE } from '@/utils/constants';
 
-export const metadata: Metadata = {
-  title: 'Admin Matches List',
-  robots: { index: false, follow: false },
-};
+export async function generateMetadata() {
+  return {
+    title: 'Admin Matches List',
+    robots: { index: false, follow: false },
+  };
+}
 
 export default async function AdminMatchesPage({
   params,
@@ -84,12 +85,12 @@ export default async function AdminMatchesPage({
       <AdminPanelButtons isMatchesPage />
       <div>
         <div className='mb-5'>
-          <Heading as='h2' className='text-xl mb-2'>
+          <Heading as='h2' className='text-xl mb-2.5'>
             {'Tournament Matches'}
           </Heading>
-          <Paragraph className='text-light-blue'>{tournament.name}</Paragraph>
+          <Paragraph className='text-humanoid'>{tournament.name}</Paragraph>
         </div>
-        <div className='grid gap-4'>
+        <div className='grid gap-2.5 sm:gap-5 bg-light-grey p-2.5 sm:p-5 rounded-lg shadow-md'>
           {matches && matches.length > 0 ? (
             <>
               {matches.map((match) => (
@@ -99,18 +100,19 @@ export default async function AdminMatchesPage({
                   tournament={tournament}
                 />
               ))}
-              {totalPages > 1 && (
+              {totalPages > 1 ? (
                 <Pagination
+                  className='mt-2.5'
                   currentPage={currentPage}
                   totalPages={totalPages}
                   baseUrl={`/admin/tournaments/${tournament.id}/matches`}
                 />
-              )}
+              ) : null}
             </>
           ) : (
-            <Paragraph className='p-4 rounded-lg bg-light-grey text-center shadow-md'>
+            <Paragraph className='p-2.5 sm:p-5 rounded-lg bg-background text-center shadow-md'>
               {
-                'There are no matches for this tournament yet, please upload some battle logs.'
+                'There are no matches for this tournament yet, please upload some battle logs to see the matches here.'
               }
             </Paragraph>
           )}

@@ -32,4 +32,6 @@ export interface Tournament {
 
 export interface TournamentsListProps {
   tournaments: Tournament[];
+  currentPage?: number;
+  totalPages?: number;
 }

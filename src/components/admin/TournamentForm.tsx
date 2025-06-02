@@ -109,7 +109,7 @@ export function TournamentForm({ initialData = null }: TournamentFormProps) {
   if (!isMounted) return <TournamentFormSkeleton />;
 
   return (
-    <div className='bg-light-grey shadow-md rounded-lg p-5'>
+    <div className='bg-light-grey shadow-md rounded-lg p-2.5 sm:p-5'>
       <Form
         handleSubmit={handleSubmit}
         message={error}
@@ -152,11 +152,6 @@ export function TournamentForm({ initialData = null }: TournamentFormProps) {
               setFormData({ ...formData, end_date: e.target.value })
             }
           />
-          {/* <span className='font-bold text-red text-xs'>
-            {
-              'Leave the date "31-12-1999 23:00" as is when the tournament is still ongoing, this can be edited later when the tournament has ended!'
-            }
-          </span> */}
         </div>
         <Input
           type='number'

@@ -6,7 +6,7 @@ export const MatchListItem = ({ tournamentId, match }: MatchListItemProps) => {
     <Link
       key={match.id}
       href={`/tournaments/${tournamentId}/matches/${match.id}`}
-      className='p-4 rounded-lg shadow-md bg-light-grey hover:bg-blue-grey'
+      className='p-2.5 sm:p-5 rounded-lg shadow-md bg-background hover:bg-medium-grey transition-all duration-300'
       title={`${match.player1} vs ${match.player2}`}
       aria-label={`${match.player1} vs ${match.player2}`}
     >
@@ -16,11 +16,11 @@ export const MatchListItem = ({ tournamentId, match }: MatchListItemProps) => {
           {' vs '}
           {match.player2}
         </span>
-        <span className='flex text-light-blue'>
+        <span className='flex text-humanoid'>
           <span className='text-sm'>
             {new Date(match.date).toLocaleDateString()}
           </span>
-          <span className='w-[1px] h-5 bg-gray-500 mx-5 rounded-full' />
+          <span className='w-[1px] h-5 bg-light-grey mx-5 rounded-full' />
           <span className='text-sm'>{match.region}</span>
         </span>
       </span>

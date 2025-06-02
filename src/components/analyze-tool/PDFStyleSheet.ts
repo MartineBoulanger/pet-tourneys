@@ -25,7 +25,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     height: '100%',
     width: '100%',
-    backgroundColor: '#303030',
+    backgroundColor: '#101010',
     padding: 40,
   },
   coverTitle: {
@@ -37,7 +37,7 @@ export const styles = StyleSheet.create({
   },
   coverSubtitle: {
     fontSize: 18,
-    color: '#8ec5ff',
+    color: '#11a7f5',
     fontWeight: 'bold',
     marginBottom: 40,
     textAlign: 'center',
@@ -45,7 +45,7 @@ export const styles = StyleSheet.create({
   coverImage: {
     width: 250,
     height: 250,
-    marginBottom: 30,
+    marginBottom: 40,
   },
   coverMeta: {
     fontSize: 12,
@@ -64,14 +64,14 @@ export const styles = StyleSheet.create({
   },
   header: {
     fontSize: 20,
-    marginBottom: 10,
+    marginBottom: 40,
     fontWeight: 'bold',
     textAlign: 'center',
     color: '#101010',
   },
   sectionHeader: {
     fontSize: 16,
-    marginTop: 30,
+    marginTop: 10,
     marginBottom: 10,
     fontWeight: 'bold',
     color: '#101010',
@@ -85,7 +85,7 @@ export const styles = StyleSheet.create({
   },
   divider: {
     borderBottomWidth: 1,
-    borderBottomColor: '#cccccc',
+    borderBottomColor: '#303030',
     marginVertical: 10,
   },
   // tables
@@ -93,13 +93,13 @@ export const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: 'bold',
     color: '#f1f1f1',
-    backgroundColor: '#303030',
+    backgroundColor: '#101010',
     padding: 5,
   },
   tableRow: {
     flexDirection: 'row',
     borderBottomWidth: 1,
-    borderBottomColor: '#cccccc',
+    borderBottomColor: '#303030',
     alignItems: 'center',
     paddingVertical: 5,
   },
@@ -117,22 +117,23 @@ export const styles = StyleSheet.create({
     marginBottom: 8,
   },
   overviewBlock: {
-    backgroundColor: '#303030',
+    backgroundColor: '#101010',
     width: '49%',
     padding: 15,
     borderRadius: 8,
   },
   overviewBlockTitle: {
     color: '#f1f1f1',
+    fontSize: 20,
     fontWeight: 'bold',
   },
   overviewBlockValue: {
-    color: '#8ec5ff',
+    color: '#11a7f5',
     fontSize: 36,
     fontWeight: 'bold',
   },
   overviewBlockValueList: {
-    color: '#8ec5ff',
+    color: '#11a7f5',
     fontStyle: 'italic',
     fontSize: 12,
     marginTop: 5,
@@ -172,7 +173,7 @@ export const styles = StyleSheet.create({
     fontStyle: 'italic',
     padding: 5,
     borderRadius: 4,
-    backgroundColor: '#cccccc',
+    backgroundColor: '#f1f1f1',
     color: '#101010',
   },
   players: {

@@ -41,7 +41,7 @@ const ContentLayout = ({ component }: ContentLayoutProps) => {
   return (
     <div
       className={cn(
-        'p-5 rounded-lg bg-background grid grid-cols-1 gap-2.5 lg:gap-5',
+        'p-2.5 sm:p-5 rounded-lg bg-background grid grid-cols-1 gap-2.5 lg:gap-5',
         setLayout
       )}
     >

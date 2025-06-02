@@ -18,14 +18,12 @@ export const LoginDiscord = () => {
     <Button
       type='button'
       onClick={handleDiscordLogin}
-      className=' bg-blue-grey hover:bg-blue-grey/70 flex justify-center items-center gap-4'
+      className='flex justify-center items-center gap-2.5 sm:gap-5'
       title='Login with Discord'
       aria-label='Login with Discord'
     >
-      <FaDiscord className='text-foreground w-6 h-6' />
-      <span className='text-foreground uppercase'>
-        {isPending ? 'Redirecting...' : 'Login with Discord'}
-      </span>
+      <FaDiscord className='w-6 h-6' />
+      <span>{isPending ? 'Redirecting...' : 'Login with Discord'}</span>
     </Button>
   );
 };

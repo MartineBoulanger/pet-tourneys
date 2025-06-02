@@ -16,68 +16,41 @@ export interface PetUsageChartData extends ChartDataItem {
   total_played: number;
 }
 
-export interface ChartData {
-  petUsageData: PetUsageChartData[];
-  petTypeData: ChartDataItem[];
-  petBreedData: ChartDataItem[];
+export interface ChartsProps<T> {
+  data: T[] | undefined;
 }
 
-export interface BattleAnalysisStatsProps {
-  stats: {
-    generalStats: {
-      averageDuration: string;
-      totalBattles: number;
-      totalMatches?: number;
-      matchesByRegion?: {
-        EU: number;
-        NA: number;
-        other: number;
-      };
-    };
-    petStats: Array<{
-      name: string;
-      count: number;
-      playerCount: number;
-      opponentCount: number;
-      team: 'player' | 'opponent' | 'both';
-    }>;
-    abilityStats: AbilityAnalysisResult;
-    battleStats: BattleStatistics;
+export interface ChartData {
+  petUsageData: Array<PetUsageChartData>;
+  petTypeData: Array<ChartDataItem>;
+  petBreedData: Array<ChartDataItem>;
+}
+
+export interface BattleChartsProps {
+  matchesStats?: {
+    averageDuration?: string;
+    totalBattles?: number;
+    totalMatches?: number;
+    matchesByRegion?: Array<ChartDataItem>;
+    battleResults?: Array<ChartDataItem>;
+    matchResults?: Array<ChartDataItem>;
   };
   isMatchView: boolean;
 }
 
-export interface PetBreedChartProps {
-  breeds: { name: string; value: number }[] | undefined;
+export interface PetBattleLogProps {
+  battleStats: BattleStatistics;
+  isMatchView?: boolean;
 }
 
-export interface PetChartsProps {
+export interface PetAbilitiesProps {
+  abilityStats: AbilityAnalysisResult;
+}
+
+export interface PetChartsProps extends ChartsProps<TournamentPetStat> {
   chartData: ChartData;
-  stats: TournamentPetStat[];
 }
 
-export interface PetListProps {
-  stats: TournamentPetStat[];
-  matchView?: boolean;
-}
-
-export interface PetStatCardProps {
-  petStat: TournamentPetStat;
-  rank?: number;
-}
-
-export interface PetStatListProps {
-  petStats: TournamentPetStat[];
-}
-
-export interface PetStatsChartProps {
-  pets: TournamentPetStat[];
-}
-
-export interface PetTypeChartProps {
-  types: { name: string; value: number }[] | undefined;
-}
-
-export interface PetUsageChartProps {
-  pets: PetUsageChartData[] | undefined;
+export interface PetListProps extends ChartsProps<TournamentPetStat> {
+  isMatchView?: boolean;
 }

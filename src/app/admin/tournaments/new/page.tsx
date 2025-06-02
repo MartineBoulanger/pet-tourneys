@@ -1,11 +1,12 @@
 import { TournamentForm } from '@/components/admin';
 import { Container, Heading } from '@/components/ui';
-import { Metadata } from 'next';
 
-export const metadata: Metadata = {
-  title: 'Create New Tourney',
-  robots: { index: false, follow: false },
-};
+export async function generateMetadata() {
+  return {
+    title: 'Create Tournament',
+    robots: { index: false, follow: false },
+  };
+}
 
 export default function NewTournamentPage() {
   return (

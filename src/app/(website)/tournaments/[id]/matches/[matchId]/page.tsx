@@ -17,7 +17,7 @@ export async function generateMetadata({
 }) {
   const { id, matchId } = await params;
   return {
-    title: 'Tourney Match Details',
+    title: 'Match Details',
     alternates: {
       canonical: `${process.env
         .NEXT_PUBLIC_BASE_URL!}/tournaments/${id}/matches/${matchId}`,
@@ -51,13 +51,13 @@ export default async function MatchPage({
   const links: Links = [
     {
       id: 1,
-      url: `/tournaments/${id}/statistics/pet-usage?matchId=${matchId}`,
-      text: 'Pet Usage Statistics',
+      url: `/tournaments/${id}/statistics?matchId=${matchId}`,
+      text: 'Match Statistics',
     },
     {
       id: 2,
-      url: `/tournaments/${id}/statistics/battle-logs?matchId=${matchId}`,
-      text: 'Battle Logs Statistics',
+      url: `/tournaments/${id}/statistics/pet-stats?matchId=${matchId}`,
+      text: 'Match Pets Statistics',
     },
     {
       id: 3,
@@ -77,12 +77,12 @@ export default async function MatchPage({
             <span className='text-xl text-foreground/50'>{match.region}</span>
           </span>
         }
-        className='lg:mb-5'
+        className='sm:mb-5'
       >
         <ActionDropdown links={links} />
       </PageHeading>
       {match && <MatchScore match={match} />}
-      <div className='mb-10'>
+      <div className='mb-5 sm:mb-10'>
         {battleLogs?.length ? (
           battleLogs.map((battle, index) => (
             <div key={battle.id} className='mb-5 lg:mb-10'>
@@ -94,7 +94,7 @@ export default async function MatchPage({
             </div>
           ))
         ) : (
-          <Paragraph className='text-gray-500'>
+          <Paragraph className='p-2.5 sm:p-5 rounded-lg bg-background text-center shadow-md'>
             {'No battle logs available.'}
           </Paragraph>
         )}

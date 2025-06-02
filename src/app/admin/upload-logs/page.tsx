@@ -1,12 +1,13 @@
-import { Metadata } from 'next';
-import { getTournaments } from '@/supabase/actions/tournaments';
+import { getTournamentsForForm } from '@/supabase/actions/tournaments';
 import { UploadForm } from '@/components/admin';
 import { Container, Heading, Paragraph } from '@/components/ui';
 
-export const metadata: Metadata = {
-  title: 'Upload Logs',
-  robots: { index: false, follow: false },
-};
+export async function generateMetadata() {
+  return {
+    title: 'Upload Battle Logs',
+    robots: { index: false, follow: false },
+  };
+}
 
 export default async function UploadLogsPage() {
   const {
@@ -14,7 +15,7 @@ export default async function UploadLogsPage() {
     status,
     message,
     data: { tournaments },
-  } = await getTournaments();
+  } = await getTournamentsForForm();
 
   if (!success) {
     return (

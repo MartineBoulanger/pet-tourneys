@@ -16,7 +16,7 @@ import { MATCHES_PER_PAGE } from '@/utils/constants';
 export async function generateMetadata({ params }: { params: PageParams }) {
   const { id } = await params;
   return {
-    title: 'Tourney Details',
+    title: 'Tournament Details',
     alternates: {
       canonical: `${process.env.NEXT_PUBLIC_BASE_URL!}/tournaments/${id}`,
     },
@@ -63,13 +63,13 @@ export default async function TournamentPage({
   const links: Links = [
     {
       id: 1,
-      url: `/tournaments/${tournament.id}/statistics/pet-usage`,
-      text: 'Pet Usage Statistics',
+      url: `/tournaments/${tournament.id}/statistics`,
+      text: 'Tournament Statistics',
     },
     {
       id: 2,
-      url: `/tournaments/${tournament.id}/statistics/battle-logs`,
-      text: 'Battle Logs Statistics',
+      url: `/tournaments/${tournament.id}/statistics/pet-stats`,
+      text: 'Tournament Pets Statistics',
     },
     {
       id: 3,
@@ -83,7 +83,7 @@ export default async function TournamentPage({
       <PageHeading heading={tournament.name}>
         <ActionDropdown links={links} />
       </PageHeading>
-      <div className='mb-10 text-foreground'>
+      <div className='mb-5 sm:mb-10'>
         <Paragraph>
           {new Date(tournament.start_date).toLocaleDateString()} -{' '}
           {tournament.end_date === '1999-12-31T22:00:00' ||
@@ -91,7 +91,7 @@ export default async function TournamentPage({
             ? 'Ongoing'
             : new Date(tournament.end_date).toLocaleDateString()}
         </Paragraph>
-        <Paragraph className='font-bold text-light-blue'>
+        <Paragraph className='font-bold text-humanoid'>
           {tournament.participant_count}
           {' participants'}
         </Paragraph>
@@ -104,7 +104,7 @@ export default async function TournamentPage({
           totalPages={totalPages}
         />
       ) : (
-        <Paragraph className='p-4 rounded-lg bg-light-grey text-center shadow-md'>
+        <Paragraph className='p-2.5 sm:p-5 rounded-lg bg-background text-center shadow-md'>
           {'There are no matches for this tournament available yet.'}
         </Paragraph>
       )}

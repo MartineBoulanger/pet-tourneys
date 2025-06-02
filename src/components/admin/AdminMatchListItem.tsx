@@ -7,12 +7,12 @@ export const AdminMatchListItem = ({
   tournament,
 }: AdminMatchListItemProps) => {
   return (
-    <div className='p-4 rounded-lg shadow-md bg-light-grey flex justify-between items-center'>
+    <div className='p-2.5 sm:p-5 rounded-lg shadow-md bg-background flex justify-between items-center'>
       <div>
         <Link
           key={match.id}
           href={`/tournaments/${tournament.id}/matches/${match.id}`}
-          className='link'
+          className='link text-foreground'
           title={`${match.player1} vs ${match.player2}`}
           aria-label={`${match.player1} vs ${match.player2}`}
         >
@@ -26,12 +26,12 @@ export const AdminMatchListItem = ({
             : match.opponent_score}
           )
         </Link>
-        <div className='flex mt-2 text-light-blue'>
-          <div className='text-sm'>
+        <div className='flex mt-2.5 text-humanoid'>
+          <div className='text-sm sm:text-base'>
             {new Date(match.date).toLocaleDateString()}
           </div>
-          <div className='mx-5 text-gray-500'>•</div>
-          <div className='text-sm'>{match.region}</div>
+          <div className='mx-5 text-light-grey'>•</div>
+          <div className='text-sm sm:text-base'>{match.region}</div>
         </div>
       </div>
       <AdminTournamentMatchActions

@@ -67,10 +67,10 @@ export const Pagination = ({
         <Link
           key={page}
           href={`${baseUrl}?${queryParam}=${page}`}
-          className={`flex h-10 w-10 items-center justify-center rounded-md ${
+          className={`flex h-10 w-10 items-center justify-center rounded-md font-bold ${
             currentPage === page
-              ? 'bg-blue-grey text-foreground cursor-default'
-              : 'hover:bg-blue-grey'
+              ? 'bg-humanoid text-background'
+              : 'hover:bg-background hover:text-foreground'
           }`}
           aria-disabled={currentPage === page}
           title={`Page ${page}`}

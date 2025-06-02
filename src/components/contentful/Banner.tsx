@@ -23,7 +23,7 @@ const Banner = ({ component, isPage = false, className }: BannerProps) => {
           <RichText component={bannerText} className='w-full max-w-[700px]' />
           {bannerActionsCollection?.items &&
           bannerActionsCollection.items.length > 0 ? (
-            <div className='flex flex-wrap items-center justify-center md:justify-end gap-5 mt-10 w-full'>
+            <div className='flex flex-wrap items-center justify-center md:justify-end gap-2.5 sm:gap-5 mt-5 sm:mt-10 w-full'>
               {bannerActionsCollection.items.map((cta, index) => (
                 <Cta key={index} component={cta} />
               ))}

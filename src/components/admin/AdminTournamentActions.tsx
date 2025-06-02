@@ -6,7 +6,7 @@ import { DeleteTournamentProps } from './types';
 
 export const AdminTournamentActions = ({ id, name }: DeleteTournamentProps) => {
   return (
-    <div className='flex flex-col-reverse md:flex-row items-center justify-center md:justify-evenly gap-4'>
+    <div className='flex flex-col-reverse md:flex-row items-center justify-center md:justify-evenly gap-2.5 sm:gap-5'>
       <Link
         className='btn-link'
         href={`/admin/tournaments/${id}/matches`}

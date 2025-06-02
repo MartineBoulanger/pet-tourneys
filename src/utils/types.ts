@@ -29,10 +29,7 @@ export interface ActivePets {
 }
 
 export interface BattleStatistics {
-  totalPetSwaps: {
-    player: number;
-    opponent: number;
-  };
+  totalPetSwaps: Record<string, number>;
   petSwapDetails: Record<string, number>;
   weatherChanges: {
     total: number;
@@ -183,6 +180,35 @@ export type AbilityAnalysisResult = AbilityCategories & {
   categorizationLog?: { [ability: string]: string[] };
   totalUniqueAbilitiesUsed?: number;
 };
+
+export interface BattleLogsStatistics {
+  generalStats: {
+    averageDuration: string;
+    totalBattles: number;
+    totalMatches: number;
+    matchesByRegion: {
+      name: string;
+      value: number;
+    }[];
+    battleResults: {
+      name: string;
+      value: number;
+    }[];
+    matchResults: {
+      name: string;
+      value: number;
+    }[];
+  };
+  petStats: Array<{
+    name: string;
+    count: number;
+    playerCount: number;
+    opponentCount: number;
+    team: 'player' | 'opponent' | 'both';
+  }>;
+  abilityStats: AbilityAnalysisResult;
+  battleStats: BattleStatistics;
+}
 
 export interface UploadProps {
   player1: string;

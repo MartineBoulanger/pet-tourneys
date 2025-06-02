@@ -109,10 +109,9 @@ export const AnalyzeToolForm = () => {
 
   return (
     <>
-      <div className='bg-light-grey shadow-md rounded-lg p-5'>
+      <div className='bg-light-grey shadow-md rounded-lg p-2.5 sm:p-5'>
         <Form
           handleSubmit={handleSubmit}
-          className='space-y-4'
           button1={{
             variant: 'secondary',
             type: 'button',

@@ -1,16 +1,17 @@
-// import { notFound } from 'next/navigation';
-// import { PetList, PetCharts } from '@/components/statistics';
-// import {
-//   getMatchPetUsage,
-//   getTournamentPetStats,
-// } from '@/supabase/actions/pet-usage-statistics';
-// import { getTournament } from '@/supabase/actions/tournaments';
-// import { getMatch } from '@/supabase/actions/matches';
+import { notFound } from 'next/navigation';
+import { PetList } from '@/components/statistics';
 import {
-  Container,
+  getMatchPetUsage,
+  getTournamentPetStats,
+} from '@/supabase/actions/pet-usage-statistics';
+import { getTournament } from '@/supabase/actions/tournaments';
+import { getMatch } from '@/supabase/actions/matches';
+import {
   PageHeading,
+  Heading,
   Paragraph,
   ActionDropdown,
+  Container,
 } from '@/components/ui';
 import { PageParams, MatchSearchParams } from '@/types';
 import { Links } from '@/lib/types';
@@ -18,7 +19,7 @@ import { Links } from '@/lib/types';
 export async function generateMetadata({ params }: { params: PageParams }) {
   const { id } = await params;
   return {
-    title: 'Pet Stats',
+    title: 'Pets Statistics',
     alternates: {
       canonical: `${process.env
         .NEXT_PUBLIC_BASE_URL!}/tournaments/${id}/statistics/pet-stats`,
@@ -26,7 +27,7 @@ export async function generateMetadata({ params }: { params: PageParams }) {
   };
 }
 
-export default async function PetStatsPage({
+export default async function PetUsageStatisticsPage({
   params,
   searchParams,
 }: {
@@ -36,28 +37,54 @@ export default async function PetStatsPage({
   const { id } = await params;
   const { matchId } = await searchParams;
   const isMatchView = !!matchId;
-  const title = isMatchView
-    ? 'Match Pet Statistics'
-    : 'Tournament Pet Statistics';
+
+  let stats;
+  let title = 'Tournament Pets Statistics';
+  let entityName = '';
+
+  if (isMatchView) {
+    const match = await getMatch(id, matchId);
+    if (!match) return notFound();
+
+    stats = await getMatchPetUsage(id, matchId);
+    title = 'Match Pets Statistics';
+    entityName = `${match.player1} vs ${match.player2}`;
+  } else {
+    const {
+      success,
+      status,
+      message,
+      data: { tournament },
+    } = await getTournament(id);
+
+    if (!success) {
+      return (
+        <div className='text-center'>
+          <Heading className='text-red'>{`Error ${status}!`}</Heading>
+          <Paragraph>{message}</Paragraph>
+        </div>
+      );
+    }
+
+    if (!tournament) return notFound();
+
+    stats = await getTournamentPetStats(id);
+    entityName = tournament.name;
+  }
+
+  if (!stats) return notFound();
 
   // make links data for the dropdown menu on the page
   const links: Links = [
     {
       id: 1,
-      url: `/tournaments/${id}/statistics/pet-usage${
-        isMatchView ? `?matchId=${matchId}` : ''
-      }`,
-      text: 'Pet Usage Statistics',
+      url: isMatchView
+        ? `/tournaments/${id}/statistics?matchId=${matchId}`
+        : `/tournaments/${id}/statistics`,
+      text: isMatchView ? 'Match Statistics' : 'Tournament Statistics',
     },
     {
       id: 2,
-      url: `/tournaments/${id}/statistics/battle-logs${
-        isMatchView ? `?matchId=${matchId}` : ''
-      }`,
-      text: 'Battle Logs Statistics',
-    },
-    {
-      id: 3,
       url: isMatchView
         ? `/tournaments/${id}/matches/${matchId}`
         : `/tournaments/${id}`,
@@ -65,16 +92,18 @@ export default async function PetStatsPage({
     },
   ];
 
+  // TODO: The pet list will change so that there will be statistics per pet as well from the tournament
   return (
     <Container>
-      <div className='mb-6'>
+      <div className='mb-5'>
         <PageHeading heading={title}>
           <ActionDropdown links={links} />
         </PageHeading>
-        {/* {entityName && (
-          <Paragraph className='text-light-blue'>{entityName}</Paragraph>
-        )} */}
+        {entityName && (
+          <Paragraph className='text-humanoid'>{entityName}</Paragraph>
+        )}
       </div>
+      {stats && <PetList data={stats} isMatchView={isMatchView} />}
     </Container>
   );
 }

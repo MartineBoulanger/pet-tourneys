@@ -64,14 +64,14 @@ export default async function ArticlePage({
       {page.banner ? (
         <>
           <Banner component={page.banner} isPage />
-          <div className='hidden md:block md:w-[40px] md:mx-auto text-light-blue animate-bounce mb-10'>
+          <div className='hidden md:block md:w-[40px] md:mx-auto text-humanoid animate-bounce mb-10'>
             <TbSquareChevronsDown className='w-10 h-10' />
           </div>
         </>
       ) : null}
       <Container className='p-2.5 sm:p-5 bg-light-grey rounded-lg shadow-md'>
         {page.pageTitle || page.pageDescription ? (
-          <div className='p-5 rounded-lg bg-background mb-5'>
+          <div className='p-2.5 sm:p-5 rounded-lg bg-background mb-5'>
             {page.pageTitle ? (
               <PageHeading heading={page.pageTitle} className='md:items-start'>
                 <ActionDropdown links={links} />

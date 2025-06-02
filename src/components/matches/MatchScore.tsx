@@ -8,24 +8,24 @@ interface MatchScoreProps {
 export const MatchScore = ({ match }: MatchScoreProps) => {
   return (
     <>
-      <div className='mb-8 p-4 bg-light-grey rounded-lg shadow-md'>
+      <div className='mb-5 p-2.5 sm:p-5 bg-background rounded-lg shadow-md'>
         <div className='flex justify-between items-center'>
           <div className='text-center'>
             <Paragraph className='text-lg font-medium'>
               {match.player1}
             </Paragraph>
-            <Paragraph className='text-3xl font-bold'>
+            <Paragraph className='text-3xl font-bold text-humanoid'>
               {match.owner === match.player1
                 ? match.owner_score
                 : match.opponent_score}
             </Paragraph>
           </div>
-          <div className='text-xl font-bold text-light-blue'>{'vs'}</div>
+          <div className='text-xl font-bold'>{'vs'}</div>
           <div className='text-center'>
             <Paragraph className='text-lg font-medium'>
               {match.player2}
             </Paragraph>
-            <Paragraph className='text-3xl font-bold'>
+            <Paragraph className='text-3xl font-bold text-humanoid'>
               {match.owner === match.player2
                 ? match.owner_score
                 : match.opponent_score}
@@ -33,17 +33,16 @@ export const MatchScore = ({ match }: MatchScoreProps) => {
           </div>
         </div>
       </div>
-
-      <div className='mb-5 md:mb-10 text-foreground'>
+      <div className='mb-5 md:mb-10'>
         <Paragraph>
           <span>{'Played on '}</span>
-          <span className='font-bold text-light-blue'>
+          <span className='font-bold text-humanoid'>
             {new Date(match.date).toLocaleString()}
           </span>
         </Paragraph>
         <Paragraph>
           <span>{'Logs submitted by '}</span>
-          <span className='font-bold text-light-blue'>{match.owner}</span>
+          <span className='font-bold text-humanoid'>{match.owner}</span>
         </Paragraph>
       </div>
     </>
