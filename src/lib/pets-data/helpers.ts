@@ -1,26 +1,3 @@
-export enum PET_SOURCES {
-  BATTLE = 'Pet Battle',
-  PROFESSION = 'Profession',
-  VENDOR = 'Vendor',
-  WORLDDROP = 'World Drop',
-  DROP = 'Drop',
-  PARAGON = 'Paragon Reward',
-  TCG = 'Trading Card Game',
-  PROMOTION = 'Promotion',
-  QUEST = 'Quest',
-  ACHIEVEMENT = 'Achievement',
-  SHOP = 'In-Game Shop',
-  WORLDEVENT = 'World Event',
-  FISHING = 'Fishing',
-  ARCHAEOLOGY = 'Archaeology',
-  DISCOVERY = 'Discovery',
-  BLACKMARKET = 'Black Market',
-  TREASURE = 'Treasure',
-  MISSION = 'Mission',
-  ORDERHALL = 'Order Hall',
-  TRADINGPOST = 'Trading Post',
-}
-
 export const PET_TYPES = {
   1: 'Humanoid',
   2: 'Dragonkin',

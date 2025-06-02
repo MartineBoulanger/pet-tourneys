@@ -1,4 +1,12 @@
-export const aquatic_pets = [
+import {
+  PetData,
+  PET_SOURCES,
+  PROFESSIONS,
+  EXPANSIONS,
+  LOCATIONS,
+} from './types';
+
+export const aquatic_pets: PetData[] = [
   {
     name: 'Wood Frog',
     speciesID: 64,
