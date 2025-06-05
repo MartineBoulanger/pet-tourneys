@@ -27,7 +27,7 @@ export interface PetData {
   source: string;
   professionDetails?: ProfessionDetails;
   eventName?: string;
-  locations?: string;
+  locations?: string[];
   chance?: number;
   flavor?: string;
   icon: string;
@@ -70,4 +70,10 @@ export enum EXPANSIONS {
 
 export enum LOCATIONS {
   HF = 'Hillsbrad Foothills',
+  NSTV = 'Northern Stranglethorn',
+  CSTV = 'The Cape of Stranglethorn',
+}
+
+export enum DUNGEONS {
+  DM = 'The Deadmines',
 }

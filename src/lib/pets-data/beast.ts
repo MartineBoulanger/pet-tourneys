@@ -71,7 +71,7 @@ export const beast_pets: PetData[] = [
     type: 8,
     isTradable: true,
     source: PET_SOURCES.WORLDDROP,
-    locations: LOCATIONS.HF,
+    locations: [LOCATIONS.HF],
     chance: 0.05,
     flavor: "Old Alterac saying: 'A cat has nine lives, but needs only one.'",
     icon: 'pet-icons/blacktabbycat.png',
@@ -136,6 +136,64 @@ export const beast_pets: PetData[] = [
     possibleBreeds: [3],
     baseStats: [7, 8.5, 8.5],
     image: 'pets/siamese_cat.jpg',
+    abilities: [
+      {
+        slot1: {
+          lvl1: 'Claw',
+          lvl10: 'Pounce',
+        },
+        slot2: {
+          lvl2: 'Rake',
+          lvl15: 'Screech',
+        },
+        slot3: {
+          lvl4: 'Devour',
+          lvl20: 'Prowl',
+        },
+      },
+    ],
+  },
+  {
+    name: 'Silver Tabby Cat',
+    speciesID: 45,
+    type: 8,
+    isTradable: true,
+    source: PET_SOURCES.VENDOR,
+    flavor:
+      "Sleeping is this cat's second favorite activity. The first is yawning.",
+    icon: 'pet-icons/silvertabbycat.png',
+    possibleBreeds: [1],
+    baseStats: [7, 8.5, 8.5],
+    image: 'pets/silver_tabby.jpg',
+    abilities: [
+      {
+        slot1: {
+          lvl1: 'Claw',
+          lvl10: 'Pounce',
+        },
+        slot2: {
+          lvl2: 'Rake',
+          lvl15: 'Screech',
+        },
+        slot3: {
+          lvl4: 'Devour',
+          lvl20: 'Prowl',
+        },
+      },
+    ],
+  },
+  {
+    name: 'White Kitten',
+    speciesID: 46,
+    type: 8,
+    isTradable: true,
+    source: PET_SOURCES.VENDOR,
+    flavor:
+      'The queen had three kittens. The first gave her a juicy rat. The second, a tasty hare. And the white, her favorite, presented the head of her rival.',
+    icon: 'pet-icons/silvertabbycat.png',
+    possibleBreeds: [10],
+    baseStats: [7.5, 7.5, 9],
+    image: 'pets/silver_tabby.jpg',
     abilities: [
       {
         slot1: {
