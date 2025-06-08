@@ -9,6 +9,7 @@ export function PetsDataConverter() {
   const [excelData, setExcelData] = useState('');
   const [jsonOutput, setJsonOutput] = useState('');
 
+  // Only one order of columns for the pet data, can always add columns -> but you have to add these in the excel sheet as well.
   const headers = [
     'petID',
     'name',
@@ -81,7 +82,7 @@ export function PetsDataConverter() {
             required
           />
         </Form>
-        <div className='flex items-center justify-end gap-2.5 sm:gap-5 mt-2.5 sm:mt-5'>
+        <div className='flex items-center flex-wrap justify-end gap-2.5 sm:gap-5 mt-2.5 sm:mt-5'>
           <Button variant='secondary' onClick={() => router.back()}>
             {'Cancel'}
           </Button>
@@ -91,17 +92,19 @@ export function PetsDataConverter() {
           <Button onClick={convertToJson}>{'Convert to JSON'}</Button>
         </div>
       </div>
-      <div className='flex flex-col sm:flex-row justify-between items-end sm:items-center mb-5 mt-5 sm:mt-10'>
-        <Heading as='h2'>{'JSON Output'}</Heading>
-        <Button onClick={downloadJsonFile}>{'Download JSON File'}</Button>
-      </div>
-      <div className='bg-light-grey shadow-md rounded-lg p-2.5 sm:p-5'>
-        {jsonOutput && (
-          <pre className='p-2.5 sm:p-5 bg-background rounded-lg w-full overflow-auto max-h-[450px]'>
-            {jsonOutput}
-          </pre>
-        )}
-      </div>
+      {jsonOutput && (
+        <>
+          <div className='flex flex-row justify-between items-center mb-5 mt-5 sm:mt-10'>
+            <Heading as='h2'>{'JSON Output'}</Heading>
+            <Button onClick={downloadJsonFile}>{'Download JSON File'}</Button>
+          </div>
+          <div className='bg-light-grey shadow-md rounded-lg p-2.5 sm:p-5'>
+            <pre className='p-2.5 sm:p-5 bg-background rounded-lg w-full overflow-auto max-h-[450px]'>
+              {jsonOutput}
+            </pre>
+          </div>
+        </>
+      )}
     </>
   );
 }

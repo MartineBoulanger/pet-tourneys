@@ -197,46 +197,6 @@ export async function analyzePlayerAndPetStats(
   );
 }
 
-// Helper function to process team pets
-function processTeamPets(
-  team: string[],
-  player: string,
-  isWinner: boolean,
-  playerPetStats: Map<
-    string,
-    Map<string, { timesUsed: number; kills: number; deaths: number }>
-  >
-) {
-  const playerStats = playerPetStats.get(player)!;
-
-  team.forEach((petName) => {
-    if (!playerStats.has(petName)) {
-      playerStats.set(petName, { timesUsed: 0, kills: 0, deaths: 0 });
-    }
-    const petStat = playerStats.get(petName)!;
-    petStat.timesUsed += 1;
-
-    if (isWinner) {
-      petStat.kills += 1; // Count kill for each pet on win
-    } else {
-      petStat.deaths += 1; // Count death for each pet on loss
-    }
-  });
-}
-
-// Helper function to update problematic pets
-function updateProblematicPets(
-  loser: string,
-  winningPets: string[],
-  playerProblemPets: Map<string, Map<string, number>>
-) {
-  const loserProblemPets = playerProblemPets.get(loser)!;
-
-  winningPets.forEach((petName) => {
-    loserProblemPets.set(petName, (loserProblemPets.get(petName) || 0) + 1);
-  });
-}
-
 export async function calculatePlayerRecords(
   matches: Match[]
 ): Promise<PlayerRecord[]> {

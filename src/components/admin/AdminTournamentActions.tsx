@@ -6,30 +6,30 @@ import { DeleteTournamentProps } from './types';
 
 export const AdminTournamentActions = ({ id, name }: DeleteTournamentProps) => {
   return (
-    <div className='flex flex-col-reverse md:flex-row items-center justify-center md:justify-evenly gap-2.5 sm:gap-5'>
+    <div className='flex flex-col md:flex-row items-center justify-center md:justify-evenly gap-2.5 sm:gap-5'>
       <Link
         className='btn-link'
         href={`/admin/tournaments/${id}/matches`}
-        title='matches list page'
-        aria-label='matches list page'
+        title='Matches List Page'
+        aria-label='Matches List Page'
       >
         <GiBattleGear />
       </Link>
       <Link
         className='btn-link'
-        href={`/admin/tournaments/${id}/edit`}
-        title='edit match'
-        aria-label='edit match'
+        href={`/admin/tournaments/${id}/players`}
+        title='Players List Page'
+        aria-label='Players List Page'
       >
-        <FaEdit />
+        <FaClipboard />
       </Link>
       <Link
         className='btn-link'
-        href={`/admin/tournaments/${id}/tournament-results`}
-        title='Tournament Results'
-        aria-label='Tournament Results'
+        href={`/admin/tournaments/${id}/edit`}
+        title='Edit Match'
+        aria-label='Edit Match'
       >
-        <FaClipboard />
+        <FaEdit />
       </Link>
       <DeleteTournament id={id} name={name} />
     </div>

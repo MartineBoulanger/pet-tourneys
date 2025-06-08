@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { FaChevronRight, FaChevronLeft } from 'react-icons/fa6';
+import { Button } from '@/components/ui';
 
 interface PaginationProps {
   currentPage: number;
@@ -7,6 +8,7 @@ interface PaginationProps {
   baseUrl: string;
   queryParam?: string;
   className?: string;
+  onPageChange?: (page: number) => void;
 }
 
 export const Pagination = ({
@@ -15,8 +17,14 @@ export const Pagination = ({
   baseUrl,
   queryParam = 'page',
   className = '',
+  onPageChange, // only use this prop when data is already parsed and does not have to be called per page at the database
 }: PaginationProps) => {
   if (totalPages <= 1) return null;
+
+  const handlePageChange = (page: number) => {
+    if (page < 1 || page > totalPages || page === currentPage) return;
+    if (onPageChange) onPageChange(page);
+  };
 
   const renderPageNumbers = () => {
     const pages = [];
@@ -63,7 +71,22 @@ export const Pagination = ({
         );
       }
 
-      return (
+      return onPageChange ? (
+        <Button
+          key={page}
+          onClick={() => handlePageChange(Number(page))}
+          className={`flex h-10 w-10 items-center justify-center rounded-md font-bold bg-transparent ${
+            currentPage === page
+              ? 'bg-humanoid text-background'
+              : 'hover:bg-background hover:text-foreground'
+          }`}
+          aria-disabled={currentPage === page}
+          title={`Page ${page}`}
+          aria-label={`Page ${page}`}
+        >
+          {page}
+        </Button>
+      ) : (
         <Link
           key={page}
           href={`${baseUrl}?${queryParam}=${page}`}
@@ -85,41 +108,75 @@ export const Pagination = ({
   return (
     <div className={`flex items-center justify-center gap-2 ${className}`}>
       {/* Previous Button */}
-      <Link
-        href={`${baseUrl}?${queryParam}=${currentPage - 1}`}
-        className={`flex items-center justify-center p-2 rounded-lg ${
-          currentPage === 1
-            ? 'opacity-40 cursor-default'
-            : 'hover:bg-light-grey'
-        }`}
-        aria-disabled={currentPage === 1}
-        tabIndex={currentPage === 1 ? -1 : undefined}
-        title='Previous'
-        aria-label='Previous'
-      >
-        <FaChevronLeft className='h-6 w-6' />
-        <span className='sr-only'>Previous</span>
-      </Link>
+      {onPageChange ? (
+        <Button
+          onClick={() => handlePageChange(currentPage - 1)}
+          className={`flex items-center justify-center p-2 rounded-lg bg-transparent ${
+            currentPage === 1
+              ? 'opacity-40 cursor-default'
+              : 'hover:bg-light-grey'
+          }`}
+          disabled={currentPage === 1}
+          title='Previous'
+          aria-label='Previous'
+        >
+          <FaChevronLeft className='h-6 w-6' />
+          <span className='sr-only'>Previous</span>
+        </Button>
+      ) : (
+        <Link
+          href={`${baseUrl}?${queryParam}=${currentPage - 1}`}
+          className={`flex items-center justify-center p-2 rounded-lg ${
+            currentPage === 1
+              ? 'opacity-40 cursor-default'
+              : 'hover:bg-light-grey'
+          }`}
+          aria-disabled={currentPage === 1}
+          tabIndex={currentPage === 1 ? -1 : undefined}
+          title='Previous'
+          aria-label='Previous'
+        >
+          <FaChevronLeft className='h-6 w-6' />
+          <span className='sr-only'>Previous</span>
+        </Link>
+      )}
 
       {/* Page Numbers */}
       <div className='flex items-center gap-1.5'>{renderPageNumbers()}</div>
 
       {/* Next Button */}
-      <Link
-        href={`${baseUrl}?${queryParam}=${currentPage + 1}`}
-        className={`flex items-center justify-center p-2 rounded-lg ${
-          currentPage === totalPages
-            ? 'opacity-40 cursor-default'
-            : 'hover:bg-light-grey'
-        }`}
-        aria-disabled={currentPage === totalPages}
-        tabIndex={currentPage === totalPages ? -1 : undefined}
-        title='Next'
-        aria-label='Next'
-      >
-        <FaChevronRight className='h-6 w-6' />
-        <span className='sr-only'>Next</span>
-      </Link>
+      {onPageChange ? (
+        <Button
+          onClick={() => handlePageChange(currentPage + 1)}
+          className={`flex items-center justify-center p-2 rounded-lg bg-transparent ${
+            currentPage === totalPages
+              ? 'opacity-40 cursor-default'
+              : 'hover:bg-light-grey'
+          }`}
+          disabled={currentPage === totalPages}
+          title='Next'
+          aria-label='Next'
+        >
+          <FaChevronRight className='h-6 w-6' />
+          <span className='sr-only'>Next</span>
+        </Button>
+      ) : (
+        <Link
+          href={`${baseUrl}?${queryParam}=${currentPage + 1}`}
+          className={`flex items-center justify-center p-2 rounded-lg ${
+            currentPage === totalPages
+              ? 'opacity-40 cursor-default'
+              : 'hover:bg-light-grey'
+          }`}
+          aria-disabled={currentPage === totalPages}
+          tabIndex={currentPage === totalPages ? -1 : undefined}
+          title='Next'
+          aria-label='Next'
+        >
+          <FaChevronRight className='h-6 w-6' />
+          <span className='sr-only'>Next</span>
+        </Link>
+      )}
     </div>
   );
 };
