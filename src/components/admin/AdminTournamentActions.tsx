@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { FaEdit } from 'react-icons/fa';
+import { FaEdit, FaClipboard } from 'react-icons/fa';
 import { GiBattleGear } from 'react-icons/gi';
 import { DeleteTournament } from './DeleteTournament';
 import { DeleteTournamentProps } from './types';
@@ -22,6 +22,14 @@ export const AdminTournamentActions = ({ id, name }: DeleteTournamentProps) => {
         aria-label='edit match'
       >
         <FaEdit />
+      </Link>
+      <Link
+        className='btn-link'
+        href={`/admin/tournaments/${id}/tournament-results`}
+        title='Tournament Results'
+        aria-label='Tournament Results'
+      >
+        <FaClipboard />
       </Link>
       <DeleteTournament id={id} name={name} />
     </div>
