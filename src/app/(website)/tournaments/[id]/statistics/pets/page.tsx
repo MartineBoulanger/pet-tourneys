@@ -21,6 +21,7 @@ import {
 import { PageParams, MatchSearchParams } from '@/types';
 import { Links } from '@/lib/types';
 import petData from '@/lib/pets-data.json';
+import { TournamentPetStat } from '@/utils/types';
 
 export async function generateMetadata({ params }: { params: PageParams }) {
   const { id } = await params;
@@ -84,7 +85,7 @@ export default async function PetUsageStatisticsPage({
   if (!stats) return notFound();
 
   // Create a map of pet stats by name for easy lookup
-  const petStatsMap = new Map<string, any>();
+  const petStatsMap = new Map<string, TournamentPetStat>();
   stats.forEach((stat) => {
     petStatsMap.set(stat.pet_data.name, stat);
   });

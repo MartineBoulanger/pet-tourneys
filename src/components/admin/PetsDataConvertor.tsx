@@ -39,7 +39,7 @@ export function PetsDataConverter() {
     const rows = excelData.split('\n');
     const jsonData = rows.map((row) => {
       const columns = row.split('\t');
-      const obj: any = {};
+      const obj: Record<string, string> = {};
       headers.forEach((header, index) => {
         obj[header] = columns[index] || '';
       });

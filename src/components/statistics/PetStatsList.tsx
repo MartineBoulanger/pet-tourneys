@@ -127,7 +127,7 @@ export function PetStatsList({
                 <div className='col-span-2 space-y-2.5 sm:space-y-5'>
                   <div className='p-2.5 sm:p-5 rounded-lg bg-background shadow-md'>
                     <Paragraph className='italic text-center'>
-                      "{pet.description}"
+                      &ldquo;{pet.description}&ldquo;
                     </Paragraph>
                   </div>
 
