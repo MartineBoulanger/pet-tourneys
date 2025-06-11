@@ -1,13 +1,21 @@
-import { ReactNode } from 'react';
+import { HTMLProps, ReactNode } from 'react';
 
 type HeadingTags = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
-interface HeadingProps {
+interface HeadingProps extends HTMLProps<HTMLHeadingElement> {
   as?: HeadingTags;
-  className?: string;
   children: ReactNode;
 }
 
-export const Heading = ({ as = 'h1', className, children }: HeadingProps) => {
+export const Heading = ({
+  as = 'h1',
+  className,
+  children,
+  ...rest
+}: HeadingProps) => {
   const Tag = as;
-  return <Tag className={className}>{children}</Tag>;
+  return (
+    <Tag className={className} {...rest}>
+      {children}
+    </Tag>
+  );
 };

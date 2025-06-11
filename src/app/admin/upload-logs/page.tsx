@@ -42,7 +42,7 @@ export default async function UploadLogsPage() {
   return (
     <Container className='max-w-[1024px]'>
       <Heading className='text-center'>{'Pet Battle Logs Uploader'}</Heading>
-      <Paragraph className='text-center mb-5'>
+      <Paragraph className='max-w-[600px] mx-auto text-center mb-5 mt-2.5 text-sm'>
         {
           'Upload the PvP pet battle logs and pet usage, fill in the match information, and track the match and logs.'
         }

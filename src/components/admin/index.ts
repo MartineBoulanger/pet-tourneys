@@ -5,3 +5,5 @@ export * from './UploadForm';
 export * from './TournamentsListItem';
 export * from './AdminPanelButtons';
 export * from './AdminMatchListItem';
+export * from './PetsDataConvertor';
+export * from './TournamentPlayersList';

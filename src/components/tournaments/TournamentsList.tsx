@@ -41,7 +41,6 @@ export const TournamentsList = ({
       ))}
       {totalPages > 1 ? (
         <Pagination
-          className='mt-2.5'
           currentPage={currentPage}
           totalPages={totalPages}
           baseUrl={'/tournaments'}

@@ -54,6 +54,13 @@ export const adminData: NavigationData = [
     text: 'Upload the battle logs from the match',
     imageSrc: `${process.env.NEXT_PUBLIC_BASE_URL!}/images/bluegor.png`,
   },
+  {
+    id: 3,
+    url: '/admin/upload-pets',
+    linkText: 'Upload Pets Data',
+    text: 'Upload the data from all pets in the game to create a JSOn file to use as data file.',
+    imageSrc: `${process.env.NEXT_PUBLIC_BASE_URL!}/images/redrex.png`,
+  },
 ];
 
 export const footerData: FooterData = [

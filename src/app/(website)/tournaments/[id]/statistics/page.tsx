@@ -174,8 +174,8 @@ export default async function PetUsageStatisticsPage({
     {
       id: 1,
       url: isMatchView
-        ? `/tournaments/${id}/statistics/pet-stats?matchId=${matchId}`
-        : `/tournaments/${id}/statistics/pet-stats`,
+        ? `/tournaments/${id}/statistics/pets?matchId=${matchId}`
+        : `/tournaments/${id}/statistics/pets`,
       text: isMatchView
         ? 'Match Pets Statistics'
         : 'Tournament Pets Statistics',

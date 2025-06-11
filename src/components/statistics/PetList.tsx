@@ -1,3 +1,5 @@
+// NOTE : leave the component for now - it might come in handy one day
+
 'use client';
 
 import { useState } from 'react';

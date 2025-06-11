@@ -57,11 +57,11 @@ export const RadarGraph = ({
   };
 
   return (
-    <GraphWrapper className='p-2.5 md:p-5 h-[425px] md:h-[450px]'>
+    <GraphWrapper className='h-[425px] md:h-[450px]'>
       <RadarChart
         cx='50%'
         cy='50%'
-        outerRadius={isMobile ? '65%' : '80%'}
+        outerRadius={isMobile ? '65%' : '70%'}
         data={data}
       >
         <Tooltip content={<CustomTooltip />} />
