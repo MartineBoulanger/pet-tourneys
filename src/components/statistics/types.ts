@@ -51,6 +51,52 @@ export interface PetChartsProps extends ChartsProps<TournamentPetStat> {
   chartData: ChartData;
 }
 
+// remove this one as soon as the other pet list is done
 export interface PetListProps extends ChartsProps<TournamentPetStat> {
   isMatchView?: boolean;
+}
+
+interface Pet {
+  petID: string;
+  name: string;
+  type: string;
+  isTradable: string;
+  baseHealth: string;
+  basePower: string;
+  baseSpeed: string;
+  ability1: string;
+  ability2: string;
+  ability3: string;
+  ability4: string;
+  ability5: string;
+  ability6: string;
+  source: string;
+  isCapturable: string;
+  expansion: string;
+  isHordeOnly: string;
+  isAllianceOnly: string;
+  description: string;
+  availableBreeds: string;
+  icon: string;
+  image: string;
+}
+
+export interface PetStatsListProps {
+  petData: Pet[];
+  petStats: TournamentPetStat[];
+  battleStats?: BattleStatistics;
+  isMatchView?: boolean;
+}
+
+export enum TypesImages {
+  Aquatic = '/images/pet-types/aquatic.png',
+  Beast = '/images/pet-types/beast.png',
+  Critter = '/images/pet-types/critter.png',
+  Dragonkin = '/images/pet-types/dragonkin.png',
+  Elemental = '/images/pet-types/elemental.png',
+  Flying = '/images/pet-types/flying.png',
+  Humanoid = '/images/pet-types/humanoid.png',
+  Magic = '/images/pet-types/magic.png',
+  Mechanical = '/images/pet-types/mechanical.png',
+  Undead = '/images/pet-types/undead.png',
 }

@@ -162,7 +162,7 @@ export function TournamentPlayersList({
           totalPages={totalPages}
           baseUrl=''
           onPageChange={handlePageChange}
-          className='mt-4'
+          className='mt-2.5 sm:mt-5'
         />
       )}
     </div>

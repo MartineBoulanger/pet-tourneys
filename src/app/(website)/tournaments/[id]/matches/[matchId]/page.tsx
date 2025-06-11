@@ -56,7 +56,7 @@ export default async function MatchPage({
     },
     {
       id: 2,
-      url: `/tournaments/${id}/statistics/pet-stats?matchId=${matchId}`,
+      url: `/tournaments/${id}/statistics/pets?matchId=${matchId}`,
       text: 'Match Pets Statistics',
     },
     {

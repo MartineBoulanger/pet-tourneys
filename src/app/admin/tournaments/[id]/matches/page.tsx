@@ -102,7 +102,6 @@ export default async function AdminMatchesPage({
               ))}
               {totalPages > 1 ? (
                 <Pagination
-                  className='mt-2.5'
                   currentPage={currentPage}
                   totalPages={totalPages}
                   baseUrl={`/admin/tournaments/${tournament.id}/matches`}

@@ -78,7 +78,6 @@ export default async function AdminPage({
               ))}
               {totalPages > 1 ? (
                 <Pagination
-                  className='mt-2.5'
                   currentPage={currentPage}
                   totalPages={totalPages}
                   baseUrl={'/admin'}

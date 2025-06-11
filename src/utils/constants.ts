@@ -1,4 +1,4 @@
-export const PETS_PER_PAGE = 20;
+export const PETS_PER_PAGE = 15;
 export const MATCHES_PER_PAGE = 10;
 export const TOURNAMENTS_PER_PAGE = 10;
 export const PLAYERS_PER_PAGE = 10;

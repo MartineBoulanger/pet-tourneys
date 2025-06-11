@@ -68,7 +68,7 @@ export default async function TournamentPage({
     },
     {
       id: 2,
-      url: `/tournaments/${tournament.id}/statistics/pet-stats`,
+      url: `/tournaments/${tournament.id}/statistics/pets`,
       text: 'Tournament Pets Statistics',
     },
     {
