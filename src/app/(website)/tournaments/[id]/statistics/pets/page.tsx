@@ -126,6 +126,7 @@ export default async function PetUsageStatisticsPage({
           petData={petsWithStats}
           petStats={stats}
           battleStats={battleStats.battleStats}
+          isMatchView={isMatchView}
         />
       )}
     </Container>

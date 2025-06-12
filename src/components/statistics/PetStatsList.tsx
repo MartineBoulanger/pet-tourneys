@@ -10,11 +10,13 @@ import { petTypeColors, PETS_PER_PAGE } from '@/utils/constants';
 import { RadarGraph } from '@/components/statistics/graphs';
 import { Alliance } from '@/assets/Alliance';
 import { Horde } from '@/assets/Horde';
+import { cn } from '@/utils/cn';
 
 export function PetStatsList({
   petData,
   petStats,
   battleStats,
+  isMatchView = false,
 }: PetStatsListProps) {
   const [expandedPets, setExpandedPets] = useState<Record<string, boolean>>({});
   const [currentPage, setCurrentPage] = useState(1);
@@ -60,23 +62,20 @@ export function PetStatsList({
         };
         const swaps = petSwapDetails[pet.name] || 0;
         const typeColor = petTypeColors[pet.type as keyof typeof petTypeColors];
+        const availableBreeds = pet.availableBreeds
+          .split(',')
+          .map((breed) => breed.trim());
+        const normalizedBreedStats = stats.breed_stats.map((bs) => ({
+          ...bs,
+          normalizedBreed: bs.breed.trim(), // Normalize breed names from stats
+        }));
 
-        const graphData = [
+        let graphData = [];
+
+        const baseGraphData = [
           {
             name: 'Total Played',
             value: stats.total_played || 0,
-          },
-          {
-            name: 'Wins',
-            value: stats.wins || 0,
-          },
-          {
-            name: 'Losses',
-            value: stats.losses || 0,
-          },
-          {
-            name: 'Matches',
-            value: stats.match_count || 0,
           },
           {
             name: 'Kills',
@@ -91,6 +90,26 @@ export function PetStatsList({
             value: swaps || 0,
           },
         ];
+
+        if (isMatchView) {
+          graphData = baseGraphData;
+        } else {
+          graphData = [
+            ...baseGraphData,
+            {
+              name: 'Matches',
+              value: stats.match_count || 0,
+            },
+            {
+              name: 'Wins',
+              value: stats.wins || 0,
+            },
+            {
+              name: 'Losses',
+              value: stats.losses || 0,
+            },
+          ];
+        }
 
         return (
           <div
@@ -275,7 +294,7 @@ export function PetStatsList({
                     height={100}
                     loading='lazy'
                   />
-                  {stats.breed_stats.length > 0 && (
+                  {availableBreeds.length > 0 && (
                     <div className='rounded-lg overflow-hidden bg-background shadow-md mt-2.5 sm:mt-5'>
                       <div className='overflow-x-auto'>
                         <table className='min-w-full'>
@@ -292,27 +311,36 @@ export function PetStatsList({
                             </tr>
                           </thead>
                           <tbody className='bg-background font-light'>
-                            {stats.breed_stats.map((breed, index) => (
-                              <tr
-                                key={index}
-                                className='border-b border-medium-grey last-of-type:border-none'
-                              >
-                                <td
-                                  className='py-2 px-4 font-bold'
-                                  style={{
-                                    color: typeColor,
-                                  }}
+                            {availableBreeds.map((breed) => {
+                              const breedStat = normalizedBreedStats.find(
+                                (bs) => bs.normalizedBreed === breed
+                              );
+                              const isUsed = !!breedStat;
+                              return (
+                                <tr
+                                  key={breed}
+                                  className={cn(
+                                    'border-b border-medium-grey last-of-type:border-none',
+                                    !isUsed ? 'opacity-40' : 'opacity-100'
+                                  )}
                                 >
-                                  {breed.breed}
-                                </td>
-                                <td className='py-2 px-4'>
-                                  {breed.stats || '-'}
-                                </td>
-                                <td className='py-2 px-4'>
-                                  {breed.times_played}
-                                </td>
-                              </tr>
-                            ))}
+                                  <td
+                                    className='py-2 px-4 font-bold'
+                                    style={{
+                                      color: typeColor,
+                                    }}
+                                  >
+                                    {breed}
+                                  </td>
+                                  <td className='py-2 px-4'>
+                                    {isUsed ? breedStat.stats || '-' : '-'}
+                                  </td>
+                                  <td className='py-2 px-4'>
+                                    {isUsed ? breedStat.times_played : '-'}
+                                  </td>
+                                </tr>
+                              );
+                            })}
                           </tbody>
                         </table>
                       </div>
