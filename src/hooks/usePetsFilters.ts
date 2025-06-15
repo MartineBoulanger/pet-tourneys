@@ -204,7 +204,15 @@ export const usePetsFilters = ({
     }
 
     return result;
-  }, [petData, petStatsMap, searchTerm, sortOption, filters, petPerformance, petSwapDetails]);
+  }, [
+    petData,
+    petStatsMap,
+    searchTerm,
+    sortOption,
+    filters,
+    petPerformance,
+    petSwapDetails,
+  ]);
 
   // Calculate pagination
   const totalPages = Math.ceil(filteredPets.length / PETS_PER_PAGE);
@@ -226,7 +234,7 @@ export const usePetsFilters = ({
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const handleFilterChange = (key: string, value: string) => {
+  const handleFilterChange = (key: string, value: string | boolean) => {
     setFilters((prev) => ({
       ...prev,
       [key]: value,

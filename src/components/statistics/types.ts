@@ -116,7 +116,7 @@ export interface PetControlsProps {
     isAllianceOnly: boolean;
     isHordeOnly: boolean;
   };
-  onFilterChange: (key: string, value: any) => void;
+  onFilterChange: (key: string, value: string | boolean) => void;
   onResetFilters: () => void;
   uniqueTypes: string[];
   uniqueExpansions: string[];
