@@ -56,7 +56,7 @@ export interface PetListProps extends ChartsProps<TournamentPetStat> {
   isMatchView?: boolean;
 }
 
-interface Pet {
+export interface Pet {
   petID: string;
   name: string;
   type: string;
@@ -100,3 +100,32 @@ export enum TypesImages {
   Mechanical = '/images/pet-types/mechanical.png',
   Undead = '/images/pet-types/undead.png',
 }
+
+export interface PetControlsProps {
+  searchTerm: string;
+  onSearchChange: (term: string) => void;
+  sortOption: string;
+  onSortChange: (option: string) => void;
+  filters: {
+    type: string;
+    expansion: string;
+    breed: string;
+    source: string;
+    tradable: boolean;
+    capturable: boolean;
+    isAllianceOnly: boolean;
+    isHordeOnly: boolean;
+  };
+  onFilterChange: (key: string, value: any) => void;
+  onResetFilters: () => void;
+  uniqueTypes: string[];
+  uniqueExpansions: string[];
+  uniqueBreeds: string[];
+  uniqueSources: string[];
+  isMatchView?: boolean;
+}
+
+export type SortOption = {
+  value: string;
+  label: string;
+};

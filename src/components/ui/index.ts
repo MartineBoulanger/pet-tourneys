@@ -1,19 +1,22 @@
-export * from './Button';
-export * from './Container';
+// Form UI components
 export * from './Form';
 export * from './FormErrorMessage';
 export * from './Input';
-
-export * from './LineGraph';
-export * from './Skeletons';
-export * from './PopUp';
-export * from './Modal';
-export * from './Pagination';
-export * from './PageHeading';
-export * from './Heading';
-export * from './Paragraph';
+export * from './Checkbox';
 export * from './Textarea';
 export * from './Select';
 export * from './Option';
-export * from './ActionDropdown';
 
+// Generic UI components
+export * from './Container';
+export * from './Button';
+export * from './Heading';
+export * from './Paragraph';
+
+// Other UI components
+export * from './PageHeading';
+export * from './Pagination';
+export * from './PopUp';
+export * from './Modal';
+export * from './Skeletons';
+export * from './ActionDropdown';
