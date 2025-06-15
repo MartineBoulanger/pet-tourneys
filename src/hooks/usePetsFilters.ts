@@ -2,7 +2,7 @@
 
 import { Pet } from '@/components/statistics/types';
 import { PETS_PER_PAGE, petTypeColors } from '@/utils/constants';
-import { BattleStatistics, BreedStats, TournamentPetStat } from '@/utils/types';
+import { BattleStatistics, TournamentPetStat } from '@/utils/types';
 import { useState, useMemo } from 'react';
 
 interface UsePetsFiltersProps {
@@ -44,7 +44,7 @@ export const usePetsFilters = ({
 
   // Filter and sort pets
   const filteredPets = useMemo(() => {
-    let result = petData.filter((pet) => {
+    const result = petData.filter((pet) => {
       // Search term matching
       const matchesSearch =
         pet.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -204,7 +204,7 @@ export const usePetsFilters = ({
     }
 
     return result;
-  }, [petData, petStatsMap, searchTerm, sortOption, filters]);
+  }, [petData, petStatsMap, searchTerm, sortOption, filters, petPerformance, petSwapDetails]);
 
   // Calculate pagination
   const totalPages = Math.ceil(filteredPets.length / PETS_PER_PAGE);
@@ -226,7 +226,7 @@ export const usePetsFilters = ({
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const handleFilterChange = (key: string, value: any) => {
+  const handleFilterChange = (key: string, value: string) => {
     setFilters((prev) => ({
       ...prev,
       [key]: value,
