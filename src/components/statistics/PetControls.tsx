@@ -14,10 +14,7 @@ export function PetControls({
   filters,
   onFilterChange,
   onResetFilters,
-  uniqueTypes,
-  uniqueExpansions,
-  uniqueBreeds,
-  uniqueSources,
+  uniqueStats,
   isMatchView = false,
 }: PetControlsProps) {
   const [showFilters, setShowFilters] = useState(false);
@@ -120,7 +117,7 @@ export function PetControls({
             name='type'
           >
             <Option value='' label='All Types' />
-            {uniqueTypes.map((type) => (
+            {uniqueStats.types.map((type) => (
               <Option key={type} value={type} label={type} />
             ))}
           </Select>
@@ -134,7 +131,7 @@ export function PetControls({
             name='breed'
           >
             <Option value='' label='All Breeds' />
-            {uniqueBreeds.map((breed) => (
+            {uniqueStats.breeds.map((breed) => (
               <Option key={breed} value={breed} label={breed} />
             ))}
           </Select>
@@ -148,7 +145,7 @@ export function PetControls({
             name='expansion'
           >
             <Option value='' label='All Expansions' />
-            {uniqueExpansions.map((expansion) => (
+            {uniqueStats.expansions.map((expansion) => (
               <Option key={expansion} value={expansion} label={expansion} />
             ))}
           </Select>
@@ -162,7 +159,7 @@ export function PetControls({
             name='source'
           >
             <Option value='' label='All Sources' />
-            {uniqueSources.map((source) => (
+            {uniqueStats.sources.map((source) => (
               <Option key={source} value={source} label={source} />
             ))}
           </Select>

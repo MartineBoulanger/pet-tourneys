@@ -18,6 +18,7 @@ export const usePetsFilters = ({
   battleStats,
   isMatchView = false,
 }: UsePetsFiltersProps) => {
+  // states to set and to use
   const [expandedPets, setExpandedPets] = useState<Record<string, boolean>>({});
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState('');
@@ -33,19 +34,17 @@ export const usePetsFilters = ({
     isAllianceOnly: false,
   });
 
+  // local data to use for the pets data and the list
   const petPerformance = battleStats?.petPerformance || {};
   const petSwapDetails = battleStats?.petSwapDetails || {};
-
-  // Create a map of pet stats by name for easy lookup
   const petStatsMap = new Map<string, TournamentPetStat>();
   petStats.forEach((stat) => {
     petStatsMap.set(stat.pet_data.name, stat);
   });
 
-  // Filter and sort pets
+  // filtering, sorting and searching the pet data
   const filteredPets = useMemo(() => {
     const result = petData.filter((pet) => {
-      // Search term matching
       const matchesSearch =
         pet.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         [
@@ -60,7 +59,6 @@ export const usePetsFilters = ({
             ability && ability.toLowerCase().includes(searchTerm.toLowerCase())
         );
 
-      // Filter matching
       const matchesType = !filters.type || pet.type === filters.type;
       const matchesExpansion =
         !filters.expansion || pet.expansion === filters.expansion;
@@ -93,7 +91,6 @@ export const usePetsFilters = ({
       );
     });
 
-    // Apply sorting
     switch (sortOption) {
       case 'name-asc':
         result.sort((a, b) => a.name.localeCompare(b.name));
@@ -214,13 +211,14 @@ export const usePetsFilters = ({
     petSwapDetails,
   ]);
 
-  // Calculate pagination
+  // pagination
   const totalPages = Math.ceil(filteredPets.length / PETS_PER_PAGE);
   const currentPetData = filteredPets.slice(
     (currentPage - 1) * PETS_PER_PAGE,
     currentPage * PETS_PER_PAGE
   );
 
+  // show/hide pet data in dropdown
   const togglePet = (petName: string) => {
     setExpandedPets((prev) => ({
       ...prev,
@@ -228,12 +226,13 @@ export const usePetsFilters = ({
     }));
   };
 
+  // pagination page change
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
-    // Scroll to top when page changes
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  // setting the change of the filter(s)
   const handleFilterChange = (key: string, value: string | boolean) => {
     setFilters((prev) => ({
       ...prev,
@@ -242,6 +241,7 @@ export const usePetsFilters = ({
     setCurrentPage(1); // Reset to first page when filters change
   };
 
+  // reset all filters, sorting and search
   const resetFilters = () => {
     setSearchTerm('');
     setSortOption('name-asc');
@@ -258,40 +258,35 @@ export const usePetsFilters = ({
     setCurrentPage(1);
   };
 
-  // Get unique values for filter dropdowns
-  const uniqueTypes = useMemo(() => {
+  // get unique values for filter dropdowns
+  const uniqueStats = useMemo(() => {
     const types = new Set<string>();
-    petData.forEach((pet) => types.add(pet.type));
-    return Array.from(types).sort();
-  }, [petData]);
-
-  const uniqueExpansions = useMemo(() => {
     const expansions = new Set<string>();
-    petData.forEach((pet) => expansions.add(pet.expansion));
-    return Array.from(expansions).sort();
-  }, [petData]);
-
-  const uniqueBreeds = useMemo(() => {
+    const sources = new Set<string>();
     const breeds = new Set<string>();
+
     petData.forEach((pet) => {
+      types.add(pet.type);
+      expansions.add(pet.expansion);
+      sources.add(pet.source);
       if (pet.availableBreeds) {
         pet.availableBreeds.split(',').forEach((breed) => {
           breeds.add(breed.trim());
         });
       }
     });
-    return Array.from(breeds).sort();
+
+    return {
+      types: Array.from(types).sort(),
+      expansions: Array.from(expansions).sort(),
+      sources: Array.from(sources)
+        .sort()
+        .filter((s) => s !== ''),
+      breeds: Array.from(breeds).sort(),
+    };
   }, [petData]);
 
-  const uniqueSources = useMemo(() => {
-    const sources = new Set<string>();
-    petData.forEach((pet) => sources.add(pet.source));
-    return Array.from(sources)
-      .sort()
-      .filter((s) => s !== '');
-  }, [petData]);
-
-  // pet detail functions that are needed in the mapping of the pets
+  // function that is used inside the mapping, to get the correct battle stats data per pet
   const getPetStats = (name: string) => {
     const stats = petStatsMap.get(name);
     const breeds = stats?.breed_stats.map((bs) => ({
@@ -344,19 +339,18 @@ export const usePetsFilters = ({
     };
   };
 
+  // getting the color from each pet type
   const getTypeColor = (type: string) => {
     return petTypeColors[type as keyof typeof petTypeColors];
   };
 
+  // set all available breed per pet in an array of strings
   const setAvailableBreedToArray = (breeds: string) => {
     return breeds.split(',').map((breed) => breed.trim());
   };
 
   return {
-    uniqueSources,
-    uniqueBreeds,
-    uniqueExpansions,
-    uniqueTypes,
+    uniqueStats,
     resetFilters,
     handleFilterChange,
     handlePageChange,

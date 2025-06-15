@@ -25,10 +25,7 @@ export function PetStatsList({
     filters,
     handleFilterChange,
     resetFilters,
-    uniqueBreeds,
-    uniqueExpansions,
-    uniqueSources,
-    uniqueTypes,
+    uniqueStats,
     currentPage,
     currentPetData,
     togglePet,
@@ -50,10 +47,7 @@ export function PetStatsList({
         filters={filters}
         onFilterChange={handleFilterChange}
         onResetFilters={resetFilters}
-        uniqueTypes={uniqueTypes}
-        uniqueExpansions={uniqueExpansions}
-        uniqueBreeds={uniqueBreeds}
-        uniqueSources={uniqueSources}
+        uniqueStats={uniqueStats}
         isMatchView={isMatchView}
       />
 

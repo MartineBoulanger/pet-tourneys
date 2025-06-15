@@ -118,10 +118,12 @@ export interface PetControlsProps {
   };
   onFilterChange: (key: string, value: string | boolean) => void;
   onResetFilters: () => void;
-  uniqueTypes: string[];
-  uniqueExpansions: string[];
-  uniqueBreeds: string[];
-  uniqueSources: string[];
+  uniqueStats: {
+    types: string[];
+    expansions: string[];
+    breeds: string[];
+    sources: string[];
+  };
   isMatchView?: boolean;
 }
 
