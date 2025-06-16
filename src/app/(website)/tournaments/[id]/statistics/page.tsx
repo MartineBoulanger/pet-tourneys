@@ -38,7 +38,7 @@ export async function generateMetadata({ params }: { params: PageParams }) {
   };
 }
 
-export default async function PetUsageStatisticsPage({
+export default async function StatisticsPage({
   params,
   searchParams,
 }: {
@@ -186,6 +186,11 @@ export default async function PetUsageStatisticsPage({
         ? `/tournaments/${id}/matches/${matchId}`
         : `/tournaments/${id}`,
       text: isMatchView ? 'Back to match' : 'Back to tournament',
+    },
+    {
+      id: 3,
+      url: `/tournaments/${id}/rankings`,
+      text: 'Tournament Rankings',
     },
   ];
 

@@ -6,7 +6,7 @@ import { AllPagesFragment } from '@/components/contentful/types';
 
 export async function generateMetadata() {
   return {
-    title: 'Pet Battle Articles',
+    title: 'Our Articles',
     alternates: {
       canonical: `${process.env.NEXT_PUBLIC_BASE_URL!}/articles`,
     },
@@ -20,7 +20,7 @@ export default async function ArticlesPage() {
   // TODO: add pagination with 12 page cards  per page -> see commercial LLBG for implementing pagination for Contentful
   return (
     <Container>
-      <Heading className='text-center'>{'Pet Battle Articles'}</Heading>
+      <Heading className='text-center'>{'Our Pet Battle Articles'}</Heading>
       <Paragraph className='max-w-[700px] text-center mx-auto'>
         {
           'You want to learn how to and what pets to use in Pet Battling? Especially in PvP? You want to know what strategies would work, or which pet would be good to use? Then these articles could be of use for you. Have a look around, and hopefully you find what you were looking for.'

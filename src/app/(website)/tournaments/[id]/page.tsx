@@ -73,6 +73,11 @@ export default async function TournamentPage({
     },
     {
       id: 3,
+      url: `/tournaments/${tournament.id}/rankings`,
+      text: 'Tournament Rankings',
+    },
+    {
+      id: 4,
       url: '/tournaments',
       text: 'Back To Tournaments',
     },

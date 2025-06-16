@@ -69,7 +69,7 @@ export function PetControls({
             type='text'
             value={searchTerm}
             onChange={(e) => onSearchChange(e.target.value)}
-            placeholder='Search pets...'
+            placeholder='Search pets by name, ability, or pet id...'
             className='pl-10 w-full'
             label='Search Pets'
             id='search-pets'

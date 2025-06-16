@@ -57,7 +57,8 @@ export const usePetsFilters = ({
         ].some(
           (ability) =>
             ability && ability.toLowerCase().includes(searchTerm.toLowerCase())
-        );
+        ) ||
+        pet.petID.includes(searchTerm);
 
       const matchesType = !filters.type || pet.type === filters.type;
       const matchesExpansion =

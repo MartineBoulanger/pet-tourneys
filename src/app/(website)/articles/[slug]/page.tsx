@@ -18,9 +18,9 @@ export async function generateMetadata({
   const seoData = page && page.seoMetadata;
 
   return {
-    title: seoData.title || 'Pet Battle Articles',
+    title: seoData.title || 'Oure Articles',
     description:
-      seoData.description || 'Pet Battle Articles for all pet masters',
+      seoData.description || 'Our Pet Battle Articles for all pet masters',
     keywords: seoData.keywords || ['WoW, articles, pet'],
     alternates: {
       canonical: `${process.env.NEXT_PUBLIC_BASE_URL!}/articles/${slug}`,

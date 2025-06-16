@@ -29,12 +29,12 @@ export async function generateMetadata({ params }: { params: PageParams }) {
     title: 'Pets Statistics',
     alternates: {
       canonical: `${process.env
-        .NEXT_PUBLIC_BASE_URL!}/tournaments/${id}/statistics/pet-stats`,
+        .NEXT_PUBLIC_BASE_URL!}/tournaments/${id}/statistics/pets`,
     },
   };
 }
 
-export default async function PetUsageStatisticsPage({
+export default async function PetsStatisticsPage({
   params,
   searchParams,
 }: {
@@ -108,6 +108,11 @@ export default async function PetUsageStatisticsPage({
         ? `/tournaments/${id}/matches/${matchId}`
         : `/tournaments/${id}`,
       text: isMatchView ? 'Back to match' : 'Back to tournament',
+    },
+    {
+      id: 3,
+      url: `/tournaments/${id}/rankings`,
+      text: 'Tournament Rankings',
     },
   ];
 
