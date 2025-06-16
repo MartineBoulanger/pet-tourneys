@@ -54,7 +54,7 @@ export function PetStatsList({
       <div className='space-y-2.5 sm:space-y-5 bg-background p-2.5 sm:p-5 rounded-lg'>
         {currentPetData.length > 0 ? (
           currentPetData.map((pet) => {
-            const { stats, breeds, graphData } = getPetStats(pet.name);
+            const { stats, breeds, graphData, winRate } = getPetStats(pet.name);
             const typeColor = getTypeColor(pet.type);
             const availableBreeds = setAvailableBreedToArray(
               pet.availableBreeds
@@ -190,15 +190,39 @@ export function PetStatsList({
                           </div>
                         </div>
                         <div className='p-2.5 sm:p-5 rounded-lg bg-background shadow-md'>
-                          <Heading
-                            as='h3'
-                            className='text-xl font-bold'
-                            style={{
-                              color: typeColor,
-                            }}
-                          >
-                            {'Battle Statistics'}
-                          </Heading>
+                          <div className='flex items-start justify-between'>
+                            <Heading
+                              as='h3'
+                              className='text-xl font-bold'
+                              style={{
+                                color: typeColor,
+                              }}
+                            >
+                              {'Battle Statistics'}
+                            </Heading>
+                            <Paragraph
+                              className={cn(
+                                'font-light p-2 bg-light-grey rounded-lg'
+                              )}
+                            >
+                              <span className='font-bold'>{'Win Rate: '}</span>
+                              <span
+                                className={cn(
+                                  winRate < 25 ? 'text-red' : '',
+                                  winRate >= 25 && winRate < 50
+                                    ? 'text-orange'
+                                    : '',
+                                  winRate >= 50 && winRate < 75
+                                    ? 'text-yellow'
+                                    : '',
+                                  winRate >= 75 ? 'text-green' : ''
+                                )}
+                              >
+                                {winRate}
+                                {'%'}
+                              </span>
+                            </Paragraph>
+                          </div>
                           <RadarGraph
                             data={graphData}
                             tooltip='Count: '

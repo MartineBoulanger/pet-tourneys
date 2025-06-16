@@ -294,6 +294,7 @@ export const usePetsFilters = ({
       ...bs,
       normalizedBreed: bs.breed.trim(),
     }));
+    const winRate = stats?.win_rate || 0;
 
     let graphData = [];
     const baseGraphData = [
@@ -337,6 +338,7 @@ export const usePetsFilters = ({
       stats,
       breeds,
       graphData,
+      winRate,
     };
   };
 
