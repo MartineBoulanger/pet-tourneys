@@ -294,42 +294,46 @@ export const usePetsFilters = ({
       normalizedBreed: bs.breed.trim(),
     }));
     const winRate = stats?.win_rate || 0;
+    const totalPlayed = stats?.total_played || 0;
+    const totalMatches = stats?.match_count || 0;
 
     let graphData = [];
-    const baseGraphData = [
-      {
-        name: 'Total Played',
-        value: stats?.total_played || 0,
-      },
-      {
-        name: 'Kills',
-        value: petPerformance[name]?.kills || 0,
-      },
-      {
-        name: 'Deaths',
-        value: petPerformance[name]?.deaths || 0,
-      },
-      {
-        name: 'Swaps',
-        value: petSwapDetails[name] || 0,
-      },
-    ];
     if (isMatchView) {
-      graphData = baseGraphData;
+      graphData = [
+        {
+          name: 'Kills',
+          value: petPerformance[name]?.kills || 0,
+        },
+        {
+          name: 'Deaths',
+          value: petPerformance[name]?.deaths || 0,
+        },
+        {
+          name: 'Swaps',
+          value: petSwapDetails[name] || 0,
+        },
+      ];
     } else {
       graphData = [
-        ...baseGraphData,
-        {
-          name: 'Matches',
-          value: stats?.match_count || 0,
-        },
         {
           name: 'Wins',
           value: stats?.wins || 0,
         },
         {
+          name: 'Kills',
+          value: petPerformance[name]?.kills || 0,
+        },
+        {
           name: 'Losses',
           value: stats?.losses || 0,
+        },
+        {
+          name: 'Deaths',
+          value: petPerformance[name]?.deaths || 0,
+        },
+        {
+          name: 'Swaps',
+          value: petSwapDetails[name] || 0,
         },
       ];
     }
@@ -338,6 +342,8 @@ export const usePetsFilters = ({
       breeds,
       graphData,
       winRate,
+      totalMatches,
+      totalPlayed,
     };
   };
 
