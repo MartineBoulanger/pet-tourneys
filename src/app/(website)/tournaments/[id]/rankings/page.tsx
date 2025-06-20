@@ -11,6 +11,7 @@ import { PageParams } from '@/types';
 import { Links } from '@/lib/types';
 import { PlayerRankings } from '@/components/tournaments';
 import { getPlayerRecords } from '@/supabase/actions/players';
+import { loadJsonData } from '@/utils/loadJsonData'
 
 export async function generateMetadata({ params }: { params: PageParams }) {
   const { id } = await params;
@@ -23,6 +24,42 @@ export async function generateMetadata({ params }: { params: PageParams }) {
   };
 }
 
+async function loadPlayerData(id: string) {
+  try {
+    const jsonPath = `${process.env
+      .NEXT_PUBLIC_BASE_URL!}/json-files/rankings-data/player-rankings-${id.slice(
+      0,
+      5
+    )}.json`;
+
+    const response = await fetch(jsonPath, { cache: 'no-store' });
+
+    const contentType = response.headers.get('content-type');
+    if (!contentType?.includes('application/json')) {
+      const text = await response.text();
+      throw new Error(`Expected JSON but got: ${text.substring(0, 50)}...`);
+    }
+
+    const jsonData = await response.json();
+
+    if (!jsonData.records || !jsonData.regions) {
+      throw new Error('Invalid JSON structure - missing records or regions');
+    }
+
+    return jsonData;
+  } catch (jsonError) {
+    console.error('JSON load failed, falling back to Supabase', jsonError);
+
+    try {
+      const { records, regions } = await getPlayerRecords(id);
+      return { records, regions };
+    } catch (supabaseError) {
+      console.error('Both JSON and Supabase failed:', supabaseError);
+      throw new Error('Failed to load player data from any source');
+    }
+  }
+}
+
 export default async function RankingsPage({ params }: { params: PageParams }) {
   const { id } = await params;
 
@@ -32,7 +69,8 @@ export default async function RankingsPage({ params }: { params: PageParams }) {
     message,
     data: { tournament, matches },
   } = await getTournamentDetails(id);
-  const records = await getPlayerRecords(id);
+
+  const playerData = await loadPlayerData(id);
 
   if (!success) {
     return (
@@ -43,11 +81,11 @@ export default async function RankingsPage({ params }: { params: PageParams }) {
     );
   }
 
-  if (!records) {
+  if (!playerData.records || !playerData.regions) {
     return (
       <Container className='text-center'>
         <Heading className='text-red'>{'No Rankings Found!'}</Heading>
-        <Paragraph>{'No player rankings found.'}</Paragraph>
+        <Paragraph>{'No player rankings are found.'}</Paragraph>
       </Container>
     );
   }
@@ -81,7 +119,12 @@ export default async function RankingsPage({ params }: { params: PageParams }) {
         </PageHeading>
         <Paragraph className='text-humanoid'>{tournament.name}</Paragraph>
       </div>
-      {records.length > 0 ? <PlayerRankings records={records} /> : null}
+      {playerData.records.length > 0 ? (
+        <PlayerRankings
+          records={playerData.records}
+          regions={playerData.regions}
+        />
+      ) : null}
     </Container>
   );
 }

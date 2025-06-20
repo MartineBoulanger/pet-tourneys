@@ -1,3 +1,5 @@
+import { EnhancedPlayerRecord } from '@/supabase/actions/players';
+
 export interface Match {
   id: string;
   region: string;
@@ -34,4 +36,9 @@ export interface TournamentsListProps {
   tournaments: Tournament[];
   currentPage?: number;
   totalPages?: number;
+}
+
+export interface PlayerRankingsProps {
+  records: EnhancedPlayerRecord[];
+  regions: string[];
 }

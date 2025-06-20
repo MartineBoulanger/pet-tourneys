@@ -18,5 +18,7 @@ export * from './PageHeading';
 export * from './Pagination';
 export * from './PopUp';
 export * from './Modal';
+export * from './Tabs';
+export * from './Tab';
 export * from './Skeletons';
 export * from './ActionDropdown';

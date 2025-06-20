@@ -12,6 +12,7 @@ export const Alliance = ({ className }: { className?: string }) => {
       enableBackground='new 0 0 816 528'
       xmlSpace='preserve'
       className={className}
+      aria-label='Alliance Only'
     >
       <path
         xmlns='http://www.w3.org/2000/svg'

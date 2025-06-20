@@ -10,6 +10,7 @@ export interface PlayerRecord {
   wins: number;
   losses: number;
   winRate: number;
+  region: string;
 }
 
 export interface PetStats {
@@ -35,13 +36,11 @@ export async function getPlayerRecords(tournamentId: string) {
   const matchesTable = getTournamentTableName('matches', tournamentId);
   const battleLogsTable = getTournamentTableName('battle_logs', tournamentId);
 
-  // Fetch matches from Supabase
   const { data: matches, error } = await supabase
     .schema('api')
     .from(matchesTable)
     .select('*');
 
-  // Fetch battle logs from Supabase
   const { data: logs, error: logsError } = await supabase
     .schema('api')
     .from(battleLogsTable)
@@ -49,11 +48,25 @@ export async function getPlayerRecords(tournamentId: string) {
 
   if (error || logsError) {
     console.error('Error fetching data:', error || logsError);
-    return [];
+    return { records: [], regions: [] };
   }
 
-  // Calculate player records
-  return analyzePlayerAndPetStats(matches as Match[], logs as BattleLog[]);
+  const regions = getAvailableRegions(matches as Match[]);
+  const records = await analyzePlayerAndPetStats(
+    matches as Match[],
+    logs as BattleLog[]
+  );
+
+  return { records, regions };
+}
+
+// Helper function to get available regions
+function getAvailableRegions(matches: Match[]): string[] {
+  const regions = new Set<string>();
+  matches.forEach((match) => {
+    if (match.region) regions.add(match.region);
+  });
+  return Array.from(regions).sort();
 }
 
 export async function analyzePlayerAndPetStats(
@@ -61,7 +74,10 @@ export async function analyzePlayerAndPetStats(
   battleLogs: BattleLog[]
 ): Promise<EnhancedPlayerRecord[]> {
   // Track match results separately from battle results
-  const matchResults = new Map<string, { wins: number; losses: number }>();
+  const matchResults = new Map<
+    string,
+    { wins: number; losses: number; region: string }
+  >();
   const battlePetStats = new Map<
     string,
     Map<string, { timesUsed: number; kills: number; deaths: number }>
@@ -70,9 +86,11 @@ export async function analyzePlayerAndPetStats(
 
   // Initialize all players from matches
   matches.forEach((match) => {
+    const matchRegion = match.region || 'N/A';
+
     [match.player1, match.player2].forEach((player) => {
       if (!matchResults.has(player)) {
-        matchResults.set(player, { wins: 0, losses: 0 });
+        matchResults.set(player, { wins: 0, losses: 0, region: matchRegion });
       }
       if (!battlePetStats.has(player)) {
         battlePetStats.set(player, new Map());
@@ -154,7 +172,7 @@ export async function analyzePlayerAndPetStats(
 
   // Combine results
   return Array.from(matchResults.entries()).map(
-    ([playerName, { wins, losses }]) => {
+    ([playerName, { wins, losses, region }]) => {
       const totalMatches = wins + losses;
       const winRate = totalMatches > 0 ? (wins / totalMatches) * 100 : 0;
 
@@ -180,7 +198,8 @@ export async function analyzePlayerAndPetStats(
         playerName,
         wins,
         losses,
-        winRate: parseFloat(winRate.toFixed(2)),
+        region,
+        winRate: parseFloat(winRate.toFixed()),
         mostUsedPet: petStatsArray[0] || {
           petName: 'None',
           timesUsed: 0,
@@ -200,7 +219,10 @@ export async function analyzePlayerAndPetStats(
 export async function calculatePlayerRecords(
   matches: Match[]
 ): Promise<PlayerRecord[]> {
-  const playerStats: Record<string, { wins: number; losses: number }> = {};
+  const playerStats: Record<
+    string,
+    { wins: number; losses: number; region: string }
+  > = {};
 
   // Process each match
   matches.forEach((match) => {
@@ -218,10 +240,13 @@ export async function calculatePlayerRecords(
     if (winner === null) return;
 
     const loser = winner === match.player1 ? match.player2 : match.player1;
+    const region = match.region || 'N/A';
 
     // Initialize players if not already tracked
-    if (!playerStats[winner]) playerStats[winner] = { wins: 0, losses: 0 };
-    if (!playerStats[loser]) playerStats[loser] = { wins: 0, losses: 0 };
+    if (!playerStats[winner])
+      playerStats[winner] = { wins: 0, losses: 0, region };
+    if (!playerStats[loser])
+      playerStats[loser] = { wins: 0, losses: 0, region };
 
     // Update stats
     playerStats[winner].wins += 1;
@@ -238,11 +263,12 @@ export async function calculatePlayerRecords(
         playerName,
         wins: stats.wins,
         losses: stats.losses,
+        region: stats.region,
         winRate: parseFloat(winRate.toFixed(2)),
       };
     }
   );
 
   // Sort by most wins first
-  return records.sort((a, b) => b.wins - a.wins || a.losses - b.losses);
+  return records.sort((a, b) => b.wins - a.wins);
 }

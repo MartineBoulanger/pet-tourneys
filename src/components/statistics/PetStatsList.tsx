@@ -1,12 +1,15 @@
 'use client';
 
 import Image from 'next/image';
+import { useMemo } from 'react';
 import { IoClose, IoCheckmark } from 'react-icons/io5';
 import { Button, Heading, Paragraph, Pagination } from '@/components/ui';
 import { PetStatsListProps, TypesImages } from './types';
 import { RadarGraph } from '@/components/statistics/graphs';
 import { Alliance } from '@/assets/Alliance';
 import { Horde } from '@/assets/Horde';
+import { MedalIcon } from '@/assets/MedalIcon';
+import { StrongPetIcon, WeakPetIcon } from '@/assets/PetStrengthIcons';
 import { cn } from '@/utils/cn';
 import { PetControls } from './PetControls';
 import { usePetsFilters } from '@/hooks/usePetsFilters';
@@ -37,6 +40,13 @@ export function PetStatsList({
     setAvailableBreedToArray,
   } = usePetsFilters({ petData, petStats, battleStats });
 
+  const topUsedPets = useMemo(() => {
+    return [...petStats]
+      .sort((a, b) => b.total_played - a.total_played)
+      .slice(0, 10)
+      .map((stat) => stat.pet_data.name);
+  }, [petStats]);
+
   return (
     <div className='space-y-2.5 sm:space-y-5'>
       <PetControls
@@ -54,7 +64,11 @@ export function PetStatsList({
       <div className='space-y-2.5 sm:space-y-5 bg-background p-2.5 sm:p-5 rounded-lg'>
         {currentPetData.length > 0 ? (
           currentPetData.map((pet) => {
-            const { stats, breeds, graphData, winRate } = getPetStats(pet.name);
+            const isTopUsed = topUsedPets.includes(pet.name);
+            const usageRank = topUsedPets.indexOf(pet.name) + 1;
+            const { stats, breeds, graphData, winRate, strength } = getPetStats(
+              pet.name
+            );
             const typeColor = getTypeColor(pet.type);
             const availableBreeds = setAvailableBreedToArray(
               pet.availableBreeds
@@ -83,11 +97,20 @@ export function PetStatsList({
                         loading='lazy'
                       />
                     </div>
+                    {isTopUsed && (
+                      <div className='mr-2.5 sm:mr-5'>
+                        <MedalIcon position={usageRank} className='w-5 h-5' />
+                      </div>
+                    )}
                     <Heading as='h3' className='mr-2.5'>
                       {pet.name}
                     </Heading>
                     {pet.isAllianceOnly === 'Yes' ? <Alliance /> : null}
                     {pet.isHordeOnly === 'Yes' ? <Horde /> : null}
+                    {strength === 'strong' && (
+                      <StrongPetIcon className='w-5 h-5' />
+                    )}
+                    {strength === 'weak' && <WeakPetIcon className='w-5 h-5' />}
                   </div>
                   {expandedPets[pet.name] ? '-' : '+'}
                 </Button>

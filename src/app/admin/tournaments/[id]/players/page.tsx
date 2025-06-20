@@ -1,7 +1,11 @@
 import { redirect } from 'next/navigation';
 import { getUserSession } from '@/supabase/actions/auth';
 import { Container, Heading, Paragraph } from '@/components/ui';
-import { AdminPanelButtons, TournamentPlayersList } from '@/components/admin';
+import {
+  AdminPanelButtons,
+  TournamentPlayersList,
+  ExportRankingsButton,
+} from '@/components/admin';
 import { PageParams } from '@/types';
 import { getPlayerRecords } from '@/supabase/actions/players';
 import { getTournamentDetails } from '@/supabase/actions/tournaments';
@@ -32,7 +36,7 @@ export default async function AdminPlayersPage({
     data: { tournament },
   } = await getTournamentDetails(id);
 
-  const records = await getPlayerRecords(id);
+  const { records } = await getPlayerRecords(id);
 
   if (!success) {
     return (
@@ -75,6 +79,10 @@ export default async function AdminPlayersPage({
     <Container>
       <Heading>{`${username}'s Admin Panel`}</Heading>
       <AdminPanelButtons isMatchesPage />
+      <ExportRankingsButton
+        tournamentId={id}
+        tournamentName={tournament.name}
+      />
       <div>
         <div className='mb-5'>
           <Heading as='h2' className='text-xl mb-2.5'>

@@ -83,6 +83,11 @@
     border: 1px solid var(--color-foreground);
     @apply hover:transition-all hover:duration-500 hover:bg-[var(--color-blue-grey)] hover:border-[var(--color-blue-grey)];
   }
+  .medal-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    min-width: 1.5rem;
+  }
 }
 
 @layer utilities {

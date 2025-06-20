@@ -12,6 +12,7 @@ export const Horde = ({ className }: { className?: string }) => {
       enableBackground='new 0 0 848 608'
       xmlSpace='preserve'
       className={className}
+      aria-label='Horde Only'
     >
       <path
         fill='#dc2626'

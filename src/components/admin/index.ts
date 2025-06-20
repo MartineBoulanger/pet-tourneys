@@ -7,3 +7,4 @@ export * from './AdminPanelButtons';
 export * from './AdminMatchListItem';
 export * from './PetsDataConvertor';
 export * from './TournamentPlayersList';
+export * from './ExportRankingsButton';

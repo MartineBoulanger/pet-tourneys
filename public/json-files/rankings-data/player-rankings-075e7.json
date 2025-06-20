@@ -1,0 +1,3764 @@
+{
+  "tournamentId": "075e7708-cfa4-4b30-a033-4246520f605a",
+  "tournamentName": "Pet Battle PvP Tournament Season 2",
+  "timestamp": "2025-06-16T23:54:15.162Z",
+  "records": [
+    {
+      "playerName": "Bebark",
+      "wins": 4,
+      "losses": 2,
+      "region": "EU",
+      "winRate": 67,
+      "mostUsedPet": {
+        "petName": "Reven",
+        "timesUsed": 6,
+        "kills": 3,
+        "deaths": 3
+      },
+      "mostProblematicPet": {
+        "petName": "Cobbleshell",
+        "timesLostAgainst": 3
+      },
+      "petStatistics": [
+        {
+          "petName": "Reven",
+          "timesUsed": 6,
+          "kills": 3,
+          "deaths": 3
+        },
+        {
+          "petName": "Trunks",
+          "timesUsed": 4,
+          "kills": 3,
+          "deaths": 1
+        },
+        {
+          "petName": "Aubergine Scootlefish",
+          "timesUsed": 4,
+          "kills": 2,
+          "deaths": 2
+        },
+        {
+          "petName": "Mr. DELVER",
+          "timesUsed": 3,
+          "kills": 3,
+          "deaths": 0
+        },
+        {
+          "petName": "Fun-Size Flarendo",
+          "timesUsed": 3,
+          "kills": 3,
+          "deaths": 0
+        },
+        {
+          "petName": "Sergeant Quackers",
+          "timesUsed": 3,
+          "kills": 2,
+          "deaths": 1
+        },
+        {
+          "petName": "Benax",
+          "timesUsed": 3,
+          "kills": 2,
+          "deaths": 1
+        },
+        {
+          "petName": "Pistachio",
+          "timesUsed": 2,
+          "kills": 2,
+          "deaths": 0
+        },
+        {
+          "petName": "Wily Rat",
+          "timesUsed": 2,
+          "kills": 1,
+          "deaths": 1
+        },
+        {
+          "petName": "Portentous Present",
+          "timesUsed": 2,
+          "kills": 1,
+          "deaths": 1
+        },
+        {
+          "petName": "Roggy",
+          "timesUsed": 2,
+          "kills": 0,
+          "deaths": 2
+        },
+        {
+          "petName": "Death Adder Hatchling",
+          "timesUsed": 2,
+          "kills": 0,
+          "deaths": 2
+        },
+        {
+          "petName": "Lost Quill",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Viridian Mechasaur",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Waxwick",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Venture Bombshell",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Shadow",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Wavebreaker Mechasaur",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Violent Poultrid",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Roseate Hopper",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Cerulean Moth",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Iggy",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Fyrn",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Voidglower",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Gnomelia Gearheart",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Cobbleshell",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Sunsoaked Flitter",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Watcher of the Huntress",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Grip of Terror",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Resonant Echo",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Chi-Chi",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Hatchling of Chi-Ji",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Rescued Fawn",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Whoopy",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Spectral Raven",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Jingles",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Drakks",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Tonguelasher",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Timeless Mechanical Dragonling",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Lost Limb",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Glamrok",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Qiraji Guardling",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Mechanical Pandaren Dragonling",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        }
+      ]
+    },
+    {
+      "playerName": "Isabella",
+      "wins": 3,
+      "losses": 3,
+      "region": "EU",
+      "winRate": 50,
+      "mostUsedPet": {
+        "petName": "Widget the Departed",
+        "timesUsed": 10,
+        "kills": 5,
+        "deaths": 5
+      },
+      "mostProblematicPet": {
+        "petName": "Blazing Cindercrawler",
+        "timesLostAgainst": 3
+      },
+      "petStatistics": [
+        {
+          "petName": "Widget the Departed",
+          "timesUsed": 10,
+          "kills": 5,
+          "deaths": 5
+        },
+        {
+          "petName": "Jingles",
+          "timesUsed": 6,
+          "kills": 3,
+          "deaths": 3
+        },
+        {
+          "petName": "Stormborne Whelpling",
+          "timesUsed": 6,
+          "kills": 3,
+          "deaths": 3
+        },
+        {
+          "petName": "Lost Quill",
+          "timesUsed": 5,
+          "kills": 2,
+          "deaths": 3
+        },
+        {
+          "petName": "Darkmoon Rabbit",
+          "timesUsed": 4,
+          "kills": 3,
+          "deaths": 1
+        },
+        {
+          "petName": "Blightbreath",
+          "timesUsed": 4,
+          "kills": 0,
+          "deaths": 4
+        },
+        {
+          "petName": "Mechanical Pandaren Dragonling",
+          "timesUsed": 3,
+          "kills": 2,
+          "deaths": 1
+        },
+        {
+          "petName": "Dust Bunny",
+          "timesUsed": 3,
+          "kills": 1,
+          "deaths": 2
+        },
+        {
+          "petName": "Scourged Whelpling",
+          "timesUsed": 3,
+          "kills": 0,
+          "deaths": 3
+        },
+        {
+          "petName": "Helpful Glimmerfly",
+          "timesUsed": 2,
+          "kills": 2,
+          "deaths": 0
+        },
+        {
+          "petName": "Cobbleshell",
+          "timesUsed": 2,
+          "kills": 2,
+          "deaths": 0
+        },
+        {
+          "petName": "Fiendish Imp",
+          "timesUsed": 2,
+          "kills": 1,
+          "deaths": 1
+        },
+        {
+          "petName": "Lost Limb",
+          "timesUsed": 2,
+          "kills": 1,
+          "deaths": 1
+        },
+        {
+          "petName": "Twilight",
+          "timesUsed": 2,
+          "kills": 0,
+          "deaths": 2
+        },
+        {
+          "petName": "Twilight Whelpling",
+          "timesUsed": 2,
+          "kills": 0,
+          "deaths": 2
+        },
+        {
+          "petName": "Shadow",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Thunderscale Whelpling",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Graves",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Enchanted Broom",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Watcher of the Huntress",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Infernal Pyreclaw",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Timeless Mechanical Dragonling",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        }
+      ]
+    },
+    {
+      "playerName": "Des",
+      "wins": 2,
+      "losses": 2,
+      "region": "NA",
+      "winRate": 50,
+      "mostUsedPet": {
+        "petName": "Lost Quill",
+        "timesUsed": 6,
+        "kills": 3,
+        "deaths": 3
+      },
+      "mostProblematicPet": {
+        "petName": "Umbral Amalgam",
+        "timesLostAgainst": 3
+      },
+      "petStatistics": [
+        {
+          "petName": "Lost Quill",
+          "timesUsed": 6,
+          "kills": 3,
+          "deaths": 3
+        },
+        {
+          "petName": "Shadow",
+          "timesUsed": 5,
+          "kills": 2,
+          "deaths": 3
+        },
+        {
+          "petName": "Twilight Clutch-Sister",
+          "timesUsed": 4,
+          "kills": 1,
+          "deaths": 3
+        },
+        {
+          "petName": "Stormborne Whelpling",
+          "timesUsed": 4,
+          "kills": 1,
+          "deaths": 3
+        },
+        {
+          "petName": "Glamrok",
+          "timesUsed": 3,
+          "kills": 3,
+          "deaths": 0
+        },
+        {
+          "petName": "Lost Limb",
+          "timesUsed": 3,
+          "kills": 1,
+          "deaths": 2
+        },
+        {
+          "petName": "Rose Taipan",
+          "timesUsed": 3,
+          "kills": 0,
+          "deaths": 3
+        },
+        {
+          "petName": "Molten Corgi",
+          "timesUsed": 2,
+          "kills": 2,
+          "deaths": 0
+        },
+        {
+          "petName": "Bone Serpent",
+          "timesUsed": 2,
+          "kills": 2,
+          "deaths": 0
+        },
+        {
+          "petName": "Twilight",
+          "timesUsed": 2,
+          "kills": 1,
+          "deaths": 1
+        },
+        {
+          "petName": "Fiendish Imp",
+          "timesUsed": 2,
+          "kills": 1,
+          "deaths": 1
+        },
+        {
+          "petName": "Nexus Whelpling",
+          "timesUsed": 2,
+          "kills": 0,
+          "deaths": 2
+        },
+        {
+          "petName": "Jademist Dancer",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Fel-Afflicted Skyfin",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Timeless Mechanical Dragonling",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Fledgling Warden Owl",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Craboom",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Darkmoon Rabbit",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Sister of Temptation",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Vibrant Glowfly",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Shimmerbough Hoarder",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Teardrop Moth",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        }
+      ]
+    },
+    {
+      "playerName": "DraikoGinger",
+      "wins": 3,
+      "losses": 2,
+      "region": "NA",
+      "winRate": 60,
+      "mostUsedPet": {
+        "petName": "Umbral Amalgam",
+        "timesUsed": 11,
+        "kills": 8,
+        "deaths": 3
+      },
+      "mostProblematicPet": {
+        "petName": "Qiraji Guardling",
+        "timesLostAgainst": 3
+      },
+      "petStatistics": [
+        {
+          "petName": "Umbral Amalgam",
+          "timesUsed": 11,
+          "kills": 8,
+          "deaths": 3
+        },
+        {
+          "petName": "Proto Avian Fledgling",
+          "timesUsed": 8,
+          "kills": 3,
+          "deaths": 5
+        },
+        {
+          "petName": "Lime Roboclucker",
+          "timesUsed": 5,
+          "kills": 4,
+          "deaths": 1
+        },
+        {
+          "petName": "Arachnoid Skitterbot",
+          "timesUsed": 5,
+          "kills": 3,
+          "deaths": 2
+        },
+        {
+          "petName": "Kun-Lai Runt",
+          "timesUsed": 4,
+          "kills": 4,
+          "deaths": 0
+        },
+        {
+          "petName": "Ranishu Runt",
+          "timesUsed": 4,
+          "kills": 2,
+          "deaths": 2
+        },
+        {
+          "petName": "Roggy",
+          "timesUsed": 3,
+          "kills": 2,
+          "deaths": 1
+        },
+        {
+          "petName": "Rose Taipan",
+          "timesUsed": 3,
+          "kills": 1,
+          "deaths": 2
+        },
+        {
+          "petName": "Shimmerbough Hoarder",
+          "timesUsed": 3,
+          "kills": 0,
+          "deaths": 3
+        },
+        {
+          "petName": "Sir Shady Mrrgglton Junior",
+          "timesUsed": 2,
+          "kills": 2,
+          "deaths": 0
+        },
+        {
+          "petName": "Gerald",
+          "timesUsed": 2,
+          "kills": 1,
+          "deaths": 1
+        },
+        {
+          "petName": "Sneaky Marmot",
+          "timesUsed": 2,
+          "kills": 1,
+          "deaths": 1
+        },
+        {
+          "petName": "Fiendish Imp",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Cobbleshell",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Magical Crawdad",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Silithid Hatchling",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Teardrop Moth",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        }
+      ]
+    },
+    {
+      "playerName": "Gooskaffur",
+      "wins": 4,
+      "losses": 0,
+      "region": "NA",
+      "winRate": 100,
+      "mostUsedPet": {
+        "petName": "Lime Roboclucker",
+        "timesUsed": 6,
+        "kills": 5,
+        "deaths": 1
+      },
+      "mostProblematicPet": {
+        "petName": "Lost Quill",
+        "timesLostAgainst": 1
+      },
+      "petStatistics": [
+        {
+          "petName": "Lime Roboclucker",
+          "timesUsed": 6,
+          "kills": 5,
+          "deaths": 1
+        },
+        {
+          "petName": "Cobbleshell",
+          "timesUsed": 4,
+          "kills": 4,
+          "deaths": 0
+        },
+        {
+          "petName": "Teardrop Moth",
+          "timesUsed": 4,
+          "kills": 4,
+          "deaths": 0
+        },
+        {
+          "petName": "Shore Butterfly",
+          "timesUsed": 4,
+          "kills": 3,
+          "deaths": 1
+        },
+        {
+          "petName": "Violent Poultrid",
+          "timesUsed": 3,
+          "kills": 3,
+          "deaths": 0
+        },
+        {
+          "petName": "Varmint MK II",
+          "timesUsed": 2,
+          "kills": 2,
+          "deaths": 0
+        },
+        {
+          "petName": "Lost Limb",
+          "timesUsed": 2,
+          "kills": 2,
+          "deaths": 0
+        },
+        {
+          "petName": "Ranishu Runt",
+          "timesUsed": 2,
+          "kills": 2,
+          "deaths": 0
+        },
+        {
+          "petName": "Bone Serpent",
+          "timesUsed": 2,
+          "kills": 2,
+          "deaths": 0
+        },
+        {
+          "petName": "Blackfuse Bombling",
+          "timesUsed": 2,
+          "kills": 2,
+          "deaths": 0
+        },
+        {
+          "petName": "Foulwing Buzzer",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Aqir Tunneler",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Lost Quill",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Lil' Frostwing",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Sneaky Marmot",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Micromancer",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Umbral Amalgam",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Fluttering Glimmerfly",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        }
+      ]
+    },
+    {
+      "playerName": "Woxbc",
+      "wins": 4,
+      "losses": 1,
+      "region": "NA",
+      "winRate": 80,
+      "mostUsedPet": {
+        "petName": "Cobbleshell",
+        "timesUsed": 7,
+        "kills": 5,
+        "deaths": 2
+      },
+      "mostProblematicPet": {
+        "petName": "Violent Poultrid",
+        "timesLostAgainst": 2
+      },
+      "petStatistics": [
+        {
+          "petName": "Cobbleshell",
+          "timesUsed": 7,
+          "kills": 5,
+          "deaths": 2
+        },
+        {
+          "petName": "Jingles",
+          "timesUsed": 7,
+          "kills": 4,
+          "deaths": 3
+        },
+        {
+          "petName": "Rebellious Imp",
+          "timesUsed": 6,
+          "kills": 6,
+          "deaths": 0
+        },
+        {
+          "petName": "Frostwolf Ghostpup",
+          "timesUsed": 5,
+          "kills": 3,
+          "deaths": 2
+        },
+        {
+          "petName": "Teardrop Moth",
+          "timesUsed": 4,
+          "kills": 4,
+          "deaths": 0
+        },
+        {
+          "petName": "Mechanical Pandaren Dragonling",
+          "timesUsed": 4,
+          "kills": 2,
+          "deaths": 2
+        },
+        {
+          "petName": "Qiraji Guardling",
+          "timesUsed": 3,
+          "kills": 3,
+          "deaths": 0
+        },
+        {
+          "petName": "Vengeful Porcupette",
+          "timesUsed": 2,
+          "kills": 2,
+          "deaths": 0
+        },
+        {
+          "petName": "Emperor Crab",
+          "timesUsed": 2,
+          "kills": 2,
+          "deaths": 0
+        },
+        {
+          "petName": "Fiendish Imp",
+          "timesUsed": 2,
+          "kills": 1,
+          "deaths": 1
+        },
+        {
+          "petName": "Anxious Nibbler",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Twilight Clutch-Sister",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Sir Shady Mrrgglton Junior",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Sentinel's Companion",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Warbot",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Curious Wolvar Pup",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Broot",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Blightbreath",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Violent Poultrid",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        }
+      ]
+    },
+    {
+      "playerName": "Elinaedara",
+      "wins": 2,
+      "losses": 1,
+      "region": "NA",
+      "winRate": 67,
+      "mostUsedPet": {
+        "petName": "Fluttering Glimmerfly",
+        "timesUsed": 5,
+        "kills": 5,
+        "deaths": 0
+      },
+      "mostProblematicPet": {
+        "petName": "Cobbleshell",
+        "timesLostAgainst": 2
+      },
+      "petStatistics": [
+        {
+          "petName": "Fluttering Glimmerfly",
+          "timesUsed": 5,
+          "kills": 5,
+          "deaths": 0
+        },
+        {
+          "petName": "Lime Roboclucker",
+          "timesUsed": 4,
+          "kills": 3,
+          "deaths": 1
+        },
+        {
+          "petName": "Shore Butterfly",
+          "timesUsed": 4,
+          "kills": 3,
+          "deaths": 1
+        },
+        {
+          "petName": "Lost Limb",
+          "timesUsed": 3,
+          "kills": 1,
+          "deaths": 2
+        },
+        {
+          "petName": "Ranishu Runt",
+          "timesUsed": 2,
+          "kills": 2,
+          "deaths": 0
+        },
+        {
+          "petName": "Shadow",
+          "timesUsed": 2,
+          "kills": 1,
+          "deaths": 1
+        },
+        {
+          "petName": "Blightbreath",
+          "timesUsed": 2,
+          "kills": 0,
+          "deaths": 2
+        },
+        {
+          "petName": "Brilliant Glimmershell",
+          "timesUsed": 2,
+          "kills": 0,
+          "deaths": 2
+        },
+        {
+          "petName": "Bone Serpent",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Sneaky Marmot",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Varmint MK II",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Stormborne Whelpling",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Lost Quill",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Crawling Claw",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Father Winter's Helper",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Vibrant Glowfly",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Fiendish Imp",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Severs",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Jingles",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Lil' Frostwing",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        }
+      ]
+    },
+    {
+      "playerName": "Lleyla",
+      "wins": 1,
+      "losses": 2,
+      "region": "NA",
+      "winRate": 33,
+      "mostUsedPet": {
+        "petName": "Venture Bombshell",
+        "timesUsed": 8,
+        "kills": 4,
+        "deaths": 4
+      },
+      "mostProblematicPet": {
+        "petName": "Pygmy Marsuul",
+        "timesLostAgainst": 2
+      },
+      "petStatistics": [
+        {
+          "petName": "Venture Bombshell",
+          "timesUsed": 8,
+          "kills": 4,
+          "deaths": 4
+        },
+        {
+          "petName": "Thrrrdgl",
+          "timesUsed": 4,
+          "kills": 2,
+          "deaths": 2
+        },
+        {
+          "petName": "Stormborne Whelpling",
+          "timesUsed": 4,
+          "kills": 1,
+          "deaths": 3
+        },
+        {
+          "petName": "Mechanical Pandaren Dragonling",
+          "timesUsed": 3,
+          "kills": 2,
+          "deaths": 1
+        },
+        {
+          "petName": "Lady Feathersworth",
+          "timesUsed": 3,
+          "kills": 1,
+          "deaths": 2
+        },
+        {
+          "petName": "Golden Chirper",
+          "timesUsed": 3,
+          "kills": 1,
+          "deaths": 2
+        },
+        {
+          "petName": "Lime Roboclucker",
+          "timesUsed": 3,
+          "kills": 1,
+          "deaths": 2
+        },
+        {
+          "petName": "Lil' Ragnaros",
+          "timesUsed": 3,
+          "kills": 1,
+          "deaths": 2
+        },
+        {
+          "petName": "Baa'lial",
+          "timesUsed": 2,
+          "kills": 1,
+          "deaths": 1
+        },
+        {
+          "petName": "Thunderscale Whelpling",
+          "timesUsed": 2,
+          "kills": 1,
+          "deaths": 1
+        },
+        {
+          "petName": "Arachnoid Skitterbot",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Blighthawk",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Fledgling Warden Owl",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Lost Quill",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        }
+      ]
+    },
+    {
+      "playerName": "Theominouskilt",
+      "wins": 1,
+      "losses": 2,
+      "region": "NA",
+      "winRate": 33,
+      "mostUsedPet": {
+        "petName": "Scourged Whelpling",
+        "timesUsed": 5,
+        "kills": 4,
+        "deaths": 1
+      },
+      "mostProblematicPet": {
+        "petName": "Qiraji Guardling",
+        "timesLostAgainst": 4
+      },
+      "petStatistics": [
+        {
+          "petName": "Scourged Whelpling",
+          "timesUsed": 5,
+          "kills": 4,
+          "deaths": 1
+        },
+        {
+          "petName": "Void-Scarred Locust",
+          "timesUsed": 5,
+          "kills": 2,
+          "deaths": 3
+        },
+        {
+          "petName": "Infernal Pyreclaw",
+          "timesUsed": 4,
+          "kills": 1,
+          "deaths": 3
+        },
+        {
+          "petName": "Ghost Maggot",
+          "timesUsed": 3,
+          "kills": 1,
+          "deaths": 2
+        },
+        {
+          "petName": "Blightbreath",
+          "timesUsed": 3,
+          "kills": 0,
+          "deaths": 3
+        },
+        {
+          "petName": "Cerulean Moth",
+          "timesUsed": 2,
+          "kills": 1,
+          "deaths": 1
+        },
+        {
+          "petName": "Fledgling Kingfeather",
+          "timesUsed": 2,
+          "kills": 0,
+          "deaths": 2
+        },
+        {
+          "petName": "Briarhorn Hatchling",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Blossoming Ancient",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Albatross Hatchling",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Weebomination",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Molten Corgi",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Blighthawk",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Blazehound",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Lil' Bling",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Father Winter's Helper",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        }
+      ]
+    },
+    {
+      "playerName": "Trianthe",
+      "wins": 2,
+      "losses": 2,
+      "region": "NA",
+      "winRate": 50,
+      "mostUsedPet": {
+        "petName": "Jingles",
+        "timesUsed": 7,
+        "kills": 4,
+        "deaths": 3
+      },
+      "mostProblematicPet": {
+        "petName": "Scourged Whelpling",
+        "timesLostAgainst": 3
+      },
+      "petStatistics": [
+        {
+          "petName": "Jingles",
+          "timesUsed": 7,
+          "kills": 4,
+          "deaths": 3
+        },
+        {
+          "petName": "Timeless Mechanical Dragonling",
+          "timesUsed": 5,
+          "kills": 4,
+          "deaths": 1
+        },
+        {
+          "petName": "Qiraji Guardling",
+          "timesUsed": 4,
+          "kills": 3,
+          "deaths": 1
+        },
+        {
+          "petName": "Endmite",
+          "timesUsed": 3,
+          "kills": 3,
+          "deaths": 0
+        },
+        {
+          "petName": "Twilight Clutch-Sister",
+          "timesUsed": 3,
+          "kills": 1,
+          "deaths": 2
+        },
+        {
+          "petName": "Violent Poultrid",
+          "timesUsed": 2,
+          "kills": 2,
+          "deaths": 0
+        },
+        {
+          "petName": "Chitterspine Skitterling",
+          "timesUsed": 2,
+          "kills": 1,
+          "deaths": 1
+        },
+        {
+          "petName": "Glamrok",
+          "timesUsed": 2,
+          "kills": 1,
+          "deaths": 1
+        },
+        {
+          "petName": "Tonguelasher",
+          "timesUsed": 2,
+          "kills": 1,
+          "deaths": 1
+        },
+        {
+          "petName": "Lost Limb",
+          "timesUsed": 2,
+          "kills": 1,
+          "deaths": 1
+        },
+        {
+          "petName": "Death Adder Hatchling",
+          "timesUsed": 2,
+          "kills": 1,
+          "deaths": 1
+        },
+        {
+          "petName": "Void-Scarred Hare",
+          "timesUsed": 2,
+          "kills": 0,
+          "deaths": 2
+        },
+        {
+          "petName": "Lil' Frostwing",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Cobbleshell",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Molten Corgi",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Golden Chirper",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Drakks",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Mechanical Pandaren Dragonling",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        }
+      ]
+    },
+    {
+      "playerName": "Stonedove",
+      "wins": 1,
+      "losses": 2,
+      "region": "NA",
+      "winRate": 33,
+      "mostUsedPet": {
+        "petName": "Terky",
+        "timesUsed": 3,
+        "kills": 1,
+        "deaths": 2
+      },
+      "mostProblematicPet": {
+        "petName": "Mr. Bigglesworth",
+        "timesLostAgainst": 2
+      },
+      "petStatistics": [
+        {
+          "petName": "Terky",
+          "timesUsed": 3,
+          "kills": 1,
+          "deaths": 2
+        },
+        {
+          "petName": "Shadow",
+          "timesUsed": 3,
+          "kills": 1,
+          "deaths": 2
+        },
+        {
+          "petName": "Iron Starlette",
+          "timesUsed": 3,
+          "kills": 0,
+          "deaths": 3
+        },
+        {
+          "petName": "Lil' Nefarian",
+          "timesUsed": 3,
+          "kills": 0,
+          "deaths": 3
+        },
+        {
+          "petName": "Lost Quill",
+          "timesUsed": 2,
+          "kills": 1,
+          "deaths": 1
+        },
+        {
+          "petName": "Rose Taipan",
+          "timesUsed": 2,
+          "kills": 1,
+          "deaths": 1
+        },
+        {
+          "petName": "Bone Serpent",
+          "timesUsed": 2,
+          "kills": 1,
+          "deaths": 1
+        },
+        {
+          "petName": "Mr. Wiggles",
+          "timesUsed": 2,
+          "kills": 1,
+          "deaths": 1
+        },
+        {
+          "petName": "Lil' Ragnaros",
+          "timesUsed": 2,
+          "kills": 0,
+          "deaths": 2
+        },
+        {
+          "petName": "Celestial Dragon",
+          "timesUsed": 2,
+          "kills": 0,
+          "deaths": 2
+        },
+        {
+          "petName": "Fledgling Warden Owl",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Fiendish Imp",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Thrillbot 9000",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Alpine Hare",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Abyssal Slitherling",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Timeless Mechanical Dragonling",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        }
+      ]
+    },
+    {
+      "playerName": "Matdredalia",
+      "wins": 0,
+      "losses": 1,
+      "region": "NA",
+      "winRate": 0,
+      "mostUsedPet": {
+        "petName": "Unborn Val'kyr",
+        "timesUsed": 2,
+        "kills": 1,
+        "deaths": 1
+      },
+      "mostProblematicPet": {
+        "petName": "Lost Quill",
+        "timesLostAgainst": 1
+      },
+      "petStatistics": [
+        {
+          "petName": "Unborn Val'kyr",
+          "timesUsed": 2,
+          "kills": 1,
+          "deaths": 1
+        },
+        {
+          "petName": "Boneshard",
+          "timesUsed": 2,
+          "kills": 1,
+          "deaths": 1
+        },
+        {
+          "petName": "Alpine Foxling",
+          "timesUsed": 2,
+          "kills": 0,
+          "deaths": 2
+        },
+        {
+          "petName": "Kun-Lai Runt",
+          "timesUsed": 2,
+          "kills": 0,
+          "deaths": 2
+        },
+        {
+          "petName": "Ikky",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Gnomelia Gearheart",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Fathom",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Zandalari Anklerender",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        }
+      ]
+    },
+    {
+      "playerName": "Zariah",
+      "wins": 1,
+      "losses": 5,
+      "region": "EU",
+      "winRate": 17,
+      "mostUsedPet": {
+        "petName": "Shimmerbough Hoarder",
+        "timesUsed": 8,
+        "kills": 2,
+        "deaths": 6
+      },
+      "mostProblematicPet": {
+        "petName": "K'uddly",
+        "timesLostAgainst": 3
+      },
+      "petStatistics": [
+        {
+          "petName": "Shimmerbough Hoarder",
+          "timesUsed": 8,
+          "kills": 2,
+          "deaths": 6
+        },
+        {
+          "petName": "Graves",
+          "timesUsed": 7,
+          "kills": 2,
+          "deaths": 5
+        },
+        {
+          "petName": "Mr. Bigglesworth",
+          "timesUsed": 5,
+          "kills": 1,
+          "deaths": 4
+        },
+        {
+          "petName": "Spectral Raven",
+          "timesUsed": 4,
+          "kills": 2,
+          "deaths": 2
+        },
+        {
+          "petName": "Deathy",
+          "timesUsed": 4,
+          "kills": 1,
+          "deaths": 3
+        },
+        {
+          "petName": "Mechanical Pandaren Dragonling",
+          "timesUsed": 4,
+          "kills": 1,
+          "deaths": 3
+        },
+        {
+          "petName": "Spectral Tiger Cub",
+          "timesUsed": 3,
+          "kills": 1,
+          "deaths": 2
+        },
+        {
+          "petName": "Storm-Infused Snapdragon",
+          "timesUsed": 3,
+          "kills": 0,
+          "deaths": 3
+        },
+        {
+          "petName": "Infernal Pyreclaw",
+          "timesUsed": 2,
+          "kills": 1,
+          "deaths": 1
+        },
+        {
+          "petName": "Ikky",
+          "timesUsed": 2,
+          "kills": 1,
+          "deaths": 1
+        },
+        {
+          "petName": "Fledgling Warden Owl",
+          "timesUsed": 2,
+          "kills": 1,
+          "deaths": 1
+        },
+        {
+          "petName": "Lost Quill",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Pistachio",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Son of Sethe",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Devourling",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Lime Roboclucker",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Scraps",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Flayer Youngling",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        }
+      ]
+    },
+    {
+      "playerName": "Panseit",
+      "wins": 4,
+      "losses": 2,
+      "region": "EU",
+      "winRate": 67,
+      "mostUsedPet": {
+        "petName": "K'uddly",
+        "timesUsed": 4,
+        "kills": 3,
+        "deaths": 1
+      },
+      "mostProblematicPet": {
+        "petName": "Shimmerbough Hoarder",
+        "timesLostAgainst": 3
+      },
+      "petStatistics": [
+        {
+          "petName": "K'uddly",
+          "timesUsed": 4,
+          "kills": 3,
+          "deaths": 1
+        },
+        {
+          "petName": "Blazing Cindercrawler",
+          "timesUsed": 4,
+          "kills": 3,
+          "deaths": 1
+        },
+        {
+          "petName": "Drazka'zet the Wrathful",
+          "timesUsed": 3,
+          "kills": 1,
+          "deaths": 2
+        },
+        {
+          "petName": "Gearspring Hopper",
+          "timesUsed": 2,
+          "kills": 2,
+          "deaths": 0
+        },
+        {
+          "petName": "Archetype of Focus",
+          "timesUsed": 2,
+          "kills": 2,
+          "deaths": 0
+        },
+        {
+          "petName": "Slimy Darkhunter",
+          "timesUsed": 2,
+          "kills": 1,
+          "deaths": 1
+        },
+        {
+          "petName": "Soul of the Forge",
+          "timesUsed": 2,
+          "kills": 1,
+          "deaths": 1
+        },
+        {
+          "petName": "Amalgam of Destruction",
+          "timesUsed": 2,
+          "kills": 1,
+          "deaths": 1
+        },
+        {
+          "petName": "Twilight",
+          "timesUsed": 2,
+          "kills": 1,
+          "deaths": 1
+        },
+        {
+          "petName": "Blightbreath",
+          "timesUsed": 2,
+          "kills": 1,
+          "deaths": 1
+        },
+        {
+          "petName": "Graves",
+          "timesUsed": 2,
+          "kills": 0,
+          "deaths": 2
+        },
+        {
+          "petName": "Blackchasm Crawler",
+          "timesUsed": 2,
+          "kills": 0,
+          "deaths": 2
+        },
+        {
+          "petName": "Baa'lial",
+          "timesUsed": 2,
+          "kills": 0,
+          "deaths": 2
+        },
+        {
+          "petName": "Ambre",
+          "timesUsed": 2,
+          "kills": 0,
+          "deaths": 2
+        },
+        {
+          "petName": "Gruesome Belcher",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Trigger",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Animated Tome",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Firewing",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Gillvanas",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Experiment 13",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Bumbles",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Drakks",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Syd the Squid",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Crimson Frog",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Detective Ray",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Knockoff Blingtron",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Lil' Nefarian",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Spirit of Summer",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Giggling Flame",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Fel Flame",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Alchemical Runoff",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Accursed Hexxer",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Hatespark the Tiny",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Stormie",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Clockwork Gnome",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Gale",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Starry Dreamfoal",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Grunch",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Micronax",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Lost Quill",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Rascal-Bot",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Grip of Terror",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Void Shardling",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Stormborne Whelpling",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        }
+      ]
+    },
+    {
+      "playerName": "Lobombre",
+      "wins": 4,
+      "losses": 1,
+      "region": "NA",
+      "winRate": 80,
+      "mostUsedPet": {
+        "petName": "Qiraji Guardling",
+        "timesUsed": 8,
+        "kills": 7,
+        "deaths": 1
+      },
+      "mostProblematicPet": {
+        "petName": "Rebellious Imp",
+        "timesLostAgainst": 2
+      },
+      "petStatistics": [
+        {
+          "petName": "Qiraji Guardling",
+          "timesUsed": 8,
+          "kills": 7,
+          "deaths": 1
+        },
+        {
+          "petName": "Lost Limb",
+          "timesUsed": 6,
+          "kills": 2,
+          "deaths": 4
+        },
+        {
+          "petName": "Timeless Mechanical Dragonling",
+          "timesUsed": 5,
+          "kills": 5,
+          "deaths": 0
+        },
+        {
+          "petName": "Cobbleshell",
+          "timesUsed": 5,
+          "kills": 4,
+          "deaths": 1
+        },
+        {
+          "petName": "Sir Shady Mrrgglton Junior",
+          "timesUsed": 4,
+          "kills": 3,
+          "deaths": 1
+        },
+        {
+          "petName": "Anxious Nibbler",
+          "timesUsed": 4,
+          "kills": 2,
+          "deaths": 2
+        },
+        {
+          "petName": "Tonguelasher",
+          "timesUsed": 3,
+          "kills": 3,
+          "deaths": 0
+        },
+        {
+          "petName": "Enchanted Broom",
+          "timesUsed": 3,
+          "kills": 3,
+          "deaths": 0
+        },
+        {
+          "petName": "Voidglower",
+          "timesUsed": 3,
+          "kills": 2,
+          "deaths": 1
+        },
+        {
+          "petName": "Lost Quill",
+          "timesUsed": 2,
+          "kills": 1,
+          "deaths": 1
+        },
+        {
+          "petName": "Nightshade Sproutling",
+          "timesUsed": 2,
+          "kills": 1,
+          "deaths": 1
+        },
+        {
+          "petName": "Bone Serpent",
+          "timesUsed": 2,
+          "kills": 1,
+          "deaths": 1
+        },
+        {
+          "petName": "Mechanical Pandaren Dragonling",
+          "timesUsed": 2,
+          "kills": 1,
+          "deaths": 1
+        },
+        {
+          "petName": "Graves",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Sentinel's Companion",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Curious Wolvar Pup",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Spinebug",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Golden Dawnfeather",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        }
+      ]
+    },
+    {
+      "playerName": "Shmongus",
+      "wins": 1,
+      "losses": 2,
+      "region": "NA",
+      "winRate": 33,
+      "mostUsedPet": {
+        "petName": "Qiraji Guardling",
+        "timesUsed": 8,
+        "kills": 3,
+        "deaths": 5
+      },
+      "mostProblematicPet": {
+        "petName": "Umbral Amalgam",
+        "timesLostAgainst": 3
+      },
+      "petStatistics": [
+        {
+          "petName": "Qiraji Guardling",
+          "timesUsed": 8,
+          "kills": 3,
+          "deaths": 5
+        },
+        {
+          "petName": "Violent Poultrid",
+          "timesUsed": 5,
+          "kills": 4,
+          "deaths": 1
+        },
+        {
+          "petName": "Twilight Whelpling",
+          "timesUsed": 4,
+          "kills": 3,
+          "deaths": 1
+        },
+        {
+          "petName": "Nightshade Sproutling",
+          "timesUsed": 2,
+          "kills": 2,
+          "deaths": 0
+        },
+        {
+          "petName": "Curious Wolvar Pup",
+          "timesUsed": 2,
+          "kills": 2,
+          "deaths": 0
+        },
+        {
+          "petName": "Specimen 97",
+          "timesUsed": 2,
+          "kills": 1,
+          "deaths": 1
+        },
+        {
+          "petName": "Lost Quill",
+          "timesUsed": 2,
+          "kills": 0,
+          "deaths": 2
+        },
+        {
+          "petName": "Graves",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Direhorn Runt",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Teardrop Moth",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "K'uddly",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Jingles",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Foulwing Buzzer",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Cobbleshell",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Mechanical Pandaren Dragonling",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        }
+      ]
+    },
+    {
+      "playerName": "Nemo",
+      "wins": 0,
+      "losses": 2,
+      "region": "NA",
+      "winRate": 0,
+      "mostUsedPet": {
+        "petName": "Arfus",
+        "timesUsed": 5,
+        "kills": 1,
+        "deaths": 4
+      },
+      "mostProblematicPet": {
+        "petName": "Glamrok",
+        "timesLostAgainst": 2
+      },
+      "petStatistics": [
+        {
+          "petName": "Arfus",
+          "timesUsed": 5,
+          "kills": 1,
+          "deaths": 4
+        },
+        {
+          "petName": "Mini Tyrael",
+          "timesUsed": 4,
+          "kills": 2,
+          "deaths": 2
+        },
+        {
+          "petName": "Fledgling Warden Owl",
+          "timesUsed": 2,
+          "kills": 1,
+          "deaths": 1
+        },
+        {
+          "petName": "Timeless Mechanical Dragonling",
+          "timesUsed": 2,
+          "kills": 1,
+          "deaths": 1
+        },
+        {
+          "petName": "N'Ruby",
+          "timesUsed": 2,
+          "kills": 1,
+          "deaths": 1
+        },
+        {
+          "petName": "Cruncher",
+          "timesUsed": 2,
+          "kills": 0,
+          "deaths": 2
+        },
+        {
+          "petName": "H4ND-EE",
+          "timesUsed": 2,
+          "kills": 0,
+          "deaths": 2
+        },
+        {
+          "petName": "Sapphire Firefly",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Gorillion",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Stormborne Whelpling",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Direbeak Hatchling",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Macabre Marionette",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        }
+      ]
+    },
+    {
+      "playerName": "Fwen",
+      "wins": 3,
+      "losses": 3,
+      "region": "EU",
+      "winRate": 50,
+      "mostUsedPet": {
+        "petName": "Lost Limb",
+        "timesUsed": 7,
+        "kills": 4,
+        "deaths": 3
+      },
+      "mostProblematicPet": {
+        "petName": "Jingles",
+        "timesLostAgainst": 4
+      },
+      "petStatistics": [
+        {
+          "petName": "Lost Limb",
+          "timesUsed": 7,
+          "kills": 4,
+          "deaths": 3
+        },
+        {
+          "petName": "Portentous Present",
+          "timesUsed": 7,
+          "kills": 4,
+          "deaths": 3
+        },
+        {
+          "petName": "Venture Bombshell",
+          "timesUsed": 6,
+          "kills": 3,
+          "deaths": 3
+        },
+        {
+          "petName": "Shadow",
+          "timesUsed": 5,
+          "kills": 3,
+          "deaths": 2
+        },
+        {
+          "petName": "Stormie",
+          "timesUsed": 5,
+          "kills": 2,
+          "deaths": 3
+        },
+        {
+          "petName": "Shimmerbough Hoarder",
+          "timesUsed": 4,
+          "kills": 2,
+          "deaths": 2
+        },
+        {
+          "petName": "Paleshell Crab",
+          "timesUsed": 3,
+          "kills": 2,
+          "deaths": 1
+        },
+        {
+          "petName": "Endmite",
+          "timesUsed": 3,
+          "kills": 2,
+          "deaths": 1
+        },
+        {
+          "petName": "Aquapo",
+          "timesUsed": 3,
+          "kills": 1,
+          "deaths": 2
+        },
+        {
+          "petName": "Lime Roboclucker",
+          "timesUsed": 3,
+          "kills": 0,
+          "deaths": 3
+        },
+        {
+          "petName": "Crimson Skipper",
+          "timesUsed": 3,
+          "kills": 0,
+          "deaths": 3
+        },
+        {
+          "petName": "Snapdragon Pup",
+          "timesUsed": 2,
+          "kills": 1,
+          "deaths": 1
+        },
+        {
+          "petName": "Stormborne Whelpling",
+          "timesUsed": 2,
+          "kills": 1,
+          "deaths": 1
+        },
+        {
+          "petName": "Mr. DELVER",
+          "timesUsed": 2,
+          "kills": 0,
+          "deaths": 2
+        },
+        {
+          "petName": "Jingles",
+          "timesUsed": 2,
+          "kills": 0,
+          "deaths": 2
+        },
+        {
+          "petName": "Mining Monkey",
+          "timesUsed": 2,
+          "kills": 0,
+          "deaths": 2
+        },
+        {
+          "petName": "Bop",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Qiraji Guardling",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Mord'al Eveningstar",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Utility Mechanoclaw",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        }
+      ]
+    },
+    {
+      "playerName": "Buuloki",
+      "wins": 0,
+      "losses": 2,
+      "region": "NA",
+      "winRate": 0,
+      "mostUsedPet": {
+        "petName": "Nightshade Sproutling",
+        "timesUsed": 5,
+        "kills": 1,
+        "deaths": 4
+      },
+      "mostProblematicPet": {
+        "petName": "Fluttering Glimmerfly",
+        "timesLostAgainst": 3
+      },
+      "petStatistics": [
+        {
+          "petName": "Nightshade Sproutling",
+          "timesUsed": 5,
+          "kills": 1,
+          "deaths": 4
+        },
+        {
+          "petName": "Blighthawk",
+          "timesUsed": 3,
+          "kills": 1,
+          "deaths": 2
+        },
+        {
+          "petName": "Jademist Dancer",
+          "timesUsed": 3,
+          "kills": 1,
+          "deaths": 2
+        },
+        {
+          "petName": "Servant of Demidos",
+          "timesUsed": 3,
+          "kills": 1,
+          "deaths": 2
+        },
+        {
+          "petName": "Sneaky Marmot",
+          "timesUsed": 3,
+          "kills": 0,
+          "deaths": 3
+        },
+        {
+          "petName": "Severs",
+          "timesUsed": 2,
+          "kills": 1,
+          "deaths": 1
+        },
+        {
+          "petName": "Twilight Clutch-Sister",
+          "timesUsed": 2,
+          "kills": 0,
+          "deaths": 2
+        },
+        {
+          "petName": "Teardrop Moth",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Helpful Glimmerfly",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Lil' Frostwing",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Jingles",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Chompy",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Lost Limb",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        }
+      ]
+    },
+    {
+      "playerName": "WhyDaRumGone",
+      "wins": 3,
+      "losses": 2,
+      "region": "NA",
+      "winRate": 60,
+      "mostUsedPet": {
+        "petName": "Cobbleshell",
+        "timesUsed": 8,
+        "kills": 5,
+        "deaths": 3
+      },
+      "mostProblematicPet": {
+        "petName": "Fel-Afflicted Skyfin",
+        "timesLostAgainst": 3
+      },
+      "petStatistics": [
+        {
+          "petName": "Cobbleshell",
+          "timesUsed": 8,
+          "kills": 5,
+          "deaths": 3
+        },
+        {
+          "petName": "Helpful Glimmerfly",
+          "timesUsed": 8,
+          "kills": 4,
+          "deaths": 4
+        },
+        {
+          "petName": "Lost Quill",
+          "timesUsed": 8,
+          "kills": 3,
+          "deaths": 5
+        },
+        {
+          "petName": "Chompy",
+          "timesUsed": 6,
+          "kills": 2,
+          "deaths": 4
+        },
+        {
+          "petName": "Lost Limb",
+          "timesUsed": 5,
+          "kills": 5,
+          "deaths": 0
+        },
+        {
+          "petName": "Jingles",
+          "timesUsed": 5,
+          "kills": 2,
+          "deaths": 3
+        },
+        {
+          "petName": "Fluttering Glimmerfly",
+          "timesUsed": 4,
+          "kills": 3,
+          "deaths": 1
+        },
+        {
+          "petName": "Watcher of the Huntress",
+          "timesUsed": 4,
+          "kills": 2,
+          "deaths": 2
+        },
+        {
+          "petName": "Fiendish Imp",
+          "timesUsed": 4,
+          "kills": 2,
+          "deaths": 2
+        },
+        {
+          "petName": "Redridge Tarantula",
+          "timesUsed": 3,
+          "kills": 2,
+          "deaths": 1
+        },
+        {
+          "petName": "Void-Scarred Locust",
+          "timesUsed": 2,
+          "kills": 1,
+          "deaths": 1
+        },
+        {
+          "petName": "Enchanted Broom",
+          "timesUsed": 2,
+          "kills": 1,
+          "deaths": 1
+        },
+        {
+          "petName": "Lil' Frostwing",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Baa'lial",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Eye of Corruption",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Timeless Mechanical Dragonling",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        }
+      ]
+    },
+    {
+      "playerName": "Kemirkele",
+      "wins": 0,
+      "losses": 6,
+      "region": "EU",
+      "winRate": 0,
+      "mostUsedPet": {
+        "petName": "Storm-Touched Stomper",
+        "timesUsed": 3,
+        "kills": 1,
+        "deaths": 2
+      },
+      "mostProblematicPet": {
+        "petName": "Lost Limb",
+        "timesLostAgainst": 3
+      },
+      "petStatistics": [
+        {
+          "petName": "Storm-Touched Stomper",
+          "timesUsed": 3,
+          "kills": 1,
+          "deaths": 2
+        },
+        {
+          "petName": "Drakks",
+          "timesUsed": 2,
+          "kills": 2,
+          "deaths": 0
+        },
+        {
+          "petName": "Snowlemental",
+          "timesUsed": 2,
+          "kills": 1,
+          "deaths": 1
+        },
+        {
+          "petName": "Iron Starlette",
+          "timesUsed": 2,
+          "kills": 1,
+          "deaths": 1
+        },
+        {
+          "petName": "Gnomelia Gearheart",
+          "timesUsed": 2,
+          "kills": 1,
+          "deaths": 1
+        },
+        {
+          "petName": "Gilded Darknight",
+          "timesUsed": 2,
+          "kills": 1,
+          "deaths": 1
+        },
+        {
+          "petName": "Black Skitterbug",
+          "timesUsed": 2,
+          "kills": 1,
+          "deaths": 1
+        },
+        {
+          "petName": "Onyxian Whelpling",
+          "timesUsed": 2,
+          "kills": 1,
+          "deaths": 1
+        },
+        {
+          "petName": "Faceless Mindlasher",
+          "timesUsed": 2,
+          "kills": 0,
+          "deaths": 2
+        },
+        {
+          "petName": "Celestial Dragon",
+          "timesUsed": 2,
+          "kills": 0,
+          "deaths": 2
+        },
+        {
+          "petName": "Boneshard",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Venomwing",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Murkastrasza",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Chrominius",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Baby Winston",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Blightbud",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Pilot",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Bronze Racing Enthusiast",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Palamanther",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        }
+      ]
+    },
+    {
+      "playerName": "Nokomanida",
+      "wins": 2,
+      "losses": 2,
+      "region": "NA",
+      "winRate": 50,
+      "mostUsedPet": {
+        "petName": "Qiraji Guardling",
+        "timesUsed": 5,
+        "kills": 4,
+        "deaths": 1
+      },
+      "mostProblematicPet": {
+        "petName": "Cobbleshell",
+        "timesLostAgainst": 2
+      },
+      "petStatistics": [
+        {
+          "petName": "Qiraji Guardling",
+          "timesUsed": 5,
+          "kills": 4,
+          "deaths": 1
+        },
+        {
+          "petName": "Cobbleshell",
+          "timesUsed": 3,
+          "kills": 2,
+          "deaths": 1
+        },
+        {
+          "petName": "Portentous Present",
+          "timesUsed": 3,
+          "kills": 2,
+          "deaths": 1
+        },
+        {
+          "petName": "Drakks",
+          "timesUsed": 2,
+          "kills": 2,
+          "deaths": 0
+        },
+        {
+          "petName": "Jingles",
+          "timesUsed": 2,
+          "kills": 2,
+          "deaths": 0
+        },
+        {
+          "petName": "Violent Poultrid",
+          "timesUsed": 2,
+          "kills": 2,
+          "deaths": 0
+        },
+        {
+          "petName": "Benax",
+          "timesUsed": 2,
+          "kills": 2,
+          "deaths": 0
+        },
+        {
+          "petName": "Bop",
+          "timesUsed": 2,
+          "kills": 0,
+          "deaths": 2
+        },
+        {
+          "petName": "Timeless Mechanical Dragonling",
+          "timesUsed": 2,
+          "kills": 0,
+          "deaths": 2
+        },
+        {
+          "petName": "Arfus",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Dust Bunny",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Finduin",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Aura",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Lil' Flameo",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Mailemental",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Ysergle",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Mini Thor",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Marrlok",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Glamrok",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Violet Violence",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Lost Quill",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Son of Sethe",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        }
+      ]
+    },
+    {
+      "playerName": "Deevus",
+      "wins": 3,
+      "losses": 0,
+      "region": "NA",
+      "winRate": 100,
+      "mostUsedPet": {
+        "petName": "Fel-Afflicted Skyfin",
+        "timesUsed": 5,
+        "kills": 4,
+        "deaths": 1
+      },
+      "mostProblematicPet": {
+        "petName": "Cobbleshell",
+        "timesLostAgainst": 1
+      },
+      "petStatistics": [
+        {
+          "petName": "Fel-Afflicted Skyfin",
+          "timesUsed": 5,
+          "kills": 4,
+          "deaths": 1
+        },
+        {
+          "petName": "Pistachio",
+          "timesUsed": 3,
+          "kills": 2,
+          "deaths": 1
+        },
+        {
+          "petName": "Cobbleshell",
+          "timesUsed": 2,
+          "kills": 2,
+          "deaths": 0
+        },
+        {
+          "petName": "Bronze Whelpling",
+          "timesUsed": 2,
+          "kills": 2,
+          "deaths": 0
+        },
+        {
+          "petName": "Macabre Marionette",
+          "timesUsed": 2,
+          "kills": 2,
+          "deaths": 0
+        },
+        {
+          "petName": "Sunreaver Micro-Sentry",
+          "timesUsed": 2,
+          "kills": 2,
+          "deaths": 0
+        },
+        {
+          "petName": "Hearthy",
+          "timesUsed": 2,
+          "kills": 1,
+          "deaths": 1
+        },
+        {
+          "petName": "Grommloc",
+          "timesUsed": 2,
+          "kills": 1,
+          "deaths": 1
+        },
+        {
+          "petName": "Murkalot",
+          "timesUsed": 2,
+          "kills": 1,
+          "deaths": 1
+        },
+        {
+          "petName": "Portentous Present",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Feline Familiar",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        }
+      ]
+    },
+    {
+      "playerName": "GalaxyRock",
+      "wins": 0,
+      "losses": 2,
+      "region": "NA",
+      "winRate": 0,
+      "mostUsedPet": {
+        "petName": "Coldlight Surfrunner",
+        "timesUsed": 2,
+        "kills": 0,
+        "deaths": 2
+      },
+      "mostProblematicPet": {
+        "petName": "Jingles",
+        "timesLostAgainst": 3
+      },
+      "petStatistics": [
+        {
+          "petName": "Coldlight Surfrunner",
+          "timesUsed": 2,
+          "kills": 0,
+          "deaths": 2
+        },
+        {
+          "petName": "Crazy Carrot",
+          "timesUsed": 2,
+          "kills": 0,
+          "deaths": 2
+        },
+        {
+          "petName": "Pearlescent Glimmershell",
+          "timesUsed": 2,
+          "kills": 0,
+          "deaths": 2
+        },
+        {
+          "petName": "Sentinel's Companion",
+          "timesUsed": 2,
+          "kills": 0,
+          "deaths": 2
+        },
+        {
+          "petName": "Portentous Present",
+          "timesUsed": 2,
+          "kills": 0,
+          "deaths": 2
+        },
+        {
+          "petName": "Lil' Ragnaros",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Wicker Pup",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Kunchong Hatchling",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Baa'lial",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Son of Animus",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Graves",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Mechanical Pandaren Dragonling",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Blighthawk",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        }
+      ]
+    },
+    {
+      "playerName": "Domiel",
+      "wins": 0,
+      "losses": 1,
+      "region": "NA",
+      "winRate": 0,
+      "mostUsedPet": {
+        "petName": "Legionnaire Murky",
+        "timesUsed": 4,
+        "kills": 2,
+        "deaths": 2
+      },
+      "mostProblematicPet": {
+        "petName": "Lost Limb",
+        "timesLostAgainst": 3
+      },
+      "petStatistics": [
+        {
+          "petName": "Legionnaire Murky",
+          "timesUsed": 4,
+          "kills": 2,
+          "deaths": 2
+        },
+        {
+          "petName": "Bone Serpent",
+          "timesUsed": 2,
+          "kills": 2,
+          "deaths": 0
+        },
+        {
+          "petName": "Lil’ Ragnaros",
+          "timesUsed": 2,
+          "kills": 1,
+          "deaths": 1
+        },
+        {
+          "petName": "Timeless Mechanical Dragonling",
+          "timesUsed": 2,
+          "kills": 0,
+          "deaths": 2
+        },
+        {
+          "petName": "Zandalari Toenibbler",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Primal Stormling",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Arctic Hare",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Guardian Cobra Hatchling",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        }
+      ]
+    },
+    {
+      "playerName": "Lunatick",
+      "wins": 0,
+      "losses": 2,
+      "region": "NA",
+      "winRate": 0,
+      "mostUsedPet": {
+        "petName": "Baa'l",
+        "timesUsed": 3,
+        "kills": 1,
+        "deaths": 2
+      },
+      "mostProblematicPet": {
+        "petName": "Timeless Mechanical Dragonling",
+        "timesLostAgainst": 3
+      },
+      "petStatistics": [
+        {
+          "petName": "Baa'l",
+          "timesUsed": 3,
+          "kills": 1,
+          "deaths": 2
+        },
+        {
+          "petName": "Drakks",
+          "timesUsed": 2,
+          "kills": 1,
+          "deaths": 1
+        },
+        {
+          "petName": "Weebomination",
+          "timesUsed": 2,
+          "kills": 1,
+          "deaths": 1
+        },
+        {
+          "petName": "Arfus",
+          "timesUsed": 2,
+          "kills": 0,
+          "deaths": 2
+        },
+        {
+          "petName": "Acid-Drenched Rat",
+          "timesUsed": 2,
+          "kills": 0,
+          "deaths": 2
+        },
+        {
+          "petName": "Bloodgazer Hatchling",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Ikky",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Kirin Tor Familiar",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Untamed Hatchling",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Brul",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Death Talon Whelpguard",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Bone Serpent",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Tonguelasher",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Lost Limb",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Mechanical Pandaren Dragonling",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        }
+      ]
+    },
+    {
+      "playerName": "Olopa",
+      "wins": 2,
+      "losses": 1,
+      "region": "NA",
+      "winRate": 67,
+      "mostUsedPet": {
+        "petName": "Mr. Bigglesworth",
+        "timesUsed": 2,
+        "kills": 2,
+        "deaths": 0
+      },
+      "mostProblematicPet": {
+        "petName": "Lime Roboclucker",
+        "timesLostAgainst": 1
+      },
+      "petStatistics": [
+        {
+          "petName": "Mr. Bigglesworth",
+          "timesUsed": 2,
+          "kills": 2,
+          "deaths": 0
+        },
+        {
+          "petName": "Chi-Chi",
+          "timesUsed": 2,
+          "kills": 2,
+          "deaths": 0
+        },
+        {
+          "petName": "Hatchling of Chi-Ji",
+          "timesUsed": 2,
+          "kills": 2,
+          "deaths": 0
+        },
+        {
+          "petName": "Pricklefury Hare",
+          "timesUsed": 2,
+          "kills": 2,
+          "deaths": 0
+        },
+        {
+          "petName": "Pygmy Marsuul",
+          "timesUsed": 2,
+          "kills": 2,
+          "deaths": 0
+        },
+        {
+          "petName": "Drowned Hatchling",
+          "timesUsed": 2,
+          "kills": 2,
+          "deaths": 0
+        },
+        {
+          "petName": "Coastal Sandpiper",
+          "timesUsed": 2,
+          "kills": 1,
+          "deaths": 1
+        },
+        {
+          "petName": "Kelpfin",
+          "timesUsed": 2,
+          "kills": 0,
+          "deaths": 2
+        },
+        {
+          "petName": "Tonguelasher",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Enchanted Broom",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Mongoose",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Stardust",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Living Rose",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Spinebug",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Happiness",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Jeepers",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Pierre",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Fluttering Glimmerfly",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        }
+      ]
+    },
+    {
+      "playerName": "DarkPuffin",
+      "wins": 0,
+      "losses": 1,
+      "region": "NA",
+      "winRate": 0,
+      "mostUsedPet": {
+        "petName": "Stormie",
+        "timesUsed": 2,
+        "kills": 1,
+        "deaths": 1
+      },
+      "mostProblematicPet": {
+        "petName": "Lost Quill",
+        "timesLostAgainst": 1
+      },
+      "petStatistics": [
+        {
+          "petName": "Stormie",
+          "timesUsed": 2,
+          "kills": 1,
+          "deaths": 1
+        },
+        {
+          "petName": "Corrupted Tentacle",
+          "timesUsed": 2,
+          "kills": 0,
+          "deaths": 2
+        },
+        {
+          "petName": "Nexus Whelpling",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Tiny Blue Carp",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Mr. DELVER",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Rotbreath",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Stormborne Whelpling",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Frigid Frostling",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Crawbat",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Shadow",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        }
+      ]
+    },
+    {
+      "playerName": "Tanixion",
+      "wins": 6,
+      "losses": 0,
+      "region": "EU",
+      "winRate": 100,
+      "mostUsedPet": {
+        "petName": "Jingles",
+        "timesUsed": 8,
+        "kills": 7,
+        "deaths": 1
+      },
+      "mostProblematicPet": {
+        "petName": "Stormborne Whelpling",
+        "timesLostAgainst": 1
+      },
+      "petStatistics": [
+        {
+          "petName": "Jingles",
+          "timesUsed": 8,
+          "kills": 7,
+          "deaths": 1
+        },
+        {
+          "petName": "Violent Poultrid",
+          "timesUsed": 6,
+          "kills": 6,
+          "deaths": 0
+        },
+        {
+          "petName": "Lime Roboclucker",
+          "timesUsed": 6,
+          "kills": 5,
+          "deaths": 1
+        },
+        {
+          "petName": "Qiraji Guardling",
+          "timesUsed": 5,
+          "kills": 5,
+          "deaths": 0
+        },
+        {
+          "petName": "Mr. DELVER",
+          "timesUsed": 5,
+          "kills": 5,
+          "deaths": 0
+        },
+        {
+          "petName": "Cobbleshell",
+          "timesUsed": 5,
+          "kills": 4,
+          "deaths": 1
+        },
+        {
+          "petName": "Lost Quill",
+          "timesUsed": 3,
+          "kills": 3,
+          "deaths": 0
+        },
+        {
+          "petName": "Death Adder Hatchling",
+          "timesUsed": 3,
+          "kills": 3,
+          "deaths": 0
+        },
+        {
+          "petName": "Bone Serpent",
+          "timesUsed": 2,
+          "kills": 2,
+          "deaths": 0
+        },
+        {
+          "petName": "Shimmerbough Hoarder",
+          "timesUsed": 2,
+          "kills": 2,
+          "deaths": 0
+        },
+        {
+          "petName": "Teardrop Moth",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Sir Shady Mrrgglton Junior",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Umbral Amalgam",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        }
+      ]
+    },
+    {
+      "playerName": "Asomyrh",
+      "wins": 0,
+      "losses": 2,
+      "region": "NA",
+      "winRate": 0,
+      "mostUsedPet": {
+        "petName": "Brown Rabbit",
+        "timesUsed": 3,
+        "kills": 0,
+        "deaths": 3
+      },
+      "mostProblematicPet": {
+        "petName": "Cobbleshell",
+        "timesLostAgainst": 4
+      },
+      "petStatistics": [
+        {
+          "petName": "Brown Rabbit",
+          "timesUsed": 3,
+          "kills": 0,
+          "deaths": 3
+        },
+        {
+          "petName": "Mechanical Pandaren Dragonling",
+          "timesUsed": 2,
+          "kills": 0,
+          "deaths": 2
+        },
+        {
+          "petName": "Son of Sethe",
+          "timesUsed": 2,
+          "kills": 0,
+          "deaths": 2
+        },
+        {
+          "petName": "Stormborne Whelpling",
+          "timesUsed": 2,
+          "kills": 0,
+          "deaths": 2
+        },
+        {
+          "petName": "Shimmerbough Hoarder",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Wily Rat",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Twilight Clutch-Sister",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Nether Faerie Dragon",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Fragment of Anger",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Buttercup",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Hemospore",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Paleshell Crab",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Oasis Void-Duster",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        }
+      ]
+    }
+  ],
+  "regions": ["EU", "NA"]
+}

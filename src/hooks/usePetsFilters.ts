@@ -22,7 +22,7 @@ export const usePetsFilters = ({
   const [expandedPets, setExpandedPets] = useState<Record<string, boolean>>({});
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState('');
-  const [sortOption, setSortOption] = useState('name-asc');
+  const [sortOption, setSortOption] = useState('played-desc');
   const [filters, setFilters] = useState({
     type: '',
     expansion: '',
@@ -245,7 +245,7 @@ export const usePetsFilters = ({
   // reset all filters, sorting and search
   const resetFilters = () => {
     setSearchTerm('');
-    setSortOption('name-asc');
+    setSortOption('played-desc');
     setFilters({
       type: '',
       expansion: '',
@@ -295,6 +295,14 @@ export const usePetsFilters = ({
       normalizedBreed: bs.breed.trim(),
     }));
     const winRate = stats?.win_rate || 0;
+    const kills = petPerformance[name]?.kills || 0;
+    const played = stats?.total_played || 1;
+
+    const killRatio = kills / played;
+    let strength: 'strong' | 'weak' | 'average' = 'average';
+
+    if (killRatio > 0.8) strength = 'strong';
+    else if (killRatio < 0.15) strength = 'weak';
 
     let graphData = [];
     const baseGraphData = [
@@ -315,8 +323,8 @@ export const usePetsFilters = ({
         value: petSwapDetails[name] || 0,
       },
     ];
-    if (isMatchView) {
-      graphData = baseGraphData;
+    if (isMatchView === true) {
+      graphData = baseGraphData.filter((item) => item.value > 0);
     } else {
       graphData = [
         ...baseGraphData,
@@ -332,13 +340,14 @@ export const usePetsFilters = ({
           name: 'Losses',
           value: stats?.losses || 0,
         },
-      ];
+      ].filter((item) => item.value > 0);
     }
     return {
       stats,
       breeds,
       graphData,
       winRate,
+      strength,
     };
   };
 
