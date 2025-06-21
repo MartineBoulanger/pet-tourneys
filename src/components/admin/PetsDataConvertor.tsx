@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Heading, Textarea, Button, Form } from '@/components/ui';
+import { FaFileDownload } from 'react-icons/fa';
 
 export function PetsDataConverter() {
   const router = useRouter();
@@ -96,7 +97,9 @@ export function PetsDataConverter() {
         <>
           <div className='flex flex-row justify-between items-center mb-5 mt-5 sm:mt-10'>
             <Heading as='h2'>{'JSON Output'}</Heading>
-            <Button onClick={downloadJsonFile}>{'Download JSON File'}</Button>
+            <Button onClick={downloadJsonFile}>
+              <FaFileDownload className='h-6 w-6' />
+            </Button>
           </div>
           <div className='bg-light-grey shadow-md rounded-lg p-2.5 sm:p-5'>
             <pre className='p-2.5 sm:p-5 bg-background rounded-lg w-full overflow-auto max-h-[450px]'>

@@ -1,4 +1,5 @@
 import { EnhancedPlayerRecord } from '@/supabase/actions/players';
+import { Pet } from '@/components/statistics/types';
 
 export interface Match {
   id: string;
@@ -41,4 +42,5 @@ export interface TournamentsListProps {
 export interface PlayerRankingsProps {
   records: EnhancedPlayerRecord[];
   regions: string[];
+  petData: Pet[];
 }

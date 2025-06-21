@@ -10,8 +10,8 @@ import {
 import { PageParams } from '@/types';
 import { Links } from '@/lib/types';
 import { PlayerRankings } from '@/components/tournaments';
-import { getPlayerRecords } from '@/supabase/actions/players';
-import { loadJsonData } from '@/utils/loadJsonData'
+import { loadPetsData, loadPlayerData } from '@/utils/loadJsonData';
+import { Pet } from '@/components/statistics/types';
 
 export async function generateMetadata({ params }: { params: PageParams }) {
   const { id } = await params;
@@ -22,42 +22,6 @@ export async function generateMetadata({ params }: { params: PageParams }) {
         .NEXT_PUBLIC_BASE_URL!}/tournaments/${id}/rankings`,
     },
   };
-}
-
-async function loadPlayerData(id: string) {
-  try {
-    const jsonPath = `${process.env
-      .NEXT_PUBLIC_BASE_URL!}/json-files/rankings-data/player-rankings-${id.slice(
-      0,
-      5
-    )}.json`;
-
-    const response = await fetch(jsonPath, { cache: 'no-store' });
-
-    const contentType = response.headers.get('content-type');
-    if (!contentType?.includes('application/json')) {
-      const text = await response.text();
-      throw new Error(`Expected JSON but got: ${text.substring(0, 50)}...`);
-    }
-
-    const jsonData = await response.json();
-
-    if (!jsonData.records || !jsonData.regions) {
-      throw new Error('Invalid JSON structure - missing records or regions');
-    }
-
-    return jsonData;
-  } catch (jsonError) {
-    console.error('JSON load failed, falling back to Supabase', jsonError);
-
-    try {
-      const { records, regions } = await getPlayerRecords(id);
-      return { records, regions };
-    } catch (supabaseError) {
-      console.error('Both JSON and Supabase failed:', supabaseError);
-      throw new Error('Failed to load player data from any source');
-    }
-  }
 }
 
 export default async function RankingsPage({ params }: { params: PageParams }) {
@@ -71,6 +35,7 @@ export default async function RankingsPage({ params }: { params: PageParams }) {
   } = await getTournamentDetails(id);
 
   const playerData = await loadPlayerData(id);
+  const petData: Pet[] = await loadPetsData();
 
   if (!success) {
     return (
@@ -91,6 +56,10 @@ export default async function RankingsPage({ params }: { params: PageParams }) {
   }
 
   if (!tournament || !matches) return notFound();
+
+  const isOnGoing =
+    tournament.end_date === '1999-12-31T22:00:00' ||
+    tournament.end_date === null;
 
   // make links data for the dropdown menu on the page
   const links: Links = [
@@ -119,12 +88,19 @@ export default async function RankingsPage({ params }: { params: PageParams }) {
         </PageHeading>
         <Paragraph className='text-humanoid'>{tournament.name}</Paragraph>
       </div>
-      {playerData.records.length > 0 ? (
+      {isOnGoing ? (
+        <Paragraph className='p-2.5 sm:p-5 rounded-lg bg-background text-center shadow-md'>
+          {
+            'The tournament is still ongoing, come back to check the rankings when the tournament is finished.'
+          }
+        </Paragraph>
+      ) : (
         <PlayerRankings
           records={playerData.records}
           regions={playerData.regions}
+          petData={petData}
         />
-      ) : null}
+      )}
     </Container>
   );
 }

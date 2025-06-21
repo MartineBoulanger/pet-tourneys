@@ -182,15 +182,15 @@ export default async function StatisticsPage({
     },
     {
       id: 2,
+      url: `/tournaments/${id}/rankings`,
+      text: 'Tournament Rankings',
+    },
+    {
+      id: 3,
       url: isMatchView
         ? `/tournaments/${id}/matches/${matchId}`
         : `/tournaments/${id}`,
       text: isMatchView ? 'Back to match' : 'Back to tournament',
-    },
-    {
-      id: 3,
-      url: `/tournaments/${id}/rankings`,
-      text: 'Tournament Rankings',
     },
   ];
 

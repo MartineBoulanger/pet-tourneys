@@ -79,15 +79,17 @@ export default async function AdminPlayersPage({
     <Container>
       <Heading>{`${username}'s Admin Panel`}</Heading>
       <AdminPanelButtons isMatchesPage />
-      <ExportRankingsButton
-        tournamentId={id}
-        tournamentName={tournament.name}
-      />
       <div>
         <div className='mb-5'>
-          <Heading as='h2' className='text-xl mb-2.5'>
-            {'Tournament Players'}
-          </Heading>
+          <div className='flex items-center justify-between'>
+            <Heading as='h2' className='text-xl mb-2.5'>
+              {'Tournament Players'}
+            </Heading>
+            <ExportRankingsButton
+              tournamentId={id}
+              tournamentName={tournament.name}
+            />
+          </div>
           <Paragraph className='text-humanoid'>{tournament.name}</Paragraph>
         </div>
         {records.length > 0 ? (

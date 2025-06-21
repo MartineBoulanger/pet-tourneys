@@ -42,7 +42,7 @@ export const AdminPanelButtons = ({
           >
             <span className='max-w-[40px] max-h-[40px]'>
               <Image
-                src={`${process.env.NEXT_PUBLIC_BASE_URL!}/images/redrex.png`}
+                src={`${process.env.NEXT_PUBLIC_BASE_URL!}/images/greenrex.png`}
                 alt={'Back To Tournaments List'}
                 width={50}
                 height={50}

@@ -10,7 +10,6 @@ import {
 } from '@/supabase/actions/battle-logs-statistics';
 import { getTournament } from '@/supabase/actions/tournaments';
 import { getMatch } from '@/supabase/actions/matches';
-import {} from '@/supabase/actions/players';
 import {
   PageHeading,
   Heading,
@@ -22,6 +21,7 @@ import { PageParams, MatchSearchParams } from '@/types';
 import { Links } from '@/lib/types';
 import { TournamentPetStat } from '@/utils/types';
 import { Pet } from '@/components/statistics/types';
+import { loadPetsData } from '@/utils/loadJsonData';
 
 export async function generateMetadata({ params }: { params: PageParams }) {
   const { id } = await params;
@@ -32,31 +32,6 @@ export async function generateMetadata({ params }: { params: PageParams }) {
         .NEXT_PUBLIC_BASE_URL!}/tournaments/${id}/statistics/pets`,
     },
   };
-}
-
-async function loadPetsData() {
-  try {
-    const jsonPath = `${process.env
-      .NEXT_PUBLIC_BASE_URL!}/json-files/pets-data.json`;
-
-    const response = await fetch(jsonPath, { cache: 'no-store' });
-
-    const contentType = response.headers.get('content-type');
-    if (!contentType?.includes('application/json')) {
-      const text = await response.text();
-      throw new Error(`Expected JSON but got: ${text.substring(0, 50)}...`);
-    }
-
-    const jsonData = await response.json();
-
-    if (!jsonData) {
-      throw new Error('Invalid JSON structure - missing the pets data');
-    }
-
-    return jsonData;
-  } catch (jsonError) {
-    console.error('JSON load failed, no Json file found', jsonError);
-  }
 }
 
 export default async function PetsStatisticsPage({
@@ -130,15 +105,15 @@ export default async function PetsStatisticsPage({
     },
     {
       id: 2,
+      url: `/tournaments/${id}/rankings`,
+      text: 'Tournament Rankings',
+    },
+    {
+      id: 3,
       url: isMatchView
         ? `/tournaments/${id}/matches/${matchId}`
         : `/tournaments/${id}`,
       text: isMatchView ? 'Back to match' : 'Back to tournament',
-    },
-    {
-      id: 3,
-      url: `/tournaments/${id}/rankings`,
-      text: 'Tournament Rankings',
     },
   ];
 

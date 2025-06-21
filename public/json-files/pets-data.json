@@ -13801,7 +13801,7 @@
   },
   {
     "petID": "1266",
-    "name": "Xu-Fu, Cub of Xuen",
+    "name": "Xu-Fu - Cub of Xuen",
     "type": "Beast",
     "isTradable": "No",
     "ability1": "Spirit Claws",
@@ -13849,7 +13849,7 @@
   },
   {
     "petID": "1303",
-    "name": "Chi-Chi, Hatchling of Chi-Ji",
+    "name": "Chi-Chi - Hatchling of Chi-Ji",
     "type": "Flying",
     "isTradable": "No",
     "ability1": "Fire Quills",
@@ -13861,19 +13861,19 @@
     "baseHealth": "8,25",
     "basePower": "8,25",
     "baseSpeed": "7,5",
-    "availableBreeds": "PS",
+    "availableBreeds": "P/S",
     "source": "Vendor",
     "isCapturable": "Yes",
     "expansion": "Mists of Pandaria",
     "isHordeOnly": "",
     "isAllianceOnly": "",
-    "icon": "",
-    "image": "",
-    "description": ""
+    "icon": "cranegod.png",
+    "image": "chi-chi-hatchling-of-chi-Ji.jpg",
+    "description": "Chi-Chi tries to inspire hope with her loud squawk and by chasing, and eventually eating, butterflies."
   },
   {
     "petID": "1304",
-    "name": "Yu'la, Broodling of Yu'lon",
+    "name": "Yu'la - Broodling of Yu'lon",
     "type": "Dragonkin",
     "isTradable": "No",
     "ability1": "Breath",
@@ -13897,7 +13897,7 @@
   },
   {
     "petID": "1305",
-    "name": "Zao, Calfling of Niuzao",
+    "name": "Zao - Calfling of Niuzao",
     "type": "Beast",
     "isTradable": "No",
     "ability1": "Trample",
@@ -21361,7 +21361,7 @@
   },
   {
     "petID": "2047",
-    "name": "Ban-Fu, Cub of Ban-Lu",
+    "name": "Ban-Fu - Cub of Ban-Lu",
     "type": "Beast",
     "isTradable": "No",
     "ability1": "Spirit Claws",
@@ -30937,7 +30937,7 @@
   },
   {
     "petID": "2917",
-    "name": "Gloober, as G'huun",
+    "name": "Gloober - as G'huun",
     "type": "Critter",
     "isTradable": "Yes",
     "ability1": "Bite",

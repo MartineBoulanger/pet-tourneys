@@ -1,7 +1,7 @@
 {
   "tournamentId": "075e7708-cfa4-4b30-a033-4246520f605a",
   "tournamentName": "Pet Battle PvP Tournament Season 2",
-  "timestamp": "2025-06-16T23:54:15.162Z",
+  "timestamp": "2025-06-21T22:46:16.431Z",
   "records": [
     {
       "playerName": "Bebark",
@@ -81,13 +81,13 @@
           "deaths": 1
         },
         {
-          "petName": "Roggy",
+          "petName": "Death Adder Hatchling",
           "timesUsed": 2,
           "kills": 0,
           "deaths": 2
         },
         {
-          "petName": "Death Adder Hatchling",
+          "petName": "Roggy",
           "timesUsed": 2,
           "kills": 0,
           "deaths": 2
@@ -189,36 +189,6 @@
           "deaths": 1
         },
         {
-          "petName": "Grip of Terror",
-          "timesUsed": 1,
-          "kills": 0,
-          "deaths": 1
-        },
-        {
-          "petName": "Resonant Echo",
-          "timesUsed": 1,
-          "kills": 0,
-          "deaths": 1
-        },
-        {
-          "petName": "Chi-Chi",
-          "timesUsed": 1,
-          "kills": 0,
-          "deaths": 1
-        },
-        {
-          "petName": "Hatchling of Chi-Ji",
-          "timesUsed": 1,
-          "kills": 0,
-          "deaths": 1
-        },
-        {
-          "petName": "Rescued Fawn",
-          "timesUsed": 1,
-          "kills": 0,
-          "deaths": 1
-        },
-        {
           "petName": "Whoopy",
           "timesUsed": 1,
           "kills": 0,
@@ -274,6 +244,30 @@
         },
         {
           "petName": "Mechanical Pandaren Dragonling",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Grip of Terror",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Resonant Echo",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Chi-Chi - Hatchling of Chi-Ji",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Rescued Fawn",
           "timesUsed": 1,
           "kills": 0,
           "deaths": 1
@@ -1460,7 +1454,7 @@
         "deaths": 2
       },
       "mostProblematicPet": {
-        "petName": "Mr. Bigglesworth",
+        "petName": "Proto Avian Fledgling",
         "timesLostAgainst": 2
       },
       "petStatistics": [
@@ -1549,13 +1543,13 @@
           "deaths": 1
         },
         {
-          "petName": "Abyssal Slitherling",
+          "petName": "Timeless Mechanical Dragonling",
           "timesUsed": 1,
           "kills": 0,
           "deaths": 1
         },
         {
-          "petName": "Timeless Mechanical Dragonling",
+          "petName": "Abyssal Slitherling",
           "timesUsed": 1,
           "kills": 0,
           "deaths": 1

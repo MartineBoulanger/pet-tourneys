@@ -58,14 +58,13 @@ export function ExportRankingsButton({
     <Button
       onClick={handleExport}
       disabled={isLoading}
-      className='btn-link flex items-center gap-2.5 border py-3 px-4 rounded-lg border-blue-grey hover:bg-blue-grey hover:text-foreground'
+      className='btn-link border py-3 px-4 rounded-lg border-blue-grey hover:bg-blue-grey hover:text-foreground'
     >
       {isLoading ? (
-        'Exporting...'
+        '...'
       ) : (
         <>
-          <FaFileDownload className='mr-2.5 h-6 w-6' />
-          {'Export Rankings Data'}
+          <FaFileDownload className='h-6 w-6' />
         </>
       )}
     </Button>
