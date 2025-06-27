@@ -88,19 +88,19 @@ export default async function RankingsPage({ params }: { params: PageParams }) {
         </PageHeading>
         <Paragraph className='text-humanoid'>{tournament.name}</Paragraph>
       </div>
-      {isOnGoing ? (
+      {/* {isOnGoing ? (
         <Paragraph className='p-2.5 sm:p-5 rounded-lg bg-background text-center shadow-md'>
           {
             'The tournament is still ongoing, come back to check the rankings when the tournament is finished.'
           }
         </Paragraph>
-      ) : (
-        <PlayerRankings
-          records={playerData.records}
-          regions={playerData.regions}
-          petData={petData}
-        />
-      )}
+      ) : ( */}
+      <PlayerRankings
+        records={playerData.records}
+        regions={playerData.regions}
+        petData={petData}
+      />
+      {/* )} */}
     </Container>
   );
 }
