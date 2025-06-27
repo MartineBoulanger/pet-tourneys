@@ -57,9 +57,9 @@ export default async function RankingsPage({ params }: { params: PageParams }) {
 
   if (!tournament || !matches) return notFound();
 
-  const isOnGoing =
-    tournament.end_date === '1999-12-31T22:00:00' ||
-    tournament.end_date === null;
+  // const isOnGoing =
+  //   tournament.end_date === '1999-12-31T22:00:00' ||
+  //   tournament.end_date === null;
 
   // make links data for the dropdown menu on the page
   const links: Links = [
