@@ -14,7 +14,7 @@ export const BottomNavigation = ({ user }: BottomNavigationProps) => {
   return (
     <div
       className={cn(
-        'fixed bottom-0 left-0 right-0 bg-background flex items-center justify-evenly md:hidden z-50'
+        'fixed bottom-0 left-0 right-0 bg-background flex items-center justify-evenly lg:hidden z-50'
       )}
     >
       {user ? (
@@ -53,7 +53,7 @@ export const BottomNavigation = ({ user }: BottomNavigationProps) => {
       ) : null}
 
       <div className='w-0.5 h-10 rounded-lg bg-blue-grey' />
-      <Menu buttonVariant='link' className='md:hidden' />
+      <Menu buttonVariant='link' className='lg:hidden' />
     </div>
   );
 };

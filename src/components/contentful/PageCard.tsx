@@ -5,8 +5,8 @@ import { PageCardProps } from './types';
 
 export const PageCard = ({ page }: PageCardProps) => {
   return (
-    <div className='bg-light-grey shadow-md rounded-lg p-2.5 sm:p-5'>
-      <div className='flex flex-col items-center justify-between gap-5 bg-background rounded-lg p-2.5 sm:p-5'>
+    <div className='bg-light-grey shadow-md rounded-lg p-2.5 lg:p-5'>
+      <div className='flex flex-col items-center justify-between gap-5 bg-background rounded-lg p-2.5 lg:p-5'>
         <Heading
           as='h2'
           className='text-center text-4xl tracking-wider text-humanoid'

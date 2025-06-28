@@ -57,7 +57,7 @@ export const RadarGraph = ({
   };
 
   return (
-    <GraphWrapper className='h-[425px] md:h-[450px]'>
+    <GraphWrapper className='h-[425px] lg:h-[450px]'>
       <RadarChart
         cx='50%'
         cy='50%'

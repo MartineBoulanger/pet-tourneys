@@ -45,7 +45,7 @@ export function BattleLogViewer({ battleLog }: BattleLogViewerProps) {
 
   return (
     <div className='rounded-lg overflow-hidden shadow-md'>
-      <div className='bg-light-grey p-2.5 sm:p-5'>
+      <div className='bg-light-grey p-2.5 lg:p-5'>
         <div className='flex justify-between items-center'>
           <div>
             <Heading as='h3' className='font-medium'>
@@ -74,7 +74,7 @@ export function BattleLogViewer({ battleLog }: BattleLogViewerProps) {
           </div>
         </div>
       </div>
-      <div className='grid grid-cols-1 md:grid-cols-2 gap-5 p-2.5 sm:p-5 border-b border-light-grey bg-background'>
+      <div className='grid grid-cols-1 lg:grid-cols-2 gap-5 p-2.5 lg:p-5 border-b border-light-grey bg-background'>
         <div>
           <Heading as='h4' className='font-medium text-cyan-400 mb-2.5'>
             {'Log Owner Team'}
@@ -100,16 +100,16 @@ export function BattleLogViewer({ battleLog }: BattleLogViewerProps) {
           </ul>
         </div>
       </div>
-      <div className='p-2.5 sm:p-5 bg-background'>
+      <div className='p-2.5 lg:p-5 bg-background'>
         <Heading as='h4' className='font-medium mb-2.5'>
           {'Battle Rounds'}
         </Heading>
-        <div className='space-y-2.5 sm:space-y-5'>
+        <div className='space-y-2.5 lg:space-y-5'>
           {battleRounds.slice(0, visibleRounds).map((round) => (
             <div key={round.round} className='rounded-md overflow-hidden'>
               <Button
                 onClick={() => toggleRound(round.round)}
-                className='w-full p-2.5 sm:p-5 bg-light-grey hover:bg-medium-grey rounded-none'
+                className='w-full p-2.5 lg:p-5 bg-light-grey hover:bg-medium-grey rounded-none'
                 title='Toggle round'
                 aria-label='Toggle round'
               >
@@ -123,8 +123,8 @@ export function BattleLogViewer({ battleLog }: BattleLogViewerProps) {
               </Button>
 
               {expandedRounds[round.round] && (
-                <div className='p-2.5 sm:p-5 border border-light-grey bg-dark-grey rounded-b-md'>
-                  <ul className='space-y-2.5 sm:space-y-5'>
+                <div className='p-2.5 lg:p-5 border border-light-grey bg-dark-grey rounded-b-md'>
+                  <ul className='space-y-2.5 lg:space-y-5'>
                     {round.events.map((event, index) => {
                       const cleanedEvent = event.replace(/^\d+\s*/, '');
 
@@ -151,7 +151,7 @@ export function BattleLogViewer({ battleLog }: BattleLogViewerProps) {
                               : 'text-orange-300'
                           }`}
                         >
-                          <div className='flex items-center justify-between w-full md:max-w-[640px]'>
+                          <div className='flex items-center justify-between w-full lg:max-w-[640px]'>
                             <span>{cleanedEvent}</span>
                             {isStrong ||
                             isWeak ||
@@ -160,7 +160,7 @@ export function BattleLogViewer({ battleLog }: BattleLogViewerProps) {
                             isBlocked ||
                             isMissed ? (
                               <span
-                                className={`ml-1 px-1 rounded text-xs sm:text-sm ml-2.5 ${
+                                className={`ml-1 px-1 rounded text-xs lg:text-sm ml-2.5 ${
                                   isCritical || isMissed
                                     ? 'bg-red-100 text-red-800'
                                     : isStrong || isDodged
@@ -192,14 +192,14 @@ export function BattleLogViewer({ battleLog }: BattleLogViewerProps) {
           ))}
         </div>
 
-        <div className='flex justify-center gap-2.5 sm:gap-5 mt-2.5 sm:mt-5'>
+        <div className='flex justify-center gap-2.5 lg:gap-5 mt-2.5 lg:mt-5'>
           {visibleRounds < battleRounds.length && (
             <Button
               onClick={showMoreRounds}
               title='Show More'
               aria-label='Show More'
             >
-              Show More
+              {'Show More'}
             </Button>
           )}
           {visibleRounds > ROUNDS_PER_PAGE && (
@@ -209,7 +209,7 @@ export function BattleLogViewer({ battleLog }: BattleLogViewerProps) {
               title='Show Less'
               aria-label='Show Less'
             >
-              Show Less
+              {'Show Less'}
             </Button>
           )}
         </div>

@@ -31,13 +31,13 @@ export const ForgotPasswordForm = () => {
   if (!isMounted) return <ForgotResetFormSkeleton />;
 
   return (
-    <div className='bg-light-grey shadow-md rounded-lg p-2.5 sm:p-5'>
+    <div className='bg-light-grey shadow-md rounded-lg p-2.5 lg:p-5'>
       <Form handleSubmit={handleSubmit} message={error}>
         <Input type='email' label='Email' id='email' name='email' required />
         <AuthButton
           type='Forgot Password'
           loading={loading}
-          className='mt-2.5 sm:mt-5'
+          className='mt-2.5 lg:mt-5'
         />
       </Form>
     </div>

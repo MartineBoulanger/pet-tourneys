@@ -59,7 +59,7 @@ export const BattleCharts = ({
       </div>
       <div
         className={cn(
-          'bg-light-grey rounded-lg shadow-md grid grid-cols-1 md:grid-cols-2 gap-2.5 lg:gap-5 p-2.5 lg:p-5',
+          'bg-light-grey rounded-lg shadow-md grid grid-cols-1 lg:grid-cols-2 gap-2.5 lg:gap-5 p-2.5 lg:p-5',
           isMatchView ? 'md:grid-cols-1' : ''
         )}
       >

@@ -24,7 +24,7 @@ export const ScatterGraph = ({
 
   if (!data || data.length === 0) {
     return (
-      <p className='text-center bg-background rounded-lg p-2.5 sm:p-5'>
+      <p className='text-center bg-background rounded-lg p-2.5 lg:p-5'>
         {'No scatter chart data available.'}
       </p>
     );
@@ -53,7 +53,7 @@ export const ScatterGraph = ({
   };
 
   return (
-    <GraphWrapper className='p-2.5 lg:p-5 h-[425px] md:h-[450px]'>
+    <GraphWrapper className='p-2.5 lg:p-5 h-[425px] lg:h-[450px]'>
       <ScatterChart
         margin={{
           top: 10,

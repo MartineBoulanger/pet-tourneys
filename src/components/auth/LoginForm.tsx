@@ -33,7 +33,7 @@ export const LoginForm = () => {
 
   return (
     <>
-      <div className='bg-light-grey shadow-md rounded-lg p-2.5 sm:p-5'>
+      <div className='bg-light-grey shadow-md rounded-lg p-2.5 lg:p-5'>
         <Form handleSubmit={handleSubmit} message={error}>
           <Input label='Email' id='email' name='email' type='email' required />
           <Input
@@ -46,10 +46,10 @@ export const LoginForm = () => {
           <AuthButton
             type='login'
             loading={loading}
-            className='mt-2.5 sm:mt-5'
+            className='mt-2.5 lg:mt-5'
           />
         </Form>
-        <div className='mt-2.5 sm:mt-5 flex items-center'>
+        <div className='mt-2.5 lg:mt-5 flex items-center'>
           <Paragraph>{`Don't have an account?`}</Paragraph>
           <Link
             className='link font-bold ml-2.5'
@@ -72,7 +72,7 @@ export const LoginForm = () => {
           </Link>
         </div>
       </div>
-      <div className='mt-2.5 sm:mt-5 p-2.5 sm:p-5 bg-background rounded-lg shadow-md w-full flex justify-center'>
+      <div className='mt-2.5 lg:mt-5 p-2.5 lg:p-5 bg-background rounded-lg shadow-md w-full flex justify-center'>
         <LoginDiscord />
       </div>
     </>

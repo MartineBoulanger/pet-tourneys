@@ -30,7 +30,7 @@ const Asset = ({
         isBanner ? 'h-[432px] object-center' : 'relative',
         isPage && isBanner
           ? '-mt-5 md:h-[90vh]'
-          : 'md:h-[55vh] rounded-t-lg min-[425px]:rounded-lg overflow-hidden',
+          : 'lg:h-[55vh] rounded-t-lg min-[425px]:rounded-lg overflow-hidden',
         className
       )}
     >

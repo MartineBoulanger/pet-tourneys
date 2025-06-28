@@ -100,7 +100,7 @@ export const AnalyzeToolDetails = ({
     parsedBattleLogs.length > 0 && (
       <div className='mt-10'>
         {/* Title & action button above the content */}
-        <div className='flex flex-col sm:flex-row justify-between items-end sm:items-center mb-5'>
+        <div className='flex flex-col lg:flex-row justify-between items-end lg:items-center mb-5'>
           <div>
             <Heading as='h2' className='text-3xl text-humanoid font-bold'>
               {'Battle Logs Analysis Report'}
@@ -120,7 +120,7 @@ export const AnalyzeToolDetails = ({
               />
             }
             fileName={`${playerName + '-' || ''}battle-logs-analysis.pdf`}
-            className='btn-submit py-2 px-4 rounded border-none uppercase mt-5 sm:mt-0'
+            className='btn-submit py-2 px-4 rounded border-none uppercase mt-5 lg:mt-0'
           >
             {({ loading }) =>
               loading ? 'Preparing PDF...' : 'Download as PDF'
@@ -131,12 +131,12 @@ export const AnalyzeToolDetails = ({
         {/* Statistics results */}
         <div
           id='analysis-results'
-          className='bg-light-grey p-2.5 sm:p-5 rounded-lg shadow-md'
+          className='bg-light-grey p-2.5 lg:p-5 rounded-lg shadow-md'
         >
           {playerName ? (
             <Heading
               as='h3'
-              className='text-2xl mb-5 text-center p-2.5 sm:p-5 rounded-lg bg-background'
+              className='text-2xl mb-5 text-center p-2.5 lg:p-5 rounded-lg bg-background'
             >
               <span>{'Logs from '}</span>
               <span className='font-bold text-humanoid'>{playerName}</span>
@@ -149,7 +149,7 @@ export const AnalyzeToolDetails = ({
                 <Heading as='h4' className='text-xl font-semibold mb-2.5'>
                   {'Overall Match Statistics'}
                 </Heading>
-                <div className='flex flex-wrap flex-col md:flex-row gap-2.5 sm:gap-5 mb-5'>
+                <div className='flex flex-wrap flex-col lg:flex-row gap-2.5 lg:gap-5 mb-5'>
                   <OverviewCard
                     title='Total Battles'
                     value={parsedBattleLogs.length}
@@ -176,15 +176,15 @@ export const AnalyzeToolDetails = ({
           )}
 
           {parsedBattleLogs && parsedBattleLogs.length > 0 && (
-            <div className='mb-5 sm:mb-10'>
+            <div className='mb-5 lg:mb-10'>
               <Heading as='h4' className='text-lg font-bold mb-2.5'>
                 {'Battle Logs Overview'}
               </Heading>
-              <div className='space-y-2.5 sm:space-y-5'>
+              <div className='space-y-2.5 lg:space-y-5'>
                 {parsedBattleLogs.map((battle, i) => (
                   <div
                     key={i}
-                    className='bg-background p-2.5 sm:p-5 rounded-lg shadow-md'
+                    className='bg-background p-2.5 lg:p-5 rounded-lg shadow-md'
                   >
                     <div className='flex justify-between mb-2.5'>
                       <Paragraph className='font-bold'>
@@ -205,7 +205,7 @@ export const AnalyzeToolDetails = ({
                         {battle.result}
                       </Paragraph>
                     </div>
-                    <div className='grid grid-cols-2 gap-2.5 sm:gap-5 text-sm'>
+                    <div className='grid grid-cols-2 gap-2.5 lg:gap-5 text-sm'>
                       <div>
                         <Paragraph className='font-medium text-cyan mb-2.5'>
                           {'Your Team'}
@@ -244,7 +244,7 @@ export const AnalyzeToolDetails = ({
             </div>
           )}
 
-          <div className='mb-5 sm:mb-10'>
+          <div className='mb-5 lg:mb-10'>
             <Heading as='h4' className='text-lg font-bold mb-2.5'>
               {'Top 5 Most Used Pets'}
             </Heading>
@@ -261,13 +261,13 @@ export const AnalyzeToolDetails = ({
               className={
                 Object.keys(safeStats.petPerformance).length > 0
                   ? 'mb-5'
-                  : 'mb-5 sm:mb-10'
+                  : 'mb-5 lg:mb-10'
               }
             >
               <Heading as='h4' className='text-lg font-bold mb-2.5'>
                 {'Overall Pet Performance Statistics'}
               </Heading>
-              <div className='flex flex-wrap flex-col md:flex-row gap-2.5 sm:gap-5 mb-5'>
+              <div className='flex flex-wrap flex-col lg:flex-row gap-2.5 lg:gap-5 mb-5'>
                 <OverviewCard
                   title='Total Pet Kills'
                   value={safeStats.totalKills}
@@ -280,7 +280,7 @@ export const AnalyzeToolDetails = ({
             </div>
           ) : null}
 
-          <div className='mb-5 sm:mb-10'>
+          <div className='mb-5 lg:mb-10'>
             <Heading as='h4' className='text-lg font-bold mb-2.5'>
               {'Top 5 Pet Assassins'}
             </Heading>
@@ -300,14 +300,14 @@ export const AnalyzeToolDetails = ({
 
           {safeStats.totalPetSwaps &&
             Object.keys(safeStats.totalPetSwaps).length > 0 && (
-              <div className='mb-5 sm:mb-10'>
+              <div className='mb-5 lg:mb-10'>
                 <Heading as='h4' className='text-lg font-bold mb-2.5'>
                   {'Overall Pet Swaps Statistics'}
                 </Heading>
-                <div className='flex flex-wrap flex-col md:flex-row gap-2.5 sm:gap-5 mb-5'>
+                <div className='flex flex-wrap flex-col lg:flex-row gap-2.5 lg:gap-5 mb-5'>
                   <OverviewCard title='Total Pet Swaps' value={totalSwaps} />
                 </div>
-                <div className='grid grid-cols-1 lg:grid-cols-2 gap-2.5 sm:gap-5 mt-5'>
+                <div className='grid grid-cols-1 lg:grid-cols-2 gap-2.5 lg:gap-5 mt-5'>
                   <div>
                     <Heading as='h4' className='text-lg font-bold mb-2.5'>
                       {'Pet Swaps'}
@@ -339,11 +339,11 @@ export const AnalyzeToolDetails = ({
 
           {safeStats.weatherChanges &&
             Object.keys(safeStats.weatherChanges).length > 0 && (
-              <div className='mb-5 sm:mb-10'>
+              <div className='mb-5 lg:mb-10'>
                 <Heading as='h4' className='text-lg font-bold mb-2.5'>
                   {'Overall Weather Conditions Statistics'}
                 </Heading>
-                <div className='flex flex-wrap flex-col md:flex-row gap-2.5 sm:gap-5 mb-5'>
+                <div className='flex flex-wrap flex-col md:flex-row gap-2.5 lg:gap-5 mb-5'>
                   <OverviewCard
                     title='Total Weather Conditions'
                     value={safeStats.totalWeatherChanges}
@@ -367,7 +367,7 @@ export const AnalyzeToolDetails = ({
               <Heading as='h4' className='text-lg font-bold mb-2.5'>
                 {'Overall Pet Abilities Statistics'}
               </Heading>
-              <div className='flex flex-wrap flex-col md:flex-row gap-2.5 sm:gap-5 mb-5'>
+              <div className='flex flex-wrap flex-col lg:flex-row gap-2.5 lg:gap-5 mb-5'>
                 <OverviewCard
                   title='Total Unique Abilities Used'
                   value={usedAbilities.totalUniqueAbilitiesUsed || 0}
@@ -376,7 +376,7 @@ export const AnalyzeToolDetails = ({
               <Heading as='h4' className='text-lg font-bold mb-2.5'>
                 {'All Used Abilities Per Category'}
               </Heading>
-              <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 sm:gap-5'>
+              <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 lg:gap-5'>
                 {(
                   Object.entries(usedAbilities) as [
                     keyof AbilityCategories,

@@ -1,0 +1,20 @@
+import { headerData } from '@/lib/navigationData';
+import { Container } from '@/components/ui';
+import { LinkCard } from './LinkCard';
+
+export const LinksGallery = () => {
+  return (
+    <Container className='grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-2.5 w-full order-1 lg:order-0'>
+      {headerData.map((l) => (
+        <LinkCard
+          key={l.id}
+          id={l.id}
+          url={l.url}
+          linkText={l.linkText}
+          text={l.text}
+          imageSrc={l.imageSrc}
+        />
+      ))}
+    </Container>
+  );
+};

@@ -71,7 +71,7 @@ export function PetsDataConverter() {
 
   return (
     <>
-      <div className='bg-light-grey shadow-md rounded-lg p-2.5 sm:p-5'>
+      <div className='bg-light-grey shadow-md rounded-lg p-2.5 lg:p-5'>
         <Form handleSubmit={convertToJson}>
           <Textarea
             label='Paste excel data here'
@@ -83,7 +83,7 @@ export function PetsDataConverter() {
             required
           />
         </Form>
-        <div className='flex items-center flex-wrap justify-end gap-2.5 sm:gap-5 mt-2.5 sm:mt-5'>
+        <div className='flex items-center flex-wrap justify-end gap-2.5 lg:gap-5 mt-2.5 lg:mt-5'>
           <Button variant='secondary' onClick={() => router.back()}>
             {'Cancel'}
           </Button>
@@ -95,14 +95,14 @@ export function PetsDataConverter() {
       </div>
       {jsonOutput && (
         <>
-          <div className='flex flex-row justify-between items-center mb-5 mt-5 sm:mt-10'>
+          <div className='flex flex-row justify-between items-center mb-5 mt-5 lg:mt-10'>
             <Heading as='h2'>{'JSON Output'}</Heading>
             <Button onClick={downloadJsonFile}>
               <FaFileDownload className='h-6 w-6' />
             </Button>
           </div>
-          <div className='bg-light-grey shadow-md rounded-lg p-2.5 sm:p-5'>
-            <pre className='p-2.5 sm:p-5 bg-background rounded-lg w-full overflow-auto max-h-[450px]'>
+          <div className='bg-light-grey shadow-md rounded-lg p-2.5 lg:p-5'>
+            <pre className='p-2.5 lg:p-5 bg-background rounded-lg w-full overflow-auto max-h-[450px]'>
               {jsonOutput}
             </pre>
           </div>

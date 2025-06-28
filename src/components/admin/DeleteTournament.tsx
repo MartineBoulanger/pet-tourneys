@@ -43,16 +43,16 @@ export const DeleteTournament = ({ id, name }: DeleteTournamentProps) => {
           onClick={() => setIsOpen(false)}
         >
           <div
-            className='bg-light-grey rounded-lg p-2.5 sm:p-5 max-w-md w-full m-5 sm:m-0'
+            className='bg-light-grey rounded-lg p-2.5 lg:p-5 max-w-md w-full m-5 lg:m-0'
             onClick={(e) => e.stopPropagation()}
           >
-            <Heading className='mb-2.5 sm:mb-5'>{'Confirm Deletion'}</Heading>
-            <Paragraph className='mb-2.5 sm:mb-5'>
+            <Heading className='mb-2.5 lg:mb-5'>{'Confirm Deletion'}</Heading>
+            <Paragraph className='mb-2.5 lg:mb-5'>
               {'Are you sure you want to delete the tournament '}
               <strong className='text-humanoid'>{name}</strong>
               {'? This action cannot be undone.'}
             </Paragraph>
-            <div className='flex justify-end gap-2.5 sm:gap-5'>
+            <div className='flex justify-end gap-2.5 lg:gap-5'>
               <Button
                 onClick={() => setIsOpen(false)}
                 variant='secondary'

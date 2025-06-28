@@ -22,7 +22,7 @@ export function PetStatsCharts({ data }: ChartsProps<TournamentPetStat>) {
   const speedData = convertToGraphData(stats.speed, 150);
 
   return (
-    <div className='bg-light-grey rounded-lg shadow-md grid grid-cols-1 md:grid-cols-3 gap-2.5 lg:gap-5 p-2.5 lg:p-5'>
+    <div className='bg-light-grey rounded-lg shadow-md grid grid-cols-1 lg:grid-cols-3 gap-2.5 lg:gap-5 p-2.5 lg:p-5'>
       <div>
         <Heading as='h2' className='mb-2.5 text-base lg:text-lg font-sans'>
           {'Health'}

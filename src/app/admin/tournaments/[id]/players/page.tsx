@@ -95,7 +95,7 @@ export default async function AdminPlayersPage({
         {records.length > 0 ? (
           <TournamentPlayersList records={records} />
         ) : (
-          <Paragraph className='p-2.5 sm:p-5 rounded-lg bg-background text-center shadow-md'>
+          <Paragraph className='p-2.5 lg:p-5 rounded-lg bg-background text-center shadow-md'>
             {
               'There are no players available yet, please makes sure matches are created and battle logs are uploaded correctly.'
             }

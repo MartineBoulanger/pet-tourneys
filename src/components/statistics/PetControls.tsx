@@ -59,7 +59,7 @@ export function PetControls({
     <div className='bg-light-grey p-2.5 lg:p-5 rounded-lg mb-2.5 lg:mb-5 shadow-sm'>
       <div
         className={cn(
-          'flex flex-col md:flex-row md:items-center gap-2.5 lg:gap-5 p-2.5 lg:p-5 bg-background',
+          'flex flex-col lg:flex-row lg:items-center gap-2.5 lg:gap-5 p-2.5 lg:p-5 bg-background',
           showFilters ? 'rounded-t-lg' : 'rounded-lg'
         )}
       >
@@ -79,7 +79,7 @@ export function PetControls({
         <Select
           value={sortOption}
           onChange={(e) => onSortChange(e.target.value)}
-          className='w-full md:w-64'
+          className='w-full lg:w-64'
           label='Sort Pets'
           id='sort-pets'
           name='sort-pets'

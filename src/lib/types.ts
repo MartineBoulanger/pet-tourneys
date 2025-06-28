@@ -28,4 +28,5 @@ export type Links = {
 export type PartnersData = {
   name: string;
   image: string;
+  isPriority?: boolean;
 }[];

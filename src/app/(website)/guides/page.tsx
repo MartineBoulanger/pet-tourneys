@@ -27,11 +27,11 @@ export default async function GuidesPage() {
         }
       </Paragraph>
       {/* Page cards list */}
-      <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-10 sm:mt-20 gap-2.5 sm:gap-5'>
+      <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-10 lg:mt-20 gap-2.5 sm:gap-5'>
         {pages && pages.length > 0 ? (
           pages.map((page) => <PageCard key={page.sys.id} page={page} />)
         ) : (
-          <div className='p-2.5 sm:p-5 bg-background rounded-lg text-center lg:col-start-2'>
+          <div className='p-2.5 lg:p-5 bg-background rounded-lg text-center lg:col-start-2'>
             {'No guides are online yet. Please come back later!'}
           </div>
         )}

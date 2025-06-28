@@ -9,7 +9,7 @@ export const AdminNav = async () => {
   const admin = await getAdminSession();
 
   return (
-    <div className='w-full py-2.5 px-5 hidden md:flex md:justify-end md:items-center'>
+    <div className='w-full py-2.5 px-5 hidden lg:flex lg:justify-end lg:items-center'>
       {admin ? (
         <>
           <Link

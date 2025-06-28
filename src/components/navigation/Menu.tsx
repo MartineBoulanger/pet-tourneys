@@ -22,7 +22,7 @@ export const Menu = ({ className, buttonVariant = 'primary' }: MenuProps) => {
 
   return (
     <div className={className}>
-      <div className='flex items-center gap-x-5 md:gap-x-0 p-5 md:p-0'>
+      <div className='flex items-center gap-x-5 lg:gap-x-0 p-5 lg:p-0'>
         <Button
           title='Mobile Nav Menu'
           aria-label='Mobile Nav Menu'
@@ -30,7 +30,7 @@ export const Menu = ({ className, buttonVariant = 'primary' }: MenuProps) => {
           variant={buttonVariant}
           onClick={toggleMenu}
         >
-          <GiHamburgerMenu className='md:w-6 md:h-6' />
+          <GiHamburgerMenu className='lg:w-6 lg:h-6' />
         </Button>
       </div>
 

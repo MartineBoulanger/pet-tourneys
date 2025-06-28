@@ -51,7 +51,7 @@ export default async function TournamentsPage({
           totalPages={totalPages}
         />
       ) : (
-        <Paragraph className='p-2.5 sm:p-5 rounded-lg bg-background text-center shadow-md'>
+        <Paragraph className='p-2.5 lg:p-5 rounded-lg bg-background text-center shadow-md'>
           {'There are no tournaments available yet.'}
         </Paragraph>
       )}

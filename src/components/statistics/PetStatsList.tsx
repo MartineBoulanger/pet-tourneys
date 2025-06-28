@@ -105,7 +105,7 @@ export function PetStatsList({
                       />
                     </div>
                     {isTopUsed && (
-                      <div className='mr-2.5 sm:mr-5'>
+                      <div className='mr-2.5 lg:mr-5'>
                         <MedalIcon position={usageRank} className='w-5 h-5' />
                       </div>
                     )}
@@ -131,7 +131,7 @@ export function PetStatsList({
                         </Paragraph>
                       </div>
 
-                      <div className='grid grid-cols-1 md:grid-cols-2 gap-2.5 lg:gap-5 mt-2.5'>
+                      <div className='grid grid-cols-1 lg:grid-cols-2 gap-2.5 lg:gap-5 mt-2.5'>
                         <div className='p-2.5 lg:p-5 rounded-lg bg-background shadow-md relative'>
                           <Heading
                             as='h3'
@@ -285,7 +285,7 @@ export function PetStatsList({
                         >
                           {'Abilities'}
                         </Heading>
-                        <div className='grid grid-cols-2 gap-2.5 sm:gap-5 mt-2.5'>
+                        <div className='grid grid-cols-2 gap-2.5 lg:gap-5 mt-2.5'>
                           <div className='space-y-1'>
                             <Paragraph className='font-light'>
                               <span className='font-bold'>{'Lvl 1: '}</span>

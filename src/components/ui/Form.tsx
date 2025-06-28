@@ -32,13 +32,13 @@ export const Form = ({
     <form
       onSubmit={handleSubmit}
       className={cn(
-        'p-2.5 sm:p-5 bg-background rounded-lg flex flex-col w-full gap-2.5 sm:gap-5',
+        'p-2.5 lg:p-5 bg-background rounded-lg flex flex-col w-full gap-2.5 lg:gap-5',
         className
       )}
     >
       {children}
       {button1 || button2 ? (
-        <div className='flex gap-2.5 sm:gap-5 self-end mt-2.5 sm:mt-5'>
+        <div className='flex gap-2.5 lg:gap-5 self-end mt-2.5 lg:mt-5'>
           {button1 && (
             <Button
               variant={button1.variant}

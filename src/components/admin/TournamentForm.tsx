@@ -109,7 +109,7 @@ export function TournamentForm({ initialData = null }: TournamentFormProps) {
   if (!isMounted) return <TournamentFormSkeleton />;
 
   return (
-    <div className='bg-light-grey shadow-md rounded-lg p-2.5 sm:p-5'>
+    <div className='bg-light-grey shadow-md rounded-lg p-2.5 lg:p-5'>
       <Form
         handleSubmit={handleSubmit}
         message={error}

@@ -17,7 +17,7 @@ export const PetAbilitiesCharts = ({ abilityStats }: PetAbilitiesProps) => {
       <Heading as='h2' className='text-xl lg:text-3xl mb-2.5'>
         {'Overall Pet Abilities Statistics'}
       </Heading>
-      <div className='flex flex-wrap flex-col md:flex-row gap-2.5 lg:gap-5 mb-5'>
+      <div className='flex flex-wrap flex-col lg:flex-row gap-2.5 lg:gap-5 mb-5'>
         {abilityStats?.totalUniqueAbilitiesUsed ? (
           <OverviewCard
             title='Total Unique Abilities Used'

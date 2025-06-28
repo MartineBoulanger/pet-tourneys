@@ -67,7 +67,7 @@ export default async function AdminPage({
         <Heading as='h2' className='text-xl mb-2.5'>
           {'Tournaments List'}
         </Heading>
-        <div className='grid gap-2.5 sm:gap-5 bg-light-grey p-2.5 sm:p-5 rounded-lg shadow-md'>
+        <div className='grid gap-2.5 lg:gap-5 bg-light-grey p-2.5 lg:p-5 rounded-lg shadow-md'>
           {tournaments.length > 0 ? (
             <>
               {tournaments.map((tournament) => (
@@ -85,7 +85,7 @@ export default async function AdminPage({
               ) : null}
             </>
           ) : (
-            <Paragraph className='p-2.5 sm:p-5 rounded-lg bg-background text-center shadow-md'>
+            <Paragraph className='p-2.5 lg:p-5 rounded-lg bg-background text-center shadow-md'>
               {
                 'There are no tournaments available yet, please create a tournament.'
               }

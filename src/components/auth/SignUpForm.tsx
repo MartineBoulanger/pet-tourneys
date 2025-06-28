@@ -31,7 +31,7 @@ export const SignUpForm = () => {
   if (!isMounted) return <SignUpFormSkeleton />;
 
   return (
-    <div className='bg-light-grey shadow-md rounded-lg p-2.5 sm:p-5'>
+    <div className='bg-light-grey shadow-md rounded-lg p-2.5 lg:p-5'>
       <Form handleSubmit={handleSubmit} message={error}>
         <Input
           type='text'
@@ -51,10 +51,10 @@ export const SignUpForm = () => {
         <AuthButton
           type='Sign up'
           loading={loading}
-          className='mt-2.5 sm:mt-5'
+          className='mt-2.5 lg:mt-5'
         />
       </Form>
-      <div className='mt-2.5 sm:mt-5 flex items-center'>
+      <div className='mt-2.5 lg:mt-5 flex items-center'>
         <Paragraph>{'Already have an account?'}</Paragraph>
         <Link
           className='link font-bold ml-2.5'

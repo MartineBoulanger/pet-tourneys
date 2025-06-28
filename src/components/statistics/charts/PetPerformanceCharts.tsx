@@ -43,7 +43,7 @@ export const PetPerformanceCharts = ({ battleStats }: PetBattleLogProps) => {
       <Heading as='h2' className='text-xl lg:text-3xl mb-2.5'>
         {'Overall Pet Performance Statistics'}
       </Heading>
-      <div className='flex flex-wrap flex-col md:flex-row gap-2.5 lg:gap-5 mb-5'>
+      <div className='flex flex-wrap flex-col lg:flex-row gap-2.5 lg:gap-5 mb-5'>
         {battleStats?.totalWeatherChanges ? (
           <OverviewCard
             title='Total Weather Conditions'
@@ -57,7 +57,7 @@ export const PetPerformanceCharts = ({ battleStats }: PetBattleLogProps) => {
           <OverviewCard title='Total Deaths' value={battleStats.totalDeaths} />
         ) : null}
       </div>
-      <div className='bg-light-grey rounded-lg shadow-md grid grid-cols-1 md:grid-cols-2 gap-2.5 lg:gap-5 p-2.5 lg:p-5'>
+      <div className='bg-light-grey rounded-lg shadow-md grid grid-cols-1 lg:grid-cols-2 gap-2.5 lg:gap-5 p-2.5 lg:p-5'>
         <div>
           <Heading as='h2' className='mb-2.5 text-base lg:text-lg font-sans'>
             {'Top 5 Pet Assassins'}

@@ -89,7 +89,7 @@ export default async function RankingsPage({ params }: { params: PageParams }) {
         <Paragraph className='text-humanoid'>{tournament.name}</Paragraph>
       </div>
       {/* {isOnGoing ? (
-        <Paragraph className='p-2.5 sm:p-5 rounded-lg bg-background text-center shadow-md'>
+        <Paragraph className='p-2.5 lg:p-5 rounded-lg bg-background text-center shadow-md'>
           {
             'The tournament is still ongoing, come back to check the rankings when the tournament is finished.'
           }

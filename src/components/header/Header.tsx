@@ -8,7 +8,7 @@ export async function Header() {
         <Logo />
         <div className='flex items-center justify-end flex-0'>
           <AdminNav />
-          <Menu className='p-0 m-0 hidden md:block' />
+          <Menu className='p-0 m-0 hidden lg:block' />
         </div>
       </nav>
     </header>

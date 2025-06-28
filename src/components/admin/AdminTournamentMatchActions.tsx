@@ -10,7 +10,7 @@ export const AdminTournamentMatchActions = ({
   player2,
 }: DeleteMatchProps) => {
   return (
-    <div className='flex flex-col md:flex-row items-center justify-center md:justify-evenly gap-2.5 sm:gap-5'>
+    <div className='flex flex-col lg:flex-row items-center justify-center lg:justify-evenly gap-2.5 lg:gap-5'>
       <Link
         className='btn-link'
         href={`/admin/tournaments/${tournamentId}/matches/${matchId}/edit`}

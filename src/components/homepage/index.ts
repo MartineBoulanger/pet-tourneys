@@ -1,2 +1,2 @@
-export * from './Carousel';
-export * from './TopView';
+export * from './LinksGallery';
+export * from './PartnerGallery';

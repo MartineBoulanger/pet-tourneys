@@ -13,7 +13,7 @@ export const MatchList = ({
       <Heading as='h2' className='text-xl mb-2.5'>
         {'Tournament Matches'}
       </Heading>
-      <div className='grid gap-2.5 sm:gap-5 mb-2.5 sm:mb-5 bg-light-grey p-2.5 sm:p-5 rounded-lg'>
+      <div className='grid gap-2.5 lg:gap-5 mb-2.5 lg:mb-5 bg-light-grey p-2.5 lg:p-5 rounded-lg'>
         {matches.map((match) => (
           <MatchListItem
             key={match.id}

@@ -9,7 +9,7 @@ export const TournamentsListItem = ({
   if (!tournament) return null;
 
   return (
-    <div className='p-2.5 sm:p-5 rounded-lg shadow-md bg-background'>
+    <div className='p-2.5 lg:p-5 rounded-lg shadow-md bg-background'>
       <div className='flex justify-between items-center'>
         <div className='flex flex-col'>
           <Link
@@ -20,7 +20,7 @@ export const TournamentsListItem = ({
           >
             {tournament.name}
           </Link>
-          <Paragraph className='text-sm sm:text-base text-humanoid mt-2.5'>
+          <Paragraph className='text-sm lg:text-base text-humanoid mt-2.5'>
             {new Date(tournament.start_date).toLocaleDateString()} -{' '}
             {tournament.end_date === '1999-12-31T22:00:00' ||
             tournament.end_date === null
@@ -28,7 +28,7 @@ export const TournamentsListItem = ({
               : tournament.end_date &&
                 new Date(tournament.end_date).toLocaleDateString()}
           </Paragraph>
-          <Paragraph className='text-sm sm:text-base text-humanoid'>
+          <Paragraph className='text-sm lg:text-base text-humanoid'>
             {tournament.participant_count}
             {' participants'}
           </Paragraph>

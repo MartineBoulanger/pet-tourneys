@@ -25,7 +25,7 @@ export function Modal({
       <div
         className={cn(
           'relative z-[99999] bg-light-grey rounded-lg shadow-md',
-          'max-w-full max-h-[90vh] w-full sm:max-w-[512px] mx-5 sm:mx-0',
+          'max-w-full max-h-[90vh] w-full lg:max-w-[512px] mx-5 lg:mx-0',
           'overflow-y-auto',
           className
         )}
@@ -33,7 +33,7 @@ export function Modal({
         <Button className='absolute right-2.5 top-2.5' onClick={onClose}>
           <IoMdClose className='w-6 h-6' />
         </Button>
-        <div className='p-2.5 sm:p-5 z-[99999]'>{children}</div>
+        <div className='p-2.5 lg:p-5 z-[99999]'>{children}</div>
       </div>
     </div>
   ) : null;

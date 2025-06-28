@@ -112,7 +112,7 @@ export const DoublePieGraph = ({
   };
 
   return (
-    <GraphWrapper className='p-2.5 lg:p-5 h-[425px] md:h-[450px]'>
+    <GraphWrapper className='p-2.5 lg:p-5 h-[425px] lg:h-[450px]'>
       <PieChart>
         <Tooltip content={<CustomTooltip />} />
 

@@ -83,7 +83,7 @@ export const PlayerRankings = ({
   };
 
   return (
-    <div className='space-y-2.5 sm:space-y-5'>
+    <div className='space-y-2.5 lg:space-y-5'>
       {currentRecords.length > 0 ? (
         <>
           <Tabs className='bg-light-grey'>
@@ -97,7 +97,7 @@ export const PlayerRankings = ({
               </Tab>
             ))}
           </Tabs>
-          <div className='space-y-2.5 sm:space-y-5 bg-background p-2.5 sm:p-5 rounded-lg shadow-md'>
+          <div className='space-y-2.5 lg:space-y-5 bg-background p-2.5 lg:p-5 rounded-lg shadow-md'>
             {currentRecords.map((player, index) => {
               const globalPosition =
                 (currentPage - 1) * PLAYERS_PER_PAGE + index + 1;
@@ -116,7 +116,7 @@ export const PlayerRankings = ({
                   <Button
                     onClick={() => togglePlayer(player.playerName)}
                     variant='link'
-                    className='flex items-center justify-between w-full text-left p-2.5 sm:p-5 text-foreground'
+                    className='flex items-center justify-between w-full text-left p-2.5 lg:p-5 text-foreground'
                   >
                     <div className='flex items-center gap-2.5'>
                       <div className='flex items-center mr-2.5'>
@@ -141,8 +141,8 @@ export const PlayerRankings = ({
                   </Button>
 
                   {expandedPlayers[player.playerName] && (
-                    <div className='bg-light-grey p-2.5 sm:p-5 rounded-b-lg p-2.5 sm:p-5'>
-                      <div className='flex flex-wrap flex-col md:flex-row gap-2.5 sm:gap-5 mb-2.5 sm:mb-5'>
+                    <div className='bg-light-grey p-2.5 lg:p-5 rounded-b-lg p-2.5 lg:p-5'>
+                      <div className='flex flex-wrap flex-col lg:flex-row gap-2.5 lg:gap-5 mb-2.5 lg:mb-5'>
                         <OverviewCard title='Matches Won' value={player.wins} />
                         <OverviewCard
                           title='Matches Lost'
@@ -154,7 +154,7 @@ export const PlayerRankings = ({
                         />
                       </div>
 
-                      <div className='grid grid-cols-1 md:grid-cols-2 gap-2.5 lg:gap-5'>
+                      <div className='grid grid-cols-1 lg:grid-cols-2 gap-2.5 lg:gap-5'>
                         <div className='bg-background p-2.5 lg:p-5 rounded-lg'>
                           {player.mostUsedPet.timesUsed > 0 ? (
                             <div className='flex items-start justify-between'>
@@ -246,7 +246,7 @@ export const PlayerRankings = ({
                         </div>
                       </div>
 
-                      <div className='mt-2.5 sm:mt-5'>
+                      <div className='mt-2.5 lg:mt-5'>
                         <Heading as='h4' className='text-lg font-bold mb-2.5'>
                           {"Player's Pet Usage In Tournament"}
                         </Heading>
@@ -535,7 +535,7 @@ export const PlayerRankings = ({
                 totalPages={totalPages}
                 baseUrl=''
                 onPageChange={handlePageChange}
-                className='mt-2.5 sm:mt-5'
+                className='mt-2.5 lg:mt-5'
               />
             )}
           </div>
