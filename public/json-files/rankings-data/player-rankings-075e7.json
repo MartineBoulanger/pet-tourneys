@@ -1,8 +1,152 @@
 {
   "tournamentId": "075e7708-cfa4-4b30-a033-4246520f605a",
   "tournamentName": "Pet Battle PvP Tournament Season 2",
-  "timestamp": "2025-06-21T22:46:16.431Z",
+  "timestamp": "2025-06-28T22:14:33.749Z",
   "records": [
+    {
+      "playerName": "Woxbc",
+      "wins": 2,
+      "losses": 0,
+      "region": "NA Finals",
+      "winRate": 100,
+      "mostUsedPet": {
+        "petName": "Teardrop Moth",
+        "timesUsed": 5,
+        "kills": 4,
+        "deaths": 1
+      },
+      "mostProblematicPet": {
+        "petName": "Bone Serpent",
+        "timesLostAgainst": 1
+      },
+      "petStatistics": [
+        {
+          "petName": "Teardrop Moth",
+          "timesUsed": 5,
+          "kills": 4,
+          "deaths": 1
+        },
+        {
+          "petName": "Rebellious Imp",
+          "timesUsed": 4,
+          "kills": 4,
+          "deaths": 0
+        },
+        {
+          "petName": "Umbral Amalgam",
+          "timesUsed": 4,
+          "kills": 3,
+          "deaths": 1
+        },
+        {
+          "petName": "Trunks",
+          "timesUsed": 2,
+          "kills": 2,
+          "deaths": 0
+        },
+        {
+          "petName": "Jingles",
+          "timesUsed": 2,
+          "kills": 2,
+          "deaths": 0
+        },
+        {
+          "petName": "Mechanical Pandaren Dragonling",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Cobbleshell",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Bone Serpent",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Lime Roboclucker",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        }
+      ],
+      "compositeId": "Woxbc-NA Finals-075e7708-cfa4-4b30-a033-4246520f605a",
+      "isFinals": true
+    },
+    {
+      "playerName": "Deevus",
+      "wins": 0,
+      "losses": 1,
+      "region": "NA Finals",
+      "winRate": 0,
+      "mostUsedPet": {
+        "petName": "Violent Poultrid",
+        "timesUsed": 2,
+        "kills": 0,
+        "deaths": 2
+      },
+      "mostProblematicPet": {
+        "petName": "Rebellious Imp",
+        "timesLostAgainst": 2
+      },
+      "petStatistics": [
+        {
+          "petName": "Violent Poultrid",
+          "timesUsed": 2,
+          "kills": 0,
+          "deaths": 2
+        },
+        {
+          "petName": "Hearthy",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Pistachio",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Murkalot",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Grommloc",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Feline Familiar",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Cobbleshell",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Bronze Whelpling",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        }
+      ],
+      "compositeId": "Deevus-NA Finals-075e7708-cfa4-4b30-a033-4246520f605a",
+      "isFinals": true
+    },
     {
       "playerName": "Bebark",
       "wins": 4,
@@ -272,7 +416,9 @@
           "kills": 0,
           "deaths": 1
         }
-      ]
+      ],
+      "compositeId": "Bebark-EU-075e7708-cfa4-4b30-a033-4246520f605a",
+      "isFinals": false
     },
     {
       "playerName": "Isabella",
@@ -423,7 +569,9 @@
           "kills": 0,
           "deaths": 1
         }
-      ]
+      ],
+      "compositeId": "Isabella-EU-075e7708-cfa4-4b30-a033-4246520f605a",
+      "isFinals": false
     },
     {
       "playerName": "Des",
@@ -574,7 +722,9 @@
           "kills": 0,
           "deaths": 1
         }
-      ]
+      ],
+      "compositeId": "Des-NA-075e7708-cfa4-4b30-a033-4246520f605a",
+      "isFinals": false
     },
     {
       "playerName": "DraikoGinger",
@@ -695,7 +845,9 @@
           "kills": 0,
           "deaths": 1
         }
-      ]
+      ],
+      "compositeId": "DraikoGinger-NA-075e7708-cfa4-4b30-a033-4246520f605a",
+      "isFinals": false
     },
     {
       "playerName": "Gooskaffur",
@@ -822,7 +974,9 @@
           "kills": 0,
           "deaths": 1
         }
-      ]
+      ],
+      "compositeId": "Gooskaffur-NA-075e7708-cfa4-4b30-a033-4246520f605a",
+      "isFinals": false
     },
     {
       "playerName": "Woxbc",
@@ -955,7 +1109,9 @@
           "kills": 0,
           "deaths": 1
         }
-      ]
+      ],
+      "compositeId": "Woxbc-NA-075e7708-cfa4-4b30-a033-4246520f605a",
+      "isFinals": false
     },
     {
       "playerName": "Elinaedara",
@@ -1094,7 +1250,9 @@
           "kills": 0,
           "deaths": 1
         }
-      ]
+      ],
+      "compositeId": "Elinaedara-NA-075e7708-cfa4-4b30-a033-4246520f605a",
+      "isFinals": false
     },
     {
       "playerName": "Lleyla",
@@ -1197,7 +1355,9 @@
           "kills": 0,
           "deaths": 1
         }
-      ]
+      ],
+      "compositeId": "Lleyla-NA-075e7708-cfa4-4b30-a033-4246520f605a",
+      "isFinals": false
     },
     {
       "playerName": "Theominouskilt",
@@ -1312,7 +1472,9 @@
           "kills": 0,
           "deaths": 1
         }
-      ]
+      ],
+      "compositeId": "Theominouskilt-NA-075e7708-cfa4-4b30-a033-4246520f605a",
+      "isFinals": false
     },
     {
       "playerName": "Trianthe",
@@ -1439,7 +1601,9 @@
           "kills": 0,
           "deaths": 1
         }
-      ]
+      ],
+      "compositeId": "Trianthe-NA-075e7708-cfa4-4b30-a033-4246520f605a",
+      "isFinals": false
     },
     {
       "playerName": "Stonedove",
@@ -1554,7 +1718,9 @@
           "kills": 0,
           "deaths": 1
         }
-      ]
+      ],
+      "compositeId": "Stonedove-NA-075e7708-cfa4-4b30-a033-4246520f605a",
+      "isFinals": false
     },
     {
       "playerName": "Matdredalia",
@@ -1621,7 +1787,9 @@
           "kills": 0,
           "deaths": 1
         }
-      ]
+      ],
+      "compositeId": "Matdredalia-NA-075e7708-cfa4-4b30-a033-4246520f605a",
+      "isFinals": false
     },
     {
       "playerName": "Zariah",
@@ -1748,7 +1916,9 @@
           "kills": 0,
           "deaths": 1
         }
-      ]
+      ],
+      "compositeId": "Zariah-EU-075e7708-cfa4-4b30-a033-4246520f605a",
+      "isFinals": false
     },
     {
       "playerName": "Panseit",
@@ -2031,7 +2201,9 @@
           "kills": 0,
           "deaths": 1
         }
-      ]
+      ],
+      "compositeId": "Panseit-EU-075e7708-cfa4-4b30-a033-4246520f605a",
+      "isFinals": false
     },
     {
       "playerName": "Lobombre",
@@ -2158,7 +2330,9 @@
           "kills": 0,
           "deaths": 1
         }
-      ]
+      ],
+      "compositeId": "Lobombre-NA-075e7708-cfa4-4b30-a033-4246520f605a",
+      "isFinals": false
     },
     {
       "playerName": "Shmongus",
@@ -2267,7 +2441,9 @@
           "kills": 0,
           "deaths": 1
         }
-      ]
+      ],
+      "compositeId": "Shmongus-NA-075e7708-cfa4-4b30-a033-4246520f605a",
+      "isFinals": false
     },
     {
       "playerName": "Nemo",
@@ -2358,7 +2534,9 @@
           "kills": 0,
           "deaths": 1
         }
-      ]
+      ],
+      "compositeId": "Nemo-NA-075e7708-cfa4-4b30-a033-4246520f605a",
+      "isFinals": false
     },
     {
       "playerName": "Fwen",
@@ -2497,7 +2675,9 @@
           "kills": 0,
           "deaths": 1
         }
-      ]
+      ],
+      "compositeId": "Fwen-EU-075e7708-cfa4-4b30-a033-4246520f605a",
+      "isFinals": false
     },
     {
       "playerName": "Buuloki",
@@ -2594,7 +2774,9 @@
           "kills": 0,
           "deaths": 1
         }
-      ]
+      ],
+      "compositeId": "Buuloki-NA-075e7708-cfa4-4b30-a033-4246520f605a",
+      "isFinals": false
     },
     {
       "playerName": "WhyDaRumGone",
@@ -2709,7 +2891,9 @@
           "kills": 0,
           "deaths": 1
         }
-      ]
+      ],
+      "compositeId": "WhyDaRumGone-NA-075e7708-cfa4-4b30-a033-4246520f605a",
+      "isFinals": false
     },
     {
       "playerName": "Kemirkele",
@@ -2842,7 +3026,9 @@
           "kills": 0,
           "deaths": 1
         }
-      ]
+      ],
+      "compositeId": "Kemirkele-EU-075e7708-cfa4-4b30-a033-4246520f605a",
+      "isFinals": false
     },
     {
       "playerName": "Nokomanida",
@@ -2993,7 +3179,9 @@
           "kills": 0,
           "deaths": 1
         }
-      ]
+      ],
+      "compositeId": "Nokomanida-NA-075e7708-cfa4-4b30-a033-4246520f605a",
+      "isFinals": false
     },
     {
       "playerName": "Deevus",
@@ -3078,7 +3266,9 @@
           "kills": 0,
           "deaths": 1
         }
-      ]
+      ],
+      "compositeId": "Deevus-NA-075e7708-cfa4-4b30-a033-4246520f605a",
+      "isFinals": false
     },
     {
       "playerName": "GalaxyRock",
@@ -3175,7 +3365,9 @@
           "kills": 0,
           "deaths": 1
         }
-      ]
+      ],
+      "compositeId": "GalaxyRock-NA-075e7708-cfa4-4b30-a033-4246520f605a",
+      "isFinals": false
     },
     {
       "playerName": "Domiel",
@@ -3242,7 +3434,9 @@
           "kills": 0,
           "deaths": 1
         }
-      ]
+      ],
+      "compositeId": "Domiel-NA-075e7708-cfa4-4b30-a033-4246520f605a",
+      "isFinals": false
     },
     {
       "playerName": "Lunatick",
@@ -3351,134 +3545,9 @@
           "kills": 0,
           "deaths": 1
         }
-      ]
-    },
-    {
-      "playerName": "Olopa",
-      "wins": 2,
-      "losses": 1,
-      "region": "NA",
-      "winRate": 67,
-      "mostUsedPet": {
-        "petName": "Mr. Bigglesworth",
-        "timesUsed": 2,
-        "kills": 2,
-        "deaths": 0
-      },
-      "mostProblematicPet": {
-        "petName": "Lime Roboclucker",
-        "timesLostAgainst": 1
-      },
-      "petStatistics": [
-        {
-          "petName": "Mr. Bigglesworth",
-          "timesUsed": 2,
-          "kills": 2,
-          "deaths": 0
-        },
-        {
-          "petName": "Chi-Chi",
-          "timesUsed": 2,
-          "kills": 2,
-          "deaths": 0
-        },
-        {
-          "petName": "Hatchling of Chi-Ji",
-          "timesUsed": 2,
-          "kills": 2,
-          "deaths": 0
-        },
-        {
-          "petName": "Pricklefury Hare",
-          "timesUsed": 2,
-          "kills": 2,
-          "deaths": 0
-        },
-        {
-          "petName": "Pygmy Marsuul",
-          "timesUsed": 2,
-          "kills": 2,
-          "deaths": 0
-        },
-        {
-          "petName": "Drowned Hatchling",
-          "timesUsed": 2,
-          "kills": 2,
-          "deaths": 0
-        },
-        {
-          "petName": "Coastal Sandpiper",
-          "timesUsed": 2,
-          "kills": 1,
-          "deaths": 1
-        },
-        {
-          "petName": "Kelpfin",
-          "timesUsed": 2,
-          "kills": 0,
-          "deaths": 2
-        },
-        {
-          "petName": "Tonguelasher",
-          "timesUsed": 1,
-          "kills": 1,
-          "deaths": 0
-        },
-        {
-          "petName": "Enchanted Broom",
-          "timesUsed": 1,
-          "kills": 1,
-          "deaths": 0
-        },
-        {
-          "petName": "Mongoose",
-          "timesUsed": 1,
-          "kills": 1,
-          "deaths": 0
-        },
-        {
-          "petName": "Stardust",
-          "timesUsed": 1,
-          "kills": 1,
-          "deaths": 0
-        },
-        {
-          "petName": "Living Rose",
-          "timesUsed": 1,
-          "kills": 1,
-          "deaths": 0
-        },
-        {
-          "petName": "Spinebug",
-          "timesUsed": 1,
-          "kills": 1,
-          "deaths": 0
-        },
-        {
-          "petName": "Happiness",
-          "timesUsed": 1,
-          "kills": 1,
-          "deaths": 0
-        },
-        {
-          "petName": "Jeepers",
-          "timesUsed": 1,
-          "kills": 0,
-          "deaths": 1
-        },
-        {
-          "petName": "Pierre",
-          "timesUsed": 1,
-          "kills": 0,
-          "deaths": 1
-        },
-        {
-          "petName": "Fluttering Glimmerfly",
-          "timesUsed": 1,
-          "kills": 0,
-          "deaths": 1
-        }
-      ]
+      ],
+      "compositeId": "Lunatick-NA-075e7708-cfa4-4b30-a033-4246520f605a",
+      "isFinals": false
     },
     {
       "playerName": "DarkPuffin",
@@ -3557,7 +3626,9 @@
           "kills": 0,
           "deaths": 1
         }
-      ]
+      ],
+      "compositeId": "DarkPuffin-NA-075e7708-cfa4-4b30-a033-4246520f605a",
+      "isFinals": false
     },
     {
       "playerName": "Tanixion",
@@ -3654,7 +3725,9 @@
           "kills": 1,
           "deaths": 0
         }
-      ]
+      ],
+      "compositeId": "Tanixion-EU-075e7708-cfa4-4b30-a033-4246520f605a",
+      "isFinals": false
     },
     {
       "playerName": "Asomyrh",
@@ -3751,8 +3824,298 @@
           "kills": 0,
           "deaths": 1
         }
-      ]
+      ],
+      "compositeId": "Asomyrh-NA-075e7708-cfa4-4b30-a033-4246520f605a",
+      "isFinals": false
+    },
+    {
+      "playerName": "Olopa",
+      "wins": 2,
+      "losses": 1,
+      "region": "NA",
+      "winRate": 67,
+      "mostUsedPet": {
+        "petName": "Pygmy Marsuul",
+        "timesUsed": 2,
+        "kills": 2,
+        "deaths": 0
+      },
+      "mostProblematicPet": {
+        "petName": "Lime Roboclucker",
+        "timesLostAgainst": 1
+      },
+      "petStatistics": [
+        {
+          "petName": "Pygmy Marsuul",
+          "timesUsed": 2,
+          "kills": 2,
+          "deaths": 0
+        },
+        {
+          "petName": "Drowned Hatchling",
+          "timesUsed": 2,
+          "kills": 2,
+          "deaths": 0
+        },
+        {
+          "petName": "Mr. Bigglesworth",
+          "timesUsed": 2,
+          "kills": 2,
+          "deaths": 0
+        },
+        {
+          "petName": "Chi-Chi - Hatchling of Chi-Ji",
+          "timesUsed": 2,
+          "kills": 2,
+          "deaths": 0
+        },
+        {
+          "petName": "Pricklefury Hare",
+          "timesUsed": 2,
+          "kills": 2,
+          "deaths": 0
+        },
+        {
+          "petName": "Coastal Sandpiper",
+          "timesUsed": 2,
+          "kills": 1,
+          "deaths": 1
+        },
+        {
+          "petName": "Kelpfin",
+          "timesUsed": 2,
+          "kills": 0,
+          "deaths": 2
+        },
+        {
+          "petName": "Stardust",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Living Rose",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Spinebug",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Happiness",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Tonguelasher",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Enchanted Broom",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Mongoose",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Jeepers",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Pierre",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Fluttering Glimmerfly",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        }
+      ],
+      "compositeId": "Olopa-NA-075e7708-cfa4-4b30-a033-4246520f605a",
+      "isFinals": false
+    },
+    {
+      "playerName": "Gooskaffur",
+      "wins": 1,
+      "losses": 1,
+      "region": "NA Finals",
+      "winRate": 50,
+      "mostUsedPet": {
+        "petName": "Bone Serpent",
+        "timesUsed": 4,
+        "kills": 2,
+        "deaths": 2
+      },
+      "mostProblematicPet": {
+        "petName": "Teardrop Moth",
+        "timesLostAgainst": 3
+      },
+      "petStatistics": [
+        {
+          "petName": "Bone Serpent",
+          "timesUsed": 4,
+          "kills": 2,
+          "deaths": 2
+        },
+        {
+          "petName": "Violent Poultrid",
+          "timesUsed": 2,
+          "kills": 2,
+          "deaths": 0
+        },
+        {
+          "petName": "Lime Roboclucker",
+          "timesUsed": 2,
+          "kills": 2,
+          "deaths": 0
+        },
+        {
+          "petName": "Teardrop Moth",
+          "timesUsed": 2,
+          "kills": 1,
+          "deaths": 1
+        },
+        {
+          "petName": "Cobbleshell",
+          "timesUsed": 2,
+          "kills": 1,
+          "deaths": 1
+        },
+        {
+          "petName": "Blackfuse Bombling",
+          "timesUsed": 2,
+          "kills": 1,
+          "deaths": 1
+        },
+        {
+          "petName": "Jeweled Sapphire Whelpling",
+          "timesUsed": 2,
+          "kills": 0,
+          "deaths": 2
+        },
+        {
+          "petName": "Umbral Amalgam",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Thunder",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Lost Quill",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Shore Butterfly",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Long-Eared Owl",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        }
+      ],
+      "compositeId": "Gooskaffur-NA Finals-075e7708-cfa4-4b30-a033-4246520f605a",
+      "isFinals": true
+    },
+    {
+      "playerName": "Lobombre",
+      "wins": 0,
+      "losses": 1,
+      "region": "NA Finals",
+      "winRate": 0,
+      "mostUsedPet": {
+        "petName": "Voidglower",
+        "timesUsed": 2,
+        "kills": 0,
+        "deaths": 2
+      },
+      "mostProblematicPet": {
+        "petName": "Teardrop Moth",
+        "timesLostAgainst": 1
+      },
+      "petStatistics": [
+        {
+          "petName": "Voidglower",
+          "timesUsed": 2,
+          "kills": 0,
+          "deaths": 2
+        },
+        {
+          "petName": "Trunks",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Squally",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Qiraji Guardling",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Mechanical Pandaren Dragonling",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Lost Limb",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Nightshade Sproutling",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Spinebug",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        }
+      ],
+      "compositeId": "Lobombre-NA Finals-075e7708-cfa4-4b30-a033-4246520f605a",
+      "isFinals": true
     }
   ],
-  "regions": ["EU", "NA"]
+  "regions": ["EU", "NA", "NA Finals"],
+  "version": "1.4",
+  "dataModel": "player-rankings-with-regions",
+  "note": "Records include both region and compositeId for compatibility"
 }

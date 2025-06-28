@@ -20,12 +20,26 @@ export function ExportRankingsButton({
     try {
       const { records, regions } = await getPlayerRecords(tournamentId);
 
+      // Create enhanced records with both region and compositeId
+      const enhancedRecords = records.map((player) => ({
+        ...player,
+        // Keep the original region field for display purposes
+        region: player.region,
+        // Add composite ID for unique identification
+        compositeId: `${player.playerName}-${player.region}-${tournamentId}`,
+        // Add finals flag
+        isFinals: player.region.includes('Finals'),
+      }));
+
       const exportData = {
         tournamentId,
         tournamentName,
         timestamp: new Date().toISOString(),
-        records,
+        records: enhancedRecords, // Now includes both region and compositeId
         regions,
+        version: '1.4',
+        dataModel: 'player-rankings-with-regions',
+        note: 'Records include both region and compositeId for compatibility',
       };
 
       const blob = new Blob([JSON.stringify(exportData, null, 2)], {
@@ -39,9 +53,10 @@ export function ExportRankingsButton({
       a.click();
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
+
       toast.success('Export successful!', {
         className: 'toast-success',
-        description: 'Player rankings data is downloaded.',
+        description: 'Player rankings exported with regional data preserved',
       });
     } catch (error) {
       console.error('Export error:', error);
@@ -59,6 +74,8 @@ export function ExportRankingsButton({
       onClick={handleExport}
       disabled={isLoading}
       className='btn-link border py-3 px-4 rounded-lg border-blue-grey hover:bg-blue-grey hover:text-foreground'
+      title='Export Rankings'
+      aria-label='Export Rankings'
     >
       {isLoading ? (
         '...'

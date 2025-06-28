@@ -73,38 +73,50 @@ export async function analyzePlayerAndPetStats(
   matches: Match[],
   battleLogs: BattleLog[]
 ): Promise<EnhancedPlayerRecord[]> {
-  // Track match results separately from battle results
+  // Track match results with region-specific keys
   const matchResults = new Map<
-    string,
+    string, // playerName-region composite key
     { wins: number; losses: number; region: string }
   >();
+
   const battlePetStats = new Map<
-    string,
+    string, // playerName-region composite key
     Map<string, { timesUsed: number; kills: number; deaths: number }>
   >();
-  const problematicPets = new Map<string, Map<string, number>>();
 
-  // Initialize all players from matches
+  const problematicPets = new Map<
+    string, // playerName-region composite key
+    Map<string, number>
+  >();
+
+  // Initialize all players from matches with region-specific keys
   matches.forEach((match) => {
     const matchRegion = match.region || 'N/A';
 
     [match.player1, match.player2].forEach((player) => {
-      if (!matchResults.has(player)) {
-        matchResults.set(player, { wins: 0, losses: 0, region: matchRegion });
+      const playerKey = `${player}-${matchRegion}`;
+
+      if (!matchResults.has(playerKey)) {
+        matchResults.set(playerKey, {
+          wins: 0,
+          losses: 0,
+          region: matchRegion,
+        });
       }
-      if (!battlePetStats.has(player)) {
-        battlePetStats.set(player, new Map());
+      if (!battlePetStats.has(playerKey)) {
+        battlePetStats.set(playerKey, new Map());
       }
-      if (!problematicPets.has(player)) {
-        problematicPets.set(player, new Map());
+      if (!problematicPets.has(playerKey)) {
+        problematicPets.set(playerKey, new Map());
       }
     });
   });
 
-  // Process MATCH results (win/loss)
+  // Process MATCH results (win/loss) with region context
   matches.forEach((match) => {
     if (match.owner_score === match.opponent_score) return; // Skip ties
 
+    const matchRegion = match.region || 'N/A';
     const winner =
       match.owner_score > match.opponent_score
         ? match.owner
@@ -113,17 +125,21 @@ export async function analyzePlayerAndPetStats(
         : match.player1;
     const loser = winner === match.player1 ? match.player2 : match.player1;
 
-    matchResults.get(winner)!.wins += 1;
-    matchResults.get(loser)!.losses += 1;
+    const winnerKey = `${winner}-${matchRegion}`;
+    const loserKey = `${loser}-${matchRegion}`;
+
+    matchResults.get(winnerKey)!.wins += 1;
+    matchResults.get(loserKey)!.losses += 1;
   });
 
-  // Process BATTLE LOGS (pet statistics)
+  // Process BATTLE LOGS (pet statistics) with region context
   battleLogs.forEach((log) => {
     if (log.result === 'DRAW') return;
 
     const match = matches.find((m) => m.id === log.match_id);
     if (!match) return;
 
+    const matchRegion = match.region || 'N/A';
     const battleWinner =
       log.result === 'WIN'
         ? match.owner
@@ -133,13 +149,14 @@ export async function analyzePlayerAndPetStats(
     const battleLoser =
       battleWinner === match.player1 ? match.player2 : match.player1;
 
+    const winnerKey = `${battleWinner}-${matchRegion}`;
+    const loserKey = `${battleLoser}-${matchRegion}`;
+
     // Process winning team's pets (kills)
     const winningPets =
       log.result === 'WIN' ? log.player_team : log.opponent_team;
     winningPets.forEach((petName) => {
-      const player = battleWinner;
-      const stats = battlePetStats.get(player)!;
-
+      const stats = battlePetStats.get(winnerKey)!;
       if (!stats.has(petName)) {
         stats.set(petName, { timesUsed: 0, kills: 0, deaths: 0 });
       }
@@ -152,9 +169,7 @@ export async function analyzePlayerAndPetStats(
     const losingPets =
       log.result === 'WIN' ? log.opponent_team : log.player_team;
     losingPets.forEach((petName) => {
-      const player = battleLoser;
-      const stats = battlePetStats.get(player)!;
-
+      const stats = battlePetStats.get(loserKey)!;
       if (!stats.has(petName)) {
         stats.set(petName, { timesUsed: 0, kills: 0, deaths: 0 });
       }
@@ -165,19 +180,20 @@ export async function analyzePlayerAndPetStats(
 
     // Track problematic pets
     winningPets.forEach((petName) => {
-      const loserStats = problematicPets.get(battleLoser)!;
+      const loserStats = problematicPets.get(loserKey)!;
       loserStats.set(petName, (loserStats.get(petName) || 0) + 1);
     });
   });
 
-  // Combine results
+  // Combine results into EnhancedPlayerRecord format
   return Array.from(matchResults.entries()).map(
-    ([playerName, { wins, losses, region }]) => {
+    ([playerKey, { wins, losses, region }]) => {
+      const [playerName] = playerKey.split('-'); // Extract just the player name
       const totalMatches = wins + losses;
       const winRate = totalMatches > 0 ? (wins / totalMatches) * 100 : 0;
 
-      const petStats = battlePetStats.get(playerName) || new Map();
-      const problemPets = problematicPets.get(playerName) || new Map();
+      const petStats = battlePetStats.get(playerKey) || new Map();
+      const problemPets = problematicPets.get(playerKey) || new Map();
 
       const petStatsArray: PetStats[] = Array.from(petStats.entries())
         .map(([petName, { timesUsed, kills, deaths }]) => ({
@@ -211,6 +227,8 @@ export async function analyzePlayerAndPetStats(
           timesLostAgainst: 0,
         },
         petStatistics: petStatsArray,
+        // Add composite ID for reference
+        compositeId: playerKey,
       };
     }
   );

@@ -41,9 +41,9 @@ export function TournamentPlayersList({
 
   return (
     <div className='space-y-2.5 lg:space-y-5 bg-background p-2.5 lg:p-5 rounded-lg shadow-md'>
-      {currentRecords.map((player) => (
+      {currentRecords.map((player, index) => (
         <div
-          key={player.playerName}
+          key={index}
           className='bg-light-grey hover:bg-medium-grey rounded-lg'
         >
           <Button
