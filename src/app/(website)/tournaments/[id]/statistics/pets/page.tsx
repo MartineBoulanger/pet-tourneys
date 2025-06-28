@@ -105,8 +105,8 @@ export default async function PetsStatisticsPage({
     },
     {
       id: 2,
-      url: `/tournaments/${id}/rankings`,
-      text: 'Rankings',
+      url: isMatchView ? '' : `/tournaments/${id}/rankings`,
+      text: isMatchView ? '' : 'Rankings',
     },
     {
       id: 3,
