@@ -6,11 +6,11 @@ interface ActionDropdownProps {
   links: Links;
 }
 
-export const ActionDropdown = ({ links }: ActionDropdownProps) => {
+export const PageMenu = ({ links }: ActionDropdownProps) => {
   if (!links) return null;
 
   return (
-    <div className='flex flex-col gap-2.5'>
+    <div className='flex flex-wrap items-center justify-center gap-2.5 p-2.5 rounded-lg bg-background'>
       {links.map((link) => (
         <Fragment key={link.id}>
           <Link
@@ -21,7 +21,7 @@ export const ActionDropdown = ({ links }: ActionDropdownProps) => {
           >
             {link.text}
           </Link>
-          <div className='h-0.5 rounded-lg w-full bg-light-grey last-of-type:hidden' />
+          <div className='w-1 h-1 rounded-full bg-foreground last-of-type:hidden' />
         </Fragment>
       ))}
     </div>

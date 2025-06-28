@@ -1,7 +1,5 @@
 import { HTMLProps, JSX } from 'react';
-import { FaChevronDown } from 'react-icons/fa';
 import { cn } from '@/utils/cn';
-import { PopUp } from './PopUp';
 import { Heading } from './Heading';
 
 interface PageHeadingProps extends HTMLProps<HTMLElement> {
@@ -17,24 +15,10 @@ export const PageHeading = ({
 
   return (
     <div
-      className={cn(
-        'flex flex-col md:flex-row flex-wrap items-start md:items-center justify-center md:justify-between mb-10 lg:mb-0',
-        className
-      )}
+      className={cn('flex flex-col flex-wrap w-full mb-10 lg:mb-0', className)}
     >
+      {children ? <span className='mb-10'>{children}</span> : null}
       <Heading>{heading}</Heading>
-      {children ? (
-        <PopUp
-          text={
-            <span className='flex gap-2'>
-              {'Go To'} <FaChevronDown />
-            </span>
-          }
-          divClassName='w-[250px] lg:right-0'
-        >
-          {children}
-        </PopUp>
-      ) : null}
     </div>
   );
 };

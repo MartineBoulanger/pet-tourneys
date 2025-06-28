@@ -4,7 +4,7 @@ import {
   PageHeading,
   Heading,
   Paragraph,
-  ActionDropdown,
+  PageMenu,
 } from '@/components/ui';
 import { getMatchDetails } from '@/supabase/actions/matches';
 import { MatchPageParams } from '@/types';
@@ -52,17 +52,17 @@ export default async function MatchPage({
     {
       id: 1,
       url: `/tournaments/${id}/statistics?matchId=${matchId}`,
-      text: 'Match Statistics',
+      text: 'Statistics',
     },
     {
       id: 2,
       url: `/tournaments/${id}/statistics/pets?matchId=${matchId}`,
-      text: 'Match Pets Statistics',
+      text: 'Pets Statistics',
     },
     {
       id: 3,
       url: `/tournaments/${id}`,
-      text: 'Back To Tournament',
+      text: 'Back To Tournament Details',
     },
   ];
 
@@ -79,7 +79,7 @@ export default async function MatchPage({
         }
         className='sm:mb-5'
       >
-        <ActionDropdown links={links} />
+        <PageMenu links={links} />
       </PageHeading>
       {match && <MatchScore match={match} />}
       <div className='mb-5 sm:mb-10'>

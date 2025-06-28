@@ -7,7 +7,7 @@ import {
   PageHeading,
   Heading,
   Paragraph,
-  ActionDropdown,
+  PageMenu,
 } from '@/components/ui';
 import { PageParams, PageSearchParams } from '@/types';
 import { Links } from '@/lib/types';
@@ -64,29 +64,29 @@ export default async function TournamentPage({
     {
       id: 1,
       url: `/tournaments/${tournament.id}/statistics`,
-      text: 'Tournament Statistics',
+      text: 'Statistics',
     },
     {
       id: 2,
       url: `/tournaments/${tournament.id}/statistics/pets`,
-      text: 'Tournament Pets Statistics',
+      text: 'Pets Statistics',
     },
     {
       id: 3,
       url: `/tournaments/${tournament.id}/rankings`,
-      text: 'Tournament Rankings',
+      text: 'Rankings',
     },
     {
       id: 4,
       url: '/tournaments',
-      text: 'Back To Tournaments',
+      text: 'Back To Tournaments List',
     },
   ];
 
   return (
     <Container>
       <PageHeading heading={tournament.name}>
-        <ActionDropdown links={links} />
+        <PageMenu links={links} />
       </PageHeading>
       <div className='mb-5 sm:mb-10'>
         <Paragraph>

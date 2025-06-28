@@ -5,7 +5,7 @@ import {
   PageHeading,
   Heading,
   Paragraph,
-  ActionDropdown,
+  PageMenu,
 } from '@/components/ui';
 import { PageParams } from '@/types';
 import { Links } from '@/lib/types';
@@ -66,17 +66,17 @@ export default async function RankingsPage({ params }: { params: PageParams }) {
     {
       id: 1,
       url: `/tournaments/${tournament.id}/statistics`,
-      text: 'Tournament Statistics',
+      text: 'Statistics',
     },
     {
       id: 2,
       url: `/tournaments/${tournament.id}/statistics/pets`,
-      text: 'Tournament Pets Statistics',
+      text: 'Pets Statistics',
     },
     {
       id: 3,
-      url: '/tournaments',
-      text: 'Back To Tournaments',
+      url: `/tournaments/${tournament.id}`,
+      text: 'Back To Tournament Details',
     },
   ];
 
@@ -84,7 +84,7 @@ export default async function RankingsPage({ params }: { params: PageParams }) {
     <Container>
       <div className='mb-5'>
         <PageHeading heading={'Tournament Rankings'}>
-          <ActionDropdown links={links} />
+          <PageMenu links={links} />
         </PageHeading>
         <Paragraph className='text-humanoid'>{tournament.name}</Paragraph>
       </div>

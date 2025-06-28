@@ -16,7 +16,7 @@ import {
   PageHeading,
   Heading,
   Paragraph,
-  ActionDropdown,
+  PageMenu,
   Container,
 } from '@/components/ui';
 import { PageParams, MatchSearchParams } from '@/types';
@@ -176,21 +176,21 @@ export default async function StatisticsPage({
       url: isMatchView
         ? `/tournaments/${id}/statistics/pets?matchId=${matchId}`
         : `/tournaments/${id}/statistics/pets`,
-      text: isMatchView
-        ? 'Match Pets Statistics'
-        : 'Tournament Pets Statistics',
+      text: 'Pets Statistics',
     },
     {
       id: 2,
       url: `/tournaments/${id}/rankings`,
-      text: 'Tournament Rankings',
+      text: 'Rankings',
     },
     {
       id: 3,
       url: isMatchView
         ? `/tournaments/${id}/matches/${matchId}`
         : `/tournaments/${id}`,
-      text: isMatchView ? 'Back to match' : 'Back to tournament',
+      text: isMatchView
+        ? 'Back To Match Details'
+        : 'Back To Tournament Details',
     },
   ];
 
@@ -198,7 +198,7 @@ export default async function StatisticsPage({
     <Container>
       <div className='mb-5'>
         <PageHeading heading={title}>
-          <ActionDropdown links={links} />
+          <PageMenu links={links} />
         </PageHeading>
         {entityName && (
           <Paragraph className='text-humanoid'>{entityName}</Paragraph>

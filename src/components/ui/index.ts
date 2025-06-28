@@ -21,4 +21,4 @@ export * from './Modal';
 export * from './Tabs';
 export * from './Tab';
 export * from './Skeletons';
-export * from './ActionDropdown';
+export * from './PageMenu';

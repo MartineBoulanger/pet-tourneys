@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 import { TbSquareChevronsDown } from 'react-icons/tb';
 import { getPage } from '@/contentful/actions/getPage';
-import { Container, PageHeading, ActionDropdown } from '@/components/ui';
+import { Container, PageHeading, PageMenu } from '@/components/ui';
 import RichText from '@/components/contentful/RichText';
 import PageContent from '@/components/contentful/PageContent';
 import Banner from '@/components/contentful/Banner';
@@ -74,7 +74,7 @@ export default async function ArticlePage({
           <div className='p-2.5 sm:p-5 rounded-lg bg-background mb-5'>
             {page.pageTitle ? (
               <PageHeading heading={page.pageTitle} className='md:items-start'>
-                <ActionDropdown links={links} />
+                <PageMenu links={links} />
               </PageHeading>
             ) : null}
             {page.pageDescription ? (
