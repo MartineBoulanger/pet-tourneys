@@ -50,7 +50,7 @@ export default async function TournamentPage({
 
   if (!success || !succ) {
     return (
-      <Container className='text-center'>
+      <Container className='text-center lg:px-5'>
         <Heading className='text-red'>{`Error ${status || stat}!`}</Heading>
         <Paragraph>{message}</Paragraph>
       </Container>
@@ -84,7 +84,7 @@ export default async function TournamentPage({
   ];
 
   return (
-    <Container>
+    <Container className='lg:px-5'>
       <PageHeading heading={tournament.name}>
         <PageMenu links={links} />
       </PageHeading>

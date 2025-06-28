@@ -11,6 +11,7 @@ import { Toaster } from 'sonner';
 import { FaCheck, FaInfo } from 'react-icons/fa';
 import { IoWarningOutline } from 'react-icons/io5';
 import { BiErrorAlt } from 'react-icons/bi';
+import { ScrollToTop } from '@/components/ui';
 
 export const revalidate = 3600;
 
@@ -57,6 +58,7 @@ export default async function RootLayout({
         <main className='min-h-[85vh] relative'>{children}</main>
         <Footer />
         <BottomNavigation user={isAdmin} />
+        <ScrollToTop />
         <Toaster
           expand
           position='top-center'

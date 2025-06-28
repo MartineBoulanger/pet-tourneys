@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation';
-import { PetStatsList } from '@/components/statistics';
+import { PetStatsList } from '@/components/tournaments';
 import {
   getMatchPetUsage,
   getTournamentPetStats,
@@ -69,10 +69,10 @@ export default async function PetsStatisticsPage({
 
     if (!success) {
       return (
-        <div className='text-center'>
+        <Container className='text-center lg:px-5'>
           <Heading className='text-red'>{`Error ${status}!`}</Heading>
           <Paragraph>{message}</Paragraph>
-        </div>
+        </Container>
       );
     }
 
@@ -120,7 +120,7 @@ export default async function PetsStatisticsPage({
   ];
 
   return (
-    <Container>
+    <Container className='lg:px-5'>
       <div className='mb-5'>
         <PageHeading heading={title}>
           <PageMenu links={links} />

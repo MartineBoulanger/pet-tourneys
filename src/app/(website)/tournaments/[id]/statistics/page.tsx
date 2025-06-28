@@ -115,10 +115,10 @@ export default async function StatisticsPage({
 
     if (!success) {
       return (
-        <div className='text-center'>
+        <Container className='text-center lg:px-5'>
           <Heading className='text-red'>{`Error ${status}!`}</Heading>
           <Paragraph>{message}</Paragraph>
-        </div>
+        </Container>
       );
     }
 
@@ -195,7 +195,7 @@ export default async function StatisticsPage({
   ];
 
   return (
-    <Container>
+    <Container className='lg:px-5'>
       <div className='mb-5'>
         <PageHeading heading={title}>
           <PageMenu links={links} />

@@ -83,7 +83,7 @@ export const PlayerRankings = ({
   };
 
   return (
-    <div className='space-y-2.5 lg:space-y-5'>
+    <div className='space-y-2.5'>
       {currentRecords.length > 0 ? (
         <>
           <Tabs className='bg-light-grey'>
@@ -97,7 +97,7 @@ export const PlayerRankings = ({
               </Tab>
             ))}
           </Tabs>
-          <div className='space-y-2.5 lg:space-y-5 bg-background p-2.5 lg:p-5 rounded-lg shadow-md'>
+          <div className='space-y-2.5 bg-background p-2.5 rounded-lg shadow-md'>
             {currentRecords.map((player, index) => {
               const globalPosition =
                 (currentPage - 1) * PLAYERS_PER_PAGE + index + 1;
@@ -116,7 +116,7 @@ export const PlayerRankings = ({
                   <Button
                     onClick={() => togglePlayer(player.playerName)}
                     variant='link'
-                    className='flex items-center justify-between w-full text-left p-2.5 lg:p-5 text-foreground'
+                    className='flex items-center justify-between w-full text-left p-2.5 text-foreground'
                   >
                     <div className='flex items-center gap-2.5'>
                       <div className='flex items-center mr-2.5'>
@@ -141,7 +141,7 @@ export const PlayerRankings = ({
                   </Button>
 
                   {expandedPlayers[player.playerName] && (
-                    <div className='bg-light-grey p-2.5 lg:p-5 rounded-b-lg p-2.5 lg:p-5'>
+                    <div className='bg-light-grey p-2.5 rounded-b-lg p-2.5'>
                       <div className='flex flex-wrap flex-col lg:flex-row gap-2.5 lg:gap-5 mb-2.5 lg:mb-5'>
                         <OverviewCard title='Matches Won' value={player.wins} />
                         <OverviewCard
@@ -250,7 +250,7 @@ export const PlayerRankings = ({
                         <Heading as='h4' className='text-lg font-bold mb-2.5'>
                           {"Player's Pet Usage In Tournament"}
                         </Heading>
-                        <div className='overflow-x-auto'>
+                        <div className='overflow-x-auto rounded-lg'>
                           <table className='min-w-full'>
                             <thead className='bg-background text-left'>
                               <tr className='border-b border-medium-grey'>
@@ -535,7 +535,7 @@ export const PlayerRankings = ({
                 totalPages={totalPages}
                 baseUrl=''
                 onPageChange={handlePageChange}
-                className='mt-2.5 lg:mt-5'
+                className='mb-2.5 mt-5 lg:mt-5'
               />
             )}
           </div>

@@ -25,7 +25,7 @@ export default async function EditTournamentPage({
 
   if (!success) {
     return (
-      <Container className='text-center'>
+      <Container className='text-center lg:px-5'>
         <Heading className='text-red'>{`Error ${status}!`}</Heading>
         <Paragraph>{message}</Paragraph>
       </Container>
@@ -34,7 +34,7 @@ export default async function EditTournamentPage({
 
   if (!tournament) {
     return (
-      <Container className='text-center'>
+      <Container className='text-center lg:px-5'>
         <Heading className='text-red'>{'No Tournament Found!'}</Heading>
         <Paragraph>
           {'Please create a tournament first before you can edit one.'}
@@ -44,7 +44,7 @@ export default async function EditTournamentPage({
   }
 
   return (
-    <Container className='w-full flex flex-col justify-center max-w-[500px]'>
+    <Container className='w-full flex flex-col justify-center max-w-[512px]'>
       <Heading className='text-center'>{'Edit Tournament'}</Heading>
       <TournamentForm initialData={tournament} />
     </Container>

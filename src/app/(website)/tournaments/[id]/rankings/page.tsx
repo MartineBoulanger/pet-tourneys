@@ -39,7 +39,7 @@ export default async function RankingsPage({ params }: { params: PageParams }) {
 
   if (!success) {
     return (
-      <Container className='text-center'>
+      <Container className='text-center lg:px-5'>
         <Heading className='text-red'>{`Error ${status}!`}</Heading>
         <Paragraph>{message}</Paragraph>
       </Container>
@@ -48,7 +48,7 @@ export default async function RankingsPage({ params }: { params: PageParams }) {
 
   if (!playerData.records || !playerData.regions) {
     return (
-      <Container className='text-center'>
+      <Container className='text-center lg:px-5'>
         <Heading className='text-red'>{'No Rankings Found!'}</Heading>
         <Paragraph>{'No player rankings are found.'}</Paragraph>
       </Container>
@@ -81,7 +81,7 @@ export default async function RankingsPage({ params }: { params: PageParams }) {
   ];
 
   return (
-    <Container>
+    <Container className='lg:px-5'>
       <div className='mb-5'>
         <PageHeading heading={'Tournament Rankings'}>
           <PageMenu links={links} />

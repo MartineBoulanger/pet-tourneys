@@ -60,7 +60,7 @@ export default async function ArticlePage({
       : [];
 
   return (
-    <div className='flex flex-col'>
+    <div className='flex flex-col px-5'>
       {page.banner ? (
         <>
           <Banner component={page.banner} isPage />

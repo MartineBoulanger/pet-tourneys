@@ -1,6 +1,7 @@
 'use client';
 
 import { PDFDownloadLink } from '@react-pdf/renderer';
+import { FaFileDownload } from 'react-icons/fa';
 import { DownloadPDFProps } from './types';
 import { AbilityCategories } from '@/utils/types';
 import { Heading, Paragraph } from '@/components/ui';
@@ -121,9 +122,11 @@ export const AnalyzeToolDetails = ({
             }
             fileName={`${playerName + '-' || ''}battle-logs-analysis.pdf`}
             className='btn-submit py-2 px-4 rounded border-none uppercase mt-5 lg:mt-0'
+            title='Download as PDF'
+            aria-label='Download as PDF'
           >
             {({ loading }) =>
-              loading ? 'Preparing PDF...' : 'Download as PDF'
+              loading ? '...' : <FaFileDownload className='h-6 w-6' />
             }
           </PDFDownloadLink>
         </div>
@@ -131,7 +134,7 @@ export const AnalyzeToolDetails = ({
         {/* Statistics results */}
         <div
           id='analysis-results'
-          className='bg-light-grey p-2.5 lg:p-5 rounded-lg shadow-md'
+          className='bg-light-grey p-2.5 lg:p-5 rounded-lg shadow-md lg:mb-10'
         >
           {playerName ? (
             <Heading
@@ -406,25 +409,6 @@ export const AnalyzeToolDetails = ({
               </div>
             </>
           )}
-        </div>
-
-        {/* Title & action button at the bottom of the page */}
-        <div className='flex justify-end items-center mt-5'>
-          <PDFDownloadLink
-            document={
-              <GeneratePDF
-                parsedBattleLogs={parsedBattleLogs}
-                parsedPetUsage={parsedPetUsage}
-                playerName={playerName}
-              />
-            }
-            fileName={`${playerName + '-' || ''}battle-logs-analysis.pdf`}
-            className='btn-submit py-2 px-4 rounded border-none uppercase'
-          >
-            {({ loading }) =>
-              loading ? 'Preparing PDF...' : 'Download as PDF'
-            }
-          </PDFDownloadLink>
         </div>
       </div>
     )

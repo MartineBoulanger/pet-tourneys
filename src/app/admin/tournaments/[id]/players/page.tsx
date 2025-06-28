@@ -40,7 +40,7 @@ export default async function AdminPlayersPage({
 
   if (!success) {
     return (
-      <Container className='text-center'>
+      <Container className='text-center lg:px-5'>
         <Heading className='text-red'>{`Error ${status}!`}</Heading>
         <Paragraph>{message}</Paragraph>
       </Container>
@@ -49,7 +49,7 @@ export default async function AdminPlayersPage({
 
   if (!tournament) {
     return (
-      <Container className='text-center'>
+      <Container className='text-center lg:px-5'>
         <Heading className='text-red'>{'No Tournament Found!'}</Heading>
         <Paragraph>
           {
@@ -62,7 +62,7 @@ export default async function AdminPlayersPage({
 
   if (!records) {
     return (
-      <Container className='text-center'>
+      <Container className='text-center lg:px-5'>
         <Heading className='text-red'>{'No Players Found!'}</Heading>
         <Paragraph>
           {
@@ -76,7 +76,7 @@ export default async function AdminPlayersPage({
   const username = response?.user && response?.user?.username;
 
   return (
-    <Container>
+    <Container className='lg:px-5'>
       <Heading>{`${username}'s Admin Panel`}</Heading>
       <AdminPanelButtons isMatchesPage />
       <div>

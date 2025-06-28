@@ -22,3 +22,4 @@ export * from './Tabs';
 export * from './Tab';
 export * from './Skeletons';
 export * from './PageMenu';
+export * from './ScrollToTop';

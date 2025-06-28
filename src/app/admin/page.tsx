@@ -37,7 +37,7 @@ export default async function AdminPage({
 
   if (!success) {
     return (
-      <Container className='text-center'>
+      <Container className='text-center lg:px-5'>
         <Heading className='text-red'>{`Error ${status}!`}</Heading>
         <Paragraph>{message}</Paragraph>
       </Container>
@@ -46,7 +46,7 @@ export default async function AdminPage({
 
   if (!tournaments) {
     return (
-      <Container className='text-center'>
+      <Container className='text-center lg:px-5'>
         <Heading className='text-red'>{'No Tournaments Found!'}</Heading>
         <Paragraph>
           {
@@ -60,7 +60,7 @@ export default async function AdminPage({
   const username = response?.user && response?.user?.username;
 
   return (
-    <Container>
+    <Container className='lg:px-5'>
       <Heading>{`${username}'s Admin Panel`}</Heading>
       <AdminPanelButtons />
       <div>

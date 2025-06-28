@@ -13,7 +13,7 @@ export const MatchList = ({
       <Heading as='h2' className='text-xl mb-2.5'>
         {'Tournament Matches'}
       </Heading>
-      <div className='grid gap-2.5 lg:gap-5 mb-2.5 lg:mb-5 bg-light-grey p-2.5 lg:p-5 rounded-lg'>
+      <div className='grid gap-2.5 bg-light-grey p-2.5 rounded-lg'>
         {matches.map((match) => (
           <MatchListItem
             key={match.id}
@@ -26,6 +26,7 @@ export const MatchList = ({
             currentPage={currentPage}
             totalPages={totalPages}
             baseUrl={`/tournaments/${tournamentId}`}
+            className='my-2.5'
           />
         ) : null}
       </div>

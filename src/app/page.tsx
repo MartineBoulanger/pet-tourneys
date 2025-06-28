@@ -6,9 +6,9 @@ import { partnersData } from '@/lib/partners';
 export default function HomePage() {
   return (
     <>
-      <div className='flex flex-col'>
+      <Container className='my-5 lg:mb-10 flex flex-col'>
         <LinksGallery />
-        <Container className='lg:my-10 w-full h-full lg:max-w-[65%] mx-auto rounded-lg overflow-hidden shadow-md'>
+        <div className='w-full h-full lg:max-w-[80%] 2xl:max-w-[65%] mx-auto rounded-lg overflow-hidden shadow-md'>
           <Image
             src={`${process.env.NEXT_PUBLIC_BASE_URL!}/images/promo-poster.png`}
             alt='Tournament Promo Poster'
@@ -17,8 +17,8 @@ export default function HomePage() {
             className='w-full h-full object-cover'
             priority
           />
-        </Container>
-      </div>
+        </div>
+      </Container>
       <PartnerGallery data={partnersData} />
     </>
   );

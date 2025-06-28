@@ -34,7 +34,7 @@ export default async function AdminEditMatchPage({
 
   if (!tournaments) {
     return (
-      <Container className='text-center'>
+      <Container className='text-center lg:px-5'>
         <Heading className='text-red'>{'No Tournaments Found!'}</Heading>
         <Paragraph>
           {
@@ -47,7 +47,7 @@ export default async function AdminEditMatchPage({
 
   if (!match) {
     return (
-      <Container className='text-center'>
+      <Container className='text-center lg:px-5'>
         <Heading className='text-red'>{'Match not found!'}</Heading>
       </Container>
     );

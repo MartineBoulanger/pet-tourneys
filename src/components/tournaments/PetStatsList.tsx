@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { useMemo } from 'react';
 import { IoClose, IoCheckmark } from 'react-icons/io5';
 import { Button, Heading, Paragraph, Pagination } from '@/components/ui';
-import { PetStatsListProps, TypesImages } from './types';
+import { PetStatsListProps, TypesImages } from '../statistics/types';
 import { RadarGraph } from '@/components/statistics/graphs';
 import { Alliance } from '@/assets/Alliance';
 import { Horde } from '@/assets/Horde';
@@ -61,7 +61,7 @@ export function PetStatsList({
         isMatchView={isMatchView}
       />
 
-      <div className='space-y-2.5 lg:space-y-5 bg-background p-2.5 lg:p-5 rounded-lg'>
+      <div className='space-y-2.5 bg-background p-2.5 rounded-lg'>
         {currentPetData.length > 0 ? (
           currentPetData.map((pet) => {
             const isTopUsed = topUsedPets.includes(pet.name);
@@ -73,9 +73,8 @@ export function PetStatsList({
               winRate,
               strength,
               totalMatches,
-              totalPlayed } = getPetStats(
-              pet.name
-            );
+              totalPlayed,
+            } = getPetStats(pet.name);
             const typeColor = getTypeColor(pet.type);
             const availableBreeds = setAvailableBreedToArray(
               pet.availableBreeds
@@ -93,19 +92,19 @@ export function PetStatsList({
                   className='bg-transparent flex items-center justify-between w-full text-left p-0 pr-2.5 lg:pr-5'
                 >
                   <div className='flex items-center'>
-                    <div className='flex items-center h-[50px] w-[50px] mr-5'>
+                    <div className='flex items-center h-[40px] w-[40px] mr-2.5'>
                       <Image
                         src={`${process.env
                           .NEXT_PUBLIC_BASE_URL!}/images/pet-icons/${pet.icon}`}
                         alt={pet.name}
                         className='w-full h-full object-contain'
-                        width={50}
-                        height={50}
+                        width={40}
+                        height={40}
                         loading='lazy'
                       />
                     </div>
                     {isTopUsed && (
-                      <div className='mr-2.5 lg:mr-5'>
+                      <div className='mr-2.5'>
                         <MedalIcon position={usageRank} className='w-5 h-5' />
                       </div>
                     )}
@@ -123,15 +122,15 @@ export function PetStatsList({
                 </Button>
 
                 {expandedPets[pet.name] && (
-                  <div className='p-2.5 lg:p-5 grid grid-cols-1 lg:grid-cols-3 gap-y-2.5 lg:gap-5 bg-light-grey rounded-b-lg'>
-                    <div className='col-span-2 space-y-2.5 lg:space-y-5'>
+                  <div className='p-2.5 grid grid-cols-1 lg:grid-cols-3 gap-y-2.5 lg:gap-2.5 bg-light-grey rounded-b-lg'>
+                    <div className='col-span-2 space-y-2.5'>
                       <div className='p-2.5 lg:p-5 rounded-lg bg-background shadow-md'>
                         <Paragraph className='italic text-center'>
                           &ldquo;{pet.description}&ldquo;
                         </Paragraph>
                       </div>
 
-                      <div className='grid grid-cols-1 lg:grid-cols-2 gap-2.5 lg:gap-5 mt-2.5'>
+                      <div className='grid grid-cols-1 lg:grid-cols-2 gap-2.5 mt-2.5'>
                         <div className='p-2.5 lg:p-5 rounded-lg bg-background shadow-md relative'>
                           <Heading
                             as='h3'
@@ -329,7 +328,7 @@ export function PetStatsList({
                         loading='lazy'
                       />
                       {availableBreeds.length > 0 && (
-                        <div className='rounded-lg overflow-hidden bg-background shadow-md mt-2.5 lg:mt-5'>
+                        <div className='rounded-lg overflow-hidden bg-background shadow-md mt-2.5'>
                           <div className='overflow-x-auto'>
                             <table className='min-w-full'>
                               <thead
@@ -402,7 +401,7 @@ export function PetStatsList({
             totalPages={totalPages}
             baseUrl=''
             onPageChange={handlePageChange}
-            className='mt-2.5 lg:mt-5'
+            className='mt-5 mb-2.5'
           />
         ) : null}
       </div>

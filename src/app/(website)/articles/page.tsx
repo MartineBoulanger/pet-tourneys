@@ -19,7 +19,7 @@ export default async function ArticlesPage() {
   if (!pages) notFound();
   // TODO: add pagination with 12 page cards  per page -> see commercial LLBG for implementing pagination for Contentful
   return (
-    <Container>
+    <Container className='lg:px-5'>
       <Heading className='text-center'>{'Our Pet Battle Articles'}</Heading>
       <Paragraph className='max-w-[700px] text-center mx-auto'>
         {
@@ -31,7 +31,7 @@ export default async function ArticlesPage() {
         {pages && pages.length > 0 ? (
           pages.map((page) => <PageCard key={page.sys.id} page={page} />)
         ) : (
-          <div className='py-5 px-2.5 bg-light-grey rounded-lg text-center lg:col-start-2'>
+          <div className='w-full py-5 px-2.5 bg-light-grey rounded-lg text-center lg:col-start-2'>
             {'No articles are online yet. Please come back later!'}
           </div>
         )}

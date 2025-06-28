@@ -12,7 +12,7 @@ export async function generateMetadata() {
 
 export default function AnalyzerPage() {
   return (
-    <Container>
+    <Container className='lg:px-5'>
       <Heading className='text-center'>
         {'Pet Battle PvP Logs Analyzer'}
       </Heading>

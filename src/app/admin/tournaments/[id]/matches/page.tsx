@@ -46,7 +46,7 @@ export default async function AdminMatchesPage({
 
   if (!success || !succ) {
     return (
-      <Container className='text-center'>
+      <Container className='text-center lg:px-5'>
         <Heading className='text-red'>{`Error ${status || stat}!`}</Heading>
         <Paragraph>{message}</Paragraph>
       </Container>
@@ -55,7 +55,7 @@ export default async function AdminMatchesPage({
 
   if (!tournament) {
     return (
-      <Container className='text-center'>
+      <Container className='text-center lg:px-5'>
         <Heading className='text-red'>{'No Tournament Found!'}</Heading>
         <Paragraph>
           {
@@ -68,7 +68,7 @@ export default async function AdminMatchesPage({
 
   if (!matches) {
     return (
-      <Container className='text-center'>
+      <Container className='text-center lg:px-5'>
         <Heading className='text-red'>{'No Matches Found!'}</Heading>
         <Paragraph>
           {'Please upload battle logs, so you can create matches.'}
@@ -80,7 +80,7 @@ export default async function AdminMatchesPage({
   const username = response?.user && response?.user?.username;
 
   return (
-    <Container>
+    <Container className='lg:px-5'>
       <Heading>{`${username}'s Admin Panel`}</Heading>
       <AdminPanelButtons isMatchesPage />
       <div>

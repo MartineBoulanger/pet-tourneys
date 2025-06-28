@@ -19,7 +19,7 @@ export default async function UploadLogsPage() {
 
   if (!success) {
     return (
-      <Container className='text-center'>
+      <Container className='text-center lg:px-5'>
         <Heading className='text-red'>{`Error ${status}!`}</Heading>
         <Paragraph>{message}</Paragraph>
       </Container>
@@ -28,7 +28,7 @@ export default async function UploadLogsPage() {
 
   if (!tournaments) {
     return (
-      <Container className='text-center'>
+      <Container className='text-center lg:px-5'>
         <Heading className='text-red'>{'No Tournaments Found!'}</Heading>
         <Paragraph>
           {

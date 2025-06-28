@@ -5,7 +5,7 @@
 import { Cell, PieChart, Pie, Tooltip, TooltipProps } from 'recharts';
 import { GraphWrapper } from './GraphWrapper';
 import { DoublePieGraphProps } from './types';
-import { capitalizeWord } from '@/utils/cn';
+import { capitalizeWord, calculatePercentage } from '@/utils/cn';
 import { useWindowSize } from '@/hooks/useWindowSize';
 
 export const DoublePieGraph = ({
@@ -27,20 +27,30 @@ export const DoublePieGraph = ({
     );
   }
 
+  // Calculate total for pet types and breeds
+  const totalPetTypes = data.reduce((sum, item) => sum + Number(item.value), 0);
+  const totalPetBreeds = data2.reduce(
+    (sum, item) => sum + Number(item.value),
+    0
+  );
+
   const CustomTooltip = ({
     active,
     payload,
   }: TooltipProps<string | number, string | number>) => {
     if (!active || !payload || !payload.length) return null;
 
-    const data = payload[0].payload;
+    const dataItem = payload[0].payload;
+    const isInnerPie = payload[0].name === 'value';
+    const total = isInnerPie ? totalPetTypes : totalPetBreeds;
+    const percentage = calculatePercentage(dataItem.value, total);
 
     return (
       <div className='bg-light-grey p-2.5 rounded-lg shadow-md'>
-        <p className='font-bold text-humanoid'>{data.name}</p>
+        <p className='font-bold text-humanoid'>{dataItem.name}</p>
         <p>
           {tooltip}
-          {data.value}
+          {dataItem.value} ({percentage})
         </p>
       </div>
     );

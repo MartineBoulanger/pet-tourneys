@@ -103,7 +103,7 @@ export const BattleCharts = ({
         ) : null}
         {isMatchView && matchesStats ? (
           <div>
-            <Heading as='h2' className='mb-2.5 text-base lg:text-lg font-sans'>
+            <Heading as='h2' className='mb-2.5 w-full text-base lg:text-lg font-sans'>
               {'Battle Results'}
             </Heading>
             {matchesStats.battleResults && (

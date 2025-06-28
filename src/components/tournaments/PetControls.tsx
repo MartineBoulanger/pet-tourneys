@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { IoFilter, IoSearch } from 'react-icons/io5';
 import { Input, Select, Button, Option, Checkbox } from '@/components/ui';
 import { cn } from '@/utils/cn';
-import { PetControlsProps, SortOption } from './types';
+import { PetControlsProps, SortOption } from '../statistics/types';
 
 export function PetControls({
   searchTerm,
@@ -56,10 +56,10 @@ export function PetControls({
   }
 
   return (
-    <div className='bg-light-grey p-2.5 lg:p-5 rounded-lg mb-2.5 lg:mb-5 shadow-sm'>
+    <div className='bg-light-grey p-2.5 rounded-lg mb-2.5 lg:mb-5 shadow-sm'>
       <div
         className={cn(
-          'flex flex-col lg:flex-row lg:items-center gap-2.5 lg:gap-5 p-2.5 lg:p-5 bg-background',
+          'flex flex-col lg:flex-row lg:items-center gap-2.5 lg:gap-5 p-2.5 bg-background',
           showFilters ? 'rounded-t-lg' : 'rounded-lg'
         )}
       >
@@ -107,7 +107,7 @@ export function PetControls({
       </div>
 
       {showFilters ? (
-        <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 lg:gap-5 p-2.5 lg:p-5 bg-background rounded-b-lg border-t border-t-light-grey'>
+        <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 lg:gap-5 p-2.5  bg-background rounded-b-lg border-t border-t-light-grey'>
           {/* Type Filter */}
           <Select
             value={filters.type}

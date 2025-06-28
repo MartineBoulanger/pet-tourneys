@@ -19,7 +19,7 @@ export default async function GuidesPage() {
   if (!pages) notFound();
   // TODO: add pagination with 12 page cards  per page -> see commercial LLBG for implementing pagination for Contentful
   return (
-    <Container>
+    <Container className='lg:px-5'>
       <Heading className='text-center'>{'Our Guides'}</Heading>
       <Paragraph className='max-w-[700px] text-center mx-auto'>
         {

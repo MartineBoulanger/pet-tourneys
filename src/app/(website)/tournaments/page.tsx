@@ -42,7 +42,7 @@ export default async function TournamentsPage({
   if (!tournaments) return notFound();
 
   return (
-    <Container>
+    <Container className='lg:px-5'>
       <Heading>{'Tournaments'}</Heading>
       {tournaments.length > 0 ? (
         <TournamentsList

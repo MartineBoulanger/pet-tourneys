@@ -10,7 +10,7 @@ export async function generateMetadata() {
 
 export default function NewTournamentPage() {
   return (
-    <Container className='w-full flex flex-col justify-center max-w-[500px]'>
+    <Container className='w-full flex flex-col justify-center max-w-[512px]'>
       <Heading className='text-center'>{'Create Tournament'}</Heading>
       <TournamentForm />
     </Container>

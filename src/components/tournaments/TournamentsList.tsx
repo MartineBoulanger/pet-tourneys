@@ -8,12 +8,12 @@ export const TournamentsList = ({
   totalPages = 1,
 }: TournamentsListProps) => {
   return (
-    <div className='grid gap-2.5 lg:gap-5 bg-light-grey rounded-lg p-2.5 lg:p-5'>
+    <div className='grid gap-2.5 lg:gap-5 bg-light-grey rounded-lg p-2.5'>
       {tournaments.map((tournament) => (
         <Link
           key={tournament.id}
           href={`/tournaments/${tournament.id}`}
-          className='p-2.5 lg:p-5 rounded-lg shadow-md bg-background hover:bg-medium-grey transition-all duration-300'
+          className='p-2.5 rounded-lg shadow-md bg-background hover:bg-medium-grey transition-all duration-300'
           title={tournament.name}
           aria-label={tournament.name}
         >
@@ -30,7 +30,7 @@ export const TournamentsList = ({
                   : tournament.end_date &&
                     new Date(tournament.end_date).toLocaleDateString()}
               </span>
-              <span className='w-[1px] h-5 bg-light-grey mx-5 rounded-full' />
+              <span className='w-[1px] h-5 bg-light-grey mx-2.5 lg:mx-5 rounded-full' />
               <span className='text-sm'>
                 {tournament.participant_count}
                 {' participants'}

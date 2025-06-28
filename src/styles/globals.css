@@ -9,9 +9,6 @@
     line-height: normal;
     display: flexbox;
   }
-  main {
-    padding: 20px;
-  }
   button {
     padding-inline: 11px;
     padding-top: 7px;

@@ -60,7 +60,7 @@ export default async function GuidePage({
       : [];
 
   return (
-    <div className='flex flex-col'>
+    <div className='flex flex-col px-5'>
       {page.banner ? (
         <>
           <Banner component={page.banner} isPage />

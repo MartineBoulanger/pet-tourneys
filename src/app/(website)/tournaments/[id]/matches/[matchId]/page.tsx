@@ -40,7 +40,7 @@ export default async function MatchPage({
 
   if (!success) {
     return (
-      <Container className='text-center'>
+      <Container className='text-center lg:px-5'>
         <Heading className='text-red'>{`Error ${status}!`}</Heading>
         <Paragraph>{message}</Paragraph>
       </Container>
@@ -67,7 +67,7 @@ export default async function MatchPage({
   ];
 
   return (
-    <Container>
+    <Container className='lg:px-5'>
       <PageHeading
         heading={
           <span className='flex gap-2.5'>

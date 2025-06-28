@@ -12,7 +12,7 @@ export async function generateMetadata() {
 
 export default function ForgotPasswordPage() {
   return (
-    <Container className='w-full max-w-[512px]'>
+    <Container className='max-w-[512px]'>
       <Heading className='text-center'>{'Forgot Password'}</Heading>
       <ForgotPasswordForm />
     </Container>

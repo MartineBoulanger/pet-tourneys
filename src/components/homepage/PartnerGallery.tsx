@@ -16,7 +16,7 @@ export const PartnerGallery = ({ data, className }: PartnersGalleryProps) => {
   const regularPartners = data.filter((partner) => !partner.isPriority);
 
   return (
-    <>
+    <div className='bg-light-grey py-5 lg:py-10 px-5 md:px-0'>
       <Heading className='text-center tracking-wider'>
         {'Proud to partner with'}
       </Heading>
@@ -48,6 +48,6 @@ export const PartnerGallery = ({ data, className }: PartnersGalleryProps) => {
           ))}
         </div>
       </div>
-    </>
+    </div>
   );
 };
