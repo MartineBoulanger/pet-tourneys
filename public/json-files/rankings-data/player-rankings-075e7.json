@@ -1,7 +1,7 @@
 {
   "tournamentId": "075e7708-cfa4-4b30-a033-4246520f605a",
   "tournamentName": "Pet Battle PvP Tournament Season 2",
-  "timestamp": "2025-06-29T21:55:11.788Z",
+  "timestamp": "2025-06-30T19:38:36.533Z",
   "records": [
     {
       "playerName": "Woxbc",
@@ -4238,15 +4238,15 @@
     },
     {
       "playerName": "Bebark",
-      "wins": 0,
-      "losses": 1,
+      "wins": 1,
+      "losses": 2,
       "region": "EU Finals",
-      "winRate": 0,
+      "winRate": 50,
       "mostUsedPet": {
-        "petName": "Fun-Size Flarendo",
+        "petName": "Cursed Birman",
         "timesUsed": 2,
-        "kills": 0,
-        "deaths": 2
+        "kills": 2,
+        "deaths": 0
       },
       "mostProblematicPet": {
         "petName": "Sir Shady Mrrgglton Junior",
@@ -4254,10 +4254,52 @@
       },
       "petStatistics": [
         {
+          "petName": "Cursed Birman",
+          "timesUsed": 2,
+          "kills": 2,
+          "deaths": 0
+        },
+        {
+          "petName": "Wavebreaker Mechasaur",
+          "timesUsed": 2,
+          "kills": 2,
+          "deaths": 0
+        },
+        {
+          "petName": "Lettuce",
+          "timesUsed": 2,
+          "kills": 1,
+          "deaths": 1
+        },
+        {
           "petName": "Fun-Size Flarendo",
           "timesUsed": 2,
           "kills": 0,
           "deaths": 2
+        },
+        {
+          "petName": "Frumpy Softpaw",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Sergeant Quackers",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Tricorne",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Arfus",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
         },
         {
           "petName": "Scourge of the Aspects",
@@ -4297,6 +4339,18 @@
         },
         {
           "petName": "Vombata Pup",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Helpful Workshop Bot",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Tiberius",
           "timesUsed": 1,
           "kills": 0,
           "deaths": 1
@@ -4437,14 +4491,14 @@
     {
       "playerName": "Isabella",
       "wins": 0,
-      "losses": 1,
+      "losses": 2,
       "region": "EU Finals",
       "winRate": 0,
       "mostUsedPet": {
         "petName": "Widget the Departed",
-        "timesUsed": 2,
-        "kills": 2,
-        "deaths": 0
+        "timesUsed": 5,
+        "kills": 3,
+        "deaths": 2
       },
       "mostProblematicPet": {
         "petName": "Spyragos",
@@ -4453,9 +4507,21 @@
       "petStatistics": [
         {
           "petName": "Widget the Departed",
+          "timesUsed": 5,
+          "kills": 3,
+          "deaths": 2
+        },
+        {
+          "petName": "Jingles",
+          "timesUsed": 3,
+          "kills": 1,
+          "deaths": 2
+        },
+        {
+          "petName": "Crimson Mechasaur",
           "timesUsed": 2,
-          "kills": 2,
-          "deaths": 0
+          "kills": 1,
+          "deaths": 1
         },
         {
           "petName": "Lost Quill",
@@ -4464,13 +4530,19 @@
           "deaths": 1
         },
         {
-          "petName": "Jingles",
+          "petName": "Stormborne Whelpling",
           "timesUsed": 2,
           "kills": 0,
           "deaths": 2
         },
         {
-          "petName": "Stormborne Whelpling",
+          "petName": "Mechanical Pandaren Dragonling",
+          "timesUsed": 2,
+          "kills": 0,
+          "deaths": 2
+        },
+        {
+          "petName": "Stormie",
           "timesUsed": 2,
           "kills": 0,
           "deaths": 2
@@ -4482,13 +4554,13 @@
           "deaths": 0
         },
         {
-          "petName": "Crimson Mechasaur",
+          "petName": "Twilight",
           "timesUsed": 1,
           "kills": 1,
           "deaths": 0
         },
         {
-          "petName": "Twilight",
+          "petName": "Buttercup",
           "timesUsed": 1,
           "kills": 1,
           "deaths": 0
@@ -4512,7 +4584,19 @@
           "deaths": 1
         },
         {
-          "petName": "Mechanical Pandaren Dragonling",
+          "petName": "Cobbleshell",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Spyragos",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Qiraji Guardling",
           "timesUsed": 1,
           "kills": 0,
           "deaths": 1

@@ -15811,9 +15811,9 @@
     "expansion": "Warlords of Draenor",
     "isHordeOnly": "",
     "isAllianceOnly": "",
-    "icon": "",
-    "image": "",
-    "description": ""
+    "icon": "catstatueemeraldeyes.png",
+    "image": "cursed-birman.jpg",
+    "description": "One of this cat's nine lives has returned to haunt the living by yowling loudly when you're trying to sleep."
   },
   {
     "petID": "1523",
@@ -21475,9 +21475,9 @@
     "expansion": "Legion",
     "isHordeOnly": "",
     "isAllianceOnly": "",
-    "icon": "",
-    "image": "",
-    "description": ""
+    "icon": "rat-pirate.png",
+    "image": "tricorne.jpg",
+    "description": "He'll plunder your provolone, turn your ship to swiss, then get your gouda. He's a true muenster and the scourge of the seven bries."
   },
   {
     "petID": "2058",
@@ -36088,12 +36088,12 @@
     "availableBreeds": "H/P",
     "source": "World Event",
     "isCapturable": "Yes",
-    "expansion": "",
+    "expansion": "The War Within",
     "isHordeOnly": "",
     "isAllianceOnly": "",
-    "icon": "",
-    "image": "",
-    "description": ""
+    "icon": "help_bot.png",
+    "image": "helpful-workshop-bot.jpg",
+    "description": "The name 'Beepbop' followed by the words 'Made by Threadis' are roughly but lovingly scratched into the bottom plate on this tiny nerubian-crafted bot."
   },
   {
     "petID": "3248",
@@ -39787,9 +39787,9 @@
     "expansion": "The War Within",
     "isHordeOnly": "",
     "isAllianceOnly": "",
-    "icon": "",
-    "image": "",
-    "description": ""
+    "icon": "lettuce.png",
+    "image": "lettuce.jpg",
+    "description": "Cave swallows were once plentiful in the early days of Undermine's construction. Now, goblin construction has left the population of these beautiful birds dangerously low."
   },
   {
     "petID": "3519",
@@ -42547,9 +42547,9 @@
     "expansion": "The War Within",
     "isHordeOnly": "",
     "isAllianceOnly": "",
-    "icon": "",
-    "image": "",
-    "description": ""
+    "icon": "red-lynx.png",
+    "image": "tiberius.jpg",
+    "description": "The Imperial Lynx hails from the shore of the far-flung Arathi Empire, where they serve as fierce and loyal companions and mounts for citizens."
   },
   {
     "petID": "4464",
@@ -46699,9 +46699,9 @@
     "expansion": "The War Within",
     "isHordeOnly": "",
     "isAllianceOnly": "",
-    "icon": "",
-    "image": "",
-    "description": ""
+    "icon": "gray_softpaw.png",
+    "image": "frumpy-softpaw.jpg",
+    "description": "These grumpy, frumpy meeksi only seem to find joy when drinking a boba milk tea with salted caramel and cookie dough."
   },
   {
     "petID": "4759",
