@@ -127,6 +127,20 @@ export const usePetsFilters = ({
           return statB - statA;
         });
         break;
+      case 'winrate-asc':
+        result.sort((a, b) => {
+          const statA = petStatsMap.get(a.name)?.win_rate || 0;
+          const statB = petStatsMap.get(b.name)?.win_rate || 0;
+          return statA - statB;
+        });
+        break;
+      case 'winrate-desc':
+        result.sort((a, b) => {
+          const statA = petStatsMap.get(a.name)?.win_rate || 0;
+          const statB = petStatsMap.get(b.name)?.win_rate || 0;
+          return statB - statA;
+        });
+        break;
       case 'losses-asc':
         result.sort((a, b) => {
           const statA = petStatsMap.get(a.name)?.losses || 0;

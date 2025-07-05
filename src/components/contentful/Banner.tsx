@@ -1,16 +1,35 @@
+import Image from 'next/image';
 import RichText from './RichText';
-import Asset from './Asset';
 import Cta from './Cta';
 import { BannerProps } from './types';
 import { cn } from '@/utils/cn';
-
+import YouTubeVideo from './YouTubeVideo';
+// TODO: check on why isPage is not working and fix this
 const Banner = ({ component, isPage = false, className }: BannerProps) => {
   if (!component) return null;
-  const { bannerImage, bannerText, bannerActionsCollection } = component;
+  const { bannerPicture, bannerVideo, bannerText, bannerActionsCollection } =
+    component;
 
-  return bannerImage ? (
-    <div className={cn('w-full h-full relative', className)}>
-      <Asset component={bannerImage} isBanner isPage={isPage} />
+  return bannerPicture ? (
+    <div className={cn('w-full h-full relative px-2.5', className)}>
+      <div
+        className={cn(
+          'flex items-center justify-center',
+          isPage ? 'lg:h-[85vh]' : 'rounded-lg overflow-hidden'
+        )}
+      >
+        <Image
+          src={bannerPicture?.url}
+          alt={bannerPicture?.title}
+          width={bannerPicture?.width}
+          height={bannerPicture?.height}
+          className={cn(
+            'h-full w-full',
+            isPage ? 'object-contain' : 'object-cover'
+          )}
+          loading={isPage ? 'eager' : 'lazy'}
+        />
+      </div>
       {bannerText ? (
         <div
           className={cn(
@@ -32,6 +51,13 @@ const Banner = ({ component, isPage = false, className }: BannerProps) => {
         </div>
       ) : null}
     </div>
+  ) : bannerVideo ? (
+    <YouTubeVideo
+      component={bannerVideo}
+      autoplay
+      isContentLayout={isPage ? false : true}
+      isPage={isPage}
+    />
   ) : null;
 };
 

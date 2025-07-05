@@ -230,26 +230,28 @@ export function PetStatsList({
                               {'Battle Statistics'}
                             </Heading>
                             <div className='font-light p-2 bg-light-grey rounded-lg xl:w-[40%] space-y-1'>
-                              <Paragraph className='flex items-center justify-between'>
-                                <span className='font-bold'>
-                                  {'Win Rate: '}
-                                </span>
-                                <span
-                                  className={cn(
-                                    winRate < 25 ? 'text-red' : '',
-                                    winRate >= 25 && winRate < 50
-                                      ? 'text-orange'
-                                      : '',
-                                    winRate >= 50 && winRate < 75
-                                      ? 'text-yellow'
-                                      : '',
-                                    winRate >= 75 ? 'text-green' : ''
-                                  )}
-                                >
-                                  {winRate}
-                                  {'%'}
-                                </span>
-                              </Paragraph>
+                              {!isMatchView && (
+                                <Paragraph className='flex items-center justify-between'>
+                                  <span className='font-bold'>
+                                    {'Win Rate: '}
+                                  </span>
+                                  <span
+                                    className={cn(
+                                      winRate < 25 ? 'text-red' : '',
+                                      winRate >= 25 && winRate < 50
+                                        ? 'text-orange'
+                                        : '',
+                                      winRate >= 50 && winRate < 75
+                                        ? 'text-yellow'
+                                        : '',
+                                      winRate >= 75 ? 'text-green' : ''
+                                    )}
+                                  >
+                                    {winRate}
+                                    {'%'}
+                                  </span>
+                                </Paragraph>
+                              )}
                               <Paragraph className='flex items-center justify-between'>
                                 <span className='font-bold mr-1'>
                                   {'Total Played: '}

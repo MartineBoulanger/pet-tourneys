@@ -32,10 +32,17 @@ export const headerData: NavigationData = [
   },
   {
     id: 4,
+    url: '/pet-reviews',
+    linkText: 'Pet Reviews',
+    text: 'Looking for a pet that is great for PvP? Checkout out all our pet reviews to see which pet you can best use for PvP!',
+    imageSrc: `${process.env.NEXT_PUBLIC_BASE_URL!}/images/bluegor.png`,
+  },
+  {
+    id: 5,
     url: '/analyze-tool',
     linkText: 'Our Analyze Tool',
     text: 'Want to check your personal battle statistics? Check out our analyze tool and download the PDF of your battle result!',
-    imageSrc: `${process.env.NEXT_PUBLIC_BASE_URL!}/images/bluegor.png`,
+    imageSrc: `${process.env.NEXT_PUBLIC_BASE_URL!}/images/greengor.png`,
   },
 ];
 

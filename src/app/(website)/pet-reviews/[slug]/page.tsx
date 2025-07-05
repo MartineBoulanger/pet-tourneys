@@ -18,10 +18,11 @@ export async function generateMetadata({
 
   if (!page?.seoMetadata) {
     return {
-      title: 'Our Articles',
-      description: 'Our Pet Battle Articles for all pet masters',
+      title: 'Pet Reviews',
+      description:
+        'Pet Reviews for getting the best battle pet for your PvP team',
       alternates: {
-        canonical: `${process.env.NEXT_PUBLIC_BASE_URL!}/articles/${slug}`,
+        canonical: `${process.env.NEXT_PUBLIC_BASE_URL!}/pet-reviews/${slug}`,
       },
     };
   }
@@ -29,15 +30,17 @@ export async function generateMetadata({
   const { title, description, indexable, keywords, image } = page.seoMetadata;
 
   return {
-    title: title || 'Our Articles',
-    description: description || 'Our Pet Battle Articles for all pet masters',
-    keywords: keywords || ['WoW, articles, pet'],
+    title: title || 'Pet Reviews',
+    description:
+      description ||
+      'Pet Reviews for getting the best battle pet for your PvP team',
+    keywords: keywords || ['WoW, reviews, pet'],
     alternates: {
-      canonical: `${process.env.NEXT_PUBLIC_BASE_URL!}/articles/${slug}`,
+      canonical: `${process.env.NEXT_PUBLIC_BASE_URL!}/pet-reviews/${slug}`,
     },
     robots: {
-      index: indexable === true || false,
-      follow: indexable === true || false,
+      index: indexable === true,
+      follow: indexable === true,
     },
     openGraph: {
       images: image?.url ? [image.url] : ['/opengraph-image.png'],
@@ -45,7 +48,7 @@ export async function generateMetadata({
   };
 }
 
-export default async function ArticlePage({
+export default async function GuidePage({
   params,
   searchParams,
 }: {
@@ -59,7 +62,6 @@ export default async function ArticlePage({
 
   if (!page) notFound();
 
-  // make links data for the dropdown menu on the page
   const links: Links = [];
   if (page.ctAsCollection?.items) {
     links.push(

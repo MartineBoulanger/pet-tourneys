@@ -50,6 +50,7 @@ export const withSupabase = (middleware: CustomMiddleware) => {
       !request.nextUrl.pathname.startsWith('/tournaments') &&
       !request.nextUrl.pathname.startsWith('/guides') &&
       !request.nextUrl.pathname.startsWith('/articles') &&
+      !request.nextUrl.pathname.startsWith('/pet-reviews') &&
       !request.nextUrl.pathname.startsWith('/json-files') &&
       !request.nextUrl.pathname.startsWith('/auth') &&
       !request.nextUrl.pathname.endsWith('/sitemap.xml') &&

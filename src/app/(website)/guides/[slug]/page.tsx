@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 import { TbSquareChevronsDown } from 'react-icons/tb';
 import { getPage } from '@/contentful/actions/getPage';
-import { Container, PageHeading, PageMenu } from '@/components/ui';
+import { Container, Heading, PageMenu } from '@/components/ui';
 import RichText from '@/components/contentful/RichText';
 import PageContent from '@/components/contentful/PageContent';
 import Banner from '@/components/contentful/Banner';
@@ -15,22 +15,32 @@ export async function generateMetadata({
 }) {
   const { slug } = await params;
   const page = await getPage(false, slug);
-  const seoData = page && page.seoMetadata;
+
+  if (!page?.seoMetadata) {
+    return {
+      title: 'Our Guides',
+      description: 'Our Guides for all that want to know things',
+      alternates: {
+        canonical: `${process.env.NEXT_PUBLIC_BASE_URL!}/guides/${slug}`,
+      },
+    };
+  }
+
+  const { title, description, indexable, keywords, image } = page.seoMetadata;
 
   return {
-    title: seoData.title || 'Our Guides',
-    description:
-      seoData.description || 'Our Guides for all that want to know things.',
-    keywords: seoData.keywords || ['WoW, guides, pet'],
+    title: title || 'Our Guides',
+    description: description || 'Our Guides for all that want to know things',
+    keywords: keywords || ['WoW, guides, pet'],
     alternates: {
       canonical: `${process.env.NEXT_PUBLIC_BASE_URL!}/guides/${slug}`,
     },
     robots: {
-      index: seoData.indexable === true || false,
-      follow: seoData.indexable === true || false,
+      index: indexable === true,
+      follow: indexable === true,
     },
     openGraph: {
-      images: seoData.image.media.url || '/opengraph-image.png',
+      images: image?.url ? [image.url] : ['/opengraph-image.png'],
     },
   };
 }
@@ -49,45 +59,52 @@ export default async function GuidePage({
 
   if (!page) notFound();
 
-  // make links data for the dropdown menu on the page
-  const links: Links =
-    page.ctAsCollection && page.ctAsCollection.items.length > 0
-      ? page.ctAsCollection.items.map((link, index) => ({
-          id: index,
-          url: link?.ctaUrl || '',
-          text: link?.ctaText || '',
-        }))
-      : [];
+  const links: Links = [];
+  if (page.ctAsCollection?.items) {
+    links.push(
+      ...page.ctAsCollection.items.map((link, index) => ({
+        id: index,
+        url: link?.ctaUrl || '',
+        text: link?.ctaText || '',
+      }))
+    );
+  }
 
   return (
     <div className='flex flex-col px-5'>
+      {links ? (
+        <Container className='w-full'>
+          <PageMenu links={links} className='mt-5' />
+        </Container>
+      ) : null}
       {page.banner ? (
         <>
           <Banner component={page.banner} isPage />
-          <div className='hidden lg:block lg:w-[40px] lg:mx-auto text-humanoid animate-bounce mb-10'>
+          <div className='hidden lg:block lg:w-[40px] lg:mx-auto text-foreground animate-bounce mb-10'>
             <TbSquareChevronsDown className='w-10 h-10' />
           </div>
         </>
       ) : null}
-      <Container className='p-2.5 lg:p-5 bg-light-grey rounded-lg shadow-md'>
+      <Container className='p-2.5 bg-light-grey rounded-lg shadow-md'>
         {page.pageTitle || page.pageDescription ? (
-          <div className='p-2.5 lg:p-5 rounded-lg bg-background mb-5'>
+          <div className='p-2.5 rounded-t-lg bg-background'>
             {page.pageTitle ? (
-              <PageHeading heading={page.pageTitle} className='md:items-start'>
-                <PageMenu links={links} />
-              </PageHeading>
+              <Heading className='text-center'>{page.pageTitle}</Heading>
             ) : null}
             {page.pageDescription ? (
-              <RichText component={page.pageDescription} />
+              <>
+                <RichText
+                  component={page.pageDescription}
+                  className='lg:w-full'
+                />
+                <div className='h-0.5 w-full bg-light-grey rounded-lg mt-2.5 lg:mt-5' />
+              </>
             ) : null}
           </div>
         ) : null}
-        <div>
-          {page.pageContentCollection &&
-          page.pageContentCollection.items.length > 0 ? (
-            <PageContent components={page.pageContentCollection.items} />
-          ) : null}
-        </div>
+        {page.pageContentCollection?.items ? (
+          <PageContent components={page.pageContentCollection.items} />
+        ) : null}
       </Container>
     </div>
   );

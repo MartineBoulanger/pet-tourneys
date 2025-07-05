@@ -42,6 +42,8 @@ export function PetControls({
       { value: 'played-desc', label: 'Total Played (High-Low)' },
       { value: 'kills-asc', label: 'Kills (Low-High)' },
       { value: 'kills-desc', label: 'Kills (High-Low)' },
+      { value: 'winrate-asc', label: 'Win Rate (Low-High)' },
+      { value: 'winrate-desc', label: 'Win Rate (High-Low)' },
       { value: 'deaths-asc', label: 'Deaths (Low-High)' },
       { value: 'deaths-desc', label: 'Deaths (High-Low)' },
       { value: 'swaps-asc', label: 'Swaps (Low-High)' },

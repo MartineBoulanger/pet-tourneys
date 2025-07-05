@@ -1,7 +1,7 @@
 {
   "tournamentId": "075e7708-cfa4-4b30-a033-4246520f605a",
   "tournamentName": "Pet Battle PvP Tournament Season 2",
-  "timestamp": "2025-06-30T19:38:36.533Z",
+  "timestamp": "2025-07-05T18:07:14.440Z",
   "records": [
     {
       "playerName": "Woxbc",
@@ -4604,9 +4604,201 @@
       ],
       "compositeId": "Isabella-EU Finals-075e7708-cfa4-4b30-a033-4246520f605a",
       "isFinals": true
+    },
+    {
+      "playerName": "Tanixion",
+      "wins": 1,
+      "losses": 0,
+      "region": "World Finals",
+      "winRate": 100,
+      "mostUsedPet": {
+        "petName": "Bone Serpent",
+        "timesUsed": 3,
+        "kills": 2,
+        "deaths": 1
+      },
+      "mostProblematicPet": {
+        "petName": "Teardrop Moth",
+        "timesLostAgainst": 3
+      },
+      "petStatistics": [
+        {
+          "petName": "Bone Serpent",
+          "timesUsed": 3,
+          "kills": 2,
+          "deaths": 1
+        },
+        {
+          "petName": "Lime Roboclucker",
+          "timesUsed": 2,
+          "kills": 2,
+          "deaths": 0
+        },
+        {
+          "petName": "Graves",
+          "timesUsed": 2,
+          "kills": 2,
+          "deaths": 0
+        },
+        {
+          "petName": "Violent Poultrid",
+          "timesUsed": 2,
+          "kills": 1,
+          "deaths": 1
+        },
+        {
+          "petName": "Helpful Glimmerfly",
+          "timesUsed": 2,
+          "kills": 1,
+          "deaths": 1
+        },
+        {
+          "petName": "Mr. DELVER",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Spring Rabbit",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Cobbleshell",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Sir Shady Mrrgglton Junior",
+          "timesUsed": 1,
+          "kills": 1,
+          "deaths": 0
+        },
+        {
+          "petName": "Jingles",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Lost Quill",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Teardrop Moth",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Umbral Amalgam",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Buttercup",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Qiraji Guardling",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        }
+      ],
+      "compositeId": "Tanixion-World Finals-075e7708-cfa4-4b30-a033-4246520f605a",
+      "isFinals": true
+    },
+    {
+      "playerName": "Woxbc",
+      "wins": 0,
+      "losses": 1,
+      "region": "World Finals",
+      "winRate": 0,
+      "mostUsedPet": {
+        "petName": "Rebellious Imp",
+        "timesUsed": 4,
+        "kills": 1,
+        "deaths": 3
+      },
+      "mostProblematicPet": {
+        "petName": "Lime Roboclucker",
+        "timesLostAgainst": 2
+      },
+      "petStatistics": [
+        {
+          "petName": "Rebellious Imp",
+          "timesUsed": 4,
+          "kills": 1,
+          "deaths": 3
+        },
+        {
+          "petName": "Teardrop Moth",
+          "timesUsed": 3,
+          "kills": 3,
+          "deaths": 0
+        },
+        {
+          "petName": "Frostwolf Ghostpup",
+          "timesUsed": 3,
+          "kills": 2,
+          "deaths": 1
+        },
+        {
+          "petName": "Lime Roboclucker",
+          "timesUsed": 3,
+          "kills": 1,
+          "deaths": 2
+        },
+        {
+          "petName": "Umbral Amalgam",
+          "timesUsed": 2,
+          "kills": 1,
+          "deaths": 1
+        },
+        {
+          "petName": "Singing Sunflower",
+          "timesUsed": 2,
+          "kills": 1,
+          "deaths": 1
+        },
+        {
+          "petName": "Violent Poultrid",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Cobbleshell",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Fledgling Warden Owl",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        },
+        {
+          "petName": "Trunks",
+          "timesUsed": 1,
+          "kills": 0,
+          "deaths": 1
+        }
+      ],
+      "compositeId": "Woxbc-World Finals-075e7708-cfa4-4b30-a033-4246520f605a",
+      "isFinals": true
     }
   ],
-  "regions": ["EU", "EU Finals", "NA", "NA Finals"],
+  "regions": ["EU", "EU Finals", "NA", "NA Finals", "World Finals"],
   "version": "1.4",
   "dataModel": "player-rankings-with-regions",
   "note": "Records include both region and compositeId for compatibility"

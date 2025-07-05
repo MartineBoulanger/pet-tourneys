@@ -3,10 +3,11 @@ import { ContentLayoutItem, ContentLayoutProps } from './types';
 import { cn } from '@/utils/cn';
 
 const REGISTERED_COMPONENTS = {
-  ContentTypeAsset: () =>
-    dynamic(() => import('@/components/contentful/Asset')),
+  Banner: () => dynamic(() => import('@/components/contentful/Banner')),
   ContentTypeRichText: () =>
     dynamic(() => import('@/components/contentful/RichText')),
+  YouTubeVideo: () =>
+    dynamic(() => import('@/components/contentful/YouTubeVideo')),
 };
 
 const componentMap = new Map();
@@ -29,26 +30,17 @@ const ContentLayout = ({ component }: ContentLayoutProps) => {
   const { layout, contentCollection } = component;
   if (!contentCollection.items) return null;
 
-  let setLayout: string;
-  if (layout === '2 Columns') {
-    setLayout = 'lg:grid-cols-2';
-  } else if (layout === '3 Columns') {
-    setLayout = 'lg:grid-cols-3';
-  } else {
-    setLayout = '';
-  }
-
   return (
     <div
       className={cn(
-        'p-2.5 lg:p-5 rounded-lg bg-background grid grid-cols-1 gap-2.5 lg:gap-5',
-        setLayout
+        'grid grid-cols-1',
+        layout === '2 Columns' && 'lg:grid-cols-2'
       )}
     >
       {contentCollection.items.map((component, index) => {
         const Block = getRegisteredComponent(component);
         if (!Block) return null;
-        return <Block key={`block-${index}`} component={component} />;
+        return <Block key={`block-${index}`} component={component} isContentLayout />;
       })}
     </div>
   );

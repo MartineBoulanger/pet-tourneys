@@ -14,7 +14,11 @@ const options = (): Options => {
       [BLOCKS.PARAGRAPH]: (node, children) => {
         const p = node?.nodeType === 'paragraph';
         if (!p) return null;
-        return <p className='mb-2.5 lg:mb-5 last:mb-0'>{children}</p>;
+        return (
+          <p className='mb-2.5 lg:mb-3.5 last:mb-0 leading-[21px]'>
+            {children}
+          </p>
+        );
       },
       [BLOCKS.HEADING_1]: (node, children) => {
         const h1 = node?.nodeType === 'heading-1';
@@ -27,7 +31,10 @@ const options = (): Options => {
         const h2 = node?.nodeType === 'heading-2';
         if (!h2) return null;
         return (
-          <Heading as='h2' className='mb-2.5'>
+          <Heading
+            as='h2'
+            className='mb-2.5 lg:text-2xl text-humanoid font-sans tracking-normal'
+          >
             {children}
           </Heading>
         );
@@ -72,14 +79,16 @@ const options = (): Options => {
         const quote = node?.nodeType === 'blockquote';
         if (!quote) return null;
         return (
-          <q className='text-humanoid flex italic mb-1.5 lg:mb-5'>{children}</q>
+          <span className='flex w-full lg:w-3/4 text-center italic mb-2.5 lg:mb-3.5 lg:mx-auto p-2.5 lg:p-5 bg-light-grey rounded-lg'>
+            {children}
+          </span>
         );
       },
       [BLOCKS.HR]: (node) => {
         const hr = node?.nodeType === 'hr';
         if (!hr) return null;
         return (
-          <div className='h-0.5 rounded-lg w-full bg-light-grey my-2.5 lg:my-5' />
+          <div className='h-[1px] rounded-lg w-full bg-light-grey my-2.5 lg:my-5' />
         );
       },
       [BLOCKS.UL_LIST]: (node, children) => {
@@ -112,21 +121,21 @@ const options = (): Options => {
       },
     },
     renderMark: {
-      [MARKS.BOLD]: (text) => (
-        <span className='font-bold text-humanoid'>{text}</span>
-      ),
-      [MARKS.ITALIC]: (text) => (
-        <span className='italic text-light-blue'>{text}</span>
-      ),
+      [MARKS.BOLD]: (text) => <span className='font-bold'>{text}</span>,
+      [MARKS.ITALIC]: (text) => <span className='italic'>{text}</span>,
       [MARKS.UNDERLINE]: (text) => <span className='underline'>{text}</span>,
       [MARKS.STRIKETHROUGH]: (text) => (
-        <span className='line-through text-foreground/60'>{text}</span>
+        <span className='line-through'>{text}</span>
       ),
     },
   };
 };
 
-const RichText = ({ component, className }: RichTextProps) => {
+const RichText = ({
+  component,
+  className,
+  isContentLayout = false,
+}: RichTextProps) => {
   if (!component) return null;
   const { text, textAligned } = component;
   const aligned = textAligned ? textAligned : 'left';
@@ -135,8 +144,9 @@ const RichText = ({ component, className }: RichTextProps) => {
   return text && text.json ? (
     <div
       className={cn(
-        'leading-normal w-full',
+        'leading-normal w-full px-2.5 antialiased',
         textAligned && `text-${aligned}`,
+        isContentLayout ? 'lg:px-5' : 'lg:w-[800px] lg:mx-auto',
         className
       )}
     >

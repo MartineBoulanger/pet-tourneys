@@ -1,109 +1,44 @@
+import { BANNER_FRAGMENT } from './banner';
+import { CONTENT_LAYOUT_FRAGMENT } from './contentLayout';
+import { CTA_FRAGMENT } from './cta';
+import { RICHTEXT_FRAGMENT } from './richText';
+import { SEO_METADATA_FRAGMENT } from './seoMetadata';
+import { YT_VIDEO_FRAGMENT } from './youTubeVideo';
+
 export const PAGE_FRAGMENT = `
+  __typename
+  _id
   sys {
     id
   }
-  __typename
   seoMetadata {
-    __typename
-    title
-    description
-    indexable
-    keywords
-    image {
-      media {
-        title
-        description
-        url
-      }
-    }
+    ${SEO_METADATA_FRAGMENT}
   }
   pageType
   urlSlug
   banner {
-    __typename
-    bannerImage {
-      media {
-        title
-        description
-        url
-      }
-    }
-    bannerText {
-      text {
-        json
-      }
-      textAligned
-    }
-    bannerActionsCollection {
-      items {
-        ctaText
-        ctaUrl
-      }
-    }
+    ${BANNER_FRAGMENT}
   }
   pageTitle
   pageDescription {
-    __typename
-    text {
-      json
-    }
-    textAligned
+    ${RICHTEXT_FRAGMENT}
   }
   ctAsCollection {
     items {
-      __typename
-      ctaText
-      ctaUrl
+      ${CTA_FRAGMENT}
     }
   }
   pageContentCollection {
     items {
       __typename
-      ... on Banner {
-        bannerImage {
-          media {
-            title
-            description
-            url
-          }
-        }
-        bannerText {
-          text {
-            json
-          }
-          textAligned
-        }
-        bannerActionsCollection {
-          items {
-            ctaText
-            ctaUrl
-          }
-        }
-      }
       ... on ContentLayout {
-        layout
-        contentCollection {
-          items {
-            __typename
-            ... on ContentTypeAsset {
-              media {
-                title
-                description
-                url
-              }
-              cta {
-                ctaText
-                ctaUrl
-              }
-            }
-            ... on ContentTypeRichText {
-              text {
-                json
-              }
-              textAligned
-            }
-          }
-        }
+        ${CONTENT_LAYOUT_FRAGMENT}
+      }
+      ... on ContentTypeRichText {
+        ${RICHTEXT_FRAGMENT}
+      }
+      ... on YouTubeVideo {
+        ${YT_VIDEO_FRAGMENT}
       }
     }
   }

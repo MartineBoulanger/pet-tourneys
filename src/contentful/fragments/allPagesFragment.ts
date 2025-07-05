@@ -1,18 +1,15 @@
+import { BANNER_FRAGMENT } from './banner';
+
 export const ALL_PAGES_FRAGMENT = `
+  __typename
+  _id
   sys {
     id
   }
-  __typename
   pageType
   urlSlug
   pageTitle
   banner {
-    bannerImage {
-      media {
-        title
-        description
-        url
-      }
-    }
+    ${BANNER_FRAGMENT}
   }
 `;

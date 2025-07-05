@@ -23,7 +23,7 @@ export default async function ArticlesPage() {
       <Heading className='text-center'>{'Our Pet Battle Articles'}</Heading>
       <Paragraph className='max-w-[700px] text-center mx-auto'>
         {
-          'You want to learn how to and what pets to use in Pet Battling? Especially in PvP? You want to know what strategies would work, or which pet would be good to use? Then these articles could be of use for you. Have a look around, and hopefully you find what you were looking for.'
+          'New expansion? Or new patch? And you want to know what new is coming for battle pets and pet battling? Check out our news articles, and articles about new pets, new strategies, etc.'
         }
       </Paragraph>
       {/* Page cards list */}
@@ -31,7 +31,7 @@ export default async function ArticlesPage() {
         {pages && pages.length > 0 ? (
           pages.map((page) => <PageCard key={page.sys.id} page={page} />)
         ) : (
-          <div className='w-full py-5 px-2.5 bg-light-grey rounded-lg text-center lg:col-start-2'>
+          <div className='col-span-full p-2.5 lg:p-5 bg-background rounded-lg text-center col-start-1'>
             {'No articles are online yet. Please come back later!'}
           </div>
         )}
