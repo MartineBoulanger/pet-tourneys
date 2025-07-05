@@ -147,5 +147,4 @@ export interface YouTubeVideoProps {
   autoplay?: boolean;
   showinfo?: boolean;
   isContentLayout?: boolean;
-  isPage?: boolean;
 }

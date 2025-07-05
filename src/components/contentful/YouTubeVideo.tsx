@@ -19,15 +19,17 @@ const YouTubeVideo = ({
   showinfo = false,
   className,
   isContentLayout = false,
-  isPage = false,
 }: YouTubeVideoProps) => {
-  if (!component) return null;
-  const { title, youTubeUrl, description, thumbnail: thumb } = component;
   const [thumbnail, setThumbnail] = useState<Media | null>(
-    thumb ? thumb : null
+    component?.thumbnail ? component.thumbnail : null
   );
   const [isAutoPlay, setIsAutoplay] = useState<boolean>(autoplay);
+
+  if (!component) return null;
+
+  const { title, youTubeUrl, description } = component;
   const videoId = getYouTubeVideoId(youTubeUrl);
+
   if (!videoId) return null;
 
   const handleThumbnailPlay = () => {
