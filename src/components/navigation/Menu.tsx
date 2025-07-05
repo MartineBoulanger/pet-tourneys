@@ -1,7 +1,6 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
 import { useState } from 'react';
 import { IoMdClose } from 'react-icons/io';
 import { GiHamburgerMenu } from 'react-icons/gi';
@@ -63,12 +62,13 @@ export const Menu = ({ className, buttonVariant = 'primary' }: MenuProps) => {
                   aria-label={link.linkText}
                 >
                   <span className='max-w-[40px] max-h-[40px]'>
-                    <Image
+                    <img
                       src={link.imageSrc}
                       alt={link.linkText}
                       width={50}
                       height={50}
                       className='w-full h-full object-cover'
+                      loading='lazy'
                     />
                   </span>
                   <span>{link.linkText}</span>

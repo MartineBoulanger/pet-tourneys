@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import Image from 'next/image';
 import { BiLogIn } from 'react-icons/bi';
 import { Logout } from '@/components/auth/Logout';
 import { getUserSession, getAdminSession } from '@/supabase/actions/auth';
@@ -19,12 +18,13 @@ export const AdminNav = async () => {
             aria-label='Admin Panel'
           >
             <span>
-              <Image
+              <img
                 src={admin?.admin?.avatar_url || ''}
                 alt={admin?.admin?.username || ''}
                 width={25}
                 height={25}
                 className='rounded-full'
+                loading='lazy'
               />
             </span>
           </Link>

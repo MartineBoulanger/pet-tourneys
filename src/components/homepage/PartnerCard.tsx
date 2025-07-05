@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import { cn } from '@/utils/cn';
 import { Paragraph } from '@/components/ui';
 
@@ -30,12 +29,13 @@ export const PartnerCard = ({
       )}
     >
       <div className='relative'>
-        <Image
+        <img
           src={partner.image}
           alt={partner.name}
           width={sizeMap[size].width}
           height={sizeMap[size].height}
           className='w-full h-full object-contain'
+          loading='lazy'
         />
       </div>
       <Paragraph

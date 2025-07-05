@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import RichText from './RichText';
 import Cta from './Cta';
 import { BannerProps } from './types';
@@ -18,7 +17,7 @@ const Banner = ({ component, isPage = false, className }: BannerProps) => {
           isPage ? 'lg:h-[85vh]' : 'rounded-lg overflow-hidden'
         )}
       >
-        <Image
+        <img
           src={bannerPicture?.url}
           alt={bannerPicture?.title}
           width={bannerPicture?.width}

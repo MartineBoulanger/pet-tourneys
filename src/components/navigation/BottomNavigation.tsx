@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import Image from 'next/image';
 import { BiLogIn } from 'react-icons/bi';
 import { cn } from '@/utils/cn';
 import { Profile } from '@/types';
@@ -40,12 +39,13 @@ export const BottomNavigation = ({ user }: BottomNavigationProps) => {
             aria-label='Admin Panel'
           >
             <span>
-              <Image
+              <img
                 src={user?.avatar_url || ''}
                 alt={user?.username || ''}
                 width={25}
                 height={25}
                 className='rounded-full'
+                loading='lazy'
               />
             </span>
           </Link>

@@ -1,5 +1,5 @@
 'use client';
-import Image from 'next/image';
+
 import { CgPlayButtonR } from 'react-icons/cg';
 import { cn } from '@/utils/cn';
 import { Media, YouTubeVideoProps } from './types';
@@ -52,7 +52,7 @@ const YouTubeVideo = ({
           className='relative aspect-video cursor-pointer rounded-lg overflow-hidden bg-transparent'
           onClick={handleThumbnailPlay}
         >
-          <Image
+          <img
             src={thumbnail?.url}
             alt={thumbnail?.title}
             width={thumbnail?.width}
