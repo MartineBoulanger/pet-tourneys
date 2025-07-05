@@ -3,7 +3,7 @@ import Link from 'next/link';
 export const Logo = () => {
   return (
     <Link title='Logo' aria-label='Logo' href='/'>
-      <span className='w-full h-10'>
+      <span className='w-10 h-10'>
         <img
           width={40}
           height={40}
