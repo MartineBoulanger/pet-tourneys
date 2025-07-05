@@ -56,7 +56,6 @@ const Banner = ({ component, isPage = false, className }: BannerProps) => {
       component={bannerVideo}
       autoplay
       isContentLayout={isPage ? false : true}
-      isPage={isPage}
     />
   ) : null;
 };
