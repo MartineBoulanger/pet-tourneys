@@ -53,6 +53,7 @@ export const withSupabase = (middleware: CustomMiddleware) => {
       !request.nextUrl.pathname.startsWith('/pet-reviews') &&
       !request.nextUrl.pathname.startsWith('/json-files') &&
       !request.nextUrl.pathname.startsWith('/auth') &&
+      !request.nextUrl.pathname.startsWith('/api') &&
       !request.nextUrl.pathname.endsWith('/sitemap.xml') &&
       !request.nextUrl.pathname.endsWith('/robots.txt') &&
       !request.nextUrl.pathname.endsWith('/')

@@ -1,0 +1,84 @@
+.prose {
+  max-width: 100%;
+}
+
+.prose h1,
+.prose h2 {
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+.prose p {
+  line-height: 1.6;
+}
+
+.prose ul,
+.prose ol {
+  margin-bottom: 1em;
+  padding-left: 1.5em;
+}
+
+.prose ul {
+  list-style-type: disc;
+}
+
+.prose ol {
+  list-style-type: decimal;
+}
+
+.prose a {
+  color: #11a7f5;
+}
+.prose a:hover {
+  text-decoration: underline;
+}
+
+.prose img {
+  max-width: 100%;
+  height: auto;
+  margin: 1em 0;
+  float: left;
+}
+
+/* rules page */
+.rules {
+  width: 100%;
+}
+
+.rules ul,
+.rules ol {
+  margin-bottom: 1em;
+  padding-left: 1.5em;
+}
+
+.rules ul {
+  list-style-type: disc;
+}
+
+.rules ol {
+  list-style-type: decimal;
+}
+
+.rules a {
+  color: #11a7f5;
+}
+
+.rules a:hover {
+  text-decoration: underline;
+}
+
+.rules img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  /* margin: 10px 0; */
+  display: inline-flex;
+}
+
+@media screen and (min-width: 1024px) {
+  .rules img {
+    width: 30%;
+    max-width: 45%;
+    /* margin: 10px; */
+  }
+}

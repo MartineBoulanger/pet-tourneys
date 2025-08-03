@@ -1,9 +1,16 @@
 import { notFound } from 'next/navigation';
 import { getTournaments } from '@/supabase/actions/tournaments';
-import { Container, Heading, Paragraph } from '@/components/ui';
+import {
+  Container,
+  Heading,
+  PageHeading,
+  PageMenu,
+  Paragraph,
+} from '@/components/ui';
 import { TournamentsList } from '@/components/tournaments';
 import { PageSearchParams } from '@/types';
 import { TOURNAMENTS_PER_PAGE } from '@/utils/constants';
+import { Links } from '@/lib/types';
 
 export async function generateMetadata() {
   return {
@@ -41,9 +48,39 @@ export default async function TournamentsPage({
 
   if (!tournaments) return notFound();
 
+  const links: Links = [
+    {
+      id: 1,
+      url: `/tournaments/rules`,
+      text: 'Rules',
+    },
+    {
+      id: 2,
+      url: `/tournaments/prizes`,
+      text: 'Prizes',
+    },
+    {
+      id: 3,
+      url: `/tournaments/stages`,
+      text: 'Stages',
+    },
+    {
+      id: 4,
+      url: '/tournaments/schedule',
+      text: 'Schedule',
+    },
+    {
+      id: 5,
+      url: '/tournaments/sign-ups',
+      text: 'Sign-ups',
+    },
+  ];
+
   return (
     <Container className='lg:px-5'>
-      <Heading>{'Tournaments'}</Heading>
+      <PageHeading heading='Tournaments'>
+        <PageMenu links={links} />
+      </PageHeading>
       {tournaments.length > 0 ? (
         <TournamentsList
           tournaments={tournaments}
