@@ -8,5 +8,9 @@ export type {
   CarouselProps,
   CarouselItemComponent,
   CustomImage,
+  DeriveCarouselItemKeyParams,
+  CarouselData,
+  CarouselSettings,
+  CarouselThumbnailType
 } from './types';
 export * from './Thumbnails';

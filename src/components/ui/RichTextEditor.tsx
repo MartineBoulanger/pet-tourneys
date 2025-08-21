@@ -2,13 +2,11 @@
 
 import { useEditor, EditorContent, Editor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
-import Image from '@tiptap/extension-image';
 import Link from '@tiptap/extension-link';
 import { useState, useEffect } from 'react';
 import { HiListBullet } from 'react-icons/hi2';
 import { VscListOrdered } from 'react-icons/vsc';
-import { FaLink, FaRegImage } from 'react-icons/fa6';
-import { uploadImage } from '@/mongoDB/actions/images';
+import { FaLink } from 'react-icons/fa6';
 
 type RichTextEditorProps = {
   content: string;
@@ -21,34 +19,12 @@ export function RichTextEditor({
   content,
   onChange,
   className,
-  imgClassName,
 }: RichTextEditorProps) {
   const [isMounted, setIsMounted] = useState(false);
 
   const editor = useEditor({
     extensions: [
       StarterKit,
-      Image.configure({
-        HTMLAttributes: {
-          class: imgClassName || 'max-w-full h-auto rounded-lg',
-          loading: 'lazy',
-        },
-        inline: true,
-      }),
-      Image.extend({
-        addAttributes() {
-          return {
-            ...this.parent?.(),
-            'data-id': {
-              default: null,
-              parseHTML: (element) => element.getAttribute('data-id'),
-              renderHTML: (attributes) => ({
-                'data-id': attributes['data-id'],
-              }),
-            },
-          };
-        },
-      }),
       Link.configure({
         openOnClick: false,
       }),
@@ -57,58 +33,14 @@ export function RichTextEditor({
     onUpdate: ({ editor }) => {
       onChange(editor.getHTML());
     },
-    immediatelyRender: true,
+    immediatelyRender: false,
   });
-
-  const handleImageUpload = async (file: File) => {
-    try {
-      const formData = new FormData();
-      formData.append('file', file);
-
-      const result = await uploadImage(formData);
-
-      if (result.success && editor) {
-        const imageUrl = `/api/images?id=${result.imageId}`; // Keep this URL pattern for compatibility
-
-        editor
-          .chain()
-          .focus()
-          .setImage({
-            src: imageUrl,
-            alt: file.name,
-          })
-          .run();
-      }
-    } catch (error) {
-      console.error('Image upload failed:', error);
-    }
-  };
 
   useEffect(() => {
     if (editor && content !== editor.getHTML()) {
       editor.commands.setContent(content);
     }
   }, [content, editor]);
-
-  useEffect(() => {
-    const handlePaste = (event: ClipboardEvent) => {
-      const items = event.clipboardData?.items;
-      if (!items || !editor) return;
-
-      for (let i = 0; i < items.length; i++) {
-        if (items[i].type.indexOf('image') === 0) {
-          const file = items[i].getAsFile();
-          if (file) {
-            event.preventDefault();
-            handleImageUpload(file);
-          }
-        }
-      }
-    };
-
-    window.addEventListener('paste', handlePaste);
-    return () => window.removeEventListener('paste', handlePaste);
-  }, [editor]);
 
   useEffect(() => {
     setIsMounted(true);
@@ -123,7 +55,7 @@ export function RichTextEditor({
     <div
       className={`border border-light-grey rounded-lg overflow-hidden ${className}`}
     >
-      <MenuBar editor={editor} onImageUpload={handleImageUpload} />
+      <MenuBar editor={editor} />
       <EditorContent
         editor={editor}
         className='min-h-[350px] overflow-x-auto p-2.5 lg:p-5 bg-foreground text-background prose'
@@ -132,42 +64,12 @@ export function RichTextEditor({
   );
 }
 
-function MenuBar({
-  editor,
-  onImageUpload,
-}: {
-  editor: Editor | null;
-  onImageUpload: (file: File) => Promise<void>;
-}) {
-  const [isUploading, setIsUploading] = useState(false);
-
+function MenuBar({ editor }: { editor: Editor | null }) {
   if (!editor) return null;
 
   const handleButtonClick = (action: () => void) => (e: React.MouseEvent) => {
-    e.preventDefault(); // Prevent default button behavior
+    e.preventDefault();
     action();
-  };
-
-  const handleImageClick = () => {
-    const input = document.createElement('input');
-    input.type = 'file';
-    input.accept = 'image/*';
-
-    input.onchange = async (e) => {
-      const file = (e.target as HTMLInputElement).files?.[0];
-      if (file) {
-        try {
-          setIsUploading(true);
-          await onImageUpload(file);
-        } catch (error) {
-          console.error('Image upload failed:', error);
-        } finally {
-          setIsUploading(false);
-        }
-      }
-    };
-
-    input.click();
   };
 
   return (
@@ -359,17 +261,6 @@ function MenuBar({
         title='Link'
       >
         <FaLink />
-      </button>
-
-      {/* Image */}
-      <button
-        onClick={handleButtonClick(handleImageClick)}
-        className={`p-2.5 rounded hover:bg-background ${
-          isUploading ? 'opacity-50 cursor-not-allowed' : ''
-        }`}
-        title='Image'
-      >
-        {isUploading ? '...' : <FaRegImage />}
       </button>
     </div>
   );

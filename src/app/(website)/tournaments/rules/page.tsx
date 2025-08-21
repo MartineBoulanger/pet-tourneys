@@ -1,4 +1,3 @@
-import { RulesPage } from '@/components/cms/RulesPage';
 import { Links } from '@/lib/types';
 import { Container, PageHeading, PageMenu } from '@/components/ui';
 
@@ -20,21 +19,6 @@ export default function TournamentsRulesPage() {
     },
     {
       id: 2,
-      url: `/tournaments/stages`,
-      text: 'Stages',
-    },
-    {
-      id: 3,
-      url: '/tournaments/schedule',
-      text: 'Schedule',
-    },
-    {
-      id: 4,
-      url: '/tournaments/sign-ups',
-      text: 'Sign-ups',
-    },
-    {
-      id: 5,
       url: '/tournaments',
       text: 'Tournaments List',
     },
@@ -45,7 +29,7 @@ export default function TournamentsRulesPage() {
       <PageHeading heading='Tournament Rules'>
         <PageMenu links={links} />
       </PageHeading>
-      <RulesPage />
+      {/* TODO: make a sidebar navigation to navigate to each rule set */}
     </Container>
   );
 }

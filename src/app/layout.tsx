@@ -22,8 +22,8 @@ export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: {
-    template: '%s | Pet Tourneys',
-    default: 'Pet Tourneys',
+    template: '%s | PML',
+    default: 'Pet Masters League',
   },
   description:
     'The WoW Pet Community for all things pet battling and battle pets related',

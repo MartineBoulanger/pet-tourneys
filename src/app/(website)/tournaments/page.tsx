@@ -59,21 +59,6 @@ export default async function TournamentsPage({
       url: `/tournaments/prizes`,
       text: 'Prizes',
     },
-    {
-      id: 3,
-      url: `/tournaments/stages`,
-      text: 'Stages',
-    },
-    {
-      id: 4,
-      url: '/tournaments/schedule',
-      text: 'Schedule',
-    },
-    {
-      id: 5,
-      url: '/tournaments/sign-ups',
-      text: 'Sign-ups',
-    },
   ];
 
   return (

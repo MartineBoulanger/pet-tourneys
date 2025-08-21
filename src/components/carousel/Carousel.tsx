@@ -243,7 +243,13 @@ const Carousel = ({
             >
               <FaChevronLeft />
             </Button>
-            <Thumbnails items={thumbnails} goTo={jumpTo} currentIndex={index} />
+            {thumbnails && (
+              <Thumbnails
+                items={thumbnails}
+                goTo={jumpTo}
+                currentIndex={index}
+              />
+            )}
             <Button
               onClick={incrIdx}
               disabled={onlyOneItem}

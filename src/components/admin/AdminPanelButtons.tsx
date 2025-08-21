@@ -7,8 +7,8 @@ export const AdminPanelButtons = ({
   isMatchesPage = false,
 }: AdminPanelButtonsProps) => {
   return (
-    <div className='mb-10'>
-      <Heading as='h2' className='text-xl mb-2.5'>
+    <div className='mb-5'>
+      <Heading as='h2' className='font-sans tracking-normal text-humanoid text-xl mb-2.5'>
         {'What do you want to do?'}
       </Heading>
       <div className='flex flex-wrap items-center gap-2.5 lg:gap-5'>

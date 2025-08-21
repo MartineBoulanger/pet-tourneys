@@ -1,79 +1,100 @@
 'use server';
 
-import dbConnect from '@/mongoDB/client';
-import Image from '@/mongoDB/models/Image';
+import { revalidatePath } from 'next/cache';
+import { ImageUpload } from '../types';
+import {
+  getImageDimensionsFromBuffer,
+  serializeImage,
+  serializeImages,
+} from '../utils';
+import { Upload } from '../models/Upload';
+import dbConnect from '../client';
 
-export async function uploadImage(formData: FormData) {
+export async function uploadImages(
+  formData: FormData
+): Promise<{ success: boolean; images?: ImageUpload[]; error?: string }> {
   try {
     await dbConnect();
+    const files = formData.getAll('images') as File[];
 
-    const file = formData.get('file') as File;
-    if (!file) {
-      throw new Error('No file provided');
+    if (!files || files.length === 0) {
+      return { success: false, error: 'No images provided' };
     }
 
-    // First check if image with same filename exists
-    const existingImage = await Image.findOne({ filename: file.name });
-    if (existingImage) {
-      return {
-        success: true,
-        imageId: existingImage._id.toString(),
-        existing: true, // Flag to indicate this is an existing image
+    const uploads: ImageUpload[] = [];
+
+    for (const file of files) {
+      if (!file.type.startsWith('image/')) continue;
+      const buffer = await file.arrayBuffer();
+      const base64 = Buffer.from(buffer).toString('base64');
+      const dataUrl = `data:${file.type};base64,${base64}`;
+      const dimensions = await getImageDimensionsFromBuffer(buffer, file.type);
+
+      const imageData = {
+        src: dataUrl,
+        alt: file.name.split('.')[0],
+        width: dimensions.width,
+        height: dimensions.height,
+        usedIn: [],
+        usedInModel: undefined,
       };
+
+      const newUpload = new Upload(imageData);
+      const savedImage = await newUpload.save();
+
+      // Serialize the saved document to plain object
+      const serializedImage = serializeImage(savedImage);
+      uploads.push(serializedImage);
     }
 
-    // If not exists, proceed with upload
-    const buffer = Buffer.from(await file.arrayBuffer());
-
-    const newImage = new Image({
-      filename: file.name,
-      mimeType: file.type,
-      size: file.size,
-      data: buffer,
-    });
-
-    await newImage.save();
-
-    return {
-      success: true,
-      imageId: newImage._id.toString(),
-      existing: false,
-    };
+    revalidatePath('/admin/image-manager');
+    return { success: true, images: uploads };
   } catch (error) {
-    console.error('Failed to upload image:', error);
-    return {
-      success: false,
-      error: error instanceof Error ? error.message : 'Failed to upload image',
-    };
+    console.error('Upload error:', error);
+    return { success: false, error: 'Failed to upload images' };
   }
 }
 
-export async function getImage(imageId: string) {
+export async function getUploadedImages(): Promise<ImageUpload[]> {
   try {
     await dbConnect();
-
-    if (!imageId) {
-      throw new Error('Image ID required');
-    }
-
-    const image = await Image.findById(imageId);
-    if (!image) {
-      throw new Error('Image not found');
-    }
-
-    return {
-      success: true,
-      image: {
-        data: image.data,
-        mimeType: image.mimeType,
-        size: image.size,
-      },
-    };
+    const images = await Upload.find().sort({ createdAt: -1 }).lean();
+    return serializeImages(images);
   } catch (error) {
-    console.error('Failed to fetch image:', error);
-    return {
-      success: false,
-      error: error instanceof Error ? error.message : 'Failed to fetch image',
-    };
+    console.error('Error fetching images:', error);
+    return [];
+  }
+}
+
+export async function deleteImage(
+  imageId: string
+): Promise<{ success: boolean; error?: string }> {
+  try {
+    await dbConnect();
+    const result = await Upload.findOneAndDelete({ _id: imageId });
+    if (!result) return { success: false, error: 'Image not found' };
+    revalidatePath('/admin/image-manager');
+    return { success: true };
+  } catch (error) {
+    console.error('Failed to delete image:', error);
+    return { success: false, error: 'Failed to delete image' };
+  }
+}
+
+export async function updateImage(
+  imageId: string,
+  updates: { alt?: string; usedIn?: string[]; usedInModel?: string }
+): Promise<{ success: boolean; error?: string }> {
+  try {
+    await dbConnect();
+    const result = await Upload.findOneAndUpdate({ _id: imageId }, updates, {
+      new: true,
+    });
+    if (!result) return { success: false, error: 'Image not found' };
+    revalidatePath('/admin/image-manager');
+    return { success: true };
+  } catch (error) {
+    console.error('Update error:', error);
+    return { success: false, error: 'Failed to update image' };
   }
 }

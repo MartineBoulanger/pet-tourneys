@@ -12,6 +12,7 @@ import {
   Textarea,
   Select,
   Option,
+  Paragraph,
 } from '@/components/ui';
 import { UploadFormProps } from './types';
 
@@ -125,6 +126,11 @@ export function UploadForm({
 
   return (
     <div className='bg-light-grey shadow-md rounded-lg p-2.5 lg:p-5'>
+      <Paragraph className='w-full text-center mb-5 mt-2.5 text-sm'>
+        {
+          'Upload/Edit the PvP pet battle logs and pet usage, fill in the match information, and track the match and logs.'
+        }
+      </Paragraph>
       <Form
         handleSubmit={handleSubmit}
         button1={{ type: 'button', variant: 'secondary', text: 'Cancel' }}

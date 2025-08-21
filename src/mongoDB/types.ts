@@ -1,50 +1,45 @@
-import { Document } from 'mongoose';
+import { Types } from 'mongoose';
 
-export type StoreName = 'rules' | 'prizes' | 'stages' | 'schedule' | 'sign-ups';
-
-export interface Rule {
-  title: string;
-  content: string;
-  order: number;
+// **************************************************************************
+export interface MongoImageDocument {
+  _id: Types.ObjectId;
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+  usedIn: Types.ObjectId[];
+  usedInModel?: string;
+  createdAt: Date;
+  updatedAt: Date;
+  __v?: number;
+}
+export interface ImageUpload {
+  _id: string;
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+  usedIn: string[];
+  usedInModel?: string;
   createdAt: Date;
   updatedAt: Date;
 }
-
-export interface Prize {
+// **************************************************************************
+export interface MongoResourceDocument {
+  _id: Types.ObjectId;
   title: string;
-  description: string;
-  value: number;
-  image?: string;
+  imageIds: string[];
+  order?: number;
+  createdAt: Date;
+  updatedAt: Date;
+  __v?: number;
+}
+export interface Resource {
+  _id: string;
+  title: string;
+  imageIds: string[];
+  order?: number;
   createdAt: Date;
   updatedAt: Date;
 }
-
-export interface Stage {
-  title: string;
-  description: string;
-  image?: string;
-  order: number;
-  createdAt: Date;
-  updatedAt: Date;
-}
-
-export interface Image {
-  filename: string;
-  mimeType: string;
-  size: number;
-  data: BufferConstructor;
-  createdAt: Date;
-}
-
-export type StoreType<T extends StoreName> = T extends 'rules'
-  ? Rule
-  : T extends 'prizes'
-  ? Prize
-  : T extends 'stages'
-  ? Stage
-  : never;
-
-export interface iRuleDocument extends Rule, Document {}
-export interface iPrizeDocument extends Prize, Document {}
-export interface iStageDocument extends Stage, Document {}
-export interface iImageDocument extends Image, Document {}
+// **************************************************************************

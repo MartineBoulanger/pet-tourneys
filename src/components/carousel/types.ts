@@ -25,10 +25,6 @@ export type RenderedComponentProps = {
   jumpTo: (index: number) => void;
 };
 
-// export type RenderedComponentPropsWithIndex = RenderedComponentProps & {
-//   currentIdx: number;
-// };
-
 export type CarouselItemComponent = {
   image?: Partial<StaticImageData> & CustomImage;
   component?:
@@ -38,6 +34,7 @@ export type CarouselItemComponent = {
 
 export type CarouselItem = {
   key?: string;
+  imageId?: string;
   mobile?: CarouselItemComponent;
   desktop?: CarouselItemComponent;
 };
@@ -63,4 +60,22 @@ export type DeriveCarouselItemKeyParams = {
   isFirstItem?: boolean;
   isLastItem?: boolean;
   isMobileDevice?: boolean;
+};
+
+export type CarouselThumbnailType = 'images' | 'numbers' | 'strings';
+
+export type CarouselSettings = {
+  slideDuration: number;
+  noAutoPlay: boolean;
+  noBlur: boolean;
+  showControls: boolean;
+  autoPlayOutsideViewport: boolean;
+  pauseOnHover: boolean;
+  thumbnailType: CarouselThumbnailType;
+  customThumbnails?: string[] | number[];
+};
+
+export type CarouselData = {
+  items: CarouselItem[];
+  settings: CarouselSettings;
 };

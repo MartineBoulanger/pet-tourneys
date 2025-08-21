@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Heading, Textarea, Button, Form } from '@/components/ui';
+import { Heading, Textarea, Button, Form, Paragraph } from '@/components/ui';
 import { FaFileDownload } from 'react-icons/fa';
 
 export function PetsDataConverter() {
@@ -72,6 +72,11 @@ export function PetsDataConverter() {
   return (
     <>
       <div className='bg-light-grey shadow-md rounded-lg p-2.5 lg:p-5'>
+        <Paragraph className='w-full text-center mx-auto mb-5 mt-2.5 text-sm'>
+          {
+            "Upload the excel file sheet from Xu-Fu's pet guide, and convert it to a JSON file, then download the json file, and make sure you move the file from Downloads folder to the lib folder in the app. This can only be done by Fwen for now."
+          }
+        </Paragraph>
         <Form handleSubmit={convertToJson}>
           <Textarea
             label='Paste excel data here'
@@ -84,7 +89,7 @@ export function PetsDataConverter() {
           />
         </Form>
         <div className='flex items-center flex-wrap justify-end gap-2.5 lg:gap-5 mt-2.5 lg:mt-5'>
-          <Button variant='secondary' onClick={() => router.back()}>
+          <Button variant='secondary' onClick={() => router.push('/admin')}>
             {'Cancel'}
           </Button>
           <Button variant='secondary' onClick={handleClear}>
@@ -96,7 +101,12 @@ export function PetsDataConverter() {
       {jsonOutput && (
         <>
           <div className='flex flex-row justify-between items-center mb-5 mt-5 lg:mt-10'>
-            <Heading as='h2'>{'JSON Output'}</Heading>
+            <Heading
+              as='h3'
+              className='font-sans tracking-normal text-xl text-center mb-2.5'
+            >
+              {'JSON Output'}
+            </Heading>
             <Button onClick={downloadJsonFile}>
               <FaFileDownload className='h-6 w-6' />
             </Button>

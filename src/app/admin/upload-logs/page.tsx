@@ -1,6 +1,6 @@
 import { getTournamentsForForm } from '@/supabase/actions/tournaments';
 import { UploadForm } from '@/components/admin';
-import { Container, Heading, Paragraph } from '@/components/ui';
+import { Container, Heading, Paragraph, Divider } from '@/components/ui';
 
 export async function generateMetadata() {
   return {
@@ -19,35 +19,52 @@ export default async function UploadLogsPage() {
 
   if (!success) {
     return (
-      <Container className='text-center lg:px-5'>
-        <Heading className='text-red'>{`Error ${status}!`}</Heading>
-        <Paragraph>{message}</Paragraph>
-      </Container>
+      <>
+        <Divider alignment='horizontal' color='light-grey' height='0.5' />
+        <Container className='text-center lg:px-5'>
+          <Heading
+            as='h2'
+            className='font-sans tracking-normal text-xl text-center text-red mb-2.5'
+          >{`Error ${status}!`}</Heading>
+          <Paragraph>{message}</Paragraph>
+        </Container>
+      </>
     );
   }
 
   if (!tournaments) {
     return (
-      <Container className='text-center lg:px-5'>
-        <Heading className='text-red'>{'No Tournaments Found!'}</Heading>
-        <Paragraph>
-          {
-            'Please create a tournament first before you upload the battle logs to create matches and statistics.'
-          }
-        </Paragraph>
-      </Container>
+      <>
+        <Divider alignment='horizontal' color='light-grey' height='0.5' />
+        <Container className='text-center lg:px-5'>
+          <Heading
+            as='h2'
+            className='font-sans tracking-normal text-xl text-center text-red mb-2.5'
+          >
+            {'No Tournaments Found!'}
+          </Heading>
+          <Paragraph>
+            {
+              'Please create a tournament first before you upload the battle logs to create matches and statistics.'
+            }
+          </Paragraph>
+        </Container>
+      </>
     );
   }
 
   return (
-    <Container className='max-w-[1024px]'>
-      <Heading className='text-center'>{'Pet Battle Logs Uploader'}</Heading>
-      <Paragraph className='max-w-[600px] mx-auto text-center mb-5 mt-2.5 text-sm'>
-        {
-          'Upload the PvP pet battle logs and pet usage, fill in the match information, and track the match and logs.'
-        }
-      </Paragraph>
-      <UploadForm tournaments={tournaments || []} />
-    </Container>
+    <>
+      <Divider alignment='horizontal' color='light-grey' height='0.5' />
+      <Container className='max-w-[1024px]'>
+        <Heading
+          as='h2'
+          className='font-sans tracking-normal text-xl text-center mb-2.5'
+        >
+          {'Pet Battle Logs Upload Form'}
+        </Heading>
+        <UploadForm tournaments={tournaments || []} />
+      </Container>
+    </>
   );
 }

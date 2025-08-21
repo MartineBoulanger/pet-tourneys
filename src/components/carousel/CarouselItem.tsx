@@ -68,18 +68,18 @@ export const CarouselItem = ({
             loadingComponent
           ) : (
             <div
-              className='absolute animate-pulse w-full bg-gray-300 transform h-full'
+              className='absolute animate-pulse w-full transform h-full'
               aria-busy
             />
           )}
           <Image
             alt={image?.alt as string}
             src={image?.src}
-            width={image.width}
-            height={image.height}
+            width={image.width || 400}
+            height={image.height || 400}
             style={imageStyles}
             className={cn(
-              'absolute inset-0 object-cover transition duration-200 select-none',
+              'absolute inset-0 object-cover mx-auto transition duration-200 select-none',
               {
                 'blur-sm': !loaded,
                 'cursor-grab': !isGrabbing && !isSingleSlide,

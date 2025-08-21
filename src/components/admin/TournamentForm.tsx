@@ -119,7 +119,7 @@ export function TournamentForm({ initialData = null }: TournamentFormProps) {
           type: 'submit',
           text: isSubmitting ? 'Saving...' : 'Save Tournament',
         }}
-        handleClick={() => router.back()}
+        handleClick={() => router.push('/admin/tournaments')}
       >
         <Input
           type='text'

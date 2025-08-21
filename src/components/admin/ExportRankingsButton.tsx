@@ -73,15 +73,19 @@ export function ExportRankingsButton({
     <Button
       onClick={handleExport}
       disabled={isLoading}
-      className='btn-link border py-3 px-4 rounded-lg border-blue-grey hover:bg-blue-grey hover:text-foreground'
+      className='btn-submit py-[7px] px-[11px] rounded-lg flex items-center gap-2.5'
       title='Export Rankings'
       aria-label='Export Rankings'
     >
       {isLoading ? (
-        '...'
+        <>
+          <FaFileDownload className='h-5 w-5' />{' '}
+          <span>{'Downloading JSON...'}</span>
+        </>
       ) : (
         <>
-          <FaFileDownload className='h-6 w-6' />
+          <FaFileDownload className='h-5 w-5' />{' '}
+          <span>{'Download Rankings'}</span>
         </>
       )}
     </Button>

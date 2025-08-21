@@ -13,6 +13,16 @@ export const DEFAULT_BLUR_QUALITY = 40;
 export const DEFAULT_ASPECT_RATIO = [16, 9];
 export const DEFAULT_DURATION = 5000;
 
+export const DEFAULT_CAROUSEL_SETTINGS = {
+  slideDuration: 5000,
+  noAutoPlay: false,
+  noBlur: true,
+  showControls: true,
+  autoPlayOutsideViewport: true,
+  pauseOnHover: true,
+  thumbnailType: 'images' as const,
+};
+
 // object to set classes for each breakpoint
 export const breakPointClasses: BreakPointClassShape = {
   xs: { desktop: 'hidden xs:flex', mobile: 'flex xs:hidden' },
