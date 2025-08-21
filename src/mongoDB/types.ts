@@ -43,3 +43,23 @@ export interface Resource {
   updatedAt: Date;
 }
 // **************************************************************************
+export interface MongoRuleDocument {
+  _id: Types.ObjectId;
+  title: string;
+  content: string;
+  imageIds: string[];
+  order?: number;
+  createdAt: Date;
+  updatedAt: Date;
+  __v?: number;
+}
+export interface Rule {
+  _id: string;
+  title: string;
+  content: string;
+  imageIds: string[];
+  order?: number;
+  createdAt: Date;
+  updatedAt: Date;
+}
+// **************************************************************************

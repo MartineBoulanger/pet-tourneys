@@ -1,5 +1,6 @@
 import { Links } from '@/lib/types';
 import { Container, PageHeading, PageMenu } from '@/components/ui';
+import { RulesList } from '@/components/admin/cms/rules/RulesList';
 
 export async function generateMetadata() {
   return {
@@ -30,6 +31,7 @@ export default function TournamentsRulesPage() {
         <PageMenu links={links} />
       </PageHeading>
       {/* TODO: make a sidebar navigation to navigate to each rule set */}
+      <RulesList />
     </Container>
   );
 }

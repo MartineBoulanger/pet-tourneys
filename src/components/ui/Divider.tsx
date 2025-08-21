@@ -18,8 +18,8 @@ export const Divider = ({
       className={cn(
         'rounded-full',
         alignment === 'horizontal'
-          ? `w-full h-${height} my-5`
-          : `h-full w-${width} mx-5`,
+          ? `w-${width} h-${height} my-5 mx-auto`
+          : `h-${height} w-${width} mx-5 my-auto`,
         `bg-${color}`
       )}
     />

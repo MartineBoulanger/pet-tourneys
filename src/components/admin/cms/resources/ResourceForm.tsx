@@ -51,12 +51,12 @@ export const ResourceForm = ({
         setSelectedImageIds([]);
         onSuccess?.();
       } else {
-        setError(result.error || 'Er is een fout opgetreden');
+        setError(result.error || 'An unexpected error occurred');
       }
 
       setTitle(title);
     } catch (err) {
-      setError('Er is een onverwachte fout opgetreden');
+      setError('An unexpected error occurred');
     }
   };
 

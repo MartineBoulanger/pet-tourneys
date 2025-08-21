@@ -2,68 +2,69 @@
 
 import { useState, useEffect } from 'react';
 import {
-  getResources,
-  deleteResource,
-  reorderResources,
-} from '@/mongoDB/actions/resources';
-import { ResourceForm } from './ResourceForm';
-import { Resource as ResourceType } from '@/mongoDB/types';
-import { FaTrashAlt, FaEdit, FaImage, FaPlus, FaBars, FaFolderPlus } from 'react-icons/fa';
+  FaTrashAlt,
+  FaEdit,
+  FaImage,
+  FaPlus,
+  FaBars,
+  FaFolderPlus,
+} from 'react-icons/fa';
+import { IoMdCalendar } from 'react-icons/io';
+import { getRules, deleteRule, reorderRules } from '@/mongoDB/actions/rules';
+import { Rule as RuleType } from '@/mongoDB/types';
+import { RuleForm } from './RuleForm';
 import {
   Button,
   Heading,
   Paragraph,
-  ResourcesManagerSkeleton,
+  ImageManagerSkeleton,
 } from '@/components/ui';
-import { IoMdCalendar } from 'react-icons/io';
 
-export function ResourcesManager() {
-  const [resources, setResources] = useState<ResourceType[]>([]);
+export function RulesManager() {
+  const [rules, setRules] = useState<RuleType[]>([]);
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
-  const [editingResource, setEditingResource] = useState<
-    ResourceType | undefined
-  >();
+  const [editingRule, setEditingRule] = useState<RuleType | undefined>();
   const [deletingId, setDeletingId] = useState<string | null>(null);
   const [draggedItem, setDraggedItem] = useState<string | null>(null);
 
-  const loadResources = async () => {
+  const loadRules = async () => {
     setLoading(true);
     try {
-      const data = await getResources();
-      setResources(data);
+      const data = await getRules();
+      setRules(data);
     } catch (error) {
-      console.error('Error loading resources:', error);
+      console.error('Error loading rules:', error);
     } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    loadResources();
+    loadRules();
   }, []);
 
   const handleFormSuccess = () => {
     setShowForm(false);
-    setEditingResource(undefined);
-    loadResources();
+    setEditingRule(undefined);
+    loadRules();
   };
 
-  const handleEdit = (resource: ResourceType) => {
-    setEditingResource(resource);
+  const handleEdit = (rule: RuleType) => {
+    setEditingRule(rule);
     setShowForm(true);
   };
 
-  const handleDelete = async (resourceId: string) => {
-    if (!confirm('Are you sure you want to delete this resource section?')) {
+  const handleDeleteRule = async (ruleId: string) => {
+    if (!confirm('Are you sure you want to delete this rule?')) {
       return;
     }
 
-    setDeletingId(resourceId);
+    setDeletingId(ruleId);
     try {
-      const result = await deleteResource(resourceId);
+      const result = await deleteRule(ruleId);
       if (result.success) {
-        await loadResources();
+        await loadRules();
       } else {
         alert(result.error || 'Error during deleting');
       }
@@ -76,11 +77,11 @@ export function ResourcesManager() {
 
   const handleCancelForm = () => {
     setShowForm(false);
-    setEditingResource(undefined);
+    setEditingRule(undefined);
   };
 
-  const handleDragStart = (e: React.DragEvent, resourceId: string) => {
-    setDraggedItem(resourceId);
+  const handleDragStart = (e: React.DragEvent, ruleId: string) => {
+    setDraggedItem(ruleId);
     e.dataTransfer.effectAllowed = 'move';
   };
 
@@ -89,41 +90,41 @@ export function ResourcesManager() {
     e.dataTransfer.dropEffect = 'move';
   };
 
-  const handleDrop = async (e: React.DragEvent, targetResourceId: string) => {
+  const handleDrop = async (e: React.DragEvent, targetRuleId: string) => {
     e.preventDefault();
 
-    if (!draggedItem || draggedItem === targetResourceId) {
+    if (!draggedItem || draggedItem === targetRuleId) {
       setDraggedItem(null);
       return;
     }
 
-    const draggedIndex = resources.findIndex((r) => r._id === draggedItem);
-    const targetIndex = resources.findIndex((r) => r._id === targetResourceId);
+    const draggedIndex = rules.findIndex((r) => r._id === draggedItem);
+    const targetIndex = rules.findIndex((r) => r._id === targetRuleId);
 
     if (draggedIndex === -1 || targetIndex === -1) return;
 
-    const newResources = [...resources];
-    const draggedResource = newResources[draggedIndex];
-    newResources.splice(draggedIndex, 1);
-    newResources.splice(targetIndex, 0, draggedResource);
-    setResources(newResources);
+    const newRules = [...rules];
+    const draggedRule = newRules[draggedIndex];
+    newRules.splice(draggedIndex, 1);
+    newRules.splice(targetIndex, 0, draggedRule);
+    setRules(newRules);
 
-    const resourceIds = newResources.map((r) => r._id);
+    const ruleIds = newRules.map((r) => r._id);
     try {
-      await reorderResources(resourceIds);
+      await reorderRules(ruleIds);
     } catch (error) {
-      console.error('Error reordering:', error);
-      await loadResources();
+      console.error('Error reordering rules:', error);
+      await loadRules();
     }
 
     setDraggedItem(null);
   };
 
-  if (loading) return <ResourcesManagerSkeleton />;
+  if (loading) return <ImageManagerSkeleton />;
 
   return (
     <div className='space-y-2.5 lg:space-y-5'>
-      {/* Header with new resource button */}
+      {/* Header with new rule button */}
       <div className='flex flex-wrap items-center justify-center gap-2.5 lg:gap-5 mb-2.5 lg:mb-5'>
         {!showForm && (
           <Button
@@ -131,36 +132,36 @@ export function ResourcesManager() {
             className='flex items-center gap-2.5 py-[7px] px-[11px] rounded-lg'
           >
             <FaPlus className='h-4 w-4' />
-            {'New Resource Section'}
+            {'New Rule'}
           </Button>
         )}
       </div>
 
-      {/* Form for new/edit resource */}
+      {/* Form for new/edit rule */}
       {showForm && (
         <div className='bg-light-grey rounded-lg p-2.5 lg:p-5 shadow-md'>
-          <ResourceForm
-            resource={editingResource}
+          <RuleForm
+            rule={editingRule}
             onSuccess={handleFormSuccess}
             onCancel={handleCancelForm}
           />
         </div>
       )}
 
-      {/* Resources list */}
-      {resources.length === 0 ? (
+      {/* Rules list */}
+      {rules.length === 0 ? (
         <div className='bg-light-grey rounded-lg shadow-md p-2.5 lg:p-5'>
           <div className='flex flex-col items-center justify-center text-center bg-background rounded-lg py-12 px-2.5 lg:px-5'>
             <FaFolderPlus className='text-humanoid mb-6 w-24 h-24' />
             <div className='text-foreground/30 text-lg mb-2'>
-              {'No resources found'}
+              {'No rules found'}
             </div>
             <Paragraph className='text-foreground/50 text-sm mb-4'>
-              {'Create your first resource section to get started'}
+              {'Create you first rule to get started'}
             </Paragraph>
             {!showForm && (
               <Button onClick={() => setShowForm(true)} className='px-4 py-2'>
-                {'Create First Resource'}
+                {'Create First Rule'}
               </Button>
             )}
           </div>
@@ -169,18 +170,18 @@ export function ResourcesManager() {
         <div className='space-y-2.5 bg-light-grey p-2.5 lg:p-5 rounded-lg shadow-md'>
           <div className='text-sm text-foreground/50 mb-2.5 flex items-center gap-2.5'>
             <FaBars className='h-5 w-5' />
-            {'Drag the resources to change the order'}
+            {'Drag the rules to change the order'}
           </div>
 
-          {resources.map((resource, index) => (
+          {rules.map((rule, index) => (
             <div
-              key={resource._id}
+              key={rule._id}
               draggable
-              onDragStart={(e) => handleDragStart(e, resource._id)}
+              onDragStart={(e) => handleDragStart(e, rule._id)}
               onDragOver={handleDragOver}
-              onDrop={(e) => handleDrop(e, resource._id)}
+              onDrop={(e) => handleDrop(e, rule._id)}
               className={`bg-background rounded-lg p-2.5 lg:p-5 transition-all cursor-move ${
-                draggedItem === resource._id ? 'opacity-50 scale-95' : ''
+                draggedItem === rule._id ? 'opacity-50 scale-95' : ''
               }`}
             >
               <div className='flex items-center justify-between'>
@@ -198,20 +199,20 @@ export function ResourcesManager() {
                       as='h3'
                       className='text-lg font-bold text-humanoid'
                     >
-                      {resource.title}
+                      {rule.title}
                     </Heading>
 
                     <div className='flex flex-wrap items-center gap-2.5 lg:gap-5 text-sm text-foreground/80'>
                       <div className='flex items-center gap-1'>
                         <FaImage className='h-4 w-4' />
-                        {resource.imageIds.length}
+                        {rule.imageIds?.length}
                         {' image'}
-                        {resource.imageIds.length !== 1 ? 's' : ''}
+                        {rule.imageIds?.length !== 1 ? 's' : ''}
                       </div>
-                      {resource.createdAt && (
+                      {rule.createdAt && (
                         <div className='flex items-center gap-1'>
                           <IoMdCalendar className='h-4 w-4' />{' '}
-                          {new Date(resource.createdAt).toLocaleDateString()}
+                          {new Date(rule.createdAt).toLocaleDateString()}
                         </div>
                       )}
                     </div>
@@ -222,7 +223,7 @@ export function ResourcesManager() {
                   <Button
                     type='button'
                     variant='link'
-                    onClick={() => handleEdit(resource)}
+                    onClick={() => handleEdit(rule)}
                     disabled={showForm}
                     className='btn-link'
                     title='Edit'
@@ -233,12 +234,12 @@ export function ResourcesManager() {
                   <Button
                     type='button'
                     variant='link'
-                    onClick={() => handleDelete(resource._id)}
-                    disabled={deletingId === resource._id || showForm}
+                    onClick={() => handleDeleteRule(rule._id)}
+                    disabled={deletingId === rule._id || showForm}
                     className='btn-link hover:text-red'
                     title='Delete'
                   >
-                    {deletingId === resource._id ? (
+                    {deletingId === rule._id ? (
                       <div className='h-5 w-5 border-2 border-red-600 border-t-transparent rounded-full animate-spin' />
                     ) : (
                       <FaTrashAlt className='h-5 w-5' />

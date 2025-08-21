@@ -1,4 +1,5 @@
 import { Container, Divider, Heading } from '@/components/ui';
+import { RulesManager } from '@/components/admin/cms/rules/RulesManager';
 
 export default async function AdminRulesPage() {
   return (
@@ -8,6 +9,7 @@ export default async function AdminRulesPage() {
         <Heading as='h2' className='font-sans tracking-normal text-xl mb-2.5'>
           {'Manage Tournament Rules'}
         </Heading>
+        <RulesManager />
       </Container>
     </>
   );

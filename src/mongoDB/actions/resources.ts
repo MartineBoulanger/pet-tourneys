@@ -1,6 +1,7 @@
 'use server';
 
 import { revalidatePath } from 'next/cache';
+import mongoose from 'mongoose';
 import dbConnect from '../client';
 import {
   Resource as ResourceType,
@@ -9,7 +10,6 @@ import {
 } from '../types';
 import { Resource } from '../models/Resource';
 import { Upload } from '../models/Upload';
-import mongoose from 'mongoose';
 
 export async function createResource(formData: FormData) {
   try {
@@ -64,8 +64,8 @@ export async function updateResource(resourceId: string, formData: FormData) {
 
     const title = formData.get('title') as string;
     let imageIds: string[] = [];
-
     const imageIdsFromGetAll = formData.getAll('imageIds') as string[];
+
     if (imageIdsFromGetAll && imageIdsFromGetAll.length > 0) {
       imageIds = imageIdsFromGetAll;
     } else {
@@ -274,7 +274,7 @@ export async function updateResourceOrder(
     console.error('Error updating resource order:', error);
     return {
       success: false,
-      error: 'Failed to edit the ordering of the resources',
+      error: 'Failed to update the order of the resources',
     };
   }
 }
@@ -293,7 +293,7 @@ export async function reorderResources(resourceIds: string[]) {
 
     return { success: true };
   } catch (error) {
-    console.error('Error reordering resources:', error);
-    return { success: false, error: 'Failed to re-order the resources' };
+    console.error('Failed to reorder resources:', error);
+    return { success: false, error: 'Failed to reorder the resources' };
   }
 }

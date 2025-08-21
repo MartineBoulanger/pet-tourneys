@@ -1,6 +1,6 @@
 import { IoMdImages } from 'react-icons/io';
 import { ImageUpload, Resource as ResourceType } from '@/mongoDB/types';
-import { ImageGrid } from './ImageGrid';
+import { ImageGrid } from '../ImageGrid';
 import { Heading, Paragraph, Divider } from '@/components/ui';
 
 interface ResourceSectionProps {
@@ -18,7 +18,12 @@ export function ResourceSection({ resource }: ResourceSectionProps) {
         >
           {resource.title}
         </Heading>
-        <Divider alignment='horizontal' color='humanoid' height='0.5' />
+        <Divider
+          alignment='horizontal'
+          color='humanoid'
+          width='24'
+          height='0.5'
+        />
         <Paragraph className='text-foreground/50 my-5'>
           {resource.images.length}
           {' image'}
