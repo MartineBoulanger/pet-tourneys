@@ -10,7 +10,7 @@ import {
   FaCheck,
   FaTimes,
 } from 'react-icons/fa';
-import { IoGrid, IoList, IoAlertCircle } from 'react-icons/io5';
+import { IoGrid, IoList } from 'react-icons/io5';
 import {
   uploadImages,
   getUploadedImages,
