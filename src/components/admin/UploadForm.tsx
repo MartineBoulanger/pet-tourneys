@@ -14,7 +14,22 @@ import {
   Option,
   Paragraph,
 } from '@/components/ui';
-import { UploadFormProps } from './types';
+
+export interface UploadFormProps {
+  tournaments: Array<{ id: string; name: string }>;
+  initialData?: {
+    player1: string;
+    player2: string;
+    owner: string;
+    date: string;
+    logs: string;
+    petUsage: string;
+    tournament_id: string;
+    region: string;
+  };
+  match_id?: string;
+  isEditMode?: boolean;
+}
 
 export function UploadForm({
   tournaments,

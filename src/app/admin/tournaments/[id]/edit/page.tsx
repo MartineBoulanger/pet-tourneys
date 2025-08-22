@@ -1,4 +1,4 @@
-import { TournamentForm } from '@/components/admin';
+import { TournamentForm } from '@/components/admin/tournaments/TournamentForm';
 import { Container, Divider, Heading, Paragraph } from '@/components/ui';
 import { getTournament } from '@/supabase/actions/tournaments';
 import { PageParams } from '@/types';

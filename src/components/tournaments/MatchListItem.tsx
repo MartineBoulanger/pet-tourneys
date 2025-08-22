@@ -1,5 +1,10 @@
 import Link from 'next/link';
-import { MatchListItemProps } from './types';
+import { Match } from './MatchList';
+
+export interface MatchListItemProps {
+  tournamentId: string;
+  match: Match;
+}
 
 export const MatchListItem = ({ tournamentId, match }: MatchListItemProps) => {
   return (

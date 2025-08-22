@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { IoFilter, IoSearch } from 'react-icons/io5';
 import { Input, Select, Button, Option, Checkbox } from '@/components/ui';
 import { cn } from '@/utils/cn';
-import { PetControlsProps, SortOption } from '../statistics/types';
+import { PetControlsProps, SortOption } from './types';
 
 export function PetControls({
   searchTerm,

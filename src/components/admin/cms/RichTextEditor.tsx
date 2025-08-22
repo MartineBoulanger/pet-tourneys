@@ -8,12 +8,11 @@ import { HiListBullet } from 'react-icons/hi2';
 import { VscListOrdered } from 'react-icons/vsc';
 import { FaLink } from 'react-icons/fa6';
 
-type RichTextEditorProps = {
+interface RichTextEditorProps {
   content: string;
   onChange: (content: string) => void;
   className?: string;
-  imgClassName?: string;
-};
+}
 
 export function RichTextEditor({
   content,

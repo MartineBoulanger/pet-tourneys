@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 import { getTournamentDetails } from '@/supabase/actions/tournaments';
 import { getPaginatedMatches } from '@/supabase/actions/matches';
-import { MatchList } from '@/components/tournaments';
+import { MatchList } from '@/components/tournaments/MatchList';
 import {
   Container,
   PageHeading,

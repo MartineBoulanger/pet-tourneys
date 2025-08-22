@@ -8,7 +8,11 @@ import {
   createTournament,
   updateTournament,
 } from '@/supabase/actions/tournaments';
-import { TournamentFormProps } from './types';
+import { Tournament } from '@/components/tournaments/TournamentsList';
+
+interface TournamentFormProps {
+  initialData?: Tournament | null;
+}
 
 export function TournamentForm({ initialData = null }: TournamentFormProps) {
   const router = useRouter();

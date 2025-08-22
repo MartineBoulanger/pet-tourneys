@@ -1,7 +1,11 @@
 import Link from 'next/link';
-import { TournamentsListItemProps } from './types';
 import { AdminTournamentActions } from './AdminTournamentActions';
 import { Paragraph } from '@/components/ui';
+import { Tournament } from '@/components/tournaments/TournamentsList';
+
+interface TournamentsListItemProps {
+  tournament: Tournament;
+}
 
 export const TournamentsListItem = ({
   tournament,

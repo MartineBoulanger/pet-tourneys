@@ -1,8 +1,6 @@
 import { Container, Divider, Heading, Paragraph } from '@/components/ui';
-import {
-  TournamentPlayersList,
-  ExportRankingsButton,
-} from '@/components/admin';
+import { TournamentPlayersList } from '@/components/admin/tournaments/TournamentPlayersList';
+import { ExportRankingsButton } from '@/components/admin/tournaments/ExportRankingsButton';
 import { PageParams } from '@/types';
 import { getPlayerRecords } from '@/supabase/actions/players';
 import { getTournamentDetails } from '@/supabase/actions/tournaments';

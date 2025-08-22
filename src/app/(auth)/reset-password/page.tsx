@@ -1,4 +1,4 @@
-import { ResetPasswordForm } from '@/components/auth';
+import { ResetPasswordForm } from '@/components/auth/ResetPasswordForm';
 import { Container, Heading } from '@/components/ui';
 
 export async function generateMetadata() {

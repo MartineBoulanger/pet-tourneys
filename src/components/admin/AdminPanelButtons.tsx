@@ -1,8 +1,11 @@
 import Link from 'next/link';
 import { adminData } from '@/lib/navigationData';
 import { Heading } from '@/components/ui';
-import { AdminPanelButtonsProps } from './types';
 import Image from 'next/image';
+
+interface AdminPanelButtonsProps {
+  isMatchesPage?: boolean;
+}
 
 export const AdminPanelButtons = ({
   isMatchesPage = false,
@@ -47,7 +50,7 @@ export const AdminPanelButtons = ({
           >
             <span className='max-w-[40px] max-h-[40px]'>
               <Image
-                src={`${process.env.BASE_URL!}/images/greenrex.png`}
+                src={`/images/greenrex.png`}
                 alt={'Back To Tournaments List'}
                 width={50}
                 height={50}

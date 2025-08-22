@@ -1,13 +1,31 @@
 import { ImageUpload } from '@/mongoDB/types';
 import { ImageCard } from './ImageCard';
+import { cn } from '@/utils/cn';
 
 interface ImageGridProps {
   images: ImageUpload[];
+  cols?: number;
 }
 
-export function ImageGrid({ images }: ImageGridProps) {
+export function ImageGrid({ images, cols = 0 }: ImageGridProps) {
+  let colNumber;
+  switch (cols) {
+    case 1:
+      colNumber = 'grid-cols-1';
+      break;
+    case 2:
+      colNumber = 'grid-cols-1 sm:grid-cols-2';
+      break;
+    case 3:
+      colNumber = 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3';
+      break;
+    default:
+      colNumber = 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4';
+      break;
+  }
+
   return (
-    <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5 lg:gap-5'>
+    <div className={cn('grid gap-2.5 lg:gap-5', colNumber)}>
       {images.map((image) => (
         <ImageCard key={image._id} image={image} />
       ))}

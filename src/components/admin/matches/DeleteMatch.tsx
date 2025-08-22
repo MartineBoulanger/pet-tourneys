@@ -3,28 +3,39 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { FaTrash } from 'react-icons/fa';
-import { deleteTournament } from '@/supabase/actions/tournaments';
+import { deleteMatch } from '@/supabase/actions/matches';
 import { Heading, Button, Paragraph } from '@/components/ui';
-import { DeleteTournamentProps } from './types';
 
-export const DeleteTournament = ({ id, name }: DeleteTournamentProps) => {
+export interface DeleteMatchProps {
+  tournamentId: string;
+  matchId: string;
+  player1: string;
+  player2: string;
+}
+
+export const DeleteMatch = ({
+  tournamentId,
+  matchId,
+  player1,
+  player2,
+}: DeleteMatchProps) => {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
 
-  const handleDelete = async () => {
+  const handleDeleteMatch = async () => {
     setIsDeleting(true);
     try {
-      await deleteTournament(id);
+      await deleteMatch(tournamentId, matchId);
       router.refresh();
       setIsOpen(false);
-    } catch (err) {
-      console.error(err);
+    } catch (error) {
+      console.error('Error deleting tournament:', error);
+      alert('Failed to delete tournament');
     } finally {
       setIsDeleting(false);
     }
   };
-
   return (
     <>
       <Button
@@ -32,24 +43,28 @@ export const DeleteTournament = ({ id, name }: DeleteTournamentProps) => {
         className='hover:text-red'
         type='button'
         onClick={() => setIsOpen(true)}
-        title={`Delete tournament ${name}`}
-        aria-label={`Delete tournament ${name}`}
+        title={`Delete match ${player1} vs ${player2}`}
+        aria-label={`Delete match ${player1} vs ${player2}`}
       >
         <FaTrash />
       </Button>
       {isOpen && (
         <div
-          className='fixed inset-0 bg-background/80 flex items-center justify-center z-[123]'
+          className='fixed inset-0 bg-background/80 flex items-center justify-center z-50'
           onClick={() => setIsOpen(false)}
         >
           <div
-            className='bg-light-grey rounded-lg p-2.5 lg:p-5 max-w-md w-full m-5 lg:m-0'
+            className='bg-light-grey rounded-lg p-2.5 lg:p-5 m-5 lg:m-0 max-w-md w-full'
             onClick={(e) => e.stopPropagation()}
           >
             <Heading className='mb-2.5 lg:mb-5'>{'Confirm Deletion'}</Heading>
             <Paragraph className='mb-2.5 lg:mb-5'>
-              {'Are you sure you want to delete the tournament '}
-              <strong className='text-humanoid'>{name}</strong>
+              {
+                'Are you sure you want to delete the match with the battle logs '
+              }
+              <strong className='text-humanoid'>
+                {player1 + ' vs ' + player2}
+              </strong>
               {'? This action cannot be undone.'}
             </Paragraph>
             <div className='flex justify-end gap-2.5 lg:gap-5'>
@@ -57,16 +72,16 @@ export const DeleteTournament = ({ id, name }: DeleteTournamentProps) => {
                 onClick={() => setIsOpen(false)}
                 variant='secondary'
                 disabled={isDeleting}
-                title='cancel delete tournament'
-                aria-label='cancel delete tournament'
+                title='cancel delete match'
+                aria-label='cancel delete match'
               >
                 {'Cancel'}
               </Button>
               <Button
-                onClick={handleDelete}
+                onClick={handleDeleteMatch}
                 disabled={isDeleting}
-                title='delete tournament'
-                aria-label='delete tournament'
+                title='delete match'
+                aria-label='delete match'
               >
                 {isDeleting ? 'Deleting...' : 'Delete'}
               </Button>

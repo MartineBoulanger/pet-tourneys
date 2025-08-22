@@ -1,4 +1,5 @@
 import { Container, Heading, Divider } from '@/components/ui';
+import { PrizesManager } from '@/components/admin/cms/prizes/PrizesManager';
 
 export default async function AdminPrizesPage() {
   return (
@@ -7,6 +8,7 @@ export default async function AdminPrizesPage() {
       <Heading as='h2' className='font-sans tracking-normal text-xl mb-2.5'>
         {'Manage Tournament Prizes'}
       </Heading>
+      <PrizesManager />
     </Container>
   );
 }

@@ -5,7 +5,7 @@ import '@/styles/prose.css';
 import { getAdminSession, getUserSession } from '@/supabase/actions/auth';
 import { Footer } from '@/components/footer/Footer';
 import { Header } from '@/components/header/Header';
-import { BottomNavigation } from '@/components/navigation';
+import { BottomNavigation } from '@/components/navigation/BottomNavigation';
 import { Toaster } from 'sonner';
 import { FaCheck, FaInfo } from 'react-icons/fa';
 import { IoWarningOutline } from 'react-icons/io5';

@@ -4,7 +4,8 @@ import { useState } from 'react';
 import { createRule, updateRule } from '@/mongoDB/actions/rules';
 import { Rule as RuleType } from '@/mongoDB/types';
 import ImageSelector from '../ImageSelector';
-import { Button, Heading, Input, RichTextEditor } from '@/components/ui';
+import { RichTextEditor } from '../RichTextEditor';
+import { Button, Heading, Input } from '@/components/ui';
 
 interface RuleFormProps {
   rule?: RuleType;
@@ -72,7 +73,7 @@ export function RuleForm({ rule, onSuccess, onCancel }: RuleFormProps) {
         setError(result.error || 'An unexpected error occurred');
       }
     } catch (error) {
-      console.error(error)
+      console.error(error);
       setError('An unexpected error occurred');
     }
   };
@@ -111,7 +112,7 @@ export function RuleForm({ rule, onSuccess, onCancel }: RuleFormProps) {
             }));
           }}
           multiple
-          maxSelection={30}
+          maxSelection={10}
           label={'Choose images'}
           showPreview={true}
           allowNull={true}

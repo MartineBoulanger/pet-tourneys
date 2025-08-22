@@ -11,10 +11,6 @@ export async function createRule(data: Partial<RuleType>) {
   try {
     await dbConnect();
 
-    // const title = formData.get('title') as string;
-    // const content = formData.get('content') as string;
-    // const imageIds = formData.getAll('imageIds') as string[];
-
     if (!data.title?.trim() || !data.content?.trim())
       return { success: false, error: 'Title and Content are required' };
 
@@ -59,31 +55,6 @@ export async function createRule(data: Partial<RuleType>) {
 export async function updateRule(ruleId: string, data: Partial<RuleType>) {
   try {
     await dbConnect();
-
-    // const title = formData.get('title') as string;
-    // const content = formData.get('content') as string;
-    // let imageIds: string[] = [];
-    // const imageIdsFromGetAll = formData.getAll('imageIds') as string[];
-
-    // if (imageIdsFromGetAll && imageIdsFromGetAll.length > 0) {
-    //   imageIds = imageIdsFromGetAll;
-    // } else {
-    //   const imageIdsString = formData.get('imageIds') as string;
-    //   if (imageIdsString) {
-    //     try {
-    //       const parsed = JSON.parse(imageIdsString);
-    //       if (Array.isArray(parsed)) {
-    //         imageIds = parsed;
-    //       }
-    //     } catch (error) {
-    //       console.error(
-    //         'Failed to parse imageIds as JSON, treating as single value:',
-    //         error
-    //       );
-    //       imageIds = [imageIdsString];
-    //     }
-    //   }
-    // }
 
     if (!data.title?.trim() || !data.content?.trim())
       return { success: false, error: 'Title and Content are required' };
@@ -239,7 +210,7 @@ export async function reorderRules(ruleIds: string[]) {
 
     return { success: true };
   } catch (error) {
-    console.error('Failed to reorder rules', error);
+    console.error('Failed to reorder rules:', error);
     return { success: false, error: 'Failed to reorder the rules' };
   }
 }

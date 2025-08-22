@@ -1,8 +1,7 @@
 import Link from 'next/link';
 import { FaEdit, FaClipboard } from 'react-icons/fa';
 import { GiBattleGear } from 'react-icons/gi';
-import { DeleteTournament } from './DeleteTournament';
-import { DeleteTournamentProps } from './types';
+import { DeleteTournament, DeleteTournamentProps } from './DeleteTournament';
 
 export const AdminTournamentActions = ({ id, name }: DeleteTournamentProps) => {
   return (

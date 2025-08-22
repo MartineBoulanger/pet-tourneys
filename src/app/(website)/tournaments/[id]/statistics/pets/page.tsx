@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation';
-import { PetStatsList } from '@/components/tournaments';
+import { PetStatsList } from '@/components/statistics/PetStatsList';
 import {
   getMatchPetUsage,
   getTournamentPetStats,

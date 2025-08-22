@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { MdOutlinePostAdd, MdUpload } from 'react-icons/md';
-import { TournamentsListItem } from '@/components/admin';
+import { TournamentsListItem } from '@/components/admin/tournaments/TournamentsListItem';
 import {
   Container,
   Heading,

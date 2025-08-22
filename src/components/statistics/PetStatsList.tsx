@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { useMemo } from 'react';
 import { IoClose, IoCheckmark } from 'react-icons/io5';
 import { Button, Heading, Paragraph, Pagination } from '@/components/ui';
-import { PetStatsListProps, TypesImages } from '../statistics/types';
+import { PetStatsListProps, TypesImages } from './types';
 import { RadarGraph } from '@/components/statistics/graphs';
 import { Alliance } from '@/assets/Alliance';
 import { Horde } from '@/assets/Horde';
@@ -94,9 +94,7 @@ export function PetStatsList({
                   <div className='flex items-center'>
                     <div className='flex items-center h-[40px] w-[40px] mr-2.5'>
                       <Image
-                        src={`${process.env.BASE_URL!}/images/pet-icons/${
-                          pet.icon
-                        }`}
+                        src={`/images/pet-icons/${pet.icon}`}
                         alt={pet.name}
                         className='w-full h-full object-contain'
                         width={40}
@@ -322,14 +320,13 @@ export function PetStatsList({
 
                     <div>
                       <Image
-                        src={`${process.env.BASE_URL!}/images/pets/${
-                          pet.image
-                        }`}
+                        src={`/images/pets/${pet.image}`}
                         alt={pet.name}
                         className='w-full h-auto rounded-lg object-cover'
                         width={100}
                         height={100}
                         loading='lazy'
+                        unoptimized
                       />
                       {availableBreeds.length > 0 && (
                         <div className='rounded-lg overflow-hidden bg-background shadow-md mt-2.5'>

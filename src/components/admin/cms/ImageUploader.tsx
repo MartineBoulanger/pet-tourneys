@@ -16,14 +16,12 @@ import {
   getUploadedImages,
   deleteImage,
   updateImage,
-} from '@/mongoDB/actions/images';
+} from '@/mongoDB/actions/uploads';
 import { ImageUpload } from '@/mongoDB/types';
 import {
   Container,
   Heading,
   Paragraph,
-  Select,
-  Option,
   Input,
   Button,
   Checkbox,
@@ -42,9 +40,6 @@ export const ImageUploader = () => {
   const [editAlt, setEditAlt] = useState<string>('');
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [searchTerm, setSearchTerm] = useState('');
-  const [filterUsage, setFilterUsage] = useState<'all' | 'used' | 'unused'>(
-    'all'
-  );
   const [selectedImages, setSelectedImages] = useState<string[]>([]);
   const [viewingImage, setViewingImage] = useState<ImageUpload | null>(null);
   const [isPending, startTransition] = useTransition();
@@ -55,7 +50,7 @@ export const ImageUploader = () => {
 
   useEffect(() => {
     filterImages();
-  }, [images, searchTerm, filterUsage]);
+  }, [images, searchTerm]);
 
   const loadImages = async () => {
     setIsLoading(true);
@@ -262,20 +257,6 @@ export const ImageUploader = () => {
                 className='pl-10'
               />
             </div>
-
-            <Select
-              label='Sort by Usage'
-              name='filterUsage'
-              id='filterUsage'
-              value={filterUsage}
-              onChange={(e) =>
-                setFilterUsage(e.target.value as 'all' | 'used' | 'unused')
-              }
-            >
-              <Option value='all' label='All Images' />
-              <Option value='used' label='Used Images' />
-              <Option value='unused' label='Unused Images' />
-            </Select>
           </div>
 
           {/* View Mode and Bulk Actions */}
@@ -347,8 +328,8 @@ export const ImageUploader = () => {
               {'No images found'}
             </Heading>
             <Paragraph className='text-foreground/50'>
-              {searchTerm || filterUsage !== 'all'
-                ? 'Try adjusting your filters or search term'
+              {searchTerm
+                ? 'Try adjusting your search term'
                 : 'Upload some images to get started'}
             </Paragraph>
           </div>

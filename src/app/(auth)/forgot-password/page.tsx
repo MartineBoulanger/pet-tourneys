@@ -1,4 +1,4 @@
-import { ForgotPasswordForm } from '@/components/auth';
+import { ForgotPasswordForm } from '@/components/auth/ForgotPasswordForm';
 import { Container, Heading } from '@/components/ui';
 
 export async function generateMetadata() {

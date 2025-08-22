@@ -1,6 +1,24 @@
 import { MatchListItem } from './MatchListItem';
-import { MatchListProps } from './types';
 import { Pagination, Heading } from '@/components/ui';
+
+export interface Match {
+  id: string;
+  region: string;
+  player1: string;
+  player2: string;
+  owner: string;
+  date: string;
+  owner_score: number;
+  opponent_score: number;
+  outcome: string;
+}
+
+export interface MatchListProps {
+  matches: Match[];
+  tournamentId: string;
+  currentPage?: number;
+  totalPages?: number;
+}
 
 export const MatchList = ({
   matches,

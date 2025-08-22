@@ -7,7 +7,7 @@ import {
   PageMenu,
   Paragraph,
 } from '@/components/ui';
-import { TournamentsList } from '@/components/tournaments';
+import { TournamentsList } from '@/components/tournaments/TournamentsList';
 import { PageSearchParams } from '@/types';
 import { TOURNAMENTS_PER_PAGE } from '@/utils/constants';
 import { Links } from '@/lib/types';

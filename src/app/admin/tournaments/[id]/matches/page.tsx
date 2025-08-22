@@ -8,7 +8,7 @@ import {
   Paragraph,
   Divider,
 } from '@/components/ui';
-import { AdminMatchListItem } from '@/components/admin';
+import { AdminMatchListItem } from '@/components/admin/matches/AdminMatchListItem';
 import { PageParams, PageSearchParams } from '@/types';
 import { MATCHES_PER_PAGE } from '@/utils/constants';
 import Link from 'next/link';

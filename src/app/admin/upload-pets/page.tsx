@@ -1,5 +1,5 @@
 import { Container, Heading, Divider } from '@/components/ui';
-import { PetsDataConverter } from '@/components/admin';
+import { PetsDataConverter } from '@/components/admin/PetsDataConvertor';
 
 export async function generateMetadata() {
   return {

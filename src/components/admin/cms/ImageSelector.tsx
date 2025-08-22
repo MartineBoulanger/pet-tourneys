@@ -11,11 +11,10 @@ import {
 } from 'react-icons/fa';
 import { IoGrid, IoList } from 'react-icons/io5';
 import { ImageUpload } from '@/mongoDB/types';
-import { getUploadedImages } from '@/mongoDB/actions/images';
+import { getUploadedImages } from '@/mongoDB/actions/uploads';
 import { Button, Heading, Input, Paragraph } from '@/components/ui';
 import { cn } from '@/utils/cn';
 
-// Props interface
 interface ImageSelectorProps {
   selectedImageId?: string;
   onImageSelect?: (image: ImageUpload | null) => void;

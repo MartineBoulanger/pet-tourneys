@@ -1,4 +1,5 @@
-import { LinksGallery, PartnerGallery } from '@/components/homepage';
+import { LinksGallery } from '@/components/homepage/LinksGallery';
+import { PartnerGallery } from '@/components/homepage/PartnerGallery';
 import { Container } from '@/components/ui';
 import { partnersData } from '@/lib/partners';
 

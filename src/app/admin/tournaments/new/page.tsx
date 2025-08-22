@@ -1,4 +1,4 @@
-import { TournamentForm } from '@/components/admin';
+import { TournamentForm } from '@/components/admin/tournaments/TournamentForm';
 import { Container, Heading, Divider } from '@/components/ui';
 
 export default function NewTournamentPage() {

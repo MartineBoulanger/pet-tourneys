@@ -1,5 +1,5 @@
 import { getTournamentsForForm } from '@/supabase/actions/tournaments';
-import { UploadForm } from '@/components/admin';
+import { UploadForm } from '@/components/admin/UploadForm';
 import { Container, Divider, Heading, Paragraph } from '@/components/ui';
 import { getTournamentTableName } from '@/utils/getTournamentTableName';
 import { createClient } from '@/supabase/server';

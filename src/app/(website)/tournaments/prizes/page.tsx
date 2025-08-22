@@ -1,5 +1,6 @@
 import { Links } from '@/lib/types';
 import { Container, PageHeading, PageMenu } from '@/components/ui';
+import { PrizesList } from '@/components/admin/cms/prizes/PrizesList';
 
 export async function generateMetadata() {
   return {
@@ -29,6 +30,7 @@ export default function TournamentsPrizesPage() {
       <PageHeading heading='Tournament Prizes'>
         <PageMenu links={links} />
       </PageHeading>
+      <PrizesList />
     </Container>
   );
 }

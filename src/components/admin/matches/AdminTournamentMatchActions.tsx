@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import { FaEdit } from 'react-icons/fa';
-import { DeleteMatch } from './DeleteMatch';
-import { DeleteMatchProps } from './types';
+import { DeleteMatch, DeleteMatchProps } from './DeleteMatch';
 
 export const AdminTournamentMatchActions = ({
   tournamentId,

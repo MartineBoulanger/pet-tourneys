@@ -59,3 +59,33 @@ export interface Rule {
   updatedAt: Date;
 }
 // **************************************************************************
+export interface MongoPrizeDocument {
+  _id: Types.ObjectId;
+  title: string;
+  description: string;
+  isCarousel: boolean;
+  isColumnLayout: boolean;
+  imagePosition: string;
+  textAlignment: string;
+  imageIds: string[];
+  videoUrl: string;
+  order?: number;
+  createdAt: Date;
+  updatedAt: Date;
+  __v?: number;
+}
+export interface Prize {
+  _id: string;
+  title: string;
+  description: string;
+  isCarousel: boolean;
+  isColumnLayout: boolean;
+  imagePosition: string;
+  textAlignment: string;
+  imageIds: string[];
+  videoUrl: string;
+  order?: number;
+  createdAt: Date;
+  updatedAt: Date;
+}
+// **************************************************************************

@@ -6,7 +6,6 @@ export * from './Checkbox';
 export * from './Textarea';
 export * from './Select';
 export * from './Option';
-export * from './RichTextEditor';
 
 // Generic UI components
 export * from './Container';
@@ -25,4 +24,3 @@ export * from './Tab';
 export * from './Skeletons';
 export * from './PageMenu';
 export * from './ScrollToTop';
-export * from './Video';

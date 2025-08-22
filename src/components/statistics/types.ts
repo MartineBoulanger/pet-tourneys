@@ -51,11 +51,6 @@ export interface PetChartsProps extends ChartsProps<TournamentPetStat> {
   chartData: ChartData;
 }
 
-// remove this one as soon as the other pet list is done
-export interface PetListProps extends ChartsProps<TournamentPetStat> {
-  isMatchView?: boolean;
-}
-
 export interface Pet {
   petID: string;
   name: string;

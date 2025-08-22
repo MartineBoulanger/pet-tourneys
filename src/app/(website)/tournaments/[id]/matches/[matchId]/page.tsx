@@ -1,4 +1,5 @@
-import { BattleLogViewer, MatchScore } from '@/components/matches';
+import { BattleLogViewer } from '@/components/matches/BattleLogViewer';
+import { MatchScore } from '@/components/matches/MatchScore';
 import {
   Container,
   PageHeading,

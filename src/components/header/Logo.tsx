@@ -9,7 +9,7 @@ export const Logo = () => {
           width={40}
           height={40}
           className='w-12 h-12 object-contain'
-          src={`${process.env.BASE_URL!}/images/tourney-logo.png`}
+          src={`/images/tourney-logo.png`}
           alt='Logo'
           loading='lazy'
           unoptimized

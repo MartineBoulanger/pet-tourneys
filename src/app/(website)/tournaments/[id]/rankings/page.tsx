@@ -9,7 +9,7 @@ import {
 } from '@/components/ui';
 import { PageParams } from '@/types';
 import { Links } from '@/lib/types';
-import { PlayerRankings } from '@/components/tournaments';
+import { PlayerRankings } from '@/components/tournaments/PlayerRankings';
 import { loadPetsData, loadPlayerData } from '@/utils/loadJsonData';
 import { Pet } from '@/components/statistics/types';
 

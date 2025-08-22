@@ -1,4 +1,4 @@
-import { SignUpForm } from '@/components/auth';
+import { SignUpForm } from '@/components/auth/SignUpForm';
 import { Container, Heading, Paragraph } from '@/components/ui';
 
 export async function generateMetadata() {

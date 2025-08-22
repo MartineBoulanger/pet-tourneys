@@ -1,6 +1,12 @@
 import Link from 'next/link';
 import { AdminTournamentMatchActions } from './AdminTournamentMatchActions';
-import { AdminMatchListItemProps } from './types';
+import { Match } from '@/components/tournaments/MatchList';
+import { Tournament } from '@/components/tournaments/TournamentsList';
+
+interface AdminMatchListItemProps {
+  match: Match;
+  tournament: Tournament;
+}
 
 export const AdminMatchListItem = ({
   match,
