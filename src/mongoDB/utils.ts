@@ -10,7 +10,7 @@ export function serializeImage(doc: MongoImageDocument): ImageUpload {
     alt: doc.alt,
     width: doc.width,
     height: doc.height,
-    usedIn: doc.usedIn.map((id: any) => id.toString()),
+    usedIn: doc.usedIn.map((id) => id.toString()),
     usedInModel: doc.usedInModel || undefined,
     createdAt: new Date(doc.createdAt),
     updatedAt: new Date(doc.updatedAt),
@@ -20,7 +20,7 @@ export function serializeImage(doc: MongoImageDocument): ImageUpload {
 /**
  * Serializes an array of MongoDB documents
  */
-export function serializeImages(docs: any[]): ImageUpload[] {
+export function serializeImages(docs: MongoImageDocument[]): ImageUpload[] {
   return docs.map((doc) => serializeImage(doc));
 }
 

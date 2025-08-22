@@ -1,5 +1,3 @@
-import { redirect } from 'next/navigation';
-import { getUserSession } from '@/supabase/actions/auth';
 import { Container, Divider, Heading, Paragraph } from '@/components/ui';
 import {
   TournamentPlayersList,
@@ -22,11 +20,6 @@ export default async function AdminPlayersPage({
   params: PageParams;
 }) {
   const { id } = await params;
-  const response = await getUserSession();
-
-  if (!response?.user || response?.user?.role !== 'admin') {
-    redirect('/');
-  }
 
   const {
     success,
@@ -80,8 +73,6 @@ export default async function AdminPlayersPage({
       </>
     );
   }
-
-  const username = response?.user && response?.user?.username;
 
   return (
     <>

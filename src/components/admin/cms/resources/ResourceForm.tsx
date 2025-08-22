@@ -56,6 +56,7 @@ export const ResourceForm = ({
 
       setTitle(title);
     } catch (err) {
+      console.error(err);
       setError('An unexpected error occurred');
     }
   };

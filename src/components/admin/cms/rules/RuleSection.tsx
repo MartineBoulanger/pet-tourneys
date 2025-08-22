@@ -1,4 +1,3 @@
-import { IoMdImages } from 'react-icons/io';
 import { ImageUpload, Rule as RuleType } from '@/mongoDB/types';
 import { ImageGrid } from '../ImageGrid';
 import { Heading, Paragraph, Divider } from '@/components/ui';

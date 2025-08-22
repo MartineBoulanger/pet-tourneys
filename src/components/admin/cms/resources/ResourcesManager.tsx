@@ -8,7 +8,14 @@ import {
 } from '@/mongoDB/actions/resources';
 import { ResourceForm } from './ResourceForm';
 import { Resource as ResourceType } from '@/mongoDB/types';
-import { FaTrashAlt, FaEdit, FaImage, FaPlus, FaBars, FaFolderPlus } from 'react-icons/fa';
+import {
+  FaTrashAlt,
+  FaEdit,
+  FaImage,
+  FaPlus,
+  FaBars,
+  FaFolderPlus,
+} from 'react-icons/fa';
 import {
   Button,
   Heading,
@@ -68,6 +75,7 @@ export function ResourcesManager() {
         alert(result.error || 'Error during deleting');
       }
     } catch (error) {
+      console.error(error);
       alert('An unexpected error occurred');
     } finally {
       setDeletingId(null);

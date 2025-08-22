@@ -69,6 +69,7 @@ export function RulesManager() {
         alert(result.error || 'Error during deleting');
       }
     } catch (error) {
+      console.error(error);
       alert('An unexpected error occurred');
     } finally {
       setDeletingId(null);

@@ -15,6 +15,7 @@ import { BiErrorAlt } from 'react-icons/bi';
 import { ScrollToTop } from '@/components/ui';
 
 declare global {
+  // @typescript-eslint/no-explicit-any
   var mongoose: any; // any is used here because it can contain anything
 }
 

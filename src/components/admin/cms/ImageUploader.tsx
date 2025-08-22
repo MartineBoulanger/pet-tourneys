@@ -118,6 +118,7 @@ export const ImageUploader = () => {
         setTimeout(() => setUploadProgress(''), 3000);
       }
     } catch (error) {
+      console.error(error);
       setUploadProgress('Upload failed');
       setTimeout(() => setUploadProgress(''), 3000);
     } finally {

@@ -2,9 +2,9 @@
 
 import { useState } from 'react';
 import { createRule, updateRule } from '@/mongoDB/actions/rules';
-import { ImageUpload, Rule as RuleType } from '@/mongoDB/types';
+import { Rule as RuleType } from '@/mongoDB/types';
 import ImageSelector from '../ImageSelector';
-import { Button, Heading, Input, RichTextEditor, Form } from '@/components/ui';
+import { Button, Heading, Input, RichTextEditor } from '@/components/ui';
 
 interface RuleFormProps {
   rule?: RuleType;
@@ -21,11 +21,6 @@ export function RuleForm({ rule, onSuccess, onCancel }: RuleFormProps) {
     createdAt: rule?.createdAt || new Date(),
     updatedAt: rule?.updatedAt || new Date(),
   });
-  // const [title, setTitle] = useState<string>(rule?.title || '');
-  // const [content, setContent] = useState<string>(rule?.content || '');
-  // const [selectedImageIds, setSelectedImageIds] = useState<string[]>(
-  //   rule?.imageIds || []
-  // );
   const [error, setError] = useState<string>('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -55,13 +50,6 @@ export function RuleForm({ rule, onSuccess, onCancel }: RuleFormProps) {
       return;
     }
 
-    // const formData = new FormData();
-    // formData.append('title', title);
-    // formData.append('content', content);
-    // selectedImageIds.forEach((imageId) => {
-    //   formData.append('imageIds', imageId);
-    // });
-
     try {
       let result;
       if (rule?._id) {
@@ -71,9 +59,6 @@ export function RuleForm({ rule, onSuccess, onCancel }: RuleFormProps) {
       }
 
       if (result.success) {
-        // setTitle('');
-        // setContent('');
-        // setSelectedImageIds([]);
         setFormData({
           _id: '',
           title: '',
@@ -86,10 +71,8 @@ export function RuleForm({ rule, onSuccess, onCancel }: RuleFormProps) {
       } else {
         setError(result.error || 'An unexpected error occurred');
       }
-
-      // setTitle(title);
-      // setContent(content);
     } catch (error) {
+      console.error(error)
       setError('An unexpected error occurred');
     }
   };
