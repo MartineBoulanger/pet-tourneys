@@ -6,8 +6,6 @@ import { getAdminSession, getUserSession } from '@/supabase/actions/auth';
 import { Footer } from '@/components/footer/Footer';
 import { Header } from '@/components/header/Header';
 import { BottomNavigation } from '@/components/navigation';
-import { SpeedInsights } from '@vercel/speed-insights/next';
-import { Analytics } from '@vercel/analytics/next';
 import { Toaster } from 'sonner';
 import { FaCheck, FaInfo } from 'react-icons/fa';
 import { IoWarningOutline } from 'react-icons/io5';
@@ -78,8 +76,6 @@ export default async function RootLayout({
             error: <BiErrorAlt />,
           }}
         />
-        <SpeedInsights />
-        <Analytics />
       </body>
     </html>
   );

@@ -8,6 +8,7 @@ import { GiHamburgerMenu } from 'react-icons/gi';
 import { Button } from '@/components/ui';
 import { headerData } from '@/lib/navigationData';
 import { cn } from '@/utils/cn';
+import Image from 'next/image';
 
 interface MenuProps {
   className?: string;
@@ -76,13 +77,14 @@ export const Menu = ({ className, buttonVariant = 'primary' }: MenuProps) => {
                       onClick={toggleDropdown}
                     >
                       <span className='max-w-[40px] max-h-[40px]'>
-                        <img
+                        <Image
                           src={link.imageSrc}
                           alt={link.linkText}
                           width={50}
                           height={50}
                           className='w-full h-full object-cover'
                           loading='lazy'
+                          unoptimized
                         />
                       </span>
                       <span>{link.linkText}</span>
@@ -131,13 +133,14 @@ export const Menu = ({ className, buttonVariant = 'primary' }: MenuProps) => {
                     aria-label={link.linkText}
                   >
                     <span className='max-w-[40px] max-h-[40px]'>
-                      <img
+                      <Image
                         src={link.imageSrc}
                         alt={link.linkText}
                         width={50}
                         height={50}
                         className='w-full h-full object-cover'
                         loading='lazy'
+                        unoptimized
                       />
                     </span>
                     <span>{link.linkText}</span>

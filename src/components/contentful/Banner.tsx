@@ -3,6 +3,7 @@ import Cta from './Cta';
 import { BannerProps } from './types';
 import { cn } from '@/utils/cn';
 import YouTubeVideo from './YouTubeVideo';
+import Image from 'next/image';
 // TODO: check on why isPage is not working and fix this
 const Banner = ({ component, isPage = false, className }: BannerProps) => {
   if (!component) return null;
@@ -17,7 +18,7 @@ const Banner = ({ component, isPage = false, className }: BannerProps) => {
           isPage ? 'lg:h-[85vh]' : 'rounded-lg overflow-hidden'
         )}
       >
-        <img
+        <Image
           src={bannerPicture?.url}
           alt={bannerPicture?.title}
           width={bannerPicture?.width}
@@ -27,6 +28,7 @@ const Banner = ({ component, isPage = false, className }: BannerProps) => {
             isPage ? 'object-contain' : 'object-cover'
           )}
           loading={isPage ? 'eager' : 'lazy'}
+          unoptimized
         />
       </div>
       {bannerText ? (

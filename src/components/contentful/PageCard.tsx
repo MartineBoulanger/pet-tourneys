@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { Heading } from '@/components/ui';
 import { PageCardProps } from './types';
+import Image from 'next/image';
 
 export const PageCard = ({ page }: PageCardProps) => {
   const pageParent =
@@ -20,18 +21,19 @@ export const PageCard = ({ page }: PageCardProps) => {
           {page.pageTitle}
         </Heading>
         {page.banner && page?.banner?.bannerPicture ? (
-          <img
+          <Image
             src={page?.banner?.bannerPicture?.url || ''}
             alt={page?.banner?.bannerPicture?.title || ''}
             width={500}
             height={500}
           />
         ) : (
-          <img
-            src={`${process.env.BASE_URL!}/images/tourney-logo.png`}
+          <Image
+            src={`/images/tourney-logo.png`}
             alt={'Fallback image'}
             width={500}
             height={500}
+            unoptimized
           />
         )}
         <Link

@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { adminData } from '@/lib/navigationData';
 import { Heading } from '@/components/ui';
 import { AdminPanelButtonsProps } from './types';
+import Image from 'next/image';
 
 export const AdminPanelButtons = ({
   isMatchesPage = false,
@@ -24,13 +25,14 @@ export const AdminPanelButtons = ({
             aria-label={linkText}
           >
             <span className='max-w-[40px] max-h-[40px]'>
-              <img
+              <Image
                 src={imageSrc}
                 alt={linkText}
                 width={50}
                 height={50}
                 className='w-full h-full object-cover'
                 loading='lazy'
+                unoptimized
               />
             </span>
             <span>{linkText}</span>
@@ -44,13 +46,14 @@ export const AdminPanelButtons = ({
             aria-label='Back To Tournaments List'
           >
             <span className='max-w-[40px] max-h-[40px]'>
-              <img
+              <Image
                 src={`${process.env.BASE_URL!}/images/greenrex.png`}
                 alt={'Back To Tournaments List'}
                 width={50}
                 height={50}
                 className='w-full h-full object-cover'
                 loading='lazy'
+                unoptimized
               />
             </span>
             <span>{'Back To Tournaments List'}</span>
