@@ -224,10 +224,6 @@ export async function getImagesByIds(
       alt: image.alt ?? '',
       width: image.width ?? 0,
       height: image.height ?? 0,
-      usedIn: Array.isArray(image.usedIn)
-        ? image.usedIn.map((id: string) => String(id))
-        : [],
-      usedInModel: image.usedInModel ?? undefined,
       createdAt: image.createdAt ?? null,
       updatedAt: image.updatedAt ?? null,
     }));

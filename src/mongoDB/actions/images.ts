@@ -1,7 +1,7 @@
 'use server';
 
 import { revalidatePath } from 'next/cache';
-import { ImageUpload } from '../types';
+import { ImageUpload, MongoImageDocument } from '../types';
 import {
   getImageDimensionsFromBuffer,
   serializeImage,
@@ -35,8 +35,6 @@ export async function uploadImages(
         alt: file.name.split('.')[0],
         width: dimensions.width,
         height: dimensions.height,
-        usedIn: [],
-        usedInModel: undefined,
       };
 
       const newUpload = new Upload(imageData);
@@ -59,7 +57,7 @@ export async function getUploadedImages(): Promise<ImageUpload[]> {
   try {
     await dbConnect();
     const images = await Upload.find().sort({ createdAt: -1 }).lean();
-    return serializeImages(images);
+    return serializeImages(images as MongoImageDocument[]);
   } catch (error) {
     console.error('Error fetching images:', error);
     return [];
@@ -83,7 +81,7 @@ export async function deleteImage(
 
 export async function updateImage(
   imageId: string,
-  updates: { alt?: string; usedIn?: string[]; usedInModel?: string }
+  updates: { alt?: string }
 ): Promise<{ success: boolean; error?: string }> {
   try {
     await dbConnect();

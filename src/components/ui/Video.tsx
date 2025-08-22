@@ -38,7 +38,7 @@ export const Video = ({
     return <div className={cn('text-red', className)}>Invalid YouTube URL</div>;
   }
 
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL!?.replace(/\/+$/, '');
+  const baseUrl = process.env.BASE_URL?.replace(/\/+$/, '');
   const domain = baseUrl
     ? encodeURIComponent(baseUrl)
     : 'https%3A%2F%2Fwww.petmastersleague.com';

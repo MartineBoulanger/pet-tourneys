@@ -28,7 +28,7 @@ export const PageCard = ({ page }: PageCardProps) => {
           />
         ) : (
           <img
-            src={`${process.env.NEXT_PUBLIC_BASE_URL!}/images/tourney-logo.png`}
+            src={`${process.env.BASE_URL!}/images/tourney-logo.png`}
             alt={'Fallback image'}
             width={500}
             height={500}

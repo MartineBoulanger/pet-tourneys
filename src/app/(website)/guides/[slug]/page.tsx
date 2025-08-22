@@ -21,7 +21,7 @@ export async function generateMetadata({
       title: 'Our Guides',
       description: 'Our Guides for all that want to know things',
       alternates: {
-        canonical: `${process.env.NEXT_PUBLIC_BASE_URL!}/guides/${slug}`,
+        canonical: `${process.env.BASE_URL!}/guides/${slug}`,
       },
     };
   }
@@ -33,7 +33,7 @@ export async function generateMetadata({
     description: description || 'Our Guides for all that want to know things',
     keywords: keywords || ['WoW, guides, pet'],
     alternates: {
-      canonical: `${process.env.NEXT_PUBLIC_BASE_URL!}/guides/${slug}`,
+      canonical: `${process.env.BASE_URL!}/guides/${slug}`,
     },
     robots: {
       index: indexable === true,

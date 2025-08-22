@@ -180,8 +180,7 @@ export const PlayerRankings = ({
                               </div>
                               <div className='w-[100px] lg:w-[125px] h-[100px] lg:h-[125px]'>
                                 <Image
-                                  src={`${process.env
-                                    .NEXT_PUBLIC_BASE_URL!}/images/pets/${
+                                  src={`${process.env.BASE_URL!}/images/pets/${
                                     mostUsedPet?.image
                                   }`}
                                   alt={
@@ -223,8 +222,7 @@ export const PlayerRankings = ({
                               </div>
                               <div className='w-[100px] lg:w-[125px] h-[100px] lg:h-[125px]'>
                                 <Image
-                                  src={`${process.env
-                                    .NEXT_PUBLIC_BASE_URL!}/images/pets/${
+                                  src={`${process.env.BASE_URL!}/images/pets/${
                                     nemesisPet?.image
                                   }`}
                                   alt={
@@ -303,7 +301,7 @@ export const PlayerRankings = ({
                                           <div className='w-full lg:w-[300px] h-auto lg:h-[300px]'>
                                             <Image
                                               src={`${process.env
-                                                .NEXT_PUBLIC_BASE_URL!}/images/pets/${
+                                                .BASE_URL!}/images/pets/${
                                                 petDetails?.image
                                               }`}
                                               alt={

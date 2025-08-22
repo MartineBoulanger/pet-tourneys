@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: { params: PageParams }) {
   return {
     title: 'Tournament Details',
     alternates: {
-      canonical: `${process.env.NEXT_PUBLIC_BASE_URL!}/tournaments/${id}`,
+      canonical: `${process.env.BASE_URL!}/tournaments/${id}`,
     },
   };
 }

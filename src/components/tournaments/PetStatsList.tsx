@@ -94,8 +94,9 @@ export function PetStatsList({
                   <div className='flex items-center'>
                     <div className='flex items-center h-[40px] w-[40px] mr-2.5'>
                       <Image
-                        src={`${process.env
-                          .NEXT_PUBLIC_BASE_URL!}/images/pet-icons/${pet.icon}`}
+                        src={`${process.env.BASE_URL!}/images/pet-icons/${
+                          pet.icon
+                        }`}
                         alt={pet.name}
                         className='w-full h-full object-contain'
                         width={40}
@@ -321,8 +322,9 @@ export function PetStatsList({
 
                     <div>
                       <Image
-                        src={`${process.env
-                          .NEXT_PUBLIC_BASE_URL!}/images/pets/${pet.image}`}
+                        src={`${process.env.BASE_URL!}/images/pets/${
+                          pet.image
+                        }`}
                         alt={pet.name}
                         className='w-full h-auto rounded-lg object-cover'
                         width={100}

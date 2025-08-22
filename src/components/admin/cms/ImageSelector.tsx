@@ -536,15 +536,6 @@ export default function ImageSelector({
                               {'ID: '}
                               {image._id}
                             </Paragraph>
-
-                            {/* Usage indicator */}
-                            {image.usedIn.length > 0 && (
-                              <div className='mt-1'>
-                                <span className='inline-flex items-center px-2 py-0.5 rounded-lg text-xs font-bold border border-dark-green bg-light-green text-dark-green'>
-                                  {'Used '}({image.usedIn.length})
-                                </span>
-                              </div>
-                            )}
                           </div>
                         </div>
                       );

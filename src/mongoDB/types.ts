@@ -7,8 +7,6 @@ export interface MongoImageDocument {
   alt: string;
   width: number;
   height: number;
-  usedIn: Types.ObjectId[];
-  usedInModel?: string;
   createdAt: Date;
   updatedAt: Date;
   __v?: number;
@@ -19,8 +17,6 @@ export interface ImageUpload {
   alt: string;
   width: number;
   height: number;
-  usedIn: string[];
-  usedInModel?: string;
   createdAt: Date;
   updatedAt: Date;
 }

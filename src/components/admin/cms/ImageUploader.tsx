@@ -81,13 +81,6 @@ export const ImageUploader = () => {
       );
     }
 
-    // Usage filter
-    if (filterUsage === 'used') {
-      filtered = filtered.filter((img) => img.usedIn.length > 0);
-    } else if (filterUsage === 'unused') {
-      filtered = filtered.filter((img) => img.usedIn.length === 0);
-    }
-
     setFilteredImages(filtered);
   };
 
@@ -128,14 +121,7 @@ export const ImageUploader = () => {
   };
 
   const handleDeleteImage = async (imageId: string) => {
-    const image = images.find((img) => img._id === imageId);
-    const hasUsages = image && image.usedIn.length > 0;
-
-    const confirmMessage = hasUsages
-      ? `This image is used in ${image.usedIn.length} place(s). Are you sure you want to delete it?`
-      : 'Are you sure you want to delete this image?';
-
-    if (confirm(confirmMessage)) {
+    if (confirm('Are you sure you want to delete this image?')) {
       startTransition(async () => {
         const result = await deleteImage(imageId);
         if (result.success) {
@@ -151,7 +137,7 @@ export const ImageUploader = () => {
   const handleBulkDelete = async () => {
     const usedImages = selectedImages.filter((id) => {
       const img = images.find((i) => i._id === id);
-      return img && img.usedIn.length > 0;
+      return img;
     });
 
     let confirmMessage = `Are you sure you want to delete ${selectedImages.length} image(s)?`;
@@ -411,13 +397,6 @@ export const ImageUploader = () => {
                     width={image.width}
                     height={image.height}
                   />
-
-                  {/* Usage indicator */}
-                  {image.usedIn.length > 0 && (
-                    <div className='absolute bottom-2 right-2 border border-dark-green bg-light-green text-dark-green px-2 py-1 rounded-lg text-xs'>
-                      {'Used '}({image.usedIn.length})
-                    </div>
-                  )}
                 </div>
 
                 {/* Image Info */}
@@ -468,16 +447,6 @@ export const ImageUploader = () => {
                         {image.height}
                         {' pixels'}
                       </Paragraph>
-                    </div>
-                  )}
-
-                  {/* Usage Info */}
-                  {image.usedIn.length > 0 && (
-                    <div className='mb-2.5'>
-                      <div className='flex items-center gap-1 text-xs text-green'>
-                        <IoAlertCircle className='w-3 h-3' />
-                        {`Used in ${image.usedIn.length} place(s)`}
-                      </div>
                     </div>
                   )}
 
@@ -599,39 +568,6 @@ export const ImageUploader = () => {
                         {new Date(viewingImage.createdAt).toLocaleDateString()}
                       </Paragraph>
                     </div>
-                  </div>
-
-                  <div>
-                    {viewingImage.usedIn.length > 0 ? (
-                      <div>
-                        <Heading
-                          as='h4'
-                          className='text-foreground/50 font-bold mb-2.5'
-                        >
-                          {'Usage '}({viewingImage.usedIn.length})
-                        </Heading>
-                        <div className='space-y-1 text-sm'>
-                          {viewingImage.usedIn.map((usage, index) => (
-                            <Paragraph key={index}>
-                              {'• '}
-                              {usage}
-                            </Paragraph>
-                          ))}
-                        </div>
-                      </div>
-                    ) : (
-                      <div>
-                        <Heading
-                          as='h4'
-                          className='text-foreground/50 font-bold mb-2.5'
-                        >
-                          {'Not Currently Used'}
-                        </Heading>
-                        <Paragraph className='text-sm'>
-                          {'This image is not being used anywhere yet.'}
-                        </Paragraph>
-                      </div>
-                    )}
                   </div>
                 </div>
 

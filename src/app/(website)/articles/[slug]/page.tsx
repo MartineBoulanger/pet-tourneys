@@ -21,7 +21,7 @@ export async function generateMetadata({
       title: 'Our Articles',
       description: 'Our Pet Battle Articles for all pet masters',
       alternates: {
-        canonical: `${process.env.NEXT_PUBLIC_BASE_URL!}/articles/${slug}`,
+        canonical: `${process.env.BASE_URL!}/articles/${slug}`,
       },
     };
   }
@@ -33,7 +33,7 @@ export async function generateMetadata({
     description: description || 'Our Pet Battle Articles for all pet masters',
     keywords: keywords || ['WoW, articles, pet'],
     alternates: {
-      canonical: `${process.env.NEXT_PUBLIC_BASE_URL!}/articles/${slug}`,
+      canonical: `${process.env.BASE_URL!}/articles/${slug}`,
     },
     robots: {
       index: indexable === true || false,

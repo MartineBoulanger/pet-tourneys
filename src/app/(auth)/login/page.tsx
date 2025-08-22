@@ -5,7 +5,7 @@ export async function generateMetadata() {
   return {
     title: 'Login',
     alternates: {
-      canonical: `${process.env.NEXT_PUBLIC_BASE_URL!}/login`,
+      canonical: `${process.env.BASE_URL!}/login`,
     },
   };
 }

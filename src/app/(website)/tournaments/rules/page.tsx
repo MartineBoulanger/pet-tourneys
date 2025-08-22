@@ -6,7 +6,7 @@ export async function generateMetadata() {
   return {
     title: 'Tournament Rules',
     alternates: {
-      canonical: `${process.env.NEXT_PUBLIC_BASE_URL!}/tournaments/rules`,
+      canonical: `${process.env.BASE_URL!}/tournaments/rules`,
     },
   };
 }

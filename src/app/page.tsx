@@ -11,7 +11,7 @@ export default function HomePage() {
         {/* TODO: schedule and sign ups section here */}
         {/* <div className='w-full h-full lg:max-w-[80%] 2xl:max-w-[65%] mx-auto rounded-lg overflow-hidden shadow-md'>
           <img
-            src={`${process.env.NEXT_PUBLIC_BASE_URL!}/images/promo-poster.png`}
+            src={`${process.env.BASE_URL!}/images/promo-poster.png`}
             alt='Tournament Promo Poster'
             width={1000}
             height={1000}

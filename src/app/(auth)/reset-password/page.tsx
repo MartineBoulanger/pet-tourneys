@@ -5,7 +5,7 @@ export async function generateMetadata() {
   return {
     title: 'Reset Password',
     alternates: {
-      canonical: `${process.env.NEXT_PUBLIC_BASE_URL!}/reset-password`,
+      canonical: `${process.env.BASE_URL!}/reset-password`,
     },
   };
 }

@@ -8,7 +8,10 @@ export const AdminPanelButtons = ({
 }: AdminPanelButtonsProps) => {
   return (
     <div className='mb-5'>
-      <Heading as='h2' className='font-sans tracking-normal text-humanoid text-xl mb-2.5'>
+      <Heading
+        as='h2'
+        className='font-sans tracking-normal text-humanoid text-xl mb-2.5'
+      >
         {'What do you want to do?'}
       </Heading>
       <div className='flex flex-wrap items-center gap-2.5 lg:gap-5'>
@@ -42,7 +45,7 @@ export const AdminPanelButtons = ({
           >
             <span className='max-w-[40px] max-h-[40px]'>
               <img
-                src={`${process.env.NEXT_PUBLIC_BASE_URL!}/images/greenrex.png`}
+                src={`${process.env.BASE_URL!}/images/greenrex.png`}
                 alt={'Back To Tournaments List'}
                 width={50}
                 height={50}

@@ -83,7 +83,7 @@ export const ResourceForm = ({
             setSelectedImageIds(imageIds);
           }}
           multiple
-          maxSelection={10}
+          maxSelection={30}
           label={'Choose images'}
           showPreview={true}
           allowNull={true}

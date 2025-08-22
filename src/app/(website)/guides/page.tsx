@@ -8,7 +8,7 @@ export async function generateMetadata() {
   return {
     title: 'Our Guides',
     alternates: {
-      canonical: `${process.env.NEXT_PUBLIC_BASE_URL!}/guides`,
+      canonical: `${process.env.BASE_URL!}/guides`,
     },
   };
 }

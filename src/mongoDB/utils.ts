@@ -10,8 +10,6 @@ export function serializeImage(doc: MongoImageDocument): ImageUpload {
     alt: doc.alt,
     width: doc.width,
     height: doc.height,
-    usedIn: doc.usedIn.map((id) => id.toString()),
-    usedInModel: doc.usedInModel || undefined,
     createdAt: new Date(doc.createdAt),
     updatedAt: new Date(doc.updatedAt),
   };

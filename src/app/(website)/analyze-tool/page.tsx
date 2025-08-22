@@ -5,7 +5,7 @@ export async function generateMetadata() {
   return {
     title: 'Analyze Tool',
     alternates: {
-      canonical: `${process.env.NEXT_PUBLIC_BASE_URL!}/analyze-tool`,
+      canonical: `${process.env.BASE_URL!}/analyze-tool`,
     },
   };
 }

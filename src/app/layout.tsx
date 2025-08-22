@@ -13,10 +13,13 @@ import { FaCheck, FaInfo } from 'react-icons/fa';
 import { IoWarningOutline } from 'react-icons/io5';
 import { BiErrorAlt } from 'react-icons/bi';
 import { ScrollToTop } from '@/components/ui';
+import { Mongoose } from 'mongoose';
 
 declare global {
-  // @typescript-eslint/no-explicit-any
-  var mongoose: any; // any is used here because it can contain anything
+  var mongoose: {
+    conn: Mongoose | null;
+    promise: Promise<Mongoose> | null;
+  };
 }
 
 export const revalidate = 3600;
@@ -29,7 +32,7 @@ export const metadata: Metadata = {
   description:
     'The WoW Pet Community for all things pet battling and battle pets related',
   robots: { index: true, follow: true },
-  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL!),
+  metadataBase: new URL(process.env.BASE_URL!),
   alternates: {
     canonical: '/',
   },

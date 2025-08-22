@@ -20,7 +20,7 @@ export async function generateMetadata({
     title: 'Match Details',
     alternates: {
       canonical: `${process.env
-        .NEXT_PUBLIC_BASE_URL!}/tournaments/${id}/matches/${matchId}`,
+        .BASE_URL!}/tournaments/${id}/matches/${matchId}`,
     },
   };
 }

@@ -8,7 +8,7 @@ export async function generateMetadata() {
   return {
     title: 'Pet Reviews',
     alternates: {
-      canonical: `${process.env.NEXT_PUBLIC_BASE_URL!}/pet-reviews`,
+      canonical: `${process.env.BASE_URL!}/pet-reviews`,
     },
   };
 }
