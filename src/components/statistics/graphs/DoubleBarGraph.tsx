@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any*/
+
 'use client';
 
 import { BarChart, Bar, XAxis, Legend, Tooltip, TooltipProps } from 'recharts';
