@@ -8,7 +8,7 @@ interface InputProps
     DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>,
     'required' | 'type'
   > {
-  label: string;
+  label?: string;
   id: string;
   name: string;
   type?: 'text' | 'email' | 'password' | 'number' | 'date' | 'datetime-local';
@@ -26,7 +26,7 @@ export const Input = ({
 }: InputProps) => {
   return (
     <div>
-      <label htmlFor={id}>{label}:</label>
+      {label && <label htmlFor={id}>{label}:</label>}
       <input
         id={id}
         type={type}

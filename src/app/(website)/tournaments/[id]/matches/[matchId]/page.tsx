@@ -1,4 +1,5 @@
-import { BattleLogViewer, MatchScore } from '@/components/matches';
+import { BattleLogViewer } from '@/components/matches/BattleLogViewer';
+import { MatchScore } from '@/components/matches/MatchScore';
 import {
   Container,
   PageHeading,
@@ -20,7 +21,7 @@ export async function generateMetadata({
     title: 'Match Details',
     alternates: {
       canonical: `${process.env
-        .NEXT_PUBLIC_BASE_URL!}/tournaments/${id}/matches/${matchId}`,
+        .BASE_URL!}/tournaments/${id}/matches/${matchId}`,
     },
   };
 }
@@ -62,7 +63,7 @@ export default async function MatchPage({
     {
       id: 3,
       url: `/tournaments/${id}`,
-      text: 'Back To Tournament Details',
+      text: 'Back To League Details',
     },
   ];
 

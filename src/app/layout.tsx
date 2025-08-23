@@ -1,29 +1,35 @@
 import type { Metadata, Viewport } from 'next';
 import { roboto, warcraft } from '@/styles/fonts';
 import '@/styles/globals.css';
+import '@/styles/prose.css';
 import { getAdminSession, getUserSession } from '@/supabase/actions/auth';
 import { Footer } from '@/components/footer/Footer';
 import { Header } from '@/components/header/Header';
-import { BottomNavigation } from '@/components/navigation';
-import { SpeedInsights } from '@vercel/speed-insights/next';
-import { Analytics } from '@vercel/analytics/next';
+import { BottomNavigation } from '@/components/navigation/BottomNavigation';
 import { Toaster } from 'sonner';
 import { FaCheck, FaInfo } from 'react-icons/fa';
 import { IoWarningOutline } from 'react-icons/io5';
 import { BiErrorAlt } from 'react-icons/bi';
 import { ScrollToTop } from '@/components/ui';
+import { Mongoose } from 'mongoose';
+
+declare global {
+  var mongoose: {
+    conn: Mongoose | null;
+    promise: Promise<Mongoose> | null;
+  };
+}
 
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: {
-    template: '%s | Pet Tourneys',
-    default: 'Pet Tourneys',
+    template: '%s | PML',
+    default: 'Pet Masters League',
   },
-  description:
-    'The WoW Pet Community for all things pet battling and battle pets related',
+  description: 'Pet Masters League - your pets, your mission, your victory!',
   robots: { index: true, follow: true },
-  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL!),
+  metadataBase: new URL(process.env.BASE_URL!),
   alternates: {
     canonical: '/',
   },
@@ -69,8 +75,6 @@ export default async function RootLayout({
             error: <BiErrorAlt />,
           }}
         />
-        <SpeedInsights />
-        <Analytics />
       </body>
     </html>
   );

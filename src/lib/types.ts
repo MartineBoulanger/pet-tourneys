@@ -7,6 +7,7 @@ export type NavigationData = {
   linkText: string;
   text: string;
   imageSrc: string;
+  children?: Links;
 }[];
 
 // Type for the links in the footer

@@ -1,18 +1,17 @@
-import { redirect } from 'next/navigation';
-import { getUserSession } from '@/supabase/actions/auth';
+import { MdUpload } from 'react-icons/md';
 import { getTournamentDetails } from '@/supabase/actions/tournaments';
 import { getPaginatedMatches } from '@/supabase/actions/matches';
-import { Container, Pagination, Heading, Paragraph } from '@/components/ui';
-import { AdminPanelButtons, AdminMatchListItem } from '@/components/admin';
+import {
+  Container,
+  Pagination,
+  Heading,
+  Paragraph,
+  Divider,
+} from '@/components/ui';
+import { AdminMatchListItem } from '@/components/admin/matches/AdminMatchListItem';
 import { PageParams, PageSearchParams } from '@/types';
 import { MATCHES_PER_PAGE } from '@/utils/constants';
-
-export async function generateMetadata() {
-  return {
-    title: 'Admin Matches List',
-    robots: { index: false, follow: false },
-  };
-}
+import Link from 'next/link';
 
 export default async function AdminMatchesPage({
   params,
@@ -25,11 +24,6 @@ export default async function AdminMatchesPage({
   const { page } = await searchParams;
   const currentPage = Number(page) || 1;
   const offset = (currentPage - 1) * MATCHES_PER_PAGE;
-  const response = await getUserSession();
-
-  if (!response?.user || response?.user?.role !== 'admin') {
-    redirect('/');
-  }
 
   const {
     success,
@@ -46,49 +40,76 @@ export default async function AdminMatchesPage({
 
   if (!success || !succ) {
     return (
-      <Container className='text-center lg:px-5'>
-        <Heading className='text-red'>{`Error ${status || stat}!`}</Heading>
-        <Paragraph>{message}</Paragraph>
-      </Container>
+      <>
+        <Divider alignment='horizontal' color='light-grey' height='0.5' />
+        <Container className='text-center lg:px-5'>
+          <Heading
+            as='h2'
+            className='font-sans tracking-normal text-xl text-red mb-2.5'
+          >{`Error ${status || stat}!`}</Heading>
+          <Paragraph>{message}</Paragraph>
+        </Container>
+      </>
     );
   }
 
   if (!tournament) {
     return (
-      <Container className='text-center lg:px-5'>
-        <Heading className='text-red'>{'No Tournament Found!'}</Heading>
-        <Paragraph>
-          {
-            'Please create a tournament first, so you can upload battle logs and create matches.'
-          }
-        </Paragraph>
-      </Container>
+      <>
+        <Divider alignment='horizontal' color='light-grey' height='0.5' />
+        <Container className='text-center lg:px-5'>
+          <Heading
+            as='h2'
+            className='font-sans tracking-normal text-xl text-red mb-2.5'
+          >
+            {'No League Found!'}
+          </Heading>
+          <Paragraph>
+            {
+              'Please create a league first, so you can upload battle logs and create matches.'
+            }
+          </Paragraph>
+        </Container>
+      </>
     );
   }
 
   if (!matches) {
     return (
-      <Container className='text-center lg:px-5'>
-        <Heading className='text-red'>{'No Matches Found!'}</Heading>
-        <Paragraph>
-          {'Please upload battle logs, so you can create matches.'}
-        </Paragraph>
-      </Container>
+      <>
+        <Divider alignment='horizontal' color='light-grey' height='0.5' />
+        <Container className='text-center lg:px-5'>
+          <Heading
+            as='h2'
+            className='font-sans tracking-normal text-xl text-red mb-2.5'
+          >
+            {'No Matches Found!'}
+          </Heading>
+          <Paragraph>
+            {'Please upload battle logs, so you can create matches.'}
+          </Paragraph>
+        </Container>
+      </>
     );
   }
 
-  const username = response?.user && response?.user?.username;
-
   return (
-    <Container className='lg:px-5'>
-      <Heading>{`${username}'s Admin Panel`}</Heading>
-      <AdminPanelButtons isMatchesPage />
-      <div>
+    <>
+      <Divider alignment='horizontal' color='light-grey' height='0.5' />
+      <Container className='px-0 lg:px-0'>
         <div className='mb-5'>
-          <Heading as='h2' className='text-xl mb-2.5'>
-            {'Tournament Matches'}
+          <Heading as='h2' className='font-sans tracking-normal text-xl'>
+            {'Manage League Matches'}
           </Heading>
           <Paragraph className='text-humanoid'>{tournament.name}</Paragraph>
+        </div>
+        <div className='flex flex-wrap item-center justify-center gap-2.5 lg:gap-5 mb-2.5 lg:mb-5'>
+          <Link
+            href='/admin/upload-logs'
+            className='btn-submit flex items-center gap-2.5 py-[7px] px-[11px] rounded-lg'
+          >
+            <MdUpload className='w-5 h-5' /> <span>{'Upload Battle Logs'}</span>
+          </Link>
         </div>
         <div className='grid gap-2.5 sm:gap-5 bg-light-grey p-2.5 sm:p-5 rounded-lg shadow-md'>
           {matches && matches.length > 0 ? (
@@ -111,12 +132,12 @@ export default async function AdminMatchesPage({
           ) : (
             <Paragraph className='p-2.5 sm:p-5 rounded-lg bg-background text-center shadow-md'>
               {
-                'There are no matches for this tournament yet, please upload some battle logs to see the matches here.'
+                'There are no matches for this league yet, please upload some battle logs to see the matches here.'
               }
             </Paragraph>
           )}
         </div>
-      </div>
-    </Container>
+      </Container>
+    </>
   );
 }

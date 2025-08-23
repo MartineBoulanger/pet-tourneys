@@ -15,9 +15,9 @@ export const PageHeading = ({
 
   return (
     <div
-      className={cn('flex flex-col flex-wrap w-full mb-10 lg:mb-0', className)}
+      className={cn('flex flex-col flex-wrap w-full mb-5 lg:mb-0', className)}
     >
-      {children ? <span className='mb-10'>{children}</span> : null}
+      {children ? <span className='mb-5 lg:mb-10'>{children}</span> : null}
       <Heading>{heading}</Heading>
     </div>
   );

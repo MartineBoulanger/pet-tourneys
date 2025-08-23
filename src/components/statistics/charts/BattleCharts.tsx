@@ -26,7 +26,7 @@ export const BattleCharts = ({
       <Heading as='h2' className='text-xl lg:text-3xl mb-2.5'>
         {isMatchView
           ? 'Overall Match Statistics'
-          : 'Overall Tournament Statistics'}
+          : 'Overall League Statistics'}
       </Heading>
       <div className='flex flex-wrap flex-col md:flex-row gap-2.5 lg:gap-5 mb-5'>
         {!isMatchView && matchesStats?.totalMatches ? (

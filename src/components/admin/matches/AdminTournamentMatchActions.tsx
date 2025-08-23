@@ -1,0 +1,29 @@
+import Link from 'next/link';
+import { FaEdit } from 'react-icons/fa';
+import { DeleteMatch, DeleteMatchProps } from './DeleteMatch';
+
+export const AdminTournamentMatchActions = ({
+  tournamentId,
+  matchId,
+  player1,
+  player2,
+}: DeleteMatchProps) => {
+  return (
+    <div className='flex flex-col lg:flex-row items-center justify-center lg:justify-evenly gap-2.5 lg:gap-5'>
+      <Link
+        className='btn-link'
+        href={`/admin/tournaments/${tournamentId}/matches/${matchId}/edit`}
+        title='edit league'
+        aria-label='edit league'
+      >
+        <FaEdit />
+      </Link>
+      <DeleteMatch
+        tournamentId={tournamentId}
+        matchId={matchId}
+        player1={player1}
+        player2={player2}
+      />
+    </div>
+  );
+};

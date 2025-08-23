@@ -22,7 +22,7 @@ export const Footer = async () => {
       </div>
       <div className='pt-5 flex items-center justify-center text-sm text-humanoid'>
         <FaRegCopyright />
-        {new Date().getFullYear()} {'WoW Pet Community'}
+        {new Date().getFullYear()} {'Pet Masters League'}
       </div>
     </footer>
   );

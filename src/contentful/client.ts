@@ -5,11 +5,10 @@ export const contentful = async (
   preview = false,
   tags = ['guides']
 ) => {
-  const spaceId = process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID! || '';
-  const environment =
-    process.env.NEXT_PUBLIC_CONTENTFUL_ENVIRONMENT! || 'master';
-  const deliveryToken = process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN! || '';
-  const previewToken = process.env.NEXT_PUBLIC_CONTENTFUL_PREVIEW_TOKEN! || '';
+  const spaceId = process.env.CONTENTFUL_SPACE_ID! || '';
+  const environment = process.env.CONTENTFUL_ENVIRONMENT! || 'master';
+  const deliveryToken = process.env.CONTENTFUL_ACCESS_TOKEN! || '';
+  const previewToken = process.env.CONTENTFUL_PREVIEW_TOKEN! || '';
 
   if (!deliveryToken || !previewToken) {
     console.error('Contentful API tokens are missing');
