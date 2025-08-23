@@ -30,8 +30,8 @@ export const DeleteMatch = ({
       router.refresh();
       setIsOpen(false);
     } catch (error) {
-      console.error('Error deleting tournament:', error);
-      alert('Failed to delete tournament');
+      console.error('Error deleting match:', error);
+      alert('Failed to delete match');
     } finally {
       setIsDeleting(false);
     }

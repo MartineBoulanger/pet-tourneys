@@ -29,7 +29,7 @@ export const PageCard = ({ page }: PageCardProps) => {
           />
         ) : (
           <Image
-            src={`/images/tourney-logo.png`}
+            src={`/images/PML_Logo.jpg`}
             alt={'Fallback image'}
             width={500}
             height={500}

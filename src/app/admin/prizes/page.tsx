@@ -6,7 +6,7 @@ export default async function AdminPrizesPage() {
     <Container className='px-0 lg:px-0'>
       <Divider alignment='horizontal' color='light-grey' height='0.5' />
       <Heading as='h2' className='font-sans tracking-normal text-xl mb-2.5'>
-        {'Manage Tournament Prizes'}
+        {'Manage League Prizes'}
       </Heading>
       <PrizesManager />
     </Container>

@@ -20,10 +20,10 @@ export default async function GuidesPage() {
   // TODO: add pagination with 12 page cards  per page -> see commercial LLBG for implementing pagination for Contentful
   return (
     <Container className='lg:px-5'>
-      <Heading className='text-center'>{'Our Guides'}</Heading>
+      <Heading className='text-center'>{'Guides'}</Heading>
       <Paragraph className='max-w-[700px] text-center mx-auto'>
         {
-          'Looking for some guides about pet battling? Or you need to remind yourself how to report a win-ticket in Discord? You can find any guide you need about pet battling and the tournament here.'
+          'Looking for some guides about pet battling, or battle pets? Or you need to remind yourself how to report a win-ticket in Discord? You can find any guide you need about pet battling and the league here.'
         }
       </Paragraph>
       {/* Page cards list */}

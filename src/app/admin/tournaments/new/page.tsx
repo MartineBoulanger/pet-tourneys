@@ -10,7 +10,7 @@ export default function NewTournamentPage() {
           as='h2'
           className='font-sans tracking-normal text-xl text-center mb-2.5'
         >
-          {'Create Tournament Form'}
+          {'Create League Form'}
         </Heading>
         <TournamentForm />
       </Container>

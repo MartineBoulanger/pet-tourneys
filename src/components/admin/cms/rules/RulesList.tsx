@@ -1,4 +1,4 @@
-import { IoMdImages } from 'react-icons/io';
+import { MdMenuBook } from 'react-icons/md';
 import { getRulesWithImages } from '@/mongoDB/actions/rules';
 import { RuleSection } from './RuleSection';
 import { Heading, Paragraph } from '@/components/ui';
@@ -11,16 +11,16 @@ export async function RulesList() {
     return (
       <div className='bg-light-grey rounded-lg mt-5 p-2.5 lg:p-5'>
         <div className='flex flex-col items-center justify-center text-center px-2.5 lg:px-5 py-20 bg-background rounded-lg'>
-          <IoMdImages className='text-humanoid mb-6 w-24 h-24' />
+          <MdMenuBook className='text-humanoid mb-6 w-24 h-24' />
           <Heading
             as='h2'
             className='font-sans tracking-normal text-2xl font-bold mb-5'
           >
-            {'No Images Available'}
+            {'No Rules Available'}
           </Heading>
           <Paragraph className='text-foreground/50'>
             {
-              'There are no images available at this moment, please come back later to check if there are images for you to use.'
+              'There are no rules available at this moment, please come back later.'
             }
           </Paragraph>
         </div>

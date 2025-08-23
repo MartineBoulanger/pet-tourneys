@@ -4,7 +4,7 @@ import { PrizesList } from '@/components/admin/cms/prizes/PrizesList';
 
 export async function generateMetadata() {
   return {
-    title: 'Tournaments Prizes',
+    title: 'League Prizes',
     alternates: {
       canonical: `${process.env.BASE_URL!}/tournaments/prizes`,
     },
@@ -21,13 +21,13 @@ export default function TournamentsPrizesPage() {
     {
       id: 2,
       url: '/tournaments',
-      text: 'Tournaments List',
+      text: 'Leagues List',
     },
   ];
 
   return (
     <Container>
-      <PageHeading heading='Tournament Prizes'>
+      <PageHeading heading='League Prizes'>
         <PageMenu links={links} />
       </PageHeading>
       <PrizesList />

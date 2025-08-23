@@ -36,8 +36,8 @@ export const DeleteTournament = ({ id, name }: DeleteTournamentProps) => {
         className='hover:text-red'
         type='button'
         onClick={() => setIsOpen(true)}
-        title={`Delete tournament ${name}`}
-        aria-label={`Delete tournament ${name}`}
+        title={`Delete league ${name}`}
+        aria-label={`Delete league ${name}`}
       >
         <FaTrash />
       </Button>
@@ -52,7 +52,7 @@ export const DeleteTournament = ({ id, name }: DeleteTournamentProps) => {
           >
             <Heading className='mb-2.5 lg:mb-5'>{'Confirm Deletion'}</Heading>
             <Paragraph className='mb-2.5 lg:mb-5'>
-              {'Are you sure you want to delete the tournament '}
+              {'Are you sure you want to delete the league '}
               <strong className='text-humanoid'>{name}</strong>
               {'? This action cannot be undone.'}
             </Paragraph>
@@ -61,16 +61,16 @@ export const DeleteTournament = ({ id, name }: DeleteTournamentProps) => {
                 onClick={() => setIsOpen(false)}
                 variant='secondary'
                 disabled={isDeleting}
-                title='cancel delete tournament'
-                aria-label='cancel delete tournament'
+                title='cancel delete league'
+                aria-label='cancel delete league'
               >
                 {'Cancel'}
               </Button>
               <Button
                 onClick={handleDelete}
                 disabled={isDeleting}
-                title='delete tournament'
-                aria-label='delete tournament'
+                title='delete league'
+                aria-label='delete league'
               >
                 {isDeleting ? 'Deleting...' : 'Delete'}
               </Button>

@@ -7,7 +7,7 @@ export default async function AdminRulesPage() {
       <Divider alignment='horizontal' color='light-grey' height='0.5' />
       <Container className='px-0 lg:px-0'>
         <Heading as='h2' className='font-sans tracking-normal text-xl mb-2.5'>
-          {'Manage Tournament Rules'}
+          {'Manage League Rules'}
         </Heading>
         <RulesManager />
       </Container>

@@ -34,7 +34,7 @@ export async function generateMetadata({
     description:
       description ||
       'Pet Reviews for getting the best battle pet for your PvP team',
-    keywords: keywords || ['WoW, reviews, pet'],
+    keywords: keywords || ['WoW, PML, reviews, pet'],
     alternates: {
       canonical: `${process.env.BASE_URL!}/pet-reviews/${slug}`,
     },

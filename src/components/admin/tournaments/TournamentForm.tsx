@@ -37,7 +37,7 @@ export function TournamentForm({ initialData = null }: TournamentFormProps) {
 
   const validateForm = () => {
     if (!formData.name.trim()) {
-      setError('Tournament name is required');
+      setError('League name is required');
       return false;
     }
     if (!formData.start_date.trim()) {
@@ -76,24 +76,24 @@ export function TournamentForm({ initialData = null }: TournamentFormProps) {
         if (!success) {
           toast.error('Failed to update!', {
             className: 'toast-error',
-            description: 'Failed to update the tournament.',
+            description: 'Failed to update the league.',
           });
         }
-        toast.success('Tournament updated successfully!', {
+        toast.success('League updated successfully!', {
           className: 'toast-success',
-          description: 'Tournament has been successfully updated.',
+          description: 'League has been successfully updated.',
         });
       } else {
         const { success } = await createTournament(submissionData);
         if (!success) {
           toast.error('Failed to create!', {
             className: 'toast-error',
-            description: 'Failed to create the tournament.',
+            description: 'Failed to create the league.',
           });
         }
-        toast.success('Tournament created successfully!', {
+        toast.success('League created successfully!', {
           className: 'toast-success',
-          description: 'Tournament has been successfully created.',
+          description: 'League has been successfully created.',
         });
       }
 
@@ -103,7 +103,7 @@ export function TournamentForm({ initialData = null }: TournamentFormProps) {
       console.error(error);
       toast.error('Failed to save!', {
         className: 'toast-error',
-        description: 'Failed to save tournament',
+        description: 'Failed to save league',
       });
     } finally {
       setIsSubmitting(false);
@@ -121,7 +121,7 @@ export function TournamentForm({ initialData = null }: TournamentFormProps) {
         button2={{
           variant: 'primary',
           type: 'submit',
-          text: isSubmitting ? 'Saving...' : 'Save Tournament',
+          text: isSubmitting ? 'Saving...' : 'Save League',
         }}
         handleClick={() => router.push('/admin/tournaments')}
       >
@@ -129,7 +129,7 @@ export function TournamentForm({ initialData = null }: TournamentFormProps) {
           type='text'
           id='name'
           name='name'
-          label='Tournament Name'
+          label='League Name'
           value={formData.name}
           onChange={(e) => setFormData({ ...formData, name: e.target.value })}
           required

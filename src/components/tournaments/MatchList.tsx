@@ -29,7 +29,7 @@ export const MatchList = ({
   return (
     <>
       <Heading as='h2' className='text-xl mb-2.5'>
-        {'Tournament Matches'}
+        {'League Matches'}
       </Heading>
       <div className='grid gap-2.5 bg-light-grey p-2.5 rounded-lg'>
         {matches.map((match) => (

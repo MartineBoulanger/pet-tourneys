@@ -45,10 +45,10 @@ export default async function AdminPlayersPage({
       <>
         <Divider alignment='horizontal' color='light-grey' height='0.5' />
         <Container className='text-center'>
-          <Heading className='text-red'>{'No Tournament Found!'}</Heading>
+          <Heading className='text-red'>{'No League Found!'}</Heading>
           <Paragraph>
             {
-              'Please create a tournament first, so you can upload battle logs and create matches.'
+              'Please create a league first, so you can upload battle logs and create matches.'
             }
           </Paragraph>
         </Container>
@@ -79,7 +79,7 @@ export default async function AdminPlayersPage({
         <div>
           <div className='mb-5'>
             <Heading as='h2' className='font-sans tracking-normal text-xl'>
-              {'Manage Tournament Players'}
+              {'Manage League Players'}
             </Heading>
             <Paragraph className='text-humanoid'>{tournament.name}</Paragraph>
           </div>

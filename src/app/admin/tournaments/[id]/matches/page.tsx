@@ -62,11 +62,11 @@ export default async function AdminMatchesPage({
             as='h2'
             className='font-sans tracking-normal text-xl text-red mb-2.5'
           >
-            {'No Tournament Found!'}
+            {'No League Found!'}
           </Heading>
           <Paragraph>
             {
-              'Please create a tournament first, so you can upload battle logs and create matches.'
+              'Please create a league first, so you can upload battle logs and create matches.'
             }
           </Paragraph>
         </Container>
@@ -99,7 +99,7 @@ export default async function AdminMatchesPage({
       <Container className='px-0 lg:px-0'>
         <div className='mb-5'>
           <Heading as='h2' className='font-sans tracking-normal text-xl'>
-            {'Manage Tournament Matches'}
+            {'Manage League Matches'}
           </Heading>
           <Paragraph className='text-humanoid'>{tournament.name}</Paragraph>
         </div>
@@ -132,7 +132,7 @@ export default async function AdminMatchesPage({
           ) : (
             <Paragraph className='p-2.5 sm:p-5 rounded-lg bg-background text-center shadow-md'>
               {
-                'There are no matches for this tournament yet, please upload some battle logs to see the matches here.'
+                'There are no matches for this league yet, please upload some battle logs to see the matches here.'
               }
             </Paragraph>
           )}

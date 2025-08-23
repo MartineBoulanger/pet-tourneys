@@ -31,7 +31,7 @@ export const TournamentsList = ({
           aria-label={tournament.name}
         >
           <span className='flex flex-wrap justify-between items-center'>
-            <span className='text-lg font-medium leading-normal tracking-[1.5px]'>
+            <span className='text-lg font-medium leading-normal'>
               {tournament.name}
             </span>
             <span className='flex text-humanoid'>

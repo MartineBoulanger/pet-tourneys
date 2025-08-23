@@ -47,7 +47,7 @@ export default async function PetsStatisticsPage({
 
   let stats;
   let battleStats;
-  let title = 'Tournament Pets Statistics';
+  let title = 'League Pets Statistics';
   let entityName = '';
 
   if (isMatchView) {
@@ -112,9 +112,7 @@ export default async function PetsStatisticsPage({
       url: isMatchView
         ? `/tournaments/${id}/matches/${matchId}`
         : `/tournaments/${id}`,
-      text: isMatchView
-        ? 'Back To Match Details'
-        : 'Back To Tournament Details',
+      text: isMatchView ? 'Back To Match Details' : 'Back To League Details',
     },
   ];
 

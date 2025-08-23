@@ -4,7 +4,7 @@ import { RulesList } from '@/components/admin/cms/rules/RulesList';
 
 export async function generateMetadata() {
   return {
-    title: 'Tournament Rules',
+    title: 'League Rules',
     alternates: {
       canonical: `${process.env.BASE_URL!}/tournaments/rules`,
     },
@@ -21,13 +21,13 @@ export default function TournamentsRulesPage() {
     {
       id: 2,
       url: '/tournaments',
-      text: 'Tournaments List',
+      text: 'Leagues List',
     },
   ];
 
   return (
     <Container className='mb-5 lg:mb-10'>
-      <PageHeading heading='Tournament Rules'>
+      <PageHeading heading='League Rules'>
         <PageMenu links={links} />
       </PageHeading>
       <RulesList />

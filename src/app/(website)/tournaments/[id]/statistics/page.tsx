@@ -50,7 +50,7 @@ export default async function StatisticsPage({
 
   let stats;
   let battleStats;
-  let title = 'Tournament Statistics';
+  let title = 'League Statistics';
   let entityName = '';
   let chartData: ChartData = {
     petUsageData: [],
@@ -187,9 +187,7 @@ export default async function StatisticsPage({
       url: isMatchView
         ? `/tournaments/${id}/matches/${matchId}`
         : `/tournaments/${id}`,
-      text: isMatchView
-        ? 'Back To Match Details'
-        : 'Back To Tournament Details',
+      text: isMatchView ? 'Back To Match Details' : 'Back To League Details',
     },
   ];
 

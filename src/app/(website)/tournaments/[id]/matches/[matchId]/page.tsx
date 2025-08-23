@@ -63,7 +63,7 @@ export default async function MatchPage({
     {
       id: 3,
       url: `/tournaments/${id}`,
-      text: 'Back To Tournament Details',
+      text: 'Back To League Details',
     },
   ];
 

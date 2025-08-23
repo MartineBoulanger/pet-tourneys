@@ -34,11 +34,11 @@ export default async function AdminEditMatchPage({
             as='h2'
             className='font-sans tracking-normal text-xl text-red text-center mb-2.5'
           >
-            {'No Tournaments Found!'}
+            {'No Leagues Found!'}
           </Heading>
           <Paragraph>
             {
-              'Please create a tournament first before you upload the battle logs to create matches and statistics.'
+              'Please create a league first before you upload the battle logs to create matches and statistics.'
             }
           </Paragraph>
         </Container>

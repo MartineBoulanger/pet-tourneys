@@ -40,10 +40,10 @@ export default async function EditTournamentPage({
             as='h2'
             className='font-sans tracking-normal text-xl text-red text-center mb-2.5'
           >
-            {'No Tournament Found!'}
+            {'No League Found!'}
           </Heading>
           <Paragraph>
-            {'Please create a tournament first before you can edit one.'}
+            {'Please create a league first before you can edit one.'}
           </Paragraph>
         </Container>
       </>
@@ -58,7 +58,7 @@ export default async function EditTournamentPage({
           as='h2'
           className='font-sans tracking-normal text-xl text-center mb-2.5'
         >
-          {'Edit Tournament'}
+          {'Edit League'}
         </Heading>
         <TournamentForm initialData={tournament} />
       </Container>

@@ -3,14 +3,14 @@ import Link from 'next/link';
 
 export const Logo = () => {
   return (
-    <Link title='Logo' aria-label='Logo' href='/'>
+    <Link title='Logo PML' aria-label='Logo PML' href='/'>
       <span>
         <Image
-          width={40}
-          height={40}
+          width={50}
+          height={50}
           className='w-12 h-12 object-contain'
-          src={`/images/tourney-logo.png`}
-          alt='Logo'
+          src={`/images/PML_Logo.jpg`}
+          alt='Logo PML'
           loading='lazy'
           unoptimized
         />

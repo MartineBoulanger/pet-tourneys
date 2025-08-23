@@ -13,8 +13,8 @@ export const AdminTournamentMatchActions = ({
       <Link
         className='btn-link'
         href={`/admin/tournaments/${tournamentId}/matches/${matchId}/edit`}
-        title='edit tournament'
-        aria-label='edit tournament'
+        title='edit league'
+        aria-label='edit league'
       >
         <FaEdit />
       </Link>

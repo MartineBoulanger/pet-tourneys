@@ -203,17 +203,14 @@ export function UploadForm({
             required
           />
           <Select
-            label='Choose Tournament'
+            label='Choose League'
             id='tournament_id'
             name='tournament_id'
             value={formData.tournament_id}
             onChange={handleChange}
             required
           >
-            <Option
-              value=''
-              label='Select a tournament that the logs belong to'
-            />
+            <Option value='' label='Select a league that the logs belong to' />
 
             {tournaments.map((tournament) => (
               <Option

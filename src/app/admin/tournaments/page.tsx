@@ -42,7 +42,7 @@ export default async function AdminTournamentsListPage({
       </>
     );
   }
-  
+
   if (!tournaments) {
     return (
       <>
@@ -52,11 +52,11 @@ export default async function AdminTournamentsListPage({
             as='h2'
             className='font-sans tracking-normal text-xl text-red mb-2.5'
           >
-            {'No Tournaments Found!'}
+            {'No Leagues Found!'}
           </Heading>
           <Paragraph>
             {
-              'Please create a tournament first before you upload the battle logs to create matches and statistics.'
+              'Please create a league first before you upload the battle logs to create matches and statistics.'
             }
           </Paragraph>
         </Container>
@@ -69,7 +69,7 @@ export default async function AdminTournamentsListPage({
       <Divider alignment='horizontal' color='light-grey' height='0.5' />
       <Container className='px-0 lg:px-0'>
         <Heading as='h2' className='font-sans tracking-normal text-xl mb-2.5'>
-          {'Manage Tournaments'}
+          {'Manage Leagues'}
         </Heading>
         <div className='flex flex-wrap item-center justify-center gap-2.5 lg:gap-5 mb-2.5 lg:mb-5'>
           <Link
@@ -77,7 +77,7 @@ export default async function AdminTournamentsListPage({
             className='btn-submit flex items-center gap-2.5 py-[7px] px-[11px] rounded-lg'
           >
             <MdOutlinePostAdd className='w-5 h-5' />{' '}
-            <span>{'Create Tournament'}</span>
+            <span>{'Create League'}</span>
           </Link>
           <Link
             href='/admin/upload-logs'
@@ -105,9 +105,7 @@ export default async function AdminTournamentsListPage({
             </>
           ) : (
             <Paragraph className='p-2.5 lg:p-5 rounded-lg bg-background text-center shadow-md'>
-              {
-                'There are no tournaments available yet, please create a tournament.'
-              }
+              {'There are no leagues available yet, please create a league.'}
             </Paragraph>
           )}
         </div>

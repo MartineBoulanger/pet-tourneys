@@ -14,7 +14,7 @@ import { Links } from '@/lib/types';
 
 export async function generateMetadata() {
   return {
-    title: 'Tournaments',
+    title: 'Leagues',
     alternates: {
       canonical: `${process.env.BASE_URL!}/tournaments`,
     },
@@ -63,7 +63,7 @@ export default async function TournamentsPage({
 
   return (
     <Container className='lg:px-5'>
-      <PageHeading heading='Tournaments'>
+      <PageHeading heading='Leagues'>
         <PageMenu links={links} />
       </PageHeading>
       {tournaments.length > 0 ? (
@@ -74,7 +74,7 @@ export default async function TournamentsPage({
         />
       ) : (
         <Paragraph className='p-2.5 lg:p-5 rounded-lg bg-background text-center shadow-md'>
-          {'There are no tournaments available yet.'}
+          {'There are no leagues available yet.'}
         </Paragraph>
       )}
     </Container>

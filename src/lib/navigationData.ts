@@ -14,13 +14,13 @@ export const headerData: NavigationData = [
     url: '/',
     linkText: 'HomePage',
     text: '',
-    imageSrc: `/images/tourney-logo.png`,
+    imageSrc: `/images/PML_Logo.jpg`,
   },
   {
     id: 2,
     url: '/tournaments',
-    linkText: 'Tournaments',
-    text: 'These are the tournaments we are living for! Here you can check all the matches and statistics of each tournament!',
+    linkText: 'Leagues',
+    text: 'These are the leagues we are living for! Here you can check all the matches and statistics of each league!',
     imageSrc: `/images/redrex.png`,
     children: [
       {
@@ -39,7 +39,7 @@ export const headerData: NavigationData = [
     id: 3,
     url: '/guides',
     linkText: 'Guides',
-    text: 'Looking for a specific guide for Pet Battling or for the Tourney system? Checkout out all the guides on the guides page!',
+    text: 'Looking for a specific guide for Pet Battling or for the league system? Checkout out all the guides on the guides page!',
     imageSrc: `/images/bluerex.png`,
   },
   {
@@ -70,7 +70,7 @@ export const adminData: NavigationData = [
     id: 1,
     url: '/admin/upload-pets',
     linkText: 'Upload Pets Data',
-    text: 'Upload the data from all pets in the game to create a JSOn file to use as data file.',
+    text: 'Upload the data from all pets in the game to create a JSON file to use as data file.',
     imageSrc: `/images/redrex.png`,
   },
   {
@@ -83,22 +83,22 @@ export const adminData: NavigationData = [
   {
     id: 3,
     url: '/admin/tournaments',
-    linkText: 'Manage Tournaments',
-    text: 'Manage all tournaments.',
+    linkText: 'Manage Leagues',
+    text: 'Manage all leagues.',
     imageSrc: `/images/greenrex.png`,
   },
   {
     id: 4,
     url: '/admin/rules',
-    linkText: 'Manage Tournament Rules',
-    text: 'Manage the rules of the tournament.',
+    linkText: 'Manage League Rules',
+    text: 'Manage the rules of the league.',
     imageSrc: `/images/bluerex.png`,
   },
   {
     id: 5,
     url: '/admin/prizes',
-    linkText: 'Manage Tournament Prizes',
-    text: 'Manage the prizes of the tournament.',
+    linkText: 'Manage League Prizes',
+    text: 'Manage the prizes of the league.',
     imageSrc: `/images/greengor.png`,
   },
   {

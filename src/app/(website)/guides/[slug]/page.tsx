@@ -18,8 +18,9 @@ export async function generateMetadata({
 
   if (!page?.seoMetadata) {
     return {
-      title: 'Our Guides',
-      description: 'Our Guides for all that want to know things',
+      title: 'Guides',
+      description:
+        'Guides for pet masters about pet battling, battle pets, and the league',
       alternates: {
         canonical: `${process.env.BASE_URL!}/guides/${slug}`,
       },
@@ -29,9 +30,11 @@ export async function generateMetadata({
   const { title, description, indexable, keywords, image } = page.seoMetadata;
 
   return {
-    title: title || 'Our Guides',
-    description: description || 'Our Guides for all that want to know things',
-    keywords: keywords || ['WoW, guides, pet'],
+    title: title || 'Guides',
+    description:
+      description ||
+      'Guides for pet masters about pet battling, battle pets, and the league',
+    keywords: keywords || ['WoW, PML, guides, pet'],
     alternates: {
       canonical: `${process.env.BASE_URL!}/guides/${slug}`,
     },

@@ -27,8 +27,7 @@ export const metadata: Metadata = {
     template: '%s | PML',
     default: 'Pet Masters League',
   },
-  description:
-    'The WoW Pet Community for all things pet battling and battle pets related',
+  description: 'Pet Masters League - your pets, your mission, your victory!',
   robots: { index: true, follow: true },
   metadataBase: new URL(process.env.BASE_URL!),
   alternates: {

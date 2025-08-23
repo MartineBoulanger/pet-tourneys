@@ -4,6 +4,8 @@ import { ResourcesList } from '@/components/admin/cms/resources/ResourcesList';
 export async function generateMetadata() {
   return {
     title: 'Resources',
+    description:
+      'All our images are at your disposal to use, download them and mention us',
     alternates: {
       canonical: `${process.env.BASE_URL!}/resources`,
     },

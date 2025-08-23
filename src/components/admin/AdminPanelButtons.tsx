@@ -45,13 +45,13 @@ export const AdminPanelButtons = ({
           <Link
             href='/admin'
             className='btn-link flex items-center gap-2.5 border py-1 px-3 rounded-lg border-blue-grey hover:bg-blue-grey hover:text-foreground'
-            title='Back To Tournaments List'
-            aria-label='Back To Tournaments List'
+            title='Back To League List'
+            aria-label='Back To League List'
           >
             <span className='max-w-[40px] max-h-[40px]'>
               <Image
                 src={`/images/greenrex.png`}
-                alt={'Back To Tournaments List'}
+                alt={'Back To League List'}
                 width={50}
                 height={50}
                 className='w-full h-full object-cover'
@@ -59,7 +59,7 @@ export const AdminPanelButtons = ({
                 unoptimized
               />
             </span>
-            <span>{'Back To Tournaments List'}</span>
+            <span>{'Back To League List'}</span>
           </Link>
         ) : null}
       </div>

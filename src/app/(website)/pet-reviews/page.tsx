@@ -7,6 +7,8 @@ import { AllPagesFragment } from '@/components/contentful/types';
 export async function generateMetadata() {
   return {
     title: 'Pet Reviews',
+    description:
+      'Pet Reviews for getting the best battle pet for your PvP team',
     alternates: {
       canonical: `${process.env.BASE_URL!}/pet-reviews`,
     },
