@@ -80,8 +80,8 @@ export const Menu = ({ className, buttonVariant = 'primary' }: MenuProps) => {
                         <Image
                           src={link.imageSrc}
                           alt={link.linkText}
-                          width={50}
-                          height={50}
+                          width={40}
+                          height={40}
                           className='w-full h-full object-cover'
                           loading='lazy'
                           unoptimized
@@ -136,8 +136,8 @@ export const Menu = ({ className, buttonVariant = 'primary' }: MenuProps) => {
                       <Image
                         src={link.imageSrc}
                         alt={link.linkText}
-                        width={50}
-                        height={50}
+                        width={40}
+                        height={40}
                         className='w-full h-full object-cover'
                         loading='lazy'
                         unoptimized

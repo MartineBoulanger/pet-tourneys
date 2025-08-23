@@ -135,7 +135,7 @@ export const DesktopSidebarNavigation = ({
       {/* Sidebar */}
       <div
         className={cn(
-          'h-fit sticky top-[11%] bg-background rounded-lg shadow-md',
+          'h-fit sticky top-[10%] bg-background rounded-lg shadow-md',
           'transition-all duration-300 ease-in-out overflow-hidden',
           'min-h-[calc(100vh-2rem)]'
         )}

@@ -12,7 +12,7 @@ export const headerData: NavigationData = [
   {
     id: 1,
     url: '/',
-    linkText: 'HomePage',
+    linkText: 'Home',
     text: '',
     imageSrc: `/images/PML_Logo.jpg`,
   },
@@ -82,31 +82,31 @@ export const adminData: NavigationData = [
   },
   {
     id: 3,
+    url: '/admin/resources',
+    linkText: 'Manage All Resources',
+    text: 'Manage all the resource sections for the resources page.',
+    imageSrc: `/images/bluegor.png`,
+  },
+  {
+    id: 4,
     url: '/admin/tournaments',
     linkText: 'Manage Leagues',
     text: 'Manage all leagues.',
     imageSrc: `/images/greenrex.png`,
   },
   {
-    id: 4,
+    id: 5,
     url: '/admin/rules',
     linkText: 'Manage League Rules',
     text: 'Manage the rules of the league.',
     imageSrc: `/images/bluerex.png`,
   },
   {
-    id: 5,
+    id: 6,
     url: '/admin/prizes',
     linkText: 'Manage League Prizes',
     text: 'Manage the prizes of the league.',
     imageSrc: `/images/greengor.png`,
-  },
-  {
-    id: 6,
-    url: '/admin/resources',
-    linkText: 'Manage All Resources',
-    text: 'Manage all the resource sections for the resources page.',
-    imageSrc: `/images/bluegor.png`,
   },
 ];
 
