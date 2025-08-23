@@ -30,7 +30,6 @@ export default function TournamentsRulesPage() {
       <PageHeading heading='Tournament Rules'>
         <PageMenu links={links} />
       </PageHeading>
-      {/* TODO: make a sidebar navigation to navigate to each rule set */}
       <RulesList />
     </Container>
   );

@@ -28,7 +28,7 @@ import {
 } from '@/components/ui';
 import { cn } from '@/utils/cn';
 import Image from 'next/image';
-import { ImageManagerSkeleton } from '@/components/ui';
+import { ImagesManagerSkeleton } from '@/components/ui';
 
 export const ImageUploader = () => {
   const [images, setImages] = useState<ImageUpload[]>([]);
@@ -203,7 +203,7 @@ export const ImageUploader = () => {
     setSelectedImages([]);
   };
 
-  if (isLoading) return <ImageManagerSkeleton />;
+  if (isLoading) return <ImagesManagerSkeleton />;
 
   return (
     <Container className='px-0 lg:px-0'>

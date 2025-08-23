@@ -20,7 +20,7 @@ import {
   Button,
   Heading,
   Paragraph,
-  ResourcesManagerSkeleton,
+  CMSManagerSkeleton,
 } from '@/components/ui';
 import { IoMdCalendar } from 'react-icons/io';
 
@@ -127,7 +127,7 @@ export function ResourcesManager() {
     setDraggedItem(null);
   };
 
-  if (loading) return <ResourcesManagerSkeleton />;
+  if (loading) return <CMSManagerSkeleton />;
 
   return (
     <div className='space-y-2.5 lg:space-y-5'>

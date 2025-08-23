@@ -42,7 +42,7 @@ export default async function AdminTournamentsListPage({
       </>
     );
   }
-
+  
   if (!tournaments) {
     return (
       <>

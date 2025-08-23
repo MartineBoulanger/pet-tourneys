@@ -38,7 +38,7 @@ export function ResourceSection({ resource }: ResourceSectionProps) {
             </Paragraph>
           </div>
         ) : (
-          <ImageGrid images={resource.images} />
+          <ImageGrid images={resource.images} isDownloadable />
         )}
       </div>
     </section>

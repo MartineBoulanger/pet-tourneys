@@ -1,16 +1,18 @@
 'use client';
 
 import { useState } from 'react';
-import { Button } from '@/components/ui';
-import { ImageUpload } from '@/mongoDB/types';
 import Image from 'next/image';
 import { FaTimes } from 'react-icons/fa';
+import { Button } from '@/components/ui';
+import { ImageUpload } from '@/mongoDB/types';
+import { DownloadImageButton } from './DownloadImageButton';
 
 interface ImageCardProps {
   image: ImageUpload;
+  isDownloadable?: boolean;
 }
 
-export function ImageCard({ image }: ImageCardProps) {
+export function ImageCard({ image, isDownloadable = false }: ImageCardProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -35,6 +37,16 @@ export function ImageCard({ image }: ImageCardProps) {
                 {'View Full Image'}
               </Button>
             </div>
+            {/* Download button */}
+            {isDownloadable && (
+              <div className='absolute top-5 right-5'>
+                <DownloadImageButton
+                  imageUrl={image.src}
+                  filename={`${image.alt}.jpg`}
+                  className='backdrop-blur-sm shadow-lg'
+                />
+              </div>
+            )}
           </div>
         </div>
       </div>

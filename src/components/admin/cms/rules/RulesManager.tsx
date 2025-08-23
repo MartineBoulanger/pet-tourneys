@@ -17,7 +17,7 @@ import {
   Button,
   Heading,
   Paragraph,
-  ImageManagerSkeleton,
+  CMSManagerSkeleton,
 } from '@/components/ui';
 
 export function RulesManager() {
@@ -121,7 +121,7 @@ export function RulesManager() {
     setDraggedItem(null);
   };
 
-  if (loading) return <ImageManagerSkeleton />;
+  if (loading) return <CMSManagerSkeleton />;
 
   return (
     <div className='space-y-2.5 lg:space-y-5'>

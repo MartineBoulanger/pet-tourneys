@@ -5,9 +5,14 @@ import { cn } from '@/utils/cn';
 interface ImageGridProps {
   images: ImageUpload[];
   cols?: number;
+  isDownloadable?: boolean;
 }
 
-export function ImageGrid({ images, cols = 0 }: ImageGridProps) {
+export function ImageGrid({
+  images,
+  cols = 0,
+  isDownloadable = false,
+}: ImageGridProps) {
   let colNumber;
   switch (cols) {
     case 1:
@@ -27,7 +32,11 @@ export function ImageGrid({ images, cols = 0 }: ImageGridProps) {
   return (
     <div className={cn('grid gap-2.5 lg:gap-5', colNumber)}>
       {images.map((image) => (
-        <ImageCard key={image._id} image={image} />
+        <ImageCard
+          key={image._id}
+          image={image}
+          isDownloadable={isDownloadable}
+        />
       ))}
     </div>
   );

@@ -2,6 +2,7 @@ import { IoMdImages } from 'react-icons/io';
 import { getRulesWithImages } from '@/mongoDB/actions/rules';
 import { RuleSection } from './RuleSection';
 import { Heading, Paragraph } from '@/components/ui';
+import { SidebarNavigation } from '../SidebarNavigation';
 
 export async function RulesList() {
   const rulesWithImages = await getRulesWithImages();
@@ -28,10 +29,20 @@ export async function RulesList() {
   }
 
   return (
-    <div className='space-y-2.5 lg:space-y-5 bg-light-grey rounded-lg p-2.5 lg:p-5'>
-      {rulesWithImages.map((rule) => (
-        <RuleSection key={rule._id} rule={rule} />
-      ))}
+    <div className='relative flex bg-light-grey rounded-lg p-2.5 lg:p-5'>
+      {/* Sidebar Navigation */}
+      <SidebarNavigation />
+
+      {/* Main Content */}
+      <div className='flex-1 min-w-0'>
+        <div className='relative space-y-2.5 lg:space-y-5 bg-light-grey rounded-lg lg:pl-5'>
+          {rulesWithImages.map((rule) => (
+            <div key={rule._id} id={`rule-${rule._id}`} className='scroll-mt-5'>
+              <RuleSection rule={rule} />
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
