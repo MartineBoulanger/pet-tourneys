@@ -38,7 +38,7 @@ export function PetStatsList({
     getPetStats,
     getTypeColor,
     setAvailableBreedToArray,
-  } = usePetsFilters({ petData, petStats, battleStats, isMatchView });
+  } = usePetsFilters({ petData, petStats, battleStats });
 
   const topUsedPets = useMemo(() => {
     return [...petStats]
@@ -48,7 +48,7 @@ export function PetStatsList({
   }, [petStats]);
 
   return (
-    <div className='space-y-2.5 lg:space-y-5'>
+    <div className='space-y-2.5 sm:space-y-5'>
       <PetControls
         searchTerm={searchTerm}
         onSearchChange={setSearchTerm}
@@ -61,20 +61,14 @@ export function PetStatsList({
         isMatchView={isMatchView}
       />
 
-      <div className='space-y-2.5 bg-background p-2.5 rounded-lg'>
+      <div className='space-y-2.5 sm:space-y-5 bg-background p-2.5 sm:p-5 rounded-lg'>
         {currentPetData.length > 0 ? (
           currentPetData.map((pet) => {
             const isTopUsed = topUsedPets.includes(pet.name);
             const usageRank = topUsedPets.indexOf(pet.name) + 1;
-            const {
-              stats,
-              breeds,
-              graphData,
-              winRate,
-              strength,
-              totalMatches,
-              totalPlayed,
-            } = getPetStats(pet.name);
+            const { stats, breeds, graphData, winRate, strength } = getPetStats(
+              pet.name
+            );
             const typeColor = getTypeColor(pet.type);
             const availableBreeds = setAvailableBreedToArray(
               pet.availableBreeds
@@ -89,7 +83,7 @@ export function PetStatsList({
               >
                 <Button
                   onClick={() => togglePet(pet.name)}
-                  className='bg-transparent flex items-center justify-between w-full text-left p-0 pr-2.5 lg:pr-5'
+                  className='bg-transparent flex items-center justify-between w-full text-left p-0 pr-2.5 sm:pr-5'
                 >
                   <div className='flex items-center'>
                     <div className='flex items-center h-[40px] w-[40px] mr-2.5'>
@@ -122,16 +116,16 @@ export function PetStatsList({
                 </Button>
 
                 {expandedPets[pet.name] && (
-                  <div className='p-2.5 grid grid-cols-1 lg:grid-cols-3 gap-y-2.5 lg:gap-2.5 bg-light-grey rounded-b-lg'>
-                    <div className='col-span-2 space-y-2.5'>
-                      <div className='p-2.5 lg:p-5 rounded-lg bg-background shadow-md'>
+                  <div className='p-2.5 sm:p-5 grid grid-cols-1 md:grid-cols-3 gap-y-2.5 sm:gap-5 bg-light-grey rounded-b-lg'>
+                    <div className='col-span-2 space-y-2.5 sm:space-y-5'>
+                      <div className='p-2.5 sm:p-5 rounded-lg bg-background shadow-md'>
                         <Paragraph className='italic text-center'>
                           &ldquo;{pet.description}&ldquo;
                         </Paragraph>
                       </div>
 
-                      <div className='grid grid-cols-1 lg:grid-cols-2 gap-2.5 mt-2.5'>
-                        <div className='p-2.5 lg:p-5 rounded-lg bg-background shadow-md relative'>
+                      <div className='grid grid-cols-1 md:grid-cols-2 gap-2.5 sm:gap-5 mt-2.5'>
+                        <div className='p-2.5 sm:p-5 rounded-lg bg-background shadow-md relative'>
                           <Heading
                             as='h3'
                             className='text-xl font-bold'
@@ -218,7 +212,7 @@ export function PetStatsList({
                             </div>
                           </div>
                         </div>
-                        <div className='p-2.5 lg:p-5 rounded-lg bg-background shadow-md'>
+                        <div className='p-2.5 sm:p-5 rounded-lg bg-background shadow-md'>
                           <div className='flex items-start justify-between'>
                             <Heading
                               as='h3'
@@ -229,44 +223,28 @@ export function PetStatsList({
                             >
                               {'Battle Statistics'}
                             </Heading>
-                            <div className='font-light p-2 bg-light-grey rounded-lg xl:w-[40%] space-y-1'>
-                              {!isMatchView && (
-                                <Paragraph className='flex items-center justify-between'>
-                                  <span className='font-bold'>
-                                    {'Win Rate: '}
-                                  </span>
-                                  <span
-                                    className={cn(
-                                      winRate < 25 ? 'text-red' : '',
-                                      winRate >= 25 && winRate < 50
-                                        ? 'text-orange'
-                                        : '',
-                                      winRate >= 50 && winRate < 75
-                                        ? 'text-yellow'
-                                        : '',
-                                      winRate >= 75 ? 'text-green' : ''
-                                    )}
-                                  >
-                                    {winRate}
-                                    {'%'}
-                                  </span>
-                                </Paragraph>
+                            <Paragraph
+                              className={cn(
+                                'font-light p-2 bg-light-grey rounded-lg'
                               )}
-                              <Paragraph className='flex items-center justify-between'>
-                                <span className='font-bold mr-1'>
-                                  {'Total Played: '}
-                                </span>
-                                {totalPlayed}
-                              </Paragraph>
-                              {!isMatchView && (
-                                <Paragraph className='flex items-center justify-between'>
-                                  <span className='font-bold mr-1'>
-                                    {'Total Matches: '}
-                                  </span>
-                                  {totalMatches}
-                                </Paragraph>
-                              )}
-                            </div>
+                            >
+                              <span className='font-bold'>{'Win Rate: '}</span>
+                              <span
+                                className={cn(
+                                  winRate < 25 ? 'text-red' : '',
+                                  winRate >= 25 && winRate < 50
+                                    ? 'text-orange'
+                                    : '',
+                                  winRate >= 50 && winRate < 75
+                                    ? 'text-yellow'
+                                    : '',
+                                  winRate >= 75 ? 'text-green' : ''
+                                )}
+                              >
+                                {winRate}
+                                {'%'}
+                              </span>
+                            </Paragraph>
                           </div>
                           <RadarGraph
                             data={graphData}
@@ -276,7 +254,7 @@ export function PetStatsList({
                         </div>
                       </div>
 
-                      <div className='p-2.5 lg:p-5 rounded-lg bg-background shadow-md'>
+                      <div className='p-2.5 sm:p-5 rounded-lg bg-background shadow-md'>
                         <Heading
                           as='h3'
                           className='text-xl font-bold'
@@ -330,7 +308,7 @@ export function PetStatsList({
                         loading='lazy'
                       />
                       {availableBreeds.length > 0 && (
-                        <div className='rounded-lg overflow-hidden bg-background shadow-md mt-2.5'>
+                        <div className='rounded-lg overflow-hidden bg-background shadow-md mt-2.5 sm:mt-5'>
                           <div className='overflow-x-auto'>
                             <table className='min-w-full'>
                               <thead
@@ -403,7 +381,7 @@ export function PetStatsList({
             totalPages={totalPages}
             baseUrl=''
             onPageChange={handlePageChange}
-            className='mt-5 mb-2.5'
+            className='mt-2.5 sm:mt-5'
           />
         ) : null}
       </div>

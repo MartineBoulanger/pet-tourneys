@@ -20,7 +20,7 @@ export const PieGraph = ({
 
   if (!data || data.length === 0) {
     return (
-      <p className='text-center bg-background rounded-lg p-2.5 lg:p-5'>
+      <p className='text-center bg-background rounded-lg p-2.5 sm:p-5'>
         {'No pie chart data available.'}
       </p>
     );
@@ -35,7 +35,7 @@ export const PieGraph = ({
     const data = payload[0].payload;
 
     return (
-      <div className='bg-light-grey p-2.5 rounded-lg shadow-md'>
+      <div className='bg-light-grey p-2.5 sm:p-5 rounded-lg shadow-md'>
         <p className='font-bold text-humanoid'>{capitalizeWord(data.name)}</p>
         <p>
           {tooltip}
@@ -74,7 +74,7 @@ export const PieGraph = ({
   };
 
   return (
-    <GraphWrapper className='p-2.5 lg:p-5 h-[425px] lg:h-[450px]'>
+    <GraphWrapper className='p-2.5 sm:p-5 h-[425px] md:h-[450px]'>
       <PieChart>
         <Tooltip content={<CustomTooltip />} />
 

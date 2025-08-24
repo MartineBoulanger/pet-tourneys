@@ -58,10 +58,10 @@ export function PetControls({
   }
 
   return (
-    <div className='bg-light-grey p-2.5 rounded-lg mb-2.5 lg:mb-5 shadow-sm'>
+    <div className='bg-light-grey p-2.5 sm:p-5 rounded-lg mb-2.5 sm:mb-5 shadow-sm'>
       <div
         className={cn(
-          'flex flex-col lg:flex-row lg:items-center gap-2.5 lg:gap-5 p-2.5 bg-background',
+          'flex flex-col md:flex-row md:items-center gap-2.5 sm:gap-5 p-2.5 sm:p-5 bg-background',
           showFilters ? 'rounded-t-lg' : 'rounded-lg'
         )}
       >
@@ -94,7 +94,7 @@ export function PetControls({
             />
           ))}
         </Select>
-        <div className='flex self-end gap-2.5 lg:gap-5'>
+        <div className='flex self-end gap-2.5 sm:gap-5'>
           <Button
             onClick={() => setShowFilters(!showFilters)}
             className='flex items-center gap-2.5 p-2'
@@ -109,7 +109,7 @@ export function PetControls({
       </div>
 
       {showFilters ? (
-        <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 lg:gap-5 p-2.5  bg-background rounded-b-lg border-t border-t-light-grey'>
+        <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-5 p-2.5 sm:p-5 bg-background rounded-b-lg border-t border-t-light-grey'>
           {/* Type Filter */}
           <Select
             value={filters.type}

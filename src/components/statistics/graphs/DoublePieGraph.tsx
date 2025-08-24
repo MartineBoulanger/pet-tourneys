@@ -21,7 +21,7 @@ export const DoublePieGraph = ({
 
   if (!data || !data2 || data.length === 0 || data2.length === 0) {
     return (
-      <p className='text-center bg-background rounded-lg p-2.5 lg:p-5'>
+      <p className='text-center bg-background rounded-lg p-2.5 sm:p-5'>
         {'No double pie chart data available.'}
       </p>
     );
@@ -46,8 +46,8 @@ export const DoublePieGraph = ({
     const percentage = calculatePercentage(dataItem.value, total);
 
     return (
-      <div className='bg-light-grey p-2.5 rounded-lg shadow-md'>
-        <p className='font-bold text-humanoid'>{dataItem.name}</p>
+      <div className='bg-light-grey p-2.5 sm:p-5 rounded-lg shadow-md'>
+        <p className='font-bold text-humanoid'>{data.name}</p>
         <p>
           {tooltip}
           {dataItem.value} ({percentage})
@@ -122,7 +122,7 @@ export const DoublePieGraph = ({
   };
 
   return (
-    <GraphWrapper className='p-2.5 lg:p-5 h-[425px] lg:h-[450px]'>
+    <GraphWrapper className='p-2.5 sm:p-5 h-[425px] md:h-[450px]'>
       <PieChart>
         <Tooltip content={<CustomTooltip />} />
 
