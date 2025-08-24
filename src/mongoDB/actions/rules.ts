@@ -50,7 +50,7 @@ export async function createRule(data: Partial<RuleType>) {
     };
   } catch (error) {
     console.error('Failed to create rule:', error);
-    return { success: false, error: 'Failed to create rule' };
+    return { success: false, error: `Failed to create rule: ${error}` };
   }
 }
 
@@ -96,7 +96,7 @@ export async function updateRule(ruleId: string, data: Partial<RuleType>) {
     return { success: true, rule: result };
   } catch (error) {
     console.error('Failed to update rule:', error);
-    return { success: false, error: 'Failed to update rule' };
+    return { success: false, error: `Failed to update rule: ${error}` };
   }
 }
 
@@ -116,7 +116,7 @@ export async function deleteRule(ruleId: string) {
     return { success: true };
   } catch (error) {
     console.error('Failed to delete rule:', error);
-    return { success: false, error: 'Failed to delete rule' };
+    return { success: false, error: `Failed to delete rule: ${error}` };
   }
 }
 
@@ -206,7 +206,10 @@ export async function updateRuleOrder(ruleId: string, newOrder: number) {
     return { success: true };
   } catch (error) {
     console.error('Failed to update rule order:', error);
-    return { success: false, error: 'Failed to update the order of the rules' };
+    return {
+      success: false,
+      error: `Failed to update the order of the rules: ${error}`,
+    };
   }
 }
 
@@ -231,6 +234,6 @@ export async function reorderRules(ruleIds: string[]) {
     return { success: true, modifiedCount: result.modifiedCount };
   } catch (error) {
     console.error('Failed to reorder rules:', error);
-    return { success: false, error: 'Failed to reorder the rules' };
+    return { success: false, error: `Failed to reorder the rules: ${error}` };
   }
 }

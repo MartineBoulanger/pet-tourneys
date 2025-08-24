@@ -111,7 +111,7 @@ export async function updatePrize(prizeId: string, data: Partial<PrizeType>) {
     return { success: true, prize: result };
   } catch (error) {
     console.error('Failed to update prize:', error);
-    return { success: false, error: 'Failed to update prize' };
+    return { success: false, error: `Failed to update prize: ${error}` };
   }
 }
 
@@ -131,7 +131,7 @@ export async function deletePrize(prizeId: string) {
     return { success: true };
   } catch (error) {
     console.error('Failed to delete prize:', error);
-    return { success: false, error: 'Failed to delete prize' };
+    return { success: false, error: `Failed to delete prize: ${error}` };
   }
 }
 
@@ -230,7 +230,7 @@ export async function updatePrizeOrder(prizeId: string, newOrder: number) {
     console.error('Failed to update prize order:', error);
     return {
       success: false,
-      error: 'Failed to update the order of the prizes',
+      error: `Failed to update the order of the prizes: ${error}`,
     };
   }
 }
@@ -256,6 +256,6 @@ export async function reorderPrizes(prizeIds: string[]) {
     return { success: true, modifiedCount: result.modifiedCount };
   } catch (error) {
     console.error('Failed to reorder prizes:', error);
-    return { success: false, error: 'Failed to reorder the prizes' };
+    return { success: false, error: `Failed to reorder the prizes: ${error}` };
   }
 }

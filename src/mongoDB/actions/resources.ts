@@ -49,7 +49,7 @@ export async function createResource(formData: FormData) {
     };
   } catch (error) {
     console.error('Error creating resource:', error);
-    return { success: false, error: 'Error creating resource' };
+    return { success: false, error: `Error creating resource: ${error}` };
   }
 }
 
@@ -117,7 +117,7 @@ export async function updateResource(resourceId: string, formData: FormData) {
     return { success: true, resource: result };
   } catch (error) {
     console.error('Error updating resource:', error);
-    return { success: false, error: 'Failed to edit resource' };
+    return { success: false, error: `Failed to edit resource: ${error}` };
   }
 }
 
@@ -139,7 +139,7 @@ export async function deleteResource(resourceId: string) {
     console.error('Error deleting resource:', error);
     return {
       success: false,
-      error: 'Failed to delete resource',
+      error: `Failed to delete resource: ${error}`,
     };
   }
 }
@@ -281,7 +281,7 @@ export async function updateResourceOrder(
     console.error('Error updating resource order:', error);
     return {
       success: false,
-      error: 'Failed to update the order of the resources',
+      error: `Failed to update the order of the resources: ${error}`,
     };
   }
 }
@@ -306,6 +306,9 @@ export async function reorderResources(resourceIds: string[]) {
     return { success: true, modifiedCount: result.modifiedCount };
   } catch (error) {
     console.error('Failed to reorder resources:', error);
-    return { success: false, error: 'Failed to reorder the resources' };
+    return {
+      success: false,
+      error: `Failed to reorder the resources: ${error}`,
+    };
   }
 }

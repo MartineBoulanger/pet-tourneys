@@ -50,7 +50,7 @@ export async function uploadImages(
     return { success: true, images: uploads };
   } catch (error) {
     console.error('Upload error:', error);
-    return { success: false, error: 'Failed to upload images' };
+    return { success: false, error: `Failed to upload images: ${error}` };
   }
 }
 
@@ -96,7 +96,7 @@ export async function deleteImage(
     return { success: true };
   } catch (error) {
     console.error('Failed to delete image:', error);
-    return { success: false, error: 'Failed to delete image' };
+    return { success: false, error: `Failed to delete image: ${error}` };
   }
 }
 
@@ -120,6 +120,6 @@ export async function updateImage(
     return { success: true };
   } catch (error) {
     console.error('Update error:', error);
-    return { success: false, error: 'Failed to update image' };
+    return { success: false, error: `Failed to update image: ${error}` };
   }
 }
