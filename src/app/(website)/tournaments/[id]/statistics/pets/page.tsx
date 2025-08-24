@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation';
-import { PetStatsList } from '@/components/statistics/PetStatsList';
+import { PetStatsList } from '@/components/tournaments';
 import {
   getMatchPetUsage,
   getTournamentPetStats,
@@ -28,7 +28,8 @@ export async function generateMetadata({ params }: { params: PageParams }) {
   return {
     title: 'Pets Statistics',
     alternates: {
-      canonical: `${process.env.BASE_URL!}/tournaments/${id}/statistics/pets`,
+      canonical: `${process.env
+        .NEXT_PUBLIC_BASE_URL!}/tournaments/${id}/statistics/pets`,
     },
   };
 }
@@ -47,7 +48,7 @@ export default async function PetsStatisticsPage({
 
   let stats;
   let battleStats;
-  let title = 'League Pets Statistics';
+  let title = 'Tournament Pets Statistics';
   let entityName = '';
 
   if (isMatchView) {
@@ -112,7 +113,9 @@ export default async function PetsStatisticsPage({
       url: isMatchView
         ? `/tournaments/${id}/matches/${matchId}`
         : `/tournaments/${id}`,
-      text: isMatchView ? 'Back To Match Details' : 'Back To League Details',
+      text: isMatchView
+        ? 'Back To Match Details'
+        : 'Back To Tournament Details',
     },
   ];
 

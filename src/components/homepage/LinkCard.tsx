@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import { Heading } from '@/components/ui';
-import Image from 'next/image';
 
 interface LinkCardProps {
   id: number;
@@ -27,7 +26,7 @@ export const LinkCard = ({
     >
       <span className='flex flex-col items-center content-between justify-between gap-5 bg-background p-2.5 lg:p-5 rounded-lg hover:scale-[1.02] transition-all duration-300'>
         <span className='w-[150px] h-[150px]'>
-          <Image
+          <img
             src={imageSrc}
             alt={text}
             width={100}

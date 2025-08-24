@@ -1,19 +1,6 @@
 import Link from 'next/link';
+import { TournamentsListProps } from './types';
 import { Pagination } from '@/components/ui';
-
-export interface Tournament {
-  id: string;
-  name: string;
-  start_date: string;
-  end_date?: string | null;
-  participant_count: number;
-}
-
-export interface TournamentsListProps {
-  tournaments: Tournament[];
-  currentPage?: number;
-  totalPages?: number;
-}
 
 export const TournamentsList = ({
   tournaments,
@@ -31,7 +18,7 @@ export const TournamentsList = ({
           aria-label={tournament.name}
         >
           <span className='flex flex-wrap justify-between items-center'>
-            <span className='text-lg font-medium leading-normal'>
+            <span className='text-lg font-medium leading-normal tracking-[1.5px]'>
               {tournament.name}
             </span>
             <span className='flex text-humanoid'>

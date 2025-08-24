@@ -12,24 +12,8 @@ import {
   Textarea,
   Select,
   Option,
-  Paragraph,
 } from '@/components/ui';
-
-export interface UploadFormProps {
-  tournaments: Array<{ id: string; name: string }>;
-  initialData?: {
-    player1: string;
-    player2: string;
-    owner: string;
-    date: string;
-    logs: string;
-    petUsage: string;
-    tournament_id: string;
-    region: string;
-  };
-  match_id?: string;
-  isEditMode?: boolean;
-}
+import { UploadFormProps } from './types';
 
 export function UploadForm({
   tournaments,
@@ -141,11 +125,6 @@ export function UploadForm({
 
   return (
     <div className='bg-light-grey shadow-md rounded-lg p-2.5 lg:p-5'>
-      <Paragraph className='w-full text-center mb-5 mt-2.5 text-sm'>
-        {
-          'Upload/Edit the PvP pet battle logs and pet usage, fill in the match information, and track the match and logs.'
-        }
-      </Paragraph>
       <Form
         handleSubmit={handleSubmit}
         button1={{ type: 'button', variant: 'secondary', text: 'Cancel' }}
@@ -203,14 +182,17 @@ export function UploadForm({
             required
           />
           <Select
-            label='Choose League'
+            label='Choose Tournament'
             id='tournament_id'
             name='tournament_id'
             value={formData.tournament_id}
             onChange={handleChange}
             required
           >
-            <Option value='' label='Select a league that the logs belong to' />
+            <Option
+              value=''
+              label='Select a tournament that the logs belong to'
+            />
 
             {tournaments.map((tournament) => (
               <Option

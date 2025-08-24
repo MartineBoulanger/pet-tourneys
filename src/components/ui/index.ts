@@ -12,7 +12,6 @@ export * from './Container';
 export * from './Button';
 export * from './Heading';
 export * from './Paragraph';
-export * from './Divider';
 
 // Other UI components
 export * from './PageHeading';

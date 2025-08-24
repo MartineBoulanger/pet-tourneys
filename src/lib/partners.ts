@@ -1,35 +1,37 @@
 import { PartnersData } from './types';
 
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL!;
+
 export const partnersData: PartnersData = [
   {
     name: 'Icy Veins',
-    image: `/images/partners/icyveins-shirt.png`,
+    image: `${baseUrl}/images/partners/icyveins-shirt.png`,
   },
   {
     name: 'WarcraftPets.com',
-    image: `/images/partners/warcraftpets-shirt.png`,
+    image: `${baseUrl}/images/partners/warcraftpets-shirt.png`,
   },
   {
     name: 'Starship',
-    image: `/images/partners/starship-shirt.png`,
+    image: `${baseUrl}/images/partners/starship-shirt.png`,
     isPriority: true,
   },
   {
     name: 'Paws Your Game',
-    image: `/images/partners/paws-shirt.png`,
+    image: `${baseUrl}/images/partners/paws-shirt.png`,
     isPriority: true,
   },
   {
     name: 'Valor',
-    image: `/images/partners/valor-shirt.png`,
+    image: `${baseUrl}/images/partners/valor-shirt.png`,
     isPriority: true,
   },
   {
     name: 'WoW-PetGuide.com',
-    image: `/images/partners/xufu-shirt.png`,
+    image: `${baseUrl}/images/partners/xufu-shirt.png`,
   },
   {
     name: 'Raider.io',
-    image: `/images/partners/raiderio-shirt.png`,
+    image: `${baseUrl}/images/partners/raiderio-shirt.png`,
   },
 ];

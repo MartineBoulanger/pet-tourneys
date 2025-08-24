@@ -1,22 +1,15 @@
 import { notFound } from 'next/navigation';
 import { getTournaments } from '@/supabase/actions/tournaments';
-import {
-  Container,
-  Heading,
-  PageHeading,
-  PageMenu,
-  Paragraph,
-} from '@/components/ui';
-import { TournamentsList } from '@/components/tournaments/TournamentsList';
+import { Container, Heading, Paragraph } from '@/components/ui';
+import { TournamentsList } from '@/components/tournaments';
 import { PageSearchParams } from '@/types';
 import { TOURNAMENTS_PER_PAGE } from '@/utils/constants';
-import { Links } from '@/lib/types';
 
 export async function generateMetadata() {
   return {
-    title: 'Leagues',
+    title: 'Tournaments',
     alternates: {
-      canonical: `${process.env.BASE_URL!}/tournaments`,
+      canonical: `${process.env.NEXT_PUBLIC_BASE_URL!}/tournaments`,
     },
   };
 }
@@ -48,24 +41,9 @@ export default async function TournamentsPage({
 
   if (!tournaments) return notFound();
 
-  const links: Links = [
-    {
-      id: 1,
-      url: `/tournaments/rules`,
-      text: 'Rules',
-    },
-    {
-      id: 2,
-      url: `/tournaments/prizes`,
-      text: 'Prizes',
-    },
-  ];
-
   return (
     <Container className='lg:px-5'>
-      <PageHeading heading='Leagues'>
-        <PageMenu links={links} />
-      </PageHeading>
+      <Heading>{'Tournaments'}</Heading>
       {tournaments.length > 0 ? (
         <TournamentsList
           tournaments={tournaments}
@@ -74,7 +52,7 @@ export default async function TournamentsPage({
         />
       ) : (
         <Paragraph className='p-2.5 lg:p-5 rounded-lg bg-background text-center shadow-md'>
-          {'There are no leagues available yet.'}
+          {'There are no tournaments available yet.'}
         </Paragraph>
       )}
     </Container>

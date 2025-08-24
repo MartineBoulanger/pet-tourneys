@@ -1,21 +1,14 @@
 import Link from 'next/link';
 import { adminData } from '@/lib/navigationData';
 import { Heading } from '@/components/ui';
-import Image from 'next/image';
-
-interface AdminPanelButtonsProps {
-  isMatchesPage?: boolean;
-}
+import { AdminPanelButtonsProps } from './types';
 
 export const AdminPanelButtons = ({
   isMatchesPage = false,
 }: AdminPanelButtonsProps) => {
   return (
-    <div className='mb-5'>
-      <Heading
-        as='h2'
-        className='font-sans tracking-normal text-humanoid text-xl mb-2.5'
-      >
+    <div className='mb-10'>
+      <Heading as='h2' className='text-xl mb-2.5'>
         {'What do you want to do?'}
       </Heading>
       <div className='flex flex-wrap items-center gap-2.5 lg:gap-5'>
@@ -28,14 +21,13 @@ export const AdminPanelButtons = ({
             aria-label={linkText}
           >
             <span className='max-w-[40px] max-h-[40px]'>
-              <Image
+              <img
                 src={imageSrc}
                 alt={linkText}
                 width={50}
                 height={50}
                 className='w-full h-full object-cover'
                 loading='lazy'
-                unoptimized
               />
             </span>
             <span>{linkText}</span>
@@ -45,21 +37,20 @@ export const AdminPanelButtons = ({
           <Link
             href='/admin'
             className='btn-link flex items-center gap-2.5 border py-1 px-3 rounded-lg border-blue-grey hover:bg-blue-grey hover:text-foreground'
-            title='Back To League List'
-            aria-label='Back To League List'
+            title='Back To Tournaments List'
+            aria-label='Back To Tournaments List'
           >
             <span className='max-w-[40px] max-h-[40px]'>
-              <Image
-                src={`/images/greenrex.png`}
-                alt={'Back To League List'}
+              <img
+                src={`${process.env.NEXT_PUBLIC_BASE_URL!}/images/greenrex.png`}
+                alt={'Back To Tournaments List'}
                 width={50}
                 height={50}
                 className='w-full h-full object-cover'
                 loading='lazy'
-                unoptimized
               />
             </span>
-            <span>{'Back To League List'}</span>
+            <span>{'Back To Tournaments List'}</span>
           </Link>
         ) : null}
       </div>

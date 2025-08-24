@@ -1,18 +1,16 @@
-import Image from 'next/image';
 import Link from 'next/link';
 
 export const Logo = () => {
   return (
-    <Link title='Home' aria-label='Home' href='/'>
+    <Link title='Logo' aria-label='Logo' href='/'>
       <span>
-        <Image
-          width={50}
-          height={50}
+        <img
+          width={40}
+          height={40}
           className='w-12 h-12 object-contain'
-          src={`/images/PML_Logo.jpg`}
-          alt='Logo PML'
+          src={`${process.env.NEXT_PUBLIC_BASE_URL!}/images/tourney-logo.png`}
+          alt='Logo'
           loading='lazy'
-          unoptimized
         />
       </span>
     </Link>

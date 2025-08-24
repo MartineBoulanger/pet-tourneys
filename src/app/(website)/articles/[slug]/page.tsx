@@ -18,10 +18,10 @@ export async function generateMetadata({
 
   if (!page?.seoMetadata) {
     return {
-      title: 'Articles',
-      description: 'Articles about pet battling, and battle pets.',
+      title: 'Our Articles',
+      description: 'Our Pet Battle Articles for all pet masters',
       alternates: {
-        canonical: `${process.env.BASE_URL!}/articles/${slug}`,
+        canonical: `${process.env.NEXT_PUBLIC_BASE_URL!}/articles/${slug}`,
       },
     };
   }
@@ -29,11 +29,11 @@ export async function generateMetadata({
   const { title, description, indexable, keywords, image } = page.seoMetadata;
 
   return {
-    title: title || 'Articles',
-    description: description || 'Articles about pet battling, and battle pets.',
-    keywords: keywords || ['WoW, PML, articles, pet'],
+    title: title || 'Our Articles',
+    description: description || 'Our Pet Battle Articles for all pet masters',
+    keywords: keywords || ['WoW, articles, pet'],
     alternates: {
-      canonical: `${process.env.BASE_URL!}/articles/${slug}`,
+      canonical: `${process.env.NEXT_PUBLIC_BASE_URL!}/articles/${slug}`,
     },
     robots: {
       index: indexable === true || false,

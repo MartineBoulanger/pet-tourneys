@@ -1,8 +1,9 @@
-import { getPlayerRecords } from '@/supabase/actions/players';
+import { getPlayerRecords } from "@/supabase/actions/players";
 
 export async function loadPetsData() {
   try {
-    const jsonPath = `${process.env.BASE_URL!}/json-files/pets-data.json`;
+    const jsonPath = `${process.env
+      .NEXT_PUBLIC_BASE_URL!}/json-files/pets-data.json`;
 
     const response = await fetch(jsonPath, { cache: 'no-store' });
 
@@ -27,7 +28,7 @@ export async function loadPetsData() {
 export async function loadPlayerData(id: string) {
   try {
     const jsonPath = `${process.env
-      .BASE_URL!}/json-files/rankings-data/player-rankings-${id.slice(
+      .NEXT_PUBLIC_BASE_URL!}/json-files/rankings-data/player-rankings-${id.slice(
       0,
       5
     )}.json`;

@@ -4,7 +4,7 @@ import { getMatches } from '@/supabase/actions/matches';
 import { getAllPages } from '@/contentful/actions/getAllPages';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const url = process.env.BASE_URL!;
+  const url = process.env.NEXT_PUBLIC_BASE_URL!;
   const {
     data: { tournaments },
   } = await getTournamentsForForm();

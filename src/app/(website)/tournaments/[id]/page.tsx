@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 import { getTournamentDetails } from '@/supabase/actions/tournaments';
 import { getPaginatedMatches } from '@/supabase/actions/matches';
-import { MatchList } from '@/components/tournaments/MatchList';
+import { MatchList } from '@/components/tournaments';
 import {
   Container,
   PageHeading,
@@ -16,9 +16,9 @@ import { MATCHES_PER_PAGE } from '@/utils/constants';
 export async function generateMetadata({ params }: { params: PageParams }) {
   const { id } = await params;
   return {
-    title: 'League Details',
+    title: 'Tournament Details',
     alternates: {
-      canonical: `${process.env.BASE_URL!}/tournaments/${id}`,
+      canonical: `${process.env.NEXT_PUBLIC_BASE_URL!}/tournaments/${id}`,
     },
   };
 }
@@ -79,7 +79,7 @@ export default async function TournamentPage({
     {
       id: 4,
       url: '/tournaments',
-      text: 'Back To Leagues List',
+      text: 'Back To Tournaments List',
     },
   ];
 
@@ -110,7 +110,7 @@ export default async function TournamentPage({
         />
       ) : (
         <Paragraph className='p-2.5 lg:p-5 rounded-lg bg-background text-center shadow-md'>
-          {'There are no matches for this league available yet.'}
+          {'There are no matches for this tournament available yet.'}
         </Paragraph>
       )}
     </Container>

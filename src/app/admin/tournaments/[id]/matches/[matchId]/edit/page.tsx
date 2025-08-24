@@ -1,9 +1,16 @@
 import { getTournamentsForForm } from '@/supabase/actions/tournaments';
-import { UploadForm } from '@/components/admin/UploadForm';
-import { Container, Divider, Heading, Paragraph } from '@/components/ui';
+import { UploadForm } from '@/components/admin';
+import { Container, Heading, Paragraph } from '@/components/ui';
 import { getTournamentTableName } from '@/utils/getTournamentTableName';
 import { createClient } from '@/supabase/server';
 import { MatchPageParams } from '@/types';
+
+export async function generateMetadata() {
+  return {
+    title: 'Edit Match',
+    robots: { index: false, follow: false },
+  };
+}
 
 export default async function AdminEditMatchPage({
   params,
@@ -27,67 +34,43 @@ export default async function AdminEditMatchPage({
 
   if (!tournaments) {
     return (
-      <>
-        <Divider alignment='horizontal' color='light-grey' height='0.5' />
-        <Container className='text-center'>
-          <Heading
-            as='h2'
-            className='font-sans tracking-normal text-xl text-red text-center mb-2.5'
-          >
-            {'No Leagues Found!'}
-          </Heading>
-          <Paragraph>
-            {
-              'Please create a league first before you upload the battle logs to create matches and statistics.'
-            }
-          </Paragraph>
-        </Container>
-      </>
+      <Container className='text-center lg:px-5'>
+        <Heading className='text-red'>{'No Tournaments Found!'}</Heading>
+        <Paragraph>
+          {
+            'Please create a tournament first before you upload the battle logs to create matches and statistics.'
+          }
+        </Paragraph>
+      </Container>
     );
   }
 
   if (!match) {
     return (
-      <>
-        <Divider alignment='horizontal' color='light-grey' height='0.5' />
-        <Container className='text-center'>
-          <Heading
-            as='h2'
-            className='font-sans tracking-normal text-xl text-red text-center mb-2.5'
-          >
-            {'Match not found!'}
-          </Heading>
-        </Container>
-      </>
+      <Container className='text-center lg:px-5'>
+        <Heading className='text-red'>{'Match not found!'}</Heading>
+      </Container>
     );
   }
 
   return (
-    <>
-      <Divider alignment='horizontal' color='light-grey' height='0.5' />
-      <Container className='max-w-[1024px]'>
-        <Heading
-          as='h2'
-          className='font-sans tracking-normal text-xl text-center mb-2.5'
-        >
-          {'Edit Match'}
-        </Heading>
-        <UploadForm
-          tournaments={tournaments || []}
-          initialData={{
-            player1: match.player1,
-            player2: match.player2,
-            owner: match.owner,
-            date: match.date,
-            region: match.region,
-            tournament_id: id,
-            logs: '',
-            petUsage: '',
-          }}
-          match_id={matchId}
-          isEditMode
-        />
-      </Container>
-    </>
+    <Container className='max-w-[1024px]'>
+      <Heading className='text-center'>{'Edit Match'}</Heading>
+      <UploadForm
+        tournaments={tournaments || []}
+        initialData={{
+          player1: match.player1,
+          player2: match.player2,
+          owner: match.owner,
+          date: match.date,
+          region: match.region,
+          tournament_id: id,
+          logs: '',
+          petUsage: '',
+        }}
+        match_id={matchId}
+        isEditMode
+      />
+    </Container>
   );
 }

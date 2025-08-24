@@ -1,6 +1,5 @@
 import { cn } from '@/utils/cn';
 import { Paragraph } from '@/components/ui';
-import Image from 'next/image';
 
 interface PartnerCardProps {
   partner: {
@@ -30,14 +29,13 @@ export const PartnerCard = ({
       )}
     >
       <div className='relative'>
-        <Image
+        <img
           src={partner.image}
           alt={partner.name}
           width={sizeMap[size].width}
           height={sizeMap[size].height}
           className='w-full h-full object-contain'
           loading='lazy'
-          unoptimized
         />
       </div>
       <Paragraph

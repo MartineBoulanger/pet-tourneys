@@ -22,7 +22,7 @@ export async function generateMetadata({
       description:
         'Pet Reviews for getting the best battle pet for your PvP team',
       alternates: {
-        canonical: `${process.env.BASE_URL!}/pet-reviews/${slug}`,
+        canonical: `${process.env.NEXT_PUBLIC_BASE_URL!}/pet-reviews/${slug}`,
       },
     };
   }
@@ -34,9 +34,9 @@ export async function generateMetadata({
     description:
       description ||
       'Pet Reviews for getting the best battle pet for your PvP team',
-    keywords: keywords || ['WoW, PML, reviews, pet'],
+    keywords: keywords || ['WoW, reviews, pet'],
     alternates: {
-      canonical: `${process.env.BASE_URL!}/pet-reviews/${slug}`,
+      canonical: `${process.env.NEXT_PUBLIC_BASE_URL!}/pet-reviews/${slug}`,
     },
     robots: {
       index: indexable === true,

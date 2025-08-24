@@ -2,7 +2,7 @@
 
 import { createClient } from '@/supabase/server';
 import { getTournamentTableName } from '@/utils/getTournamentTableName';
-import { Match } from '@/components/tournaments/MatchList';
+import { Match } from '@/components/tournaments/types';
 import { BattleLog } from '@/utils/types';
 
 export interface PlayerRecord {

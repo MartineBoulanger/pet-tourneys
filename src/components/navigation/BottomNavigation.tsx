@@ -4,7 +4,6 @@ import { cn } from '@/utils/cn';
 import { Profile } from '@/types';
 import { Logout } from '@/components/auth/Logout';
 import { Menu } from './Menu';
-import Image from 'next/image';
 
 interface BottomNavigationProps {
   user?: Profile | null;
@@ -40,7 +39,7 @@ export const BottomNavigation = ({ user }: BottomNavigationProps) => {
             aria-label='Admin Panel'
           >
             <span>
-              <Image
+              <img
                 src={user?.avatar_url || ''}
                 alt={user?.username || ''}
                 width={25}

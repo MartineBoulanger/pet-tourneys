@@ -1,6 +1,6 @@
 {
-  "name": "Pet Masters League",
-  "short_name": "PML",
+  "name": "Wow Pet Community",
+  "short_name": "WPC",
   "icons": [
     {
       "src": "/android-chrome-192x192.png",
@@ -13,7 +13,7 @@
       "type": "image/png"
     }
   ],
-  "description": "Pet Masters League - your pets, your mission, your victory!",
+  "description": "WoW Pet Community for all things pet battling and battle pets related",
   "start_url": "/",
   "theme_color": "#202020",
   "background_color": "#202020",

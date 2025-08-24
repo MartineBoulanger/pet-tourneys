@@ -18,11 +18,10 @@ export async function generateMetadata({
 
   if (!page?.seoMetadata) {
     return {
-      title: 'Guides',
-      description:
-        'Guides for pet masters about pet battling, battle pets, and the league',
+      title: 'Our Guides',
+      description: 'Our Guides for all that want to know things',
       alternates: {
-        canonical: `${process.env.BASE_URL!}/guides/${slug}`,
+        canonical: `${process.env.NEXT_PUBLIC_BASE_URL!}/guides/${slug}`,
       },
     };
   }
@@ -30,13 +29,11 @@ export async function generateMetadata({
   const { title, description, indexable, keywords, image } = page.seoMetadata;
 
   return {
-    title: title || 'Guides',
-    description:
-      description ||
-      'Guides for pet masters about pet battling, battle pets, and the league',
-    keywords: keywords || ['WoW, PML, guides, pet'],
+    title: title || 'Our Guides',
+    description: description || 'Our Guides for all that want to know things',
+    keywords: keywords || ['WoW, guides, pet'],
     alternates: {
-      canonical: `${process.env.BASE_URL!}/guides/${slug}`,
+      canonical: `${process.env.NEXT_PUBLIC_BASE_URL!}/guides/${slug}`,
     },
     robots: {
       index: indexable === true,

@@ -5,7 +5,6 @@ import { cn } from '@/utils/cn';
 import { Media, YouTubeVideoProps } from './types';
 import RichText from './RichText';
 import { useState } from 'react';
-import Image from 'next/image';
 
 const getYouTubeVideoId = (url: string): string | null => {
   const regex =
@@ -53,7 +52,7 @@ const YouTubeVideo = ({
           className='relative aspect-video cursor-pointer rounded-lg overflow-hidden bg-transparent'
           onClick={handleThumbnailPlay}
         >
-          <Image
+          <img
             src={thumbnail?.url}
             alt={thumbnail?.title}
             width={thumbnail?.width}
