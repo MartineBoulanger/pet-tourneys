@@ -205,7 +205,7 @@ export async function getImagesByIds(
       return [];
     }
 
-    const db = await getCollection('resources');
+    const db = await getCollection('uploads');
     const images = await db.find({ _id: { $in: validObjectIds } }).toArray();
 
     return images.map((image) => ({
