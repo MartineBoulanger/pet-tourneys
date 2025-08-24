@@ -2,19 +2,18 @@
 
 import { revalidatePath } from 'next/cache';
 import { ObjectId } from 'mongodb';
-import { connectToDatabase } from '../client';
+import client from '../client';
 import { Prize as PrizeType } from '../types';
 import { getImagesByIds } from './resources';
 
 export async function createPrize(data: Partial<PrizeType>) {
   try {
-    const { db } = await connectToDatabase();
-    const collection = db.collection('prizes');
-
     if (!data.title?.trim() || !data.description?.trim())
       return { success: false, error: 'Title and Description are required' };
 
-    const lastPrize = await collection
+    const lastPrize = await client
+      .db(process.env.MONGODB_DB!)
+      .collection('prizes')
       .find({})
       .sort({ order: -1 })
       .limit(1)
@@ -41,7 +40,10 @@ export async function createPrize(data: Partial<PrizeType>) {
       updatedAt: new Date(),
     };
 
-    const result = await collection.insertOne(prizeData);
+    const result = await client
+      .db(process.env.MONGODB_DB!)
+      .collection('prizes')
+      .insertOne(prizeData);
 
     revalidatePath('/admin/prizes');
 
@@ -61,9 +63,6 @@ export async function createPrize(data: Partial<PrizeType>) {
 
 export async function updatePrize(prizeId: string, data: Partial<PrizeType>) {
   try {
-    const { db } = await connectToDatabase();
-    const collection = db.collection('prizes');
-
     if (!data.title?.trim() || !data.description?.trim())
       return { success: false, error: 'Title and Description are required' };
 
@@ -83,11 +82,14 @@ export async function updatePrize(prizeId: string, data: Partial<PrizeType>) {
       updatedAt: data.updatedAt,
     };
 
-    const updatedPrize = await collection.findOneAndUpdate(
-      { _id: new ObjectId(prizeId) },
-      { $set: prizeData },
-      { returnDocument: 'after' }
-    );
+    const updatedPrize = await client
+      .db(process.env.MONGODB_DB!)
+      .collection('prizes')
+      .findOneAndUpdate(
+        { _id: new ObjectId(prizeId) },
+        { $set: prizeData },
+        { returnDocument: 'after' }
+      );
 
     if (!updatedPrize) return { success: false, error: 'Prize not found' };
 
@@ -117,12 +119,12 @@ export async function updatePrize(prizeId: string, data: Partial<PrizeType>) {
 
 export async function deletePrize(prizeId: string) {
   try {
-    const { db } = await connectToDatabase();
-    const collection = db.collection('prizes');
-
-    const deletePrize = await collection.findOneAndDelete({
-      _id: new ObjectId(prizeId),
-    });
+    const deletePrize = await client
+      .db(process.env.MONGODB_DB!)
+      .collection('prizes')
+      .findOneAndDelete({
+        _id: new ObjectId(prizeId),
+      });
 
     if (!deletePrize) return { success: false, error: 'Prize not found' };
 
@@ -137,10 +139,12 @@ export async function deletePrize(prizeId: string) {
 
 export async function getPrizes(): Promise<PrizeType[]> {
   try {
-    const { db } = await connectToDatabase();
-    const collection = db.collection('prizes');
-
-    const prizes = await collection.find({}).sort({ order: 1 }).toArray();
+    const prizes = await client
+      .db(process.env.MONGODB_DB!)
+      .collection('prizes')
+      .find({})
+      .sort({ order: 1 })
+      .toArray();
 
     return prizes.map((prize) => ({
       _id: String(prize._id),
@@ -164,12 +168,12 @@ export async function getPrizes(): Promise<PrizeType[]> {
 
 export async function getPrize(prizeId: string): Promise<PrizeType | null> {
   try {
-    const { db } = await connectToDatabase();
-    const collection = db.collection('prizes');
-
-    const prize = await collection.findOne({
-      _id: new ObjectId(prizeId),
-    });
+    const prize = await client
+      .db(process.env.MONGODB_DB!)
+      .collection('prizes')
+      .findOne({
+        _id: new ObjectId(prizeId),
+      });
 
     if (!prize) return null;
 
@@ -214,14 +218,14 @@ export async function getPrizesWithImages() {
 
 export async function updatePrizeOrder(prizeId: string, newOrder: number) {
   try {
-    const { db } = await connectToDatabase();
-    const collection = db.collection('prizes');
-
-    await collection.findOneAndUpdate(
-      { _id: new ObjectId(prizeId) },
-      { $set: { order: newOrder } },
-      { returnDocument: 'after' }
-    );
+    await client
+      .db(process.env.MONGODB_DB!)
+      .collection('prizes')
+      .findOneAndUpdate(
+        { _id: new ObjectId(prizeId) },
+        { $set: { order: newOrder } },
+        { returnDocument: 'after' }
+      );
 
     revalidatePath('/admin/prizes');
 
@@ -237,9 +241,6 @@ export async function updatePrizeOrder(prizeId: string, newOrder: number) {
 
 export async function reorderPrizes(prizeIds: string[]) {
   try {
-    const { db } = await connectToDatabase();
-    const collection = db.collection('prizes');
-
     // Create bulk write operations for efficient updating
     const bulkOps = prizeIds.map((id, index) => ({
       updateOne: {
@@ -249,7 +250,10 @@ export async function reorderPrizes(prizeIds: string[]) {
     }));
 
     // Execute all updates in a single operation
-    const result = await collection.bulkWrite(bulkOps);
+    const result = await client
+      .db(process.env.MONGODB_DB!)
+      .collection('prizes')
+      .bulkWrite(bulkOps);
 
     revalidatePath('/admin/prizes');
 

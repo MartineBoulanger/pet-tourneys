@@ -2,19 +2,18 @@
 
 import { revalidatePath } from 'next/cache';
 import { ObjectId } from 'mongodb';
-import { connectToDatabase } from '../client';
+import client from '../client';
 import { Rule as RuleType } from '../types';
 import { getImagesByIds } from './resources';
 
 export async function createRule(data: Partial<RuleType>) {
   try {
-    const { db } = await connectToDatabase();
-    const collection = db.collection('rules');
-
     if (!data.title?.trim() || !data.content?.trim())
       return { success: false, error: 'Title and Content are required' };
 
-    const lastRule = await collection
+    const lastRule = await client
+      .db(process.env.MONGODB_DB!)
+      .collection('rules')
       .find({})
       .sort({ order: -1 })
       .limit(1)
@@ -36,7 +35,10 @@ export async function createRule(data: Partial<RuleType>) {
       updatedAt: new Date(),
     };
 
-    const result = await collection.insertOne(ruleData);
+    const result = await client
+      .db(process.env.MONGODB_DB!)
+      .collection('rules')
+      .insertOne(ruleData);
 
     revalidatePath('/admin/rules');
 
@@ -56,9 +58,6 @@ export async function createRule(data: Partial<RuleType>) {
 
 export async function updateRule(ruleId: string, data: Partial<RuleType>) {
   try {
-    const { db } = await connectToDatabase();
-    const collection = db.collection('rules');
-
     if (!data.title?.trim() || !data.content?.trim())
       return { success: false, error: 'Title and Content are required' };
 
@@ -73,11 +72,14 @@ export async function updateRule(ruleId: string, data: Partial<RuleType>) {
       updatedAt: data.updatedAt,
     };
 
-    const updatedRule = await collection.findOneAndUpdate(
-      { _id: new ObjectId(ruleId) },
-      { $set: ruleData },
-      { returnDocument: 'after' }
-    );
+    const updatedRule = await client
+      .db(process.env.MONGODB_DB!)
+      .collection('rules')
+      .findOneAndUpdate(
+        { _id: new ObjectId(ruleId) },
+        { $set: ruleData },
+        { returnDocument: 'after' }
+      );
 
     if (!updatedRule) return { success: false, error: 'Rule not found' };
 
@@ -102,12 +104,12 @@ export async function updateRule(ruleId: string, data: Partial<RuleType>) {
 
 export async function deleteRule(ruleId: string) {
   try {
-    const { db } = await connectToDatabase();
-    const collection = db.collection('rules');
-
-    const deleteRule = await collection.findOneAndDelete({
-      _id: new ObjectId(ruleId),
-    });
+    const deleteRule = await client
+      .db(process.env.MONGODB_DB!)
+      .collection('rules')
+      .findOneAndDelete({
+        _id: new ObjectId(ruleId),
+      });
 
     if (!deleteRule) return { success: false, error: 'Rule not found' };
 
@@ -122,10 +124,12 @@ export async function deleteRule(ruleId: string) {
 
 export async function getRules(): Promise<RuleType[]> {
   try {
-    const { db } = await connectToDatabase();
-    const collection = db.collection('rules');
-
-    const rules = await collection.find({}).sort({ order: 1 }).toArray();
+    const rules = await client
+      .db(process.env.MONGODB_DB!)
+      .collection('rules')
+      .find({})
+      .sort({ order: 1 })
+      .toArray();
 
     return rules.map((rule) => ({
       _id: String(rule._id),
@@ -144,12 +148,12 @@ export async function getRules(): Promise<RuleType[]> {
 
 export async function getRule(ruleId: string): Promise<RuleType | null> {
   try {
-    const { db } = await connectToDatabase();
-    const collection = db.collection('rules');
-
-    const rule = await collection.findOne({
-      _id: new ObjectId(ruleId),
-    });
+    const rule = await client
+      .db(process.env.MONGODB_DB!)
+      .collection('rules')
+      .findOne({
+        _id: new ObjectId(ruleId),
+      });
 
     if (!rule) return null;
 
@@ -192,14 +196,14 @@ export async function getRulesWithImages() {
 
 export async function updateRuleOrder(ruleId: string, newOrder: number) {
   try {
-    const { db } = await connectToDatabase();
-    const collection = db.collection('rules');
-
-    await collection.findOneAndUpdate(
-      { _id: new ObjectId(ruleId) },
-      { $set: { order: newOrder } },
-      { returnDocument: 'after' }
-    );
+    await client
+      .db(process.env.MONGODB_DB!)
+      .collection('rules')
+      .findOneAndUpdate(
+        { _id: new ObjectId(ruleId) },
+        { $set: { order: newOrder } },
+        { returnDocument: 'after' }
+      );
 
     revalidatePath('/admin/rules');
 
@@ -215,9 +219,6 @@ export async function updateRuleOrder(ruleId: string, newOrder: number) {
 
 export async function reorderRules(ruleIds: string[]) {
   try {
-    const { db } = await connectToDatabase();
-    const collection = db.collection('rules');
-
     // Create bulk write operations for efficient updating
     const bulkOps = ruleIds.map((id, index) => ({
       updateOne: {
@@ -227,7 +228,10 @@ export async function reorderRules(ruleIds: string[]) {
     }));
 
     // Execute all updates in a single operation
-    const result = await collection.bulkWrite(bulkOps);
+    const result = await client
+      .db(process.env.MONGODB_DB!)
+      .collection('rules')
+      .bulkWrite(bulkOps);
 
     revalidatePath('/admin/rules');
 

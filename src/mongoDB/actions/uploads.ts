@@ -2,7 +2,7 @@
 
 import { revalidatePath } from 'next/cache';
 import { ObjectId, WithId } from 'mongodb';
-import { connectToDatabase } from '../client';
+import client from '../client';
 import { ImageUpload } from '../types';
 import { getImageDimensionsFromBuffer } from '../utils';
 
@@ -10,9 +10,6 @@ export async function uploadImages(
   formData: FormData
 ): Promise<{ success: boolean; images?: ImageUpload[]; error?: string }> {
   try {
-    const { db } = await connectToDatabase();
-    const collection = db.collection('uploads');
-
     const uploads: ImageUpload[] = [];
     const files = formData.getAll('images') as File[];
 
@@ -38,7 +35,11 @@ export async function uploadImages(
         updatedAt: new Date(),
       };
 
-      const result = await collection.insertOne(imageData);
+      const result = await client
+        .db(process.env.MONGODB_DB!)
+        .collection('uploads')
+        .insertOne(imageData);
+
       const savedImage: ImageUpload = {
         ...imageData,
         _id: String(result.insertedId),
@@ -56,10 +57,12 @@ export async function uploadImages(
 
 export async function getUploadedImages() {
   try {
-    const { db } = await connectToDatabase();
-    const collection = db.collection('uploads');
-
-    const images = await collection.find().sort({ createdAt: -1 }).toArray();
+    const images = await client
+      .db(process.env.MONGODB_DB!)
+      .collection('uploads')
+      .find()
+      .sort({ createdAt: -1 })
+      .toArray();
 
     // Convert to the proper type by mapping and ensuring all required fields
     return images.map((image) => ({
@@ -83,12 +86,12 @@ export async function deleteImage(
   imageId: string
 ): Promise<{ success: boolean; error?: string }> {
   try {
-    const { db } = await connectToDatabase();
-    const collection = db.collection('uploads');
-
-    const result = await collection.findOneAndDelete({
-      _id: new ObjectId(imageId),
-    });
+    const result = await client
+      .db(process.env.MONGODB_DB!)
+      .collection('uploads')
+      .findOneAndDelete({
+        _id: new ObjectId(imageId),
+      });
 
     if (!result) return { success: false, error: 'Image not found' };
 
@@ -105,14 +108,14 @@ export async function updateImage(
   updates: { alt?: string; filename?: string }
 ): Promise<{ success: boolean; error?: string }> {
   try {
-    const { db } = await connectToDatabase();
-    const collection = db.collection('uploads');
-
-    const result = await collection.findOneAndUpdate(
-      { _id: new ObjectId(imageId) },
-      { $set: updates },
-      { returnDocument: 'after' }
-    );
+    const result = await client
+      .db(process.env.MONGODB_DB!)
+      .collection('uploads')
+      .findOneAndUpdate(
+        { _id: new ObjectId(imageId) },
+        { $set: updates },
+        { returnDocument: 'after' }
+      );
 
     if (!result?._id) return { success: false, error: 'Image not found' };
 

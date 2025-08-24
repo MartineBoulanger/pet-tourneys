@@ -2,20 +2,19 @@
 
 import { revalidatePath } from 'next/cache';
 import { ObjectId } from 'mongodb';
-import { connectToDatabase } from '../client';
+import client from '../client';
 import { Resource as ResourceType, ImageUpload } from '../types';
 
 export async function createResource(formData: FormData) {
   try {
-    const { db } = await connectToDatabase();
-    const collection = db.collection('resources');
-
     const title = formData.get('title') as string;
     const imageIds = formData.getAll('imageIds') as string[];
 
     if (!title?.trim()) return { success: false, error: 'Title is required' };
 
-    const lastResource = await collection
+    const lastResource = await client
+      .db(process.env.MONGODB_DB!)
+      .collection('resources')
       .find({})
       .sort({ order: -1 })
       .limit(1)
@@ -35,7 +34,10 @@ export async function createResource(formData: FormData) {
       updatedAt: new Date(),
     };
 
-    const result = await collection.insertOne(resourceData);
+    const result = await client
+      .db(process.env.MONGODB_DB!)
+      .collection('resources')
+      .insertOne(resourceData);
 
     revalidatePath('/admin/resources');
 
@@ -55,9 +57,6 @@ export async function createResource(formData: FormData) {
 
 export async function updateResource(resourceId: string, formData: FormData) {
   try {
-    const { db } = await connectToDatabase();
-    const collection = db.collection('resources');
-
     const title = formData.get('title') as string;
     let imageIds: string[] = [];
     const imageIdsFromGetAll = formData.getAll('imageIds') as string[];
@@ -94,11 +93,14 @@ export async function updateResource(resourceId: string, formData: FormData) {
       updatedAt: new Date(),
     };
 
-    const updatedResource = await collection.findOneAndUpdate(
-      { _id: new ObjectId(resourceId) },
-      { $set: resourceData },
-      { returnDocument: 'after' }
-    );
+    const updatedResource = await client
+      .db(process.env.MONGODB_DB!)
+      .collection('resources')
+      .findOneAndUpdate(
+        { _id: new ObjectId(resourceId) },
+        { $set: resourceData },
+        { returnDocument: 'after' }
+      );
 
     if (!updatedResource)
       return { success: false, error: 'Resource not found' };
@@ -123,12 +125,12 @@ export async function updateResource(resourceId: string, formData: FormData) {
 
 export async function deleteResource(resourceId: string) {
   try {
-    const { db } = await connectToDatabase();
-    const collection = db.collection('resources');
-
-    const deleteResource = await collection.findOneAndDelete({
-      _id: new ObjectId(resourceId),
-    });
+    const deleteResource = await client
+      .db(process.env.MONGODB_DB!)
+      .collection('resources')
+      .findOneAndDelete({
+        _id: new ObjectId(resourceId),
+      });
 
     if (!deleteResource) return { success: false, error: 'Resource not found' };
 
@@ -146,10 +148,12 @@ export async function deleteResource(resourceId: string) {
 
 export async function getResources(): Promise<ResourceType[]> {
   try {
-    const { db } = await connectToDatabase();
-    const collection = db.collection('resources');
-
-    const resources = await collection.find({}).sort({ order: 1 }).toArray();
+    const resources = await client
+      .db(process.env.MONGODB_DB!)
+      .collection('resources')
+      .find({})
+      .sort({ order: 1 })
+      .toArray();
 
     return resources.map((resource) => ({
       _id: String(resource._id),
@@ -169,12 +173,12 @@ export async function getResource(
   resourceId: string
 ): Promise<ResourceType | null> {
   try {
-    const { db } = await connectToDatabase();
-    const collection = db.collection('resources');
-
-    const resource = await collection.findOne({
-      _id: new ObjectId(resourceId),
-    });
+    const resource = await client
+      .db(process.env.MONGODB_DB!)
+      .collection('resources')
+      .findOne({
+        _id: new ObjectId(resourceId),
+      });
 
     if (!resource) return null;
 
@@ -196,9 +200,6 @@ export async function getImagesByIds(
   imageIds: string[]
 ): Promise<ImageUpload[]> {
   try {
-    const { db } = await connectToDatabase();
-    const collection = db.collection('uploads');
-
     const validObjectIds = imageIds
       .filter((id) => id && typeof id === 'string' && id.trim() !== '')
       .map((id) => {
@@ -218,7 +219,9 @@ export async function getImagesByIds(
       return [];
     }
 
-    const images = await collection
+    const images = await client
+      .db(process.env.MONGODB_DB!)
+      .collection('resources')
       .find({ _id: { $in: validObjectIds } })
       .toArray();
 
@@ -265,14 +268,14 @@ export async function updateResourceOrder(
   newOrder: number
 ) {
   try {
-    const { db } = await connectToDatabase();
-    const collection = db.collection('resources');
-
-    await collection.findOneAndUpdate(
-      { _id: new ObjectId(resourceId) },
-      { $set: { order: newOrder } },
-      { returnDocument: 'after' }
-    );
+    await client
+      .db(process.env.MONGODB_DB!)
+      .collection('resources')
+      .findOneAndUpdate(
+        { _id: new ObjectId(resourceId) },
+        { $set: { order: newOrder } },
+        { returnDocument: 'after' }
+      );
 
     revalidatePath('/admin/resources');
 
@@ -288,9 +291,6 @@ export async function updateResourceOrder(
 
 export async function reorderResources(resourceIds: string[]) {
   try {
-    const { db } = await connectToDatabase();
-    const collection = db.collection('resources');
-
     // Create bulk write operations for efficient updating
     const bulkOps = resourceIds.map((id, index) => ({
       updateOne: {
@@ -300,7 +300,10 @@ export async function reorderResources(resourceIds: string[]) {
     }));
 
     // Execute all updates in a single operation
-    const result = await collection.bulkWrite(bulkOps);
+    const result = await client
+      .db(process.env.MONGODB_DB!)
+      .collection('resources')
+      .bulkWrite(bulkOps);
 
     revalidatePath('/admin/resources');
     return { success: true, modifiedCount: result.modifiedCount };
