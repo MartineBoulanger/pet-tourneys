@@ -8,7 +8,7 @@ interface CheckboxProps
     DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>,
     'required'
   > {
-  label: string;
+  label?: string;
   id: string;
   name: string;
   required?: boolean;
@@ -32,7 +32,7 @@ export const Checkbox = ({
         className={cn('block border rounded-lg bg-foreground', className)}
         {...props}
       />
-      {label}
+      {label ? label : null}
     </label>
   );
 };

@@ -5,7 +5,7 @@ export async function generateMetadata() {
   return {
     title: 'Analyze Tool',
     alternates: {
-      canonical: `${process.env.NEXT_PUBLIC_BASE_URL!}/analyze-tool`,
+      canonical: `${process.env.BASE_URL!}/analyze-tool`,
     },
   };
 }
@@ -13,11 +13,9 @@ export async function generateMetadata() {
 export default function AnalyzerPage() {
   return (
     <Container className='lg:px-5'>
-      <Heading className='text-center'>
-        {'Pet Battle PvP Logs Analyzer'}
-      </Heading>
+      <Heading className='text-center'>{'Pet Battle Logs Analyzer'}</Heading>
       <Paragraph className='text-center mb-2.5 max-w-[600px] mx-auto'>
-        {'Analyze your personal pet battle PvP logs.'}
+        {'Analyze your personal pet battle logs.'}
       </Paragraph>
       <Paragraph className='text-center mb-5 max-w-[600px] mx-auto'>
         {

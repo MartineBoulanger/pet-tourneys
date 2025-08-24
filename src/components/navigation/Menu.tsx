@@ -1,11 +1,14 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useState } from 'react';
 import { IoMdClose } from 'react-icons/io';
+import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { Button } from '@/components/ui';
 import { headerData } from '@/lib/navigationData';
+import { cn } from '@/utils/cn';
 
 interface MenuProps {
   className?: string;
@@ -14,9 +17,14 @@ interface MenuProps {
 
 export const Menu = ({ className, buttonVariant = 'primary' }: MenuProps) => {
   const [isOpen, setOpen] = useState<boolean>(false);
+  const [isDropdown, setIsDropdown] = useState<boolean>(false);
 
   function toggleMenu() {
     setOpen(true);
+  }
+
+  function toggleDropdown() {
+    setIsDropdown((prev) => !prev);
   }
 
   return (
@@ -42,8 +50,8 @@ export const Menu = ({ className, buttonVariant = 'primary' }: MenuProps) => {
           <div className='fixed top-0 bottom-0 right-0 w-full max-w-[430px] shadow-lg text-center flex flex-col bg-background animate-slide-in-right'>
             <div className='p-5 w-full flex items-center mb-5 bg-dark-grey justify-end'>
               <Button
-                title='Close Nav Menu'
-                aria-label='Close Nav Menu'
+                title='Close Navigation Menu'
+                aria-label='Close Navigation Menu'
                 type='button'
                 onClick={() => setOpen(false)}
               >
@@ -52,28 +60,93 @@ export const Menu = ({ className, buttonVariant = 'primary' }: MenuProps) => {
             </div>
 
             <div className='my-5 mx-5 flex flex-col items-center gap-2.5'>
-              {headerData.map((link) => (
-                <Link
-                  className='btn-link flex items-center justify-center gap-2.5 border w-full py-2.5 rounded-lg border-blue-grey hover:bg-blue-grey hover:text-foreground'
-                  key={link.id}
-                  href={link.url}
-                  onClick={() => setOpen(false)}
-                  title={link.linkText}
-                  aria-label={link.linkText}
-                >
-                  <span className='max-w-[40px] max-h-[40px]'>
-                    <img
-                      src={link.imageSrc}
-                      alt={link.linkText}
-                      width={50}
-                      height={50}
-                      className='w-full h-full object-cover'
-                      loading='lazy'
-                    />
-                  </span>
-                  <span>{link.linkText}</span>
-                </Link>
-              ))}
+              {headerData.map((link) => {
+                return link.children ? (
+                  <div
+                    className='w-full border border-blue-grey rounded-lg'
+                    key={link.id}
+                  >
+                    <Button
+                      key={link.id}
+                      className={cn(
+                        'btn-link flex items-center justify-center gap-2.5 capitalize w-full py-2.5 hover:bg-blue-grey hover:text-foreground',
+                        isDropdown
+                          ? 'border-b border-blue-grey rounded-b-none'
+                          : ''
+                      )}
+                      onClick={toggleDropdown}
+                    >
+                      <span className='max-w-[40px] max-h-[40px]'>
+                        <Image
+                          src={link.imageSrc}
+                          alt={link.linkText}
+                          width={40}
+                          height={40}
+                          className='w-full h-full object-cover'
+                          loading='lazy'
+                          unoptimized
+                        />
+                      </span>
+                      <span>{link.linkText}</span>
+                      <span>
+                        {isDropdown ? <FaChevronUp /> : <FaChevronDown />}
+                      </span>
+                    </Button>
+                    {isDropdown && (
+                      <div className='flex flex-col items-start w-full'>
+                        <Link
+                          className={cn(
+                            'btn-link font-normal flex items-center justify-center gap-2.5 w-full py-2.5  border-blue-grey hover:bg-blue-grey hover:text-foreground',
+                            isDropdown ? '' : ''
+                          )}
+                          key={link.id}
+                          href={link.url}
+                          onClick={() => setOpen(false)}
+                          title={'All ' + link.linkText}
+                          aria-label={'All ' + link.linkText}
+                        >
+                          {'All '}
+                          {link.linkText}
+                        </Link>
+                        {link.children.map((child) => (
+                          <Link
+                            key={child.id}
+                            href={child.url}
+                            className='btn-link font-normal flex items-center justify-center gap-2.5 w-full py-2.5 hover:bg-blue-grey hover:text-foreground hover:last:rounded-b-lg'
+                            onClick={() => setOpen(false)}
+                            title={child.text}
+                            aria-label={child.text}
+                          >
+                            {child.text}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  <Link
+                    className='btn-link flex items-center justify-center gap-2.5 border w-full py-2.5 rounded-lg border-blue-grey hover:bg-blue-grey hover:text-foreground'
+                    key={link.id}
+                    href={link.url}
+                    onClick={() => setOpen(false)}
+                    title={link.linkText}
+                    aria-label={link.linkText}
+                  >
+                    <span className='max-w-[40px] max-h-[40px]'>
+                      <Image
+                        src={link.imageSrc}
+                        alt={link.linkText}
+                        width={40}
+                        height={40}
+                        className='w-full h-full object-cover'
+                        loading='lazy'
+                        unoptimized
+                      />
+                    </span>
+                    <span>{link.linkText}</span>
+                  </Link>
+                );
+              })}
             </div>
           </div>
         </>

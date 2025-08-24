@@ -20,7 +20,7 @@ export const RadarGraph = ({
   tooltip,
   legendText,
   radarName,
-  angle = 60,
+  angle = 90,
   showLegend = false,
 }: RadarGraphProps) => {
   const { isMobile } = useWindowSize();
@@ -42,7 +42,7 @@ export const RadarGraph = ({
     const data = payload[0].payload;
 
     return (
-      <div className='bg-light-grey p-2.5 sm:p-5 rounded-lg shadow-md'>
+      <div className='bg-light-grey p-2.5 rounded-lg shadow-md'>
         <p className='font-bold text-humanoid'>{data.name}</p>
         <p>
           {tooltip}
@@ -70,7 +70,12 @@ export const RadarGraph = ({
           dataKey='name'
           tick={{ fontSize: isMobile ? 12 : 14, fill: '#f1f1f1', width: 100 }}
         />
-        <PolarRadiusAxis angle={angle} stroke='#666666' />
+        <PolarRadiusAxis
+          angle={angle}
+          orientation='left'
+          tick={{ fontSize: 10, fill: '#999999' }}
+          stroke='#666666'
+        />
         <Radar
           name={radarName}
           dataKey='value'

@@ -1,5 +1,5 @@
 import { Paragraph } from '@/components/ui';
-import { Match } from '@/components/tournaments/types';
+import { Match } from '@/components/tournaments/MatchList';
 
 interface MatchScoreProps {
   match: Match;

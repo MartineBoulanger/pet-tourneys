@@ -39,7 +39,7 @@ export const ScatterGraph = ({
     const data = payload[0].payload;
 
     return (
-      <div className='bg-light-grey p-2.5 sm:p-5 rounded-lg shadow-md'>
+      <div className='bg-light-grey p-2.5 rounded-lg shadow-md'>
         <p className='font-bold text-humanoid'>
           {tooltipNamePrefix}
           {data.name}
@@ -53,7 +53,7 @@ export const ScatterGraph = ({
   };
 
   return (
-    <GraphWrapper className='p-2.5 md:p-5 h-[425px] md:h-[450px]'>
+    <GraphWrapper className='p-2.5 lg:p-5 h-[425px] lg:h-[450px]'>
       <ScatterChart
         margin={{
           top: 10,

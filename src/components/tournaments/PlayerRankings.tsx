@@ -12,12 +12,17 @@ import {
   Tabs,
 } from '@/components/ui';
 import { petTypeColors, PLAYERS_PER_PAGE } from '@/utils/constants';
-import { PlayerRankingsProps } from './types';
 import { EnhancedPlayerRecord } from '@/supabase/actions/players';
 import { cn } from '@/utils/cn';
 import { MedalIcon } from '@/assets/MedalIcon';
 import { IoCheckmark, IoClose } from 'react-icons/io5';
-import { TypesImages } from '../statistics/types';
+import { Pet, TypesImages } from '../statistics/types';
+
+export interface PlayerRankingsProps {
+  records: EnhancedPlayerRecord[];
+  regions: string[];
+  petData: Pet[];
+}
 
 function sortPlayerRecords(
   records: EnhancedPlayerRecord[]
@@ -180,10 +185,7 @@ export const PlayerRankings = ({
                               </div>
                               <div className='w-[100px] lg:w-[125px] h-[100px] lg:h-[125px]'>
                                 <Image
-                                  src={`${process.env
-                                    .NEXT_PUBLIC_BASE_URL!}/images/pets/${
-                                    mostUsedPet?.image
-                                  }`}
+                                  src={`/images/pets/${mostUsedPet?.image}`}
                                   alt={
                                     mostUsedPet?.name ||
                                     player.mostUsedPet.petName
@@ -223,10 +225,7 @@ export const PlayerRankings = ({
                               </div>
                               <div className='w-[100px] lg:w-[125px] h-[100px] lg:h-[125px]'>
                                 <Image
-                                  src={`${process.env
-                                    .NEXT_PUBLIC_BASE_URL!}/images/pets/${
-                                    nemesisPet?.image
-                                  }`}
+                                  src={`/images/pets/${nemesisPet?.image}`}
                                   alt={
                                     nemesisPet?.name ||
                                     player.mostProblematicPet.petName
@@ -302,10 +301,7 @@ export const PlayerRankings = ({
                                         <div>
                                           <div className='w-full lg:w-[300px] h-auto lg:h-[300px]'>
                                             <Image
-                                              src={`${process.env
-                                                .NEXT_PUBLIC_BASE_URL!}/images/pets/${
-                                                petDetails?.image
-                                              }`}
+                                              src={`/images/pets/${petDetails?.image}`}
                                               alt={
                                                 petDetails?.name || pet.petName
                                               }

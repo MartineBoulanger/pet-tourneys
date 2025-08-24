@@ -35,7 +35,7 @@ export const DoubleBarGraph = ({
   }: TooltipProps<string | number, string | number>) => {
     if (!active || !payload || !payload.length) return null;
     return (
-      <div className='bg-light-grey p-2.5 sm:p-5 rounded-lg shadow-md'>
+      <div className='bg-light-grey p-2.5 rounded-lg shadow-md'>
         <p className='font-bold text-humanoid'>{label}</p>
         <p>
           {tooltip}
@@ -77,7 +77,7 @@ export const DoubleBarGraph = ({
   };
 
   return (
-    <GraphWrapper className='p-2.5 sm:p-5 h-[425px] md:h-[450px]'>
+    <GraphWrapper className='p-2.5 lg:p-5 h-[425px] lg:h-[450px]'>
       <BarChart data={data} layout='horizontal'>
         <Tooltip content={<CustomTooltip />} />
         <XAxis

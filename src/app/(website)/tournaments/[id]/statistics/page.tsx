@@ -32,8 +32,7 @@ export async function generateMetadata({ params }: { params: PageParams }) {
   return {
     title: 'Statistics',
     alternates: {
-      canonical: `${process.env
-        .NEXT_PUBLIC_BASE_URL!}/tournaments/${id}/statistics`,
+      canonical: `${process.env.BASE_URL!}/tournaments/${id}/statistics`,
     },
   };
 }
@@ -51,7 +50,7 @@ export default async function StatisticsPage({
 
   let stats;
   let battleStats;
-  let title = 'Tournament Statistics';
+  let title = 'League Statistics';
   let entityName = '';
   let chartData: ChartData = {
     petUsageData: [],
@@ -188,9 +187,7 @@ export default async function StatisticsPage({
       url: isMatchView
         ? `/tournaments/${id}/matches/${matchId}`
         : `/tournaments/${id}`,
-      text: isMatchView
-        ? 'Back To Match Details'
-        : 'Back To Tournament Details',
+      text: isMatchView ? 'Back To Match Details' : 'Back To League Details',
     },
   ];
 

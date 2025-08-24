@@ -6,9 +6,9 @@ import { AllPagesFragment } from '@/components/contentful/types';
 
 export async function generateMetadata() {
   return {
-    title: 'Our Articles',
+    title: 'Articles',
     alternates: {
-      canonical: `${process.env.NEXT_PUBLIC_BASE_URL!}/articles`,
+      canonical: `${process.env.BASE_URL!}/articles`,
     },
   };
 }
@@ -17,10 +17,10 @@ export default async function ArticlesPage() {
   const pages: AllPagesFragment[] = await getAllPages(false, 'Article');
 
   if (!pages) notFound();
-  // TODO: add pagination with 12 page cards  per page -> see commercial LLBG for implementing pagination for Contentful
+  // TODO: add pagination with 12 page cards per page -> see commercial LLBG for implementing pagination for Contentful
   return (
     <Container className='lg:px-5'>
-      <Heading className='text-center'>{'Our Pet Battle Articles'}</Heading>
+      <Heading className='text-center'>{'Pet Battle Articles'}</Heading>
       <Paragraph className='max-w-[700px] text-center mx-auto'>
         {
           'New expansion? Or new patch? And you want to know what new is coming for battle pets and pet battling? Check out our news articles, and articles about new pets, new strategies, etc.'

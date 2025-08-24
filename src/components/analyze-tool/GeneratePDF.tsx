@@ -41,10 +41,7 @@ export function GeneratePDF({
     <Document>
       {/* ========== COVER PAGE ========== */}
       <Page size='A4' style={styles.coverPage}>
-        <Image
-          src={`${process.env.NEXT_PUBLIC_BASE_URL!}/images/tourney-logo.png`}
-          style={styles.coverImage}
-        />
+        <Image src={`/images/PML_Logo.jpg`} style={styles.coverImage} />
         <Text style={styles.coverTitle}>{'Battle Logs Statistics Report'}</Text>
         <Text style={styles.coverSubtitle}>
           {playerName || 'Anonymous Battler'}

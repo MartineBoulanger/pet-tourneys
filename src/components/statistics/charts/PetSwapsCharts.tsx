@@ -29,24 +29,24 @@ export const PetSwapsCharts = ({
     .slice(0, 5);
 
   return (
-    <div className='mb-5 sm:mb-10'>
-      <Heading as='h2' className='text-xl sm:text-3xl mb-2.5'>
+    <div className='mb-5 lg:mb-10'>
+      <Heading as='h2' className='text-xl lg:text-3xl mb-2.5'>
         {'Overall Pet Swaps Statistics'}
       </Heading>
-      <div className='flex flex-wrap flex-col md:flex-row gap-5 mb-5'>
+      <div className='flex flex-wrap flex-col md:flex-row gap-2.5 lg:gap-5 mb-5'>
         {battleStats.totalPetSwaps ? (
           <OverviewCard title='Total Pet Swaps' value={totalSwaps} />
         ) : null}
       </div>
       <div
         className={cn(
-          'bg-light-grey rounded-lg shadow-md grid grid-cols-1 md:grid-cols-2 gap-2.5 sm:gap-5 p-2.5 sm:p-5',
-          !isMatchView ? 'md:grid-cols-1' : ''
+          'bg-light-grey rounded-lg shadow-md grid grid-cols-1 lg:grid-cols-2 gap-2.5 lg:gap-5 p-2.5 lg:p-5',
+          !isMatchView ? 'lg:grid-cols-1' : ''
         )}
       >
         {isMatchView ? (
           <div>
-            <Heading as='h2' className='mb-2.5 text-lg font-sans'>
+            <Heading as='h2' className='mb-2.5 text-base lg:text-lg font-sans'>
               {'Total Pet Swaps'}
             </Heading>
             {battleStats.totalPetSwaps && (
@@ -59,7 +59,7 @@ export const PetSwapsCharts = ({
           </div>
         ) : null}
         <div>
-          <Heading as='h2' className='mb-2.5 text-lg font-sans'>
+          <Heading as='h2' className='mb-2.5 text-base lg:text-lg font-sans'>
             {'Top 5 Pet Swaps'}
           </Heading>
           {battleStats.petSwapDetails && (
