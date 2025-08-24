@@ -1,51 +1,53 @@
 'use server';
 
 import { revalidatePath } from 'next/cache';
-import mongoose from 'mongoose';
-import dbConnect from '../client';
-import { Rule as RuleType, MongoRuleDocument } from '../types';
-import { Rule } from '../models/Rule';
+import { ObjectId } from 'mongodb';
+import { connectToDatabase } from '../client';
+import { Rule as RuleType } from '../types';
 import { getImagesByIds } from './resources';
 
 export async function createRule(data: Partial<RuleType>) {
   try {
-    await dbConnect();
+    const { db } = await connectToDatabase();
+    const collection = db.collection('rules');
 
     if (!data.title?.trim() || !data.content?.trim())
       return { success: false, error: 'Title and Content are required' };
 
+    const lastRule = await collection
+      .find({})
+      .sort({ order: -1 })
+      .limit(1)
+      .toArray();
+
+    const nextOrder = lastRule.length > 0 ? lastRule[0].order + 1 : 1;
+
     const validImageIds =
       data.imageIds?.filter(
-        (id) =>
-          id && id.trim() !== '' && mongoose.Types.ObjectId.isValid(id.trim())
+        (id) => id && id.trim() !== '' && ObjectId.isValid(id.trim())
       ) || [];
-
-    const lastRule = await Rule.findOne().sort({ order: -1 });
-    const nextOrder = (lastRule?.order || 0) + 1;
 
     const ruleData = {
       title: data.title.trim(),
       content: data.content.trim(),
       imageIds: validImageIds,
       order: nextOrder,
+      createdAt: new Date(),
+      updatedAt: new Date(),
     };
 
-    const newRule = new Rule(ruleData);
-    const savedRule = await newRule.save();
-
-    const result: RuleType = {
-      _id: String(savedRule._id),
-      title: savedRule.title,
-      content: savedRule.content,
-      imageIds: savedRule.imageIds,
-      order: savedRule.order,
-      createdAt: savedRule.createdAt,
-      updatedAt: savedRule.updatedAt,
-    };
+    const result = await collection.insertOne(ruleData);
 
     revalidatePath('/admin/rules');
 
-    return { success: true, rule: result };
+    return {
+      success: true,
+      rule: {
+        _id: String(result.insertedId),
+        ...ruleData,
+        imageIds: validImageIds.map((id) => id.toString()),
+      },
+    };
   } catch (error) {
     console.error('Failed to create rule:', error);
     return { success: false, error: 'Failed to create rule' };
@@ -54,7 +56,8 @@ export async function createRule(data: Partial<RuleType>) {
 
 export async function updateRule(ruleId: string, data: Partial<RuleType>) {
   try {
-    await dbConnect();
+    const { db } = await connectToDatabase();
+    const collection = db.collection('rules');
 
     if (!data.title?.trim() || !data.content?.trim())
       return { success: false, error: 'Title and Content are required' };
@@ -70,10 +73,11 @@ export async function updateRule(ruleId: string, data: Partial<RuleType>) {
       updatedAt: data.updatedAt,
     };
 
-    const updatedRule = await Rule.findByIdAndUpdate(ruleId, ruleData, {
-      new: true,
-      runValidators: true,
-    });
+    const updatedRule = await collection.findOneAndUpdate(
+      { _id: new ObjectId(ruleId) },
+      { $set: ruleData },
+      { returnDocument: 'after' }
+    );
 
     if (!updatedRule) return { success: false, error: 'Rule not found' };
 
@@ -98,9 +102,12 @@ export async function updateRule(ruleId: string, data: Partial<RuleType>) {
 
 export async function deleteRule(ruleId: string) {
   try {
-    await dbConnect();
+    const { db } = await connectToDatabase();
+    const collection = db.collection('rules');
 
-    const deleteRule = await Rule.findByIdAndDelete(ruleId);
+    const deleteRule = await collection.findOneAndDelete({
+      _id: new ObjectId(ruleId),
+    });
 
     if (!deleteRule) return { success: false, error: 'Rule not found' };
 
@@ -115,9 +122,10 @@ export async function deleteRule(ruleId: string) {
 
 export async function getRules(): Promise<RuleType[]> {
   try {
-    await dbConnect();
+    const { db } = await connectToDatabase();
+    const collection = db.collection('rules');
 
-    const rules = await Rule.find().sort({ order: 1 }).lean();
+    const rules = await collection.find({}).sort({ order: 1 }).toArray();
 
     return rules.map((rule) => ({
       _id: String(rule._id),
@@ -136,22 +144,23 @@ export async function getRules(): Promise<RuleType[]> {
 
 export async function getRule(ruleId: string): Promise<RuleType | null> {
   try {
-    await dbConnect();
+    const { db } = await connectToDatabase();
+    const collection = db.collection('rules');
 
-    const rule = await Rule.findById(ruleId).lean();
+    const rule = await collection.findOne({
+      _id: new ObjectId(ruleId),
+    });
 
     if (!rule) return null;
 
     return {
-      _id: (rule as MongoRuleDocument)._id.toString(),
-      title: (rule as MongoRuleDocument).title,
-      content: (rule as MongoRuleDocument).content,
-      imageIds: (rule as MongoRuleDocument).imageIds?.map((id: string) =>
-        id.toString()
-      ),
-      order: (rule as MongoRuleDocument).order,
-      createdAt: (rule as MongoRuleDocument).createdAt,
-      updatedAt: (rule as MongoRuleDocument).updatedAt,
+      _id: String(rule._id),
+      title: rule.title,
+      content: rule.content,
+      imageIds: rule.imageIds?.map((id: string) => id.toString()),
+      order: rule.order,
+      createdAt: rule.createdAt,
+      updatedAt: rule.updatedAt,
     };
   } catch (error) {
     console.error('Failed to fetch rule:', error);
@@ -183,9 +192,14 @@ export async function getRulesWithImages() {
 
 export async function updateRuleOrder(ruleId: string, newOrder: number) {
   try {
-    await dbConnect();
+    const { db } = await connectToDatabase();
+    const collection = db.collection('rules');
 
-    await Rule.findByIdAndUpdate(ruleId, { order: newOrder });
+    await collection.findOneAndUpdate(
+      { _id: new ObjectId(ruleId) },
+      { $set: { order: newOrder } },
+      { returnDocument: 'after' }
+    );
 
     revalidatePath('/admin/rules');
 
@@ -198,17 +212,23 @@ export async function updateRuleOrder(ruleId: string, newOrder: number) {
 
 export async function reorderRules(ruleIds: string[]) {
   try {
-    await dbConnect();
+    const { db } = await connectToDatabase();
+    const collection = db.collection('rules');
 
-    const updatePromises = ruleIds.map((id, index) =>
-      Rule.findByIdAndUpdate(id, { order: index + 1 })
-    );
+    // Create bulk write operations for efficient updating
+    const bulkOps = ruleIds.map((id, index) => ({
+      updateOne: {
+        filter: { _id: new ObjectId(id) },
+        update: { $set: { order: index + 1, updatedAt: new Date() } },
+      },
+    }));
 
-    await Promise.all(updatePromises);
+    // Execute all updates in a single operation
+    const result = await collection.bulkWrite(bulkOps);
 
     revalidatePath('/admin/rules');
 
-    return { success: true };
+    return { success: true, modifiedCount: result.modifiedCount };
   } catch (error) {
     console.error('Failed to reorder rules:', error);
     return { success: false, error: 'Failed to reorder the rules' };

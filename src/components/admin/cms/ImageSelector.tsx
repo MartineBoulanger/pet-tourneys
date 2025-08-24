@@ -14,6 +14,7 @@ import { ImageUpload } from '@/mongoDB/types';
 import { getUploadedImages } from '@/mongoDB/actions/uploads';
 import { Button, Heading, Input, Paragraph } from '@/components/ui';
 import { cn } from '@/utils/cn';
+import { WithId } from 'mongodb';
 
 interface ImageSelectorProps {
   selectedImageId?: string;
@@ -44,7 +45,7 @@ export default function ImageSelector({
   allowNull = true,
   maxSelection,
 }: ImageSelectorProps) {
-  const [images, setImages] = useState<ImageUpload[]>([]);
+  const [images, setImages] = useState<WithId<ImageUpload>[]>([]);
   const [filteredImages, setFilteredImages] = useState<ImageUpload[]>([]);
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);

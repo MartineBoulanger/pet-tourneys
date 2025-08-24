@@ -7,8 +7,7 @@
     "build": "next build",
     "build:memory": "next build --experimental-debug-memory-usage",
     "start": "next start",
-    "lint": "next lint",
-    "generate": "npx supabase gen types typescript --project-id sixzjnpdrixxkkkjaaai --schema api > ./src/types/database.types.ts"
+    "lint": "next lint"
   },
   "dependencies": {
     "@contentful/rich-text-react-renderer": "^16.1.0",

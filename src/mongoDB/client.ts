@@ -1,22 +1,44 @@
-import mongoose from 'mongoose';
+import { Db, MongoClient } from 'mongodb';
 
-if (!global.mongoose) global.mongoose = { conn: null, promise: null };
+const MONGODB_URI = process.env.MONGODB_URI!;
+const MONGODB_DB = process.env.MONGODB_DB!;
 
-async function dbConnect() {
-  const uri = process.env.MONGODB_URI!;
-  if (!uri) throw new Error('Please add your Mongo URI to .env');
-  if (global.mongoose.conn) return global.mongoose.conn;
-  if (!global.mongoose.promise) {
-    const opts = { bufferCommands: false };
-    global.mongoose.promise = mongoose.connect(uri, opts);
+if (!MONGODB_URI)
+  throw new Error('Please define the MONGODB_URI environment variable');
+if (!MONGODB_DB) throw new Error('Define the MONGODB_DB environment variable');
+
+let cachedClient: MongoClient | null = null;
+let cachedDb: Db | null = null;
+
+export async function connectToDatabase() {
+  // Check the cache
+  if (cachedClient && cachedDb) {
+    return {
+      client: cachedClient,
+      db: cachedDb,
+    };
   }
-  try {
-    global.mongoose.conn = await global.mongoose.promise;
-    return global.mongoose.conn;
-  } catch (error) {
-    global.mongoose.promise = null;
-    throw error;
-  }
+
+  // Set connection options
+  const opts = {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    maxPoolSize: 10, // Maintain up to 10 socket connections
+    serverSelectionTimeoutMS: 5000, // Keep trying to send operations for 5 seconds
+    socketTimeoutMS: 45000, // Close sockets after 45 seconds of inactivity
+  };
+
+  // Connect to cluster
+  const client = new MongoClient(MONGODB_URI, opts);
+  await client.connect();
+  const db = client.db(MONGODB_DB);
+
+  // Set cache
+  cachedClient = client;
+  cachedDb = db;
+
+  return {
+    client: cachedClient,
+    db: cachedDb,
+  };
 }
-
-export default dbConnect;

@@ -1,56 +1,51 @@
 'use server';
 
 import { revalidatePath } from 'next/cache';
-import mongoose from 'mongoose';
-import dbConnect from '../client';
-import {
-  Resource as ResourceType,
-  ImageUpload,
-  MongoResourceDocument,
-} from '../types';
-import { Resource } from '../models/Resource';
-import { Upload } from '../models/Upload';
+import { ObjectId } from 'mongodb';
+import { connectToDatabase } from '../client';
+import { Resource as ResourceType, ImageUpload } from '../types';
 
 export async function createResource(formData: FormData) {
   try {
-    await dbConnect();
+    const { db } = await connectToDatabase();
+    const collection = db.collection('resources');
 
     const title = formData.get('title') as string;
     const imageIds = formData.getAll('imageIds') as string[];
 
     if (!title?.trim()) return { success: false, error: 'Title is required' };
 
-    const validImageIds = imageIds.filter(
-      (id) =>
-        id && id.trim() !== '' && mongoose.Types.ObjectId.isValid(id.trim())
-    );
+    const lastResource = await collection
+      .find({})
+      .sort({ order: -1 })
+      .limit(1)
+      .toArray();
 
-    const lastResource = await Resource.findOne().sort({ order: -1 });
-    const nextOrder = (lastResource?.order || 0) + 1;
+    const nextOrder = lastResource.length > 0 ? lastResource[0].order + 1 : 1;
+
+    const validImageIds = imageIds.filter(
+      (id) => id && id.trim() !== '' && ObjectId.isValid(id.trim())
+    );
 
     const resourceData = {
       title: title.trim(),
       imageIds: validImageIds,
       order: nextOrder,
+      createdAt: new Date(),
+      updatedAt: new Date(),
     };
 
-    const newResource = new Resource(resourceData);
-    const savedResource = await newResource.save();
-
-    const result: ResourceType = {
-      _id: String(savedResource._id),
-      title: savedResource.title,
-      imageIds: savedResource.imageIds,
-      order: savedResource.order,
-      createdAt: savedResource.createdAt,
-      updatedAt: savedResource.updatedAt,
-    };
+    const result = await collection.insertOne(resourceData);
 
     revalidatePath('/admin/resources');
 
     return {
       success: true,
-      resource: result,
+      resource: {
+        _id: String(result.insertedId),
+        ...resourceData,
+        imageIds: validImageIds.map((id) => id.toString()),
+      },
     };
   } catch (error) {
     console.error('Error creating resource:', error);
@@ -60,7 +55,8 @@ export async function createResource(formData: FormData) {
 
 export async function updateResource(resourceId: string, formData: FormData) {
   try {
-    await dbConnect();
+    const { db } = await connectToDatabase();
+    const collection = db.collection('resources');
 
     const title = formData.get('title') as string;
     let imageIds: string[] = [];
@@ -98,10 +94,10 @@ export async function updateResource(resourceId: string, formData: FormData) {
       updatedAt: new Date(),
     };
 
-    const updatedResource = await Resource.findByIdAndUpdate(
-      resourceId,
-      resourceData,
-      { new: true, runValidators: true }
+    const updatedResource = await collection.findOneAndUpdate(
+      { _id: new ObjectId(resourceId) },
+      { $set: resourceData },
+      { returnDocument: 'after' }
     );
 
     if (!updatedResource)
@@ -127,9 +123,12 @@ export async function updateResource(resourceId: string, formData: FormData) {
 
 export async function deleteResource(resourceId: string) {
   try {
-    await dbConnect();
+    const { db } = await connectToDatabase();
+    const collection = db.collection('resources');
 
-    const deleteResource = await Resource.findByIdAndDelete(resourceId);
+    const deleteResource = await collection.findOneAndDelete({
+      _id: new ObjectId(resourceId),
+    });
 
     if (!deleteResource) return { success: false, error: 'Resource not found' };
 
@@ -147,9 +146,10 @@ export async function deleteResource(resourceId: string) {
 
 export async function getResources(): Promise<ResourceType[]> {
   try {
-    await dbConnect();
+    const { db } = await connectToDatabase();
+    const collection = db.collection('resources');
 
-    const resources = await Resource.find().sort({ order: 1 }).lean();
+    const resources = await collection.find({}).sort({ order: 1 }).toArray();
 
     return resources.map((resource) => ({
       _id: String(resource._id),
@@ -169,21 +169,22 @@ export async function getResource(
   resourceId: string
 ): Promise<ResourceType | null> {
   try {
-    await dbConnect();
+    const { db } = await connectToDatabase();
+    const collection = db.collection('resources');
 
-    const resource = await Resource.findById(resourceId).lean();
+    const resource = await collection.findOne({
+      _id: new ObjectId(resourceId),
+    });
 
     if (!resource) return null;
 
     return {
-      _id: (resource as MongoResourceDocument)._id.toString(),
-      title: (resource as MongoResourceDocument).title,
-      imageIds: (resource as MongoResourceDocument).imageIds.map((id: string) =>
-        id.toString()
-      ),
-      order: (resource as MongoResourceDocument).order,
-      createdAt: (resource as MongoResourceDocument).createdAt,
-      updatedAt: (resource as MongoResourceDocument).updatedAt,
+      _id: String(resource._id),
+      title: resource.title,
+      imageIds: resource.imageIds.map((id: string) => id.toString()),
+      order: resource.order,
+      createdAt: resource.createdAt,
+      updatedAt: resource.updatedAt,
     };
   } catch (error) {
     console.error('Error fetching resource:', error);
@@ -195,14 +196,15 @@ export async function getImagesByIds(
   imageIds: string[]
 ): Promise<ImageUpload[]> {
   try {
-    await dbConnect();
+    const { db } = await connectToDatabase();
+    const collection = db.collection('uploads');
 
     const validObjectIds = imageIds
       .filter((id) => id && typeof id === 'string' && id.trim() !== '')
       .map((id) => {
         try {
-          if (mongoose.isValidObjectId(id)) {
-            return new mongoose.Types.ObjectId(id);
+          if (new ObjectId(id)) {
+            return new ObjectId(id);
           }
           return null;
         } catch (error) {
@@ -210,18 +212,22 @@ export async function getImagesByIds(
           return null;
         }
       })
-      .filter((id): id is mongoose.Types.ObjectId => id !== null);
+      .filter((id): id is ObjectId => id !== null);
 
     if (validObjectIds.length === 0) {
       return [];
     }
 
-    const images = await Upload.find({ _id: { $in: validObjectIds } }).lean();
+    const images = await collection
+      .find({ _id: { $in: validObjectIds } })
+      .toArray();
 
     return images.map((image) => ({
       _id: String(image._id),
       src: image.src ?? '',
       alt: image.alt ?? '',
+      filename: image.filename ?? '',
+      filetype: image.filetype ?? '',
       width: image.width ?? 0,
       height: image.height ?? 0,
       createdAt: image.createdAt ?? null,
@@ -259,9 +265,14 @@ export async function updateResourceOrder(
   newOrder: number
 ) {
   try {
-    await dbConnect();
+    const { db } = await connectToDatabase();
+    const collection = db.collection('resources');
 
-    await Resource.findByIdAndUpdate(resourceId, { order: newOrder });
+    await collection.findOneAndUpdate(
+      { _id: new ObjectId(resourceId) },
+      { $set: { order: newOrder } },
+      { returnDocument: 'after' }
+    );
 
     revalidatePath('/admin/resources');
 
@@ -277,17 +288,22 @@ export async function updateResourceOrder(
 
 export async function reorderResources(resourceIds: string[]) {
   try {
-    await dbConnect();
+    const { db } = await connectToDatabase();
+    const collection = db.collection('resources');
 
-    const updatePromises = resourceIds.map((id, index) =>
-      Resource.findByIdAndUpdate(id, { order: index + 1 })
-    );
+    // Create bulk write operations for efficient updating
+    const bulkOps = resourceIds.map((id, index) => ({
+      updateOne: {
+        filter: { _id: new ObjectId(id) },
+        update: { $set: { order: index + 1, updatedAt: new Date() } },
+      },
+    }));
 
-    await Promise.all(updatePromises);
+    // Execute all updates in a single operation
+    const result = await collection.bulkWrite(bulkOps);
 
     revalidatePath('/admin/resources');
-
-    return { success: true };
+    return { success: true, modifiedCount: result.modifiedCount };
   } catch (error) {
     console.error('Failed to reorder resources:', error);
     return { success: false, error: 'Failed to reorder the resources' };

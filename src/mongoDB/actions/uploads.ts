@@ -1,27 +1,24 @@
 'use server';
 
 import { revalidatePath } from 'next/cache';
-import { ImageUpload, MongoImageDocument } from '../types';
-import {
-  getImageDimensionsFromBuffer,
-  serializeImage,
-  serializeImages,
-} from '../utils';
-import { Upload } from '../models/Upload';
-import dbConnect from '../client';
+import { ObjectId, WithId } from 'mongodb';
+import { connectToDatabase } from '../client';
+import { ImageUpload } from '../types';
+import { getImageDimensionsFromBuffer } from '../utils';
 
 export async function uploadImages(
   formData: FormData
 ): Promise<{ success: boolean; images?: ImageUpload[]; error?: string }> {
   try {
-    await dbConnect();
+    const { db } = await connectToDatabase();
+    const collection = db.collection('uploads');
+
+    const uploads: ImageUpload[] = [];
     const files = formData.getAll('images') as File[];
 
     if (!files || files.length === 0) {
       return { success: false, error: 'No images provided' };
     }
-
-    const uploads: ImageUpload[] = [];
 
     for (const file of files) {
       if (!file.type.startsWith('image/')) continue;
@@ -33,16 +30,20 @@ export async function uploadImages(
       const imageData = {
         src: dataUrl,
         alt: file.name.split('.')[0],
+        filename: file.name,
+        filetype: file.type,
         width: dimensions.width,
         height: dimensions.height,
+        createdAt: new Date(),
+        updatedAt: new Date(),
       };
 
-      const newUpload = new Upload(imageData);
-      const savedImage = await newUpload.save();
-
-      // Serialize the saved document to plain object
-      const serializedImage = serializeImage(savedImage);
-      uploads.push(serializedImage);
+      const result = await collection.insertOne(imageData);
+      const savedImage: ImageUpload = {
+        ...imageData,
+        _id: String(result.insertedId),
+      };
+      uploads.push(savedImage);
     }
 
     revalidatePath('/admin/image-manager');
@@ -53,11 +54,25 @@ export async function uploadImages(
   }
 }
 
-export async function getUploadedImages(): Promise<ImageUpload[]> {
+export async function getUploadedImages() {
   try {
-    await dbConnect();
-    const images = await Upload.find().sort({ createdAt: -1 }).lean();
-    return serializeImages(images as MongoImageDocument[]);
+    const { db } = await connectToDatabase();
+    const collection = db.collection('uploads');
+
+    const images = await collection.find().sort({ createdAt: -1 }).toArray();
+
+    // Convert to the proper type by mapping and ensuring all required fields
+    return images.map((image) => ({
+      _id: image._id.toString(),
+      src: image.src || '',
+      alt: image.alt || '',
+      filename: image.filename || '',
+      filetype: image.filetype || '',
+      width: image.width || 0,
+      height: image.height || 0,
+      createdAt: image.createdAt || null,
+      updatedAt: image.updatedAt || null,
+    })) as WithId<ImageUpload>[];
   } catch (error) {
     console.error('Error fetching images:', error);
     return [];
@@ -68,9 +83,15 @@ export async function deleteImage(
   imageId: string
 ): Promise<{ success: boolean; error?: string }> {
   try {
-    await dbConnect();
-    const result = await Upload.findOneAndDelete({ _id: imageId });
+    const { db } = await connectToDatabase();
+    const collection = db.collection('uploads');
+
+    const result = await collection.findOneAndDelete({
+      _id: new ObjectId(imageId),
+    });
+
     if (!result) return { success: false, error: 'Image not found' };
+
     revalidatePath('/admin/image-manager');
     return { success: true };
   } catch (error) {
@@ -81,14 +102,20 @@ export async function deleteImage(
 
 export async function updateImage(
   imageId: string,
-  updates: { alt?: string }
+  updates: { alt?: string; filename?: string }
 ): Promise<{ success: boolean; error?: string }> {
   try {
-    await dbConnect();
-    const result = await Upload.findOneAndUpdate({ _id: imageId }, updates, {
-      new: true,
-    });
-    if (!result) return { success: false, error: 'Image not found' };
+    const { db } = await connectToDatabase();
+    const collection = db.collection('uploads');
+
+    const result = await collection.findOneAndUpdate(
+      { _id: new ObjectId(imageId) },
+      { $set: updates },
+      { returnDocument: 'after' }
+    );
+
+    if (!result?._id) return { success: false, error: 'Image not found' };
+
     revalidatePath('/admin/image-manager');
     return { success: true };
   } catch (error) {

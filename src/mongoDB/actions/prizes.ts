@@ -1,24 +1,32 @@
 'use server';
 
 import { revalidatePath } from 'next/cache';
-import mongoose from 'mongoose';
-import dbConnect from '../client';
-import { Prize as PrizeType, MongoPrizeDocument } from '../types';
-import { Prize } from '../models/Prize';
+import { ObjectId } from 'mongodb';
+import { connectToDatabase } from '../client';
+import { Prize as PrizeType } from '../types';
 import { getImagesByIds } from './resources';
 
 export async function createPrize(data: Partial<PrizeType>) {
   try {
-    await dbConnect();
+    const { db } = await connectToDatabase();
+    const collection = db.collection('prizes');
+
     if (!data.title?.trim() || !data.description?.trim())
       return { success: false, error: 'Title and Description are required' };
+
+    const lastPrize = await collection
+      .find({})
+      .sort({ order: -1 })
+      .limit(1)
+      .toArray();
+
+    const nextOrder = lastPrize.length > 0 ? lastPrize[0].order + 1 : 1;
+
     const validImageIds =
       data.imageIds?.filter(
-        (id) =>
-          id && id.trim() !== '' && mongoose.Types.ObjectId.isValid(id.trim())
+        (id) => id && id.trim() !== '' && ObjectId.isValid(id.trim())
       ) || [];
-    const lastPrize = await Prize.findOne().sort({ order: -1 });
-    const nextOrder = (lastPrize?.order || 0) + 1;
+
     const prizeData = {
       title: data.title.trim(),
       description: data.description.trim(),
@@ -27,26 +35,24 @@ export async function createPrize(data: Partial<PrizeType>) {
       imagePosition: data.imagePosition,
       textAlignment: data.textAlignment,
       imageIds: validImageIds,
+      videoUrl: data.videoUrl,
       order: nextOrder,
+      createdAt: new Date(),
+      updatedAt: new Date(),
     };
-    const newPrize = new Prize(prizeData);
-    const savedPrize = await newPrize.save();
-    const result: PrizeType = {
-      _id: String(savedPrize._id),
-      title: savedPrize.title,
-      description: savedPrize.description,
-      isCarousel: savedPrize.isCarousel,
-      isColumnLayout: savedPrize.isColumnLayout,
-      imagePosition: savedPrize.imagePosition,
-      textAlignment: savedPrize.textAlignment,
-      imageIds: savedPrize.imageIds,
-      videoUrl: savedPrize.videoUrl,
-      order: savedPrize.order,
-      createdAt: savedPrize.createdAt,
-      updatedAt: savedPrize.updatedAt,
-    };
+
+    const result = await collection.insertOne(prizeData);
+
     revalidatePath('/admin/prizes');
-    return { success: true, prize: result };
+
+    return {
+      success: true,
+      prize: {
+        _id: String(result.insertedId),
+        ...prizeData,
+        imageIds: validImageIds.map((id) => id.toString()),
+      },
+    };
   } catch (error) {
     console.error('Failed to create prize:', error);
     return { success: false, error: 'Failed to create prize' };
@@ -55,12 +61,16 @@ export async function createPrize(data: Partial<PrizeType>) {
 
 export async function updatePrize(prizeId: string, data: Partial<PrizeType>) {
   try {
-    await dbConnect();
+    const { db } = await connectToDatabase();
+    const collection = db.collection('prizes');
+
     if (!data.title?.trim() || !data.description?.trim())
       return { success: false, error: 'Title and Description are required' };
+
     const cleanImageIds = data.imageIds
       ?.filter((id) => id && typeof id === 'string' && id.trim() !== '')
       .map((id) => id.trim());
+
     const prizeData = {
       title: data.title.trim(),
       description: data.description.trim(),
@@ -72,11 +82,15 @@ export async function updatePrize(prizeId: string, data: Partial<PrizeType>) {
       videoUrl: data.videoUrl,
       updatedAt: data.updatedAt,
     };
-    const updatedPrize = await Prize.findByIdAndUpdate(prizeId, prizeData, {
-      new: true,
-      runValidators: true,
-    });
+
+    const updatedPrize = await collection.findOneAndUpdate(
+      { _id: new ObjectId(prizeId) },
+      { $set: prizeData },
+      { returnDocument: 'after' }
+    );
+
     if (!updatedPrize) return { success: false, error: 'Prize not found' };
+
     const result: PrizeType = {
       _id: String(updatedPrize._id),
       title: updatedPrize.title,
@@ -91,7 +105,9 @@ export async function updatePrize(prizeId: string, data: Partial<PrizeType>) {
       createdAt: updatedPrize.createdAt,
       updatedAt: updatedPrize.updatedAt,
     };
+
     revalidatePath('/admin/prizes');
+
     return { success: true, prize: result };
   } catch (error) {
     console.error('Failed to update prize:', error);
@@ -101,10 +117,17 @@ export async function updatePrize(prizeId: string, data: Partial<PrizeType>) {
 
 export async function deletePrize(prizeId: string) {
   try {
-    await dbConnect();
-    const deletePrize = await Prize.findByIdAndDelete(prizeId);
+    const { db } = await connectToDatabase();
+    const collection = db.collection('prizes');
+
+    const deletePrize = await collection.findOneAndDelete({
+      _id: new ObjectId(prizeId),
+    });
+
     if (!deletePrize) return { success: false, error: 'Prize not found' };
+
     revalidatePath('/admin/prizes');
+
     return { success: true };
   } catch (error) {
     console.error('Failed to delete prize:', error);
@@ -114,8 +137,11 @@ export async function deletePrize(prizeId: string) {
 
 export async function getPrizes(): Promise<PrizeType[]> {
   try {
-    await dbConnect();
-    const prizes = await Prize.find().sort({ order: 1 }).lean();
+    const { db } = await connectToDatabase();
+    const collection = db.collection('prizes');
+
+    const prizes = await collection.find({}).sort({ order: 1 }).toArray();
+
     return prizes.map((prize) => ({
       _id: String(prize._id),
       title: prize.title,
@@ -138,24 +164,28 @@ export async function getPrizes(): Promise<PrizeType[]> {
 
 export async function getPrize(prizeId: string): Promise<PrizeType | null> {
   try {
-    await dbConnect();
-    const prize = await Prize.findById(prizeId).lean();
+    const { db } = await connectToDatabase();
+    const collection = db.collection('prizes');
+
+    const prize = await collection.findOne({
+      _id: new ObjectId(prizeId),
+    });
+
     if (!prize) return null;
+
     return {
-      _id: (prize as MongoPrizeDocument)._id.toString(),
-      title: (prize as MongoPrizeDocument).title,
-      description: (prize as MongoPrizeDocument).description,
-      isCarousel: (prize as MongoPrizeDocument).isCarousel,
-      isColumnLayout: (prize as MongoPrizeDocument).isColumnLayout,
-      imagePosition: (prize as MongoPrizeDocument).imagePosition,
-      textAlignment: (prize as MongoPrizeDocument).textAlignment,
-      imageIds: (prize as MongoPrizeDocument).imageIds?.map((id: string) =>
-        id.toString()
-      ),
-      videoUrl: (prize as MongoPrizeDocument).videoUrl,
-      order: (prize as MongoPrizeDocument).order,
-      createdAt: (prize as MongoPrizeDocument).createdAt,
-      updatedAt: (prize as MongoPrizeDocument).updatedAt,
+      _id: String(prize._id),
+      title: prize.title,
+      description: prize.description,
+      isCarousel: prize.isCarousel,
+      isColumnLayout: prize.isColumnLayout,
+      imagePosition: prize.imagePosition,
+      textAlignment: prize.textAlignment,
+      imageIds: prize.imageIds?.map((id: string) => id.toString()),
+      videoUrl: prize.videoUrl,
+      order: prize.order,
+      createdAt: prize.createdAt,
+      updatedAt: prize.updatedAt,
     };
   } catch (error) {
     console.error('Failed to fetch prize:', error);
@@ -166,6 +196,7 @@ export async function getPrize(prizeId: string): Promise<PrizeType | null> {
 export async function getPrizesWithImages() {
   try {
     const prizes = await getPrizes();
+
     const prizesWithImages = await Promise.all(
       prizes.map(async (prize) => {
         const ids = prize.imageIds?.length ? prize.imageIds : [];
@@ -173,6 +204,7 @@ export async function getPrizesWithImages() {
         return { ...prize, images };
       })
     );
+
     return prizesWithImages;
   } catch (error) {
     console.error('Error fetching prizes with images:', error);
@@ -182,9 +214,17 @@ export async function getPrizesWithImages() {
 
 export async function updatePrizeOrder(prizeId: string, newOrder: number) {
   try {
-    await dbConnect();
-    await Prize.findByIdAndUpdate(prizeId, { order: newOrder });
+    const { db } = await connectToDatabase();
+    const collection = db.collection('prizes');
+
+    await collection.findOneAndUpdate(
+      { _id: new ObjectId(prizeId) },
+      { $set: { order: newOrder } },
+      { returnDocument: 'after' }
+    );
+
     revalidatePath('/admin/prizes');
+
     return { success: true };
   } catch (error) {
     console.error('Failed to update prize order:', error);
@@ -197,13 +237,23 @@ export async function updatePrizeOrder(prizeId: string, newOrder: number) {
 
 export async function reorderPrizes(prizeIds: string[]) {
   try {
-    await dbConnect();
-    const updatePromises = prizeIds.map((id, index) =>
-      Prize.findByIdAndUpdate(id, { order: index + 1 })
-    );
-    await Promise.all(updatePromises);
+    const { db } = await connectToDatabase();
+    const collection = db.collection('prizes');
+
+    // Create bulk write operations for efficient updating
+    const bulkOps = prizeIds.map((id, index) => ({
+      updateOne: {
+        filter: { _id: new ObjectId(id) },
+        update: { $set: { order: index + 1, updatedAt: new Date() } },
+      },
+    }));
+
+    // Execute all updates in a single operation
+    const result = await collection.bulkWrite(bulkOps);
+
     revalidatePath('/admin/prizes');
-    return { success: true };
+
+    return { success: true, modifiedCount: result.modifiedCount };
   } catch (error) {
     console.error('Failed to reorder prizes:', error);
     return { success: false, error: 'Failed to reorder the prizes' };

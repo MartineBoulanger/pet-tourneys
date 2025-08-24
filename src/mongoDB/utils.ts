@@ -1,27 +1,3 @@
-import { ImageUpload, MongoImageDocument } from './types';
-
-/**
- * Serializes a MongoDB document to a plain object safe for client components
- */
-export function serializeImage(doc: MongoImageDocument): ImageUpload {
-  return {
-    _id: doc._id.toString(),
-    src: doc.src,
-    alt: doc.alt,
-    width: doc.width,
-    height: doc.height,
-    createdAt: new Date(doc.createdAt),
-    updatedAt: new Date(doc.updatedAt),
-  };
-}
-
-/**
- * Serializes an array of MongoDB documents
- */
-export function serializeImages(docs: MongoImageDocument[]): ImageUpload[] {
-  return docs.map((doc) => serializeImage(doc));
-}
-
 /**
  * Get the dimensions from each image
  */
@@ -30,11 +6,6 @@ export async function getImageDimensionsFromBuffer(
   mimeType: string
 ): Promise<{ width: number; height: number }> {
   try {
-    // For a production app, use a proper image processing library like Sharp:
-    // const sharp = require('sharp');
-    // const metadata = await sharp(Buffer.from(buffer)).metadata();
-    // return { width: metadata.width || 0, height: metadata.height || 0 };
-
     // Simple dimension extraction for common formats
     const uint8Array = new Uint8Array(buffer);
 

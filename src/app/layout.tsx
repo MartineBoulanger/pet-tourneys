@@ -11,14 +11,6 @@ import { FaCheck, FaInfo } from 'react-icons/fa';
 import { IoWarningOutline } from 'react-icons/io5';
 import { BiErrorAlt } from 'react-icons/bi';
 import { ScrollToTop } from '@/components/ui';
-import { Mongoose } from 'mongoose';
-
-declare global {
-  var mongoose: {
-    conn: Mongoose | null;
-    promise: Promise<Mongoose> | null;
-  };
-}
 
 export const revalidate = 3600;
 
