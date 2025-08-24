@@ -2,7 +2,7 @@
 
 import { revalidatePath } from 'next/cache';
 import { ObjectId } from 'mongodb';
-import client from '../client';
+import { getCollection } from '../client';
 import { Rule as RuleType } from '../types';
 import { getImagesByIds } from './resources';
 
@@ -11,13 +11,8 @@ export async function createRule(data: Partial<RuleType>) {
     if (!data.title?.trim() || !data.content?.trim())
       return { success: false, error: 'Title and Content are required' };
 
-    const lastRule = await client
-      .db(process.env.MONGODB_DB!)
-      .collection('rules')
-      .find({})
-      .sort({ order: -1 })
-      .limit(1)
-      .toArray();
+    const db = await getCollection('rules');
+    const lastRule = await db.find({}).sort({ order: -1 }).limit(1).toArray();
 
     const nextOrder = lastRule.length > 0 ? lastRule[0].order + 1 : 1;
 
@@ -35,10 +30,7 @@ export async function createRule(data: Partial<RuleType>) {
       updatedAt: new Date(),
     };
 
-    const result = await client
-      .db(process.env.MONGODB_DB!)
-      .collection('rules')
-      .insertOne(ruleData);
+    const result = await db.insertOne(ruleData);
 
     revalidatePath('/admin/rules');
 
@@ -72,14 +64,12 @@ export async function updateRule(ruleId: string, data: Partial<RuleType>) {
       updatedAt: data.updatedAt,
     };
 
-    const updatedRule = await client
-      .db(process.env.MONGODB_DB!)
-      .collection('rules')
-      .findOneAndUpdate(
-        { _id: new ObjectId(ruleId) },
-        { $set: ruleData },
-        { returnDocument: 'after' }
-      );
+    const db = await getCollection('rules');
+    const updatedRule = await db.findOneAndUpdate(
+      { _id: new ObjectId(ruleId) },
+      { $set: ruleData },
+      { returnDocument: 'after' }
+    );
 
     if (!updatedRule) return { success: false, error: 'Rule not found' };
 
@@ -104,12 +94,10 @@ export async function updateRule(ruleId: string, data: Partial<RuleType>) {
 
 export async function deleteRule(ruleId: string) {
   try {
-    const deleteRule = await client
-      .db(process.env.MONGODB_DB!)
-      .collection('rules')
-      .findOneAndDelete({
-        _id: new ObjectId(ruleId),
-      });
+    const db = await getCollection('rules');
+    const deleteRule = await db.findOneAndDelete({
+      _id: new ObjectId(ruleId),
+    });
 
     if (!deleteRule) return { success: false, error: 'Rule not found' };
 
@@ -124,12 +112,8 @@ export async function deleteRule(ruleId: string) {
 
 export async function getRules(): Promise<RuleType[]> {
   try {
-    const rules = await client
-      .db(process.env.MONGODB_DB!)
-      .collection('rules')
-      .find({})
-      .sort({ order: 1 })
-      .toArray();
+    const db = await getCollection('rules');
+    const rules = await db.find({}).sort({ order: 1 }).toArray();
 
     return rules.map((rule) => ({
       _id: String(rule._id),
@@ -148,12 +132,10 @@ export async function getRules(): Promise<RuleType[]> {
 
 export async function getRule(ruleId: string): Promise<RuleType | null> {
   try {
-    const rule = await client
-      .db(process.env.MONGODB_DB!)
-      .collection('rules')
-      .findOne({
-        _id: new ObjectId(ruleId),
-      });
+    const db = await getCollection('rules');
+    const rule = await db.findOne({
+      _id: new ObjectId(ruleId),
+    });
 
     if (!rule) return null;
 
@@ -196,14 +178,12 @@ export async function getRulesWithImages() {
 
 export async function updateRuleOrder(ruleId: string, newOrder: number) {
   try {
-    await client
-      .db(process.env.MONGODB_DB!)
-      .collection('rules')
-      .findOneAndUpdate(
-        { _id: new ObjectId(ruleId) },
-        { $set: { order: newOrder } },
-        { returnDocument: 'after' }
-      );
+    const db = await getCollection('rules');
+    await db.findOneAndUpdate(
+      { _id: new ObjectId(ruleId) },
+      { $set: { order: newOrder } },
+      { returnDocument: 'after' }
+    );
 
     revalidatePath('/admin/rules');
 
@@ -228,10 +208,8 @@ export async function reorderRules(ruleIds: string[]) {
     }));
 
     // Execute all updates in a single operation
-    const result = await client
-      .db(process.env.MONGODB_DB!)
-      .collection('rules')
-      .bulkWrite(bulkOps);
+    const db = await getCollection('rules');
+    const result = await db.bulkWrite(bulkOps);
 
     revalidatePath('/admin/rules');
 

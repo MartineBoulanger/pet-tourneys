@@ -2,7 +2,7 @@
 
 import { revalidatePath } from 'next/cache';
 import { ObjectId, WithId } from 'mongodb';
-import client from '../client';
+import { getCollection } from '../client';
 import { ImageUpload } from '../types';
 import { getImageDimensionsFromBuffer } from '../utils';
 
@@ -10,6 +10,7 @@ export async function uploadImages(
   formData: FormData
 ): Promise<{ success: boolean; images?: ImageUpload[]; error?: string }> {
   try {
+    const db = await getCollection('uploads');
     const uploads: ImageUpload[] = [];
     const files = formData.getAll('images') as File[];
 
@@ -35,10 +36,7 @@ export async function uploadImages(
         updatedAt: new Date(),
       };
 
-      const result = await client
-        .db(process.env.MONGODB_DB!)
-        .collection('uploads')
-        .insertOne(imageData);
+      const result = await db.insertOne(imageData);
 
       const savedImage: ImageUpload = {
         ...imageData,
@@ -57,12 +55,8 @@ export async function uploadImages(
 
 export async function getUploadedImages() {
   try {
-    const images = await client
-      .db(process.env.MONGODB_DB!)
-      .collection('uploads')
-      .find()
-      .sort({ createdAt: -1 })
-      .toArray();
+    const db = await getCollection('uploads');
+    const images = await db.find().sort({ createdAt: -1 }).toArray();
 
     // Convert to the proper type by mapping and ensuring all required fields
     return images.map((image) => ({
@@ -86,12 +80,10 @@ export async function deleteImage(
   imageId: string
 ): Promise<{ success: boolean; error?: string }> {
   try {
-    const result = await client
-      .db(process.env.MONGODB_DB!)
-      .collection('uploads')
-      .findOneAndDelete({
-        _id: new ObjectId(imageId),
-      });
+    const db = await getCollection('uploads');
+    const result = await db.findOneAndDelete({
+      _id: new ObjectId(imageId),
+    });
 
     if (!result) return { success: false, error: 'Image not found' };
 
@@ -108,14 +100,12 @@ export async function updateImage(
   updates: { alt?: string; filename?: string }
 ): Promise<{ success: boolean; error?: string }> {
   try {
-    const result = await client
-      .db(process.env.MONGODB_DB!)
-      .collection('uploads')
-      .findOneAndUpdate(
-        { _id: new ObjectId(imageId) },
-        { $set: updates },
-        { returnDocument: 'after' }
-      );
+    const db = await getCollection('uploads');
+    const result = await db.findOneAndUpdate(
+      { _id: new ObjectId(imageId) },
+      { $set: updates },
+      { returnDocument: 'after' }
+    );
 
     if (!result?._id) return { success: false, error: 'Image not found' };
 

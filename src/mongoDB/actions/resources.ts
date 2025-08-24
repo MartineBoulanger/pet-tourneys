@@ -2,7 +2,7 @@
 
 import { revalidatePath } from 'next/cache';
 import { ObjectId } from 'mongodb';
-import client from '../client';
+import { getCollection } from '../client';
 import { Resource as ResourceType, ImageUpload } from '../types';
 
 export async function createResource(formData: FormData) {
@@ -12,9 +12,8 @@ export async function createResource(formData: FormData) {
 
     if (!title?.trim()) return { success: false, error: 'Title is required' };
 
-    const lastResource = await client
-      .db(process.env.MONGODB_DB!)
-      .collection('resources')
+    const db = await getCollection('resources');
+    const lastResource = await db
       .find({})
       .sort({ order: -1 })
       .limit(1)
@@ -34,10 +33,7 @@ export async function createResource(formData: FormData) {
       updatedAt: new Date(),
     };
 
-    const result = await client
-      .db(process.env.MONGODB_DB!)
-      .collection('resources')
-      .insertOne(resourceData);
+    const result = await db.insertOne(resourceData);
 
     revalidatePath('/admin/resources');
 
@@ -93,14 +89,12 @@ export async function updateResource(resourceId: string, formData: FormData) {
       updatedAt: new Date(),
     };
 
-    const updatedResource = await client
-      .db(process.env.MONGODB_DB!)
-      .collection('resources')
-      .findOneAndUpdate(
-        { _id: new ObjectId(resourceId) },
-        { $set: resourceData },
-        { returnDocument: 'after' }
-      );
+    const db = await getCollection('resources');
+    const updatedResource = await db.findOneAndUpdate(
+      { _id: new ObjectId(resourceId) },
+      { $set: resourceData },
+      { returnDocument: 'after' }
+    );
 
     if (!updatedResource)
       return { success: false, error: 'Resource not found' };
@@ -125,12 +119,10 @@ export async function updateResource(resourceId: string, formData: FormData) {
 
 export async function deleteResource(resourceId: string) {
   try {
-    const deleteResource = await client
-      .db(process.env.MONGODB_DB!)
-      .collection('resources')
-      .findOneAndDelete({
-        _id: new ObjectId(resourceId),
-      });
+    const db = await getCollection('resources');
+    const deleteResource = await db.findOneAndDelete({
+      _id: new ObjectId(resourceId),
+    });
 
     if (!deleteResource) return { success: false, error: 'Resource not found' };
 
@@ -148,12 +140,8 @@ export async function deleteResource(resourceId: string) {
 
 export async function getResources(): Promise<ResourceType[]> {
   try {
-    const resources = await client
-      .db(process.env.MONGODB_DB!)
-      .collection('resources')
-      .find({})
-      .sort({ order: 1 })
-      .toArray();
+    const db = await getCollection('resources');
+    const resources = await db.find({}).sort({ order: 1 }).toArray();
 
     return resources.map((resource) => ({
       _id: String(resource._id),
@@ -173,12 +161,10 @@ export async function getResource(
   resourceId: string
 ): Promise<ResourceType | null> {
   try {
-    const resource = await client
-      .db(process.env.MONGODB_DB!)
-      .collection('resources')
-      .findOne({
-        _id: new ObjectId(resourceId),
-      });
+    const db = await getCollection('resources');
+    const resource = await db.findOne({
+      _id: new ObjectId(resourceId),
+    });
 
     if (!resource) return null;
 
@@ -219,11 +205,8 @@ export async function getImagesByIds(
       return [];
     }
 
-    const images = await client
-      .db(process.env.MONGODB_DB!)
-      .collection('resources')
-      .find({ _id: { $in: validObjectIds } })
-      .toArray();
+    const db = await getCollection('resources');
+    const images = await db.find({ _id: { $in: validObjectIds } }).toArray();
 
     return images.map((image) => ({
       _id: String(image._id),
@@ -268,14 +251,12 @@ export async function updateResourceOrder(
   newOrder: number
 ) {
   try {
-    await client
-      .db(process.env.MONGODB_DB!)
-      .collection('resources')
-      .findOneAndUpdate(
-        { _id: new ObjectId(resourceId) },
-        { $set: { order: newOrder } },
-        { returnDocument: 'after' }
-      );
+    const db = await getCollection('resources');
+    await db.findOneAndUpdate(
+      { _id: new ObjectId(resourceId) },
+      { $set: { order: newOrder } },
+      { returnDocument: 'after' }
+    );
 
     revalidatePath('/admin/resources');
 
@@ -300,10 +281,8 @@ export async function reorderResources(resourceIds: string[]) {
     }));
 
     // Execute all updates in a single operation
-    const result = await client
-      .db(process.env.MONGODB_DB!)
-      .collection('resources')
-      .bulkWrite(bulkOps);
+    const db = await getCollection('resources');
+    const result = await db.bulkWrite(bulkOps);
 
     revalidatePath('/admin/resources');
     return { success: true, modifiedCount: result.modifiedCount };
