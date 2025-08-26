@@ -77,8 +77,8 @@ export interface Schedule {
   _id: string;
   title: string;
   images: {
-    imageAlt?: string;
-    imageId?: string;
+    imageId: string;
+    imageName: string;
     date: string;
     order?: number;
   }[];
@@ -88,15 +88,4 @@ export interface Schedule {
   createdAt: Date;
   updatedAt: Date;
 }
-// **************************************************************************
-// export interface RecentPage {
-//   _id: string;
-//   title: string;
-//   slug: string;
-//   type: 'news' | 'articles' | 'guides' | 'pet-reviews';
-//   imageId?: string;
-//   excerpt?: string;
-//   createdAt: Date;
-//   updatedAt: Date;
-// }
 // **************************************************************************

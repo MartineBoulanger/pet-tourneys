@@ -11,7 +11,14 @@ interface InputProps
   label?: string;
   id: string;
   name: string;
-  type?: 'text' | 'email' | 'password' | 'number' | 'date' | 'datetime-local';
+  type?:
+    | 'text'
+    | 'email'
+    | 'password'
+    | 'number'
+    | 'date'
+    | 'datetime-local'
+    | 'url';
   required?: boolean;
 }
 

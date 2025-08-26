@@ -161,7 +161,7 @@ export function AnnouncementForm({
         )}
 
         <Checkbox
-          label='Visible'
+          label='Make this section visible on homepage'
           id='isVisible'
           name='isVisible'
           defaultChecked={formData.isVisible}

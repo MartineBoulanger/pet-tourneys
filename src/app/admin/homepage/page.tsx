@@ -1,5 +1,6 @@
 import { Container, Heading, Divider } from '@/components/ui';
 import { AnnouncementsManager } from '@/components/admin/cms/homepage/announcements/AnnouncementManager';
+import { SignupsManager } from '@/components/admin/cms/homepage/signups/SignupsManager';
 
 export default async function AdminHomePageSectionsPage() {
   return (
@@ -9,11 +10,35 @@ export default async function AdminHomePageSectionsPage() {
         <Heading as='h2' className='font-sans tracking-normal text-xl mb-2.5'>
           {'Manage Homepage Sections'}
         </Heading>
-        <div>
-          <Heading as='h3' className='font-sans tracking-normal text-lg text-center mb-2.5'>
-            {'Manage Announcements'}
-          </Heading>
-          <AnnouncementsManager />
+        <div className='space-y-2.5 lg:space-y-5'>
+          <div>
+            <Heading
+              as='h3'
+              className='font-sans tracking-normal text-lg text-center mb-2.5'
+            >
+              {'Manage Announcements'}
+            </Heading>
+            <AnnouncementsManager />
+          </div>
+          <Divider alignment='horizontal' color='light-grey' height='0.5' />
+          <div>
+            <Heading
+              as='h3'
+              className='font-sans tracking-normal text-lg text-center mb-2.5'
+            >
+              {'Manage Signups'}
+            </Heading>
+            <SignupsManager />
+          </div>
+          <Divider alignment='horizontal' color='light-grey' height='0.5' />
+          <div>
+            <Heading
+              as='h3'
+              className='font-sans tracking-normal text-lg text-center mb-2.5'
+            >
+              {'Manage Schedules'}
+            </Heading>
+          </div>
         </div>
       </Container>
     </>
