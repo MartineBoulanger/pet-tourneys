@@ -3,7 +3,8 @@
 import { revalidatePath } from 'next/cache';
 import { ObjectId } from 'mongodb';
 import { getCollection } from '../client';
-import { Resource as ResourceType, ImageUpload } from '../types';
+import { Resource as ResourceType } from '../types';
+import { getImagesByIds } from '../utils';
 
 export async function createResource(formData: FormData) {
   try {
@@ -179,49 +180,6 @@ export async function getResource(
   } catch (error) {
     console.error('Error fetching resource:', error);
     return null;
-  }
-}
-
-export async function getImagesByIds(
-  imageIds: string[]
-): Promise<ImageUpload[]> {
-  try {
-    const validObjectIds = imageIds
-      .filter((id) => id && typeof id === 'string' && id.trim() !== '')
-      .map((id) => {
-        try {
-          if (new ObjectId(id)) {
-            return new ObjectId(id);
-          }
-          return null;
-        } catch (error) {
-          console.warn('Invalid ObjectId:', id, error);
-          return null;
-        }
-      })
-      .filter((id): id is ObjectId => id !== null);
-
-    if (validObjectIds.length === 0) {
-      return [];
-    }
-
-    const db = await getCollection('uploads');
-    const images = await db.find({ _id: { $in: validObjectIds } }).toArray();
-
-    return images.map((image) => ({
-      _id: String(image._id),
-      src: image.src ?? '',
-      alt: image.alt ?? '',
-      filename: image.filename ?? '',
-      filetype: image.filetype ?? '',
-      width: image.width ?? 0,
-      height: image.height ?? 0,
-      createdAt: image.createdAt ?? null,
-      updatedAt: image.updatedAt ?? null,
-    }));
-  } catch (error) {
-    console.error('Error fetching images:', error);
-    return [];
   }
 }
 

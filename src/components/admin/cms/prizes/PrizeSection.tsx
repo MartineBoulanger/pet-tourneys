@@ -50,6 +50,7 @@ export function PrizeSection({ prize }: PrizeSectionProps) {
                 </div>
                 <div className={cn('lg:col-span-1', textAlignmentClass)}>
                   <div
+                    className='prose'
                     dangerouslySetInnerHTML={{ __html: prize.description }}
                   />
                 </div>

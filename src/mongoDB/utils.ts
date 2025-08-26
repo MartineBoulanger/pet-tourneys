@@ -1,5 +1,86 @@
+import { ObjectId } from 'mongodb';
+import { getCollection } from './client';
+import { ImageUpload } from './types';
+
+/**
+ * get the image or images from the uploads collection for the components
+ * @function getImagesByIds - for multiple images
+ * @function getImageById - for a single image
+ */
+export async function getImagesByIds(
+  imageIds: string[]
+): Promise<ImageUpload[]> {
+  try {
+    const validObjectIds = imageIds
+      .filter((id) => id && typeof id === 'string' && id.trim() !== '')
+      .map((id) => {
+        try {
+          if (new ObjectId(id)) {
+            return new ObjectId(id);
+          }
+          return null;
+        } catch (error) {
+          console.warn('Invalid ObjectId:', id, error);
+          return null;
+        }
+      })
+      .filter((id): id is ObjectId => id !== null);
+
+    if (validObjectIds.length === 0) {
+      return [];
+    }
+
+    const db = await getCollection('uploads');
+    const images = await db.find({ _id: { $in: validObjectIds } }).toArray();
+
+    return images.map((image) => ({
+      _id: String(image._id),
+      src: image.src ?? '',
+      alt: image.alt ?? '',
+      filename: image.filename ?? '',
+      filetype: image.filetype ?? '',
+      width: image.width ?? 0,
+      height: image.height ?? 0,
+      createdAt: image.createdAt ?? null,
+      updatedAt: image.updatedAt ?? null,
+    }));
+  } catch (error) {
+    console.error('Error fetching images:', error);
+    return [];
+  }
+}
+
+export async function getImageById(
+  imageId: string
+): Promise<ImageUpload | null> {
+  try {
+    const db = await getCollection('uploads');
+    const image = await db.findOne({ _id: new ObjectId(imageId) });
+
+    return {
+      _id: String(image?._id),
+      src: image?.src ?? '',
+      alt: image?.alt ?? '',
+      filename: image?.filename ?? '',
+      filetype: image?.filetype ?? '',
+      width: image?.width ?? 0,
+      height: image?.height ?? 0,
+      createdAt: image?.createdAt ?? null,
+      updatedAt: image?.updatedAt ?? null,
+    };
+  } catch (error) {
+    console.error('Error fetching images:', error);
+    return null;
+  }
+}
+
 /**
  * Get the dimensions from each image
+ * @function getImageDimensionsFromBuffer - checks the buffer to then use the correct function to set the width and height of the image
+ * @function getPNGDimensions - for PNG images
+ * @function getJPEGDimensions - for JPEG and JPG images
+ * @function getWebPDimensions - for WebP images
+ * @function getGIFDimensions - fir GIF images
  */
 export async function getImageDimensionsFromBuffer(
   buffer: ArrayBuffer,
@@ -26,7 +107,7 @@ export async function getImageDimensionsFromBuffer(
     return { width: 0, height: 0 };
   }
 }
-// PNG dimension extraction
+
 function getPNGDimensions(data: Uint8Array): { width: number; height: number } {
   // PNG signature: 89 50 4E 47 0D 0A 1A 0A
   if (data.length < 24) return { width: 0, height: 0 };
@@ -49,7 +130,7 @@ function getPNGDimensions(data: Uint8Array): { width: number; height: number } {
 
   return { width, height };
 }
-// JPEG dimension extraction
+
 function getJPEGDimensions(data: Uint8Array): {
   width: number;
   height: number;
@@ -92,7 +173,7 @@ function getJPEGDimensions(data: Uint8Array): {
 
   return { width: 0, height: 0 };
 }
-// GIF dimension extraction
+
 function getGIFDimensions(data: Uint8Array): { width: number; height: number } {
   if (data.length < 10) return { width: 0, height: 0 };
 
@@ -109,7 +190,6 @@ function getGIFDimensions(data: Uint8Array): { width: number; height: number } {
   return { width, height };
 }
 
-// WebP dimension extraction
 function getWebPDimensions(data: Uint8Array): {
   width: number;
   height: number;

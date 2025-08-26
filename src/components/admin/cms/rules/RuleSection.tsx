@@ -24,7 +24,7 @@ export function RuleSection({ rule }: RuleSectionProps) {
           height='1'
         />
         <div
-          className='mt-2.5 text-left'
+          className='mt-2.5 text-left prose'
           dangerouslySetInnerHTML={{ __html: rule.content }}
         />
         {rule.images.length > 0 && (

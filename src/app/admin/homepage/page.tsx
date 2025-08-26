@@ -1,0 +1,21 @@
+import { Container, Heading, Divider } from '@/components/ui';
+import { AnnouncementsManager } from '@/components/admin/cms/homepage/announcements/AnnouncementManager';
+
+export default async function AdminHomePageSectionsPage() {
+  return (
+    <>
+      <Divider alignment='horizontal' color='light-grey' height='0.5' />
+      <Container className='px-0 lg:px-0'>
+        <Heading as='h2' className='font-sans tracking-normal text-xl mb-2.5'>
+          {'Manage Homepage Sections'}
+        </Heading>
+        <div>
+          <Heading as='h3' className='font-sans tracking-normal text-lg text-center mb-2.5'>
+            {'Manage Announcements'}
+          </Heading>
+          <AnnouncementsManager />
+        </div>
+      </Container>
+    </>
+  );
+}

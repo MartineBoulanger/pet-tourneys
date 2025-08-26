@@ -4,7 +4,7 @@ import { revalidatePath } from 'next/cache';
 import { ObjectId } from 'mongodb';
 import { getCollection } from '../client';
 import { Prize as PrizeType } from '../types';
-import { getImagesByIds } from './resources';
+import { getImagesByIds } from '../utils';
 
 export async function createPrize(data: Partial<PrizeType>) {
   try {

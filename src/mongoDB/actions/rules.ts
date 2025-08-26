@@ -4,7 +4,7 @@ import { revalidatePath } from 'next/cache';
 import { ObjectId } from 'mongodb';
 import { getCollection } from '../client';
 import { Rule as RuleType } from '../types';
-import { getImagesByIds } from './resources';
+import { getImagesByIds } from '../utils';
 
 export async function createRule(data: Partial<RuleType>) {
   try {

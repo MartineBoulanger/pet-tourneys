@@ -45,3 +45,58 @@ export interface Prize {
   updatedAt: Date;
 }
 // **************************************************************************
+export interface Announcement {
+  _id: string;
+  title?: string;
+  description?: string;
+  mediaType: 'image' | 'video' | 'none';
+  imageId?: string;
+  videoUrl?: string;
+  isVisible: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+}
+// **************************************************************************
+export interface Signup {
+  _id: string;
+  title: string;
+  images: {
+    imageId: string;
+    imageName: string;
+    imageAlt?: string;
+    signupUrl: string;
+    order?: number;
+  }[];
+  layout: '2' | '3' | '4';
+  isVisible: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+}
+// **************************************************************************
+export interface Schedule {
+  _id: string;
+  title: string;
+  images: {
+    imageAlt?: string;
+    imageId?: string;
+    date: string;
+    order?: number;
+  }[];
+  layout: '2' | '3' | '4';
+  description?: string;
+  isVisible: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+}
+// **************************************************************************
+// export interface RecentPage {
+//   _id: string;
+//   title: string;
+//   slug: string;
+//   type: 'news' | 'articles' | 'guides' | 'pet-reviews';
+//   imageId?: string;
+//   excerpt?: string;
+//   createdAt: Date;
+//   updatedAt: Date;
+// }
+// **************************************************************************
