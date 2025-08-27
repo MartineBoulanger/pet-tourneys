@@ -4,7 +4,7 @@ import { LinkCard } from './LinkCard';
 
 export const LinksGallery = () => {
   return (
-    <Container className='grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-2.5 w-full order-1 lg:order-0 lg:mb-10'>
+    <Container className='flex flex-wrap items-center justify-center gap-2.5 order-1 lg:order-0 lg:my-10'>
       {headerData
         .filter((f) => f.id !== 1)
         .map((l) => (

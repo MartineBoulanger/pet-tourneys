@@ -21,7 +21,7 @@ export const LinkCard = ({
     <Link
       key={id}
       href={url}
-      className='p-2.5 bg-light-grey shadow-md rounded-lg flex'
+      className='p-2.5 bg-light-grey shadow-md rounded-lg flex self-stretch w-full min-[850]:w-[30%]'
       title={linkText}
       aria-label={linkText}
     >

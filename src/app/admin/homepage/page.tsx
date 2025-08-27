@@ -1,6 +1,7 @@
 import { Container, Heading, Divider } from '@/components/ui';
 import { AnnouncementsManager } from '@/components/admin/cms/homepage/announcements/AnnouncementManager';
 import { SignupsManager } from '@/components/admin/cms/homepage/signups/SignupsManager';
+import { SchedulesManager } from '@/components/admin/cms/homepage/schedules/SchedulesManager';
 
 export default async function AdminHomePageSectionsPage() {
   return (
@@ -38,6 +39,7 @@ export default async function AdminHomePageSectionsPage() {
             >
               {'Manage Schedules'}
             </Heading>
+            <SchedulesManager />
           </div>
         </div>
       </Container>

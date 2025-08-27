@@ -95,20 +95,6 @@ export function SignupForm({ signup, onSuccess, onCancel }: SignupFormProps) {
     setFormData({ ...formData, images: newImages });
   };
 
-  const handleImageSelect = (index: number, image: any) => {
-    if (image) {
-      // Auto-populate fields when an image is selected
-      updateImage(index, 'imageId', image._id);
-      updateImage(index, 'imageName', image.alt);
-      updateImage(index, 'imageAlt', image.alt);
-    } else {
-      // Clear fields when no image is selected
-      updateImage(index, 'imageId', '');
-      updateImage(index, 'imageName', '');
-      updateImage(index, 'imageAlt', '');
-    }
-  };
-
   const moveImage = (index: number, direction: 'up' | 'down') => {
     if (
       (direction === 'up' && index === 0) ||
@@ -128,16 +114,6 @@ export function SignupForm({ signup, onSuccess, onCancel }: SignupFormProps) {
       ...formData,
       images: newImages.map((img, i) => ({ ...img, order: i + 1 })),
     });
-  };
-
-  const isFormValid = () => {
-    if (!formData.title.trim()) return false;
-    if (formData.images.length === 0) return false;
-
-    return formData.images.every(
-      (image) =>
-        image.imageId.trim() && image.imageName.trim() && image.signupUrl.trim()
-    );
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -200,12 +176,7 @@ export function SignupForm({ signup, onSuccess, onCancel }: SignupFormProps) {
           id='layout'
           name='layout'
           value={formData.layout}
-          onChange={(e) =>
-            setFormData({
-              ...formData,
-              layout: e.target.value as '2' | '3' | '4',
-            })
-          }
+          onChange={handleSelectChange}
         >
           <Option value='' label='Choose number of columns' />
           <Option value='2' label='2 Columns' />
@@ -222,16 +193,18 @@ export function SignupForm({ signup, onSuccess, onCancel }: SignupFormProps) {
               onClick={addImage}
               disabled={formData.images.length >= 4}
               className='flex items-center gap-2'
-              // variant='link'
             >
               <FaPlus className='w-4 h-4' />
               {'Add Signup Item'}
             </Button>
           </div>
 
-          <div className='space-y-3'>
+          <div className='space-y-2.5'>
             {formData.images.map((image, index) => (
-              <div key={index} className='p-5 rounded-lg bg-light-grey'>
+              <div
+                key={`signup-${index}`}
+                className='p-5 rounded-lg bg-light-grey'
+              >
                 <div className='flex justify-between items-center mb-2.5'>
                   <Paragraph className='text-sm font-medium flex items-center gap-2'>
                     <FaGripVertical className='w-4 h-4 text-foreground/50' />
@@ -284,7 +257,7 @@ export function SignupForm({ signup, onSuccess, onCancel }: SignupFormProps) {
                     allowNull={false}
                     showPreview={true}
                     placeholder='Choose an image for this signup item...'
-                    className='mb-3'
+                    className='mb-2.5'
                   />
 
                   <Input
@@ -292,7 +265,9 @@ export function SignupForm({ signup, onSuccess, onCancel }: SignupFormProps) {
                     name='imageName'
                     id='imageName'
                     value={image.imageName}
-                    onChange={handleInputChange}
+                    onChange={(e) =>
+                      updateImage(index, 'imageName', e.target.value)
+                    }
                     required
                   />
 
@@ -302,7 +277,9 @@ export function SignupForm({ signup, onSuccess, onCancel }: SignupFormProps) {
                     name='signupUrl'
                     id='signupUrl'
                     value={image.signupUrl}
-                    onChange={handleInputChange}
+                    onChange={(e) =>
+                      updateImage(index, 'signupUrl', e.target.value)
+                    }
                     required
                   />
 
@@ -311,7 +288,9 @@ export function SignupForm({ signup, onSuccess, onCancel }: SignupFormProps) {
                     name='imageAlt'
                     id='imageAlt'
                     value={image.imageAlt}
-                    onChange={handleInputChange}
+                    onChange={(e) =>
+                      updateImage(index, 'imageAlt', e.target.value)
+                    }
                   />
                 </div>
               </div>
@@ -327,6 +306,12 @@ export function SignupForm({ signup, onSuccess, onCancel }: SignupFormProps) {
           defaultChecked={formData.isVisible}
           onChange={handleInputChange}
         />
+
+        {error && (
+          <div className='text-sm text-dark-red bg-light-red border-2 border-dark-red rounded-lg p-2.5'>
+            {error}
+          </div>
+        )}
 
         {/* Form Actions */}
         <div className='flex gap-2.5 lg:gap-5'>

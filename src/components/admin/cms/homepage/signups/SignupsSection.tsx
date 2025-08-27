@@ -99,11 +99,8 @@ export function SignupSection({ signup }: SignupsSectionProps) {
               )}
 
               {/* Title overlay */}
-              <div className='absolute bottom-0 left-0 right-0 bg-gradient-to-t from-background/70 to-transparent p-4'>
-                <Heading
-                  as='h3'
-                  className='text-humanoid font-semibold text-2xl'
-                >
+              <div className='absolute top-0 left-0 right-0 p-5 text-right bg-gradient-to-b from-background/70  to-transparent'>
+                <Heading as='h3' className='text-humanoid font-bold text-2xl'>
                   {item.imageName}
                 </Heading>
                 <Paragraph className='text-foreground text-sm'>

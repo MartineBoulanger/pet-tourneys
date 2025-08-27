@@ -79,7 +79,7 @@ export interface Schedule {
   images: {
     imageId: string;
     imageName: string;
-    date: string;
+    imageDate: string;
     order?: number;
   }[];
   layout: '2' | '3' | '4';
