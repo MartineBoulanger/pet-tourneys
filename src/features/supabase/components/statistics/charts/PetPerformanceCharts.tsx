@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-unknown*/
-
 import { DoubleBarGraph } from '@/features/recharts-graphs/DoubleBarGraph';
 import { RadialGraph } from '@/features/recharts-graphs/RadialGraph';
 import {
