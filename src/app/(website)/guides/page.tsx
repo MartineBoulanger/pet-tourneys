@@ -1,8 +1,8 @@
 import { notFound } from 'next/navigation';
 import { Container, Heading, Paragraph } from '@/components/ui';
-import { PageCard } from '@/components/contentful/PageCard';
-import { getAllPages } from '@/contentful/actions/getAllPages';
-import { AllPagesFragment } from '@/components/contentful/types';
+import { PageCard } from '@/features/contentful/components/PageCard';
+import { getAllPages } from '@/features/contentful/actions/getAllPages';
+import { AllPagesFragment } from '@/features/contentful/types';
 
 export async function generateMetadata() {
   return {

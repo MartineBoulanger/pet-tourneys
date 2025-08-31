@@ -1,4 +1,4 @@
-import { LoginForm } from '@/components/auth/LoginForm';
+import { LoginForm } from '@/features/supabase/components/auth/LoginForm';
 import { Container, Heading, Paragraph } from '@/components/ui';
 
 export async function generateMetadata() {

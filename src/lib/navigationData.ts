@@ -75,7 +75,7 @@ export const adminData: NavigationData = [
   },
   {
     id: 2,
-    url: '/admin/image-manager',
+    url: '/admin/images',
     linkText: 'Manage All Images',
     text: 'Manage all the images of recent and previous tournaments.',
     imageSrc: `/images/bluegor.png`,

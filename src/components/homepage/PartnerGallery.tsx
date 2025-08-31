@@ -1,5 +1,5 @@
 import { cn } from '@/utils/cn';
-import { Heading } from '@/components/ui';
+import { Heading } from '../ui';
 import { PartnerCard } from './PartnerCard';
 
 interface PartnersGalleryProps {

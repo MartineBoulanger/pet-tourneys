@@ -1,7 +1,7 @@
 import type { MetadataRoute } from 'next';
-import { getTournamentsForForm } from '@/supabase/actions/tournaments';
-import { getMatches } from '@/supabase/actions/matches';
-import { getAllPages } from '@/contentful/actions/getAllPages';
+import { getTournamentsForForm } from '@/features/supabase/actions/tournaments';
+import { getMatches } from '@/features/supabase/actions/matches';
+import { getAllPages } from '@/features/contentful/actions/getAllPages';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const url = process.env.BASE_URL!;
@@ -26,6 +26,24 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.8,
     },
     {
+      url: `${url}/tournaments/rules`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.8,
+    },
+    {
+      url: `${url}/tournaments/prizes`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.8,
+    },
+    {
+      url: `${url}/resources`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.8,
+    },
+    {
       url: `${url}/guides`,
       lastModified: new Date(),
       changeFrequency: 'monthly' as const,
@@ -33,6 +51,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
     {
       url: `${url}/articles`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.8,
+    },
+    {
+      url: `${url}/pet-reviews`,
       lastModified: new Date(),
       changeFrequency: 'monthly' as const,
       priority: 0.8,

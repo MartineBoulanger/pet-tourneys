@@ -1,5 +1,5 @@
 import { headerData } from '@/lib/navigationData';
-import { Container } from '@/components/ui';
+import { Container } from '../ui';
 import { LinkCard } from './LinkCard';
 
 export const LinksGallery = () => {

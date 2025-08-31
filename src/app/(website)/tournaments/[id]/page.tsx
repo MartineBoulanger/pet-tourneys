@@ -1,7 +1,8 @@
 import { notFound } from 'next/navigation';
-import { getTournamentDetails } from '@/supabase/actions/tournaments';
-import { getPaginatedMatches } from '@/supabase/actions/matches';
-import { MatchList } from '@/components/tournaments/MatchList';
+import { getTournamentDetails } from '@/features/supabase/actions/tournaments';
+import { getPaginatedMatches } from '@/features/supabase/actions/matches';
+import { MatchList } from '@/features/supabase/components/tournaments/MatchList';
+import { MATCHES_PER_PAGE } from '@/features/supabase/constants';
 import {
   Container,
   PageHeading,
@@ -11,7 +12,6 @@ import {
 } from '@/components/ui';
 import { PageParams, PageSearchParams } from '@/types';
 import { Links } from '@/lib/types';
-import { MATCHES_PER_PAGE } from '@/utils/constants';
 
 export async function generateMetadata({ params }: { params: PageParams }) {
   const { id } = await params;

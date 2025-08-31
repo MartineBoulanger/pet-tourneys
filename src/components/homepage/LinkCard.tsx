@@ -1,6 +1,6 @@
-import Link from 'next/link';
-import { Heading } from '@/components/ui';
 import Image from 'next/image';
+import Link from 'next/link';
+import { Heading } from '../ui';
 
 interface LinkCardProps {
   id: number;

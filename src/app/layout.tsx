@@ -1,15 +1,18 @@
 import type { Metadata, Viewport } from 'next';
-import { roboto, warcraft } from '@/styles/fonts';
-import '@/styles/globals.css';
-import '@/styles/prose.css';
-import { getAdminSession, getUserSession } from '@/supabase/actions/auth';
-import { Footer } from '@/components/footer/Footer';
-import { Header } from '@/components/header/Header';
-import { BottomNavigation } from '@/components/navigation/BottomNavigation';
 import { Toaster } from 'sonner';
 import { FaCheck, FaInfo } from 'react-icons/fa';
 import { IoWarningOutline } from 'react-icons/io5';
 import { BiErrorAlt } from 'react-icons/bi';
+import { roboto, warcraft } from '@/styles/fonts';
+import '@/styles/globals.css';
+import '@/styles/prose.css';
+import {
+  getAdminSession,
+  getUserSession,
+} from '@/features/supabase/actions/auth';
+import { Footer } from '@/components/footer/Footer';
+import { Header } from '@/components/header/Header';
+import { BottomNavigation } from '@/components/navigation/BottomNavigation';
 import { ScrollToTop } from '@/components/ui';
 
 export const revalidate = 3600;
@@ -26,7 +29,7 @@ export const metadata: Metadata = {
     canonical: '/',
   },
   openGraph: {
-    images: '/opengraph-image.jpg',
+    images: '/opengraph-image.png',
   },
 };
 

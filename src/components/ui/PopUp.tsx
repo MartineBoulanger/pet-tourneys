@@ -3,7 +3,7 @@
 import { JSX, ReactNode, useState } from 'react';
 import { PiDotsThreeOutlineVertical } from 'react-icons/pi';
 import { cn } from '@/utils/cn';
-import { Button } from '@/components/ui';
+import { Button } from './Button';
 
 interface PopupProps {
   text?: ReactNode | JSX.Element | string | number;

@@ -1,5 +1,11 @@
 import { notFound } from 'next/navigation';
-import { getTournamentDetails } from '@/supabase/actions/tournaments';
+import { getTournamentDetails } from '@/features/supabase/actions/tournaments';
+import { PlayerRankings } from '@/features/supabase/components/tournaments/PlayerRankings';
+import {
+  loadPetsData,
+  loadPlayerData,
+} from '@/features/supabase/utils/loadJsonData';
+import { Pet } from '@/features/supabase/components/statistics/types';
 import {
   Container,
   PageHeading,
@@ -7,11 +13,8 @@ import {
   Paragraph,
   PageMenu,
 } from '@/components/ui';
-import { PageParams } from '@/types';
 import { Links } from '@/lib/types';
-import { PlayerRankings } from '@/components/tournaments/PlayerRankings';
-import { loadPetsData, loadPlayerData } from '@/utils/loadJsonData';
-import { Pet } from '@/components/statistics/types';
+import { PageParams } from '@/types';
 
 export async function generateMetadata({ params }: { params: PageParams }) {
   const { id } = await params;

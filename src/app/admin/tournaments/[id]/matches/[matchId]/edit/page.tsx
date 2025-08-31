@@ -1,8 +1,8 @@
-import { getTournamentsForForm } from '@/supabase/actions/tournaments';
-import { UploadForm } from '@/components/admin/UploadForm';
+import { getTournamentsForForm } from '@/features/supabase/actions/tournaments';
+import { UploadForm } from '@/features/supabase/components/admin/UploadForm';
+import { getTournamentTableName } from '@/features/supabase/utils/getTournamentTableName';
+import { createClient } from '@/features/supabase/server';
 import { Container, Divider, Heading, Paragraph } from '@/components/ui';
-import { getTournamentTableName } from '@/utils/getTournamentTableName';
-import { createClient } from '@/supabase/server';
 import { MatchPageParams } from '@/types';
 
 export default async function AdminEditMatchPage({

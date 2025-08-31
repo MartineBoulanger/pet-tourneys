@@ -1,9 +1,9 @@
 'use client';
 
-import { Pet } from '@/components/statistics/types';
-import { PETS_PER_PAGE, petTypeColors } from '@/utils/constants';
-import { BattleStatistics, TournamentPetStat } from '@/utils/types';
 import { useState, useMemo } from 'react';
+import { Pet } from '@/features/supabase/components/statistics/types';
+import { PETS_PER_PAGE, petTypeColors } from '@/features/supabase/constants';
+import { BattleStatistics, TournamentPetStat } from '@/features/supabase/types';
 
 interface UsePetsFiltersProps {
   petData: Pet[];

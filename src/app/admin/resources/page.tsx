@@ -1,5 +1,5 @@
 import { Container, Heading, Divider } from '@/components/ui';
-import { ResourcesManager } from '@/components/admin/cms/resources/ResourcesManager';
+import { ResourcesManager } from '@/features/cms/components/resources/ResourcesManager';
 
 export default async function AdminResourcesPage() {
   return (

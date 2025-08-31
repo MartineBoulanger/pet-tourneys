@@ -19,6 +19,20 @@ const nextConfig: NextConfig = {
         search: '',
       },
       {
+        protocol: 'http',
+        hostname: 'localhost', // change this as soon as the node.js server is online for the images
+        port: '4000',
+        pathname: '/uploads/**',
+        search: '',
+      },
+      {
+        protocol: 'https',
+        hostname: 'pml-images-server.onrender.com',
+        port: '',
+        pathname: '/uploads/**',
+        search: '',
+      },
+      {
         protocol: 'https',
         hostname: 'pet-tourneys.vercel.app',
         port: '',
@@ -27,7 +41,14 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'images.ctfassets.net',
+        hostname: '*.petmastersleague.com',
+        port: '',
+        pathname: '/images/**',
+        search: '',
+      },
+      {
+        protocol: 'https',
+        hostname: 'images.ctfassets.net', // Contentful images may not be needed anymore soon
         port: '',
         pathname: '/**',
         search: '',

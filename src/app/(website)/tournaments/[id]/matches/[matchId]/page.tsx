@@ -1,5 +1,6 @@
-import { BattleLogViewer } from '@/components/matches/BattleLogViewer';
-import { MatchScore } from '@/components/matches/MatchScore';
+import { BattleLogViewer } from '@/features/supabase/components/matches/BattleLogViewer';
+import { MatchScore } from '@/features/supabase/components/matches/MatchScore';
+import { getMatchDetails } from '@/features/supabase/actions/matches';
 import {
   Container,
   PageHeading,
@@ -7,9 +8,8 @@ import {
   Paragraph,
   PageMenu,
 } from '@/components/ui';
-import { getMatchDetails } from '@/supabase/actions/matches';
-import { MatchPageParams } from '@/types';
 import { Links } from '@/lib/types';
+import { MatchPageParams } from '@/types';
 
 export async function generateMetadata({
   params,

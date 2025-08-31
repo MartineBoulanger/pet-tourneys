@@ -2,8 +2,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { BiLogIn } from 'react-icons/bi';
 import { cn } from '@/utils/cn';
-import { Profile } from '@/types';
-import { Logout } from '@/components/auth/Logout';
+import { Profile } from '@/features/supabase/types';
+import { Logout } from '@/features/supabase/components/auth/Logout';
 import { Menu } from './Menu';
 
 interface BottomNavigationProps {

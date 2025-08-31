@@ -1,5 +1,5 @@
-import { getTournamentsForForm } from '@/supabase/actions/tournaments';
-import { UploadForm } from '@/components/admin/UploadForm';
+import { getTournamentsForForm } from '@/features/supabase/actions/tournaments';
+import { UploadForm } from '@/features/supabase/components/admin/UploadForm';
 import { Container, Heading, Paragraph, Divider } from '@/components/ui';
 
 export async function generateMetadata() {

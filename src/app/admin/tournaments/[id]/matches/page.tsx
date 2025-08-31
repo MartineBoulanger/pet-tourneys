@@ -1,6 +1,9 @@
+import Link from 'next/link';
 import { MdUpload } from 'react-icons/md';
-import { getTournamentDetails } from '@/supabase/actions/tournaments';
-import { getPaginatedMatches } from '@/supabase/actions/matches';
+import { getTournamentDetails } from '@/features/supabase/actions/tournaments';
+import { getPaginatedMatches } from '@/features/supabase/actions/matches';
+import { AdminMatchListItem } from '@/features/supabase/components/admin/matches/AdminMatchListItem';
+import { MATCHES_PER_PAGE } from '@/features/supabase/constants';
 import {
   Container,
   Pagination,
@@ -8,10 +11,7 @@ import {
   Paragraph,
   Divider,
 } from '@/components/ui';
-import { AdminMatchListItem } from '@/components/admin/matches/AdminMatchListItem';
 import { PageParams, PageSearchParams } from '@/types';
-import { MATCHES_PER_PAGE } from '@/utils/constants';
-import Link from 'next/link';
 
 export default async function AdminMatchesPage({
   params,

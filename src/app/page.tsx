@@ -2,12 +2,12 @@ import { LinksGallery } from '@/components/homepage/LinksGallery';
 import { PartnerGallery } from '@/components/homepage/PartnerGallery';
 import { Container } from '@/components/ui';
 import { partnersData } from '@/lib/partners';
-import { getVisibleAnnouncement } from '@/mongoDB/actions/announcements';
-import { getVisibleSignup } from '@/mongoDB/actions/signups';
-import { getVisibleSchedule } from '@/mongoDB/actions/schedules';
-import { AnnouncementSection } from '@/components/admin/cms/homepage/announcements/AnnouncementSection';
-import { SignupSection } from '@/components/admin/cms/homepage/signups/SignupsSection';
-import { ScheduleSection } from '@/components/admin/cms/homepage/schedules/schedulesSection';
+import { getVisibleAnnouncement } from '@/features/cms/actions/announcements';
+import { getVisibleSignup } from '@/features/cms/actions/signups';
+import { getVisibleSchedule } from '@/features/cms/actions/schedules';
+import { AnnouncementSection } from '@/features/cms/components/homepage/announcements/AnnouncementSection';
+import { SignupSection } from '@/features/cms/components/homepage/signups/SignupsSection';
+import { ScheduleSection } from '@/features/cms/components/homepage/schedules/schedulesSection';
 
 export default async function HomePage() {
   const announcement = await getVisibleAnnouncement();

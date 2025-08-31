@@ -1,5 +1,5 @@
 import { Container, Heading, Paragraph } from '@/components/ui';
-import { ResourcesList } from '@/components/admin/cms/resources/ResourcesList';
+import { ResourcesList } from '@/features/cms/components/resources/ResourcesList';
 
 export async function generateMetadata() {
   return {

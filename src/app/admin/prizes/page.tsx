@@ -1,5 +1,5 @@
 import { Container, Heading, Divider } from '@/components/ui';
-import { PrizesManager } from '@/components/admin/cms/prizes/PrizesManager';
+import { PrizesManager } from '@/features/cms/components/prizes/PrizesManager';
 
 export default async function AdminPrizesPage() {
   return (
