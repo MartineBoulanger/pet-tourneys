@@ -139,8 +139,8 @@ export default function ImageSelector({
       const result = await listImages(page, search);
 
       // Process the response
-      const newImages =
-        result.items?.map((item: any) => ({
+      const newImages: ImageRecord[] =
+        result.items?.map((item: ImageRecord) => ({
           ...item,
           width:
             typeof item.width === 'string'
