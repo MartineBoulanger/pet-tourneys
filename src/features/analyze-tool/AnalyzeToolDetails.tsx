@@ -11,10 +11,8 @@ import {
   parseBattleStatistics,
   transformPetSwapData,
 } from '@/features/supabase/utils/analyzeToolHelpers';
-import {
-  AbilitiesCard,
-  OverviewCard,
-} from '@/features/supabase/components/statistics';
+import { AbilitiesCard } from '@/features/supabase/components/statistics/AbilitiesCard';
+import { OverviewCard } from '@/features/supabase/components/statistics/OverviewCard';
 import {
   petPerformanceLegendValues,
   petPerformanceLegendValuesColor,
