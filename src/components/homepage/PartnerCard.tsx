@@ -1,6 +1,6 @@
-import { cn } from '@/utils/cn';
-import { Paragraph } from '@/components/ui';
 import Image from 'next/image';
+import { cn } from '@/utils/cn';
+import { Paragraph } from '../ui';
 
 interface PartnerCardProps {
   partner: {

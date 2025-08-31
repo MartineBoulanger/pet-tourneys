@@ -1,6 +1,6 @@
-import { TournamentForm } from '@/components/admin/tournaments/TournamentForm';
+import { TournamentForm } from '@/features/supabase/components/admin/tournaments/TournamentForm';
+import { getTournament } from '@/features/supabase/actions/tournaments';
 import { Container, Divider, Heading, Paragraph } from '@/components/ui';
-import { getTournament } from '@/supabase/actions/tournaments';
 import { PageParams } from '@/types';
 
 export default async function EditTournamentPage({

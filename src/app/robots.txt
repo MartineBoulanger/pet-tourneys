@@ -9,4 +9,4 @@ Disallow: /admin
 Disallow: /admin/*
 Disallow: /auth/*
 
-Sitemap: https://pet-tourneys.vercel.app/sitemap.xml
+Sitemap: https://www.petmastersleague.com/sitemap.xml

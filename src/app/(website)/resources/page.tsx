@@ -1,5 +1,5 @@
 import { Container, Heading, Paragraph } from '@/components/ui';
-import { ResourcesList } from '@/components/admin/cms/resources/ResourcesList';
+import { ResourcesList } from '@/features/cms/components/resources/ResourcesList';
 
 export async function generateMetadata() {
   return {
@@ -18,7 +18,7 @@ export default async function ResourcesPage() {
       <Heading className='text-center'>{'Resources'}</Heading>
       <Paragraph className='max-w-[700px] text-center mx-auto mb-5'>
         {
-          'All these images are used in previous tournaments, and other previous stuff, and we want them to be available for everyone to use. Enjoy!'
+          'All these images are used in previous tournaments/leagues, as well in the current league, and of course for other stuff. We want them to be available for everyone to use, and share. Enjoy!'
         }
       </Paragraph>
       <ResourcesList />

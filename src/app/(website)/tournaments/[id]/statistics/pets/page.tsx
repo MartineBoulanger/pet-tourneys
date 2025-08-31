@@ -1,15 +1,18 @@
 import { notFound } from 'next/navigation';
-import { PetStatsList } from '@/components/statistics/PetStatsList';
+import { PetStatsList } from '@/features/supabase/components/statistics/PetStatsList';
 import {
   getMatchPetUsage,
   getTournamentPetStats,
-} from '@/supabase/actions/pet-usage-statistics';
+} from '@/features/supabase/actions/pet-usage-statistics';
 import {
   getMatchBattleStats,
   getTournamentBattleStats,
-} from '@/supabase/actions/battle-logs-statistics';
-import { getTournament } from '@/supabase/actions/tournaments';
-import { getMatch } from '@/supabase/actions/matches';
+} from '@/features/supabase/actions/battle-logs-statistics';
+import { getTournament } from '@/features/supabase/actions/tournaments';
+import { getMatch } from '@/features/supabase/actions/matches';
+import { TournamentPetStat } from '@/features/supabase/types';
+import { Pet } from '@/features/supabase/components/statistics/types';
+import { loadPetsData } from '@/features/supabase/utils/loadJsonData';
 import {
   PageHeading,
   Heading,
@@ -17,11 +20,8 @@ import {
   PageMenu,
   Container,
 } from '@/components/ui';
-import { PageParams, MatchSearchParams } from '@/types';
 import { Links } from '@/lib/types';
-import { TournamentPetStat } from '@/utils/types';
-import { Pet } from '@/components/statistics/types';
-import { loadPetsData } from '@/utils/loadJsonData';
+import { PageParams, MatchSearchParams } from '@/types';
 
 export async function generateMetadata({ params }: { params: PageParams }) {
   const { id } = await params;

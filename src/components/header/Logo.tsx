@@ -6,10 +6,10 @@ export const Logo = () => {
     <Link title='Home' aria-label='Home' href='/'>
       <span>
         <Image
-          width={50}
-          height={50}
-          className='w-12 h-12 object-contain'
-          src={`/images/PML_Logo.jpg`}
+          width={100}
+          height={100}
+          className='w-20 h-auto object-cover'
+          src={`/images/PML_Logo.png`}
           alt='Logo PML'
           loading='lazy'
           unoptimized

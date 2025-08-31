@@ -1,5 +1,5 @@
 import { Heading, Paragraph, Container } from '@/components/ui';
-import { AnalyzeToolForm } from '@/components/analyze-tool/AnalyzeToolForm';
+import { AnalyzeToolForm } from '@/features/analyze-tool/AnalyzeToolForm';
 
 export async function generateMetadata() {
   return {

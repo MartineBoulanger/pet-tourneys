@@ -1,11 +1,11 @@
 import { notFound } from 'next/navigation';
 import { TbSquareChevronsDown } from 'react-icons/tb';
-import { getPage } from '@/contentful/actions/getPage';
+import { getPage } from '@/features/contentful/actions/getPage';
 import { Container, Heading, PageMenu } from '@/components/ui';
-import RichText from '@/components/contentful/RichText';
-import PageContent from '@/components/contentful/PageContent';
-import Banner from '@/components/contentful/Banner';
-import { ContentTypePage } from '@/components/contentful/types';
+import RichText from '@/features/contentful/components/RichText';
+import PageContent from '@/features/contentful/components/PageContent';
+import Banner from '@/features/contentful/components/Banner';
+import { ContentTypePage } from '@/features/contentful/types';
 import { Links } from '@/lib/types';
 
 export async function generateMetadata({

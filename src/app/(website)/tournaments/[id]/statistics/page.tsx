@@ -1,17 +1,23 @@
 import { notFound } from 'next/navigation';
+import { PetCharts } from '@/features/supabase/components/statistics/charts/PetCharts';
+import { BattleCharts } from '@/features/supabase/components/statistics/charts/BattleCharts';
+import { PetPerformanceCharts } from '@/features/supabase/components/statistics/charts/PetPerformanceCharts';
+import { PetSwapsCharts } from '@/features/supabase/components/statistics/charts/PetSwapsCharts';
+import { PetAbilitiesCharts } from '@/features/supabase/components/statistics/charts/PetAbilitiesCharts';
 import {
-  PetCharts,
-  BattleCharts,
-  PetPerformanceCharts,
-  PetSwapsCharts,
-  PetAbilitiesCharts,
-} from '@/components/statistics/charts';
+  ChartDataItem,
+  ChartData,
+} from '@/features/supabase/components/statistics/types';
 import {
   getMatchPetUsage,
   getTournamentPetStats,
-} from '@/supabase/actions/pet-usage-statistics';
-import { getTournament } from '@/supabase/actions/tournaments';
-import { getMatch } from '@/supabase/actions/matches';
+} from '@/features/supabase/actions/pet-usage-statistics';
+import {
+  getMatchBattleStats,
+  getTournamentBattleStats,
+} from '@/features/supabase/actions/battle-logs-statistics';
+import { getTournament } from '@/features/supabase/actions/tournaments';
+import { getMatch } from '@/features/supabase/actions/matches';
 import {
   PageHeading,
   Heading,
@@ -20,12 +26,7 @@ import {
   Container,
 } from '@/components/ui';
 import { PageParams, MatchSearchParams } from '@/types';
-import { ChartDataItem, ChartData } from '@/components/statistics/types';
 import { Links } from '@/lib/types';
-import {
-  getMatchBattleStats,
-  getTournamentBattleStats,
-} from '@/supabase/actions/battle-logs-statistics';
 
 export async function generateMetadata({ params }: { params: PageParams }) {
   const { id } = await params;

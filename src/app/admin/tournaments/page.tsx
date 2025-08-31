@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { MdOutlinePostAdd, MdUpload } from 'react-icons/md';
-import { TournamentsListItem } from '@/components/admin/tournaments/TournamentsListItem';
+import { TournamentsListItem } from '@/features/supabase/components/admin/tournaments/TournamentsListItem';
 import {
   Container,
   Heading,
@@ -9,8 +9,8 @@ import {
   Divider,
 } from '@/components/ui';
 import { PageSearchParams } from '@/types';
-import { TOURNAMENTS_PER_PAGE } from '@/utils/constants';
-import { getTournaments } from '@/supabase/actions/tournaments';
+import { TOURNAMENTS_PER_PAGE } from '@/features/supabase/constants';
+import { getTournaments } from '@/features/supabase/actions/tournaments';
 
 export default async function AdminTournamentsListPage({
   searchParams,

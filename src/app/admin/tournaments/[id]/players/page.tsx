@@ -1,9 +1,9 @@
 import { Container, Divider, Heading, Paragraph } from '@/components/ui';
-import { TournamentPlayersList } from '@/components/admin/tournaments/TournamentPlayersList';
-import { ExportRankingsButton } from '@/components/admin/tournaments/ExportRankingsButton';
+import { TournamentPlayersList } from '@/features/supabase/components/admin/tournaments/TournamentPlayersList';
+import { ExportRankingsButton } from '@/features/supabase/components/admin/tournaments/ExportRankingsButton';
+import { getPlayerRecords } from '@/features/supabase/actions/players';
+import { getTournamentDetails } from '@/features/supabase/actions/tournaments';
 import { PageParams } from '@/types';
-import { getPlayerRecords } from '@/supabase/actions/players';
-import { getTournamentDetails } from '@/supabase/actions/tournaments';
 
 export async function generateMetadata() {
   return {

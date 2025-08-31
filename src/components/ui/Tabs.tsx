@@ -1,5 +1,5 @@
-import { cn } from '@/utils/cn';
 import { ComponentPropsWithoutRef, forwardRef } from 'react';
+import { cn } from '@/utils/cn';
 
 export interface TabsProps extends ComponentPropsWithoutRef<'div'> {
   variant?: 'default' | 'pills';

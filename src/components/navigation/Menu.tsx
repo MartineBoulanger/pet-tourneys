@@ -6,9 +6,9 @@ import { useState } from 'react';
 import { IoMdClose } from 'react-icons/io';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import { GiHamburgerMenu } from 'react-icons/gi';
-import { Button } from '@/components/ui';
 import { headerData } from '@/lib/navigationData';
 import { cn } from '@/utils/cn';
+import { Button } from '../ui';
 
 interface MenuProps {
   className?: string;

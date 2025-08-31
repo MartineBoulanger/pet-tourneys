@@ -2,16 +2,40 @@ import { LinksGallery } from '@/components/homepage/LinksGallery';
 import { PartnerGallery } from '@/components/homepage/PartnerGallery';
 import { Container } from '@/components/ui';
 import { partnersData } from '@/lib/partners';
+import { getVisibleAnnouncement } from '@/features/cms/actions/announcements';
+import { getVisibleSignup } from '@/features/cms/actions/signups';
+import { getVisibleSchedule } from '@/features/cms/actions/schedules';
+import { AnnouncementSection } from '@/features/cms/components/homepage/announcements/AnnouncementSection';
+import { SignupSection } from '@/features/cms/components/homepage/signups/SignupsSection';
+import { ScheduleSection } from '@/features/cms/components/homepage/schedules/schedulesSection';
 
-export default function HomePage() {
+export default async function HomePage() {
+  const announcement = await getVisibleAnnouncement();
+  const signup = await getVisibleSignup();
+  const schedule = await getVisibleSchedule();
+
   return (
     <>
-      <Container className='my-5 lg:mb-10 flex flex-col'>
-        {/* TODO: recent news/articles/guides section here */}
-        {/* TODO: if trailer/announcements/teasers section here */}
-        {/* TODO: schedule and sign ups section here */}
-        <LinksGallery />
-      </Container>
+      {announcement.announcement && announcement?.announcement?.isVisible ? (
+        <Container className='my-5 pb-5'>
+          <AnnouncementSection announcement={announcement.announcement} />
+        </Container>
+      ) : null}
+      {/* TODO: recent news/articles/guides section here */}
+      {(signup.signup && signup.signup.isVisible) ||
+      (schedule.schedule && schedule.schedule.isVisible) ? (
+        <div className='my-5 py-5 bg-light-grey'>
+          <Container className='flex flex-col space-y-5'>
+            {signup.signup && signup.signup.isVisible ? (
+              <SignupSection signup={signup.signup} />
+            ) : null}
+            {schedule.schedule && schedule.schedule.isVisible ? (
+              <ScheduleSection schedule={schedule.schedule} />
+            ) : null}
+          </Container>
+        </div>
+      ) : null}
+      <LinksGallery />
       <PartnerGallery data={partnersData} />
     </>
   );

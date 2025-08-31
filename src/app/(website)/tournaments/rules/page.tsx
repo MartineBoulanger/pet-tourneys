@@ -1,6 +1,6 @@
 import { Links } from '@/lib/types';
 import { Container, PageHeading, PageMenu } from '@/components/ui';
-import { RulesList } from '@/components/admin/cms/rules/RulesList';
+import { RulesList } from '@/features/cms/components/rules/RulesList';
 
 export async function generateMetadata() {
   return {

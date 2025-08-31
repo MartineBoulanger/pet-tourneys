@@ -1,5 +1,5 @@
 import { Container, Divider, Heading } from '@/components/ui';
-import { RulesManager } from '@/components/admin/cms/rules/RulesManager';
+import { RulesManager } from '@/features/cms/components/rules/RulesManager';
 
 export default async function AdminRulesPage() {
   return (

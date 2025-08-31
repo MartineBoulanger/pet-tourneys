@@ -1,8 +1,8 @@
-import { getUserSession } from '@/supabase/actions/auth';
 import { Metadata } from 'next';
 import { redirect } from 'next/navigation';
+import { getUserSession } from '@/features/supabase/actions/auth';
+import { AdminPanelButtons } from '@/features/supabase/components/admin/AdminPanelButtons';
 import { Heading } from '@/components/ui';
-import { AdminPanelButtons } from '@/components/admin/AdminPanelButtons';
 
 export const metadata: Metadata = {
   title: 'Admin Panel',
