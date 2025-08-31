@@ -1,3 +1,29 @@
+import { BASE } from './types';
+
+// Wake up the server first (for Render cold starts)
+export async function wakeUpServer(): Promise<boolean> {
+  try {
+    console.log('Waking up server...');
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 15000); // 15 second timeout for wake up
+
+    const res = await fetch(`${BASE}/api/health`, {
+      method: 'GET',
+      signal: controller.signal,
+      headers: {
+        Accept: 'application/json',
+      },
+    });
+
+    clearTimeout(timeoutId);
+    console.log('Server wake up response:', res.status);
+    return res.ok;
+  } catch (error) {
+    console.error('Server wake up failed:', error);
+    return false;
+  }
+}
+
 /**
  * @function getImageUrl - to get the correct url format for the images
  * @param imagePath - string that is the url/path coming from the server

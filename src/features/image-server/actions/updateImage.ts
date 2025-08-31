@@ -9,6 +9,9 @@ export async function updateImage(
   patch: Partial<Pick<ImageRecord, 'title' | 'alt' | 'tags' | 'custom'>>
 ) {
   try {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 15000);
+
     const res = await fetch(`${BASE}/api/images/${id}`, {
       method: 'PATCH',
       headers: {
@@ -17,7 +20,10 @@ export async function updateImage(
       },
       body: JSON.stringify(patch),
       cache: 'no-store',
+      signal: controller.signal,
     });
+
+    clearTimeout(timeoutId);
 
     if (!res.ok) {
       const errorText = await res.text();

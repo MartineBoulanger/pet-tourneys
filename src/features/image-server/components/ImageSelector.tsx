@@ -122,7 +122,6 @@ export default function ImageSelector({
   };
 
   const showLessImages = () => {
-    // Reset to first page
     setCurrentPage(1);
     loadImages(1, searchTerm);
   };
@@ -130,7 +129,7 @@ export default function ImageSelector({
   const loadImages = async (page: number = 1, search: string = '') => {
     if (page === 1) {
       setIsLoading(true);
-      setImages([]); // Clear existing images when starting fresh
+      setImages([]);
     } else {
       setIsLoadingMore(true);
     }
@@ -138,9 +137,30 @@ export default function ImageSelector({
     try {
       const result = await listImages(page, search);
 
-      // Process the response
-      const newImages: ImageRecord[] =
-        result.items?.map((item: ImageRecord) => ({
+      if (!result) {
+        throw new Error('No response from server');
+      }
+
+      let newImages: ImageRecord[] = [];
+      let total = 0;
+      let limit = 20;
+
+      if (result.items && Array.isArray(result.items)) {
+        newImages = result.items;
+        total = result.total || 0;
+        limit = result.limit || 20;
+      } else if (Array.isArray(result)) {
+        newImages = result;
+        total = result.length;
+        limit = result.length;
+      } else {
+        console.warn('Unexpected API response structure:', result);
+        newImages = [];
+        total = 0;
+      }
+
+      const processedImages: ImageRecord[] = newImages.map(
+        (item: ImageRecord) => ({
           ...item,
           width:
             typeof item.width === 'string'
@@ -150,20 +170,19 @@ export default function ImageSelector({
             typeof item.height === 'string'
               ? parseInt(item.height, 10)
               : item.height,
-        })) || [];
+        })
+      );
 
       if (page === 1) {
-        // First page - replace all images
-        setImages(newImages);
+        setImages(processedImages);
         setCurrentPage(1);
       } else {
-        // Additional pages - append to existing images
-        setImages((prev) => [...prev, ...newImages]);
+        setImages((prev) => [...prev, ...processedImages]);
         setCurrentPage(page);
       }
 
-      setTotalImages(result.total || 0);
-      setHasMore(result.page * result.limit < result.total);
+      setTotalImages(total);
+      setHasMore((result.page || page) * limit < total);
     } catch (error) {
       console.error('ImageSelector - Error loading images:', error);
       if (page === 1) {

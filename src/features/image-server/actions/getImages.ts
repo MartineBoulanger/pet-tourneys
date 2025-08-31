@@ -1,6 +1,7 @@
 'use server';
 
 import { ImageRecord, BASE } from '../types';
+import { wakeUpServer } from '../utils';
 
 // --- List ---
 export async function listImages(
@@ -9,39 +10,86 @@ export async function listImages(
   limit: number = 20
 ) {
   try {
-    const res = await fetch(
-      `${BASE}/api/images?page=${page}&limit=${limit}&search=${search}`,
-      {
-        cache: 'no-store',
-        headers: {
-          Accept: 'application/json',
-        },
-      }
-    );
+    // Wake up server if this is likely the first request
+    if (page === 1 && !search) {
+      await wakeUpServer();
+    }
+
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 second timeout
+
+    const url = `${BASE}/api/images?page=${page}&limit=${limit}&search=${encodeURIComponent(
+      search
+    )}`;
+    console.log('Fetching images from:', url);
+
+    const res = await fetch(url, {
+      cache: 'no-store',
+      headers: {
+        Accept: 'application/json',
+      },
+      signal: controller.signal,
+    });
+
+    clearTimeout(timeoutId);
 
     if (!res.ok) {
-      const errorText = await res.text();
-      console.error('List images failed:', res.status, errorText);
-      throw new Error(`Bad response from CMS: ${res.status}`);
+      const errorText = await res
+        .text()
+        .catch(() => 'No error message available');
+      console.error('List images failed:', {
+        status: res.status,
+        statusText: res.statusText,
+        error: errorText,
+        url,
+      });
+
+      // Return empty result instead of throwing for better UX
+      if (res.status === 503) {
+        console.log('Server unavailable, returning empty result');
+        return { items: [], total: 0, page, limit, hasMore: false };
+      }
+
+      throw new Error(
+        `Bad response from CMS: ${res.status} - ${res.statusText}`
+      );
     }
 
     const data = await res.json();
-    return data;
-  } catch (err) {
-    console.error('listImages failed:', err);
-    return null;
+    console.log('Images fetched successfully:', {
+      count: data.items?.length || 0,
+      total: data.total,
+      page: data.page,
+    });
+
+    // Calculate hasMore based on pagination
+    const hasMore = data.page * data.limit < data.total;
+
+    return {
+      ...data,
+      hasMore,
+    };
+  } catch (error) {
+    console.error('listImages failed:', error);
+    return { items: [], total: 0, page, limit, hasMore: false };
   }
 }
 
 // --- Single Image ---
 export async function getImage(id: string) {
   try {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 15000);
+
     const res = await fetch(`${BASE}/api/images/${id}`, {
       cache: 'no-store',
       headers: {
         Accept: 'application/json',
       },
+      signal: controller.signal,
     });
+
+    clearTimeout(timeoutId);
 
     if (!res.ok) {
       const errorText = await res.text();

@@ -91,42 +91,44 @@ export function ImagesManager({ initialImages = [] }: ImagesManagerProps) {
     loadImages(1, searchTerm);
   };
 
-  const loadImages = async (page: number = 1, search: string = '') => {
+  const loadImages = async (
+    page: number = 1,
+    search: string = '',
+    reset: boolean = false
+  ) => {
     if (page === 1) {
       setIsLoading(true);
-      setImages([]); // Clear existing images when starting fresh
+      setImages([]);
     } else {
       setIsLoadingMore(true);
     }
 
     try {
-      const result = await listImages(page, search);
+      const data = await listImages(page, search);
 
-      // Process the response
-      const newImages: ImageRecord[] =
-        result.items?.map((item: ImageRecord) => ({
-          ...item,
-          width:
-            typeof item.width === 'string'
-              ? parseInt(item.width, 10)
-              : item.width,
-          height:
-            typeof item.height === 'string'
-              ? parseInt(item.height, 10)
-              : item.height,
-        })) || [];
+      if (data) {
+        // Handle different response structures
+        let newImages: ImageRecord[] = [];
+        let total = 0;
 
-      if (page === 1) {
-        // First page - replace all images
-        setImages(newImages);
-        setCurrentPage(1);
-      } else {
-        // Additional pages - append to existing images
-        setImages((prev) => [...prev, ...newImages]);
-        setCurrentPage(page);
+        if (data.items && Array.isArray(data.items)) {
+          newImages = data.items;
+          total = data.total || 0;
+        } else if (data.images && Array.isArray(data.images)) {
+          newImages = data.images;
+          total = data.total || 0;
+        } else if (Array.isArray(data)) {
+          newImages = data;
+          total = data.length;
+        }
+
+        if (reset) {
+          setImages(newImages);
+        } else {
+          setImages((prev) => [...prev, ...newImages]);
+        }
+        setTotalImages(total);
       }
-
-      setTotalImages(result.total || 0);
     } catch (error) {
       console.error('ImageSelector - Error loading images:', error);
       if (page === 1) {
@@ -176,9 +178,15 @@ export function ImagesManager({ initialImages = [] }: ImagesManagerProps) {
       const { results, errors } = await uploadMultipleImages(selectedFiles, {});
 
       if (errors.length > 0) {
+        console.error('Some uploads failed:', errors);
+      }
+
+      if (errors.length > 0) {
         setUploadProgress(
           `Uploaded ${results.length}/${selectedFiles.length} images. Some failed.`
         );
+        setCurrentPage(1);
+        loadImages(1, searchTerm, true);
       } else {
         setUploadProgress(`Successfully uploaded ${results.length} image(s)`);
       }
@@ -193,12 +201,12 @@ export function ImagesManager({ initialImages = [] }: ImagesManagerProps) {
       ) as HTMLInputElement;
       if (fileInput) fileInput.value = '';
 
-      setTimeout(() => setUploadProgress(''), 3000);
+      setTimeout(() => setUploadProgress(''), 5000);
       router.refresh();
     } catch (error) {
       console.error(error);
-      setUploadProgress('Upload failed');
-      setTimeout(() => setUploadProgress(''), 3000);
+      setUploadProgress(`Upload failed: ${error}`);
+      setTimeout(() => setUploadProgress(''), 5000);
     } finally {
       setIsUploading(false);
     }
