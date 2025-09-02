@@ -1,11 +1,10 @@
 import Image from 'next/image';
-import { ImageRecord } from '@/features/image-server/types';
 import { Announcement } from '@/features/cms/types';
 import { Video } from '@/features/cms/components/Video';
 import { Heading, Divider } from '@/components/ui';
 
 interface AnnouncementSectionProps {
-  announcement: Announcement & { image: ImageRecord | null };
+  announcement: Announcement;
 }
 
 export function AnnouncementSection({
@@ -39,22 +38,21 @@ export function AnnouncementSection({
         />
       ) : null}
 
-      {announcement.mediaType === 'image' &&
-      announcement.imageId &&
-      announcement.image ? (
+      {announcement.mediaType === 'image' && announcement.image ? (
         <div className='w-full h-full'>
           <Image
-            src={announcement.image.url}
-            alt={announcement.image.alt}
+            src={announcement.image.secure_url}
+            alt={announcement.title || 'Announcement image'}
             style={{
               maxHeight: 'calc(90vh - 350px)',
               width: 'auto',
               height: 'auto',
             }}
             className='w-full h-full mx-auto object-cover rounded-lg overflow-hidden'
-            width={Number(announcement.image.width)}
-            height={Number(announcement.image.height)}
+            width={announcement.image.width}
+            height={announcement.image.height}
             priority
+            unoptimized
           />
         </div>
       ) : null}

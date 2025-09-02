@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { FaImage } from 'react-icons/fa';
-import { ImageRecord } from '@/features/image-server/types';
+import { CloudinaryImage } from '@/features/cloudinary/types';
 import { Heading, Divider, Paragraph } from '@/components/ui';
 import { cn } from '@/utils/cn';
 
@@ -14,11 +14,11 @@ interface SchedulesSectionProps {
     createdAt: Date;
     updatedAt: Date;
     images: Array<{
-      imageId: string;
+      image?: CloudinaryImage | null;
       imageName: string;
       imageDate: string;
       order?: number;
-      imageData: ImageRecord | null;
+      imageData?: CloudinaryImage | null;
     }>;
   };
 }
@@ -40,9 +40,13 @@ export function ScheduleSection({ schedule }: SchedulesSectionProps) {
   };
 
   // Sort images by order
-  const sortedImages = schedule.images.sort(
-    (a, b) => (a.order || 0) - (b.order || 0)
-  );
+  const sortedImages = schedule.images
+    .sort((a, b) => (a.order || 0) - (b.order || 0))
+    .map((item) => ({
+      ...item,
+      image: item.image ?? null,
+      imageData: item.imageData ?? item.image ?? null,
+    }));
 
   return (
     <div className='bg-background rounded-lg shadow-md p-2.5 lg:p-5'>
@@ -59,18 +63,19 @@ export function ScheduleSection({ schedule }: SchedulesSectionProps) {
       >
         {sortedImages.map((item, index) => (
           <div
-            key={`${item.imageId}-${index}`}
+            key={`schedule-${item.imageName}-${index}`}
             className='group block relative overflow-hidden rounded-lg bg-light-grey'
           >
             {item.imageData ? (
               <div className='relative flex flex-col aspect-video overflow-hidden'>
                 <div className='max-h-[350px] max-w-[400px] mx-auto'>
                   <Image
-                    src={item.imageData.url}
-                    alt={item.imageData.alt || item.imageName}
+                    src={item.image?.secure_url || item.imageData.secure_url}
+                    alt={item.imageName}
                     className='w-full h-full object-cover'
-                    width={Number(item.imageData.width)}
-                    height={Number(item.imageData.height)}
+                    width={item.imageData.width}
+                    height={item.imageData.height}
+                    unoptimized
                   />
                 </div>
               </div>

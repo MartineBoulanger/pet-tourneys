@@ -1,10 +1,10 @@
 import { IoMdImages } from 'react-icons/io';
-import { getResourcesWithImages } from '@/features/cms/actions/resources';
+import { getResources } from '@/features/cms/actions/resources';
 import { Heading, Paragraph } from '@/components/ui';
 import { ResourceSection } from './ResourceSection';
 
 export async function ResourcesList() {
-  const resourcesWithImages = await getResourcesWithImages();
+  const resourcesWithImages = await getResources();
 
   if (resourcesWithImages.length === 0) {
     return (

@@ -1,10 +1,10 @@
 import { IoMdTrophy } from 'react-icons/io';
-import { getPrizesWithImages } from '@/features/cms/actions/prizes';
+import { getPrizes } from '@/features/cms/actions/prizes';
 import { Heading, Paragraph } from '@/components/ui';
 import { PrizeSection } from './PrizeSection';
 
 export async function PrizesList() {
-  const prizesWithImages = await getPrizesWithImages();
+  const prizesWithImages = await getPrizes();
 
   if (prizesWithImages.length === 0) {
     return (

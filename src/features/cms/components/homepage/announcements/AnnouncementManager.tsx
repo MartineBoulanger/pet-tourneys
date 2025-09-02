@@ -203,7 +203,7 @@ export function AnnouncementsManager() {
 
                     <div className='flex flex-wrap items-center gap-2.5 lg:gap-5 text-sm text-foreground/80'>
                       {announcement.mediaType === 'image' &&
-                        announcement.imageId && (
+                        announcement.image && (
                           <div className='flex items-center gap-1'>
                             <FaImage className='h-4 w-4' />
                             {'uses image'}

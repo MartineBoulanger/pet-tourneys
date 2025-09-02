@@ -210,9 +210,9 @@ export function RulesManager() {
                     <div className='flex flex-wrap items-center gap-2.5 lg:gap-5 text-sm text-foreground/80'>
                       <div className='flex items-center gap-1'>
                         <FaImage className='h-4 w-4' />
-                        {rule.imageIds?.length}
+                        {rule.images?.length || 0}
                         {' image'}
-                        {rule.imageIds?.length !== 1 ? 's' : ''}
+                        {rule.images?.length !== 1 ? 's' : ''}
                       </div>
                       {rule.createdAt && (
                         <div className='flex items-center gap-1'>

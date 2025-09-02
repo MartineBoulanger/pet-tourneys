@@ -1,9 +1,9 @@
-import { ImageRecord } from '@/features/image-server/types';
+import { CloudinaryImage } from '@/features/cloudinary/types';
 import { cn } from '@/utils/cn';
 import { ImageCard } from './ImageCard';
 
 interface ImageGridProps {
-  images: ImageRecord[];
+  images?: CloudinaryImage[] | null;
   cols?: number;
   isDownloadable?: boolean;
 }
@@ -29,11 +29,17 @@ export function ImageGrid({
       break;
   }
 
+  // Safely handle the images prop
+  const safeImages = Array.isArray(images) ? images : [];
+  if (safeImages.length === 0) {
+    return null; // Or you can return a message like "No images to display"
+  }
+
   return (
     <div className={cn('grid gap-2.5 lg:gap-5', colNumber)}>
-      {images.map((image) => (
+      {safeImages.map((image) => (
         <ImageCard
-          key={image.id}
+          key={image.public_id}
           image={image}
           isDownloadable={isDownloadable}
         />

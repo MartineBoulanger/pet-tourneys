@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { FaImage } from 'react-icons/fa';
-import { ImageRecord } from '@/features/image-server/types';
+import { CloudinaryImage } from '@/features/cloudinary/types';
 import { Heading, Button, Divider, Paragraph } from '@/components/ui';
 import { cn } from '@/utils/cn';
 
@@ -14,12 +14,12 @@ interface SignupsSectionProps {
     createdAt: Date;
     updatedAt: Date;
     images: Array<{
-      imageId: string;
+      image?: CloudinaryImage | null;
       imageName: string;
       imageAlt?: string;
       signupUrl: string;
       order?: number;
-      imageData: ImageRecord | null;
+      imageData?: CloudinaryImage | null;
     }>;
   };
 }
@@ -41,9 +41,13 @@ export function SignupSection({ signup }: SignupsSectionProps) {
   };
 
   // Sort images by order
-  const sortedImages = signup.images.sort(
-    (a, b) => (a.order || 0) - (b.order || 0)
-  );
+  const sortedImages = signup.images
+    .sort((a, b) => (a.order || 0) - (b.order || 0))
+    .map((item) => ({
+      ...item,
+      image: item.image ?? null,
+      imageData: item.imageData ?? item.image ?? null,
+    }));
 
   return (
     <div className='bg-background rounded-lg shadow-md p-2.5 lg:p-5'>
@@ -58,7 +62,7 @@ export function SignupSection({ signup }: SignupsSectionProps) {
       <div className={cn('grid gap-2.5 lg:gap-5', getGridCols(signup.layout))}>
         {sortedImages.map((item, index) => (
           <Link
-            key={`${item.imageId}-${index}`}
+            key={`signup-${item.imageName}-${index}`}
             href={item.signupUrl}
             target='_blank'
             rel='noopener noreferrer'
@@ -69,11 +73,12 @@ export function SignupSection({ signup }: SignupsSectionProps) {
                 <div className='relative flex flex-col aspect-video overflow-hidden'>
                   <div className='max-h-[350px] max-w-full mx-auto'>
                     <Image
-                      src={item.imageData.url}
+                      src={item.image?.secure_url || item.imageData.secure_url}
                       alt={item.imageAlt || item.imageName}
                       className='object-cover transition-transform duration-300 group-hover:scale-105'
-                      width={Number(item.imageData.width)}
-                      height={Number(item.imageData.height)}
+                      width={item.imageData.width}
+                      height={item.imageData.height}
+                      unoptimized
                     />
                   </div>
 

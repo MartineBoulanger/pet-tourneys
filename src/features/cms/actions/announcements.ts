@@ -2,13 +2,12 @@
 
 import { ObjectId } from 'mongodb';
 import { revalidatePath } from 'next/cache';
-import { getImageById } from '@/features/image-server/actions/getImages';
 import { getCollection, connectToDatabase } from '../client';
 import { Announcement } from '../types';
 
 export async function createAnnouncement(data: Partial<Announcement>) {
   try {
-    if (data.mediaType === 'image' && !data.imageId) {
+    if (data.mediaType === 'image' && !data.image) {
       return {
         success: false,
         error: 'Image is required when media type is image',
@@ -28,7 +27,7 @@ export async function createAnnouncement(data: Partial<Announcement>) {
       title: data.title?.trim() || undefined,
       description: data.description?.trim() || undefined,
       mediaType: data.mediaType || 'none',
-      imageId: data.mediaType === 'image' ? data.imageId : undefined,
+      image: data.mediaType === 'image' ? data.image : null,
       videoUrl: data.mediaType === 'video' ? data.videoUrl?.trim() : undefined,
       isVisible: data.isVisible ?? true,
       createdAt: new Date(),
@@ -60,7 +59,7 @@ export async function updateAnnouncement(
     if (!ObjectId.isValid(announcementId))
       return { success: false, error: 'Invalid announcement ID' };
 
-    if (data.mediaType === 'image' && !data.imageId) {
+    if (data.mediaType === 'image' && !data.image) {
       return {
         success: false,
         error: 'Image is required when media type is image',
@@ -80,7 +79,7 @@ export async function updateAnnouncement(
       title: data.title?.trim() || undefined,
       description: data.description?.trim() || undefined,
       mediaType: data.mediaType || 'none',
-      imageId: data.mediaType === 'image' ? data.imageId : undefined,
+      image: data.mediaType === 'image' ? data.image : null,
       videoUrl: data.mediaType === 'video' ? data.videoUrl?.trim() : undefined,
       isVisible: data.isVisible ?? true,
       updatedAt: new Date(),
@@ -135,7 +134,7 @@ export async function getAnnouncements(): Promise<Announcement[]> {
       title: announcement.title,
       description: announcement.description,
       mediaType: announcement.mediaType,
-      imageId: announcement.imageId,
+      image: announcement.image,
       videoUrl: announcement.videoUrl,
       isVisible: announcement.isVisible,
       createdAt: announcement.createdAt,
@@ -154,15 +153,10 @@ export async function getVisibleAnnouncement() {
 
     if (!announcement) return { success: true, announcement: null };
 
-    const image = announcement.imageId
-      ? await getImageById(announcement.imageId)
-      : null;
-
     return {
       success: true,
       announcement: {
         ...announcement,
-        image,
         _id: String(announcement._id),
       },
     };

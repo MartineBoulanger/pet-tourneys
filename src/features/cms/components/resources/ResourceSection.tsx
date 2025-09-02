@@ -1,14 +1,16 @@
 import { IoMdImages } from 'react-icons/io';
 import { Resource as ResourceType } from '@/features/cms/types';
-import { ImageRecord } from '@/features/image-server/types';
 import { Heading, Paragraph, Divider } from '@/components/ui';
 import { ImageGrid } from '../ImageGrid';
 
 interface ResourceSectionProps {
-  resource: ResourceType & { images: ImageRecord[] };
+  resource: ResourceType;
 }
 
 export function ResourceSection({ resource }: ResourceSectionProps) {
+  // Ensure images is always an array
+  const images = Array.isArray(resource.images) ? resource.images : [];
+
   return (
     <section className='space-y-2.5 lg:space-y-5'>
       {/* Section header */}
@@ -26,12 +28,12 @@ export function ResourceSection({ resource }: ResourceSectionProps) {
           height='0.5'
         />
         <Paragraph className='text-foreground/50 my-5'>
-          {resource.images.length}
+          {images.length || 0}
           {' image'}
-          {resource.images.length !== 1 ? 's' : ''}
+          {images.length !== 1 ? 's' : ''}
         </Paragraph>
         {/* Images grid */}
-        {resource.images.length === 0 ? (
+        {images.length === 0 ? (
           <div className='flex flex-col items-center text-center py-12'>
             <IoMdImages className='w-16 h-16 text-foreground/60 mb-5' />
             <Paragraph className='text-foreground/30'>
@@ -39,7 +41,7 @@ export function ResourceSection({ resource }: ResourceSectionProps) {
             </Paragraph>
           </div>
         ) : (
-          <ImageGrid images={resource.images} isDownloadable />
+          <ImageGrid images={images} isDownloadable />
         )}
       </div>
     </section>

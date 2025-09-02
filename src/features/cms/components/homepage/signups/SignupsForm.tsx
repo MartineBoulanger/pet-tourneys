@@ -10,6 +10,8 @@ import {
 } from 'react-icons/fa';
 import { Signup } from '@/features/cms/types';
 import { createSignup, updateSignup } from '@/features/cms/actions/signups';
+import ImageSelector from '@/features/cloudinary/components/Selector';
+import { CloudinaryImage } from '@/features/cloudinary/types';
 import {
   Button,
   Heading,
@@ -19,10 +21,9 @@ import {
   Checkbox,
   Paragraph,
 } from '@/components/ui';
-import ImageSelector from '@/features/image-server/components/ImageSelector';
 
 interface SignupFormProps {
-  signup?: Signup;
+  signup?: Signup | null;
   onSuccess: () => void;
   onCancel: () => void;
 }
@@ -64,7 +65,7 @@ export function SignupForm({ signup, onSuccess, onCancel }: SignupFormProps) {
         images: [
           ...formData.images,
           {
-            imageId: '',
+            image: null,
             imageName: '',
             imageAlt: '',
             signupUrl: '',
@@ -88,7 +89,7 @@ export function SignupForm({ signup, onSuccess, onCancel }: SignupFormProps) {
   const updateImage = (
     index: number,
     field: keyof Signup['images'][0],
-    value: string | number
+    value: string | number | CloudinaryImage | null
   ) => {
     const newImages = [...formData.images];
     newImages[index] = { ...newImages[index], [field]: value };
@@ -114,6 +115,10 @@ export function SignupForm({ signup, onSuccess, onCancel }: SignupFormProps) {
       ...formData,
       images: newImages.map((img, i) => ({ ...img, order: i + 1 })),
     });
+  };
+
+  const handleImageSelect = (index: number, image: CloudinaryImage | null) => {
+    updateImage(index, 'image', image);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -245,19 +250,12 @@ export function SignupForm({ signup, onSuccess, onCancel }: SignupFormProps) {
                 <div className='grid grid-cols-1 gap-2.5 p-2.5 bg-background rounded-lg'>
                   <ImageSelector
                     label='Select Image'
-                    selectedImageId={image.imageId}
-                    onImageSelect={(selectedImage) => {
-                      updateImage(
-                        index,
-                        'imageId',
-                        selectedImage ? selectedImage.id : ''
-                      );
-                    }}
-                    required={true}
-                    allowNull={false}
-                    showPreview={true}
-                    placeholder='Choose an image for this signup item...'
-                    className='mb-2.5'
+                    selectedImage={image.image}
+                    onImageSelect={(selectedImage) =>
+                      handleImageSelect(index, selectedImage)
+                    }
+                    required
+                    showPreview
                   />
 
                   <Input

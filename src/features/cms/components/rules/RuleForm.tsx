@@ -3,7 +3,8 @@
 import { useState } from 'react';
 import { createRule, updateRule } from '@/features/cms/actions/rules';
 import { Rule as RuleType } from '@/features/cms/types';
-import ImageSelector from '@/features/image-server/components/ImageSelector';
+import ImageSelector from '@/features/cloudinary/components/Selector';
+import { CloudinaryImage } from '@/features/cloudinary/types';
 import { Button, Heading, Input } from '@/components/ui';
 import { RichTextEditor } from '../RichTextEditor';
 
@@ -18,7 +19,7 @@ export function RuleForm({ rule, onSuccess, onCancel }: RuleFormProps) {
     _id: rule?._id || '',
     title: rule?.title ?? '',
     content: rule?.content ?? '',
-    imageIds: rule?.imageIds ?? [],
+    images: rule?.images ?? [],
     createdAt: rule?.createdAt || new Date(),
     updatedAt: rule?.updatedAt || new Date(),
   });
@@ -36,6 +37,13 @@ export function RuleForm({ rule, onSuccess, onCancel }: RuleFormProps) {
     setFormData((prev) => ({
       ...prev,
       content,
+    }));
+  };
+
+  const handleImagesSelect = (images: CloudinaryImage[] | null) => {
+    setFormData((prev) => ({
+      ...prev,
+      images: images,
     }));
   };
 
@@ -64,7 +72,7 @@ export function RuleForm({ rule, onSuccess, onCancel }: RuleFormProps) {
           _id: '',
           title: '',
           content: '',
-          imageIds: [],
+          images: [],
           createdAt: new Date(),
           updatedAt: new Date(),
         });
@@ -103,19 +111,11 @@ export function RuleForm({ rule, onSuccess, onCancel }: RuleFormProps) {
         </div>
 
         <ImageSelector
-          selectedImageIds={formData.imageIds}
-          onImagesSelect={(images) => {
-            const imageIds = images.map((img) => img.id);
-            setFormData((prev) => ({
-              ...prev,
-              imageIds,
-            }));
-          }}
+          selectedImages={formData.images}
+          onImagesSelect={handleImagesSelect}
           multiple
-          maxSelection={10}
           label={'Choose images'}
-          showPreview={true}
-          allowNull={true}
+          showPreview
         />
 
         {error && (

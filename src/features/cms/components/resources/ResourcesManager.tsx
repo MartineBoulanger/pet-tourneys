@@ -212,9 +212,11 @@ export function ResourcesManager() {
                     <div className='flex flex-wrap items-center gap-2.5 lg:gap-5 text-sm text-foreground/80'>
                       <div className='flex items-center gap-1'>
                         <FaImage className='h-4 w-4' />
-                        {resource.imageIds.length}
+                        {(resource.images && resource.images?.length) || 0}
                         {' image'}
-                        {resource.imageIds.length !== 1 ? 's' : ''}
+                        {resource.images && resource.images?.length !== 1
+                          ? 's'
+                          : ''}
                       </div>
                       {resource.createdAt && (
                         <div className='flex items-center gap-1'>

@@ -7,7 +7,8 @@ import {
 } from '@/features/cms/actions/announcements';
 import { Announcement } from '@/features/cms/types';
 import { RichTextEditor } from '@/features/cms/components/RichTextEditor';
-import ImageSelector from '@/features/image-server/components/ImageSelector';
+import ImageSelector from '@/features/cloudinary/components/Selector';
+import { CloudinaryImage } from '@/features/cloudinary/types';
 import {
   Button,
   Input,
@@ -33,7 +34,7 @@ export function AnnouncementForm({
     title: announcement?.title ?? '',
     description: announcement?.description ?? '',
     mediaType: announcement?.mediaType ?? 'none',
-    imageId: announcement?.imageId ?? '',
+    image: announcement?.image ?? null,
     videoUrl: announcement?.videoUrl ?? '',
     isVisible: announcement?.isVisible ?? true,
     createdAt: announcement?.createdAt || new Date(),
@@ -56,6 +57,9 @@ export function AnnouncementForm({
     setFormData((prev) => ({
       ...prev,
       [name]: value,
+      // Clear image when media type changes
+      image: value !== 'image' ? null : prev.image,
+      videoUrl: value !== 'video' ? '' : prev.videoUrl,
     }));
   };
 
@@ -63,6 +67,13 @@ export function AnnouncementForm({
     setFormData((prev) => ({
       ...prev,
       description,
+    }));
+  };
+
+  const handleImageSelect = (image: CloudinaryImage | null) => {
+    setFormData((prev) => ({
+      ...prev,
+      image: image,
     }));
   };
 
@@ -82,7 +93,7 @@ export function AnnouncementForm({
           title: '',
           description: '',
           mediaType: 'none',
-          imageId: '',
+          image: null,
           videoUrl: '',
           isVisible: true,
           createdAt: new Date(),
@@ -136,13 +147,8 @@ export function AnnouncementForm({
 
         {formData.mediaType === 'image' && (
           <ImageSelector
-            selectedImageId={formData.imageId}
-            onImageSelect={(image) => {
-              setFormData((prev) => ({
-                ...prev,
-                imageId: String(image?.id),
-              }));
-            }}
+            selectedImage={formData.image}
+            onImageSelect={handleImageSelect}
             label={'Choose image'}
             showPreview={true}
             required

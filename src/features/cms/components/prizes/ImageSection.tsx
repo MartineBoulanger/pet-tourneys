@@ -1,21 +1,19 @@
 import { Prize as PrizeType } from '@/features/cms/types';
-import { ImageRecord } from '@/features/image-server/types';
 import { cn } from '@/utils/cn';
 import { Divider } from '@/components/ui';
 import { ImageGrid } from '../ImageGrid';
 import Carousel from '../Carousel';
 
-export function ImageSection({
-  prize,
-}: {
-  prize: PrizeType & { images: ImageRecord[] };
-}) {
-  if (prize.images.length === 0) return null;
+export function ImageSection({ prize }: { prize: PrizeType }) {
+  if (prize.images?.length === 0) return null;
+
+  // Ensure images is always an array
+  const images = Array.isArray(prize.images) ? prize.images : [];
 
   const colNumber =
-    prize.isColumnLayout && prize.images.length > 1
+    prize.isColumnLayout && prize.images && prize.images?.length > 1
       ? 2
-      : prize.images.length === 1
+      : prize.images?.length === 1
       ? 1
       : 0;
 
@@ -29,10 +27,10 @@ export function ImageSection({
           height='1'
         />
       )}
-      {prize.images.length > 2 && prize.isCarousel ? (
+      {images.length > 2 && prize.isCarousel ? (
         <div className='text-center'>
           <Carousel
-            images={prize.images}
+            images={images}
             autoPlay={true}
             autoPlayInterval={5000}
             showThumbnails={true}
@@ -43,7 +41,7 @@ export function ImageSection({
           />
         </div>
       ) : (
-        <ImageGrid images={prize.images} cols={colNumber} />
+        <ImageGrid images={images} cols={colNumber} />
       )}
     </div>
   );

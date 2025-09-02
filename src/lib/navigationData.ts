@@ -14,7 +14,7 @@ export const headerData: NavigationData = [
     url: '/',
     linkText: 'Home',
     text: '',
-    imageSrc: `/images/PML_Logo.jpg`,
+    imageSrc: `/images/PML_Logo.png`,
   },
   {
     id: 2,

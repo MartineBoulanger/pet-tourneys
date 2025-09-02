@@ -1,11 +1,11 @@
 import { MdMenuBook } from 'react-icons/md';
-import { getRulesWithImages } from '@/features/cms/actions/rules';
+import { getRules } from '@/features/cms/actions/rules';
 import { Heading, Paragraph } from '@/components/ui';
 import { SidebarNavigation } from '../SidebarNavigation';
 import { RuleSection } from './RuleSection';
 
 export async function RulesList() {
-  const rulesWithImages = await getRulesWithImages();
+  const rulesWithImages = await getRules();
 
   if (rulesWithImages.length === 0) {
     return (

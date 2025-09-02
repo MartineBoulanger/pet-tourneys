@@ -2,16 +2,14 @@
 
 import { revalidatePath } from 'next/cache';
 import { ObjectId } from 'mongodb';
-import { getImagesByIds } from '@/features/image-server/actions/getImages';
+import { CloudinaryImage } from '@/features/cloudinary/types';
 import { getCollection } from '../client';
 import { Resource as ResourceType } from '../types';
 
-export async function createResource(formData: FormData) {
+export async function createResource(data: Partial<ResourceType>) {
   try {
-    const title = formData.get('title') as string;
-    const imageIds = formData.getAll('imageIds') as string[];
-
-    if (!title?.trim()) return { success: false, error: 'Title is required' };
+    if (data.title?.trim())
+      return { success: false, error: 'Title is required' };
 
     const db = await getCollection('resources');
     const lastResource = await db
@@ -19,16 +17,11 @@ export async function createResource(formData: FormData) {
       .sort({ order: -1 })
       .limit(1)
       .toArray();
-
     const nextOrder = lastResource.length > 0 ? lastResource[0].order + 1 : 1;
 
-    const validImageIds = imageIds.filter(
-      (id) => id && id.trim() !== '' && ObjectId.isValid(id.trim())
-    );
-
     const resourceData = {
-      title: title.trim(),
-      imageIds: validImageIds,
+      title: data.title?.trim(),
+      images: data.images,
       order: nextOrder,
       createdAt: new Date(),
       updatedAt: new Date(),
@@ -43,7 +36,6 @@ export async function createResource(formData: FormData) {
       resource: {
         _id: String(result.insertedId),
         ...resourceData,
-        imageIds: validImageIds.map((id) => id.toString()),
       },
     };
   } catch (error) {
@@ -52,41 +44,17 @@ export async function createResource(formData: FormData) {
   }
 }
 
-export async function updateResource(resourceId: string, formData: FormData) {
+export async function updateResource(
+  resourceId: string,
+  data: Partial<ResourceType>
+) {
   try {
-    const title = formData.get('title') as string;
-    let imageIds: string[] = [];
-    const imageIdsFromGetAll = formData.getAll('imageIds') as string[];
-
-    if (imageIdsFromGetAll && imageIdsFromGetAll.length > 0) {
-      imageIds = imageIdsFromGetAll;
-    } else {
-      const imageIdsString = formData.get('imageIds') as string;
-      if (imageIdsString) {
-        try {
-          const parsed = JSON.parse(imageIdsString);
-          if (Array.isArray(parsed)) {
-            imageIds = parsed;
-          }
-        } catch (parseError) {
-          console.error(
-            'Failed to parse imageIds as JSON, treating as single value:',
-            parseError
-          );
-          imageIds = [imageIdsString];
-        }
-      }
-    }
-
-    if (!title?.trim()) return { success: false, error: 'Title is required' };
-
-    const cleanImageIds = imageIds
-      .filter((id) => id && typeof id === 'string' && id.trim() !== '')
-      .map((id) => id.trim());
+    if (!data.title?.trim())
+      return { success: false, error: 'Title is required' };
 
     const resourceData = {
-      title: title.trim(),
-      imageIds: cleanImageIds,
+      title: data.title.trim(),
+      images: data.images,
       updatedAt: new Date(),
     };
 
@@ -103,7 +71,7 @@ export async function updateResource(resourceId: string, formData: FormData) {
     const result: ResourceType = {
       _id: String(updatedResource._id),
       title: updatedResource.title,
-      imageIds: updatedResource.imageIds,
+      images: updatedResource.images,
       order: updatedResource.order,
       createdAt: updatedResource.createdAt,
       updatedAt: updatedResource.updatedAt,
@@ -147,7 +115,7 @@ export async function getResources(): Promise<ResourceType[]> {
     return resources.map((resource) => ({
       _id: String(resource._id),
       title: resource.title,
-      imageIds: resource.imageIds.map((id: string) => id.toString()),
+      images: resource.images,
       order: resource.order,
       createdAt: resource.createdAt,
       updatedAt: resource.updatedAt,
@@ -172,7 +140,7 @@ export async function getResource(
     return {
       _id: String(resource._id),
       title: resource.title,
-      imageIds: resource.imageIds.map((id: string) => id.toString()),
+      images: resource.images,
       order: resource.order,
       createdAt: resource.createdAt,
       updatedAt: resource.updatedAt,
@@ -180,27 +148,6 @@ export async function getResource(
   } catch (error) {
     console.error('Error fetching resource:', error);
     return null;
-  }
-}
-
-export async function getResourcesWithImages() {
-  try {
-    const resources = await getResources();
-
-    const resourcesWithImages = await Promise.all(
-      resources.map(async (resource) => {
-        const images = await getImagesByIds(resource.imageIds);
-        return {
-          ...resource,
-          images,
-        };
-      })
-    );
-
-    return resourcesWithImages;
-  } catch (error) {
-    console.error('Error fetching resources with images:', error);
-    return [];
   }
 }
 
@@ -212,7 +159,7 @@ export async function updateResourceOrder(
     const db = await getCollection('resources');
     await db.findOneAndUpdate(
       { _id: new ObjectId(resourceId) },
-      { $set: { order: newOrder } },
+      { $set: { order: newOrder, updatedAt: new Date() } },
       { returnDocument: 'after' }
     );
 

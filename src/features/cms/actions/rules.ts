@@ -2,7 +2,6 @@
 
 import { revalidatePath } from 'next/cache';
 import { ObjectId } from 'mongodb';
-import { getImagesByIds } from '@/features/image-server/actions/getImages';
 import { getCollection } from '../client';
 import { Rule as RuleType } from '../types';
 
@@ -13,18 +12,12 @@ export async function createRule(data: Partial<RuleType>) {
 
     const db = await getCollection('rules');
     const lastRule = await db.find({}).sort({ order: -1 }).limit(1).toArray();
-
     const nextOrder = lastRule.length > 0 ? lastRule[0].order + 1 : 1;
-
-    const validImageIds =
-      data.imageIds?.filter(
-        (id) => id && id.trim() !== '' && ObjectId.isValid(id.trim())
-      ) || [];
 
     const ruleData = {
       title: data.title.trim(),
       content: data.content.trim(),
-      imageIds: validImageIds,
+      images: data.images,
       order: nextOrder,
       createdAt: new Date(),
       updatedAt: new Date(),
@@ -39,7 +32,6 @@ export async function createRule(data: Partial<RuleType>) {
       rule: {
         _id: String(result.insertedId),
         ...ruleData,
-        imageIds: validImageIds.map((id) => id.toString()),
       },
     };
   } catch (error) {
@@ -53,14 +45,10 @@ export async function updateRule(ruleId: string, data: Partial<RuleType>) {
     if (!data.title?.trim() || !data.content?.trim())
       return { success: false, error: 'Title and Content are required' };
 
-    const cleanImageIds = data.imageIds
-      ?.filter((id) => id && typeof id === 'string' && id.trim() !== '')
-      .map((id) => id.trim());
-
     const ruleData = {
       title: data.title.trim(),
       content: data.content.trim(),
-      imageIds: cleanImageIds,
+      images: data.images || [],
       updatedAt: data.updatedAt,
     };
 
@@ -77,7 +65,7 @@ export async function updateRule(ruleId: string, data: Partial<RuleType>) {
       _id: String(updatedRule._id),
       title: updatedRule.title,
       content: updatedRule.content,
-      imageIds: updatedRule.imageIds,
+      images: updatedRule.images,
       order: updatedRule.order,
       createdAt: updatedRule.createdAt,
       updatedAt: updatedRule.updatedAt,
@@ -119,7 +107,7 @@ export async function getRules(): Promise<RuleType[]> {
       _id: String(rule._id),
       title: rule.title,
       content: rule.content,
-      imageIds: rule.imageIds.map((id: string) => id.toString()),
+      images: rule.images || [],
       order: rule.order,
       createdAt: rule.createdAt,
       updatedAt: rule.updatedAt,
@@ -143,7 +131,7 @@ export async function getRule(ruleId: string): Promise<RuleType | null> {
       _id: String(rule._id),
       title: rule.title,
       content: rule.content,
-      imageIds: rule.imageIds?.map((id: string) => id.toString()),
+      images: rule.images || [],
       order: rule.order,
       createdAt: rule.createdAt,
       updatedAt: rule.updatedAt,
@@ -154,34 +142,12 @@ export async function getRule(ruleId: string): Promise<RuleType | null> {
   }
 }
 
-export async function getRulesWithImages() {
-  try {
-    const rules = await getRules();
-
-    const rulesWithImages = await Promise.all(
-      rules.map(async (rule) => {
-        const ids = rule.imageIds?.length ? rule.imageIds : [];
-        const images = await getImagesByIds(ids);
-        return {
-          ...rule,
-          images,
-        };
-      })
-    );
-
-    return rulesWithImages;
-  } catch (error) {
-    console.error('Error fetching rules with images:', error);
-    return [];
-  }
-}
-
 export async function updateRuleOrder(ruleId: string, newOrder: number) {
   try {
     const db = await getCollection('rules');
     await db.findOneAndUpdate(
       { _id: new ObjectId(ruleId) },
-      { $set: { order: newOrder } },
+      { $set: { order: newOrder, updatedAt: new Date() } },
       { returnDocument: 'after' }
     );
 

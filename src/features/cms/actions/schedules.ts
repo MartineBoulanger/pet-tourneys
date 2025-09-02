@@ -2,7 +2,6 @@
 
 import { ObjectId } from 'mongodb';
 import { revalidatePath } from 'next/cache';
-import { getImageById } from '@/features/image-server/actions/getImages';
 import { connectToDatabase, getCollection } from '../client';
 import { Schedule } from '../types';
 
@@ -19,7 +18,7 @@ export async function createSchedule(data: Partial<Schedule>) {
     for (const image of data.images) {
       if (
         !image.imageName?.trim() ||
-        !image.imageId?.trim() ||
+        !image.image ||
         !image.imageDate?.trim()
       ) {
         return {
@@ -32,7 +31,7 @@ export async function createSchedule(data: Partial<Schedule>) {
     const db = await getCollection('schedules');
 
     const processedImages = data.images.map((image, index) => ({
-      imageId: image.imageId.trim(),
+      image: image.image || null,
       imageName: image.imageName.trim(),
       imageDate: image.imageDate.trim(),
       order: image.order || index + 1,
@@ -84,7 +83,7 @@ export async function updateSchedule(
     // Validate each image has required fields
     for (const image of data.images) {
       if (
-        !image.imageId?.trim() ||
+        !image.image ||
         !image.imageName?.trim() ||
         !image.imageDate?.trim()
       ) {
@@ -98,7 +97,7 @@ export async function updateSchedule(
     const db = await getCollection('schedules');
 
     const processedImages = data.images.map((image, index) => ({
-      imageId: image.imageId.trim(),
+      image: image.image || null,
       imageName: image.imageName.trim(),
       imageDate: image.imageDate.trim(),
       order: image.order || index + 1,
@@ -187,22 +186,10 @@ export async function getVisibleSchedule() {
 
     if (!schedule) return { success: true, schedule: null };
 
-    // Get images for each schedule item
-    const imagesWithData = await Promise.all(
-      schedule.images.map(async (image) => {
-        const imageData = await getImageById(image.imageId);
-        return {
-          ...image,
-          imageData,
-        };
-      })
-    );
-
     return {
       success: true,
       schedule: {
         ...schedule,
-        images: imagesWithData,
         _id: String(schedule._id),
       },
     };

@@ -1,12 +1,11 @@
 import { Prize as PrizeType } from '@/features/cms/types';
-import { ImageRecord } from '@/features/image-server/types';
 import { Heading, Divider } from '@/components/ui';
 import { cn } from '@/utils/cn';
 import { Video } from '../Video';
 import { ImageSection } from './ImageSection';
 
 interface PrizeSectionProps {
-  prize: PrizeType & { images: ImageRecord[] };
+  prize: PrizeType;
 }
 
 export function PrizeSection({ prize }: PrizeSectionProps) {

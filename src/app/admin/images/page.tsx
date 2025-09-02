@@ -1,11 +1,7 @@
-import { listImages } from '@/features/image-server/actions/getImages';
-import { ImagesManager } from '@/features/image-server/components/ImagesManager';
+import { AdminImagesManager } from '@/features/cloudinary/components/Management';
 import { Container, Heading, Divider, Paragraph } from '@/components/ui';
 
 export default async function ImagesPage() {
-  const result = await listImages();
-  const images = result?.items || result || [];
-
   return (
     <>
       <Divider alignment='horizontal' color='light-grey' height='0.5' />
@@ -16,7 +12,7 @@ export default async function ImagesPage() {
         <Paragraph className='text-humanoid'>
           {'Upload, organize, and manage all images'}
         </Paragraph>
-        <ImagesManager initialImages={images} />
+        <AdminImagesManager />
       </Container>
     </>
   );

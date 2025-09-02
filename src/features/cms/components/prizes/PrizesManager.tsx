@@ -59,7 +59,7 @@ export function PrizesManager() {
     setShowForm(true);
   };
 
-  const handleDeleteRule = async (prizeId: string) => {
+  const handleDeletePrize = async (prizeId: string) => {
     if (!confirm('Are you sure you want to delete this prize?')) {
       return;
     }
@@ -209,9 +209,9 @@ export function PrizesManager() {
                     <div className='flex flex-wrap items-center gap-2.5 lg:gap-5 text-sm text-foreground/80'>
                       <div className='flex items-center gap-1'>
                         <FaImage className='h-4 w-4' />
-                        {prize.imageIds?.length}
+                        {prize.images?.length || 0}
                         {' image'}
-                        {prize.imageIds?.length !== 1 ? 's' : ''}
+                        {prize.images?.length !== 1 ? 's' : ''}
                       </div>
                       {prize.createdAt && (
                         <div className='flex items-center gap-1'>
@@ -238,7 +238,7 @@ export function PrizesManager() {
                   <Button
                     type='button'
                     variant='link'
-                    onClick={() => handleDeleteRule(prize._id)}
+                    onClick={() => handleDeletePrize(prize._id)}
                     disabled={deletingId === prize._id || showForm}
                     className='btn-link hover:text-red'
                     title='Delete'

@@ -19,17 +19,10 @@ const nextConfig: NextConfig = {
         search: '',
       },
       {
-        protocol: 'http',
-        hostname: 'localhost', // change this as soon as the node.js server is online for the images
-        port: '4000',
-        pathname: '/uploads/**',
-        search: '',
-      },
-      {
         protocol: 'https',
-        hostname: 'pml-images-server.onrender.com',
+        hostname: 'res.cloudinary.com',
         port: '',
-        pathname: '/uploads/**',
+        pathname: '/**',
         search: '',
       },
       {

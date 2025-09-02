@@ -1,8 +1,10 @@
+import { CloudinaryImage } from '@/features/cloudinary/types';
+
 // **************************************************************************
 export interface Resource {
   _id: string;
-  title: string;
-  imageIds: string[];
+  title?: string;
+  images: CloudinaryImage[] | null;
   order?: number;
   createdAt: Date;
   updatedAt: Date;
@@ -12,7 +14,7 @@ export interface Rule {
   _id: string;
   title: string;
   content: string;
-  imageIds: string[];
+  images: CloudinaryImage[] | null;
   order?: number;
   createdAt: Date;
   updatedAt: Date;
@@ -26,7 +28,7 @@ export interface Prize {
   isColumnLayout: boolean;
   imagePosition: string;
   textAlignment: string;
-  imageIds: string[];
+  images: CloudinaryImage[] | null;
   videoUrl: string;
   order?: number;
   createdAt: Date;
@@ -38,7 +40,7 @@ export interface Announcement {
   title?: string;
   description?: string;
   mediaType: 'image' | 'video' | 'none';
-  imageId?: string;
+  image?: CloudinaryImage | null;
   videoUrl?: string;
   isVisible: boolean;
   createdAt: Date;
@@ -49,7 +51,7 @@ export interface Signup {
   _id: string;
   title: string;
   images: {
-    imageId: string;
+    image?: CloudinaryImage | null;
     imageName: string;
     imageAlt?: string;
     signupUrl: string;
@@ -65,7 +67,7 @@ export interface Schedule {
   _id: string;
   title: string;
   images: {
-    imageId: string;
+    image?: CloudinaryImage | null;
     imageName: string;
     imageDate: string;
     order?: number;

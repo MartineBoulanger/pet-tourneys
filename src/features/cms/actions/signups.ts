@@ -2,7 +2,6 @@
 
 import { ObjectId } from 'mongodb';
 import { revalidatePath } from 'next/cache';
-import { getImageById } from '@/features/image-server/actions/getImages';
 import { connectToDatabase, getCollection } from '../client';
 import { Signup } from '../types';
 
@@ -17,7 +16,7 @@ export async function createSignup(data: Partial<Signup>) {
     // Validate each image has required fields
     for (const image of data.images) {
       if (
-        !image.imageId?.trim() ||
+        !image.image ||
         !image.imageName?.trim() ||
         !image.signupUrl?.trim()
       ) {
@@ -33,7 +32,7 @@ export async function createSignup(data: Partial<Signup>) {
 
     // Process images to ensure proper order
     const processedImages = data.images.map((image, index) => ({
-      imageId: image.imageId.trim(),
+      image: image.image || null,
       imageName: image.imageName.trim(),
       imageAlt: image.imageAlt?.trim() || undefined,
       signupUrl: image.signupUrl.trim(),
@@ -82,7 +81,7 @@ export async function updateSignup(signupId: string, data: Partial<Signup>) {
     // Validate each image has required fields
     for (const image of data.images) {
       if (
-        !image.imageId?.trim() ||
+        !image.image ||
         !image.imageName?.trim() ||
         !image.signupUrl?.trim()
       ) {
@@ -98,7 +97,7 @@ export async function updateSignup(signupId: string, data: Partial<Signup>) {
 
     // Process images to ensure proper order
     const processedImages = data.images.map((image, index) => ({
-      imageId: image.imageId.trim(),
+      image: image.image || null,
       imageName: image.imageName.trim(),
       imageAlt: image.imageAlt?.trim() || undefined,
       signupUrl: image.signupUrl.trim(),
@@ -185,22 +184,10 @@ export async function getVisibleSignup() {
 
     if (!signup) return { success: true, signup: null };
 
-    // Get images for each signup item
-    const imagesWithData = await Promise.all(
-      signup.images.map(async (image) => {
-        const imageData = await getImageById(image.imageId);
-        return {
-          ...image,
-          imageData,
-        };
-      })
-    );
-
     return {
       success: true,
       signup: {
         ...signup,
-        images: imagesWithData,
         _id: String(signup._id),
       },
     };

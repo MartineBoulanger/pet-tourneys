@@ -3,11 +3,11 @@
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa6';
-import { ImageRecord } from '@/features/image-server/types';
+import { CloudinaryImage } from '@/features/cloudinary/types';
 import { Button, Paragraph } from '@/components/ui';
 
 interface CarouselProps {
-  images: ImageRecord[];
+  images: CloudinaryImage[];
   autoPlay?: boolean;
   autoPlayInterval?: number;
   showThumbnails?: boolean;
@@ -154,15 +154,15 @@ const Carousel = ({
       >
         {images.map((image, index) => (
           <div
-            key={image.id}
+            key={image.public_id}
             className={`absolute inset-0 transition-opacity duration-500 ease-in-out ${
               index === currentIndex ? 'opacity-100' : 'opacity-0'
             }`}
             aria-hidden={index !== currentIndex}
           >
             <Image
-              src={image.url}
-              alt={image.alt}
+              src={image.secure_url}
+              alt={image.public_id}
               fill
               className='object-contain'
               priority={index === 0}
@@ -210,7 +210,7 @@ const Carousel = ({
           {images.map((image, index) => (
             <Button
               variant='link'
-              key={image.id}
+              key={image.public_id}
               onClick={() => goToSlide(index)}
               disabled={isAnimating}
               className={`relative w-16 h-12 rounded overflow-hidden transition-all duration-200 ${
@@ -218,11 +218,11 @@ const Carousel = ({
                   ? 'ring-2 ring-foreground scale-110'
                   : 'opacity-60 hover:opacity-100'
               }`}
-              aria-label={`Thumbnail for ${image.alt}`}
+              aria-label={`Thumbnail for ${image.public_id}`}
             >
               <Image
-                src={image.url}
-                alt={image.alt}
+                src={image.secure_url}
+                alt={image.public_id}
                 fill
                 className='object-cover'
                 sizes='64px'

@@ -3,7 +3,8 @@
 import { useState } from 'react';
 import { createPrize, updatePrize } from '@/features/cms/actions/prizes';
 import { Prize as PrizeType } from '@/features/cms/types';
-import ImageSelector from '@/features/image-server/components/ImageSelector';
+import ImageSelector from '@/features/cloudinary/components/Selector';
+import { CloudinaryImage } from '@/features/cloudinary/types';
 import {
   Button,
   Heading,
@@ -29,7 +30,7 @@ export function PrizeForm({ prize, onSuccess, onCancel }: PrizeFormProps) {
     isColumnLayout: prize?.isColumnLayout ?? false,
     imagePosition: prize?.imagePosition ?? 'bottom',
     textAlignment: prize?.textAlignment ?? 'left',
-    imageIds: prize?.imageIds ?? [],
+    images: prize?.images ?? [],
     videoUrl: prize?.videoUrl ?? '',
     createdAt: prize?.createdAt || new Date(),
     updatedAt: prize?.updatedAt || new Date(),
@@ -58,6 +59,13 @@ export function PrizeForm({ prize, onSuccess, onCancel }: PrizeFormProps) {
     setFormData((prev) => ({
       ...prev,
       description,
+    }));
+  };
+
+  const handleImagesSelect = (images: CloudinaryImage[] | null) => {
+    setFormData((prev) => ({
+      ...prev,
+      images: images,
     }));
   };
 
@@ -90,7 +98,7 @@ export function PrizeForm({ prize, onSuccess, onCancel }: PrizeFormProps) {
           isColumnLayout: false,
           imagePosition: 'bottom',
           textAlignment: 'left',
-          imageIds: [],
+          images: [],
           videoUrl: '',
           createdAt: new Date(),
           updatedAt: new Date(),
@@ -144,24 +152,16 @@ export function PrizeForm({ prize, onSuccess, onCancel }: PrizeFormProps) {
         </Select>
 
         <ImageSelector
-          selectedImageIds={formData.imageIds}
-          onImagesSelect={(images) => {
-            const imageIds = images.map((img) => img.id);
-            setFormData((prev) => ({
-              ...prev,
-              imageIds,
-            }));
-          }}
+          selectedImages={formData.images}
+          onImagesSelect={handleImagesSelect}
           multiple
-          maxSelection={10}
           label={'Choose images'}
-          showPreview={true}
-          allowNull={true}
+          showPreview
         />
 
-        {formData.imageIds.length > 0 && (
+        {formData.images && formData.images.length > 0 && (
           <div className='space-y-2.5'>
-            {formData.imageIds.length > 2 && (
+            {formData.images.length > 2 && (
               <Checkbox
                 label='Set as carousel'
                 id='isCarousel'

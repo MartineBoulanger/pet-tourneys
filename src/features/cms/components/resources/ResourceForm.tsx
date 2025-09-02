@@ -6,7 +6,8 @@ import {
   updateResource,
 } from '@/features/cms/actions/resources';
 import { Resource as ResourceType } from '@/features/cms/types';
-import ImageSelector from '@/features/image-server/components/ImageSelector';
+import ImageSelector from '@/features/cloudinary/components/Selector';
+import { CloudinaryImage } from '@/features/cloudinary/types';
 import { Button, Heading, Input } from '@/components/ui';
 
 interface ResourceFormProps {
@@ -20,26 +21,38 @@ export const ResourceForm = ({
   onSuccess,
   onCancel,
 }: ResourceFormProps) => {
-  const [title, setTitle] = useState<string>(resource?.title || '');
-  const [selectedImageIds, setSelectedImageIds] = useState<string[]>(
-    resource?.imageIds || []
-  );
+  const [formData, setFormData] = useState<ResourceType>({
+    _id: resource?._id || '',
+    title: resource?.title ?? '',
+    images: resource?.images ?? [],
+    createdAt: resource?.createdAt || new Date(),
+    updatedAt: resource?.updatedAt || new Date(),
+  });
   const [error, setError] = useState<string>('');
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleImagesSelect = (images: CloudinaryImage[] | null) => {
+    setFormData((prev) => ({
+      ...prev,
+      images: images,
+    }));
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
 
-    if (!title.trim()) {
+    if (!formData.title?.trim()) {
       setError('Title is required');
       return;
     }
-
-    const formData = new FormData();
-    formData.append('title', title);
-    selectedImageIds.forEach((imageId) => {
-      formData.append('imageIds', imageId);
-    });
 
     try {
       let result;
@@ -50,14 +63,17 @@ export const ResourceForm = ({
       }
 
       if (result.success) {
-        setTitle('');
-        setSelectedImageIds([]);
+        setFormData({
+          _id: '',
+          title: '',
+          images: [],
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        });
         onSuccess?.();
       } else {
         setError(result.error || 'An unexpected error occurred');
       }
-
-      setTitle(title);
     } catch (err) {
       console.error(err);
       setError('An unexpected error occurred');
@@ -75,21 +91,17 @@ export const ResourceForm = ({
           label='Resource title'
           name='title'
           id='title'
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
+          value={formData.title}
+          onChange={handleChange}
+          required
         />
 
         <ImageSelector
-          selectedImageIds={selectedImageIds}
-          onImagesSelect={(images) => {
-            const imageIds = images.map((img) => img.id);
-            setSelectedImageIds(imageIds);
-          }}
+          selectedImages={formData.images}
+          onImagesSelect={handleImagesSelect}
           multiple
-          maxSelection={30}
           label={'Choose images'}
-          showPreview={true}
-          allowNull={true}
+          showPreview
         />
 
         {error && (
@@ -99,7 +111,11 @@ export const ResourceForm = ({
         )}
 
         <div className='flex gap-2.5 lg:gap-5'>
-          <Button type='submit' disabled={!title.trim()} className='flex-1'>
+          <Button
+            type='submit'
+            disabled={!formData.title?.trim()}
+            className='flex-1'
+          >
             {resource ? 'Edit' : 'Create'}
           </Button>
 

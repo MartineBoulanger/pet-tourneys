@@ -1,13 +1,15 @@
 import { Rule as RuleType } from '@/features/cms/types';
-import { ImageRecord } from '@/features/image-server/types';
 import { Heading, Paragraph, Divider } from '@/components/ui';
 import { ImageGrid } from '../ImageGrid';
 
 interface RuleSectionProps {
-  rule: RuleType & { images: ImageRecord[] };
+  rule: RuleType;
 }
 
 export function RuleSection({ rule }: RuleSectionProps) {
+  // Ensure images is always an array
+  const images = Array.isArray(rule.images) ? rule.images : [];
+
   return (
     <section className='space-y-2.5 lg:space-y-5'>
       {/* Section header */}
@@ -28,7 +30,7 @@ export function RuleSection({ rule }: RuleSectionProps) {
           className='mt-2.5 text-left prose'
           dangerouslySetInnerHTML={{ __html: rule.content }}
         />
-        {rule.images.length > 0 && (
+        {images.length > 0 && (
           <div className='mt-2.5'>
             <Divider
               alignment='horizontal'
@@ -37,14 +39,14 @@ export function RuleSection({ rule }: RuleSectionProps) {
               height='0.5'
             />
             <Paragraph className='text-foreground/50 my-5'>
-              {rule.images.length}
+              {images.length || 0}
               {' image'}
-              {rule.images.length !== 1 ? 's' : ''}
+              {images.length !== 1 ? 's' : ''}
             </Paragraph>
           </div>
         )}
         {/* Images grid */}
-        {rule.images.length === 0 ? null : <ImageGrid images={rule.images} />}
+        {images.length > 0 ? <ImageGrid images={images} /> : null}
       </div>
     </section>
   );

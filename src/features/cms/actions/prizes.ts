@@ -2,7 +2,6 @@
 
 import { revalidatePath } from 'next/cache';
 import { ObjectId } from 'mongodb';
-import { getImagesByIds } from '@/features/image-server/actions/getImages';
 import { getCollection } from '../client';
 import { Prize as PrizeType } from '../types';
 
@@ -13,13 +12,7 @@ export async function createPrize(data: Partial<PrizeType>) {
 
     const db = await getCollection('prizes');
     const lastPrize = await db.find({}).sort({ order: -1 }).limit(1).toArray();
-
     const nextOrder = lastPrize.length > 0 ? lastPrize[0].order + 1 : 1;
-
-    const validImageIds =
-      data.imageIds?.filter(
-        (id) => id && id.trim() !== '' && ObjectId.isValid(id.trim())
-      ) || [];
 
     const prizeData = {
       title: data.title.trim(),
@@ -28,7 +21,7 @@ export async function createPrize(data: Partial<PrizeType>) {
       isColumnLayout: data.isColumnLayout,
       imagePosition: data.imagePosition,
       textAlignment: data.textAlignment,
-      imageIds: validImageIds,
+      images: data.images,
       videoUrl: data.videoUrl,
       order: nextOrder,
       createdAt: new Date(),
@@ -44,7 +37,6 @@ export async function createPrize(data: Partial<PrizeType>) {
       prize: {
         _id: String(result.insertedId),
         ...prizeData,
-        imageIds: validImageIds.map((id) => id.toString()),
       },
     };
   } catch (error) {
@@ -58,10 +50,6 @@ export async function updatePrize(prizeId: string, data: Partial<PrizeType>) {
     if (!data.title?.trim() || !data.description?.trim())
       return { success: false, error: 'Title and Description are required' };
 
-    const cleanImageIds = data.imageIds
-      ?.filter((id) => id && typeof id === 'string' && id.trim() !== '')
-      .map((id) => id.trim());
-
     const prizeData = {
       title: data.title.trim(),
       description: data.description.trim(),
@@ -69,7 +57,7 @@ export async function updatePrize(prizeId: string, data: Partial<PrizeType>) {
       isColumnLayout: data.isColumnLayout,
       imagePosition: data.imagePosition,
       textAlignment: data.textAlignment,
-      imageIds: cleanImageIds,
+      images: data.images,
       videoUrl: data.videoUrl,
       updatedAt: data.updatedAt,
     };
@@ -91,7 +79,7 @@ export async function updatePrize(prizeId: string, data: Partial<PrizeType>) {
       isColumnLayout: updatedPrize.isColumnLayout,
       imagePosition: updatedPrize.imagePosition,
       textAlignment: updatedPrize.textAlignment,
-      imageIds: updatedPrize.imageIds,
+      images: updatedPrize.images,
       videoUrl: updatedPrize.videoUrl,
       order: updatedPrize.order,
       createdAt: updatedPrize.createdAt,
@@ -138,7 +126,7 @@ export async function getPrizes(): Promise<PrizeType[]> {
       isColumnLayout: prize.isColumnLayout,
       imagePosition: prize.imagePosition,
       textAlignment: prize.textAlignment,
-      imageIds: prize.imageIds.map((id: string) => id.toString()),
+      images: prize.images,
       videoUrl: prize.videoUrl,
       order: prize.order,
       createdAt: prize.createdAt,
@@ -167,7 +155,7 @@ export async function getPrize(prizeId: string): Promise<PrizeType | null> {
       isColumnLayout: prize.isColumnLayout,
       imagePosition: prize.imagePosition,
       textAlignment: prize.textAlignment,
-      imageIds: prize.imageIds?.map((id: string) => id.toString()),
+      images: prize.images,
       videoUrl: prize.videoUrl,
       order: prize.order,
       createdAt: prize.createdAt,
@@ -179,31 +167,12 @@ export async function getPrize(prizeId: string): Promise<PrizeType | null> {
   }
 }
 
-export async function getPrizesWithImages() {
-  try {
-    const prizes = await getPrizes();
-
-    const prizesWithImages = await Promise.all(
-      prizes.map(async (prize) => {
-        const ids = prize.imageIds?.length ? prize.imageIds : [];
-        const images = await getImagesByIds(ids);
-        return { ...prize, images };
-      })
-    );
-
-    return prizesWithImages;
-  } catch (error) {
-    console.error('Error fetching prizes with images:', error);
-    return [];
-  }
-}
-
 export async function updatePrizeOrder(prizeId: string, newOrder: number) {
   try {
     const db = await getCollection('prizes');
     await db.findOneAndUpdate(
       { _id: new ObjectId(prizeId) },
-      { $set: { order: newOrder } },
+      { $set: { order: newOrder, updatedAt: new Date() } },
       { returnDocument: 'after' }
     );
 
