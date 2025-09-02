@@ -4,6 +4,8 @@
 import { useState, useEffect } from 'react';
 import { getImagesAction } from '@/features/cloudinary/actions/cloudinary';
 import { CloudinaryImage } from '../types';
+import Image from 'next/image';
+import { Button, Paragraph } from '@/components/ui';
 
 interface ImageSelectorProps {
   onImageSelect?: (image: CloudinaryImage | null) => void;
@@ -136,19 +138,22 @@ export default function ImageSelector({
           <div className='flex flex-wrap gap-2'>
             {previewImages.map((image) => (
               <div key={image.public_id} className='relative'>
-                <img
+                <Image
                   src={image.secure_url}
                   alt='Selected'
                   className='w-32 h-32 object-cover rounded border'
+                  width={image.width}
+                  height={image.height}
                 />
-                <button
+                <Button
                   type='button'
+                  variant='secondary'
                   onClick={() => handleRemoveImage(image)}
-                  className='absolute top-0 right-0 bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs'
+                  className='absolute top-0 right-0 rounded-full w-6 h-6 flex items-center justify-center text-xs'
                   title='Remove this image'
                 >
                   ×
-                </button>
+                </Button>
               </div>
             ))}
           </div>
@@ -216,45 +221,48 @@ export default function ImageSelector({
                       }`}
                       onClick={() => handleImageSelect(image)}
                     >
-                      <img
+                      <Image
                         src={image.secure_url}
                         alt={image.public_id}
                         className='w-full h-24 object-cover rounded'
+                        width={image.width}
+                        height={image.height}
                       />
-                      <p className='text-xs mt-1 truncate'>
+                      <Paragraph className='text-xs mt-1 truncate'>
                         {image.public_id.split('/').pop()}
-                      </p>
+                      </Paragraph>
                     </div>
                   ))}
                 </div>
 
                 {multiple && (
-                  <div className='flex justify-end space-x-2'>
-                    <button
+                  <div className='flex justify-end space-x-2.5'>
+                    <Button
                       type='button'
+                      variant='secondary'
                       onClick={() => {
                         setShowSelector(false);
                         setTempSelected(selectedImages || []);
                       }}
-                      className='px-4 py-2 border border-gray-300 rounded text-sm'
+                      className='text-sm'
                     >
-                      Cancel
-                    </button>
-                    <button
+                      {'Cancel'}
+                    </Button>
+                    <Button
                       type='button'
                       onClick={handleConfirmSelection}
-                      className='px-4 py-2 bg-blue-600 text-white rounded text-sm'
+                      className='text-sm'
                     >
-                      Confirm Selection
-                    </button>
+                      {'Confirm Selection'}
+                    </Button>
                   </div>
                 )}
               </>
             )}
 
             {images.length === 0 && !loading && (
-              <div className='text-center py-8 text-gray-500'>
-                No images found. Upload some images first.
+              <div className='text-center py-5 text-foreground'>
+                {'No images found. Upload some images first.'}
               </div>
             )}
           </div>

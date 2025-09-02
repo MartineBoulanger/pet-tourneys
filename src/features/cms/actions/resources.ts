@@ -2,7 +2,6 @@
 
 import { revalidatePath } from 'next/cache';
 import { ObjectId } from 'mongodb';
-import { CloudinaryImage } from '@/features/cloudinary/types';
 import { getCollection } from '../client';
 import { Resource as ResourceType } from '../types';
 

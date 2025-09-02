@@ -5,14 +5,12 @@ import Image from 'next/image';
 import { FaTimes } from 'react-icons/fa';
 import { Button } from '@/components/ui';
 import { CloudinaryImage } from '@/features/cloudinary/types';
-// import { DownloadImageButton } from './DownloadImageButton';
 
 interface ImageCardProps {
   image?: CloudinaryImage | null;
-  isDownloadable?: boolean;
 }
 
-export function ImageCard({ image, isDownloadable = false }: ImageCardProps) {
+export function ImageCard({ image }: ImageCardProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (

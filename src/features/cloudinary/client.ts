@@ -33,30 +33,6 @@ export async function deleteImage(publicId: string) {
   return cloudinary.uploader.destroy(publicId);
 }
 
-export async function updateImage(publicId: string, updates: any) {
-  // For Cloudinary, we can add metadata using the admin API
-  try {
-    // This updates the image context (alt text, caption, etc.)
-    await cloudinary.uploader.explicit(publicId, {
-      type: 'upload',
-      context: {
-        alt: updates.alt,
-        caption: updates.title,
-      },
-      tags: updates.tags.join(','),
-    });
-
-    return {
-      ...updates,
-      id: publicId,
-      updatedAt: new Date().toISOString(),
-    };
-  } catch (error) {
-    console.error('Update error:', error);
-    throw new Error('Failed to update image metadata');
-  }
-}
-
 export async function getImage(publicId: string) {
   try {
     // Get image details
