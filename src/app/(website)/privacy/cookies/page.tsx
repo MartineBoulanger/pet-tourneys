@@ -1,3 +1,5 @@
+'use client';
+
 import { CookieBotBodyScript } from '@/components/scripts/CookieBot';
 import { Container, Heading } from '@/components/ui';
 
