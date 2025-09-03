@@ -102,6 +102,21 @@ export function ScheduleSection({ schedule }: SchedulesSectionProps) {
           </div>
         ))}
       </div>
+
+      {schedule.description && (
+        <>
+          <Divider
+            alignment='horizontal'
+            color='humanoid'
+            width='24'
+            height='1'
+          />
+          <div
+            className='text-center text-lg'
+            dangerouslySetInnerHTML={{ __html: schedule.description }}
+          />
+        </>
+      )}
     </div>
   );
 }
