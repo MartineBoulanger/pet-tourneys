@@ -15,12 +15,11 @@ export const CookieBotHeadScript = () => {
 
 export const CookieBotBodyScript = () => {
   return (
-    <Script
+    <script
       id='CookieDeclaration'
-      src='https://consent.cookiebot.com/8d3dad3f-5bc9-4903-9446-a553bd0abab4/cd.js'
+      src='https://consent.cookiebot.com/YOUR-DOMAIN-GROUP-ID/cd.js'
       type='text/javascript'
       async
-      strategy='afterInteractive'
     />
   );
 };
