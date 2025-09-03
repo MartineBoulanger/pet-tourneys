@@ -4,7 +4,7 @@ import {
   resultsColors,
   matchResultsColors,
 } from '@/features/supabase/constants';
-import { Heading } from '@/components/ui';
+import { Heading, Paragraph } from '@/components/ui';
 import { cn } from '@/utils/cn';
 import { BattleChartsProps } from '../types';
 import { OverviewCard } from '../OverviewCard';
@@ -21,37 +21,34 @@ export const BattleCharts = ({
     );
   }
 
+  const totalMatches = matchesStats?.totalMatches || 0;
+  const totalBattles = matchesStats?.totalBattles || 0;
+  const averageDuration = matchesStats?.averageDuration || '';
+  const battleResults = matchesStats?.battleResults || [];
+  const matchesByRegion = matchesStats?.matchesByRegion || [];
+  const matchResults = matchesStats?.matchResults || [];
+  const drawsCount =
+    battleResults.filter((m) => m?.name === 'DRAWS')[0]?.value || 0;
+
   return (
     <div className='mb-5 lg:mb-10'>
       <Heading as='h2' className='text-xl lg:text-3xl mb-2.5'>
         {isMatchView ? 'Overall Match Statistics' : 'Overall League Statistics'}
       </Heading>
       <div className='flex flex-wrap flex-col md:flex-row gap-2.5 lg:gap-5 mb-5'>
-        {!isMatchView && matchesStats?.totalMatches ? (
-          <OverviewCard
-            title='Total Matches'
-            value={matchesStats.totalMatches}
-          />
+        {!isMatchView && totalMatches > 0 ? (
+          <OverviewCard title='Total Matches' value={totalMatches} />
         ) : null}
-        {matchesStats?.totalBattles ? (
-          <OverviewCard
-            title='Total Battles'
-            value={matchesStats.totalBattles}
-          />
+        {totalBattles > 0 ? (
+          <OverviewCard title='Total Battles' value={totalBattles} />
         ) : null}
-        {!isMatchView && matchesStats.battleResults ? (
-          <OverviewCard
-            title='Total Battle Draws'
-            value={
-              matchesStats.battleResults.filter((m) => m.name === 'DRAWS')[0]
-                .value
-            }
-          />
+        {!isMatchView && battleResults.length > 0 ? (
+          <OverviewCard title='Total Battle Draws' value={drawsCount} />
         ) : null}
-        {matchesStats?.averageDuration ? (
+        {averageDuration !== '' ? (
           <OverviewCard
             title='Average Battle Duration'
-            value={matchesStats.averageDuration}
+            value={averageDuration}
           />
         ) : null}
       </div>
@@ -61,7 +58,7 @@ export const BattleCharts = ({
           isMatchView ? 'md:grid-cols-1' : ''
         )}
       >
-        {!isMatchView && matchesStats ? (
+        {!isMatchView ? (
           <>
             <div>
               <Heading
@@ -70,14 +67,16 @@ export const BattleCharts = ({
               >
                 {'Matches Per Region'}
               </Heading>
-              {matchesStats.matchesByRegion && (
+              {matchesByRegion.length > 0 ? (
                 <PieGraph
-                  data={matchesStats.matchesByRegion.filter(
-                    (m) => m.value !== 0
-                  )}
+                  data={matchesByRegion.filter((m) => m?.value !== 0)}
                   tooltip={'Matches Played: '}
                   fillColors={regionsColors}
                 />
+              ) : (
+                <Paragraph className='w-full bg-background text-center py-5 rounded-lg'>
+                  {'No matches per region available.'}
+                </Paragraph>
               )}
             </div>
             <div>
@@ -87,19 +86,23 @@ export const BattleCharts = ({
               >
                 {'Match Results'}
               </Heading>
-              {matchesStats.matchResults && (
+              {matchResults.length > 0 ? (
                 <PieGraph
-                  data={matchesStats.matchResults.filter((m) => m.value !== 0)}
+                  data={matchResults.filter((m) => m?.value !== 0)}
                   tooltip={'Count: '}
                   fillColors={matchResultsColors}
                   showWholeLabel={false}
                   showLegend
                 />
+              ) : (
+                <Paragraph className='w-full bg-background text-center py-5 rounded-lg'>
+                  {'No match results available.'}
+                </Paragraph>
               )}
             </div>
           </>
         ) : null}
-        {isMatchView && matchesStats ? (
+        {isMatchView ? (
           <div>
             <Heading
               as='h2'
@@ -107,12 +110,16 @@ export const BattleCharts = ({
             >
               {'Battle Results'}
             </Heading>
-            {matchesStats.battleResults && (
+            {battleResults.length > 0 ? (
               <PieGraph
-                data={matchesStats.battleResults.filter((m) => m.value !== 0)}
+                data={battleResults.filter((m) => m?.value !== 0)}
                 tooltip={'Result Count: '}
                 fillColors={resultsColors}
               />
+            ) : (
+              <Paragraph className='w-full bg-background text-center py-5 rounded-lg'>
+                {'No battle results available.'}
+              </Paragraph>
             )}
           </div>
         ) : null}

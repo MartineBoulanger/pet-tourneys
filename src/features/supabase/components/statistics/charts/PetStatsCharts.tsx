@@ -1,6 +1,6 @@
 'use client';
 
-import { Heading } from '@/components/ui';
+import { Heading, Paragraph } from '@/components/ui';
 import { ScatterGraph } from '@/features/recharts-graphs/ScatterGraph';
 import {
   parseAndAggregateStats,
@@ -13,9 +13,9 @@ import { ChartsProps } from '../types';
 export function PetStatsCharts({ data }: ChartsProps<TournamentPetStat>) {
   if (!data) {
     return (
-      <p className='text-center bg-background rounded-lg py-5'>
+      <Paragraph className='text-center bg-background rounded-lg py-5'>
         {'No pet stats data available.'}
-      </p>
+      </Paragraph>
     );
   }
 

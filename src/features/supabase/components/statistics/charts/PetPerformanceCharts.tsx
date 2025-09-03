@@ -5,16 +5,16 @@ import {
   weatherColors,
 } from '@/features/supabase/constants';
 import { petPerformanceLegendValues } from '@/features/supabase/constants';
-import { Heading } from '@/components/ui';
+import { Heading, Paragraph } from '@/components/ui';
 import { PetBattleLogProps } from '../types';
 import { OverviewCard } from '../OverviewCard';
 
 export const PetPerformanceCharts = ({ battleStats }: PetBattleLogProps) => {
   if (!battleStats) {
     return (
-      <p className='text-center bg-background rounded-lg p-2.5 lg:p-5'>
+      <Paragraph className='text-center bg-background rounded-lg p-2.5 lg:p-5'>
         {'No pet performance chart data available.'}
-      </p>
+      </Paragraph>
     );
   }
 

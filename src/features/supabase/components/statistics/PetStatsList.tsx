@@ -388,10 +388,14 @@ export function PetStatsList({
         ) : (
           <div className='text-center py-10'>
             <Heading as='h3' className='text-lg font-bold text-humanoid'>
-              {'No pet matches your search criteria'}
+              {currentPetData.length > 0
+                ? 'No pet matches your search criteria'
+                : 'No pet data available yet'}
             </Heading>
             <Paragraph className='mt-2.5'>
-              {'Try adjusting your search or filters'}
+              {currentPetData.length > 0
+                ? 'Try adjusting your search or filters'
+                : 'Come back later when battle logs have been uploaded'}
             </Paragraph>
           </div>
         )}

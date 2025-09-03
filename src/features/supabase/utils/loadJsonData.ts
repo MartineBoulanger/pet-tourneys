@@ -1,61 +1,82 @@
+'use server';
+
 import { getPlayerRecords } from '../actions/players';
 
-export async function loadPetsData() {
-  try {
-    const jsonPath = `${process.env.BASE_URL!}/json-files/pets-data.json`;
+type JsonResponse = {
+  success: boolean;
+  data: any;
+  error?: string;
+};
 
-    const response = await fetch(jsonPath, { cache: 'no-store' });
+async function fetchJsonSafe(url: string): Promise<JsonResponse> {
+  try {
+    const response = await fetch(url, { cache: 'no-store' });
+
+    if (!response.ok) {
+      return {
+        success: false,
+        data: null,
+        error: `HTTP ${response.status}`,
+      };
+    }
 
     const contentType = response.headers.get('content-type');
     if (!contentType?.includes('application/json')) {
-      const text = await response.text();
-      throw new Error(`Expected JSON but got: ${text.substring(0, 50)}...`);
+      return {
+        success: false,
+        data: null,
+        error: 'Response is not JSON',
+      };
     }
 
-    const jsonData = await response.json();
-
-    if (!jsonData) {
-      throw new Error('Invalid JSON structure - missing the pets data');
-    }
-
-    return jsonData;
-  } catch (jsonError) {
-    console.error('JSON load failed, no Json file found', jsonError);
+    const data = await response.json();
+    return {
+      success: true,
+      data,
+    };
+  } catch (error) {
+    return {
+      success: false,
+      data: null,
+      error: error instanceof Error ? error.message : 'Unknown error',
+    };
   }
 }
 
+export async function loadPetsData() {
+  const jsonPath = `${process.env.BASE_URL!}/json-files/pets-data.json`;
+  const result = await fetchJsonSafe(jsonPath);
+
+  if (!result.success) {
+    console.log('No JSON pets data available, using empty data');
+    return {};
+  }
+
+  return result.data || {};
+}
+
 export async function loadPlayerData(id: string) {
+  const jsonPath = `${process.env
+    .BASE_URL!}/json-files/rankings-data/player-rankings-${id.slice(
+    0,
+    5
+  )}.json`;
+
+  const result = await fetchJsonSafe(jsonPath);
+
+  // If JSON fetch was successful and has valid structure, use it
+  if (result.success && result.data?.records && result.data?.regions) {
+    return result.data;
+  }
+
+  // Otherwise fall back to Supabase
+  console.log('JSON unavailable, using Supabase data');
+
   try {
-    const jsonPath = `${process.env
-      .BASE_URL!}/json-files/rankings-data/player-rankings-${id.slice(
-      0,
-      5
-    )}.json`;
-
-    const response = await fetch(jsonPath, { cache: 'no-store' });
-
-    const contentType = response.headers.get('content-type');
-    if (!contentType?.includes('application/json')) {
-      const text = await response.text();
-      throw new Error(`Expected JSON but got: ${text.substring(0, 50)}...`);
-    }
-
-    const jsonData = await response.json();
-
-    if (!jsonData.records || !jsonData.regions) {
-      throw new Error('Invalid JSON structure - missing records or regions');
-    }
-
-    return jsonData;
-  } catch (jsonError) {
-    console.error('JSON load failed, falling back to Supabase', jsonError);
-
-    try {
-      const { records, regions } = await getPlayerRecords(id);
-      return { records, regions };
-    } catch (supabaseError) {
-      console.error('Both JSON and Supabase failed:', supabaseError);
-      throw new Error('Failed to load player data from any source');
-    }
+    const { records, regions } = await getPlayerRecords(id);
+    return { records, regions };
+  } catch (supabaseError) {
+    console.error('Supabase also failed:', supabaseError);
+    return { records: [], regions: [] };
   }
 }

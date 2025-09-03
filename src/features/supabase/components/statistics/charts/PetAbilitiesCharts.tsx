@@ -1,4 +1,4 @@
-import { Heading } from '@/components/ui';
+import { Heading, Paragraph } from '@/components/ui';
 import { OverviewCard } from '../OverviewCard';
 import { AbilitiesCard } from '../AbilitiesCard';
 import { PetAbilitiesProps } from '../types';
@@ -6,11 +6,14 @@ import { PetAbilitiesProps } from '../types';
 export const PetAbilitiesCharts = ({ abilityStats }: PetAbilitiesProps) => {
   if (!abilityStats) {
     return (
-      <p className='text-center bg-background rounded-lg p-2.5 lg:p-5'>
+      <Paragraph className='text-center bg-background rounded-lg p-2.5 lg:p-5'>
         {'No pet abilities data available.'}
-      </p>
+      </Paragraph>
     );
   }
+
+  const totalUniqueAbilitiesUsed = abilityStats?.totalUniqueAbilitiesUsed || 0;
+  const safeAbilityStats = abilityStats || {};
 
   return (
     <div className='mb-5 lg:mb-10 z-0'>
@@ -18,10 +21,10 @@ export const PetAbilitiesCharts = ({ abilityStats }: PetAbilitiesProps) => {
         {'Overall Pet Abilities Statistics'}
       </Heading>
       <div className='flex flex-wrap flex-col lg:flex-row gap-2.5 lg:gap-5 mb-5'>
-        {abilityStats?.totalUniqueAbilitiesUsed ? (
+        {totalUniqueAbilitiesUsed > 0 ? (
           <OverviewCard
             title='Total Unique Abilities Used'
-            value={abilityStats?.totalUniqueAbilitiesUsed}
+            value={totalUniqueAbilitiesUsed}
           />
         ) : null}
       </div>
@@ -30,15 +33,19 @@ export const PetAbilitiesCharts = ({ abilityStats }: PetAbilitiesProps) => {
           {'Abilities Per Category'}
         </Heading>
         <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 lg:gap-5'>
-          {Object.entries(abilityStats)
+          {Object.entries(safeAbilityStats)
             .filter(
               ([key]) =>
                 key !== 'categorizationLog' &&
                 key !== 'totalUniqueAbilitiesUsed'
             )
-            .filter(([_, abilities]) => abilities && abilities.length > 0)
+            .filter(([_, abilities]) => {
+              // Enhanced safety check for abilities
+              return Array.isArray(abilities) && abilities.length > 0;
+            })
             .map(([category, abilities], index) => {
-              if (Array.isArray(abilities)) {
+              // Additional safety check inside map
+              if (Array.isArray(abilities) && abilities.length > 0) {
                 return (
                   <AbilitiesCard
                     key={`${category}-${index}`}
@@ -47,16 +54,23 @@ export const PetAbilitiesCharts = ({ abilityStats }: PetAbilitiesProps) => {
                   />
                 );
               }
-              return (
-                <p
-                  key={`${category}-${index}`}
-                  className='text-center bg-background rounded-lg p-2.5 lg:p-5'
-                >
-                  {'No abilities data available.'}
-                </p>
-              );
+              return null;
             })}
         </div>
+
+        {/* Fallback message if no ability categories found */}
+        {Object.entries(safeAbilityStats)
+          .filter(
+            ([key]) =>
+              key !== 'categorizationLog' && key !== 'totalUniqueAbilitiesUsed'
+          )
+          .filter(
+            ([_, abilities]) => Array.isArray(abilities) && abilities.length > 0
+          ).length === 0 && (
+          <Paragraph className='text-center bg-background rounded-lg p-2.5 lg:p-5 col-span-full'>
+            {'No abilities data available.'}
+          </Paragraph>
+        )}
       </div>
     </div>
   );

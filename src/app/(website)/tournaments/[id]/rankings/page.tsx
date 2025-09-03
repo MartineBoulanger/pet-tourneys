@@ -36,29 +36,6 @@ export default async function RankingsPage({ params }: { params: PageParams }) {
     data: { tournament, matches },
   } = await getTournamentDetails(id);
 
-  const playerData = await loadPlayerData(id);
-  const petData: Pet[] = await loadPetsData();
-
-  if (!success) {
-    return (
-      <Container className='text-center lg:px-5'>
-        <Heading className='text-red'>{`Error ${status}!`}</Heading>
-        <Paragraph>{message}</Paragraph>
-      </Container>
-    );
-  }
-
-  if (!playerData.records || !playerData.regions) {
-    return (
-      <Container className='text-center lg:px-5'>
-        <Heading className='text-red'>{'No Rankings Found!'}</Heading>
-        <Paragraph>{'No player rankings are found.'}</Paragraph>
-      </Container>
-    );
-  }
-
-  if (!tournament || !matches) return notFound();
-
   const links: Links = [
     {
       id: 1,
@@ -77,14 +54,47 @@ export default async function RankingsPage({ params }: { params: PageParams }) {
     },
   ];
 
+  const playerData = await loadPlayerData(id);
+  const petData: Pet[] = await loadPetsData();
+  // Check if data is available
+  const hasPetData = Object.keys(petData).length > 0;
+  const hasPlayerData =
+    playerData.records.length > 0 && playerData.regions.length > 0;
+
+  const heading = (
+    <div className='mb-5'>
+      <PageHeading heading={'League Rankings'}>
+        <PageMenu links={links} />
+      </PageHeading>
+      <Paragraph className='text-humanoid'>{tournament.name}</Paragraph>
+    </div>
+  );
+
+  if (!success) {
+    return (
+      <Container className='text-center lg:px-5'>
+        <Heading className='text-red'>{`Error ${status}!`}</Heading>
+        <Paragraph>{message}</Paragraph>
+      </Container>
+    );
+  }
+
+  if (!hasPlayerData || !hasPetData) {
+    return (
+      <Container className='lg:px-5'>
+        {heading}
+        <Paragraph className='w-full bg-background text-center py-5 rounded-lg'>
+          {'No player rankings or pet data is found.'}
+        </Paragraph>
+      </Container>
+    );
+  }
+
+  if (!tournament || !matches) return notFound();
+
   return (
     <Container className='lg:px-5'>
-      <div className='mb-5'>
-        <PageHeading heading={'League Rankings'}>
-          <PageMenu links={links} />
-        </PageHeading>
-        <Paragraph className='text-humanoid'>{tournament.name}</Paragraph>
-      </div>
+      {heading}
       <PlayerRankings
         records={playerData.records}
         regions={playerData.regions}

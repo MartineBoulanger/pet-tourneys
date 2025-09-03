@@ -202,17 +202,17 @@ export default async function StatisticsPage({
           <Paragraph className='text-humanoid'>{entityName}</Paragraph>
         )}
       </div>
-      <PetCharts chartData={chartData} data={stats} />
+      <PetCharts chartData={chartData || null} data={stats || null} />
       <BattleCharts
-        matchesStats={battleStats.generalStats}
+        matchesStats={battleStats?.generalStats || null}
         isMatchView={isMatchView}
       />
-      <PetPerformanceCharts battleStats={battleStats.battleStats} />
+      <PetPerformanceCharts battleStats={battleStats?.battleStats || null} />
       <PetSwapsCharts
-        battleStats={battleStats.battleStats}
+        battleStats={battleStats?.battleStats || null}
         isMatchView={isMatchView}
       />
-      <PetAbilitiesCharts abilityStats={battleStats.abilityStats} />
+      <PetAbilitiesCharts abilityStats={battleStats?.abilityStats || null} />
     </Container>
   );
 }

@@ -13,6 +13,7 @@ export const PetCharts = ({ chartData, data }: PetChartsProps) => {
       </p>
     );
   }
+
   const playedPets = chartData.petUsageData?.slice(0, 5).map((pet) => ({
     name: pet.name,
     value: pet.total_played,

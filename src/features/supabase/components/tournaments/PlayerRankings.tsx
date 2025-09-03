@@ -57,8 +57,8 @@ export const PlayerRankings = ({
   if (!regions || regions.length === 0) {
     return (
       <div className='py-10 text-center'>
-        <Paragraph className='text-muted-foreground'>
-          {'No regions available in data.'}
+        <Paragraph className='text-muted-foreground text-center bg-background rounded-lg py-5'>
+          {'No player ranking data available.'}
         </Paragraph>
       </div>
     );
