@@ -1,21 +1,34 @@
 'use server';
 
 import { getPlayerRecords } from '../actions/players';
+import { Pet } from '../components/statistics/types';
+import { EnhancedPlayerRecord } from '../actions/players';
 
-type JsonResponse = {
+export type PetData = Pet[];
+
+export type PlayerRankingsData = {
+  records: EnhancedPlayerRecord[];
+  regions: string[];
+};
+
+type JsonData = PetData | PlayerRankingsData | null;
+
+type JsonResponse<T extends JsonData = JsonData> = {
   success: boolean;
-  data: any;
+  data: T;
   error?: string;
 };
 
-async function fetchJsonSafe(url: string): Promise<JsonResponse> {
+async function fetchJsonSafe<T extends JsonData>(
+  url: string
+): Promise<JsonResponse<T>> {
   try {
     const response = await fetch(url, { cache: 'no-store' });
 
     if (!response.ok) {
       return {
         success: false,
-        data: null,
+        data: null as T,
         error: `HTTP ${response.status}`,
       };
     }
@@ -24,12 +37,12 @@ async function fetchJsonSafe(url: string): Promise<JsonResponse> {
     if (!contentType?.includes('application/json')) {
       return {
         success: false,
-        data: null,
+        data: null as T,
         error: 'Response is not JSON',
       };
     }
 
-    const data = await response.json();
+    const data: T = await response.json();
     return {
       success: true,
       data,
@@ -37,22 +50,22 @@ async function fetchJsonSafe(url: string): Promise<JsonResponse> {
   } catch (error) {
     return {
       success: false,
-      data: null,
+      data: null as T,
       error: error instanceof Error ? error.message : 'Unknown error',
     };
   }
 }
 
-export async function loadPetsData() {
+export async function loadPetsData(): Promise<PetData> {
   const jsonPath = `${process.env.BASE_URL!}/json-files/pets-data.json`;
-  const result = await fetchJsonSafe(jsonPath);
+  const result = await fetchJsonSafe<PetData>(jsonPath);
 
   if (!result.success) {
     console.log('No JSON pets data available, using empty data');
-    return {};
+    return [];
   }
 
-  return result.data || {};
+  return result.data || [];
 }
 
 export async function loadPlayerData(id: string) {
@@ -62,7 +75,7 @@ export async function loadPlayerData(id: string) {
     5
   )}.json`;
 
-  const result = await fetchJsonSafe(jsonPath);
+  const result = await fetchJsonSafe<PlayerRankingsData>(jsonPath);
 
   // If JSON fetch was successful and has valid structure, use it
   if (result.success && result.data?.records && result.data?.regions) {

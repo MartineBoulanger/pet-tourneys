@@ -4,8 +4,9 @@ import { PlayerRankings } from '@/features/supabase/components/tournaments/Playe
 import {
   loadPetsData,
   loadPlayerData,
+  PlayerRankingsData,
+  PetData,
 } from '@/features/supabase/utils/loadJsonData';
-import { Pet } from '@/features/supabase/components/statistics/types';
 import {
   Container,
   PageHeading,
@@ -54,8 +55,9 @@ export default async function RankingsPage({ params }: { params: PageParams }) {
     },
   ];
 
-  const playerData = await loadPlayerData(id);
-  const petData: Pet[] = await loadPetsData();
+  const playerData: PlayerRankingsData = await loadPlayerData(id);
+  const petData: PetData = await loadPetsData();
+
   // Check if data is available
   const hasPetData = Object.keys(petData).length > 0;
   const hasPlayerData =
