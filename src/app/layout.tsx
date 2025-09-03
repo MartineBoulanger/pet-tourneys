@@ -13,7 +13,10 @@ import {
 import { Footer } from '@/components/footer/Footer';
 import { Header } from '@/components/header/Header';
 import { BottomNavigation } from '@/components/navigation/BottomNavigation';
-import { CookieBotHeadScript } from '@/components/scripts/CookieBot';
+import {
+  CookieBotHeadScript,
+  CookieBotBodyScript,
+} from '@/components/scripts/CookieBot';
 import { ScrollToTop } from '@/components/ui';
 
 export const revalidate = 3600;
@@ -74,6 +77,7 @@ export default async function RootLayout({
             error: <BiErrorAlt />,
           }}
         />
+        <CookieBotBodyScript />
       </body>
     </html>
   );
