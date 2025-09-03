@@ -13,6 +13,7 @@ import {
 import { Footer } from '@/components/footer/Footer';
 import { Header } from '@/components/header/Header';
 import { BottomNavigation } from '@/components/navigation/BottomNavigation';
+import { CookieBotHeadScript } from '@/components/scripts/CookieBot';
 import { ScrollToTop } from '@/components/ui';
 
 export const revalidate = 3600;
@@ -52,6 +53,9 @@ export default async function RootLayout({
 
   return (
     <html lang='en'>
+      <head>
+        <CookieBotHeadScript />
+      </head>
       <body
         className={`${roboto.variable} ${warcraft.variable} antialiased font-sans`}
       >
