@@ -4,7 +4,11 @@ import {
   FaYoutube,
   FaShoppingBag,
   FaPaypal,
+  FaTwitch,
+  FaInstagram,
+  FaTiktok,
 } from 'react-icons/fa';
+import { FaBluesky } from 'react-icons/fa6';
 import { GrResources } from 'react-icons/gr';
 import { NavigationData, FooterData } from './types';
 
@@ -120,38 +124,65 @@ export const adminData: NavigationData = [
 export const footerData: FooterData = [
   {
     id: 1,
+    url: 'https://petbattlepvp-shop.fourthwall.com/',
+    Icon: FaShoppingBag,
+    name: 'Merchandise',
+  },
+  {
+    id: 2,
+    url: 'https://www.patreon.com/WarcraftPetBattleTournaments',
+    Icon: FaPatreon,
+    name: 'Support Us',
+  },
+  {
+    id: 3,
+    url: 'https://www.google.com/url?q=https%3A%2F%2Fwww.paypal.com%2Fncp%2Fpayment%2F9PRLQWUF22E3Q&sa=D&sntz=1&usg=AOvVaw1IhWJF7DQUhPGjUpTmJwVY',
+    Icon: FaPaypal,
+    name: 'Prize Support',
+  },
+  {
+    id: 4,
+    url: '/resources',
+    Icon: GrResources,
+    name: 'Resources',
+  },
+];
+
+export const socialsData: FooterData = [
+  {
+    id: 1,
     url: 'http://www.google.com/url?q=http%3A%2F%2Fdiscord.gg%2Fg6Y2D7Gtew&sa=D&sntz=1&usg=AOvVaw2O2u0NiXvNkTvCDX8p5LNJ',
     Icon: FaDiscord,
     name: 'Discord',
   },
   {
     id: 2,
-    url: 'https://www.youtube.com/channel/UC99EpJ3nOedPOlGKXmlV25A',
+    url: 'https://www.youtube.com/@PetMastersLeague',
     Icon: FaYoutube,
     name: 'YouTube',
   },
   {
     id: 3,
-    url: 'https://petbattlepvp-shop.fourthwall.com/',
-    Icon: FaShoppingBag,
-    name: 'Merchandise',
+    url: 'https://www.twitch.tv/petmastersleague',
+    Icon: FaTwitch,
+    name: 'Twitch',
   },
   {
     id: 4,
-    url: 'https://www.patreon.com/WarcraftPetBattleTournaments',
-    Icon: FaPatreon,
-    name: 'Support Us',
+    url: 'https://www.instagram.com/petmastersleague/',
+    Icon: FaInstagram,
+    name: 'Instagram',
   },
   {
     id: 5,
-    url: 'https://www.google.com/url?q=https%3A%2F%2Fwww.paypal.com%2Fncp%2Fpayment%2F9PRLQWUF22E3Q&sa=D&sntz=1&usg=AOvVaw1IhWJF7DQUhPGjUpTmJwVY',
-    Icon: FaPaypal,
-    name: 'Prize Support',
+    url: 'https://www.tiktok.com/@petmastersleague',
+    Icon: FaTiktok,
+    name: 'TikTok',
   },
   {
     id: 6,
-    url: '/resources',
-    Icon: GrResources,
-    name: 'Resources',
+    url: 'https://bsky.app/profile/petmastersleague.bsky.social',
+    Icon: FaBluesky,
+    name: 'Bluesky',
   },
 ];
