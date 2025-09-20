@@ -35,6 +35,10 @@ export const PartnerCard = ({
           alt={partner.name}
           width={sizeMap[size].width}
           height={sizeMap[size].height}
+          style={{
+            width: 'auto',
+            height: 'auto',
+          }}
           className='w-full h-full object-contain'
           loading='lazy'
           unoptimized

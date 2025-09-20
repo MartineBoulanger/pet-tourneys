@@ -32,6 +32,10 @@ export const LinkCard = ({
             alt={text}
             width={100}
             height={100}
+            style={{
+              width: 'auto',
+              height: 'auto',
+            }}
             className='w-full h-full object-contain'
             loading='lazy'
           />

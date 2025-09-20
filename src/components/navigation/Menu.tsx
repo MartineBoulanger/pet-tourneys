@@ -82,6 +82,10 @@ export const Menu = ({ className, buttonVariant = 'primary' }: MenuProps) => {
                           alt={link.linkText}
                           width={40}
                           height={40}
+                          style={{
+                            width: 'auto',
+                            height: 'auto',
+                          }}
                           className='w-full h-full object-cover'
                           loading='lazy'
                           unoptimized
@@ -138,6 +142,10 @@ export const Menu = ({ className, buttonVariant = 'primary' }: MenuProps) => {
                         alt={link.linkText}
                         width={40}
                         height={40}
+                        style={{
+                          width: 'auto',
+                          height: 'auto',
+                        }}
                         className='w-full h-full object-cover'
                         loading='lazy'
                         unoptimized

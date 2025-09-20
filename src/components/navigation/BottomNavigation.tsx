@@ -45,6 +45,10 @@ export const BottomNavigation = ({ user }: BottomNavigationProps) => {
                 alt={user?.username || ''}
                 width={25}
                 height={25}
+                style={{
+                  width: 'auto',
+                  height: 'auto',
+                }}
                 className='rounded-full'
                 loading='lazy'
               />

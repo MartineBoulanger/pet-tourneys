@@ -48,13 +48,13 @@ export const withSupabase = (middleware: CustomMiddleware) => {
       !request.nextUrl.pathname.includes('/reset-password') &&
       !request.nextUrl.pathname.includes('/analyze-tool') &&
       !request.nextUrl.pathname.includes('/resources') &&
+      !request.nextUrl.pathname.includes('/privacy-policy') &&
       !request.nextUrl.pathname.startsWith('/tournaments') &&
       !request.nextUrl.pathname.startsWith('/guides') &&
       !request.nextUrl.pathname.startsWith('/articles') &&
       !request.nextUrl.pathname.startsWith('/pet-reviews') &&
       !request.nextUrl.pathname.startsWith('/json-files') &&
       !request.nextUrl.pathname.startsWith('/auth') &&
-      !request.nextUrl.pathname.startsWith('/privacy') &&
       !request.nextUrl.pathname.endsWith('/sitemap.xml') &&
       !request.nextUrl.pathname.endsWith('/robots.txt') &&
       !request.nextUrl.pathname.endsWith('/')

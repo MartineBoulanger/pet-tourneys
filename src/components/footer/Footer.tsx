@@ -34,9 +34,16 @@ export const Footer = async () => {
           </Link>
         ))}
       </div>
-      <div className='pt-5 flex items-center justify-center text-sm text-humanoid'>
-        <FaRegCopyright />
-        {new Date().getFullYear()} {'Pet Masters League'}
+      <div className='pt-5 flex items-center justify-center text-sm text-foreground/50'>
+        <FaRegCopyright className='w-2.5 h-2.5 self-start' />
+        <span className='mr-1'>{new Date().getFullYear()}</span>
+        <span>{'- Pet Masters League'}</span>
+        <Link
+          href='/privacy-policy'
+          className='btn-link text-light-blue italic underline ml-2.5 text-xs'
+        >
+          {'privacy-policy'}
+        </Link>
       </div>
     </footer>
   );

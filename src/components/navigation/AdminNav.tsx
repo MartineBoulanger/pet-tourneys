@@ -27,6 +27,10 @@ export const AdminNav = async () => {
                 alt={admin?.admin?.username || ''}
                 width={25}
                 height={25}
+                style={{
+                  width: 'auto',
+                  height: 'auto',
+                }}
                 className='rounded-full'
                 loading='lazy'
               />
