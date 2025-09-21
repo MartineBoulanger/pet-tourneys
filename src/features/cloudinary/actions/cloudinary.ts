@@ -6,6 +6,7 @@ import {
   deleteImage,
   getImages,
   getImage,
+  searchImages,
 } from '@/features/cloudinary/client';
 
 export async function uploadImageAction(formData: FormData) {
@@ -80,7 +81,18 @@ export async function getImageAction(publicId: string) {
 export async function getImagesAction(folder: string = 'pml-images') {
   try {
     const images = await getImages(folder);
-    console.log('Fetched Images from Cloudinary:', images);
+    return { success: true, data: images };
+  } catch (error) {
+    return { success: false, error: (error as Error).message };
+  }
+}
+
+export async function searchImagesInFolder(
+  query: string,
+  folder: string = 'pml-images'
+) {
+  try {
+    const images = await searchImages(query, folder);
     return { success: true, data: images };
   } catch (error) {
     return { success: false, error: (error as Error).message };

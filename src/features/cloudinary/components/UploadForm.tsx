@@ -105,7 +105,7 @@ export function ImageUploadForm({
             {' images'}
           </Paragraph>
           <Paragraph className='text-xs text-foreground/30'>
-            {'PNG, JPG, JPEG, GIF, AVIF, WEBP (MAX. 5MB EACH)'}
+            {'PNG, JPG, JPEG, GIF, AVIF, WEBP (MAX. 5MB TOTAL)'}
           </Paragraph>
         </div>
 
