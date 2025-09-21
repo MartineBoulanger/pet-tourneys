@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { setCookieConsent } from '@/features/cookie-banner/actions';
 import { Heading, Paragraph, Button } from '@/components/ui';
+import { setCookieConsent } from './actions/setCookie';
 
 export function CookieBanner() {
   const [visible, setVisible] = useState(false);
