@@ -39,18 +39,18 @@ export function ImagesToolbar({
       confirm(`Delete ${selected.length} images?`)
     ) {
       for (const id of selected) {
-        onBulkDelete && onBulkDelete([id]);
+        onBulkDelete([id]);
       }
-      setSelected && setSelected([]);
+      setSelected([]);
     }
   };
 
   const selectAllImages = () => {
-    setSelected && setSelected(images.map((img) => img.public_id));
+    setSelected(images.map((img) => img.public_id));
   };
 
   const clearSelection = () => {
-    setSelected && setSelected([]);
+    setSelected([]);
   };
 
   return (
@@ -99,10 +99,7 @@ export function ImagesToolbar({
 
           {viewMode ? (
             <Button
-              onClick={() => {
-                if (setViewMode)
-                  setViewMode(viewMode === 'grid' ? 'list' : 'grid');
-              }}
+              onClick={() => setViewMode(viewMode === 'grid' ? 'list' : 'grid')}
               className='p-2.5'
               title='Toggle View Mode'
               aria-label='Toggle View Mode'

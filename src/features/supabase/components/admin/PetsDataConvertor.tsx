@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { FaFileDownload, FaPlus, FaUpload } from 'react-icons/fa';
+import { FaFileDownload, FaUpload } from 'react-icons/fa';
 import { Heading, Textarea, Button, Form, Paragraph } from '@/components/ui';
 
 export function PetsDataConverter() {
