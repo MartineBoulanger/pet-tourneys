@@ -5,9 +5,14 @@ import { ImageCard } from './ImageCard';
 interface ImageGridProps {
   images?: CloudinaryImage[] | null;
   cols?: number;
+  isDownloadable?: boolean;
 }
 
-export function ImageGrid({ images, cols = 0 }: ImageGridProps) {
+export function ImageGrid({
+  images,
+  cols = 0,
+  isDownloadable = false,
+}: ImageGridProps) {
   let colNumber;
   switch (cols) {
     case 1:
@@ -33,7 +38,11 @@ export function ImageGrid({ images, cols = 0 }: ImageGridProps) {
   return (
     <div className={cn('grid gap-2.5 lg:gap-5', colNumber)}>
       {safeImages.map((image) => (
-        <ImageCard key={image.public_id} image={image} />
+        <ImageCard
+          key={image.public_id}
+          image={image}
+          isDownloadable={isDownloadable}
+        />
       ))}
     </div>
   );
