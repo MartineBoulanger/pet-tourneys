@@ -5,12 +5,14 @@ import Image from 'next/image';
 import { FaTimes } from 'react-icons/fa';
 import { Button } from '@/components/ui';
 import { CloudinaryImage } from '@/features/cloudinary/types';
+import { DownloadImageButton } from './DownloadImageButton';
 
 interface ImageCardProps {
   image?: CloudinaryImage | null;
+  isDownloadable?: boolean;
 }
 
-export function ImageCard({ image }: ImageCardProps) {
+export function ImageCard({ image, isDownloadable = false }: ImageCardProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -38,15 +40,14 @@ export function ImageCard({ image }: ImageCardProps) {
                 </Button>
               </div>
               {/* Download button */}
-              {/* {isDownloadable && (
-              <div className='absolute top-5 right-5'>
-                <DownloadImageButton
-                  imageUrl={image.url}
-                  filename={image.filename}
-                  className='backdrop-blur-sm shadow-lg'
-                />
-              </div>
-            )} */}
+              {isDownloadable && (
+                <div className='absolute top-5 right-5'>
+                  <DownloadImageButton
+                    publicId={image.public_id}
+                    className='backdrop-blur-sm shadow-lg'
+                  />
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -76,6 +77,14 @@ export function ImageCard({ image }: ImageCardProps) {
                 unoptimized
               />
             </div>
+            {isDownloadable && (
+              <div className='absolute top-2.5 lg:top-5 left-2.5 lg:left-5'>
+                <DownloadImageButton
+                  publicId={image.public_id}
+                  className='backdrop-blur-sm shadow-lg'
+                />
+              </div>
+            )}
           </div>
         </div>
       )}

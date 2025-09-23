@@ -7,7 +7,7 @@ import { Resource as ResourceType } from '../types';
 
 export async function createResource(data: Partial<ResourceType>) {
   try {
-    if (data.title?.trim())
+    if (!data.title?.trim())
       return { success: false, error: 'Title is required' };
 
     const db = await getCollection('resources');
@@ -34,7 +34,11 @@ export async function createResource(data: Partial<ResourceType>) {
       success: true,
       resource: {
         _id: String(result.insertedId),
-        ...resourceData,
+        title: resourceData.title,
+        images: resourceData.images,
+        order: resourceData.order,
+        createdAt: resourceData.createdAt.toISOString(),
+        updatedAt: resourceData.updatedAt.toISOString(),
       },
     };
   } catch (error) {

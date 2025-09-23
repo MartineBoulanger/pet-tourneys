@@ -11,11 +11,16 @@ export async function uploadImage(file: File, folder: string = 'pml-images') {
   const buffer = Buffer.from(arrayBuffer);
 
   return new Promise((resolve, reject) => {
+    const originalName = file.name.replace(/\.[^/.]+$/, '');
     cloudinary.uploader
       .upload_stream(
         {
           folder,
           resource_type: 'image',
+          use_filename: true,
+          unique_filename: false,
+          overwrite: true,
+          public_id: originalName,
         },
         (error, result) => {
           if (error) {
@@ -58,6 +63,18 @@ export async function getImages(folder: string = 'pml-images') {
     prefix: folder,
     max_results: 500,
   });
+
+  return result.resources;
+}
+
+export async function searchImages(
+  query: string,
+  folder: string = 'pml-images'
+) {
+  const result = await cloudinary.search
+    .expression(`folder:${folder} AND filename:${query}*`)
+    .max_results(100)
+    .execute();
 
   return result.resources;
 }

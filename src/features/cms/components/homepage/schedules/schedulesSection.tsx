@@ -24,7 +24,7 @@ interface SchedulesSectionProps {
 }
 
 export function ScheduleSection({ schedule }: SchedulesSectionProps) {
-  if (!schedule.isVisible) return null;
+  if (!schedule || !schedule.isVisible) return null;
 
   const getGridCols = (layout: string) => {
     switch (layout) {

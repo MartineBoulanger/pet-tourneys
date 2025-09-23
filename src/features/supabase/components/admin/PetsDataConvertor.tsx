@@ -1,8 +1,9 @@
 'use client';
 
+import Link from 'next/link';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { FaFileDownload } from 'react-icons/fa';
+import { FaFileDownload, FaUpload } from 'react-icons/fa';
 import { Heading, Textarea, Button, Form, Paragraph } from '@/components/ui';
 
 export function PetsDataConverter() {
@@ -71,6 +72,20 @@ export function PetsDataConverter() {
 
   return (
     <>
+      <div className='flex flex-wrap items-center justify-center gap-2.5 lg:gap-5 mb-2.5 lg:mb-5'>
+        <Link
+          href='/admin/upload-pets/icons'
+          className='btn-submit flex items-center gap-2.5 py-[7px] px-[11px] rounded-lg'
+        >
+          <FaUpload className='w-4 h-4' /> <span>{'Upload Pet Icons'}</span>
+        </Link>
+        <Link
+          href='/admin/upload-pets/images'
+          className='btn-submit flex items-center gap-2.5 py-[7px] px-[11px] rounded-lg'
+        >
+          <FaUpload className='w-4 h-4' /> <span>{'Upload Pet Images'}</span>
+        </Link>
+      </div>
       <div className='bg-light-grey shadow-md rounded-lg p-2.5 lg:p-5'>
         <Paragraph className='w-full text-center mx-auto mb-5 mt-2.5 text-sm'>
           {

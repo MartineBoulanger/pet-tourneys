@@ -5,10 +5,12 @@ import { Heading } from '@/components/ui';
 
 interface AdminPanelButtonsProps {
   isMatchesPage?: boolean;
+  isFwenLoggedIn?: boolean;
 }
 
 export const AdminPanelButtons = ({
   isMatchesPage = false,
+  isFwenLoggedIn = false,
 }: AdminPanelButtonsProps) => {
   return (
     <div className='mb-5'>
@@ -19,6 +21,27 @@ export const AdminPanelButtons = ({
         {'What do you want to do?'}
       </Heading>
       <div className='flex flex-wrap items-center gap-2.5 lg:gap-5'>
+        {isFwenLoggedIn ? (
+          <Link
+            className='btn-link flex items-center gap-2.5 border py-1 px-3 rounded-lg border-blue-grey hover:bg-blue-grey hover:text-foreground'
+            href='/admin/upload-pets'
+            title={'Upload Pets Data'}
+            aria-label={'Upload Pets Data'}
+          >
+            <span className='max-w-[40px] max-h-[40px]'>
+              <Image
+                src={'/images/redrex.png'}
+                alt={'Upload Pets Data'}
+                width={50}
+                height={50}
+                className='w-full h-full object-cover'
+                loading='lazy'
+                unoptimized
+              />
+            </span>
+            <span>{'Upload Pets Data'}</span>
+          </Link>
+        ) : null}
         {adminData.map(({ linkText, imageSrc, id, url }) => (
           <Link
             className='btn-link flex items-center gap-2.5 border py-1 px-3 rounded-lg border-blue-grey hover:bg-blue-grey hover:text-foreground'

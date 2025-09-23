@@ -12,10 +12,10 @@ export default async function UploadPetsPage() {
   return (
     <>
       <Divider alignment='horizontal' color='light-grey' height='0.5' />
-      <Container className='max-w-[1024px]'>
+      <Container className='px-0 lg:px-0'>
         <Heading
           as='h2'
-          className='font-sans tracking-normal text-xl text-center mb-2.5'
+          className='font-sans tracking-normal text-xl mb-2.5'
         >
           {'Pets Data Convertor Form'}
         </Heading>
