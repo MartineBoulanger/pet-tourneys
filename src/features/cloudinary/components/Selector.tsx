@@ -207,7 +207,7 @@ export default function ImageSelector({
                       key={image.public_id}
                       className={`cursor-pointer rounded-lg overflow-hidden aspect-square relative bg-light-grey hover:scale-101 transition-all ${
                         isSelected(image)
-                          ? 'border-2 border-blue-500 '
+                          ? 'border-2 border-humanoid'
                           : 'border-transparent'
                       }`}
                       onClick={() => handleImageSelect(image)}

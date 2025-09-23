@@ -25,7 +25,7 @@ export default async function AuthLayout({
   return (
     <div className='p-5'>
       <Heading>{`${username}'s Admin Panel`}</Heading>
-      <AdminPanelButtons />
+      <AdminPanelButtons isFwenLoggedIn={username === 'Fwen'} />
       {children}
     </div>
   );

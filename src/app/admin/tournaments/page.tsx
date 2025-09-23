@@ -1,5 +1,6 @@
 import Link from 'next/link';
-import { MdOutlinePostAdd, MdUpload } from 'react-icons/md';
+import { FaPlus } from 'react-icons/fa';
+import { MdUpload } from 'react-icons/md';
 import { TournamentsListItem } from '@/features/supabase/components/admin/tournaments/TournamentsListItem';
 import {
   Container,
@@ -76,8 +77,7 @@ export default async function AdminTournamentsListPage({
             href='/admin/tournaments/new'
             className='btn-submit flex items-center gap-2.5 py-[7px] px-[11px] rounded-lg'
           >
-            <MdOutlinePostAdd className='w-5 h-5' />{' '}
-            <span>{'Create League'}</span>
+            <FaPlus className='w-4 h-4' /> <span>{'Create League'}</span>
           </Link>
           <Link
             href='/admin/upload-logs'
