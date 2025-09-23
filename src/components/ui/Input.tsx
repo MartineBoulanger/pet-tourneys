@@ -15,6 +15,7 @@ interface InputProps
     | 'text'
     | 'email'
     | 'password'
+    | 'search'
     | 'number'
     | 'date'
     | 'datetime-local'

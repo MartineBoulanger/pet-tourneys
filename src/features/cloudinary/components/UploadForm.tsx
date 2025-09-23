@@ -1,20 +1,16 @@
-// components/CloudinaryUploadForm.tsx
 'use client';
 
 import { useState, useRef } from 'react';
 import { FaUpload, FaTrash } from 'react-icons/fa';
 import { Heading, Paragraph, Button } from '@/components/ui';
 import { uploadMultipleImagesAction } from '../actions/cloudinary';
-
-interface CloudinaryUploadFormProps {
-  folder?: string;
-  onUploadSuccess?: () => void;
-}
+import { ImageUploadFormProps } from '../types';
 
 export function ImageUploadForm({
   folder = 'pml-images',
   onUploadSuccess,
-}: CloudinaryUploadFormProps) {
+  path,
+}: ImageUploadFormProps) {
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
   const [isUploading, setIsUploading] = useState(false);
   const [uploadProgress, setUploadProgress] = useState<string>('');
@@ -63,7 +59,7 @@ export function ImageUploadForm({
       });
       formData.append('folder', folder);
 
-      const result = await uploadMultipleImagesAction(formData);
+      const result = await uploadMultipleImagesAction(formData, path);
 
       if (result.success) {
         setUploadProgress(
@@ -121,8 +117,8 @@ export function ImageUploadForm({
       </label>
 
       {error && (
-        <div className='mt-5 p-2.5 bg-red-100 border border-red-300 rounded-lg'>
-          <Paragraph className='text-red-700 text-sm'>{error}</Paragraph>
+        <div className='mt-5 p-2.5 bg-light-red border border-dark-red rounded-lg'>
+          <Paragraph className='text-dark-red text-sm'>{error}</Paragraph>
         </div>
       )}
 
@@ -130,10 +126,10 @@ export function ImageUploadForm({
         <div className='mt-5 space-y-2.5'>
           <div className='flex justify-between items-center'>
             <Heading as='h4' className='font-medium'>
-              {'Selected Files '}({selectedFiles.length})
+              {`Selected Files (${selectedFiles.length})`}
             </Heading>
             <Paragraph className='text-sm text-foreground/50'>
-              Total: {calculateTotalSize()} MB
+              {`Total: ${calculateTotalSize()} MB`}
             </Paragraph>
           </div>
 
@@ -148,7 +144,7 @@ export function ImageUploadForm({
                     {file.name}
                   </Paragraph>
                   <Paragraph className='text-xs text-foreground/50 whitespace-nowrap'>
-                    {(file.size / 1024 / 1024).toFixed(2)} MB
+                    {`${(file.size / 1024 / 1024).toFixed(2)} MB`}
                   </Paragraph>
                 </div>
                 <Button
@@ -178,8 +174,8 @@ export function ImageUploadForm({
       )}
 
       {uploadProgress && (
-        <div className='mt-5 p-2.5 bg-blue-100 border border-blue-300 rounded-lg'>
-          <Paragraph className='text-blue-700 text-sm'>
+        <div className='mt-5 p-2.5 bg-light-green border border-dark-green rounded-lg'>
+          <Paragraph className='text-dark-green text-sm'>
             {uploadProgress}
           </Paragraph>
         </div>

@@ -10,7 +10,7 @@ interface AnnouncementSectionProps {
 export function AnnouncementSection({
   announcement,
 }: AnnouncementSectionProps) {
-  if (!announcement.isVisible) return null;
+  if (!announcement || !announcement.isVisible) return null;
 
   return (
     <div className='text-center'>

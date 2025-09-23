@@ -25,7 +25,7 @@ interface SignupsSectionProps {
 }
 
 export function SignupSection({ signup }: SignupsSectionProps) {
-  if (!signup.isVisible) return null;
+  if (!signup || !signup.isVisible) return null;
 
   const getGridCols = (layout: string) => {
     switch (layout) {

@@ -9,7 +9,7 @@ import {
   searchImages,
 } from '@/features/cloudinary/client';
 
-export async function uploadImageAction(formData: FormData) {
+export async function uploadImageAction(formData: FormData, path: string) {
   const file = formData.get('image') as File;
   const folder = (formData.get('folder') as string) || 'pml-images';
 
@@ -19,7 +19,7 @@ export async function uploadImageAction(formData: FormData) {
 
   try {
     const result = await uploadImage(file, folder);
-    revalidatePath('/admin/images');
+    revalidatePath(path);
     return { success: true, data: result };
   } catch (error) {
     return { success: false, error: (error as Error).message };
@@ -27,7 +27,10 @@ export async function uploadImageAction(formData: FormData) {
 }
 
 // Multiple image upload action
-export async function uploadMultipleImagesAction(formData: FormData) {
+export async function uploadMultipleImagesAction(
+  formData: FormData,
+  path: string
+) {
   const files = formData.getAll('images');
   const folder = formData.get('folder') || 'pml-images';
 
@@ -41,13 +44,13 @@ export async function uploadMultipleImagesAction(formData: FormData) {
       fileFormData.append('image', file);
       fileFormData.append('folder', folder);
 
-      return uploadImageAction(fileFormData);
+      return uploadImageAction(fileFormData, path);
     });
 
     const results = await Promise.all(uploadPromises);
     const successfulUploads = results.filter((r) => r.success);
 
-    revalidatePath('/admin/images');
+    revalidatePath(path);
     return {
       success: true,
       data: successfulUploads.map((r) => r.data),
@@ -58,11 +61,10 @@ export async function uploadMultipleImagesAction(formData: FormData) {
   }
 }
 
-export async function deleteImageAction(publicId: string) {
+export async function deleteImageAction(publicId: string, path: string) {
   try {
     const result = await deleteImage(publicId);
-    revalidatePath('/admin/images');
-    revalidatePath('/admin');
+    revalidatePath(path);
     return { success: true, data: result };
   } catch (error) {
     return { success: false, error: (error as Error).message };
@@ -88,12 +90,17 @@ export async function getImagesAction(folder: string = 'pml-images') {
 }
 
 export async function searchImagesInFolder(
-  query: string,
+  query: string = '',
   folder: string = 'pml-images'
 ) {
   try {
-    const images = await searchImages(query, folder);
-    return { success: true, data: images };
+    if (!query || query.trim() === '') {
+      const images = await getImages(folder);
+      return { success: true, data: images };
+    } else {
+      const images = await searchImages(query, folder);
+      return { success: true, data: images };
+    }
   } catch (error) {
     return { success: false, error: (error as Error).message };
   }

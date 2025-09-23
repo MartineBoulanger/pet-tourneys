@@ -1,7 +1,10 @@
-import { AdminImagesManager } from '@/features/cloudinary/components/Management';
+import { ImagesManager } from '@/features/cloudinary/components/Manager';
+import { getImagesAction } from '@/features/cloudinary/actions/cloudinary';
 import { Container, Heading, Divider, Paragraph } from '@/components/ui';
 
 export default async function PetImagesPage() {
+  const images = await getImagesAction('pml-pet-images');
+
   return (
     <>
       <Divider alignment='horizontal' color='light-grey' height='0.5' />
@@ -12,7 +15,11 @@ export default async function PetImagesPage() {
         <Paragraph className='text-humanoid'>
           {'Upload, organize, and manage all pet images'}
         </Paragraph>
-        <AdminImagesManager folder='pml-pet-images' />
+        <ImagesManager
+          folder='pml-pet-images'
+          initImages={images.success ? images.data : []}
+          path='/admin/upload-pets/images'
+        />
       </Container>
     </>
   );

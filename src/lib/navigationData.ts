@@ -157,7 +157,8 @@ export const socialsData: FooterData = [
   },
   {
     id: 2,
-    url: 'https://www.youtube.com/@PetMastersLeague',
+    // url: 'https://www.youtube.com/@PetMastersLeague',
+    url: 'https://www.youtube.com/channel/UC99EpJ3nOedPOlGKXmlV25A',
     Icon: FaYoutube,
     name: 'YouTube',
   },
