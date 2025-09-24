@@ -28,7 +28,7 @@ export const MatchList = ({
 }: MatchListProps) => {
   return (
     <>
-      <Heading as='h2' className='text-xl mb-2.5'>
+      <Heading as='h2' className='mb-2.5 text-foreground/65'>
         {'League Matches'}
       </Heading>
       <div className='grid gap-2.5 bg-light-grey p-2.5 rounded-lg'>

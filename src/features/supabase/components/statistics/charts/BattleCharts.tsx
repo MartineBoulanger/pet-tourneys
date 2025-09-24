@@ -32,7 +32,7 @@ export const BattleCharts = ({
 
   return (
     <div className='mb-5 lg:mb-10'>
-      <Heading as='h2' className='text-xl lg:text-3xl mb-2.5'>
+      <Heading as='h2' className='mb-2.5 text-foreground/65'>
         {isMatchView ? 'Overall Match Statistics' : 'Overall League Statistics'}
       </Heading>
       <div className='flex flex-wrap flex-col md:flex-row gap-2.5 lg:gap-5 mb-5'>
@@ -61,10 +61,7 @@ export const BattleCharts = ({
         {!isMatchView ? (
           <>
             <div>
-              <Heading
-                as='h2'
-                className='mb-2.5 text-base lg:text-lg font-sans'
-              >
+              <Heading as='h3' className='text-base'>
                 {'Matches Per Region'}
               </Heading>
               {matchesByRegion.length > 0 ? (
@@ -80,10 +77,7 @@ export const BattleCharts = ({
               )}
             </div>
             <div>
-              <Heading
-                as='h2'
-                className='mb-2.5 text-base lg:text-lg font-sans'
-              >
+              <Heading as='h3' className='text-base'>
                 {'Match Results'}
               </Heading>
               {matchResults.length > 0 ? (
@@ -104,10 +98,7 @@ export const BattleCharts = ({
         ) : null}
         {isMatchView ? (
           <div>
-            <Heading
-              as='h2'
-              className='mb-2.5 w-full text-base lg:text-lg font-sans'
-            >
+            <Heading as='h3' className='text-base'>
               {'Battle Results'}
             </Heading>
             {battleResults.length > 0 ? (

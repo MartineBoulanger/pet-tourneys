@@ -17,7 +17,7 @@ export const PetAbilitiesCharts = ({ abilityStats }: PetAbilitiesProps) => {
 
   return (
     <div className='mb-5 lg:mb-10 z-0'>
-      <Heading as='h2' className='text-xl lg:text-3xl mb-2.5'>
+      <Heading as='h2' className='mb-2.5 text-foreground/65'>
         {'Overall Pet Abilities Statistics'}
       </Heading>
       <div className='flex flex-wrap flex-col lg:flex-row gap-2.5 lg:gap-5 mb-5'>
@@ -29,7 +29,7 @@ export const PetAbilitiesCharts = ({ abilityStats }: PetAbilitiesProps) => {
         ) : null}
       </div>
       <div className='bg-light-grey rounded-lg shadow-md p-2.5 lg:p-5'>
-        <Heading as='h2' className='text-lg mb-2.5 font-sans'>
+        <Heading as='h3' className='text-base mb-2.5'>
           {'Abilities Per Category'}
         </Heading>
         <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 lg:gap-5'>

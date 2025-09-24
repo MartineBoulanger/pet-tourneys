@@ -3,7 +3,7 @@ import { Toaster } from 'sonner';
 import { FaCheck, FaInfo } from 'react-icons/fa';
 import { IoWarningOutline } from 'react-icons/io5';
 import { BiErrorAlt } from 'react-icons/bi';
-import { roboto, warcraft } from '@/styles/fonts';
+import { roboto, warcraft, brutals, brutalsTilted } from '@/styles/fonts';
 import '@/styles/globals.css';
 import '@/styles/prose.css';
 import {
@@ -54,7 +54,7 @@ export default async function RootLayout({
   return (
     <html lang='en'>
       <body
-        className={`${roboto.variable} ${warcraft.variable} antialiased font-sans`}
+        className={`${roboto.variable} ${warcraft.variable} ${brutals.variable} ${brutalsTilted.variable} antialiased font-sans`}
       >
         <Header />
         <main className='min-h-[85vh] relative'>{children}</main>

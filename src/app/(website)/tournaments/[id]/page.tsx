@@ -88,19 +88,19 @@ export default async function TournamentPage({
       <PageHeading heading={tournament.name}>
         <PageMenu links={links} />
       </PageHeading>
-      <div className='mb-5 lg:mb-10'>
-        <Paragraph>
+      <Paragraph className='flex justify-center gap-2.5 mb-5 lg:mb-10'>
+        <span>
           {new Date(tournament.start_date).toLocaleDateString()} -{' '}
           {tournament.end_date === '1999-12-31T22:00:00' ||
           tournament.end_date === null
             ? 'Ongoing'
             : new Date(tournament.end_date).toLocaleDateString()}
-        </Paragraph>
-        <Paragraph className='font-bold text-humanoid'>
+        </span>
+        <span className='italic text-humanoid text-sm'>
           {tournament.participant_count}
           {' participants'}
-        </Paragraph>
-      </div>
+        </span>
+      </Paragraph>
       {matches && matches.length > 0 ? (
         <MatchList
           matches={matches}

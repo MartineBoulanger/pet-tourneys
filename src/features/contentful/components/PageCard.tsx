@@ -14,10 +14,7 @@ export const PageCard = ({ page }: PageCardProps) => {
   return (
     <div className='bg-light-grey shadow-md rounded-lg p-2.5'>
       <div className='flex flex-col items-center justify-between gap-5 bg-background rounded-lg p-2.5 lg:p-5'>
-        <Heading
-          as='h3'
-          className='text-center font-bold text-3xl tracking-normal text-humanoid'
-        >
+        <Heading as='h2' className='text-3xl text-humanoid'>
           {page.pageTitle}
         </Heading>
         {page.banner && page?.banner?.bannerPicture ? (
@@ -38,7 +35,7 @@ export const PageCard = ({ page }: PageCardProps) => {
         )}
         <Link
           href={`/${pageParent}/${page.urlSlug}`}
-          className='btn-submit py-2 px-4 rounded w-fit mx-auto text-xl uppercase font-bold'
+          className='btn-submit py-2 px-4 rounded w-fit mx-auto text-xl uppercase'
         >
           {`Read ${page.pageType}`}
         </Link>

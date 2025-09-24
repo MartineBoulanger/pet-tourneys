@@ -87,7 +87,7 @@ export default async function MatchPage({
         {battleLogs?.length ? (
           battleLogs.map((battle, index) => (
             <div key={battle.id} className='mb-5 lg:mb-10'>
-              <Heading as='h2' className='text-lg font-bold font-sans'>
+              <Heading as='h2' className='mb-2.5'>
                 {'Battle '}
                 {index + 1}
               </Heading>

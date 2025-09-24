@@ -7,6 +7,7 @@ export function StrongPetIcon({ className }: { className?: string }) {
       viewBox='0 0 24 24'
       className={cn('w-5 h-5 text-beast', className)}
       aria-placeholder='Very strong pet'
+      aria-label='Very strong pet'
     >
       <path
         d='M12 2L4 6V12C4 17 12 22 12 22C12 22 20 17 20 12V6L12 2Z'
@@ -28,6 +29,7 @@ export function WeakPetIcon({ className }: { className?: string }) {
       transform='rotate(0)matrix(-1, 0, 0, 1, 0, 0)'
       className={cn('w-5 h-5 text-light-blue', className)}
       aria-placeholder='Very weak pet'
+      aria-label='Very weak pet'
     >
       <path
         fill='currentColor'

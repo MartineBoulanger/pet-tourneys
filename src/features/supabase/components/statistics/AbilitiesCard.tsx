@@ -21,7 +21,7 @@ export function AbilitiesCard({
         onClick={() => setIsOpen(true)}
       >
         <div className='w-[40%]'>
-          <Heading as='h3' className='text-xl'>
+          <Heading as='h3' className='text-lg'>
             {abilitiesCategoryNames[
               category as keyof typeof abilitiesCategoryNames
             ] || category}

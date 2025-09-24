@@ -51,10 +51,7 @@ export function SignupSection({ signup }: SignupsSectionProps) {
 
   return (
     <div className='bg-background rounded-lg shadow-md p-2.5 lg:p-5'>
-      <Heading
-        as='h2'
-        className='text-2xl lg:text-3xl font-bold font-sans tracking-normal text-center'
-      >
+      <Heading as='h2' className='text-2xl lg:text-3xl text-foreground/90 mx-auto'>
         {signup.title}
       </Heading>
       <Divider alignment='horizontal' color='humanoid' width='24' height='1' />

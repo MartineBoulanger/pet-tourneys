@@ -1,15 +1,28 @@
 'use client';
 
 import Image from 'next/image';
-import { FaTimes, FaTrashAlt } from 'react-icons/fa';
+import { useState } from 'react';
+import { FaCopy, FaTimes, FaTrashAlt } from 'react-icons/fa';
 import { Button, Paragraph } from '@/components/ui';
 import { ImageModalProps } from '../types';
 
 export function ImageModal({ image, onClose, onDelete }: ImageModalProps) {
+  const [copied, setCopied] = useState(false);
+
   const handleDelete = () => {
     if (confirm('Are you sure you want to delete this image?')) {
       onDelete(image.public_id);
       onClose();
+    }
+  };
+
+  const handleCopyUrl = async () => {
+    try {
+      await navigator.clipboard.writeText(image.secure_url);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000); // Reset after 2s
+    } catch (err) {
+      console.error('Failed to copy:', err);
     }
   };
 
@@ -79,6 +92,13 @@ export function ImageModal({ image, onClose, onDelete }: ImageModalProps) {
 
             {/* Action Buttons */}
             <div className='flex justify-end items-center gap-2.5 lg:gap-5 py-5 border-t border-foreground/30'>
+              <Button
+                onClick={handleCopyUrl}
+                className='flex items-center gap-2'
+              >
+                <FaCopy className='w-5 h-5' />
+                <span>{copied ? 'Copied!' : 'Copy URL'}</span>
+              </Button>
               <Button
                 variant='secondary'
                 onClick={handleDelete}

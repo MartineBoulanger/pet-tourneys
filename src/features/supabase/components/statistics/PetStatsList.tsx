@@ -93,7 +93,7 @@ export function PetStatsList({
                   <div className='flex items-center'>
                     <div className='flex items-center h-[40px] w-[40px] mr-2.5'>
                       <Image
-                        src={`/images/pet-icons/${pet.icon}`}
+                        src={pet.icon || ''} //TODO: set default pet image placeholder instead of empty string
                         alt={pet.name}
                         className='w-full h-full object-contain'
                         width={40}
@@ -319,7 +319,7 @@ export function PetStatsList({
 
                     <div>
                       <Image
-                        src={`/images/pets/${pet.image}`}
+                        src={pet.image || ''} //TODO: set default pet image placeholder instead of empty string
                         alt={pet.name}
                         className='w-full h-auto rounded-lg object-cover'
                         width={100}
