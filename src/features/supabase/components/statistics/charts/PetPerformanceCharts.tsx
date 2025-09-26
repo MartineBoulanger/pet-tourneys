@@ -41,7 +41,7 @@ export const PetPerformanceCharts = ({ battleStats }: PetBattleLogProps) => {
 
   return (
     <div className='mb-5 lg:mb-10'>
-      <Heading as='h2' className='text-xl lg:text-3xl mb-2.5'>
+      <Heading as='h2' className='mb-2.5 text-foreground/65'>
         {'Overall Pet Performance Statistics'}
       </Heading>
       <div className='flex flex-wrap flex-col lg:flex-row gap-2.5 lg:gap-5 mb-5'>
@@ -60,7 +60,7 @@ export const PetPerformanceCharts = ({ battleStats }: PetBattleLogProps) => {
       </div>
       <div className='bg-light-grey rounded-lg shadow-md grid grid-cols-1 lg:grid-cols-2 gap-2.5 lg:gap-5 p-2.5 lg:p-5'>
         <div>
-          <Heading as='h2' className='mb-2.5 text-base lg:text-lg font-sans'>
+          <Heading as='h3' className='text-base'>
             {'Top 5 Pet Assassins'}
           </Heading>
           {battleStats.petPerformance && (
@@ -77,7 +77,7 @@ export const PetPerformanceCharts = ({ battleStats }: PetBattleLogProps) => {
           )}
         </div>
         <div>
-          <Heading as='h2' className='mb-2.5 text-base lg:text-lg font-sans'>
+          <Heading as='h3' className='text-base'>
             {'Weather Condition Applied'}
           </Heading>
           {battleStats.weatherChanges && (

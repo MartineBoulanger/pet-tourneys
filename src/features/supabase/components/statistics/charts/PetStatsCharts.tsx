@@ -27,7 +27,7 @@ export function PetStatsCharts({ data }: ChartsProps<TournamentPetStat>) {
   return (
     <div className='bg-light-grey rounded-lg shadow-md grid grid-cols-1 lg:grid-cols-3 gap-2.5 lg:gap-5 p-2.5 lg:p-5'>
       <div>
-        <Heading as='h2' className='mb-2.5 text-base lg:text-lg font-sans'>
+        <Heading as='h3' className='text-base'>
           {'Health'}
         </Heading>
         <ScatterGraph
@@ -38,7 +38,7 @@ export function PetStatsCharts({ data }: ChartsProps<TournamentPetStat>) {
         />
       </div>
       <div>
-        <Heading as='h2' className='mb-2.5 text-base lg:text-lg font-sans'>
+        <Heading as='h3' className='text-base'>
           {'Power'}
         </Heading>
         <ScatterGraph
@@ -49,7 +49,7 @@ export function PetStatsCharts({ data }: ChartsProps<TournamentPetStat>) {
         />
       </div>
       <div>
-        <Heading as='h2' className='mb-2.5 text-base lg:text-lg font-sans'>
+        <Heading as='h3' className='text-base'>
           {'Speed'}
         </Heading>
         <ScatterGraph

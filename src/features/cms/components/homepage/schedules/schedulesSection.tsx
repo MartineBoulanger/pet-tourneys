@@ -52,7 +52,7 @@ export function ScheduleSection({ schedule }: SchedulesSectionProps) {
     <div className='bg-background rounded-lg shadow-md p-2.5 lg:p-5'>
       <Heading
         as='h2'
-        className='text-2xl lg:text-3xl font-bold font-sans tracking-normal text-center'
+        className='text-2xl lg:text-3xl text-foreground/90 mx-auto'
       >
         {schedule.title}
       </Heading>

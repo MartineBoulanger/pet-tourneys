@@ -12,3 +12,15 @@ export const warcraft = local({
   src: './LifeCraft.ttf',
   display: 'swap',
 });
+
+export const brutals = local({
+  variable: '--font-brutals',
+  src: './BRUTALS.ttf',
+  display: 'swap',
+});
+
+export const brutalsTilted = local({
+  variable: '--font-brutals-tilted',
+  src: './BRUTALS Tilted.ttf',
+  display: 'swap',
+});

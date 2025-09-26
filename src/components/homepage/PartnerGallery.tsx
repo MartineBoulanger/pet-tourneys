@@ -17,7 +17,7 @@ export const PartnerGallery = ({ data, className }: PartnersGalleryProps) => {
 
   return (
     <div className='bg-light-grey py-5 lg:py-10 px-5 md:px-0'>
-      <Heading className='text-center tracking-wider'>
+      <Heading className='mb-5'>
         {'Proud to partner with'}
       </Heading>
       <div className={cn('relative mx-auto', className)}>

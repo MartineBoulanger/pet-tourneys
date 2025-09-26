@@ -199,7 +199,9 @@ export default async function StatisticsPage({
           <PageMenu links={links} />
         </PageHeading>
         {entityName && (
-          <Paragraph className='text-humanoid'>{entityName}</Paragraph>
+          <Paragraph className='flex justify-center text-humanoid gap-2.5 mb-5 lg:mb-10'>
+            {entityName}
+          </Paragraph>
         )}
       </div>
       <PetCharts chartData={chartData || null} data={stats || null} />

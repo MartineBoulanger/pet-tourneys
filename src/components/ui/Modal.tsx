@@ -30,8 +30,12 @@ export function Modal({
           className
         )}
       >
-        <Button className='absolute right-2.5 top-2.5' onClick={onClose}>
-          <IoMdClose className='w-6 h-6' />
+        <Button
+          variant='secondary'
+          className='absolute right-2.5 lg:right-5 top-2 lg:top-5 rounded-full p-1 '
+          onClick={onClose}
+        >
+          <IoMdClose className='w-5 h-5' />
         </Button>
         <div className='p-2.5 lg:p-5 z-[99999]'>{children}</div>
       </div>

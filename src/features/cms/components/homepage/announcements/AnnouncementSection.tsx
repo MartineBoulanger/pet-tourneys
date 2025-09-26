@@ -18,7 +18,7 @@ export function AnnouncementSection({
         <>
           <Heading
             as='h2'
-            className='text-3xl font-bold font-sans tracking-normal mb-2.5'
+            className='text-2xl lg:text-3xl text-foreground/90 mx-auto'
           >
             {announcement.title}
           </Heading>

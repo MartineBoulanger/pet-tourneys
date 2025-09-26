@@ -28,10 +28,7 @@ export function PrizeSection({ prize }: PrizeSectionProps) {
   return (
     <section className='space-y-2.5 lg:space-y-5'>
       <div className='text-center bg-background rounded-lg p-2.5 lg:p-5'>
-        <Heading
-          as='h2'
-          className='text-3xl font-bold font-sans tracking-normal mb-2.5'
-        >
+        <Heading as='h2' className='mb-2.5 mx-auto text-foreground/90'>
           {prize.title}
         </Heading>
         <Divider

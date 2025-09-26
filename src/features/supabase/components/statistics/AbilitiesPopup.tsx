@@ -10,14 +10,14 @@ export const AbilitiesPopup = ({
 }) => {
   return (
     <>
-      <Heading className='max-w-[450px] break-words mb-2.5 lg:mb-5'>
+      <Heading as='h2' className='break-words mb-2.5'>
         {abilitiesCategoryNames[
           category as keyof typeof abilitiesCategoryNames
         ] || category}
         {' Abilities'}
       </Heading>
       <div className='py-2.5 lg:py-5 bg-background rounded-lg shadow-md'>
-        <ul className='max-h-[400px] overflow-y-auto'>
+        <ul>
           {abilities &&
             abilities.map((ability, index) => (
               <li

@@ -102,10 +102,10 @@ export const AnalyzeToolDetails = ({
         {/* Title & action button above the content */}
         <div className='flex flex-col lg:flex-row justify-between items-end lg:items-center mb-5'>
           <div>
-            <Heading as='h2' className='text-3xl text-humanoid font-bold'>
+            <Heading as='h2' className='text-foreground/65'>
               {'Battle Logs Analysis Report'}
             </Heading>
-            <Paragraph className='max-w-[550px] italic mt-2.5 text-sm'>
+            <Paragraph className='max-w-[550px] italic mt-2.5 text-sm text-humanoid'>
               {
                 '**Note : The charts are in most cases just showing a part of the whole data. To see all the data, download the PDF.'
               }
@@ -120,7 +120,7 @@ export const AnalyzeToolDetails = ({
               />
             }
             fileName={`${playerName + '-' || ''}battle-logs-analysis.pdf`}
-            className='btn-submit py-2 px-4 rounded border-none uppercase mt-5 lg:mt-0'
+            className='btn-submit p-2 rounded border-none uppercase mt-5 lg:mt-0'
             title='Download as PDF'
             aria-label='Download as PDF'
           >
@@ -138,17 +138,19 @@ export const AnalyzeToolDetails = ({
           {playerName ? (
             <Heading
               as='h3'
-              className='text-2xl mb-5 text-center p-2.5 lg:p-5 rounded-lg bg-background'
+              className='text-lg mb-5 text-center p-2.5 lg:p-5 rounded-lg bg-background flex items-center justify-center'
             >
-              <span>{'Logs from '}</span>
-              <span className='font-bold text-humanoid'>{playerName}</span>
+              <span className='mr-2.5'>{'Logs from '}</span>
+              <span className='text-2xl font-brutals text-humanoid'>
+                {playerName}
+              </span>
             </Heading>
           ) : null}
 
           {parsedBattleLogs && parsedBattleLogs.length > 0 && (
             <>
               <div className='mb-5'>
-                <Heading as='h4' className='text-xl font-semibold mb-2.5'>
+                <Heading as='h3' className='text-xl'>
                   {'Overall Match Statistics'}
                 </Heading>
                 <div className='flex flex-wrap flex-col lg:flex-row gap-2.5 lg:gap-5 mb-5'>
@@ -163,7 +165,7 @@ export const AnalyzeToolDetails = ({
                 </div>
               </div>
               <div className='mb-5'>
-                <Heading as='h4' className='text-xl font-semibold mb-2.5'>
+                <Heading as='h3' className='text-xl'>
                   {'Battle Results'}
                 </Heading>
                 {parsedBattleLogs && (
@@ -179,7 +181,7 @@ export const AnalyzeToolDetails = ({
 
           {parsedBattleLogs && parsedBattleLogs.length > 0 && (
             <div className='mb-5 lg:mb-10'>
-              <Heading as='h4' className='text-lg font-bold mb-2.5'>
+              <Heading as='h3' className='text-xl'>
                 {'Battle Logs Overview'}
               </Heading>
               <div className='space-y-2.5 lg:space-y-5'>
@@ -189,9 +191,9 @@ export const AnalyzeToolDetails = ({
                     className='bg-background p-2.5 lg:p-5 rounded-lg shadow-md'
                   >
                     <div className='flex justify-between mb-2.5'>
-                      <Paragraph className='font-bold'>
+                      <Paragraph>
                         <span>{`Battle ${i + 1} - `}</span>
-                        <span className='text-humanoid'>
+                        <span className='text-humanoid text-sm'>
                           {new Date(battle.timestamp).toLocaleString()}
                         </span>
                       </Paragraph>
@@ -249,7 +251,7 @@ export const AnalyzeToolDetails = ({
           )}
 
           <div className='mb-5 lg:mb-10'>
-            <Heading as='h4' className='text-lg font-bold mb-2.5'>
+            <Heading as='h3' className='text-xl'>
               {'Top 5 Most Used Pets'}
             </Heading>
             <BarGraph
@@ -268,7 +270,7 @@ export const AnalyzeToolDetails = ({
                   : 'mb-5 lg:mb-10'
               }
             >
-              <Heading as='h4' className='text-lg font-bold mb-2.5'>
+              <Heading as='h3' className='text-xl'>
                 {'Overall Pet Performance Statistics'}
               </Heading>
               <div className='flex flex-wrap flex-col lg:flex-row gap-2.5 lg:gap-5 mb-5'>
@@ -285,7 +287,7 @@ export const AnalyzeToolDetails = ({
           ) : null}
 
           <div className='mb-5 lg:mb-10'>
-            <Heading as='h4' className='text-lg font-bold mb-2.5'>
+            <Heading as='h3' className='text-xl'>
               {'Top 5 Pet Assassins'}
             </Heading>
             {battleStats.petPerformance && (
@@ -305,7 +307,7 @@ export const AnalyzeToolDetails = ({
           {safeStats.totalPetSwaps &&
             Object.keys(safeStats.totalPetSwaps).length > 0 && (
               <div className='mb-5 lg:mb-10'>
-                <Heading as='h4' className='text-lg font-bold mb-2.5'>
+                <Heading as='h3' className='text-xl'>
                   {'Overall Pet Swaps Statistics'}
                 </Heading>
                 <div className='flex flex-wrap flex-col lg:flex-row gap-2.5 lg:gap-5 mb-5'>
@@ -313,7 +315,7 @@ export const AnalyzeToolDetails = ({
                 </div>
                 <div className='grid grid-cols-1 lg:grid-cols-2 gap-2.5 lg:gap-5 mt-5'>
                   <div>
-                    <Heading as='h4' className='text-lg font-bold mb-2.5'>
+                    <Heading as='h3' className='text-xl'>
                       {'Pet Swaps'}
                     </Heading>
                     {safeStats.totalPetSwaps && (
@@ -325,7 +327,7 @@ export const AnalyzeToolDetails = ({
                     )}
                   </div>
                   <div>
-                    <Heading as='h4' className='text-lg font-bold mb-2.5'>
+                    <Heading as='h3' className='text-xl'>
                       {'Top 5 Pet Swaps'}
                     </Heading>
                     {battleStats.petSwapDetails && (
@@ -344,7 +346,7 @@ export const AnalyzeToolDetails = ({
           {safeStats.weatherChanges &&
             Object.keys(safeStats.weatherChanges).length > 0 && (
               <div className='mb-5 lg:mb-10'>
-                <Heading as='h4' className='text-lg font-bold mb-2.5'>
+                <Heading as='h3' className='text-xl'>
                   {'Overall Weather Conditions Statistics'}
                 </Heading>
                 <div className='flex flex-wrap flex-col md:flex-row gap-2.5 lg:gap-5 mb-5'>
@@ -353,7 +355,7 @@ export const AnalyzeToolDetails = ({
                     value={safeStats.totalWeatherChanges}
                   />
                 </div>
-                <Heading as='h4' className='text-lg font-bold mb-2.5'>
+                <Heading as='h3' className='text-xl'>
                   {'Weather Condition Applied'}
                 </Heading>
                 {battleStats.weatherChanges && (
@@ -368,7 +370,7 @@ export const AnalyzeToolDetails = ({
 
           {usedAbilities && (
             <>
-              <Heading as='h4' className='text-lg font-bold mb-2.5'>
+              <Heading as='h3' className='text-xl'>
                 {'Overall Pet Abilities Statistics'}
               </Heading>
               <div className='flex flex-wrap flex-col lg:flex-row gap-2.5 lg:gap-5 mb-5'>
@@ -377,7 +379,7 @@ export const AnalyzeToolDetails = ({
                   value={usedAbilities.totalUniqueAbilitiesUsed || 0}
                 />
               </div>
-              <Heading as='h4' className='text-lg font-bold mb-2.5'>
+              <Heading as='h3' className='text-xl'>
                 {'All Used Abilities Per Category'}
               </Heading>
               <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 lg:gap-5'>

@@ -41,7 +41,7 @@ export const LinkCard = ({
           />
         </span>
         <span className='text-center'>
-          <Heading as='h2' className='text-humanoid text-[20px] mb-2.5'>
+          <Heading as='h2' className='text-humanoid mx-auto text-[20px] mb-2.5'>
             {linkText}
           </Heading>
           <span className='text-foreground'>{text}</span>

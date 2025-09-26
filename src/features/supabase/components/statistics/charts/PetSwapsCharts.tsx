@@ -41,7 +41,7 @@ export const PetSwapsCharts = ({
 
   return (
     <div className='mb-5 lg:mb-10'>
-      <Heading as='h2' className='text-xl lg:text-3xl mb-2.5'>
+      <Heading as='h2' className='mb-2.5 text-foreground/65'>
         {'Overall Pet Swaps Statistics'}
       </Heading>
       <div className='flex flex-wrap flex-col md:flex-row gap-2.5 lg:gap-5 mb-5'>
@@ -57,7 +57,7 @@ export const PetSwapsCharts = ({
       >
         {isMatchView ? (
           <div>
-            <Heading as='h2' className='mb-2.5 text-base lg:text-lg font-sans'>
+            <Heading as='h3' className='text-base'>
               {'Total Pet Swaps'}
             </Heading>
             {swaps.length > 0 ? (
@@ -74,7 +74,7 @@ export const PetSwapsCharts = ({
           </div>
         ) : null}
         <div>
-          <Heading as='h2' className='mb-2.5 text-base lg:text-lg font-sans'>
+          <Heading as='h3' className='text-base'>
             {'Top 5 Pet Swaps'}
           </Heading>
           {petSwaps.length > 0 ? (

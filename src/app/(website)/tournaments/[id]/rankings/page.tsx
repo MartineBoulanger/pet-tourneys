@@ -68,7 +68,9 @@ export default async function RankingsPage({ params }: { params: PageParams }) {
       <PageHeading heading={'League Rankings'}>
         <PageMenu links={links} />
       </PageHeading>
-      <Paragraph className='text-humanoid'>{tournament.name}</Paragraph>
+      <Paragraph className='flex justify-center text-humanoid gap-2.5 mb-5 lg:mb-10'>
+        {tournament.name}
+      </Paragraph>
     </div>
   );
 

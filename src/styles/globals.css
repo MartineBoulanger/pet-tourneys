@@ -20,32 +20,37 @@
   }
   h1,
   h2 {
-    font-weight: 700;
+    font-weight: 400;
     line-height: normal;
-    font-family: var(--font-warcraft);
-    letter-spacing: 1.5px;
+    max-width: max-content;
   }
   h1 {
-    font-size: 40px;
-    margin-bottom: 20px;
-    background: linear-gradient(
-      to right,
-      var(--color-magic),
-      var(--color-humanoid)
-    );
+    font-family: var(--font-brutals-tilted);
+    font-size: 32px;
+    margin: 0 auto;
+    text-align: center;
+    padding-inline: 10px;
+    background: linear-gradient(135deg, var(--color-green), var(--color-blue))
+      50%;
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
+    -webkit-text-fill-color: transparent;
+    -moz-background-clip: text;
+    -moz-text-fill-color: transparent;
   }
   h2 {
+    font-family: var(--font-brutals);
     font-size: 20px;
+    color: var(--color-humanoid);
   }
   @media screen and (min-width: 640px) {
     h1 {
-      font-size: 60px;
+      font-size: 48px;
+      margin: 0 auto 20px auto;
     }
     h2 {
-      font-size: 30px;
+      font-size: 24px;
     }
   }
 }
@@ -63,9 +68,9 @@
     @apply hover:transition-all hover:duration-500 hover:bg-[var(--color-blue-grey)];
   }
   .btn-cancel {
-    background-color: var(--color-red);
+    background-color: var(--color-dark-red);
     color: var(--color-foreground);
-    @apply hover:transition-all hover:duration-500 hover:bg-[var(--color-dark-red)];
+    @apply hover:transition-all hover:duration-500 hover:bg-[var(--color-red)];
   }
   .btn-link {
     background-color: transparent;

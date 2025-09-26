@@ -101,7 +101,7 @@ export function BattleLogViewer({ battleLog }: BattleLogViewerProps) {
         </div>
       </div>
       <div className='p-2.5 lg:p-5 bg-background'>
-        <Heading as='h4' className='font-medium mb-2.5'>
+        <Heading as='h3' className='font-medium mb-2.5'>
           {'Battle Rounds'}
         </Heading>
         <div className='space-y-2.5 lg:space-y-5'>
@@ -124,7 +124,7 @@ export function BattleLogViewer({ battleLog }: BattleLogViewerProps) {
 
               {expandedRounds[round.round] && (
                 <div className='p-2.5 lg:p-5 border border-light-grey bg-dark-grey rounded-b-md'>
-                  <ul className='space-y-2.5 lg:space-y-5'>
+                  <ul className='space-y-1'>
                     {round.events.map((event, index) => {
                       const cleanedEvent = event.replace(/^\d+\s*/, '');
 

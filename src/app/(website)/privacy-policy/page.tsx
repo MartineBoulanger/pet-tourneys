@@ -1,4 +1,4 @@
-import { Container, Heading, Paragraph } from '@/components/ui';
+import { Container, Heading, Paragraph, Divider } from '@/components/ui';
 
 export async function generateMetadata() {
   return {
@@ -19,10 +19,7 @@ export default async function PrivacyPage() {
           'We use cookies only where they are strictly necessary for the operation and security of our website. We do not use tracking, marketing, or analytics cookies.'
         }
       </Paragraph>
-      <Heading
-        as='h2'
-        className='font-sans text-2xl tracking-normal text-humanoid mb-2'
-      >
+      <Heading as='h2' className='text-humanoid/65 mb-1'>
         {'What are cookies?'}
       </Heading>
       <Paragraph className='max-w-[700px] mb-5'>
@@ -30,10 +27,13 @@ export default async function PrivacyPage() {
           'Cookies are small text files stored in your browser that allow a website to recognize your device. Some cookies are essential to provide the services you request, such as logging into your account.'
         }
       </Paragraph>
-      <Heading
-        as='h2'
-        className='font-sans text-2xl tracking-normal text-humanoid mb-2'
-      >
+      <Divider
+        alignment='horizontal'
+        width='80'
+        height='0.5'
+        color='humanoid'
+      />
+      <Heading as='h2' className='text-humanoid/65 mb-1'>
         {'Which cookies do we use?'}
       </Heading>
       <table className='mb-5 border-collapse w-full text-left'>
@@ -88,10 +88,13 @@ export default async function PrivacyPage() {
           </tr>
         </tbody>
       </table>
-      <Heading
-        as='h2'
-        className='font-sans text-2xl tracking-normal text-humanoid mb-2'
-      >
+      <Divider
+        alignment='horizontal'
+        width='80'
+        height='0.5'
+        color='humanoid'
+      />
+      <Heading as='h2' className='text-humanoid/65 mb-1'>
         {'Why do we use these cookies?'}
       </Heading>
       <ul className='mb-5'>
@@ -106,10 +109,13 @@ export default async function PrivacyPage() {
           }
         </li>
       </ul>
-      <Heading
-        as='h2'
-        className='font-sans text-2xl tracking-normal text-humanoid mb-2'
-      >
+      <Divider
+        alignment='horizontal'
+        width='80'
+        height='0.5'
+        color='humanoid'
+      />
+      <Heading as='h2' className='text-humanoid/65 mb-1'>
         {'Your choices'}
       </Heading>
       <ul className='mb-5'>

@@ -123,7 +123,9 @@ export default async function PetsStatisticsPage({
           <PageMenu links={links} />
         </PageHeading>
         {entityName && (
-          <Paragraph className='text-humanoid'>{entityName}</Paragraph>
+          <Paragraph className='flex justify-center text-humanoid gap-2.5 mb-5 lg:mb-10'>
+            {entityName}
+          </Paragraph>
         )}
       </div>
       {stats && (
