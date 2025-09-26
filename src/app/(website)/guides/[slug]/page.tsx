@@ -91,7 +91,7 @@ export default async function GuidePage({
       <Container className='p-2.5 bg-light-grey rounded-lg shadow-md'>
         {page.pageTitle || page.pageDescription ? (
           <div className='p-2.5 rounded-t-lg bg-background'>
-            {page.pageTitle ? <Heading>{page.pageTitle}</Heading> : null}
+            {page.pageTitle ? <Heading className='mb-2.5'>{page.pageTitle}</Heading> : null}
             {page.pageDescription ? (
               <>
                 <RichText

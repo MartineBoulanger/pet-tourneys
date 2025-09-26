@@ -34,7 +34,7 @@ const ContentLayout = ({ component }: ContentLayoutProps) => {
   return (
     <div
       className={cn(
-        'grid grid-cols-1',
+        'grid grid-cols-1 gap-2.5 lg:gap-0',
         layout === '2 Columns' && 'lg:grid-cols-2'
       )}
     >

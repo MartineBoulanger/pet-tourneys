@@ -23,18 +23,13 @@ const options = (): Options => {
       [BLOCKS.HEADING_1]: (node, children) => {
         const h1 = node?.nodeType === 'heading-1';
         if (!h1) return null;
-        return (
-          <Heading className='lg:text-4xl text-foreground'>{children}</Heading>
-        );
+        return <Heading className='lg:text-4xl'>{children}</Heading>;
       },
       [BLOCKS.HEADING_2]: (node, children) => {
         const h2 = node?.nodeType === 'heading-2';
         if (!h2) return null;
         return (
-          <Heading
-            as='h2'
-            className='mb-2.5 lg:text-2xl text-humanoid font-sans tracking-normal'
-          >
+          <Heading as='h2' className='mb-2.5'>
             {children}
           </Heading>
         );
@@ -121,7 +116,9 @@ const options = (): Options => {
       },
     },
     renderMark: {
-      [MARKS.BOLD]: (text) => <span className='font-bold'>{text}</span>,
+      [MARKS.BOLD]: (text) => (
+        <span className='font-bold text-humanoid'>{text}</span>
+      ),
       [MARKS.ITALIC]: (text) => <span className='italic'>{text}</span>,
       [MARKS.UNDERLINE]: (text) => <span className='underline'>{text}</span>,
       [MARKS.STRIKETHROUGH]: (text) => (

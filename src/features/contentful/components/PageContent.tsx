@@ -30,7 +30,7 @@ const PageContent = ({ components }: PageContentProps) => {
   if (!components) return null;
 
   return (
-    <div className='flex flex-col rounded-b-lg bg-background'>
+    <div className='flex flex-col rounded-b-lg bg-background pb-2.5'>
       {components.map((component, index) => {
         const Block = getRegisteredComponent(component);
         if (!Block) return null;
