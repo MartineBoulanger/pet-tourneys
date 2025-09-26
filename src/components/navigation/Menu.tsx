@@ -37,7 +37,7 @@ export const Menu = ({ className, buttonVariant = 'primary' }: MenuProps) => {
           variant={buttonVariant}
           onClick={toggleMenu}
         >
-          <GiHamburgerMenu className='lg:w-6 lg:h-6' />
+          <GiHamburgerMenu className='w-6 h-6' />
         </Button>
       </div>
 
