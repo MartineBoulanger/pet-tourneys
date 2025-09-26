@@ -1,6 +1,7 @@
 import { Links } from '@/lib/types';
 import { Container, PageHeading, PageMenu } from '@/components/ui';
 import { RulesList } from '@/features/cms/components/rules/RulesList';
+import { DownloadRulesButton } from '@/features/cms/components/rules/DownloadRulesButton';
 
 export async function generateMetadata() {
   return {
@@ -30,7 +31,13 @@ export default function TournamentsRulesPage() {
       <PageHeading heading='League Rules'>
         <PageMenu links={links} />
       </PageHeading>
+      <div className='flex justify-center md:justify-end'>
+        <DownloadRulesButton className='mb-2.5 lg:mb-5' />
+      </div>
       <RulesList />
+      <div className='flex justify-center md:justify-end'>
+        <DownloadRulesButton className='mt-2.5 lg:mt-5' />
+      </div>
     </Container>
   );
 }
