@@ -31,8 +31,8 @@ export const Menu = ({ className, buttonVariant = 'primary' }: MenuProps) => {
     <div className={className}>
       <div className='flex items-center gap-x-5 lg:gap-x-0 p-5 lg:p-0'>
         <Button
-          title='Mobile Nav Menu'
-          aria-label='Mobile Nav Menu'
+          title='Navigation Menu'
+          aria-label='Navigation Menu'
           type='button'
           variant={buttonVariant}
           onClick={toggleMenu}

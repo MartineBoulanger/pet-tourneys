@@ -26,7 +26,7 @@ export const PageCard = ({ page }: PageCardProps) => {
           />
         ) : (
           <Image
-            src={`/images/PML_Logo.jpg`}
+            src={`/images/PML_Logo.png`}
             alt={'Fallback image'}
             width={500}
             height={500}
