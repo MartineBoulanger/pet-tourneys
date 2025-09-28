@@ -1,8 +1,8 @@
 import { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 import { getUserSession } from '@/features/supabase/actions/auth';
-import { AdminPanelButtons } from '@/features/supabase/components/admin/AdminPanelButtons';
-import { Heading } from '@/components/ui';
+import { AdminSidebar } from '@/features/supabase/components/admin/AdminSidebar';
+import { Container, Heading } from '@/components/ui';
 
 export const metadata: Metadata = {
   title: 'Admin Panel',
@@ -24,9 +24,13 @@ export default async function AuthLayout({
 
   return (
     <div className='p-5'>
-      <Heading>{`${username}'s Admin Panel`}</Heading>
-      <AdminPanelButtons isFwenLoggedIn={username === 'Fwen'} />
-      {children}
+      <Container className='relative lg:flex lg:gap-5 px-0 lg:px-0'>
+        <AdminSidebar isFwenLoggedIn={username === 'Fwen'} />
+        <div className='lg:flex-1'>
+          <Heading>{`${username}'s Admin Panel`}</Heading>
+          {children}
+        </div>
+      </Container>
     </div>
   );
 }

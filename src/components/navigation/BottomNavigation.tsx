@@ -15,9 +15,24 @@ export const BottomNavigation = ({ user }: BottomNavigationProps) => {
   return (
     <div
       className={cn(
-        'fixed bottom-0 left-0 right-0 bg-background flex items-center justify-evenly lg:hidden z-50'
+        'fixed bottom-0 left-0 right-0 py-2.5 bg-background flex items-center justify-evenly lg:hidden z-50'
       )}
     >
+      {/* login and logout button */}
+      {user ? (
+        <Logout className='px-5 flex justify-center' />
+      ) : (
+        <Link
+          href='/login'
+          className='btn-link px-5 flex justify-center'
+          title='Login'
+          aria-label='Login'
+        >
+          <BiLogIn className='w-6 h-6' />
+        </Link>
+      )}
+      <div className='w-0.5 h-10 rounded-lg bg-blue-grey' />
+
       {/* Admin panel button */}
       {user?.role === 'admin' ? (
         <>
@@ -45,21 +60,6 @@ export const BottomNavigation = ({ user }: BottomNavigationProps) => {
           <div className='w-0.5 h-10 rounded-lg bg-blue-grey' />
         </>
       ) : null}
-
-      {/* login and logout button */}
-      {user ? (
-        <Logout className='px-5 flex justify-center' />
-      ) : (
-        <Link
-          href='/login'
-          className='btn-link px-5 flex justify-center'
-          title='Login'
-          aria-label='Login'
-        >
-          <BiLogIn className='w-6 h-6' />
-        </Link>
-      )}
-      <div className='w-0.5 h-10 rounded-lg bg-blue-grey' />
 
       {/* Discord button */}
       <Link

@@ -24,7 +24,7 @@ export default async function UploadLogsPage() {
         <Container className='text-center lg:px-5'>
           <Heading
             as='h2'
-            className='font-sans tracking-normal text-xl text-center text-red mb-2.5'
+            className='text-red mb-5'
           >{`Error ${status}!`}</Heading>
           <Paragraph>{message}</Paragraph>
         </Container>
@@ -37,10 +37,7 @@ export default async function UploadLogsPage() {
       <>
         <Divider alignment='horizontal' color='light-grey' height='0.5' />
         <Container className='text-center lg:px-5'>
-          <Heading
-            as='h2'
-            className='font-sans tracking-normal text-xl text-center text-red mb-2.5'
-          >
+          <Heading as='h2' className='text-red mb-5'>
             {'No Leagues Found!'}
           </Heading>
           <Paragraph>
@@ -56,12 +53,9 @@ export default async function UploadLogsPage() {
   return (
     <>
       <Divider alignment='horizontal' color='light-grey' height='0.5' />
-      <Container className='max-w-[1024px]'>
-        <Heading
-          as='h2'
-          className='font-sans tracking-normal text-xl text-center mb-2.5'
-        >
-          {'Pet Battle Logs Upload Form'}
+      <Container className='px-0 lg:px-0 my-0'>
+        <Heading as='h2' className='text-foreground/80 mb-5'>
+          {'Upload Battle Logs & Create Match'}
         </Heading>
         <UploadForm tournaments={tournaments || []} />
       </Container>

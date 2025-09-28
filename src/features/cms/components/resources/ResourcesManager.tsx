@@ -132,7 +132,7 @@ export function ResourcesManager() {
   return (
     <div className='space-y-2.5 lg:space-y-5'>
       {/* Header with new resource button */}
-      <div className='flex flex-wrap items-center justify-center gap-2.5 lg:gap-5 mb-2.5 lg:mb-5'>
+      <div className='flex flex-wrap items-center justify-center gap-2.5 mb-2.5'>
         {!showForm && (
           <Button
             onClick={() => setShowForm(true)}
@@ -187,13 +187,13 @@ export function ResourcesManager() {
               onDragStart={(e) => handleDragStart(e, resource._id)}
               onDragOver={handleDragOver}
               onDrop={(e) => handleDrop(e, resource._id)}
-              className={`bg-background rounded-lg p-2.5 lg:p-5 transition-all cursor-move ${
+              className={`bg-background rounded-lg p-2.5 lg:px-5 transition-all cursor-move ${
                 draggedItem === resource._id ? 'opacity-50 scale-95' : ''
               }`}
             >
               <div className='flex items-center justify-between'>
-                <div className='flex items-center gap-5 flex-1'>
-                  <div className='flex items-center gap-2.5'>
+                <div className='flex items-center gap-2.5 flex-1'>
+                  <div className='flex items-center gap-2.5 lg:gap-5'>
                     <FaBars className='h-5 w-5 text-foreground/50' />
                     <span className='bg-light-grey px-2 py-1 rounded text-sm'>
                       {'#'}
@@ -202,14 +202,11 @@ export function ResourcesManager() {
                   </div>
 
                   <div className='flex-1'>
-                    <Heading
-                      as='h3'
-                      className='text-lg font-bold text-humanoid'
-                    >
+                    <Heading as='h3' className='font-bold text-humanoid'>
                       {resource.title}
                     </Heading>
 
-                    <div className='flex flex-wrap items-center gap-2.5 lg:gap-5 text-sm text-foreground/80'>
+                    <div className='flex flex-wrap items-center gap-2.5 text-sm text-foreground/80'>
                       <div className='flex items-center gap-1'>
                         <FaImage className='h-4 w-4' />
                         {(resource.images && resource.images?.length) || 0}
@@ -228,14 +225,14 @@ export function ResourcesManager() {
                   </div>
                 </div>
 
-                <div className='flex gap-2.5 ml-2.5'>
+                <div className='flex flex-col lg:flex-row gap-2.5 ml-2.5'>
                   <Button
                     type='button'
                     variant='link'
                     onClick={() => handleEdit(resource)}
                     disabled={showForm}
                     className='btn-link'
-                    title='Edit'
+                    title='Edit Resource'
                   >
                     <FaEdit className='h-5 w-5' />
                   </Button>
@@ -246,7 +243,7 @@ export function ResourcesManager() {
                     onClick={() => handleDelete(resource._id)}
                     disabled={deletingId === resource._id || showForm}
                     className='btn-link hover:text-red'
-                    title='Delete'
+                    title='Delete Resource'
                   >
                     {deletingId === resource._id ? (
                       <div className='h-5 w-5 border-2 border-red-600 border-t-transparent rounded-full animate-spin' />

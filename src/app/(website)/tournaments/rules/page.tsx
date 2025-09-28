@@ -27,15 +27,15 @@ export default function TournamentsRulesPage() {
   ];
 
   return (
-    <Container className='mb-5 lg:mb-10'>
+    <Container className='mb-5 px-2.5 lg:px-5 lg:mb-10'>
       <PageHeading heading='League Rules'>
         <PageMenu links={links} />
       </PageHeading>
-      <div className='flex justify-center md:justify-end'>
+      <div className='flex justify-center lg:justify-end'>
         <DownloadRulesButton className='mb-2.5 lg:mb-5' />
       </div>
       <RulesList />
-      <div className='flex justify-center md:justify-end'>
+      <div className='flex justify-center lg:justify-end'>
         <DownloadRulesButton className='mt-2.5 lg:mt-5' />
       </div>
     </Container>

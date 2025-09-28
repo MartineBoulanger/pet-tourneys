@@ -23,10 +23,7 @@ export function CookieBanner() {
   return (
     <div className='fixed bottom-5 left-5 right-5 max-w-screen-md mx-auto bg-dark-grey shadow-md p-5 rounded-lg flex justify-between z-[999]'>
       <div>
-        <Heading
-          as='h2'
-          className='font-sans text-2xl tracking-normal text-humanoid mb-2'
-        >
+        <Heading as='h2' className='mb-2'>
           {'Cookies notice'}
         </Heading>
         <Paragraph className='text-sm'>

@@ -13,7 +13,7 @@ export const TournamentsListItem = ({
   if (!tournament) return null;
 
   return (
-    <div className='p-2.5 lg:p-5 rounded-lg shadow-md bg-background'>
+    <div className='p-2.5 lg:px-5 rounded-lg shadow-md bg-background'>
       <div className='flex justify-between items-center'>
         <div className='flex flex-col'>
           <Link

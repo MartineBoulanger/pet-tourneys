@@ -168,11 +168,11 @@ export function ScheduleForm({
 
   return (
     <div className='bg-background rounded-lg p-2.5 lg:p-5'>
-      <Heading as='h3' className='text-xl text-humanoid font-medium mb-2.5'>
+      <Heading as='h3' className='text-xl text-humanoid mb-2.5'>
         {schedule ? 'Edit Signup' : 'Create Signup'}
       </Heading>
 
-      <form onSubmit={handleSubmit} className='space-y-2.5 lg:space-y-5'>
+      <form onSubmit={handleSubmit} className='space-y-2.5'>
         {/* Title */}
         <Input
           label='Title'
@@ -216,10 +216,10 @@ export function ScheduleForm({
             {formData.images.map((image, index) => (
               <div
                 key={`schedule-${index}`}
-                className='p-5 rounded-lg bg-light-grey'
+                className='p-2.5 rounded-lg bg-light-grey'
               >
                 <div className='flex justify-between items-center mb-2.5'>
-                  <Paragraph className='text-sm font-medium flex items-center gap-2'>
+                  <Paragraph className='text-sm font-medium flex items-center gap-2.5'>
                     <FaGripVertical className='w-4 h-4 text-foreground/50' />
                     {'Schedule Item #'}
                     {index + 1}
@@ -310,16 +310,13 @@ export function ScheduleForm({
         )}
 
         {/* Form Actions */}
-        <div className='flex gap-2.5 lg:gap-5'>
-          <Button type='submit' className='flex-1'>
-            {schedule ? 'Edit' : 'Create'}
-          </Button>
-
+        <div className='flex justify-end gap-2.5'>
           {onCancel && (
             <Button type='button' variant='secondary' onClick={onCancel}>
               {'Cancel'}
             </Button>
           )}
+          <Button type='submit'>{schedule ? 'Edit' : 'Create'}</Button>
         </div>
       </form>
     </div>

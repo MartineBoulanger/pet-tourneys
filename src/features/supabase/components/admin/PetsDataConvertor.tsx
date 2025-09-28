@@ -11,7 +11,7 @@ export function PetsDataConverter() {
   const [excelData, setExcelData] = useState('');
   const [jsonOutput, setJsonOutput] = useState('');
 
-  // Only one order of columns for the pet data, can always add columns -> but you have to add these in the excel sheet as well.
+  // NOTE: Only one order of columns for the pet data, can always add columns -> but you have to add these in the excel sheet as well.
   const headers = [
     'petID',
     'name',
@@ -71,8 +71,8 @@ export function PetsDataConverter() {
   };
 
   return (
-    <>
-      <div className='flex flex-wrap items-center justify-center gap-2.5 lg:gap-5 mb-2.5 lg:mb-5'>
+    <div className='h-full w-full'>
+      <div className='flex flex-wrap items-center justify-center gap-2.5 mb-2.5'>
         <Link
           href='/admin/upload-pets/icons'
           className='btn-submit flex items-center gap-2.5 py-[7px] px-[11px] rounded-lg'
@@ -87,12 +87,12 @@ export function PetsDataConverter() {
         </Link>
       </div>
       <div className='bg-light-grey shadow-md rounded-lg p-2.5 lg:p-5'>
-        <Paragraph className='w-full text-center mx-auto mb-5 mt-2.5 text-sm'>
+        <Paragraph className='w-full text-center mx-auto mb-2.5 text-sm bg-background py-2.5 px-2.5 lg:px-5 rounded-lg'>
           {
             "Upload the excel file sheet from Xu-Fu's pet guide, and convert it to a JSON file, then download the json file, and make sure you move the file from Downloads folder to the lib folder in the app. This can only be done by Fwen for now."
           }
         </Paragraph>
-        <Form handleSubmit={convertToJson}>
+        <Form handleSubmit={convertToJson} className='rounded-b-none'>
           <Textarea
             label='Paste excel data here'
             id='pets-data'
@@ -103,7 +103,7 @@ export function PetsDataConverter() {
             required
           />
         </Form>
-        <div className='flex items-center flex-wrap justify-end gap-2.5 lg:gap-5 mt-2.5 lg:mt-5'>
+        <div className='flex items-center flex-wrap justify-end gap-2.5 p-2.5 lg:p-5 pt-0 lg:pt-0 bg-background rounded-b-lg'>
           <Button variant='secondary' onClick={() => router.push('/admin')}>
             {'Cancel'}
           </Button>
@@ -115,11 +115,8 @@ export function PetsDataConverter() {
       </div>
       {jsonOutput && (
         <>
-          <div className='flex flex-row justify-between items-center mb-5 mt-5 lg:mt-10'>
-            <Heading
-              as='h3'
-              className='font-sans tracking-normal text-xl text-center mb-2.5'
-            >
+          <div className='flex flex-row justify-between items-center mb-2.5 mt-5'>
+            <Heading as='h2' className='text-foreground/80'>
               {'JSON Output'}
             </Heading>
             <Button onClick={downloadJsonFile}>
@@ -133,6 +130,6 @@ export function PetsDataConverter() {
           </div>
         </>
       )}
-    </>
+    </div>
   );
 }

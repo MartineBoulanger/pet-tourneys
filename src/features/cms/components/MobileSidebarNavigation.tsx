@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { FaChevronRight } from 'react-icons/fa';
-import { AiOutlineMenuUnfold, AiOutlineMenuFold } from 'react-icons/ai';
+import { RiMenuFold4Line, RiMenuFold3Line } from 'react-icons/ri';
 import { Button, Heading, Paragraph } from '@/components/ui';
 import { cn } from '@/utils/cn';
 import { NavigationItem } from './DesktopSidebarNavigation';
@@ -119,10 +119,10 @@ export function MobileSidebarNavigation({
       {/* Fixed Mobile Navigation Button */}
       <Button
         onClick={() => setIsOpen(true)}
-        className={cn('fixed top-[18%] right-0 z-30 p-2 rounded-r-none')}
+        className={cn('fixed top-[15%] right-0 z-30 p-2 rounded-r-none')}
         aria-label='Open rules navigation'
       >
-        <AiOutlineMenuFold className='w-6 h-6' />
+        <RiMenuFold3Line className='w-6 h-6' />
       </Button>
 
       {/* Mobile Overlay */}
@@ -137,13 +137,13 @@ export function MobileSidebarNavigation({
           {/* Sidebar Panel */}
           <div
             className={cn(
-              'fixed right-0 top-[10%] h-full w-full bg-background z-50',
+              'fixed right-0 top-0 h-full w-full max-w-[430px] bg-background z-50',
               'animate-slide-in-right',
               'flex flex-col'
             )}
           >
             {/* Header */}
-            <div className='flex items-center justify-between p-5 bg-dark-grey'>
+            <div className='flex items-center justify-between py-2.5 px-5 bg-medium-grey'>
               <div>
                 <Heading as='h3' className='font-bold'>
                   {'Page Navigation'}
@@ -157,7 +157,7 @@ export function MobileSidebarNavigation({
                 onClick={() => setIsOpen(false)}
                 aria-label='Close navigation'
               >
-                <AiOutlineMenuUnfold className='w-6 h-6' />
+                <RiMenuFold4Line className='w-6 h-6' />
               </Button>
             </div>
 

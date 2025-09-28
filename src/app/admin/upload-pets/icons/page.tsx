@@ -8,11 +8,11 @@ export default async function PetIconsPage() {
   return (
     <>
       <Divider alignment='horizontal' color='light-grey' height='0.5' />
-      <Container className='px-0 lg:px-0'>
-        <Heading as='h2' className='font-sans tracking-normal text-xl mb-2.5'>
+      <Container className='px-0 lg:px-0 my-0'>
+        <Heading as='h2' className='text-foreground/80 mb-5'>
           {'Manage All Pet Icons'}
         </Heading>
-        <Paragraph className='text-humanoid'>
+        <Paragraph className='text-humanoid text-center mb-2.5'>
           {'Upload, organize, and manage all pet icons'}
         </Paragraph>
         <ImagesManager

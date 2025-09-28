@@ -36,7 +36,7 @@ export default async function AdminTournamentsListPage({
         <Container className='text-center'>
           <Heading
             as='h2'
-            className='font-sans tracking-normal text-xl text-red mb-2.5'
+            className='text-red mb-5'
           >{`Error ${status}!`}</Heading>
           <Paragraph>{message}</Paragraph>
         </Container>
@@ -49,10 +49,7 @@ export default async function AdminTournamentsListPage({
       <>
         <Divider alignment='horizontal' color='light-grey' height='0.5' />
         <Container className='text-center'>
-          <Heading
-            as='h2'
-            className='font-sans tracking-normal text-xl text-red mb-2.5'
-          >
+          <Heading as='h2' className='text-red mb-5'>
             {'No Leagues Found!'}
           </Heading>
           <Paragraph>
@@ -68,11 +65,11 @@ export default async function AdminTournamentsListPage({
   return (
     <>
       <Divider alignment='horizontal' color='light-grey' height='0.5' />
-      <Container className='px-0 lg:px-0'>
-        <Heading as='h2' className='font-sans tracking-normal text-xl mb-2.5'>
+      <Container className='px-0 lg:px-0 my-0'>
+        <Heading as='h2' className='text-foreground/80 mb-5'>
           {'Manage Leagues'}
         </Heading>
-        <div className='flex flex-wrap item-center justify-center gap-2.5 lg:gap-5 mb-2.5 lg:mb-5'>
+        <div className='flex flex-wrap item-center justify-center gap-2.5 mb-2.5'>
           <Link
             href='/admin/tournaments/new'
             className='btn-submit flex items-center gap-2.5 py-[7px] px-[11px] rounded-lg'
@@ -86,7 +83,7 @@ export default async function AdminTournamentsListPage({
             <MdUpload className='w-5 h-5' /> <span>{'Upload Battle Logs'}</span>
           </Link>
         </div>
-        <div className='grid gap-2.5 lg:gap-5 bg-light-grey p-2.5 lg:p-5 rounded-lg shadow-md'>
+        <div className='grid gap-2.5 bg-light-grey p-2.5 lg:p-5 rounded-lg shadow-md'>
           {tournaments.length > 0 ? (
             <>
               {tournaments.map((tournament) => (

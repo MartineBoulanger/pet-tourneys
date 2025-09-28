@@ -57,6 +57,8 @@ export const withSupabase = (middleware: CustomMiddleware) => {
       !request.nextUrl.pathname.startsWith('/auth') &&
       !request.nextUrl.pathname.endsWith('/sitemap.xml') &&
       !request.nextUrl.pathname.endsWith('/robots.txt') &&
+      !request.nextUrl.pathname.endsWith('/manifest.json') &&
+      !request.nextUrl.pathname.endsWith('/manifest.webmanifest') &&
       !request.nextUrl.pathname.endsWith('/')
     ) {
       // no user, potentially respond by redirecting the user to the login page

@@ -82,11 +82,11 @@ export const ResourceForm = ({
 
   return (
     <div className='bg-background rounded-lg p-2.5 lg:p-5'>
-      <Heading as='h3' className='text-xl text-humanoid font-medium mb-2.5'>
+      <Heading as='h3' className='text-xl text-humanoid mb-2.5'>
         {resource ? 'Edit Resource' : 'Create Resource'}
       </Heading>
 
-      <form onSubmit={handleSubmit} className='space-y-2.5 lg:space-y-5'>
+      <form onSubmit={handleSubmit} className='space-y-2.5'>
         <Input
           label='Resource title'
           name='title'
@@ -110,20 +110,16 @@ export const ResourceForm = ({
           </div>
         )}
 
-        <div className='flex gap-2.5 lg:gap-5'>
-          <Button
-            type='submit'
-            disabled={!formData.title?.trim()}
-            className='flex-1'
-          >
-            {resource ? 'Edit' : 'Create'}
-          </Button>
-
+        <div className='flex justify-end gap-2.5'>
           {onCancel && (
             <Button type='button' variant='secondary' onClick={onCancel}>
               {'Cancel'}
             </Button>
           )}
+
+          <Button type='submit' disabled={!formData.title?.trim()}>
+            {resource ? 'Edit' : 'Create'}
+          </Button>
         </div>
       </form>
     </div>

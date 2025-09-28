@@ -23,8 +23,8 @@ export default async function EditTournamentPage({
         <Container className='text-center lg:px-5'>
           <Heading
             as='h2'
-            className='font-sans tracking-normal text-xl text-red text-center mb-2.5'
-          >{`Error ${status}!`}</Heading>
+            className='text-red mb-5'
+          >{`Error ${status}`}</Heading>
           <Paragraph>{message}</Paragraph>
         </Container>
       </>
@@ -36,11 +36,8 @@ export default async function EditTournamentPage({
       <>
         <Divider alignment='horizontal' color='light-grey' height='0.5' />
         <Container className='text-center lg:px-5'>
-          <Heading
-            as='h2'
-            className='font-sans tracking-normal text-xl text-red text-center mb-2.5'
-          >
-            {'No League Found!'}
+          <Heading as='h2' className='text-red mb-5'>
+            {'No League Found'}
           </Heading>
           <Paragraph>
             {'Please create a league first before you can edit one.'}
@@ -53,11 +50,8 @@ export default async function EditTournamentPage({
   return (
     <>
       <Divider alignment='horizontal' color='light-grey' height='0.5' />
-      <Container className='w-full flex flex-col justify-center max-w-[512px]'>
-        <Heading
-          as='h2'
-          className='font-sans tracking-normal text-xl text-center mb-2.5'
-        >
+      <Container className='px-0 lg:px-0 my-0'>
+        <Heading as='h2' className='text-foreground/80 mb-5'>
           {'Edit League'}
         </Heading>
         <TournamentForm initialData={tournament} />

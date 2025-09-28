@@ -88,11 +88,11 @@ export function RuleForm({ rule, onSuccess, onCancel }: RuleFormProps) {
 
   return (
     <div className='bg-background rounded-lg p-2.5 lg:p-5'>
-      <Heading as='h3' className='text-xl text-humanoid font-medium mb-2.5'>
+      <Heading as='h3' className='text-xl text-humanoid mb-2.5'>
         {rule ? 'Edit Rule' : 'Create Rule'}
       </Heading>
 
-      <form onSubmit={handleSubmit} className='space-y-2.5 lg:space-y-5'>
+      <form onSubmit={handleSubmit} className='space-y-2.5'>
         <Input
           label='Rule title'
           name='title'
@@ -124,20 +124,18 @@ export function RuleForm({ rule, onSuccess, onCancel }: RuleFormProps) {
           </div>
         )}
 
-        <div className='flex gap-2.5 lg:gap-5'>
-          <Button
-            type='submit'
-            disabled={!formData.title.trim() || !formData.content.trim()}
-            className='flex-1'
-          >
-            {rule ? 'Edit' : 'Create'}
-          </Button>
-
+        <div className='flex justify-end gap-2.5'>
           {onCancel && (
             <Button type='button' variant='secondary' onClick={onCancel}>
               {'Cancel'}
             </Button>
           )}
+          <Button
+            type='submit'
+            disabled={!formData.title.trim() || !formData.content.trim()}
+          >
+            {rule ? 'Edit' : 'Create'}
+          </Button>
         </div>
       </form>
     </div>

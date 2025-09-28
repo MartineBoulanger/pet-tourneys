@@ -33,7 +33,10 @@ export default async function AdminPlayersPage({
       <>
         <Divider alignment='horizontal' color='light-grey' height='0.5' />
         <Container className='text-center'>
-          <Heading className='text-red'>{`Error ${status}!`}</Heading>
+          <Heading
+            as='h2'
+            className='text-red mb-5'
+          >{`Error ${status}!`}</Heading>
           <Paragraph>{message}</Paragraph>
         </Container>
       </>
@@ -45,7 +48,9 @@ export default async function AdminPlayersPage({
       <>
         <Divider alignment='horizontal' color='light-grey' height='0.5' />
         <Container className='text-center'>
-          <Heading className='text-red'>{'No League Found!'}</Heading>
+          <Heading as='h2' className='text-red mb-5'>
+            {'No League Found!'}
+          </Heading>
           <Paragraph>
             {
               'Please create a league first, so you can upload battle logs and create matches.'
@@ -61,7 +66,9 @@ export default async function AdminPlayersPage({
       <>
         <Divider alignment='horizontal' color='light-grey' height='0.5' />
         <Container className='text-center'>
-          <Heading className='text-red'>{'No Players Found!'}</Heading>
+          <Heading as='h2' className='text-red mb-5'>
+            {'No Players Found!'}
+          </Heading>
           <Paragraph>
             {
               'Please upload battle logs, so you can create matches, and get players results.'
@@ -75,15 +82,17 @@ export default async function AdminPlayersPage({
   return (
     <>
       <Divider alignment='horizontal' color='light-grey' height='0.5' />
-      <Container className='px-0 lg:px-0'>
+      <Container className='px-0 lg:px-0 my-0'>
         <div>
           <div className='mb-5'>
-            <Heading as='h2' className='font-sans tracking-normal text-xl'>
+            <Heading as='h2' className='text-foreground/80 mb-5'>
               {'Manage League Players'}
             </Heading>
-            <Paragraph className='text-humanoid'>{tournament.name}</Paragraph>
+            <Paragraph className='text-humanoid text-center mb-2.5'>
+              {tournament.name}
+            </Paragraph>
           </div>
-          <div className='flex flex-wrap item-center justify-center gap-2.5 lg:gap-5 mb-2.5 lg:mb-5'>
+          <div className='flex flex-wrap item-center justify-center gap-2.5 mb-2.5'>
             <ExportRankingsButton
               tournamentId={id}
               tournamentName={tournament.name}

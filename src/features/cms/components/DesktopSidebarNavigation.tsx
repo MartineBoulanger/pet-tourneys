@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { FaChevronRight } from 'react-icons/fa';
-import { AiOutlineMenuUnfold, AiOutlineMenuFold } from 'react-icons/ai';
+import { RiMenuFold4Line, RiMenuFold3Line } from 'react-icons/ri';
 import { Button, Heading, Paragraph } from '@/components/ui';
 import { cn } from '@/utils/cn';
 
@@ -135,7 +135,7 @@ export const DesktopSidebarNavigation = ({
       {/* Sidebar */}
       <div
         className={cn(
-          'h-fit sticky top-[10%] bg-background rounded-lg shadow-md',
+          'h-fit sticky top-[8%] bg-background rounded-lg shadow-md',
           'transition-all duration-300 ease-in-out overflow-hidden',
           'min-h-[calc(100vh-2rem)]'
         )}
@@ -165,9 +165,9 @@ export const DesktopSidebarNavigation = ({
             aria-label={isOpen ? 'Expand sidebar' : 'Collapse sidebar'}
           >
             {isOpen ? (
-              <AiOutlineMenuUnfold className='w-5 h-5' />
+              <RiMenuFold4Line className='w-5 h-5' />
             ) : (
-              <AiOutlineMenuFold className='w-5 h-5' />
+              <RiMenuFold3Line className='w-5 h-5' />
             )}
           </Button>
         </div>

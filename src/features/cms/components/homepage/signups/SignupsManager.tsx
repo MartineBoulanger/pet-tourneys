@@ -140,7 +140,7 @@ export function SignupsManager() {
   return (
     <div className='space-y-2.5 lg:space-y-5'>
       {/* Header with new button */}
-      <div className='flex flex-wrap items-center justify-center gap-2.5 lg:gap-5 mb-2.5 lg:mb-5'>
+      <div className='flex flex-wrap items-center justify-center gap-2.5 mb-2.5'>
         {!showForm && (
           <Button
             onClick={() => setShowForm(true)}
@@ -185,7 +185,7 @@ export function SignupsManager() {
           {signups.map((signup) => (
             <div
               key={signup._id}
-              className='bg-background rounded-lg p-2.5 lg:p-5'
+              className='bg-background rounded-lg p-2.5 lg:px-5'
             >
               <div className='flex items-center justify-between'>
                 <div className='flex items-center gap-5 flex-1'>
@@ -253,35 +253,37 @@ export function SignupsManager() {
                     )}
                   </Button>
 
-                  <Button
-                    type='button'
-                    variant='link'
-                    onClick={() => handleEdit(signup)}
-                    disabled={showForm || togglingVisibility === signup._id}
-                    className='btn-link'
-                    title='Edit signup'
-                  >
-                    <FaEdit className='h-5 w-5' />
-                  </Button>
+                  <div className='flex flex-col lg:flex-row gap-2.5 ml-2.5'>
+                    <Button
+                      type='button'
+                      variant='link'
+                      onClick={() => handleEdit(signup)}
+                      disabled={showForm || togglingVisibility === signup._id}
+                      className='btn-link'
+                      title='Edit Signup'
+                    >
+                      <FaEdit className='h-5 w-5' />
+                    </Button>
 
-                  <Button
-                    type='button'
-                    variant='link'
-                    onClick={() => handleDelete(signup._id)}
-                    disabled={
-                      deletingId === signup._id ||
-                      showForm ||
-                      togglingVisibility === signup._id
-                    }
-                    className='btn-link hover:text-red'
-                    title='Delete signup'
-                  >
-                    {deletingId === signup._id ? (
-                      <div className='h-5 w-5 border-2 border-red-600 border-t-transparent rounded-full animate-spin' />
-                    ) : (
-                      <FaTrashAlt className='h-5 w-5' />
-                    )}
-                  </Button>
+                    <Button
+                      type='button'
+                      variant='link'
+                      onClick={() => handleDelete(signup._id)}
+                      disabled={
+                        deletingId === signup._id ||
+                        showForm ||
+                        togglingVisibility === signup._id
+                      }
+                      className='btn-link hover:text-red'
+                      title='Delete Signup'
+                    >
+                      {deletingId === signup._id ? (
+                        <div className='h-5 w-5 border-2 border-red-600 border-t-transparent rounded-full animate-spin' />
+                      ) : (
+                        <FaTrashAlt className='h-5 w-5' />
+                      )}
+                    </Button>
+                  </div>
                 </div>
               </div>
             </div>

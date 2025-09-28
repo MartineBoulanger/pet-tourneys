@@ -30,10 +30,7 @@ export default async function AdminEditMatchPage({
       <>
         <Divider alignment='horizontal' color='light-grey' height='0.5' />
         <Container className='text-center'>
-          <Heading
-            as='h2'
-            className='font-sans tracking-normal text-xl text-red text-center mb-2.5'
-          >
+          <Heading as='h2' className='text-red mb-5'>
             {'No Leagues Found!'}
           </Heading>
           <Paragraph>
@@ -51,10 +48,7 @@ export default async function AdminEditMatchPage({
       <>
         <Divider alignment='horizontal' color='light-grey' height='0.5' />
         <Container className='text-center'>
-          <Heading
-            as='h2'
-            className='font-sans tracking-normal text-xl text-red text-center mb-2.5'
-          >
+          <Heading as='h2' className='text-red mb-5'>
             {'Match not found!'}
           </Heading>
         </Container>
@@ -65,12 +59,9 @@ export default async function AdminEditMatchPage({
   return (
     <>
       <Divider alignment='horizontal' color='light-grey' height='0.5' />
-      <Container className='max-w-[1024px]'>
-        <Heading
-          as='h2'
-          className='font-sans tracking-normal text-xl text-center mb-2.5'
-        >
-          {'Edit Match'}
+      <Container className='px-0 lg:px-0 my-0'>
+        <Heading as='h2' className='text-foreground/80 mb-5'>
+          {'Edit Battle Logs & Match'}
         </Heading>
         <UploadForm
           tournaments={tournaments || []}

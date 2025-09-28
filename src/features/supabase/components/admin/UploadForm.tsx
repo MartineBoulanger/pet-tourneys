@@ -141,7 +141,7 @@ export function UploadForm({
 
   return (
     <div className='bg-light-grey shadow-md rounded-lg p-2.5 lg:p-5'>
-      <Paragraph className='w-full text-center mb-5 mt-2.5 text-sm'>
+      <Paragraph className='w-full text-center mx-auto mb-2.5 text-sm bg-background py-2.5 px-2.5 lg:px-5 rounded-lg'>
         {
           'Upload/Edit the PvP pet battle logs and pet usage, fill in the match information, and track the match and logs.'
         }
@@ -156,7 +156,7 @@ export function UploadForm({
         }}
         handleClick={() => router.back()}
       >
-        <div className='grid grid-cols-1 lg:grid-cols-2 gap-2.5 lg:gap-5'>
+        <div className='grid grid-cols-1 lg:grid-cols-2 gap-2.5'>
           <Input
             label='Player 1'
             id='player1'

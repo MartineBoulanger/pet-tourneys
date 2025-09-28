@@ -144,7 +144,7 @@ export function AnnouncementsManager() {
   return (
     <div className='space-y-2.5 lg:space-y-5'>
       {/* Header with new prize button */}
-      <div className='flex flex-wrap items-center justify-center gap-2.5 lg:gap-5 mb-2.5 lg:mb-5'>
+      <div className='flex flex-wrap items-center justify-center gap-2.5 mb-2.5'>
         {!showForm && (
           <Button
             onClick={() => setShowForm(true)}
@@ -189,7 +189,7 @@ export function AnnouncementsManager() {
           {announcements.map((announcement) => (
             <div
               key={announcement._id}
-              className='bg-background rounded-lg p-2.5 lg:p-5'
+              className='bg-background rounded-lg p-2.5 lg:px-5'
             >
               <div className='flex items-center justify-between'>
                 <div className='flex items-center gap-5 flex-1'>
@@ -252,7 +252,7 @@ export function AnnouncementsManager() {
                     disabled={
                       togglingVisibility === announcement._id || showForm
                     }
-                    className={`p-1 rounded ${
+                    className={`${
                       announcement.isVisible
                         ? 'text-humanoid'
                         : 'text-foreground/50'
@@ -272,37 +272,39 @@ export function AnnouncementsManager() {
                     )}
                   </Button>
 
-                  <Button
-                    type='button'
-                    variant='link'
-                    onClick={() => handleEdit(announcement)}
-                    disabled={
-                      showForm || togglingVisibility === announcement._id
-                    }
-                    className='btn-link'
-                    title='Edit announcement'
-                  >
-                    <FaEdit className='h-5 w-5' />
-                  </Button>
+                  <div className='flex flex-col lg:flex-row gap-2.5 ml-2.5'>
+                    <Button
+                      type='button'
+                      variant='link'
+                      onClick={() => handleEdit(announcement)}
+                      disabled={
+                        showForm || togglingVisibility === announcement._id
+                      }
+                      className='btn-link'
+                      title='Edit Announcement'
+                    >
+                      <FaEdit className='h-5 w-5' />
+                    </Button>
 
-                  <Button
-                    type='button'
-                    variant='link'
-                    onClick={() => handleDeleteRule(announcement._id)}
-                    disabled={
-                      deletingId === announcement._id ||
-                      showForm ||
-                      togglingVisibility === announcement._id
-                    }
-                    className='btn-link hover:text-red'
-                    title='Delete'
-                  >
-                    {deletingId === announcement._id ? (
-                      <div className='h-5 w-5 border-2 border-red-600 border-t-transparent rounded-full animate-spin' />
-                    ) : (
-                      <FaTrashAlt className='h-5 w-5' />
-                    )}
-                  </Button>
+                    <Button
+                      type='button'
+                      variant='link'
+                      onClick={() => handleDeleteRule(announcement._id)}
+                      disabled={
+                        deletingId === announcement._id ||
+                        showForm ||
+                        togglingVisibility === announcement._id
+                      }
+                      className='btn-link hover:text-red'
+                      title='Delete Announcement'
+                    >
+                      {deletingId === announcement._id ? (
+                        <div className='h-5 w-5 border-2 border-red-600 border-t-transparent rounded-full animate-spin' />
+                      ) : (
+                        <FaTrashAlt className='h-5 w-5' />
+                      )}
+                    </Button>
+                  </div>
                 </div>
               </div>
             </div>

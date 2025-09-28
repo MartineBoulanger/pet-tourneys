@@ -40,6 +40,8 @@
     0s 1 normal both;
   --animate-slide-in-right: slide-in-right 0.4s
     cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s 1 normal both;
+  --animate-slide-out-right: slide-out-right 0.4s
+    cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s 1 normal both;
   --animate-fade-in: fade-in 0.5s cubic-bezier(0.39, 0.575, 0.565, 1) 0s 1
     normal both;
   --animate-bounce: bounce 1.5s infinite;
@@ -78,6 +80,16 @@
   100% {
     transform: translateX(0);
     opacity: 1;
+  }
+}
+@keyframes slide-out-right {
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  0% {
+    transform: translateX(300px);
+    opacity: 0;
   }
 }
 @keyframes fade-in {

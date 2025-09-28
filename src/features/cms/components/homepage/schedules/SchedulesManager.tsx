@@ -142,7 +142,7 @@ export function SchedulesManager() {
   return (
     <div className='space-y-2.5 lg:space-y-5'>
       {/* Header with new button */}
-      <div className='flex flex-wrap items-center justify-center gap-2.5 lg:gap-5 mb-2.5 lg:mb-5'>
+      <div className='flex flex-wrap items-center justify-center gap-2.5 mb-2.5'>
         {!showForm && (
           <Button
             onClick={() => setShowForm(true)}
@@ -187,7 +187,7 @@ export function SchedulesManager() {
           {schedules.map((schedule) => (
             <div
               key={schedule._id}
-              className='bg-background rounded-lg p-2.5 lg:p-5'
+              className='bg-background rounded-lg p-2.5 lg:px-5'
             >
               <div className='flex items-center justify-between'>
                 <div className='flex items-center gap-5 flex-1'>
@@ -257,35 +257,37 @@ export function SchedulesManager() {
                     )}
                   </Button>
 
-                  <Button
-                    type='button'
-                    variant='link'
-                    onClick={() => handleEdit(schedule)}
-                    disabled={showForm || togglingVisibility === schedule._id}
-                    className='btn-link'
-                    title='Edit schedule'
-                  >
-                    <FaEdit className='h-5 w-5' />
-                  </Button>
+                  <div className='flex flex-col lg:flex-row gap-2.5 ml-2.5'>
+                    <Button
+                      type='button'
+                      variant='link'
+                      onClick={() => handleEdit(schedule)}
+                      disabled={showForm || togglingVisibility === schedule._id}
+                      className='btn-link'
+                      title='Edit schedule'
+                    >
+                      <FaEdit className='h-5 w-5' />
+                    </Button>
 
-                  <Button
-                    type='button'
-                    variant='link'
-                    onClick={() => handleDelete(schedule._id)}
-                    disabled={
-                      deletingId === schedule._id ||
-                      showForm ||
-                      togglingVisibility === schedule._id
-                    }
-                    className='btn-link hover:text-red'
-                    title='Delete schedule'
-                  >
-                    {deletingId === schedule._id ? (
-                      <div className='h-5 w-5 border-2 border-red-600 border-t-transparent rounded-full animate-spin' />
-                    ) : (
-                      <FaTrashAlt className='h-5 w-5' />
-                    )}
-                  </Button>
+                    <Button
+                      type='button'
+                      variant='link'
+                      onClick={() => handleDelete(schedule._id)}
+                      disabled={
+                        deletingId === schedule._id ||
+                        showForm ||
+                        togglingVisibility === schedule._id
+                      }
+                      className='btn-link hover:text-red'
+                      title='Delete schedule'
+                    >
+                      {deletingId === schedule._id ? (
+                        <div className='h-5 w-5 border-2 border-red-600 border-t-transparent rounded-full animate-spin' />
+                      ) : (
+                        <FaTrashAlt className='h-5 w-5' />
+                      )}
+                    </Button>
+                  </div>
                 </div>
               </div>
             </div>

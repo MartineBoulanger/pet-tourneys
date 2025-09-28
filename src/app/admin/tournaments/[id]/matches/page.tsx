@@ -43,10 +43,9 @@ export default async function AdminMatchesPage({
       <>
         <Divider alignment='horizontal' color='light-grey' height='0.5' />
         <Container className='text-center lg:px-5'>
-          <Heading
-            as='h2'
-            className='font-sans tracking-normal text-xl text-red mb-2.5'
-          >{`Error ${status || stat}!`}</Heading>
+          <Heading as='h2' className='text-red mb-5'>{`Error ${
+            status || stat
+          }!`}</Heading>
           <Paragraph>{message}</Paragraph>
         </Container>
       </>
@@ -58,10 +57,7 @@ export default async function AdminMatchesPage({
       <>
         <Divider alignment='horizontal' color='light-grey' height='0.5' />
         <Container className='text-center lg:px-5'>
-          <Heading
-            as='h2'
-            className='font-sans tracking-normal text-xl text-red mb-2.5'
-          >
+          <Heading as='h2' className='text-red mb-5'>
             {'No League Found!'}
           </Heading>
           <Paragraph>
@@ -79,10 +75,7 @@ export default async function AdminMatchesPage({
       <>
         <Divider alignment='horizontal' color='light-grey' height='0.5' />
         <Container className='text-center lg:px-5'>
-          <Heading
-            as='h2'
-            className='font-sans tracking-normal text-xl text-red mb-2.5'
-          >
+          <Heading as='h2' className='text-red mb-5'>
             {'No Matches Found!'}
           </Heading>
           <Paragraph>
@@ -96,14 +89,16 @@ export default async function AdminMatchesPage({
   return (
     <>
       <Divider alignment='horizontal' color='light-grey' height='0.5' />
-      <Container className='px-0 lg:px-0'>
+      <Container className='px-0 lg:px-0 my-0'>
         <div className='mb-5'>
-          <Heading as='h2' className='font-sans tracking-normal text-xl'>
+          <Heading as='h2' className='text-foreground/80 mb-5'>
             {'Manage League Matches'}
           </Heading>
-          <Paragraph className='text-humanoid'>{tournament.name}</Paragraph>
+          <Paragraph className='text-humanoid text-center mb-2.5'>
+            {tournament.name}
+          </Paragraph>
         </div>
-        <div className='flex flex-wrap item-center justify-center gap-2.5 lg:gap-5 mb-2.5 lg:mb-5'>
+        <div className='flex flex-wrap item-center justify-center gap-2.5 mb-2.5'>
           <Link
             href='/admin/upload-logs'
             className='btn-submit flex items-center gap-2.5 py-[7px] px-[11px] rounded-lg'
@@ -111,7 +106,7 @@ export default async function AdminMatchesPage({
             <MdUpload className='w-5 h-5' /> <span>{'Upload Battle Logs'}</span>
           </Link>
         </div>
-        <div className='grid gap-2.5 sm:gap-5 bg-light-grey p-2.5 sm:p-5 rounded-lg shadow-md'>
+        <div className='grid gap-2.5 bg-light-grey p-2.5 lg:p-5 rounded-lg shadow-md'>
           {matches && matches.length > 0 ? (
             <>
               {matches.map((match) => (
@@ -130,7 +125,7 @@ export default async function AdminMatchesPage({
               ) : null}
             </>
           ) : (
-            <Paragraph className='p-2.5 sm:p-5 rounded-lg bg-background text-center shadow-md'>
+            <Paragraph className='p-2.5 lg:p-5 rounded-lg bg-background text-center shadow-md'>
               {
                 'There are no matches for this league yet, please upload some battle logs to see the matches here.'
               }

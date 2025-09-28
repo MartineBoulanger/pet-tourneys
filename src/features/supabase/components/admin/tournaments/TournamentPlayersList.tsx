@@ -40,7 +40,7 @@ export function TournamentPlayersList({
   };
 
   return (
-    <div className='space-y-2.5 lg:space-y-5 bg-background p-2.5 lg:p-5 rounded-lg shadow-md'>
+    <div className='space-y-2.5 bg-background p-2.5 lg:p-5 rounded-lg shadow-md'>
       {currentRecords.map((player, index) => (
         <div
           key={index}
@@ -58,8 +58,8 @@ export function TournamentPlayersList({
           </Button>
 
           {expandedPlayers[player.playerName] && (
-            <div className='bg-light-grey p-2.5 lg:p-5 rounded-b-lg p-2.5 lg:p-5'>
-              <div className='flex flex-wrap flex-col lg:flex-row gap-2.5 lg:gap-5 mb-2.5 lg:mb-5'>
+            <div className='bg-light-grey p-2.5 lg:p-5 rounded-b-lg'>
+              <div className='flex flex-wrap flex-col lg:flex-row gap-2.5 mb-2.5'>
                 <OverviewCard title='Matches Won' value={player.wins} />
                 <OverviewCard title='Matches Lost' value={player.losses} />
                 <OverviewCard
@@ -68,7 +68,7 @@ export function TournamentPlayersList({
                 />
               </div>
 
-              <div className='grid grid-cols-1 lg:grid-cols-2 gap-2.5 lg:gap-5'>
+              <div className='grid grid-cols-1 lg:grid-cols-2 gap-2.5'>
                 <div className='bg-background p-2.5 lg:p-5 rounded-lg'>
                   <Heading
                     as='h3'
@@ -125,11 +125,11 @@ export function TournamentPlayersList({
               </div>
 
               <div className='mt-2.5 lg:mt-5'>
-                <Heading as='h4' className='text-lg font-bold mb-2.5'>
+                <Heading as='h4' className='text-lg font-bold'>
                   {"Overall Player's Pet Usage"}
                 </Heading>
                 <div className='overflow-x-auto'>
-                  <table className='min-w-full'>
+                  <table className='min-w-full rounded-lg overflow-hidden'>
                     <thead className='bg-background text-left'>
                       <tr className='border-b border-medium-grey'>
                         <th className='text-left py-2 px-4'>{'Pet Name'}</th>

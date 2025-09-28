@@ -6,7 +6,6 @@ import { ImagesToolbar } from './Toolbar';
 import { ImagesGrid } from './Grid';
 import { ImageModal } from './Modal';
 import { CloudinaryImage, ImagesManagerProps } from '../types';
-import { Container } from '@/components/ui';
 import { deleteImageAction, getImagesAction } from '../actions/cloudinary';
 
 export function ImagesManager({
@@ -41,7 +40,7 @@ export function ImagesManager({
   };
 
   return (
-    <Container className='px-0 lg:px-0'>
+    <>
       <ImageUploadForm
         folder={folder}
         path={path}
@@ -73,6 +72,6 @@ export function ImagesManager({
           onDelete={handleDelete}
         />
       )}
-    </Container>
+    </>
   );
 }

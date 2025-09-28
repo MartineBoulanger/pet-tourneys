@@ -14,34 +14,6 @@ export const AdminNav = async () => {
 
   return (
     <div className='w-full py-2.5 px-5 hidden lg:flex lg:items-center'>
-      {/* admin panel button */}
-      {admin ? (
-        <>
-          <Link
-            href='/admin'
-            className='btn-link w-[24px] h-[24px]'
-            title='Admin Panel'
-            aria-label='Admin Panel'
-          >
-            <span>
-              <Image
-                src={admin?.admin?.avatar_url || ''}
-                alt={admin?.admin?.username || ''}
-                width={24}
-                height={24}
-                style={{
-                  width: 'auto',
-                  height: 'auto',
-                }}
-                className='rounded-full'
-                loading='lazy'
-              />
-            </span>
-          </Link>
-          <div className='w-0.5 h-9 bg-blue-grey mx-5 rounded-full' />
-        </>
-      ) : null}
-
       {/* login and logout buttons */}
       {user ? (
         <Logout />
@@ -56,6 +28,34 @@ export const AdminNav = async () => {
         </Link>
       )}
       <div className='w-0.5 h-9 bg-blue-grey mx-5 rounded-full' />
+
+      {/* admin panel button */}
+      {admin ? (
+        <>
+          <Link
+            href='/admin'
+            className='btn-link w-6 h-6'
+            title='Admin Panel'
+            aria-label='Admin Panel'
+          >
+            <span>
+              <Image
+                src={admin?.admin?.avatar_url || ''}
+                alt={admin?.admin?.username || ''}
+                width={20}
+                height={20}
+                style={{
+                  width: 'auto',
+                  height: 'auto',
+                }}
+                className='rounded-full'
+                loading='lazy'
+              />
+            </span>
+          </Link>
+          <div className='w-0.5 h-9 bg-blue-grey mx-5 rounded-full' />
+        </>
+      ) : null}
 
       {/* discord button */}
       <Link
