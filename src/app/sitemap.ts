@@ -1,16 +1,16 @@
 import type { MetadataRoute } from 'next';
 import { getTournamentsForForm } from '@/features/supabase/actions/tournaments';
 import { getMatches } from '@/features/supabase/actions/matches';
-import { getAllPages } from '@/features/contentful/actions/getAllPages';
+import { getPagesByType } from '@/features/cms/actions/pages';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const url = process.env.BASE_URL!;
   const {
     data: { tournaments },
   } = await getTournamentsForForm();
-  const allGuidePages = await getAllPages(false, 'Guide');
-  const allArticlePages = await getAllPages(false, 'Article');
-
+  const guidesPages = await getPagesByType('guides');
+  const articlesPages = await getPagesByType('articles');
+  const reviewsPages = await getPagesByType('pet-reviews');
   // Base URLs that don't depend on dynamic data
   const staticUrls = [
     {
@@ -44,6 +44,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.8,
     },
     {
+      url: `${url}/privacy-policy`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.8,
+    },
+    {
       url: `${url}/guides`,
       lastModified: new Date(),
       changeFrequency: 'monthly' as const,
@@ -69,12 +75,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ];
 
-  if (
-    !tournaments ||
-    tournaments.length === 0 ||
-    !allGuidePages ||
-    !allArticlePages
-  ) {
+  if (!tournaments || tournaments.length === 0) {
     return staticUrls;
   }
 
@@ -142,10 +143,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Flatten the array of arrays into a single array
   const dynamicUrls = tournamentEntries.flat();
 
-  const allGuides = allGuidePages
-    .map((guide: { urlSlug: string }) => {
+  // Use this as example for other pages
+  const allGuides = guidesPages
+    .map((guide: { slug: string }) => {
       const guideEntry = {
-        url: `${url}/guides/${guide.urlSlug}`,
+        url: `${url}/guides/${guide.slug}`,
         lastModified: new Date(),
         changeFrequency: 'monthly' as const,
         priority: 0.8,
@@ -154,10 +156,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     })
     .flat();
 
-  const allArticles = allArticlePages
-    .map((article: { urlSlug: string }) => {
+  const allArticles = articlesPages
+    .map((article: { slug: string }) => {
       const articleEntry = {
-        url: `${url}/articles/${article.urlSlug}`,
+        url: `${url}/articles/${article.slug}`,
         lastModified: new Date(),
         changeFrequency: 'monthly' as const,
         priority: 0.8,
@@ -166,5 +168,23 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     })
     .flat();
 
-  return [...staticUrls, ...dynamicUrls, ...allGuides, ...allArticles];
+  const allReviews = reviewsPages
+    .map((review: { slug: string }) => {
+      const reviewEntry = {
+        url: `${url}/pet-reviews/${review.slug}`,
+        lastModified: new Date(),
+        changeFrequency: 'monthly' as const,
+        priority: 0.8,
+      };
+      return [reviewEntry];
+    })
+    .flat();
+
+  return [
+    ...staticUrls,
+    ...dynamicUrls,
+    ...allGuides,
+    ...allArticles,
+    ...allReviews,
+  ];
 }

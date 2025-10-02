@@ -27,7 +27,7 @@ export interface Prize {
   isCarousel: boolean;
   isColumnLayout: boolean;
   imagePosition: string;
-  textAlignment: string;
+  textAlignment: 'left' | 'center' | 'right';
   images: CloudinaryImage[] | null;
   videoUrl: string;
   order?: number;
@@ -78,4 +78,35 @@ export interface Schedule {
   createdAt: Date;
   updatedAt: Date;
 }
+// **************************************************************************
+export type PageType = 'articles' | 'guides' | 'pet-reviews';
+export type SectionType =
+  | 'text'
+  | 'image'
+  | 'video'
+  | 'text-image'
+  | 'text-video';
+export type LayoutType = 'full-width' | 'two-column';
+export type Section = {
+  type: SectionType;
+  layout: LayoutType;
+  text?: string;
+  textAlign: 'left' | 'center' | 'right';
+  image?: CloudinaryImage | null;
+  videoUrl?: string;
+  order: number;
+};
+export type Page = {
+  _id: string;
+  title: string;
+  slug: string;
+  type: PageType;
+  bannerUrl?: string;
+  bannerImage?: CloudinaryImage | null;
+  bannerType?: 'image' | 'video' | 'none';
+  sections: Section[];
+  published: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+};
 // **************************************************************************

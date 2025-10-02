@@ -1,12 +1,6 @@
 import { notFound } from 'next/navigation';
-import { TbSquareChevronsDown } from 'react-icons/tb';
-import { getPage } from '@/features/contentful/actions/getPage';
-import { Container, Heading, PageMenu } from '@/components/ui';
-import RichText from '@/features/contentful/components/RichText';
-import PageContent from '@/features/contentful/components/PageContent';
-import Banner from '@/features/contentful/components/Banner';
-import { ContentTypePage } from '@/features/contentful/types';
-import { Links } from '@/lib/types';
+import { getPageBySlug } from '@/features/cms/actions/pages';
+import { PageDetails } from '@/features/cms/components/pages/PageDetails';
 
 export async function generateMetadata({
   params,
@@ -14,101 +8,47 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const page = await getPage(false, slug);
+  const pageData = await getPageBySlug(slug);
 
-  if (!page?.seoMetadata) {
+  if (!pageData.success) {
     return {
-      title: 'Pet Reviews',
-      description:
-        'Pet Reviews for getting the best battle pet for your PvP team',
+      title: 'Pet Review',
+      description: 'Pet Review for getting to know what pets are good, or bad',
       alternates: {
         canonical: `${process.env.BASE_URL!}/pet-reviews/${slug}`,
       },
     };
   }
 
-  const { title, description, indexable, keywords, image } = page.seoMetadata;
+  const page = pageData.page || null;
 
   return {
-    title: title || 'Pet Reviews',
-    description:
-      description ||
-      'Pet Reviews for getting the best battle pet for your PvP team',
-    keywords: keywords || ['WoW, PML, reviews, pet'],
+    title: page?.title || 'Pet Review',
+    description: 'Pet Review for getting to know what pets are good, or bad',
+    keywords: ['WoW, PML, reviews, pet, pet battle, PvP'],
     alternates: {
       canonical: `${process.env.BASE_URL!}/pet-reviews/${slug}`,
     },
-    robots: {
-      index: indexable === true,
-      follow: indexable === true,
-    },
     openGraph: {
-      images: image?.url ? [image.url] : ['/opengraph-image.png'],
+      images: page?.bannerImage?.secure_url
+        ? [page?.bannerImage?.secure_url]
+        : ['/opengraph-image.png'],
     },
   };
 }
 
 export default async function GuidePage({
   params,
-  searchParams,
 }: {
   params: Promise<{ slug: string }>;
-  searchParams: Promise<{ preview?: string }>;
 }) {
   const { slug } = await params;
-  const { preview } = await searchParams;
-  const isPreview = preview === 'true' ? true : false;
-  const page: ContentTypePage = await getPage(isPreview, slug);
+  const pageData = await getPageBySlug(slug);
 
-  if (!page) notFound();
+  if (!pageData) notFound();
+  if (!pageData.success) return null;
 
-  const links: Links = [];
-  if (page.ctAsCollection?.items) {
-    links.push(
-      ...page.ctAsCollection.items.map((link, index) => ({
-        id: index,
-        url: link?.ctaUrl || '',
-        text: link?.ctaText || '',
-      }))
-    );
-  }
+  const page = pageData.page || null;
 
-  return (
-    <div className='flex flex-col px-5'>
-      {links ? (
-        <Container className='w-full'>
-          <PageMenu links={links} className='mt-5' />
-        </Container>
-      ) : null}
-      {page.banner ? (
-        <>
-          <Banner component={page.banner} isPage />
-          <div className='hidden lg:block lg:w-[40px] lg:mx-auto text-foreground animate-bounce mb-10'>
-            <TbSquareChevronsDown className='w-10 h-10' />
-          </div>
-        </>
-      ) : null}
-      <Container className='p-2.5 bg-light-grey rounded-lg shadow-md'>
-        {page.pageTitle || page.pageDescription ? (
-          <div className='p-2.5 rounded-t-lg bg-background'>
-            {page.pageTitle ? (
-              <Heading className='text-center'>{page.pageTitle}</Heading>
-            ) : null}
-            {page.pageDescription ? (
-              <>
-                <RichText
-                  component={page.pageDescription}
-                  className='lg:w-full'
-                />
-                <div className='h-0.5 w-full bg-light-grey rounded-lg mt-2.5 lg:mt-5' />
-              </>
-            ) : null}
-          </div>
-        ) : null}
-        {page.pageContentCollection?.items ? (
-          <PageContent components={page.pageContentCollection.items} />
-        ) : null}
-      </Container>
-    </div>
-  );
+  return <PageDetails page={page} type='pet-reviews' />;
 }

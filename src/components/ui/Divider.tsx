@@ -5,6 +5,7 @@ interface DividerProps {
   color?: string;
   width?: string;
   height?: string;
+  className?: string;
 }
 
 export const Divider = ({
@@ -12,6 +13,7 @@ export const Divider = ({
   color = 'foreground',
   width = 'full',
   height = 'full',
+  className = '',
 }: DividerProps) => {
   return (
     <div
@@ -20,7 +22,8 @@ export const Divider = ({
         alignment === 'horizontal'
           ? `w-${width} h-${height} my-5 mx-auto`
           : `h-${height} w-${width} mx-5 my-auto`,
-        `bg-${color}`
+        `bg-${color}`,
+        className
       )}
     />
   );

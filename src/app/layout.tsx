@@ -25,6 +25,9 @@ export const metadata: Metadata = {
   },
   description: 'Pet Masters League - your pets, your mission, your victory!',
   robots: { index: true, follow: true },
+  keywords: [
+    'WoW, PML, pet, pets, pet battle, PvP, battle pet, pet masters league, pet pvp',
+  ],
   metadataBase: new URL(process.env.BASE_URL!),
   alternates: {
     canonical: '/',

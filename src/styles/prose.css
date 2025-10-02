@@ -4,7 +4,6 @@
 
 .prose h1,
 .prose h2 {
-  margin-top: 1.5em;
   margin-bottom: 0.5em;
 }
 
@@ -26,7 +25,8 @@
   list-style-type: decimal;
 }
 
-.prose a {
+.prose a,
+.prose strong {
   color: #11a7f5;
 }
 .prose a:hover {

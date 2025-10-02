@@ -112,6 +112,13 @@ export const adminData: NavigationData = [
     text: 'Manage the sections for schedule, signups and announcements for the new league season.',
     imageSrc: `/images/bluegor.png`,
   },
+    {
+    id: 7,
+    url: '/admin/pages',
+    linkText: 'Manage Pages',
+    text: 'Manage the article, guide and pet review pages.',
+    imageSrc: `/images/bluerex.png`,
+  },
 ];
 
 export const footerData: FooterData = [

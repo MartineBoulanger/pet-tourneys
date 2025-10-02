@@ -35,7 +35,7 @@ export const Video = ({
   const videoId = getYouTubeVideoId(url);
 
   if (!videoId) {
-    return <div className={cn('text-red', className)}>Invalid YouTube URL</div>;
+    return <div className={cn('text-red', className)}>{'Invalid YouTube URL'}</div>;
   }
 
   const baseUrl = process.env.BASE_URL?.replace(/\/+$/, '');

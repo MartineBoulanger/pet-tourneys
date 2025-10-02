@@ -1,4 +1,5 @@
 import { Prize as PrizeType } from '@/features/cms/types';
+import { getTextAlignment } from '@/features/cms/utils';
 import { Heading, Divider } from '@/components/ui';
 import { cn } from '@/utils/cn';
 import { Video } from '../Video';
@@ -9,19 +10,6 @@ interface PrizeSectionProps {
 }
 
 export function PrizeSection({ prize }: PrizeSectionProps) {
-  const getTextAlignment = (alignment: string) => {
-    switch (alignment) {
-      case 'left':
-        return 'text-left';
-      case 'center':
-        return 'text-center';
-      case 'right':
-        return 'text-right';
-      default:
-        return 'text-left';
-    }
-  };
-
   const textAlignmentClass = getTextAlignment(prize.textAlignment);
   const isImageLeft = prize.imagePosition === 'left';
 
