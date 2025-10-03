@@ -411,6 +411,11 @@ export function PageForm({ page, onSuccess, onCancel }: PageFormProps) {
             ))}
           </div>
         )}
+        {error && (
+          <div className='text-sm text-dark-red bg-light-red border-2 border-dark-red rounded-lg p-2.5'>
+            {error}
+          </div>
+        )}
       </div>
 
       {/* Submit Buttons */}
