@@ -25,7 +25,7 @@ export default async function PetReviewsPage() {
         }
       </Paragraph>
       {pages && pages.length > 0 ? (
-        <PagesList pages={pages} />
+        <PagesList pages={pages} type='pet-reviews' />
       ) : (
         <div className='bg-light-grey rounded-lg mt-5 lg:mt-10 p-2.5 lg:p-5'>
           <div className='flex flex-col items-center justify-center text-center px-2.5 lg:px-5 py-20 bg-background rounded-lg'>

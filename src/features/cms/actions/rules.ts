@@ -33,7 +33,12 @@ export async function createRule(data: Partial<RuleType>) {
       success: true,
       rule: {
         _id: String(result.insertedId),
-        ...ruleData,
+        title: ruleData.title,
+        content: ruleData.content,
+        images: ruleData.images,
+        order: ruleData.order,
+        createdAt: new Date(ruleData.createdAt),
+        updatedAt: new Date(ruleData.updatedAt),
       },
     };
   } catch (error) {
@@ -69,8 +74,8 @@ export async function updateRule(ruleId: string, data: Partial<RuleType>) {
       content: updatedRule.content,
       images: updatedRule.images,
       order: updatedRule.order,
-      createdAt: updatedRule.createdAt,
-      updatedAt: updatedRule.updatedAt,
+      createdAt: new Date(updatedRule.createdAt),
+      updatedAt: new Date(updatedRule.updatedAt),
     };
 
     revalidatePath('/admin/rules');
@@ -111,8 +116,8 @@ export async function getRules(): Promise<RuleType[]> {
       content: rule.content,
       images: rule.images || [],
       order: rule.order,
-      createdAt: rule.createdAt,
-      updatedAt: rule.updatedAt,
+      createdAt: new Date(rule.createdAt),
+      updatedAt: new Date(rule.updatedAt),
     }));
   } catch (error) {
     console.error('Failed to fetch rules:', error);
@@ -135,8 +140,8 @@ export async function getRule(ruleId: string): Promise<RuleType | null> {
       content: rule.content,
       images: rule.images || [],
       order: rule.order,
-      createdAt: rule.createdAt,
-      updatedAt: rule.updatedAt,
+      createdAt: new Date(rule.createdAt),
+      updatedAt: new Date(rule.updatedAt),
     };
   } catch (error) {
     console.error('Failed to fetch rule:', error);

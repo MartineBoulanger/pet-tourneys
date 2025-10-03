@@ -30,7 +30,16 @@ export async function createPage(data: Partial<Page>) {
       success: true,
       page: {
         _id: String(result.insertedId),
-        ...pageData,
+        title: pageData.title,
+        slug: pageData.slug,
+        type: pageData.type,
+        bannerUrl: pageData.bannerUrl,
+        bannerImage: pageData.bannerImage,
+        bannerType: pageData.bannerType,
+        sections: pageData.sections,
+        published: pageData.published,
+        createdAt: new Date(pageData.createdAt),
+        updatedAt: new Date(pageData.updatedAt),
       },
     };
   } catch (error) {
@@ -100,8 +109,8 @@ export async function getPages(): Promise<Page[]> {
       bannerType: page.bannerType,
       sections: page.sections,
       published: page.published,
-      createdAt: page.createdAt,
-      updatedAt: page.updatedAt,
+      createdAt: new Date(page.createdAt),
+      updatedAt: new Date(page.updatedAt),
     }));
   } catch (error) {
     console.error('Failed to fetch pages:', error);
@@ -126,8 +135,8 @@ export async function getPagesByType(type: string): Promise<Page[]> {
       bannerType: page.bannerType,
       sections: page.sections,
       published: page.published,
-      createdAt: page.createdAt,
-      updatedAt: page.updatedAt,
+      createdAt: new Date(page.createdAt),
+      updatedAt: new Date(page.updatedAt),
     }));
   } catch (error) {
     console.error('Failed to fetch pages:', error);
@@ -143,8 +152,17 @@ export async function getPageBySlug(slug: string) {
     return {
       success: true,
       page: {
-        ...page,
         _id: String(page._id),
+        title: page.title,
+        slug: page.slug,
+        type: page.type,
+        bannerUrl: page.bannerUrl,
+        bannerImage: page.bannerImage,
+        bannerType: page.bannerType,
+        sections: page.sections,
+        published: page.published,
+        createdAt: new Date(page.createdAt),
+        updatedAt: new Date(page.updatedAt),
       },
     };
   } catch (error) {

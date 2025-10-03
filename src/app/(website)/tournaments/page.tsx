@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 import { getTournaments } from '@/features/supabase/actions/tournaments';
 import { TournamentsList } from '@/features/supabase/components/tournaments/TournamentsList';
-import { TOURNAMENTS_PER_PAGE } from '@/features/supabase/constants';
+import { TOURNAMENTS_PER_PAGE } from '@/utils/constants';
 import {
   Container,
   Heading,

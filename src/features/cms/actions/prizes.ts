@@ -36,7 +36,17 @@ export async function createPrize(data: Partial<PrizeType>) {
       success: true,
       prize: {
         _id: String(result.insertedId),
-        ...prizeData,
+        title: prizeData.title,
+        description: prizeData.description,
+        isCarousel: prizeData.isCarousel,
+        isColumnLayout: prizeData.isColumnLayout,
+        imagePosition: prizeData.imagePosition,
+        textAlignment: prizeData.textAlignment,
+        images: prizeData.images,
+        videoUrl: prizeData.videoUrl,
+        order: prizeData.order,
+        createdAt: new Date(prizeData.createdAt),
+        updatedAt: new Date(prizeData.updatedAt),
       },
     };
   } catch (error) {
@@ -82,8 +92,8 @@ export async function updatePrize(prizeId: string, data: Partial<PrizeType>) {
       images: updatedPrize.images,
       videoUrl: updatedPrize.videoUrl,
       order: updatedPrize.order,
-      createdAt: updatedPrize.createdAt,
-      updatedAt: updatedPrize.updatedAt,
+      createdAt: new Date(updatedPrize.createdAt),
+      updatedAt: new Date(updatedPrize.updatedAt),
     };
 
     revalidatePath('/admin/prizes');
@@ -129,8 +139,8 @@ export async function getPrizes(): Promise<PrizeType[]> {
       images: prize.images,
       videoUrl: prize.videoUrl,
       order: prize.order,
-      createdAt: prize.createdAt,
-      updatedAt: prize.updatedAt,
+      createdAt: new Date(prize.createdAt),
+      updatedAt: new Date(prize.updatedAt),
     }));
   } catch (error) {
     console.error('Failed to fetch prizes:', error);
@@ -158,8 +168,8 @@ export async function getPrize(prizeId: string): Promise<PrizeType | null> {
       images: prize.images,
       videoUrl: prize.videoUrl,
       order: prize.order,
-      createdAt: prize.createdAt,
-      updatedAt: prize.updatedAt,
+      createdAt: new Date(prize.createdAt),
+      updatedAt: new Date(prize.updatedAt),
     };
   } catch (error) {
     console.error('Failed to fetch prize:', error);

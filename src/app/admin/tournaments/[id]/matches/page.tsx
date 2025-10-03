@@ -3,7 +3,7 @@ import { MdUpload } from 'react-icons/md';
 import { getTournamentDetails } from '@/features/supabase/actions/tournaments';
 import { getPaginatedMatches } from '@/features/supabase/actions/matches';
 import { AdminMatchListItem } from '@/features/supabase/components/admin/matches/AdminMatchListItem';
-import { MATCHES_PER_PAGE } from '@/features/supabase/constants';
+import { MATCHES_PER_PAGE } from '@/utils/constants';
 import {
   Container,
   Pagination,

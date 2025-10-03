@@ -10,7 +10,7 @@ import {
   Divider,
 } from '@/components/ui';
 import { PageSearchParams } from '@/types';
-import { TOURNAMENTS_PER_PAGE } from '@/features/supabase/constants';
+import { TOURNAMENTS_PER_PAGE } from '@/utils/constants';
 import { getTournaments } from '@/features/supabase/actions/tournaments';
 
 export default async function AdminTournamentsListPage({

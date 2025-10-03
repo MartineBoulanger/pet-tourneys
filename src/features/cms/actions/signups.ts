@@ -56,7 +56,12 @@ export async function createSignup(data: Partial<Signup>) {
       success: true,
       signup: {
         _id: String(result.insertedId),
-        ...signupData,
+        title: signupData.title,
+        images: signupData.images,
+        layout: signupData.layout,
+        isVisible: signupData.isVisible,
+        createdAt: new Date(signupData.createdAt),
+        updatedAt: new Date(signupData.updatedAt),
       },
     };
   } catch (error) {
@@ -166,8 +171,8 @@ export async function getSignups(): Promise<{
       images: signup.images,
       layout: signup.layout,
       isVisible: signup.isVisible,
-      createdAt: signup.createdAt,
-      updatedAt: signup.updatedAt,
+      createdAt: new Date(signup.createdAt),
+      updatedAt: new Date(signup.updatedAt),
     }));
 
     return { success: true, signups: processedSignups };
@@ -187,8 +192,13 @@ export async function getVisibleSignup() {
     return {
       success: true,
       signup: {
-        ...signup,
         _id: String(signup._id),
+        title: signup.title,
+        images: signup.images,
+        layout: signup.layout,
+        isVisible: signup.isVisible,
+        createdAt: new Date(signup.createdAt),
+        updatedAt: new Date(signup.updatedAt),
       },
     };
   } catch (error) {

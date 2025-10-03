@@ -55,7 +55,13 @@ export async function createSchedule(data: Partial<Schedule>) {
       success: true,
       schedule: {
         _id: String(result.insertedId),
-        ...scheduleData,
+        title: scheduleData.title,
+        images: scheduleData.images,
+        layout: scheduleData.layout,
+        description: scheduleData.description,
+        isVisible: scheduleData.isVisible,
+        createdAt: new Date(scheduleData.createdAt),
+        updatedAt: new Date(scheduleData.updatedAt),
       },
     };
   } catch (error) {
@@ -168,8 +174,8 @@ export async function getSchedules(): Promise<{
       layout: schedule.layout,
       description: schedule.description,
       isVisible: schedule.isVisible,
-      createdAt: schedule.createdAt,
-      updatedAt: schedule.updatedAt,
+      createdAt: new Date(schedule.createdAt),
+      updatedAt: new Date(schedule.updatedAt),
     }));
 
     return { success: true, schedules: processedSchedules };
@@ -189,8 +195,14 @@ export async function getVisibleSchedule() {
     return {
       success: true,
       schedule: {
-        ...schedule,
         _id: String(schedule._id),
+        title: schedule.title,
+        images: schedule.images,
+        layout: schedule.layout,
+        description: schedule.description,
+        isVisible: schedule.isVisible,
+        createdAt: new Date(schedule.createdAt),
+        updatedAt: new Date(schedule.updatedAt),
       },
     };
   } catch (error) {
