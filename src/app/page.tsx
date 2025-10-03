@@ -5,14 +5,21 @@ import { partnersData } from '@/lib/partners';
 import { getVisibleAnnouncement } from '@/features/cms/actions/announcements';
 import { getVisibleSignup } from '@/features/cms/actions/signups';
 import { getVisibleSchedule } from '@/features/cms/actions/schedules';
+import { getRecentPagesByTypes } from '@/features/cms/actions/pages';
 import { AnnouncementSection } from '@/features/cms/components/homepage/announcements/AnnouncementSection';
 import { SignupSection } from '@/features/cms/components/homepage/signups/SignupsSection';
 import { ScheduleSection } from '@/features/cms/components/homepage/schedules/schedulesSection';
+import { RecentPagesSection } from '@/features/cms/components/homepage/RecentPagesSection';
 
 export default async function HomePage() {
   const announcement = await getVisibleAnnouncement();
   const signup = await getVisibleSignup();
   const schedule = await getVisibleSchedule();
+  const data = await getRecentPagesByTypes([
+    'articles',
+    'pet-reviews',
+    'guides',
+  ]);
 
   return (
     <>
@@ -23,7 +30,7 @@ export default async function HomePage() {
           <AnnouncementSection announcement={announcement.announcement} />
         </Container>
       ) : null}
-      {/* TODO: recent news/articles/guides section here */}
+      <RecentPagesSection data={data} />
       {(signup.success && signup.signup && signup.signup.isVisible) ||
       (schedule.success && schedule.schedule && schedule.schedule.isVisible) ? (
         <div className='my-5 py-5 bg-light-grey'>

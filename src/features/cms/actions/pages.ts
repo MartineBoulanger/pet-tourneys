@@ -144,6 +144,16 @@ export async function getPagesByType(type: string): Promise<Page[]> {
   }
 }
 
+export async function getRecentPagesByTypes(types: string[]) {
+  const result = await Promise.all(
+    types.map(async (type) => {
+      const pages = await getPagesByType(type);
+      return { type, pages: pages.slice(0, 5) };
+    })
+  );
+  return result;
+}
+
 export async function getPageBySlug(slug: string) {
   try {
     const db = await getCollection('pages');
