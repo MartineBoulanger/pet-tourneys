@@ -1,12 +1,13 @@
-import { notFound } from 'next/navigation';
+import { MdOutlineMenuBook } from 'react-icons/md';
 import { Container, Heading, Paragraph } from '@/components/ui';
-import { PageCard } from '@/features/contentful/components/PageCard';
-import { getAllPages } from '@/features/contentful/actions/getAllPages';
-import { AllPagesFragment } from '@/features/contentful/types';
+import { PagesList } from '@/features/cms/components/pages/PagesList';
+import { getPagesByType } from '@/features/cms/actions/pages';
 
 export async function generateMetadata() {
   return {
     title: 'Articles',
+    description:
+      'Articles about pet battling, and battle pets, and WoW pet news',
     alternates: {
       canonical: `${process.env.BASE_URL!}/articles`,
     },
@@ -14,28 +15,31 @@ export async function generateMetadata() {
 }
 
 export default async function ArticlesPage() {
-  const pages: AllPagesFragment[] = await getAllPages(false, 'Article');
+  const pages = await getPagesByType('articles');
 
-  if (!pages) notFound();
-  // TODO: add pagination with 12 page cards per page -> see commercial LLBG for implementing pagination for Contentful
   return (
     <Container className='lg:px-5'>
-      <Heading className='text-center'>{'Pet Battle Articles'}</Heading>
+      <Heading className='text-center'>{'Articles'}</Heading>
       <Paragraph className='max-w-[700px] text-center mx-auto'>
         {
           'New expansion? Or new patch? And you want to know what new is coming for battle pets and pet battling? Check out our news articles, and articles about new pets, new strategies, etc.'
         }
       </Paragraph>
-      {/* Page cards list */}
-      <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-10 lg:mt-20 gap-2.5 sm:gap-5'>
-        {pages && pages.length > 0 ? (
-          pages.map((page) => <PageCard key={page.sys.id} page={page} />)
-        ) : (
-          <div className='col-span-full p-2.5 lg:p-5 bg-background rounded-lg text-center col-start-1'>
-            {'No articles are online yet. Please come back later!'}
+      {pages && pages.length > 0 ? (
+        <PagesList pages={pages} type='articles' />
+      ) : (
+        <div className='bg-light-grey rounded-lg mt-5 lg:mt-10 p-2.5 lg:p-5'>
+          <div className='flex flex-col items-center justify-center text-center px-2.5 lg:px-5 py-20 bg-background rounded-lg'>
+            <MdOutlineMenuBook className='text-humanoid mb-6 w-24 h-24' />
+            <Heading as='h2' className='mb-5 text-foreground/80'>
+              {`No articles pages available`}
+            </Heading>
+            <Paragraph className='text-foreground/50'>
+              {`There are no articles pages available at this moment, please come back later.`}
+            </Paragraph>
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </Container>
   );
 }

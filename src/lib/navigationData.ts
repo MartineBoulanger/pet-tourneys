@@ -77,6 +77,40 @@ export const adminData: NavigationData = [
     text: 'Manage all the images of recent and previous tournaments.',
     imageSrc: `/images/bluegor.png`,
   },
+];
+
+export const leaguesAdminData = [
+  {
+    id: 1,
+    url: '/admin/tournaments',
+    linkText: 'Manage Leagues',
+    text: 'Manage all leagues.',
+    imageSrc: `/images/greengor.png`,
+  },
+  {
+    id: 2,
+    url: '/admin/rules',
+    linkText: 'Manage League Rules',
+    text: 'Manage the rules of the league.',
+    imageSrc: `/images/greenrex.png`,
+  },
+  {
+    id: 3,
+    url: '/admin/prizes',
+    linkText: 'Manage League Prizes',
+    text: 'Manage the prizes of the league.',
+    imageSrc: `/images/redrex.png`,
+  },
+];
+
+export const contentManagementData: NavigationData = [
+  {
+    id: 1,
+    url: '/admin/homepage',
+    linkText: 'Manage Homepage Sections',
+    text: 'Manage the sections for schedule, signups and announcements for the new league season.',
+    imageSrc: `/images/bluegor.png`,
+  },
   {
     id: 2,
     url: '/admin/resources',
@@ -86,31 +120,10 @@ export const adminData: NavigationData = [
   },
   {
     id: 3,
-    url: '/admin/tournaments',
-    linkText: 'Manage Leagues',
-    text: 'Manage all leagues.',
-    imageSrc: `/images/greengor.png`,
-  },
-  {
-    id: 4,
-    url: '/admin/rules',
-    linkText: 'Manage League Rules',
-    text: 'Manage the rules of the league.',
-    imageSrc: `/images/greenrex.png`,
-  },
-  {
-    id: 5,
-    url: '/admin/prizes',
-    linkText: 'Manage League Prizes',
-    text: 'Manage the prizes of the league.',
-    imageSrc: `/images/redrex.png`,
-  },
-  {
-    id: 6,
-    url: '/admin/homepage',
-    linkText: 'Manage Homepage Sections',
-    text: 'Manage the sections for schedule, signups and announcements for the new league season.',
-    imageSrc: `/images/bluegor.png`,
+    url: '/admin/pages',
+    linkText: 'Manage Pages',
+    text: 'Manage the article, guide and pet review pages.',
+    imageSrc: `/images/bluerex.png`,
   },
 ];
 
@@ -150,8 +163,7 @@ export const socialsData: FooterData = [
   },
   {
     id: 2,
-    // url: 'https://www.youtube.com/@PetMastersLeague',
-    url: 'https://www.youtube.com/channel/UC99EpJ3nOedPOlGKXmlV25A',
+    url: 'https://www.youtube.com/@PetMastersLeague',
     Icon: FaYoutube,
     name: 'YouTube',
   },

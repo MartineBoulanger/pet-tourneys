@@ -42,7 +42,14 @@ export async function createAnnouncement(data: Partial<Announcement>) {
       success: true,
       announcement: {
         _id: String(result.insertedId),
-        ...announcementData,
+        title: announcementData.title,
+        description: announcementData.description,
+        mediaType: announcementData.mediaType,
+        image: announcementData.image,
+        videoUrl: announcementData.videoUrl,
+        isVisible: announcementData.isVisible,
+        createdAt: new Date(announcementData.createdAt),
+        updatedAt: new Date(announcementData.updatedAt),
       },
     };
   } catch (error) {
@@ -137,8 +144,8 @@ export async function getAnnouncements(): Promise<Announcement[]> {
       image: announcement.image,
       videoUrl: announcement.videoUrl,
       isVisible: announcement.isVisible,
-      createdAt: announcement.createdAt,
-      updatedAt: announcement.updatedAt,
+      createdAt: new Date(announcement.createdAt),
+      updatedAt: new Date(announcement.updatedAt),
     }));
   } catch (error) {
     console.error('Failed to fetch announcements:', error);
@@ -156,8 +163,15 @@ export async function getVisibleAnnouncement() {
     return {
       success: true,
       announcement: {
-        ...announcement,
         _id: String(announcement._id),
+        title: announcement.title,
+        description: announcement.description,
+        mediaType: announcement.mediaType,
+        image: announcement.image,
+        videoUrl: announcement.videoUrl,
+        isVisible: announcement.isVisible,
+        createdAt: new Date(announcement.createdAt),
+        updatedAt: new Date(announcement.updatedAt),
       },
     };
   } catch (error) {

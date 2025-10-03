@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation';
 import { getTournamentDetails } from '@/features/supabase/actions/tournaments';
 import { getPaginatedMatches } from '@/features/supabase/actions/matches';
 import { MatchList } from '@/features/supabase/components/tournaments/MatchList';
-import { MATCHES_PER_PAGE } from '@/features/supabase/constants';
+import { MATCHES_PER_PAGE } from '@/utils/constants';
 import {
   Container,
   PageHeading,

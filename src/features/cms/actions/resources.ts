@@ -37,8 +37,8 @@ export async function createResource(data: Partial<ResourceType>) {
         title: resourceData.title,
         images: resourceData.images,
         order: resourceData.order,
-        createdAt: resourceData.createdAt.toISOString(),
-        updatedAt: resourceData.updatedAt.toISOString(),
+        createdAt: new Date(resourceData.createdAt),
+        updatedAt: new Date(resourceData.updatedAt),
       },
     };
   } catch (error) {
@@ -76,8 +76,8 @@ export async function updateResource(
       title: updatedResource.title,
       images: updatedResource.images,
       order: updatedResource.order,
-      createdAt: updatedResource.createdAt,
-      updatedAt: updatedResource.updatedAt,
+      createdAt: new Date(updatedResource.createdAt),
+      updatedAt: new Date(updatedResource.updatedAt),
     };
 
     revalidatePath('/admin/resources');
@@ -120,8 +120,8 @@ export async function getResources(): Promise<ResourceType[]> {
       title: resource.title,
       images: resource.images,
       order: resource.order,
-      createdAt: resource.createdAt,
-      updatedAt: resource.updatedAt,
+      createdAt: new Date(resource.createdAt),
+      updatedAt: new Date(resource.updatedAt),
     }));
   } catch (error) {
     console.error('Error fetching resources:', error);
@@ -145,8 +145,8 @@ export async function getResource(
       title: resource.title,
       images: resource.images,
       order: resource.order,
-      createdAt: resource.createdAt,
-      updatedAt: resource.updatedAt,
+      createdAt: new Date(resource.createdAt),
+      updatedAt: new Date(resource.updatedAt),
     };
   } catch (error) {
     console.error('Error fetching resource:', error);

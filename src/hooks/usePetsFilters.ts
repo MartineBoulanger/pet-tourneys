@@ -2,8 +2,9 @@
 
 import { useState, useMemo } from 'react';
 import { Pet } from '@/features/supabase/components/statistics/types';
-import { PETS_PER_PAGE, petTypeColors } from '@/features/supabase/constants';
+import { petTypeColors } from '@/features/supabase/constants';
 import { BattleStatistics, TournamentPetStat } from '@/features/supabase/types';
+import { PETS_PER_PAGE } from '@/utils/constants';
 
 interface UsePetsFiltersProps {
   petData: Pet[];

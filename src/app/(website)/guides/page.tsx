@@ -1,12 +1,13 @@
-import { notFound } from 'next/navigation';
+import { MdOutlineMenuBook } from 'react-icons/md';
 import { Container, Heading, Paragraph } from '@/components/ui';
-import { PageCard } from '@/features/contentful/components/PageCard';
-import { getAllPages } from '@/features/contentful/actions/getAllPages';
-import { AllPagesFragment } from '@/features/contentful/types';
+import { PagesList } from '@/features/cms/components/pages/PagesList';
+import { getPagesByType } from '@/features/cms/actions/pages';
 
 export async function generateMetadata() {
   return {
-    title: 'Our Guides',
+    title: 'Guides',
+    description:
+      'Guides for pet masters about pet battling, battle pets, and the pet masters league',
     alternates: {
       canonical: `${process.env.BASE_URL!}/guides`,
     },
@@ -14,10 +15,8 @@ export async function generateMetadata() {
 }
 
 export default async function GuidesPage() {
-  const pages: AllPagesFragment[] = await getAllPages(false, 'Guide');
+  const pages = await getPagesByType('guides');
 
-  if (!pages) notFound();
-  // TODO: add pagination with 12 page cards  per page -> see commercial LLBG for implementing pagination for Contentful
   return (
     <Container className='lg:px-5'>
       <Heading className='text-center'>{'Guides'}</Heading>
@@ -26,16 +25,21 @@ export default async function GuidesPage() {
           'Looking for some guides about pet battling, or battle pets? Or you need to remind yourself how to report a win-ticket in Discord? You can find any guide you need about pet battling and the league here.'
         }
       </Paragraph>
-      {/* Page cards list */}
-      <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-10 lg:mt-20 gap-2.5 sm:gap-5'>
-        {pages && pages.length > 0 ? (
-          pages.map((page) => <PageCard key={page.sys.id} page={page} />)
-        ) : (
-          <div className='col-span-full p-2.5 lg:p-5 bg-background rounded-lg text-center col-start-1'>
-            {'No guides are online yet. Please come back later!'}
+      {pages && pages.length > 0 ? (
+        <PagesList pages={pages} type='guides' />
+      ) : (
+        <div className='bg-light-grey rounded-lg mt-5 lg:mt-10 p-2.5 lg:p-5'>
+          <div className='flex flex-col items-center justify-center text-center px-2.5 lg:px-5 py-20 bg-background rounded-lg'>
+            <MdOutlineMenuBook className='text-humanoid mb-6 w-24 h-24' />
+            <Heading as='h2' className='mb-5 text-foreground/80'>
+              {`No guides pages available`}
+            </Heading>
+            <Paragraph className='text-foreground/50'>
+              {`There are no guides pages available at this moment, please come back later.`}
+            </Paragraph>
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </Container>
   );
 }

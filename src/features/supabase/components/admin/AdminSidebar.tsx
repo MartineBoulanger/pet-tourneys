@@ -1,11 +1,14 @@
 'use client';
 
-import Link from 'next/link';
-import Image from 'next/image';
 import { useState } from 'react';
 import { RiMenuFold4Line, RiMenuFold3Line } from 'react-icons/ri';
-import { adminData } from '@/lib/navigationData';
-import { Button } from '@/components/ui';
+import {
+  adminData,
+  leaguesAdminData,
+  contentManagementData,
+} from '@/lib/navigationData';
+import { Button, Divider, Heading } from '@/components/ui';
+import { AdminLink } from './AdminLink';
 
 interface AdminSidebarProps {
   isFwenLoggedIn?: boolean;
@@ -56,53 +59,61 @@ export const AdminSidebar = ({ isFwenLoggedIn = false }: AdminSidebarProps) => {
 
           {/* Navigation */}
           <nav className='flex-1 p-5 overflow-y-auto'>
-            <div className='space-y-2.5'>
-              {isFwenLoggedIn && (
-                <Link
-                  className='btn-link flex items-center justify-start gap-2.5 border py-2 px-4 rounded-md border-blue-grey hover:bg-blue-grey hover:text-foreground'
-                  href='/admin/upload-pets'
-                  title='Upload Pets Data'
-                  aria-label='Upload Pets Data'
-                  onClick={closeSidebar}
-                >
-                  <div className='w-8 h-8 flex-shrink-0'>
-                    <Image
-                      src='/images/redrex.png'
-                      alt='Upload Pets Data'
-                      width={32}
-                      height={32}
-                      className='w-full h-full object-cover'
-                      loading='lazy'
-                      unoptimized
+            <div className='space-y-5'>
+              <div className='space-y-2.5'>
+                <Heading as='h3' className='text-humanoid'>
+                  {'General Management'}
+                </Heading>
+                {isFwenLoggedIn && (
+                  <AdminLink
+                    onClose={closeSidebar}
+                    url='/admin/upload-pets'
+                    linkText='Upload Pets Data'
+                    imageSrc='/images/redrex.png'
+                  />
+                )}
+                {adminData.map(({ linkText, imageSrc, id, url }) => (
+                  <AdminLink
+                    key={id}
+                    onClose={closeSidebar}
+                    url={url}
+                    linkText={linkText}
+                    imageSrc={imageSrc}
+                  />
+                ))}
+              </div>
+              <Divider alignment='horizontal' height='0.5' color='light-grey' />
+              <div className='space-y-2.5'>
+                <Heading as='h3' className='text-humanoid'>
+                  {'Leagues Management'}
+                </Heading>
+                {leaguesAdminData.map(({ linkText, imageSrc, id, url }) => (
+                  <AdminLink
+                    key={id}
+                    onClose={closeSidebar}
+                    url={url}
+                    linkText={linkText}
+                    imageSrc={imageSrc}
+                  />
+                ))}
+              </div>
+              <Divider alignment='horizontal' height='0.5' color='light-grey' />
+              <div className='space-y-2.5'>
+                <Heading as='h3' className='text-humanoid'>
+                  {'Content Management'}
+                </Heading>
+                {contentManagementData.map(
+                  ({ linkText, imageSrc, id, url }) => (
+                    <AdminLink
+                      key={id}
+                      onClose={closeSidebar}
+                      url={url}
+                      linkText={linkText}
+                      imageSrc={imageSrc}
                     />
-                  </div>
-                  <span>{'Upload Pets Data'}</span>
-                </Link>
-              )}
-
-              {adminData.map(({ linkText, imageSrc, id, url }) => (
-                <Link
-                  className='btn-link flex items-center justify-start gap-2.5 border py-2 px-4 rounded-md border-blue-grey hover:bg-blue-grey hover:text-foreground'
-                  key={id}
-                  href={url}
-                  title={linkText}
-                  aria-label={linkText}
-                  onClick={closeSidebar}
-                >
-                  <div className='w-8 h-8 flex-shrink-0'>
-                    <Image
-                      src={imageSrc}
-                      alt={linkText}
-                      width={32}
-                      height={32}
-                      className='w-full h-full object-cover'
-                      loading='lazy'
-                      unoptimized
-                    />
-                  </div>
-                  <span>{linkText}</span>
-                </Link>
-              ))}
+                  )
+                )}
+              </div>
             </div>
           </nav>
         </div>

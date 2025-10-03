@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { ROUNDS_PER_PAGE } from '@/features/supabase/constants';
+import { ROUNDS_PER_PAGE } from '@/utils/constants';
 import { BattleLog, BattleRound } from '@/features/supabase/types';
 import { Heading, Button } from '@/components/ui';
 

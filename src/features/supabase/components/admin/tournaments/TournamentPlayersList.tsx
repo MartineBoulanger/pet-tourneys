@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { EnhancedPlayerRecord } from '@/features/supabase/actions/players';
 import { OverviewCard } from '@/features/supabase/components/statistics/OverviewCard';
 import { Heading, Paragraph, Button, Pagination } from '@/components/ui';
-import { PLAYERS_PER_PAGE } from '@/features/supabase/constants';
+import { PLAYERS_PER_PAGE } from '@/utils/constants';
 
 export function TournamentPlayersList({
   records,

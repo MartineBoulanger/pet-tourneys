@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { IoCheckmark, IoClose } from 'react-icons/io5';
 import { OverviewCard } from '@/features/supabase/components/statistics/OverviewCard';
-import { petTypeColors, PLAYERS_PER_PAGE } from '@/features/supabase/constants';
+import { petTypeColors } from '@/features/supabase/constants';
 import { EnhancedPlayerRecord } from '@/features/supabase/actions/players';
 import {
   Heading,
@@ -15,6 +15,7 @@ import {
   Tabs,
 } from '@/components/ui';
 import { cn } from '@/utils/cn';
+import { PLAYERS_PER_PAGE } from '@/utils/constants';
 import { MedalIcon } from '@/assets/MedalIcon';
 import { Pet, TypesImages } from '../statistics/types';
 
