@@ -84,16 +84,16 @@ export interface PetStatsListProps {
 }
 
 export enum TypesImages {
-  Aquatic = '/images/pet-types/aquatic.png',
-  Beast = '/images/pet-types/beast.png',
-  Critter = '/images/pet-types/critter.png',
-  Dragonkin = '/images/pet-types/dragonkin.png',
-  Elemental = '/images/pet-types/elemental.png',
-  Flying = '/images/pet-types/flying.png',
-  Humanoid = '/images/pet-types/humanoid.png',
-  Magic = '/images/pet-types/magic.png',
-  Mechanical = '/images/pet-types/mechanical.png',
-  Undead = '/images/pet-types/undead.png',
+  Aquatic = 'https://res.cloudinary.com/dubqvghx7/image/upload/v1759700957/pml-images/aquatic.png',
+  Beast = 'https://res.cloudinary.com/dubqvghx7/image/upload/v1759700957/pml-images/beast.png',
+  Critter = 'https://res.cloudinary.com/dubqvghx7/image/upload/v1759700957/pml-images/critter.png',
+  Dragonkin = 'https://res.cloudinary.com/dubqvghx7/image/upload/v1759700958/pml-images/dragonkin.png',
+  Elemental = 'https://res.cloudinary.com/dubqvghx7/image/upload/v1759700958/pml-images/elemental.png',
+  Flying = 'https://res.cloudinary.com/dubqvghx7/image/upload/v1759700957/pml-images/flying.png',
+  Humanoid = 'https://res.cloudinary.com/dubqvghx7/image/upload/v1759700957/pml-images/humanoid.png',
+  Magic = 'https://res.cloudinary.com/dubqvghx7/image/upload/v1759700957/pml-images/magic.png',
+  Mechanical = 'https://res.cloudinary.com/dubqvghx7/image/upload/v1759700957/pml-images/mechanical.png',
+  Undead = 'https://res.cloudinary.com/dubqvghx7/image/upload/v1759700957/pml-images/undead.png',
 }
 
 export interface PetControlsProps {

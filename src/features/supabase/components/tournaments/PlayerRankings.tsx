@@ -226,7 +226,7 @@ export const PlayerRankings = ({
                               </div>
                               <div className='w-[100px] lg:w-[125px] h-[100px] lg:h-[125px]'>
                                 <Image
-                                  src={`/images/pets/${nemesisPet?.image}`}
+                                  src={nemesisPet?.image || ''}
                                   alt={
                                     nemesisPet?.name ||
                                     player.mostProblematicPet.petName
@@ -302,7 +302,7 @@ export const PlayerRankings = ({
                                         <div>
                                           <div className='w-full lg:w-[300px] h-auto lg:h-[300px]'>
                                             <Image
-                                              src={`/images/pets/${petDetails?.image}`}
+                                              src={petDetails?.image || ''}
                                               alt={
                                                 petDetails?.name || pet.petName
                                               }
