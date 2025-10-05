@@ -8,6 +8,7 @@ import {
   getImage,
   searchImages,
 } from '@/features/cloudinary/client';
+import { CloudinaryImage } from '../types';
 
 export async function uploadImageAction(formData: FormData, path: string) {
   const file = formData.get('image') as File;
@@ -80,10 +81,28 @@ export async function getImageAction(publicId: string) {
   }
 }
 
-export async function getImagesAction(folder: string = 'pml-images') {
+export async function getImagesAction(
+  folder: string = 'pml-images',
+  nextCursor?: string,
+  limit: number = 20
+) {
   try {
-    const images = await getImages(folder);
-    return { success: true, data: images };
+    const { resources, nextCursor: newCursor } = await getImages(
+      folder,
+      nextCursor,
+      limit
+    );
+    // 🔥 serialize only what you need
+    const clean = resources.map((r: CloudinaryImage) => ({
+      public_id: r.public_id,
+      secure_url: r.secure_url,
+      format: r.format,
+      bytes: r.bytes,
+      width: r.width,
+      height: r.height,
+      created_at: r.created_at,
+    }));
+    return { success: true, data: clean, nextCursor: newCursor || null };
   } catch (error) {
     return { success: false, error: (error as Error).message };
   }

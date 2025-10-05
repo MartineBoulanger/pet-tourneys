@@ -3,7 +3,13 @@ import { getImagesAction } from '@/features/cloudinary/actions/cloudinary';
 import { Container, Heading, Divider, Paragraph } from '@/components/ui';
 
 export default async function PetIconsPage() {
-  const images = await getImagesAction('pml-pet-icons');
+  const { success, data, nextCursor, error } = await getImagesAction(
+    'pml-pet-icons',
+    undefined,
+    20
+  );
+
+  if (error) return <Paragraph>{error}</Paragraph>;
 
   return (
     <>
@@ -17,7 +23,8 @@ export default async function PetIconsPage() {
         </Paragraph>
         <ImagesManager
           folder='pml-pet-icons'
-          initImages={images.success ? images.data : []}
+          initImages={success ? data : []}
+          nextCursor={nextCursor}
           path='/admin/upload-pets/icons'
         />
       </Container>

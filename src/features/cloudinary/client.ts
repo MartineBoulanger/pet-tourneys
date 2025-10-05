@@ -57,14 +57,22 @@ export async function getImage(publicId: string) {
   }
 }
 
-export async function getImages(folder: string = 'pml-images') {
+export async function getImages(
+  folder: string = 'pml-images',
+  nextCursor?: string,
+  limit: number = 20
+) {
   const result = await cloudinary.api.resources({
     type: 'upload',
     prefix: folder,
-    max_results: 500,
+    max_results: limit,
+    next_cursor: nextCursor,
   });
 
-  return result.resources;
+  return {
+    resources: result.resources,
+    nextCursor: result.next_cursor || null,
+  };
 }
 
 export async function searchImages(
@@ -73,7 +81,7 @@ export async function searchImages(
 ) {
   const result = await cloudinary.search
     .expression(`folder:${folder} AND filename:${query}*`)
-    .max_results(100)
+    .max_results(20)
     .execute();
 
   return result.resources;
