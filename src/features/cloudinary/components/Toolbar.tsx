@@ -3,9 +3,12 @@
 import { useState, useEffect } from 'react';
 import { FaSearch } from 'react-icons/fa';
 import { IoGrid, IoList } from 'react-icons/io5';
-import { searchImagesInFolder } from '@/features/cloudinary/actions/cloudinary';
+import {
+  getImagesAction,
+  searchImagesInFolder,
+} from '@/features/cloudinary/actions/cloudinary';
 import { Button, Input } from '@/components/ui';
-import { CloudinaryImage, ImagesToolbarProps } from '../types';
+import { ImagesToolbarProps } from '../types';
 
 export function ImagesToolbar({
   folder,
@@ -16,12 +19,27 @@ export function ImagesToolbar({
   viewMode,
   setViewMode,
   onBulkDelete,
+  setNextCursor,
 }: ImagesToolbarProps) {
   const [searchTerm, setSearchTerm] = useState<string>('');
 
   const handleSearch = async (term: string) => {
+    // When the search field is cleared, reload full image list
+    if (term.trim() === '') {
+      const result = await getImagesAction(folder, undefined, 20);
+      if (result.success) {
+        setImages(result.data);
+        // Optionally: reset pagination cursor here
+        setNextCursor(result.nextCursor || null);
+      }
+      return;
+    }
+
+    // Otherwise, perform search
     const result = await searchImagesInFolder(term, folder);
-    if (result.success) setImages(result.data as CloudinaryImage[]);
+    if (result.success) {
+      setImages(result.data);
+    }
   };
 
   useEffect(() => {

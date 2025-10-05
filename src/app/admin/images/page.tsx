@@ -3,7 +3,13 @@ import { getImagesAction } from '@/features/cloudinary/actions/cloudinary';
 import { Container, Heading, Divider, Paragraph } from '@/components/ui';
 
 export default async function ImagesPage() {
-  const images = await getImagesAction('pml-images');
+  const { success, data, nextCursor, error } = await getImagesAction(
+    'pml-images',
+    undefined,
+    20
+  );
+
+  if (error) return <Paragraph>{error}</Paragraph>;
 
   return (
     <>
@@ -17,7 +23,8 @@ export default async function ImagesPage() {
         </Paragraph>
         <ImagesManager
           folder='pml-images'
-          initImages={images.success ? images.data : []}
+          initImages={success ? data : []}
+          nextCursor={nextCursor}
           path='/admin/images'
         />
       </Container>

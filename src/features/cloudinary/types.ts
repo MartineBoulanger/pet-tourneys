@@ -25,6 +25,7 @@ export type ImageSelectorProps = {
 export type ImagesManagerProps = {
   folder: string;
   initImages: CloudinaryImage[];
+  nextCursor?: string | null;
   path: string;
 };
 // **************************************************************************
@@ -37,6 +38,7 @@ export type ImagesToolbarProps = {
   viewMode: 'grid' | 'list';
   setViewMode: (mode: 'grid' | 'list') => void;
   onBulkDelete: (publicIds: string[]) => void;
+  setNextCursor: (cursor: string) => void;
 };
 // **************************************************************************
 export type ImagesGridProps = {
