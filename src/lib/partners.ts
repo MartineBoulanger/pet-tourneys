@@ -1,7 +1,5 @@
 import { PartnersData } from './types';
 
-const baseUrl = process.env.BASE_URL!;
-
 export const partnersData: PartnersData = [
   {
     name: 'Icy Veins',
