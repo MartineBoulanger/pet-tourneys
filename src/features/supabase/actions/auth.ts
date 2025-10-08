@@ -48,7 +48,10 @@ export async function signIn(formData: FormData) {
     }
   }
 
-  if (existingUser && existingUser.role === 'admin') {
+  if (
+    existingUser &&
+    (existingUser.role === 'admin' || existingUser.role === 'author')
+  ) {
     redirect('/admin');
   }
 
@@ -135,6 +138,23 @@ export async function getAdminSession() {
     .single();
   if (adminError) return null;
   return { status: 'success', admin };
+}
+
+// When an author is logged in
+export async function getAuthorSession() {
+  const supabase = await createClient();
+  const { data, error } = await supabase.auth.getUser();
+  if (error) return null;
+  const { data: author, error: authorError } = await supabase
+    .schema('api')
+    .from('profiles')
+    .select('*')
+    .eq('id', data?.user.id)
+    .eq('role', 'author')
+    .limit(1)
+    .single();
+  if (authorError) return null;
+  return { status: 'success', author };
 }
 
 // To sign in with Discord

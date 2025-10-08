@@ -12,13 +12,44 @@ import { AdminLink } from './AdminLink';
 
 interface AdminSidebarProps {
   isFwenLoggedIn?: boolean;
+  isAuthor?: boolean;
+  isAdmin?: boolean;
 }
 
-export const AdminSidebar = ({ isFwenLoggedIn = false }: AdminSidebarProps) => {
+export const AdminSidebar = ({
+  isFwenLoggedIn = false,
+  isAuthor = false,
+  isAdmin = false,
+}: AdminSidebarProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleSidebar = () => setIsOpen(!isOpen);
   const closeSidebar = () => setIsOpen(false);
+
+  const filteredAdminData = adminData.filter(({ roleAllowed }) => {
+    if (roleAllowed === 'both') return true;
+    if (roleAllowed === 'admin') return isAdmin;
+    if (roleAllowed === 'author') return isAuthor;
+    return false;
+  });
+
+  const filteredLeaguesAdminData = leaguesAdminData.filter(
+    ({ roleAllowed }) => {
+      if (roleAllowed === 'both') return true;
+      if (roleAllowed === 'admin') return isAdmin;
+      if (roleAllowed === 'author') return isAuthor;
+      return false;
+    }
+  );
+
+  const filteredContentManagementData = contentManagementData.filter(
+    ({ roleAllowed }) => {
+      if (roleAllowed === 'both') return true;
+      if (roleAllowed === 'admin') return isAdmin;
+      if (roleAllowed === 'author') return isAuthor;
+      return false;
+    }
+  );
 
   return (
     <>
@@ -72,7 +103,7 @@ export const AdminSidebar = ({ isFwenLoggedIn = false }: AdminSidebarProps) => {
                     imageSrc='/images/redrex.png'
                   />
                 )}
-                {adminData.map(({ linkText, imageSrc, id, url }) => (
+                {filteredAdminData.map(({ linkText, imageSrc, id, url }) => (
                   <AdminLink
                     key={id}
                     onClose={closeSidebar}
@@ -83,26 +114,30 @@ export const AdminSidebar = ({ isFwenLoggedIn = false }: AdminSidebarProps) => {
                 ))}
               </div>
               <Divider alignment='horizontal' height='0.5' color='light-grey' />
-              <div className='space-y-2.5'>
-                <Heading as='h3' className='text-humanoid'>
-                  {'Leagues Management'}
-                </Heading>
-                {leaguesAdminData.map(({ linkText, imageSrc, id, url }) => (
-                  <AdminLink
-                    key={id}
-                    onClose={closeSidebar}
-                    url={url}
-                    linkText={linkText}
-                    imageSrc={imageSrc}
-                  />
-                ))}
-              </div>
+              {isAdmin && (
+                <div className='space-y-2.5'>
+                  <Heading as='h3' className='text-humanoid'>
+                    {'Leagues Management'}
+                  </Heading>
+                  {filteredLeaguesAdminData.map(
+                    ({ linkText, imageSrc, id, url }) => (
+                      <AdminLink
+                        key={id}
+                        onClose={closeSidebar}
+                        url={url}
+                        linkText={linkText}
+                        imageSrc={imageSrc}
+                      />
+                    )
+                  )}
+                </div>
+              )}
               <Divider alignment='horizontal' height='0.5' color='light-grey' />
               <div className='space-y-2.5'>
                 <Heading as='h3' className='text-humanoid'>
                   {'Content Management'}
                 </Heading>
-                {contentManagementData.map(
+                {filteredContentManagementData.map(
                   ({ linkText, imageSrc, id, url }) => (
                     <AdminLink
                       key={id}

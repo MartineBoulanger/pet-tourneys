@@ -8,6 +8,7 @@ import '@/styles/globals.css';
 import '@/styles/prose.css';
 import {
   getAdminSession,
+  getAuthorSession,
   getUserSession,
 } from '@/features/supabase/actions/auth';
 import { CookieBanner } from '@/features/cookie-banner/CookieBanner';
@@ -51,8 +52,13 @@ export default async function RootLayout({
 }>) {
   const user = await getUserSession();
   const admin = await getAdminSession();
-  const isAdmin =
-    user?.user?.id === admin?.admin.id ? admin?.admin : user?.user;
+  const author = await getAuthorSession();
+  const isAdminOrAuthor =
+    user?.user?.id === admin?.admin.id
+      ? admin?.admin
+      : user?.user?.id === author?.author?.id
+      ? author?.author
+      : user?.user;
 
   return (
     <html lang='en'>
@@ -62,7 +68,7 @@ export default async function RootLayout({
         <Header />
         <main className='min-h-[85vh] relative'>{children}</main>
         <Footer />
-        <BottomNavigation user={isAdmin} />
+        <BottomNavigation user={isAdminOrAuthor} />
         <ScrollToTop />
         <Toaster
           expand

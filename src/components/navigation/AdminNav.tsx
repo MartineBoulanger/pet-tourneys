@@ -6,11 +6,13 @@ import { Logout } from '@/features/supabase/components/auth/Logout';
 import {
   getUserSession,
   getAdminSession,
+  getAuthorSession,
 } from '@/features/supabase/actions/auth';
 
 export const AdminNav = async () => {
   const user = await getUserSession();
   const admin = await getAdminSession();
+  const author = await getAuthorSession();
 
   return (
     <div className='w-full py-2.5 px-5 hidden lg:flex lg:items-center'>
@@ -30,7 +32,7 @@ export const AdminNav = async () => {
       <div className='w-0.5 h-9 bg-blue-grey mx-5 rounded-full' />
 
       {/* admin panel button */}
-      {admin ? (
+      {admin || author ? (
         <>
           <Link
             href='/admin'
@@ -40,8 +42,10 @@ export const AdminNav = async () => {
           >
             <span>
               <Image
-                src={admin?.admin?.avatar_url || ''}
-                alt={admin?.admin?.username || ''}
+                src={
+                  admin?.admin?.avatar_url || author?.author?.avatar_url || ''
+                }
+                alt={admin?.admin?.username || author?.author?.username || ''}
                 width={20}
                 height={20}
                 style={{

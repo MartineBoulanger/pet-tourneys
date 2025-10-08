@@ -7,6 +7,7 @@ export type NavigationData = {
   linkText: string;
   text: string;
   imageSrc: string;
+  roleAllowed?: 'admin' | 'author' | 'both';
   children?: Links;
 }[];
 
