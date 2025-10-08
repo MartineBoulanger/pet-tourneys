@@ -76,30 +76,34 @@ export const adminData: NavigationData = [
     linkText: 'Manage All Images',
     text: 'Manage all the images of recent and previous tournaments.',
     imageSrc: `/images/bluegor.png`,
+    roleAllowed: 'both',
   },
 ];
 
-export const leaguesAdminData = [
+export const leaguesAdminData: NavigationData = [
   {
     id: 1,
     url: '/admin/tournaments',
     linkText: 'Manage Leagues',
     text: 'Manage all leagues.',
-    imageSrc: `/images/greengor.png`,
+    imageSrc: '/images/greengor.png',
+    roleAllowed: 'admin',
   },
   {
     id: 2,
     url: '/admin/rules',
     linkText: 'Manage League Rules',
     text: 'Manage the rules of the league.',
-    imageSrc: `/images/greenrex.png`,
+    imageSrc: '/images/greenrex.png',
+    roleAllowed: 'admin',
   },
   {
     id: 3,
     url: '/admin/prizes',
     linkText: 'Manage League Prizes',
     text: 'Manage the prizes of the league.',
-    imageSrc: `/images/redrex.png`,
+    imageSrc: '/images/redrex.png',
+    roleAllowed: 'admin',
   },
 ];
 
@@ -109,21 +113,24 @@ export const contentManagementData: NavigationData = [
     url: '/admin/homepage',
     linkText: 'Manage Homepage Sections',
     text: 'Manage the sections for schedule, signups and announcements for the new league season.',
-    imageSrc: `/images/bluegor.png`,
+    imageSrc: '/images/bluegor.png',
+    roleAllowed: 'admin',
   },
   {
     id: 2,
     url: '/admin/resources',
     linkText: 'Manage All Resources',
     text: 'Manage all the resource sections for the resources page.',
-    imageSrc: `/images/bluerex.png`,
+    imageSrc: '/images/bluerex.png',
+    roleAllowed: 'admin',
   },
   {
     id: 3,
     url: '/admin/pages',
     linkText: 'Manage Pages',
     text: 'Manage the article, guide and pet review pages.',
-    imageSrc: `/images/bluerex.png`,
+    imageSrc: '/images/bluerex.png',
+    roleAllowed: 'both',
   },
 ];
 

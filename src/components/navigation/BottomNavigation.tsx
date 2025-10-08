@@ -34,7 +34,7 @@ export const BottomNavigation = ({ user }: BottomNavigationProps) => {
       <div className='w-0.5 h-10 rounded-lg bg-blue-grey' />
 
       {/* Admin panel button */}
-      {user?.role === 'admin' ? (
+      {user?.role === 'admin' || user?.role === 'author' ? (
         <>
           <Link
             href='/admin'
