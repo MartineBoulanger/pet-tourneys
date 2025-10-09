@@ -186,7 +186,7 @@ export const PlayerRankings = ({
                               </div>
                               <div className='w-[100px] lg:w-[125px] h-[100px] lg:h-[125px]'>
                                 <Image
-                                  src={`/images/pets/${mostUsedPet?.image}`}
+                                  src={mostUsedPet?.image || ''}
                                   alt={
                                     mostUsedPet?.name ||
                                     player.mostUsedPet.petName
