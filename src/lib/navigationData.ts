@@ -69,6 +69,30 @@ export const headerData: NavigationData = [
   },
 ];
 
+export const homepageLinks: NavigationData = [
+  {
+    id: 1,
+    url: '/tournaments',
+    linkText: 'Leagues',
+    text: 'Want to see our leagues, and their statistics, and rankings? Here you can check everything about each league!',
+    imageSrc: `/images/redrex.png`,
+  },
+  {
+    id: 2,
+    url: '/analyze-tool',
+    linkText: 'Analyze Tool',
+    text: 'Want to check your personal battle statistics? Check out the analyze tool and download the PDF of your battle result!',
+    imageSrc: `/images/greengor.png`,
+  },
+  {
+    id: 3,
+    url: 'http://www.google.com/url?q=http%3A%2F%2Fdiscord.gg%2Fg6Y2D7Gtew&sa=D&sntz=1&usg=AOvVaw2O2u0NiXvNkTvCDX8p5LNJ',
+    linkText: 'Join Discord',
+    text: 'Want to talk to other pet battlers? Or are you interested in joining a league? Join our Discord to find out more about us!',
+    imageSrc: `/images/bluerex.png`,
+  },
+];
+
 export const adminData: NavigationData = [
   {
     id: 1,

@@ -16,11 +16,11 @@ export function RecentPagesSection({ data }: RecentPagesSectionProps) {
       {data.map(({ type, pages }) => (
         <div
           key={type}
-          className='rounded-lg bg-background p-2.5 lg:p-5 shadow-md'
+          className='rounded-lg bg-background p-2.5 lg:p-5 shadow-md space-y-5'
         >
           <Heading
             as='h2'
-            className='text-2xl lg:text-3xl text-foreground/90 mx-auto mb-2.5'
+            className='text-2xl lg:text-3xl text-foreground/90 mx-auto'
           >{`Recent ${getTypeLabel(type)}s`}</Heading>
           <ul className='space-y-2.5'>
             {pages.length > 0 ? (
@@ -48,6 +48,13 @@ export function RecentPagesSection({ data }: RecentPagesSectionProps) {
               ).toLowerCase()}s yet`}</Paragraph>
             )}
           </ul>
+          {pages.length > 0 ? (
+            <div className='text-center'>
+              <Link href={`/${type}`} className='link'>
+                {`View All ${getTypeLabel(type)}s`}
+              </Link>
+            </div>
+          ) : null}
         </div>
       ))}
     </Container>
