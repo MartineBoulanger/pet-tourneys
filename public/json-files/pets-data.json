@@ -11971,9 +11971,9 @@
     "expansion": "Mists of Pandaria",
     "isHordeOnly": "",
     "isAllianceOnly": "",
-    "icon": "",
-    "image": "",
-    "description": ""
+    "icon": "https://res.cloudinary.com/dubqvghx7/image/upload/v1758666061/pml-pet-icons/pandarenelemental_fire.png",
+    "image": "https://res.cloudinary.com/dubqvghx7/image/upload/v1760106561/pml-pet-images/pandaren-fire-spirit.jpg",
+    "description": "Though it appears to be a vaguely-related cousin to the Cinder Kitten, the two creatures actually share no ancestry."
   },
   {
     "petID": "1125",
@@ -14947,9 +14947,9 @@
     "expansion": "Warlords of Draenor",
     "isHordeOnly": "",
     "isAllianceOnly": "",
-    "icon": "",
-    "image": "",
-    "description": ""
+    "icon": "https://res.cloudinary.com/dubqvghx7/image/upload/v1758666029/pml-pet-icons/herb_wldsteelbloom_petal.png",
+    "image": "https://res.cloudinary.com/dubqvghx7/image/upload/v1760106344/pml-pet-images/autumnal-sproutling.jpg",
+    "description": "From seed to flower, a tiny terror is grown."
   },
   {
     "petID": "1430",
@@ -23323,9 +23323,9 @@
     "expansion": "Battle for Azeroth",
     "isHordeOnly": "",
     "isAllianceOnly": "",
-    "icon": "",
-    "image": "",
-    "description": ""
+    "icon": "https://res.cloudinary.com/dubqvghx7/image/upload/v1760106701/pml-pet-icons/toad_brown.png",
+    "image": "https://res.cloudinary.com/dubqvghx7/image/upload/v1760106758/pml-pet-images/inland-croaker.jpg",
+    "description": "The mucus secreted from inland croakers is so effective at repelling water, the ship builders of Kul Tiras have been using it in the wood sealant for many years."
   },
   {
     "petID": "2383",
