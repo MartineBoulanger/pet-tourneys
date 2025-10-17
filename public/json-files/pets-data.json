@@ -23035,9 +23035,9 @@
     "expansion": "Battle for Azeroth",
     "isHordeOnly": "",
     "isAllianceOnly": "",
-    "icon": "",
-    "image": "",
-    "description": ""
+    "icon": "https://res.cloudinary.com/dubqvghx7/image/upload/v1760699435/pml-pet-icons/babytortollan.png",
+    "image": "https://res.cloudinary.com/dubqvghx7/image/upload/v1760699461/pml-pet-images/tottle.jpg",
+    "description": "Tottle's one wish is to explore the world at your side!"
   },
   {
     "petID": "2157",
@@ -48333,7 +48333,7 @@
     "isAllianceOnly": "",
     "icon": "https://res.cloudinary.com/dubqvghx7/image/upload/v1760355992/pml-pet-icons/diversuit_d_01_helm.png",
     "image": "https://res.cloudinary.com/dubqvghx7/image/upload/v1760356034/pml-pet-images/flotsam-harvester.jpg",
-    "description": "These tiny harvesters are often deployed along the coastline during low tide to collect cargo and timbers that have washed ashore from shipwrecks."
+    "description": "Fel Snooters have a very good sense of smell. They will often immolate piles of leaves, scrap or snow to find grass and seeds."
   },
   {
     "petID": "4852",
