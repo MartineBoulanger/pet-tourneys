@@ -123,8 +123,8 @@ export function PetsDataConverter() {
               <FaFileDownload className='h-6 w-6' />
             </Button>
           </div>
-          <div className='bg-light-grey shadow-md rounded-lg p-2.5 lg:p-5'>
-            <pre className='p-2.5 lg:p-5 bg-background rounded-lg w-full overflow-auto max-h-[450px]'>
+          <div className='bg-light-grey shadow-md rounded-lg p-2.5 lg:p-5 max-w-[1150px]'>
+            <pre className='p-2.5 lg:p-5 bg-background rounded-lg overflow-auto max-h-[450px]'>
               {jsonOutput}
             </pre>
           </div>

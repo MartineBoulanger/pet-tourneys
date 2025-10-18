@@ -35179,9 +35179,9 @@
     "expansion": "Shadowlands",
     "isHordeOnly": "",
     "isAllianceOnly": "",
-    "icon": "",
-    "image": "",
-    "description": ""
+    "icon": "https://res.cloudinary.com/dubqvghx7/image/upload/v1760796131/pml-pet-icons/blinky.png",
+    "image": "https://res.cloudinary.com/dubqvghx7/image/upload/v1760796168/pml-pet-images/blinky.jpg",
+    "description": "Blinky just hatched, and is ready for adventure, but may need a few naps along the way."
   },
   {
     "petID": "3169",
