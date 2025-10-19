@@ -26,11 +26,12 @@ export const Footer = async () => {
             title={name}
             aria-label={name}
             key={id}
-            className='btn-link p-2.5 lg:p-5 flex items-center gap-1'
+            className='btn-link p-2.5 lg:p-5 flex items-start gap-1'
             href={url}
             target='_blank'
           >
-            <Icon /> <span>{name}</span> <FiExternalLink />
+            <Icon /> <span>{name}</span>{' '}
+            <FiExternalLink className='w-3 h-3' />
           </Link>
         ))}
       </div>

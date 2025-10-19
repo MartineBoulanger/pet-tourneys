@@ -16,38 +16,40 @@ export function RecentPagesSection({ data }: RecentPagesSectionProps) {
       {data.map(({ type, pages }) => (
         <div
           key={type}
-          className='rounded-lg bg-background p-2.5 lg:p-5 shadow-md space-y-5'
+          className='rounded-lg bg-background p-2.5 lg:p-5 shadow-md flex flex-col gap-5 justify-between'
         >
-          <Heading
-            as='h2'
-            className='text-2xl lg:text-3xl text-foreground/90 mx-auto'
-          >{`Recent ${getTypeLabel(type)}s`}</Heading>
-          <ul className='space-y-2.5'>
-            {pages.length > 0 ? (
-              pages.map((page) => (
-                <li key={page._id}>
-                  <Link
-                    href={`/${type}/${page.slug}`}
-                    className='btn-link flex justify-between items-center rounded-lg p-2.5 bg-light-grey hover:bg-blue-grey'
-                  >
-                    <span className='text-sm text-foreground'>
-                      {page.title}
-                    </span>
-                    <time
-                      dateTime={String(page.createdAt)}
-                      className='text-xs text-humanoid'
+          <div className='space-y-5'>
+            <Heading
+              as='h2'
+              className='text-2xl lg:text-3xl text-foreground/90 mx-auto'
+            >{`Recent ${getTypeLabel(type)}s`}</Heading>
+            <ul className='space-y-2.5'>
+              {pages.length > 0 ? (
+                pages.map((page) => (
+                  <li key={page._id}>
+                    <Link
+                      href={`/${type}/${page.slug}`}
+                      className='btn-link flex justify-between items-center rounded-lg p-2.5 bg-light-grey hover:bg-blue-grey'
                     >
-                      {new Date(page.createdAt).toLocaleDateString()}
-                    </time>
-                  </Link>
-                </li>
-              ))
-            ) : (
-              <Paragraph className='text-center bg-light-grey py-2.5 rounded-lg'>{`No recent ${getTypeLabel(
-                type
-              ).toLowerCase()}s yet`}</Paragraph>
-            )}
-          </ul>
+                      <span className='text-sm text-foreground'>
+                        {page.title}
+                      </span>
+                      <time
+                        dateTime={String(page.createdAt)}
+                        className='text-xs text-humanoid'
+                      >
+                        {new Date(page.createdAt).toLocaleDateString()}
+                      </time>
+                    </Link>
+                  </li>
+                ))
+              ) : (
+                <Paragraph className='text-center bg-light-grey py-2.5 rounded-lg'>{`No recent ${getTypeLabel(
+                  type
+                ).toLowerCase()}s yet`}</Paragraph>
+              )}
+            </ul>
+          </div>
           {pages.length > 0 ? (
             <div className='text-center'>
               <Link href={`/${type}`} className='link'>
