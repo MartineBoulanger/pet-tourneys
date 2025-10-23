@@ -30,7 +30,11 @@ export async function getMatches(tournamentId: string) {
   const supabase = await createClient();
   const matchesTable = getTournamentTableName('matches', tournamentId);
 
-  const { data } = await supabase.schema('api').from(matchesTable).select('*');
+  const { data } = await supabase
+    .schema('api')
+    .from(matchesTable)
+    .select('*')
+    .eq('is_forfeit', false);
 
   return data;
 }
@@ -279,21 +283,24 @@ export async function updateMatchWithLogs(
 export async function getPaginatedMatches(
   tournamentId: string,
   offset: number,
-  matchesPerPage: number
+  matchesPerPage: number,
+  shouldIncludeForfeits: boolean = false
 ) {
   const supabase = await createClient();
   const matchesTable = getTournamentTableName('matches', tournamentId);
 
-  const {
-    data: matches,
-    count,
-    error,
-  } = await supabase
+  let query = supabase
     .schema('api')
     .from(matchesTable)
     .select('*', { count: 'exact' })
     .order('date', { ascending: false })
     .range(offset, offset + matchesPerPage - 1);
+
+  if (!shouldIncludeForfeits) {
+    query = query.eq('is_forfeit', false);
+  }
+
+  const { data: matches, count, error } = await query;
 
   if (error) {
     return {

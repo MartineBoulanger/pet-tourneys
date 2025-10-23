@@ -16,7 +16,8 @@ export async function getTournamentPetStats(
   const { data: matches } = await supabase
     .schema('api')
     .from(matchesTable)
-    .select('id, player1, player2');
+    .select('id, player1, player2')
+    .eq('is_forfeit', false);
 
   const { data: records, error } = await supabase
     .schema('api')

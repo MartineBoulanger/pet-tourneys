@@ -8,15 +8,43 @@ import { UploadProps, PetData, PetUsageData } from '../types';
 
 export async function uploadBattleLog(props: UploadProps) {
   const supabase = await createClient();
-  const { logs, petUsage, tournament_id, region, ...matchData } = props;
+  const { logs, petUsage, tournament_id, region, is_forfeit, ...matchData } =
+    props;
   const matchesTable = getTournamentTableName('matches', tournament_id);
   const battleLogsTable = getTournamentTableName('battle_logs', tournament_id);
   const petUsageTable = getTournamentTableName('pet_usage', tournament_id);
 
   try {
+    // 🟡 FORFEIT LOGIC
+    if (is_forfeit) {
+      const winner = matchData.owner;
+
+      const { error: forfeitError } = await supabase
+        .schema('api')
+        .from(matchesTable)
+        .insert({
+          ...matchData,
+          region,
+          is_forfeit: true,
+          owner_score: 1,
+          opponent_score: 0,
+          outcome: 'FORFEIT',
+          owner: winner,
+        });
+
+      if (forfeitError) throw forfeitError;
+
+      return {
+        success: true,
+        message: 'Forfeit match recorded successfully',
+      };
+    }
+
     // Validate
     if (!logs || !petUsage)
-      throw new Error('Battle log and pet usage are required');
+      throw new Error(
+        'Battle log and pet usage are required unless this is a forfeit match'
+      );
 
     // Parse battle logs
     const battleLogs = parseBattleLog(logs);
@@ -49,6 +77,7 @@ export async function uploadBattleLog(props: UploadProps) {
         owner_score: scores.owner,
         opponent_score: scores.opponent,
         outcome,
+        is_forfeit: false,
       })
       .select()
       .single();

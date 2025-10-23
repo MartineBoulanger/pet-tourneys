@@ -20,7 +20,8 @@ export async function getTournamentBattleStats(
   const { data: matches, error: matchesError } = await supabase
     .schema('api')
     .from(matchesTable)
-    .select('id, region, owner_score, opponent_score');
+    .select('id, region, owner_score, opponent_score')
+    .eq('is_forfeit', false);
 
   if (matchesError) throw matchesError;
 

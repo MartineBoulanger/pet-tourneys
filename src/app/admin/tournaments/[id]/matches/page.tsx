@@ -36,7 +36,7 @@ export default async function AdminMatchesPage({
     success: succ,
     status: stat,
     data: { matches, totalPages },
-  } = await getPaginatedMatches(id, offset, MATCHES_PER_PAGE);
+  } = await getPaginatedMatches(id, offset, MATCHES_PER_PAGE, true);
 
   if (!success || !succ) {
     return (

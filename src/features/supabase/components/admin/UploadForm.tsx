@@ -69,29 +69,66 @@ export function UploadForm({
     e.preventDefault();
     setIsSubmitting(true);
 
+    // Detect forfeit
+    const isForfeit = !formData.logs && !formData.petUsage;
+
+    // Basic validation
+    if (
+      !formData.player1 ||
+      !formData.player2 ||
+      !formData.owner ||
+      !formData.tournament_id ||
+      !formData.region
+    ) {
+      toast.error('Missing required fields', {
+        description:
+          'Player names, owner, tournament, and region are required.',
+      });
+      setIsSubmitting(false);
+      return;
+    }
+
     try {
-      const result = isEditMode
-        ? await updateMatchWithLogs(formData.tournament_id, match_id, {
-            matchUpdates: {
+      let result;
+
+      if (isForfeit) {
+        // New function in your Supabase actions
+        result = await uploadBattleLog({
+          player1: formData.player1,
+          player2: formData.player2,
+          owner: formData.owner,
+          date: formData.date || new Date().toISOString(),
+          tournament_id: formData.tournament_id,
+          region: formData.region,
+          is_forfeit: true,
+          logs: '',
+          petUsage: '',
+        });
+      } else {
+        // Normal log upload
+        result = isEditMode
+          ? await updateMatchWithLogs(formData.tournament_id, match_id, {
+              matchUpdates: {
+                player1: formData.player1,
+                player2: formData.player2,
+                owner: formData.owner,
+                date: formData.date,
+                region: formData.region,
+              },
+              newLogsText: formData.logs,
+              newPetUsageText: formData.petUsage,
+            })
+          : await uploadBattleLog({
               player1: formData.player1,
               player2: formData.player2,
               owner: formData.owner,
               date: formData.date,
+              logs: formData.logs,
+              petUsage: formData.petUsage,
+              tournament_id: formData.tournament_id,
               region: formData.region,
-            },
-            newLogsText: formData.logs,
-            newPetUsageText: formData.petUsage,
-          })
-        : await uploadBattleLog({
-            player1: formData.player1,
-            player2: formData.player2,
-            owner: formData.owner,
-            date: formData.date,
-            logs: formData.logs,
-            petUsage: formData.petUsage,
-            tournament_id: formData.tournament_id,
-            region: formData.region,
-          });
+            });
+      }
 
       if (!result.success) {
         toast.error('Error!', {
@@ -115,7 +152,9 @@ export function UploadForm({
 
       toast.success('Success!', {
         className: 'toast-success',
-        description: 'Battle logs uploaded successfully!',
+        description: isForfeit
+          ? 'Forfeit match recorded successfully!'
+          : 'Battle logs uploaded successfully!',
       });
     } catch (error) {
       console.error('Error submitting form:', error);
@@ -200,7 +239,6 @@ export function UploadForm({
             type='datetime-local'
             value={formData.date}
             onChange={handleChange}
-            required
           />
           <Select
             label='Choose League'
@@ -238,7 +276,6 @@ export function UploadForm({
           value={formData.logs}
           onChange={handleChange}
           placeholder='Paste your battle logs here...'
-          required={!isEditMode}
         />
         <Textarea
           label='Pet Usage Summary'
@@ -248,7 +285,6 @@ export function UploadForm({
           value={formData.petUsage}
           onChange={handleChange}
           placeholder='Paste your pet usage summary here...'
-          required={!isEditMode}
         />
       </Form>
     </div>

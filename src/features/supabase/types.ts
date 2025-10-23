@@ -169,7 +169,7 @@ export interface BattleLog {
   id?: string;
   match_id?: string;
   timestamp: string;
-  result: 'WIN' | 'LOSS' | 'DRAW' | string;
+  result: 'WIN' | 'LOSS' | 'DRAW' | 'FORFEIT' | string;
   duration: string;
   rounds: number;
   player_team: string[];
@@ -225,11 +225,12 @@ export interface UploadProps {
   player1: string;
   player2: string;
   owner: string;
-  date: string;
-  logs: string;
-  petUsage: string;
+  date?: string;
+  logs?: string;
+  petUsage?: string;
   tournament_id: string;
   region: string;
+  is_forfeit?: boolean;
 }
 // **************************************************************************
 export interface StatDistribution {
