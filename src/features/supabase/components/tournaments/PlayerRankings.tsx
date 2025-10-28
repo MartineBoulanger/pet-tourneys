@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 import { useState } from 'react';
 import { IoCheckmark, IoClose } from 'react-icons/io5';
 import { OverviewCard } from '@/features/supabase/components/statistics/OverviewCard';
@@ -23,6 +24,7 @@ export interface PlayerRankingsProps {
   records: EnhancedPlayerRecord[];
   regions: string[];
   petData: Pet[];
+  tournamentId: string;
 }
 
 function sortPlayerRecords(
@@ -31,6 +33,10 @@ function sortPlayerRecords(
   const sorted = [...records];
 
   return sorted.sort((a, b) => {
+    // Move forfeit-only players to the bottom
+    if (a.forfeitOnly && !b.forfeitOnly) return 1;
+    if (!a.forfeitOnly && b.forfeitOnly) return -1;
+    // Normal sorting by wins/losses
     if (b.wins !== a.wins) return b.wins - a.wins;
     if (a.losses !== b.losses) return a.losses - b.losses;
     return a.playerName.localeCompare(b.playerName);
@@ -41,6 +47,7 @@ export const PlayerRankings = ({
   records,
   regions,
   petData,
+  tournamentId,
 }: PlayerRankingsProps) => {
   const [expandedPlayers, setExpandedPlayers] = useState<
     Record<string, boolean>
@@ -147,380 +154,475 @@ export const PlayerRankings = ({
                   </Button>
 
                   {expandedPlayers[player.playerName] && (
-                    <div className='bg-light-grey p-2.5 rounded-b-lg p-2.5'>
-                      <div className='flex flex-wrap flex-col lg:flex-row gap-2.5 lg:gap-5 mb-2.5 lg:mb-5'>
-                        <OverviewCard title='Matches Won' value={player.wins} />
-                        <OverviewCard
-                          title='Matches Lost'
-                          value={player.losses}
-                        />
-                        <OverviewCard
-                          title='Win Rate'
-                          value={`${player.winRate}%`}
-                        />
-                      </div>
+                    <div className='bg-light-grey p-2.5 rounded-b-lg'>
+                      {player.matches.length > 0 &&
+                      player.petStatistics.length > 0 ? (
+                        <>
+                          <div className='flex flex-wrap flex-col lg:flex-row gap-2.5 lg:gap-5 mb-2.5 lg:mb-5'>
+                            <OverviewCard
+                              title='Matches Won'
+                              value={player.wins}
+                            />
+                            <OverviewCard
+                              title='Matches Lost'
+                              value={player.losses}
+                            />
+                            <OverviewCard
+                              title='Win Rate'
+                              value={`${player.winRate}%`}
+                            />
+                          </div>
 
-                      <div className='grid grid-cols-1 lg:grid-cols-2 gap-2.5 lg:gap-5'>
-                        <div className='bg-background p-2.5 lg:p-5 rounded-lg'>
-                          {player.mostUsedPet.timesUsed > 0 ? (
-                            <div className='flex items-start justify-between'>
-                              <div>
-                                <Heading
-                                  as='h3'
-                                  className='text-xl text-muted-foreground mb-2.5'
-                                >
-                                  {'Most Used Pet'}
-                                </Heading>
-                                <Paragraph className='text-md text-humanoid font-bold'>
-                                  {player.mostUsedPet.petName}
+                          <div className='grid grid-cols-1 lg:grid-cols-2 gap-2.5 lg:gap-5'>
+                            <div className='bg-background p-2.5 lg:p-5 rounded-lg'>
+                              {player.mostUsedPet.timesUsed > 0 ? (
+                                <div className='flex items-start justify-between'>
+                                  <div>
+                                    <Heading
+                                      as='h3'
+                                      className='text-xl text-muted-foreground mb-2.5'
+                                    >
+                                      {'Most Used Pet'}
+                                    </Heading>
+                                    <Paragraph className='text-md text-humanoid font-bold'>
+                                      {player.mostUsedPet.petName}
+                                    </Paragraph>
+                                    <Paragraph className='text-sm'>
+                                      {'Used '}
+                                      {player.mostUsedPet.timesUsed}
+                                      {' times'}
+                                    </Paragraph>
+                                    <Paragraph className='text-sm'>
+                                      {player.mostUsedPet.kills}
+                                      {' kills'}
+                                    </Paragraph>
+                                  </div>
+                                  <div className='w-[100px] lg:w-[125px] h-[100px] lg:h-[125px]'>
+                                    <Image
+                                      src={mostUsedPet?.image || ''}
+                                      alt={
+                                        mostUsedPet?.name ||
+                                        player.mostUsedPet.petName
+                                      }
+                                      className='w-full h-full rounded-lg object-cover'
+                                      width={90}
+                                      height={90}
+                                      loading='lazy'
+                                    />
+                                  </div>
+                                </div>
+                              ) : (
+                                <Paragraph className='p-2.5 lg:p-5 rounded-lg bg-light-grey text-center shadow-md'>
+                                  {'No most used pet data found.'}
                                 </Paragraph>
-                                <Paragraph className='text-sm'>
-                                  {'Used '}
-                                  {player.mostUsedPet.timesUsed}
-                                  {' times'}
-                                </Paragraph>
-                                <Paragraph className='text-sm'>
-                                  {player.mostUsedPet.kills}
-                                  {' kills'}
-                                </Paragraph>
-                              </div>
-                              <div className='w-[100px] lg:w-[125px] h-[100px] lg:h-[125px]'>
-                                <Image
-                                  src={mostUsedPet?.image || ''}
-                                  alt={
-                                    mostUsedPet?.name ||
-                                    player.mostUsedPet.petName
-                                  }
-                                  className='w-full h-full rounded-lg object-cover'
-                                  width={90}
-                                  height={90}
-                                  loading='lazy'
-                                />
-                              </div>
+                              )}
                             </div>
-                          ) : (
-                            <Paragraph className='p-2.5 lg:p-5 rounded-lg bg-light-grey text-center shadow-md'>
-                              {'No most used pet data found.'}
-                            </Paragraph>
-                          )}
-                        </div>
 
-                        <div className='bg-background p-2.5 lg:p-5 rounded-lg'>
-                          {player.mostProblematicPet.timesLostAgainst > 0 ? (
-                            <div className='flex items-start justify-between'>
-                              <div>
-                                <Heading
-                                  as='h3'
-                                  className='text-xl text-muted-foreground mb-2.5'
-                                >
-                                  {'Nemesis Pet'}
-                                </Heading>
-                                <Paragraph className='text-md text-humanoid font-bold'>
-                                  {player.mostProblematicPet.petName}
+                            <div className='bg-background p-2.5 lg:p-5 rounded-lg'>
+                              {player.mostProblematicPet.timesLostAgainst >
+                              0 ? (
+                                <div className='flex items-start justify-between'>
+                                  <div>
+                                    <Heading
+                                      as='h3'
+                                      className='text-xl text-muted-foreground mb-2.5'
+                                    >
+                                      {'Nemesis Pet'}
+                                    </Heading>
+                                    <Paragraph className='text-md text-humanoid font-bold'>
+                                      {player.mostProblematicPet.petName}
+                                    </Paragraph>
+                                    <Paragraph className='text-sm'>
+                                      {'Lost against '}
+                                      {
+                                        player.mostProblematicPet
+                                          .timesLostAgainst
+                                      }
+                                      {' times'}
+                                    </Paragraph>
+                                  </div>
+                                  <div className='w-[100px] lg:w-[125px] h-[100px] lg:h-[125px]'>
+                                    <Image
+                                      src={nemesisPet?.image || ''}
+                                      alt={
+                                        nemesisPet?.name ||
+                                        player.mostProblematicPet.petName
+                                      }
+                                      className='w-full h-full rounded-lg object-cover'
+                                      width={90}
+                                      height={90}
+                                      loading='lazy'
+                                    />
+                                  </div>
+                                </div>
+                              ) : (
+                                <Paragraph className='p-2.5 lg:p-5 rounded-lg bg-light-grey text-center shadow-md'>
+                                  {'No nemesis pet data found.'}
                                 </Paragraph>
-                                <Paragraph className='text-sm'>
-                                  {'Lost against '}
-                                  {player.mostProblematicPet.timesLostAgainst}
-                                  {' times'}
-                                </Paragraph>
-                              </div>
-                              <div className='w-[100px] lg:w-[125px] h-[100px] lg:h-[125px]'>
-                                <Image
-                                  src={nemesisPet?.image || ''}
-                                  alt={
-                                    nemesisPet?.name ||
-                                    player.mostProblematicPet.petName
-                                  }
-                                  className='w-full h-full rounded-lg object-cover'
-                                  width={90}
-                                  height={90}
-                                  loading='lazy'
-                                />
-                              </div>
+                              )}
                             </div>
-                          ) : (
-                            <Paragraph className='p-2.5 lg:p-5 rounded-lg bg-light-grey text-center shadow-md'>
-                              {'No nemesis pet data found.'}
-                            </Paragraph>
-                          )}
-                        </div>
-                      </div>
+                          </div>
 
-                      <div className='mt-2.5 lg:mt-5'>
-                        <Heading as='h4' className='text-lg font-bold mb-2.5'>
-                          {"Player's Pet Usage In Tournament"}
-                        </Heading>
-                        <div className='overflow-x-auto rounded-lg'>
-                          <table className='min-w-full'>
-                            <thead className='bg-background text-left'>
-                              <tr className='border-b border-medium-grey'>
-                                <th className='text-left py-2 px-2.5 lg:px-5'>
-                                  {'Pet Name'}
-                                </th>
-                                <th className='text-left py-2 px-2.5 lg:px-5'>
-                                  {'Times Used'}
-                                </th>
-                                <th className='text-left py-2 px-2.5 lg:px-5'>
-                                  {'Kills'}
-                                </th>
-                                <th className='text-left py-2 px-2.5 lg:px-5'>
-                                  {'Deaths'}
-                                </th>
-                              </tr>
-                            </thead>
-                            <tbody className='bg-medium-grey'>
-                              {player.petStatistics.map((pet) => [
-                                <tr
-                                  key={pet.petName + '-row'}
-                                  className={cn(
-                                    'border border-medium-grey border-b-light-grey cursor-pointer hover:bg-light-grey hover:border-b-medium-grey',
-                                    expandedPet === pet.petName &&
-                                      'bg-background border-b-background'
-                                  )}
-                                  onClick={() => togglePet(pet.petName)}
-                                >
-                                  <td className='py-2 px-2.5 lg:px-5'>
-                                    {pet.petName}
-                                  </td>
-                                  <td className='py-2 px-2.5 lg:px-5'>
-                                    {pet.timesUsed}
-                                  </td>
-                                  <td className='py-2 px-2.5 lg:px-5'>
-                                    {pet.kills}
-                                  </td>
-                                  <td className='py-2 px-2.5 lg:px-5'>
-                                    {pet.deaths}
-                                  </td>
-                                </tr>,
-                                expandedPet === pet.petName && (
-                                  <tr
-                                    key={pet.petName + '-details'}
-                                    className='border border-medium-grey'
-                                  >
-                                    <td colSpan={4} className='p-0'>
-                                      <div className='space-y-2.5 lg:space-y-5 p-2.5 lg:p-5 bg-background relative grid grid-cols-1 lg:grid-cols-3 gap-2.5 lg:gap-5'>
-                                        <div>
-                                          <div className='w-full lg:w-[300px] h-auto lg:h-[300px]'>
-                                            <Image
-                                              src={petDetails?.image || ''}
-                                              alt={
-                                                petDetails?.name || pet.petName
-                                              }
-                                              className='w-full h-full rounded-lg object-cover'
-                                              width={100}
-                                              height={100}
-                                              loading='lazy'
-                                            />
-                                          </div>
-                                        </div>
-                                        <div>
-                                          <Heading
-                                            as='h3'
-                                            className='text-xl font-bold'
-                                            style={{
-                                              color:
-                                                petTypeColors[
-                                                  petDetails?.type as keyof typeof petTypeColors
-                                                ],
-                                            }}
+                          <div className='mt-2.5 lg:mt-5'>
+                            <Heading
+                              as='h4'
+                              className='text-lg font-bold mb-2.5'
+                            >
+                              {"Player's Matches In Tournament"}
+                            </Heading>
+                            {player.matches.length > 0 ? (
+                              <div className='overflow-x-auto rounded-lg'>
+                                <table className='min-w-full'>
+                                  <thead className='bg-background text-left'>
+                                    <tr className='border-b border-medium-grey'>
+                                      <th className='py-2 px-2.5 lg:px-5'>
+                                        {'Opponent'}
+                                      </th>
+                                      <th className='py-2 px-2.5 lg:px-5'>
+                                        {'Score'}
+                                      </th>
+                                      <th className='py-2 px-2.5 lg:px-5'>
+                                        {'Date'}
+                                      </th>
+                                      <th className='py-2 px-2.5 lg:px-5'>
+                                        {'Details'}
+                                      </th>
+                                    </tr>
+                                  </thead>
+                                  <tbody className='bg-medium-grey'>
+                                    {player.matches.map((match) => (
+                                      <tr
+                                        key={match.id}
+                                        className='border border-medium-grey border-b-light-grey  hover:bg-light-grey hover:border-b-medium-grey'
+                                      >
+                                        <td className='py-2 px-2.5 lg:px-5'>
+                                          {match.opponent}
+                                        </td>
+                                        <td className='py-2 px-2.5 lg:px-5'>
+                                          {match.owner_score} -{' '}
+                                          {match.opponent_score}
+                                        </td>
+                                        <td className='py-2 px-2.5 lg:px-5'>
+                                          {new Date(
+                                            match.date
+                                          ).toLocaleDateString()}
+                                        </td>
+                                        <td className='py-2 px-2.5 lg:px-5'>
+                                          <Link
+                                            href={`/tournaments/${tournamentId}/matches/${match.id}`}
+                                            className='link'
                                           >
-                                            {'Basic Information'}
-                                          </Heading>
-                                          <div className='space-y-1 mt-2'>
-                                            <Paragraph className='font-light'>
-                                              <span className='font-bold'>
-                                                {'Pet ID: '}
-                                              </span>
-                                              {petDetails?.petID}
-                                            </Paragraph>
-                                            <Paragraph className='font-light'>
-                                              <span className='font-bold'>
-                                                {'Type: '}
-                                              </span>
-                                              {petDetails?.type}
-                                            </Paragraph>
-                                            <Paragraph className='font-light'>
-                                              <span className='font-bold'>
-                                                {'Source: '}
-                                              </span>
-                                              {petDetails?.source}
-                                            </Paragraph>
-                                            <Paragraph className='font-light mb-5'>
-                                              <span className='font-bold'>
-                                                {'Expansion: '}
-                                              </span>
-                                              {petDetails?.expansion}
-                                            </Paragraph>
-                                            <Paragraph className='font-light flex gap-2.5'>
-                                              <span className='font-bold'>
-                                                {'Is tradable? '}
-                                              </span>
-                                              {petDetails?.isTradable ===
-                                              'Yes' ? (
-                                                <IoCheckmark
-                                                  color='#016630'
-                                                  className='w-5 h-5'
-                                                />
-                                              ) : (
-                                                <IoClose
-                                                  color='#9f0712'
-                                                  className='w-5 h-5'
-                                                />
-                                              )}
-                                            </Paragraph>
-                                            <Paragraph className='font-light flex gap-2.5 mb-5'>
-                                              <span className='font-bold'>
-                                                {'Can be put in cage? '}
-                                              </span>
-                                              {petDetails?.isCapturable ===
-                                              'Yes' ? (
-                                                <IoCheckmark
-                                                  color='#016630'
-                                                  className='w-5 h-5'
-                                                />
-                                              ) : (
-                                                <IoClose
-                                                  color='#9f0712'
-                                                  className='w-5 h-5'
-                                                />
-                                              )}
-                                            </Paragraph>
-                                            <Paragraph className='font-light'>
-                                              <span className='font-bold'>
-                                                {'Base Health: '}
-                                              </span>
-                                              {petDetails?.baseHealth}
-                                            </Paragraph>
-                                            <Paragraph className='font-light'>
-                                              <span className='font-bold'>
-                                                {'Base Power: '}
-                                              </span>
-                                              {petDetails?.basePower}
-                                            </Paragraph>
-                                            <Paragraph className='font-light'>
-                                              <span className='font-bold'>
-                                                {'Base Speed: '}
-                                              </span>
-                                              {petDetails?.baseSpeed}
-                                            </Paragraph>
-                                            <div className='absolute bottom-0 right-0 opacity-10 w-[150px] lg:w-[250px] h-[150px] lg:h-[250px]'>
-                                              <Image
-                                                src={
-                                                  TypesImages[
-                                                    petDetails?.type as keyof typeof TypesImages
-                                                  ]
-                                                }
-                                                alt={`${petDetails?.type} Icon`}
-                                                width={250}
-                                                height={250}
-                                                className='w-full h-full object-cover'
-                                                loading='lazy'
-                                              />
-                                            </div>
-                                          </div>
-                                        </div>
-                                        <div>
-                                          <div>
-                                            <Heading
-                                              as='h3'
-                                              className='text-xl font-bold'
-                                              style={{
-                                                color:
-                                                  petTypeColors[
-                                                    petDetails?.type as keyof typeof petTypeColors
-                                                  ],
-                                              }}
-                                            >
-                                              {'Possible Breeds'}
-                                            </Heading>
-                                            <div className='flex flex-wrap gap-2.5 mt-2.5'>
-                                              {petDetails?.availableBreeds
-                                                .split(',')
-                                                .map((b) => (
-                                                  <Paragraph
-                                                    key={b}
-                                                    className='p-2 rounded-lg border border-light-grey'
-                                                  >
-                                                    {b}
-                                                  </Paragraph>
-                                                ))}
-                                            </div>
-                                          </div>
-                                          <Heading
-                                            as='h3'
-                                            className='text-xl font-bold mt-2.5 lg:mt-5'
-                                            style={{
-                                              color:
-                                                petTypeColors[
-                                                  petDetails?.type as keyof typeof petTypeColors
-                                                ],
-                                            }}
-                                          >
-                                            {'Abilities'}
-                                          </Heading>
-                                          <div className='space-y-1 mt-2.5'>
-                                            <Paragraph className='font-light'>
-                                              <span className='font-bold'>
-                                                {'Lvl 1: '}
-                                              </span>
-                                              {petDetails?.ability1}
-                                            </Paragraph>
-                                            <Paragraph className='font-light'>
-                                              <span className='font-bold'>
-                                                {'Lvl 2: '}
-                                              </span>
-                                              {petDetails?.ability2}
-                                            </Paragraph>
-                                            <Paragraph className='font-light'>
-                                              <span className='font-bold'>
-                                                {'Lvl 4: '}
-                                              </span>
-                                              {petDetails?.ability3}
-                                            </Paragraph>
-                                            <Paragraph className='font-light'>
-                                              <span className='font-bold'>
-                                                {'Lvl 10: '}
-                                              </span>
-                                              {petDetails?.ability4}
-                                            </Paragraph>
-                                            <Paragraph className='font-light'>
-                                              <span className='font-bold'>
-                                                {'Lvl 15: '}
-                                              </span>
-                                              {petDetails?.ability5}
-                                            </Paragraph>
-                                            <Paragraph className='font-light'>
-                                              <span className='font-bold'>
-                                                {'Lvl 20: '}
-                                              </span>
-                                              {petDetails?.ability6}
-                                            </Paragraph>
-                                          </div>
-                                        </div>
-                                      </div>
-                                      <div className='p-2.5 lg:p-5 bg-background'>
-                                        <div
-                                          style={{
-                                            color:
-                                              petTypeColors[
-                                                petDetails?.type as keyof typeof petTypeColors
-                                              ],
-                                          }}
+                                            {'View Match'}
+                                          </Link>
+                                        </td>
+                                      </tr>
+                                    ))}
+                                  </tbody>
+                                </table>
+                              </div>
+                            ) : (
+                              <Paragraph className='bg-background p-5 rounded-lg text-center'>
+                                {'No player matches data found.'}
+                              </Paragraph>
+                            )}
+                          </div>
+
+                          <div className='mt-2.5 lg:mt-5'>
+                            <Heading
+                              as='h4'
+                              className='text-lg font-bold mb-2.5'
+                            >
+                              {"Player's Pet Usage In Tournament"}
+                            </Heading>
+                            {player.petStatistics.length > 0 ? (
+                              <div className='overflow-x-auto rounded-lg'>
+                                <table className='min-w-full'>
+                                  <thead className='bg-background text-left'>
+                                    <tr className='border-b border-medium-grey'>
+                                      <th className='text-left py-2 px-2.5 lg:px-5'>
+                                        {'Pet Name'}
+                                      </th>
+                                      <th className='text-left py-2 px-2.5 lg:px-5'>
+                                        {'Times Used'}
+                                      </th>
+                                      <th className='text-left py-2 px-2.5 lg:px-5'>
+                                        {'Kills'}
+                                      </th>
+                                      <th className='text-left py-2 px-2.5 lg:px-5'>
+                                        {'Deaths'}
+                                      </th>
+                                    </tr>
+                                  </thead>
+                                  <tbody className='bg-medium-grey'>
+                                    {player.petStatistics.map((pet) => [
+                                      <tr
+                                        key={pet.petName + '-row'}
+                                        className={cn(
+                                          'border border-medium-grey border-b-light-grey cursor-pointer hover:bg-light-grey hover:border-b-medium-grey',
+                                          expandedPet === pet.petName &&
+                                            'bg-background border-b-background'
+                                        )}
+                                        onClick={() => togglePet(pet.petName)}
+                                      >
+                                        <td className='py-2 px-2.5 lg:px-5'>
+                                          {pet.petName}
+                                        </td>
+                                        <td className='py-2 px-2.5 lg:px-5'>
+                                          {pet.timesUsed}
+                                        </td>
+                                        <td className='py-2 px-2.5 lg:px-5'>
+                                          {pet.kills}
+                                        </td>
+                                        <td className='py-2 px-2.5 lg:px-5'>
+                                          {pet.deaths}
+                                        </td>
+                                      </tr>,
+                                      expandedPet === pet.petName && (
+                                        <tr
+                                          key={pet.petName + '-details'}
+                                          className='border border-medium-grey'
                                         >
-                                          <Paragraph className='italic text-center'>
-                                            &ldquo;{petDetails?.description}
-                                            &ldquo;
-                                          </Paragraph>
-                                        </div>
-                                      </div>
-                                    </td>
-                                  </tr>
-                                ),
-                              ])}
-                            </tbody>
-                          </table>
-                        </div>
-                      </div>
+                                          <td colSpan={4} className='p-0'>
+                                            <div className='space-y-2.5 lg:space-y-5 p-2.5 lg:p-5 bg-background relative grid grid-cols-1 lg:grid-cols-3 gap-2.5 lg:gap-5'>
+                                              <div>
+                                                <div className='w-full lg:w-[300px] h-auto lg:h-[300px]'>
+                                                  <Image
+                                                    src={
+                                                      petDetails?.image || ''
+                                                    }
+                                                    alt={
+                                                      petDetails?.name ||
+                                                      pet.petName
+                                                    }
+                                                    className='w-full h-full rounded-lg object-cover'
+                                                    width={100}
+                                                    height={100}
+                                                    loading='lazy'
+                                                  />
+                                                </div>
+                                              </div>
+                                              <div>
+                                                <Heading
+                                                  as='h3'
+                                                  className='text-xl font-bold'
+                                                  style={{
+                                                    color:
+                                                      petTypeColors[
+                                                        petDetails?.type as keyof typeof petTypeColors
+                                                      ],
+                                                  }}
+                                                >
+                                                  {'Basic Information'}
+                                                </Heading>
+                                                <div className='space-y-1 mt-2'>
+                                                  <Paragraph className='font-light'>
+                                                    <span className='font-bold'>
+                                                      {'Pet ID: '}
+                                                    </span>
+                                                    {petDetails?.petID}
+                                                  </Paragraph>
+                                                  <Paragraph className='font-light'>
+                                                    <span className='font-bold'>
+                                                      {'Type: '}
+                                                    </span>
+                                                    {petDetails?.type}
+                                                  </Paragraph>
+                                                  <Paragraph className='font-light'>
+                                                    <span className='font-bold'>
+                                                      {'Source: '}
+                                                    </span>
+                                                    {petDetails?.source}
+                                                  </Paragraph>
+                                                  <Paragraph className='font-light mb-5'>
+                                                    <span className='font-bold'>
+                                                      {'Expansion: '}
+                                                    </span>
+                                                    {petDetails?.expansion}
+                                                  </Paragraph>
+                                                  <Paragraph className='font-light flex gap-2.5'>
+                                                    <span className='font-bold'>
+                                                      {'Is tradable? '}
+                                                    </span>
+                                                    {petDetails?.isTradable ===
+                                                    'Yes' ? (
+                                                      <IoCheckmark
+                                                        color='#016630'
+                                                        className='w-5 h-5'
+                                                      />
+                                                    ) : (
+                                                      <IoClose
+                                                        color='#9f0712'
+                                                        className='w-5 h-5'
+                                                      />
+                                                    )}
+                                                  </Paragraph>
+                                                  <Paragraph className='font-light flex gap-2.5 mb-5'>
+                                                    <span className='font-bold'>
+                                                      {'Can be put in cage? '}
+                                                    </span>
+                                                    {petDetails?.isCapturable ===
+                                                    'Yes' ? (
+                                                      <IoCheckmark
+                                                        color='#016630'
+                                                        className='w-5 h-5'
+                                                      />
+                                                    ) : (
+                                                      <IoClose
+                                                        color='#9f0712'
+                                                        className='w-5 h-5'
+                                                      />
+                                                    )}
+                                                  </Paragraph>
+                                                  <Paragraph className='font-light'>
+                                                    <span className='font-bold'>
+                                                      {'Base Health: '}
+                                                    </span>
+                                                    {petDetails?.baseHealth}
+                                                  </Paragraph>
+                                                  <Paragraph className='font-light'>
+                                                    <span className='font-bold'>
+                                                      {'Base Power: '}
+                                                    </span>
+                                                    {petDetails?.basePower}
+                                                  </Paragraph>
+                                                  <Paragraph className='font-light'>
+                                                    <span className='font-bold'>
+                                                      {'Base Speed: '}
+                                                    </span>
+                                                    {petDetails?.baseSpeed}
+                                                  </Paragraph>
+                                                  <div className='absolute bottom-0 right-0 opacity-10 w-[150px] lg:w-[250px] h-[150px] lg:h-[250px]'>
+                                                    <Image
+                                                      src={
+                                                        TypesImages[
+                                                          petDetails?.type as keyof typeof TypesImages
+                                                        ]
+                                                      }
+                                                      alt={`${petDetails?.type} Icon`}
+                                                      width={250}
+                                                      height={250}
+                                                      className='w-full h-full object-cover'
+                                                      loading='lazy'
+                                                    />
+                                                  </div>
+                                                </div>
+                                              </div>
+                                              <div>
+                                                <div>
+                                                  <Heading
+                                                    as='h3'
+                                                    className='text-xl font-bold'
+                                                    style={{
+                                                      color:
+                                                        petTypeColors[
+                                                          petDetails?.type as keyof typeof petTypeColors
+                                                        ],
+                                                    }}
+                                                  >
+                                                    {'Possible Breeds'}
+                                                  </Heading>
+                                                  <div className='flex flex-wrap gap-2.5 mt-2.5'>
+                                                    {petDetails?.availableBreeds
+                                                      .split(',')
+                                                      .map((b) => (
+                                                        <Paragraph
+                                                          key={b}
+                                                          className='p-2 rounded-lg border border-light-grey'
+                                                        >
+                                                          {b}
+                                                        </Paragraph>
+                                                      ))}
+                                                  </div>
+                                                </div>
+                                                <Heading
+                                                  as='h3'
+                                                  className='text-xl font-bold mt-2.5 lg:mt-5'
+                                                  style={{
+                                                    color:
+                                                      petTypeColors[
+                                                        petDetails?.type as keyof typeof petTypeColors
+                                                      ],
+                                                  }}
+                                                >
+                                                  {'Abilities'}
+                                                </Heading>
+                                                <div className='space-y-1 mt-2.5'>
+                                                  <Paragraph className='font-light'>
+                                                    <span className='font-bold'>
+                                                      {'Lvl 1: '}
+                                                    </span>
+                                                    {petDetails?.ability1}
+                                                  </Paragraph>
+                                                  <Paragraph className='font-light'>
+                                                    <span className='font-bold'>
+                                                      {'Lvl 2: '}
+                                                    </span>
+                                                    {petDetails?.ability2}
+                                                  </Paragraph>
+                                                  <Paragraph className='font-light'>
+                                                    <span className='font-bold'>
+                                                      {'Lvl 4: '}
+                                                    </span>
+                                                    {petDetails?.ability3}
+                                                  </Paragraph>
+                                                  <Paragraph className='font-light'>
+                                                    <span className='font-bold'>
+                                                      {'Lvl 10: '}
+                                                    </span>
+                                                    {petDetails?.ability4}
+                                                  </Paragraph>
+                                                  <Paragraph className='font-light'>
+                                                    <span className='font-bold'>
+                                                      {'Lvl 15: '}
+                                                    </span>
+                                                    {petDetails?.ability5}
+                                                  </Paragraph>
+                                                  <Paragraph className='font-light'>
+                                                    <span className='font-bold'>
+                                                      {'Lvl 20: '}
+                                                    </span>
+                                                    {petDetails?.ability6}
+                                                  </Paragraph>
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <div className='p-2.5 lg:p-5 bg-background'>
+                                              <div
+                                                style={{
+                                                  color:
+                                                    petTypeColors[
+                                                      petDetails?.type as keyof typeof petTypeColors
+                                                    ],
+                                                }}
+                                              >
+                                                <Paragraph className='italic text-center'>
+                                                  &ldquo;
+                                                  {petDetails?.description}
+                                                  &ldquo;
+                                                </Paragraph>
+                                              </div>
+                                            </div>
+                                          </td>
+                                        </tr>
+                                      ),
+                                    ])}
+                                  </tbody>
+                                </table>
+                              </div>
+                            ) : (
+                              <Paragraph className='bg-background p-5 rounded-lg text-center'>
+                                {'No player pet usage data found.'}
+                              </Paragraph>
+                            )}
+                          </div>
+                        </>
+                      ) : (
+                        <Paragraph className='bg-background p-5 rounded-lg text-center'>
+                          {
+                            'Player has been removed/dropped from the tournament.'
+                          }
+                        </Paragraph>
+                      )}
                     </div>
                   )}
                 </div>

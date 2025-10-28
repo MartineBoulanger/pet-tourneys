@@ -103,6 +103,7 @@ export default async function RankingsPage({ params }: { params: PageParams }) {
         records={playerData.records}
         regions={playerData.regions}
         petData={petData}
+        tournamentId={tournament.id}
       />
     </Container>
   );

@@ -25,10 +25,20 @@ export interface OpponentPetStats {
   timesLostAgainst: number;
 }
 
+export interface PlayerMatch {
+  id: string;
+  opponent: string;
+  owner_score: number;
+  opponent_score: number;
+  date: string;
+}
+
 export interface EnhancedPlayerRecord extends PlayerRecord {
   mostUsedPet: PetStats;
   mostProblematicPet: OpponentPetStats;
   petStatistics: PetStats[];
+  matches: PlayerMatch[];
+  forfeitOnly: boolean;
 }
 
 export async function getPlayerRecords(tournamentId: string) {
@@ -75,19 +85,29 @@ export async function analyzePlayerAndPetStats(
 ): Promise<EnhancedPlayerRecord[]> {
   // Track match results with region-specific keys
   const matchResults = new Map<
-    string, // playerName-region composite key
+    string,
     { wins: number; losses: number; region: string }
   >();
 
   const battlePetStats = new Map<
-    string, // playerName-region composite key
+    string,
     Map<string, { timesUsed: number; kills: number; deaths: number }>
   >();
 
-  const problematicPets = new Map<
-    string, // playerName-region composite key
-    Map<string, number>
+  const problematicPets = new Map<string, Map<string, number>>();
+
+  const playerMatches = new Map<
+    string,
+    {
+      id: string;
+      opponent: string;
+      owner_score: number;
+      opponent_score: number;
+      date: string;
+    }[]
   >();
+
+  const playerForfeitStatus = new Map<string, boolean>();
 
   // Initialize all players from matches with region-specific keys
   matches.forEach((match) => {
@@ -108,6 +128,47 @@ export async function analyzePlayerAndPetStats(
       }
       if (!problematicPets.has(playerKey)) {
         problematicPets.set(playerKey, new Map());
+      }
+    });
+  });
+
+  // Set matches list per player with region-specific keys with forfeit matches filtered out
+  const matchesList = matches.filter((m) => m.outcome !== 'FORFEIT');
+  matchesList.forEach((match) => {
+    const matchRegion = match.region || 'N/A';
+
+    [match.player1, match.player2].forEach((player) => {
+      const playerKey = `${player}-${matchRegion}`;
+
+      if (!playerMatches.has(playerKey)) {
+        playerMatches.set(playerKey, []);
+      }
+
+      const opponent = player === match.player1 ? match.player2 : match.player1;
+      playerMatches.get(playerKey)!.push({
+        id: match.id,
+        opponent,
+        owner_score: match.owner_score,
+        opponent_score: match.opponent_score,
+        date: match.date,
+      });
+    });
+  });
+
+  // Determine forfeit status per player with region-specific keys
+  matches.forEach((match) => {
+    const matchRegion = match.region || 'N/A';
+    const isForfeit = match.outcome === 'FORFEIT';
+
+    [match.player1, match.player2].forEach((player) => {
+      const playerKey = `${player}-${matchRegion}`;
+
+      if (!playerForfeitStatus.has(playerKey)) {
+        playerForfeitStatus.set(playerKey, true); // assume only forfeits until proven otherwise
+      }
+
+      if (!isForfeit) {
+        playerForfeitStatus.set(playerKey, false); // they played at least one real match
       }
     });
   });
@@ -227,7 +288,8 @@ export async function analyzePlayerAndPetStats(
           timesLostAgainst: 0,
         },
         petStatistics: petStatsArray,
-        // Add composite ID for reference
+        matches: playerMatches.get(playerKey) || [],
+        forfeitOnly: playerForfeitStatus.get(playerKey) ?? false,
         compositeId: playerKey,
       };
     }
