@@ -107,7 +107,8 @@ export async function signOut() {
   redirect('/');
 }
 
-// When a normale user is logged in
+// TODO: to check if 3 different functions are needed or not
+// When a normal user is logged in
 export async function getUserSession() {
   const supabase = await createClient();
   const { data, error } = await supabase.auth.getUser();

@@ -12,12 +12,14 @@ interface RichTextEditorProps {
   content: string;
   onChange: (content: string) => void;
   className?: string;
+  isComment?: boolean;
 }
 
 export function RichTextEditor({
   content,
   onChange,
   className,
+  isComment = false,
 }: RichTextEditorProps) {
   const [isMounted, setIsMounted] = useState(false);
 
@@ -54,7 +56,7 @@ export function RichTextEditor({
     <div
       className={`border border-light-grey rounded-lg overflow-hidden ${className}`}
     >
-      <MenuBar editor={editor} />
+      <MenuBar editor={editor} isComment={isComment} />
       <EditorContent
         editor={editor}
         className='min-h-[350px] overflow-x-auto p-2.5 lg:p-5 bg-foreground text-background prose'
@@ -63,7 +65,13 @@ export function RichTextEditor({
   );
 }
 
-function MenuBar({ editor }: { editor: Editor | null }) {
+function MenuBar({
+  editor,
+  isComment,
+}: {
+  editor: Editor | null;
+  isComment: boolean;
+}) {
   if (!editor) return null;
 
   const handleButtonClick = (action: () => void) => (e: React.MouseEvent) => {
@@ -73,98 +81,114 @@ function MenuBar({ editor }: { editor: Editor | null }) {
 
   return (
     <div className='flex flex-wrap items-center gap-1 p-2.5 border-b border-b-light-grey bg-light-grey'>
-      {/* Paragraph */}
-      <button
-        onClick={handleButtonClick(() =>
-          editor.chain().focus().setParagraph().run()
-        )}
-        className={`p-2.5 rounded ${
-          editor.isActive('paragraph') ? '' : 'hover:bg-background'
-        }`}
-        title='Paragraph'
-      >
-        {'P'}
-      </button>
+      {!isComment ? (
+        <>
+          {/* Paragraph */}
+          <button
+            onClick={handleButtonClick(() =>
+              editor.chain().focus().setParagraph().run()
+            )}
+            className={`p-2.5 rounded ${
+              editor.isActive('paragraph') ? '' : 'hover:bg-background'
+            }`}
+            title='Paragraph'
+          >
+            {'P'}
+          </button>
 
-      {/* Heading 1 */}
-      <button
-        onClick={handleButtonClick(() =>
-          editor.chain().focus().toggleHeading({ level: 1 }).run()
-        )}
-        className={`p-2.5 rounded ${
-          editor.isActive('heading', { level: 1 }) ? '' : 'hover:bg-background'
-        }`}
-        title='Heading 1'
-      >
-        {'H1'}
-      </button>
+          {/* Heading 1 */}
+          <button
+            onClick={handleButtonClick(() =>
+              editor.chain().focus().toggleHeading({ level: 1 }).run()
+            )}
+            className={`p-2.5 rounded ${
+              editor.isActive('heading', { level: 1 })
+                ? ''
+                : 'hover:bg-background'
+            }`}
+            title='Heading 1'
+          >
+            {'H1'}
+          </button>
 
-      {/* Heading 2 */}
-      <button
-        onClick={handleButtonClick(() =>
-          editor.chain().focus().toggleHeading({ level: 2 }).run()
-        )}
-        className={`p-2.5 rounded ${
-          editor.isActive('heading', { level: 2 }) ? '' : 'hover:bg-background'
-        }`}
-        title='Heading 2'
-      >
-        {'H2'}
-      </button>
+          {/* Heading 2 */}
+          <button
+            onClick={handleButtonClick(() =>
+              editor.chain().focus().toggleHeading({ level: 2 }).run()
+            )}
+            className={`p-2.5 rounded ${
+              editor.isActive('heading', { level: 2 })
+                ? ''
+                : 'hover:bg-background'
+            }`}
+            title='Heading 2'
+          >
+            {'H2'}
+          </button>
 
-      {/* Heading 3 */}
-      <button
-        onClick={handleButtonClick(() =>
-          editor.chain().focus().toggleHeading({ level: 3 }).run()
-        )}
-        className={`p-2.5 rounded ${
-          editor.isActive('heading', { level: 3 }) ? '' : 'hover:bg-background'
-        }`}
-        title='Heading 3'
-      >
-        {'H3'}
-      </button>
+          {/* Heading 3 */}
+          <button
+            onClick={handleButtonClick(() =>
+              editor.chain().focus().toggleHeading({ level: 3 }).run()
+            )}
+            className={`p-2.5 rounded ${
+              editor.isActive('heading', { level: 3 })
+                ? ''
+                : 'hover:bg-background'
+            }`}
+            title='Heading 3'
+          >
+            {'H3'}
+          </button>
 
-      {/* Heading 4 */}
-      <button
-        onClick={handleButtonClick(() =>
-          editor.chain().focus().toggleHeading({ level: 4 }).run()
-        )}
-        className={`p-2.5 rounded ${
-          editor.isActive('heading', { level: 4 }) ? '' : 'hover:bg-background'
-        }`}
-        title='Heading 4'
-      >
-        {'H4'}
-      </button>
+          {/* Heading 4 */}
+          <button
+            onClick={handleButtonClick(() =>
+              editor.chain().focus().toggleHeading({ level: 4 }).run()
+            )}
+            className={`p-2.5 rounded ${
+              editor.isActive('heading', { level: 4 })
+                ? ''
+                : 'hover:bg-background'
+            }`}
+            title='Heading 4'
+          >
+            {'H4'}
+          </button>
 
-      {/* Heading 5 */}
-      <button
-        onClick={handleButtonClick(() =>
-          editor.chain().focus().toggleHeading({ level: 5 }).run()
-        )}
-        className={`p-2.5 rounded ${
-          editor.isActive('heading', { level: 5 }) ? '' : 'hover:bg-background'
-        }`}
-        title='Heading 5'
-      >
-        {'H5'}
-      </button>
+          {/* Heading 5 */}
+          <button
+            onClick={handleButtonClick(() =>
+              editor.chain().focus().toggleHeading({ level: 5 }).run()
+            )}
+            className={`p-2.5 rounded ${
+              editor.isActive('heading', { level: 5 })
+                ? ''
+                : 'hover:bg-background'
+            }`}
+            title='Heading 5'
+          >
+            {'H5'}
+          </button>
 
-      {/* Heading 6 */}
-      <button
-        onClick={handleButtonClick(() =>
-          editor.chain().focus().toggleHeading({ level: 6 }).run()
-        )}
-        className={`p-2.5 rounded ${
-          editor.isActive('heading', { level: 6 }) ? '' : 'hover:bg-background'
-        }`}
-        title='Heading 6'
-      >
-        {'H6'}
-      </button>
+          {/* Heading 6 */}
+          <button
+            onClick={handleButtonClick(() =>
+              editor.chain().focus().toggleHeading({ level: 6 }).run()
+            )}
+            className={`p-2.5 rounded ${
+              editor.isActive('heading', { level: 6 })
+                ? ''
+                : 'hover:bg-background'
+            }`}
+            title='Heading 6'
+          >
+            {'H6'}
+          </button>
 
-      <div className='w-0.5 h-8 bg-medium-grey rounded-lg mx-2.5' />
+          <div className='w-0.5 h-8 bg-medium-grey rounded-lg mx-2.5' />
+        </>
+      ) : null}
 
       {/* Bold */}
       <button
@@ -233,34 +257,43 @@ function MenuBar({ editor }: { editor: Editor | null }) {
         <VscListOrdered />
       </button>
 
-      <div className='w-0.5 h-8 bg-medium-grey rounded-lg mx-2.5' />
+      {!isComment ? (
+        <>
+          <div className='w-0.5 h-8 bg-medium-grey rounded-lg mx-2.5' />
 
-      {/* Link */}
-      <button
-        onClick={handleButtonClick(() => {
-          const previousUrl = editor.getAttributes('link').href;
-          const url = window.prompt('URL', previousUrl);
+          {/* Link */}
+          <button
+            onClick={handleButtonClick(() => {
+              const previousUrl = editor.getAttributes('link').href;
+              const url = window.prompt('URL', previousUrl);
 
-          if (url === null) return;
-          if (url === '') {
-            editor.chain().focus().extendMarkRange('link').unsetLink().run();
-            return;
-          }
+              if (url === null) return;
+              if (url === '') {
+                editor
+                  .chain()
+                  .focus()
+                  .extendMarkRange('link')
+                  .unsetLink()
+                  .run();
+                return;
+              }
 
-          editor
-            .chain()
-            .focus()
-            .extendMarkRange('link')
-            .setLink({ href: url })
-            .run();
-        })}
-        className={`p-2.5 rounded ${
-          editor.isActive('link') ? '' : 'hover:bg-background'
-        }`}
-        title='Link'
-      >
-        <FaLink />
-      </button>
+              editor
+                .chain()
+                .focus()
+                .extendMarkRange('link')
+                .setLink({ href: url })
+                .run();
+            })}
+            className={`p-2.5 rounded ${
+              editor.isActive('link') ? '' : 'hover:bg-background'
+            }`}
+            title='Link'
+          >
+            <FaLink />
+          </button>
+        </>
+      ) : null}
     </div>
   );
 }

@@ -53,6 +53,23 @@
       font-size: 24px;
     }
   }
+  /* scrollbar styling */
+  /* width */
+  ::-webkit-scrollbar {
+    @apply w-1 h-1 rounded-full;
+  }
+  /* Track */
+  ::-webkit-scrollbar-track {
+    @apply bg-background w-0.5 rounded-full;
+  }
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    @apply bg-blue-grey w-[1px] rounded-full;
+  }
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-light-grey;
+  }
 }
 
 @layer components {

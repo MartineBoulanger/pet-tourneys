@@ -110,3 +110,13 @@ export type Page = {
   updatedAt: Date;
 };
 // **************************************************************************
+export type Comment = {
+  _id: string;
+  pageId: string;
+  username?: string;
+  name: string;
+  content: string;
+  createdAt: Date;
+  updatedAt: Date;
+};
+// **************************************************************************

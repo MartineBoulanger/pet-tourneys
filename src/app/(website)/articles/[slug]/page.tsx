@@ -1,6 +1,11 @@
 import { notFound } from 'next/navigation';
 import { getPageBySlug } from '@/features/cms/actions/pages';
 import { PageDetails } from '@/features/cms/components/pages/PageDetails';
+import { CommentsSection } from '@/features/cms/components/comments/CommentsSection';
+import {
+  // getAdminSession,
+  getUserSession,
+} from '@/features/supabase/actions/auth';
 
 export async function generateMetadata({
   params,
@@ -46,11 +51,22 @@ export default async function ArticlePage({
 }) {
   const { slug } = await params;
   const pageData = await getPageBySlug(slug);
+  const session = await getUserSession();
 
   if (!pageData) notFound();
   if (!pageData.success) return null;
 
   const page = pageData.page || null;
 
-  return <PageDetails page={page} type='articles' />;
+  return (
+    <>
+      <PageDetails page={page} type='articles' />
+      <CommentsSection
+        pageId={page?._id!}
+        username={session?.user?.username}
+        isAdmin={session?.user?.role === 'admin'}
+        path={`/articles/${slug}`}
+      />
+    </>
+  );
 }
