@@ -48,9 +48,9 @@ export default async function GuidePage({
   const pageData = await getPageBySlug(slug);
 
   if (!pageData) notFound();
-  if (!pageData.success) return null;
+  if (!pageData.success || !pageData.page) return null;
 
-  const page = pageData.page || null;
+  const page = pageData.page;
 
   return <PageDetails page={page} type='guides' />;
 }

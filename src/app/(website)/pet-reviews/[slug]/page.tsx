@@ -49,9 +49,9 @@ export default async function GuidePage({
   const session = await getUserSession();
 
   if (!pageData) notFound();
-  if (!pageData.success) return null;
+  if (!pageData.success || !pageData.page) return null;
 
-  const page = pageData.page || null;
+  const page = pageData.page;
   const username = session && session.user ? session.user.username : '';
   const isAdmin =
     session && session.user ? session.user.role === 'admin' : false;
@@ -60,7 +60,7 @@ export default async function GuidePage({
     <>
       <PageDetails page={page} type='pet-reviews' />
       <CommentsSection
-        pageId={page?._id!}
+        pageId={page._id}
         username={username}
         isAdmin={isAdmin}
         path={`/pet-reviews/${slug}`}

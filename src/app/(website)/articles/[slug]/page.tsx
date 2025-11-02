@@ -54,9 +54,9 @@ export default async function ArticlePage({
   const session = await getUserSession();
 
   if (!pageData) notFound();
-  if (!pageData.success) return null;
+  if (!pageData.success || !pageData.page) return null;
 
-  const page = pageData.page || null;
+  const page = pageData.page;
   const username = session && session.user ? session.user.username : '';
   const isAdmin =
     session && session.user ? session.user.role === 'admin' : false;
@@ -65,7 +65,7 @@ export default async function ArticlePage({
     <>
       <PageDetails page={page} type='articles' />
       <CommentsSection
-        pageId={page?._id!}
+        pageId={page._id}
         username={username}
         isAdmin={isAdmin}
         path={`/articles/${slug}`}
