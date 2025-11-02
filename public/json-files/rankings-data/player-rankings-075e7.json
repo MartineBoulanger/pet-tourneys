@@ -1,7 +1,7 @@
 {
   "tournamentId": "075e7708-cfa4-4b30-a033-4246520f605a",
   "tournamentName": "Pet Battle PvP Tournament Season 2",
-  "timestamp": "2025-07-05T18:07:14.440Z",
+  "timestamp": "2025-11-02T20:38:27.307Z",
   "records": [
     {
       "playerName": "Woxbc",
@@ -75,6 +75,23 @@
           "deaths": 1
         }
       ],
+      "matches": [
+        {
+          "id": "8ffd982e-6f20-4e3a-b4aa-a53df12b84dc",
+          "opponent": "Deevus",
+          "owner_score": 3,
+          "opponent_score": 0,
+          "date": "2025-06-28T20:00:00"
+        },
+        {
+          "id": "56ae9a78-c1b3-4099-b6f6-a94882564f35",
+          "opponent": "Gooskaffur",
+          "owner_score": 3,
+          "opponent_score": 1,
+          "date": "2025-06-28T22:30:00"
+        }
+      ],
+      "forfeitOnly": false,
       "compositeId": "Woxbc-NA Finals-075e7708-cfa4-4b30-a033-4246520f605a",
       "isFinals": true
     },
@@ -156,6 +173,23 @@
           "deaths": 1
         }
       ],
+      "matches": [
+        {
+          "id": "8ffd982e-6f20-4e3a-b4aa-a53df12b84dc",
+          "opponent": "Woxbc",
+          "owner_score": 3,
+          "opponent_score": 0,
+          "date": "2025-06-28T20:00:00"
+        },
+        {
+          "id": "aa002b22-c26d-4c98-967e-e800f02670de",
+          "opponent": "Lobombre",
+          "owner_score": 0,
+          "opponent_score": 3,
+          "date": "2025-06-28T22:00:00"
+        }
+      ],
+      "forfeitOnly": false,
       "compositeId": "Deevus-NA Finals-075e7708-cfa4-4b30-a033-4246520f605a",
       "isFinals": true
     },
@@ -429,6 +463,51 @@
           "deaths": 1
         }
       ],
+      "matches": [
+        {
+          "id": "8786a029-e2cd-4f71-a78e-64615cf49e34",
+          "opponent": "Isabella",
+          "owner_score": 0,
+          "opponent_score": 3,
+          "date": "2025-05-09T21:00:00"
+        },
+        {
+          "id": "4254ea46-26f7-4ad5-89be-ac4001742ca3",
+          "opponent": "Panseit",
+          "owner_score": 3,
+          "opponent_score": 0,
+          "date": "2025-04-05T10:00:00"
+        },
+        {
+          "id": "c9ca9049-a348-4bf6-9684-238a74cb6462",
+          "opponent": "Fwen",
+          "owner_score": 1,
+          "opponent_score": 3,
+          "date": "2025-04-27T20:00:00"
+        },
+        {
+          "id": "1af6d4aa-8291-4876-abe0-35d242b07eb2",
+          "opponent": "Zariah",
+          "owner_score": 3,
+          "opponent_score": 1,
+          "date": "2025-05-19T18:59:00"
+        },
+        {
+          "id": "8dab5e21-36e1-408d-a0f4-fed8df1dfb18",
+          "opponent": "Kemirkele",
+          "owner_score": 3,
+          "opponent_score": 2,
+          "date": "2025-03-29T21:00:00"
+        },
+        {
+          "id": "1c87d15f-0991-483c-9356-36d3f9440b32",
+          "opponent": "Tanixion",
+          "owner_score": 3,
+          "opponent_score": 0,
+          "date": "2025-04-13T14:00:00"
+        }
+      ],
+      "forfeitOnly": false,
       "compositeId": "Bebark-EU-075e7708-cfa4-4b30-a033-4246520f605a",
       "isFinals": false
     },
@@ -437,7 +516,7 @@
       "wins": 3,
       "losses": 3,
       "region": "EU",
-      "winRate": 50,
+      "winRate": 40,
       "mostUsedPet": {
         "petName": "Widget the Departed",
         "timesUsed": 10,
@@ -582,6 +661,44 @@
           "deaths": 1
         }
       ],
+      "matches": [
+        {
+          "id": "8786a029-e2cd-4f71-a78e-64615cf49e34",
+          "opponent": "Bebark",
+          "owner_score": 0,
+          "opponent_score": 3,
+          "date": "2025-05-09T21:00:00"
+        },
+        {
+          "id": "816d44d3-3671-474c-9add-e9fa8c0ecf90",
+          "opponent": "Fwen",
+          "owner_score": 3,
+          "opponent_score": 1,
+          "date": "2025-04-06T20:00:00"
+        },
+        {
+          "id": "955cf35f-d97e-48aa-baf9-416c273bccc8",
+          "opponent": "Tanixion",
+          "owner_score": 3,
+          "opponent_score": 1,
+          "date": "2025-04-15T10:00:00"
+        },
+        {
+          "id": "a5637147-c872-4bc5-9b2c-f82f15e5378c",
+          "opponent": "Panseit",
+          "owner_score": 2,
+          "opponent_score": 3,
+          "date": "2025-05-18T19:00:00"
+        },
+        {
+          "id": "ecdb15af-8546-4a51-bac2-f9b65e1a2881",
+          "opponent": "Zariah",
+          "owner_score": 2,
+          "opponent_score": 3,
+          "date": "2025-04-16T19:00:00"
+        }
+      ],
+      "forfeitOnly": false,
       "compositeId": "Isabella-EU-075e7708-cfa4-4b30-a033-4246520f605a",
       "isFinals": false
     },
@@ -735,6 +852,37 @@
           "deaths": 1
         }
       ],
+      "matches": [
+        {
+          "id": "68bc6f77-c3f7-4b8c-b174-4b354085a00f",
+          "opponent": "DraikoGinger",
+          "owner_score": 0,
+          "opponent_score": 3,
+          "date": "2025-05-16T14:00:00"
+        },
+        {
+          "id": "92be3137-5070-4763-8cb5-1b78e8deddda",
+          "opponent": "Nemo",
+          "owner_score": 3,
+          "opponent_score": 2,
+          "date": "2025-04-08T12:00:00"
+        },
+        {
+          "id": "8eaabdee-bc17-4f48-b744-5c3355be96fe",
+          "opponent": "DarkPuffin",
+          "owner_score": 3,
+          "opponent_score": 1,
+          "date": "2025-04-11T20:00:00"
+        },
+        {
+          "id": "0227f5f2-2764-4ccd-8ad1-d445a5742766",
+          "opponent": "Gooskaffur",
+          "owner_score": 3,
+          "opponent_score": 1,
+          "date": "2025-04-17T22:00:00"
+        }
+      ],
+      "forfeitOnly": false,
       "compositeId": "Des-NA-075e7708-cfa4-4b30-a033-4246520f605a",
       "isFinals": false
     },
@@ -858,6 +1006,44 @@
           "deaths": 1
         }
       ],
+      "matches": [
+        {
+          "id": "68bc6f77-c3f7-4b8c-b174-4b354085a00f",
+          "opponent": "Des",
+          "owner_score": 0,
+          "opponent_score": 3,
+          "date": "2025-05-16T14:00:00"
+        },
+        {
+          "id": "3ff306c1-1de4-4f0b-9dd1-323b7f1e4bd6",
+          "opponent": "Woxbc",
+          "owner_score": 1,
+          "opponent_score": 3,
+          "date": "2025-03-31T17:15:00"
+        },
+        {
+          "id": "8588781c-923a-48a5-b189-35c1dcc510bc",
+          "opponent": "Stonedove",
+          "owner_score": 3,
+          "opponent_score": 0,
+          "date": "2025-04-18T17:30:00"
+        },
+        {
+          "id": "9b8e7e94-d3c9-4a7d-9223-7189ae199e89",
+          "opponent": "Shmongus",
+          "owner_score": 3,
+          "opponent_score": 2,
+          "date": "2025-05-04T16:30:00"
+        },
+        {
+          "id": "46818e15-1186-419f-8d02-d6dbee9d10a2",
+          "opponent": "Lobombre",
+          "owner_score": 1,
+          "opponent_score": 3,
+          "date": "2025-05-19T18:00:00"
+        }
+      ],
+      "forfeitOnly": false,
       "compositeId": "DraikoGinger-NA-075e7708-cfa4-4b30-a033-4246520f605a",
       "isFinals": false
     },
@@ -987,6 +1173,37 @@
           "deaths": 1
         }
       ],
+      "matches": [
+        {
+          "id": "09018d9f-7be7-43e4-aa2e-0e3aa5d87f4c",
+          "opponent": "Woxbc",
+          "owner_score": 3,
+          "opponent_score": 0,
+          "date": "2025-05-17T20:30:00"
+        },
+        {
+          "id": "32e2879d-cfbb-46ab-b437-19a9a818351c",
+          "opponent": "Asomyrh",
+          "owner_score": 3,
+          "opponent_score": 0,
+          "date": "2025-04-01T22:00:00"
+        },
+        {
+          "id": "4b3c684c-f707-4da8-9a0c-689e3ccc2c59",
+          "opponent": "Elinaedara",
+          "owner_score": 3,
+          "opponent_score": 0,
+          "date": "2025-04-05T22:00:00"
+        },
+        {
+          "id": "0227f5f2-2764-4ccd-8ad1-d445a5742766",
+          "opponent": "Des",
+          "owner_score": 3,
+          "opponent_score": 1,
+          "date": "2025-04-17T22:00:00"
+        }
+      ],
+      "forfeitOnly": false,
       "compositeId": "Gooskaffur-NA-075e7708-cfa4-4b30-a033-4246520f605a",
       "isFinals": false
     },
@@ -1122,6 +1339,44 @@
           "deaths": 1
         }
       ],
+      "matches": [
+        {
+          "id": "09018d9f-7be7-43e4-aa2e-0e3aa5d87f4c",
+          "opponent": "Gooskaffur",
+          "owner_score": 3,
+          "opponent_score": 0,
+          "date": "2025-05-17T20:30:00"
+        },
+        {
+          "id": "3ff306c1-1de4-4f0b-9dd1-323b7f1e4bd6",
+          "opponent": "DraikoGinger",
+          "owner_score": 1,
+          "opponent_score": 3,
+          "date": "2025-03-31T17:15:00"
+        },
+        {
+          "id": "32c18ffd-112a-4618-90ef-71c3a8d21e83",
+          "opponent": "GalaxyRock",
+          "owner_score": 3,
+          "opponent_score": 0,
+          "date": "2025-04-07T19:00:00"
+        },
+        {
+          "id": "cdcc1747-3d6f-459f-8ba3-ea1783e426e9",
+          "opponent": "Lobombre",
+          "owner_score": 3,
+          "opponent_score": 1,
+          "date": "2025-04-17T23:00:00"
+        },
+        {
+          "id": "2684c749-d155-4e90-a946-5589fbbbcc9f",
+          "opponent": "WhyDaRumGone",
+          "owner_score": 3,
+          "opponent_score": 0,
+          "date": "2025-06-14T18:00:00"
+        }
+      ],
+      "forfeitOnly": false,
       "compositeId": "Woxbc-NA-075e7708-cfa4-4b30-a033-4246520f605a",
       "isFinals": false
     },
@@ -1263,6 +1518,30 @@
           "deaths": 1
         }
       ],
+      "matches": [
+        {
+          "id": "e86c6b59-5115-4a2a-b277-6ef74899cfbd",
+          "opponent": "Lleyla",
+          "owner_score": 3,
+          "opponent_score": 1,
+          "date": "2025-05-17T16:30:00"
+        },
+        {
+          "id": "4b3c684c-f707-4da8-9a0c-689e3ccc2c59",
+          "opponent": "Gooskaffur",
+          "owner_score": 3,
+          "opponent_score": 0,
+          "date": "2025-04-05T22:00:00"
+        },
+        {
+          "id": "0bd51806-ce6a-4f48-af65-a9104aa0d24b",
+          "opponent": "Buuloki",
+          "owner_score": 2,
+          "opponent_score": 3,
+          "date": "2025-05-05T01:00:00"
+        }
+      ],
+      "forfeitOnly": false,
       "compositeId": "Elinaedara-NA-075e7708-cfa4-4b30-a033-4246520f605a",
       "isFinals": false
     },
@@ -1368,6 +1647,30 @@
           "deaths": 1
         }
       ],
+      "matches": [
+        {
+          "id": "e86c6b59-5115-4a2a-b277-6ef74899cfbd",
+          "opponent": "Elinaedara",
+          "owner_score": 3,
+          "opponent_score": 1,
+          "date": "2025-05-17T16:30:00"
+        },
+        {
+          "id": "37e03311-2c07-4170-bbd9-662f2e766297",
+          "opponent": "Theominouskilt",
+          "owner_score": 1,
+          "opponent_score": 3,
+          "date": "2025-04-07T17:00:00"
+        },
+        {
+          "id": "0c6ad6bf-6c5d-42fa-b07b-aebd5d032fa0",
+          "opponent": "Olopa",
+          "owner_score": 3,
+          "opponent_score": 2,
+          "date": "2025-04-14T19:15:00"
+        }
+      ],
+      "forfeitOnly": false,
       "compositeId": "Lleyla-NA-075e7708-cfa4-4b30-a033-4246520f605a",
       "isFinals": false
     },
@@ -1485,6 +1788,30 @@
           "deaths": 1
         }
       ],
+      "matches": [
+        {
+          "id": "2d28075e-87bc-4fe0-896f-a29cf99c9a08",
+          "opponent": "Trianthe",
+          "owner_score": 3,
+          "opponent_score": 1,
+          "date": "2025-03-30T18:15:00"
+        },
+        {
+          "id": "37e03311-2c07-4170-bbd9-662f2e766297",
+          "opponent": "Lleyla",
+          "owner_score": 1,
+          "opponent_score": 3,
+          "date": "2025-04-07T17:00:00"
+        },
+        {
+          "id": "6c035323-87ba-465a-a791-8155245ab0fc",
+          "opponent": "Shmongus",
+          "owner_score": 0,
+          "opponent_score": 3,
+          "date": "2025-04-17T19:00:00"
+        }
+      ],
+      "forfeitOnly": false,
       "compositeId": "Theominouskilt-NA-075e7708-cfa4-4b30-a033-4246520f605a",
       "isFinals": false
     },
@@ -1614,6 +1941,37 @@
           "deaths": 1
         }
       ],
+      "matches": [
+        {
+          "id": "2d28075e-87bc-4fe0-896f-a29cf99c9a08",
+          "opponent": "Theominouskilt",
+          "owner_score": 3,
+          "opponent_score": 1,
+          "date": "2025-03-30T18:15:00"
+        },
+        {
+          "id": "59b399d4-e977-45b8-a46e-93c16275236f",
+          "opponent": "Lunatick",
+          "owner_score": 3,
+          "opponent_score": 0,
+          "date": "2025-04-19T12:00:00"
+        },
+        {
+          "id": "9ede554d-bc9a-4ce8-a347-04b1dfde89b9",
+          "opponent": "GalaxyRock",
+          "owner_score": 0,
+          "opponent_score": 3,
+          "date": "2025-04-28T19:00:00"
+        },
+        {
+          "id": "78808702-7373-4b64-a699-9e5ca3e153ec",
+          "opponent": "WhyDaRumGone",
+          "owner_score": 1,
+          "opponent_score": 3,
+          "date": "2025-05-09T21:00:00"
+        }
+      ],
+      "forfeitOnly": false,
       "compositeId": "Trianthe-NA-075e7708-cfa4-4b30-a033-4246520f605a",
       "isFinals": false
     },
@@ -1731,6 +2089,30 @@
           "deaths": 1
         }
       ],
+      "matches": [
+        {
+          "id": "b64bea9e-7272-4425-9358-72e140b1c264",
+          "opponent": "Matdredalia",
+          "owner_score": 3,
+          "opponent_score": 1,
+          "date": "2025-03-30T15:15:00"
+        },
+        {
+          "id": "8588781c-923a-48a5-b189-35c1dcc510bc",
+          "opponent": "DraikoGinger",
+          "owner_score": 3,
+          "opponent_score": 0,
+          "date": "2025-04-18T17:30:00"
+        },
+        {
+          "id": "733091a6-26f3-4c76-b6c2-39997fc2b171",
+          "opponent": "Olopa",
+          "owner_score": 3,
+          "opponent_score": 0,
+          "date": "2025-04-12T14:00:00"
+        }
+      ],
+      "forfeitOnly": false,
       "compositeId": "Stonedove-NA-075e7708-cfa4-4b30-a033-4246520f605a",
       "isFinals": false
     },
@@ -1800,6 +2182,16 @@
           "deaths": 1
         }
       ],
+      "matches": [
+        {
+          "id": "b64bea9e-7272-4425-9358-72e140b1c264",
+          "opponent": "Stonedove",
+          "owner_score": 3,
+          "opponent_score": 1,
+          "date": "2025-03-30T15:15:00"
+        }
+      ],
+      "forfeitOnly": false,
       "compositeId": "Matdredalia-NA-075e7708-cfa4-4b30-a033-4246520f605a",
       "isFinals": false
     },
@@ -1929,6 +2321,37 @@
           "deaths": 1
         }
       ],
+      "matches": [
+        {
+          "id": "f7d63651-2eaf-4aba-85af-e714745d7ef8",
+          "opponent": "Panseit",
+          "owner_score": 3,
+          "opponent_score": 2,
+          "date": "2025-03-31T21:30:00"
+        },
+        {
+          "id": "ecdb15af-8546-4a51-bac2-f9b65e1a2881",
+          "opponent": "Isabella",
+          "owner_score": 2,
+          "opponent_score": 3,
+          "date": "2025-04-16T19:00:00"
+        },
+        {
+          "id": "11ac238b-1e17-47fd-a309-71591b3661d3",
+          "opponent": "Tanixion",
+          "owner_score": 3,
+          "opponent_score": 0,
+          "date": "2025-05-13T20:00:00"
+        },
+        {
+          "id": "1af6d4aa-8291-4876-abe0-35d242b07eb2",
+          "opponent": "Bebark",
+          "owner_score": 3,
+          "opponent_score": 1,
+          "date": "2025-05-19T18:59:00"
+        }
+      ],
+      "forfeitOnly": false,
       "compositeId": "Zariah-EU-075e7708-cfa4-4b30-a033-4246520f605a",
       "isFinals": false
     },
@@ -2214,6 +2637,44 @@
           "deaths": 1
         }
       ],
+      "matches": [
+        {
+          "id": "f7d63651-2eaf-4aba-85af-e714745d7ef8",
+          "opponent": "Zariah",
+          "owner_score": 3,
+          "opponent_score": 2,
+          "date": "2025-03-31T21:30:00"
+        },
+        {
+          "id": "4254ea46-26f7-4ad5-89be-ac4001742ca3",
+          "opponent": "Bebark",
+          "owner_score": 3,
+          "opponent_score": 0,
+          "date": "2025-04-05T10:00:00"
+        },
+        {
+          "id": "f7b0c737-3d06-4455-9424-a8fa987e3e1e",
+          "opponent": "Fwen",
+          "owner_score": 2,
+          "opponent_score": 3,
+          "date": "2025-04-13T11:00:00"
+        },
+        {
+          "id": "a5637147-c872-4bc5-9b2c-f82f15e5378c",
+          "opponent": "Isabella",
+          "owner_score": 2,
+          "opponent_score": 3,
+          "date": "2025-05-18T19:00:00"
+        },
+        {
+          "id": "dcc533db-f959-40a0-8723-3a6b6ce9acb8",
+          "opponent": "Tanixion",
+          "owner_score": 3,
+          "opponent_score": 0,
+          "date": "2025-04-28T15:00:00"
+        }
+      ],
+      "forfeitOnly": false,
       "compositeId": "Panseit-EU-075e7708-cfa4-4b30-a033-4246520f605a",
       "isFinals": false
     },
@@ -2343,6 +2804,44 @@
           "deaths": 1
         }
       ],
+      "matches": [
+        {
+          "id": "4c822468-afd4-4694-937d-3f47b9bf6584",
+          "opponent": "Shmongus",
+          "owner_score": 0,
+          "opponent_score": 3,
+          "date": "2025-04-01T11:00:00"
+        },
+        {
+          "id": "3fb8d017-cefa-4ea0-95a5-5c2eb85e122b",
+          "opponent": "Lunatick",
+          "owner_score": 3,
+          "opponent_score": 1,
+          "date": "2025-04-09T18:30:00"
+        },
+        {
+          "id": "cdcc1747-3d6f-459f-8ba3-ea1783e426e9",
+          "opponent": "Woxbc",
+          "owner_score": 3,
+          "opponent_score": 1,
+          "date": "2025-04-17T23:00:00"
+        },
+        {
+          "id": "1381faa1-e0c1-4d93-99e8-220d7f8c20f2",
+          "opponent": "Nokomanida",
+          "owner_score": 3,
+          "opponent_score": 0,
+          "date": "2025-05-04T21:00:00"
+        },
+        {
+          "id": "46818e15-1186-419f-8d02-d6dbee9d10a2",
+          "opponent": "DraikoGinger",
+          "owner_score": 1,
+          "opponent_score": 3,
+          "date": "2025-05-19T18:00:00"
+        }
+      ],
+      "forfeitOnly": false,
       "compositeId": "Lobombre-NA-075e7708-cfa4-4b30-a033-4246520f605a",
       "isFinals": false
     },
@@ -2454,6 +2953,30 @@
           "deaths": 1
         }
       ],
+      "matches": [
+        {
+          "id": "4c822468-afd4-4694-937d-3f47b9bf6584",
+          "opponent": "Lobombre",
+          "owner_score": 0,
+          "opponent_score": 3,
+          "date": "2025-04-01T11:00:00"
+        },
+        {
+          "id": "6c035323-87ba-465a-a791-8155245ab0fc",
+          "opponent": "Theominouskilt",
+          "owner_score": 0,
+          "opponent_score": 3,
+          "date": "2025-04-17T19:00:00"
+        },
+        {
+          "id": "9b8e7e94-d3c9-4a7d-9223-7189ae199e89",
+          "opponent": "DraikoGinger",
+          "owner_score": 3,
+          "opponent_score": 2,
+          "date": "2025-05-04T16:30:00"
+        }
+      ],
+      "forfeitOnly": false,
       "compositeId": "Shmongus-NA-075e7708-cfa4-4b30-a033-4246520f605a",
       "isFinals": false
     },
@@ -2547,6 +3070,23 @@
           "deaths": 1
         }
       ],
+      "matches": [
+        {
+          "id": "92be3137-5070-4763-8cb5-1b78e8deddda",
+          "opponent": "Des",
+          "owner_score": 3,
+          "opponent_score": 2,
+          "date": "2025-04-08T12:00:00"
+        },
+        {
+          "id": "387037bd-79d4-4b52-9d25-2a711f72b137",
+          "opponent": "Nokomanida",
+          "owner_score": 3,
+          "opponent_score": 0,
+          "date": "2025-05-01T20:00:00"
+        }
+      ],
+      "forfeitOnly": false,
       "compositeId": "Nemo-NA-075e7708-cfa4-4b30-a033-4246520f605a",
       "isFinals": false
     },
@@ -2688,6 +3228,44 @@
           "deaths": 1
         }
       ],
+      "matches": [
+        {
+          "id": "816d44d3-3671-474c-9add-e9fa8c0ecf90",
+          "opponent": "Isabella",
+          "owner_score": 3,
+          "opponent_score": 1,
+          "date": "2025-04-06T20:00:00"
+        },
+        {
+          "id": "84ea438f-d5f8-406b-a837-7ae36d3d4ad0",
+          "opponent": "Kemirkele",
+          "owner_score": 3,
+          "opponent_score": 2,
+          "date": "2025-04-07T21:00:00"
+        },
+        {
+          "id": "f7b0c737-3d06-4455-9424-a8fa987e3e1e",
+          "opponent": "Panseit",
+          "owner_score": 2,
+          "opponent_score": 3,
+          "date": "2025-04-13T11:00:00"
+        },
+        {
+          "id": "c9ca9049-a348-4bf6-9684-238a74cb6462",
+          "opponent": "Bebark",
+          "owner_score": 1,
+          "opponent_score": 3,
+          "date": "2025-04-27T20:00:00"
+        },
+        {
+          "id": "fae6486d-b946-42f6-918f-0c0d98dede7a",
+          "opponent": "Tanixion",
+          "owner_score": 0,
+          "opponent_score": 3,
+          "date": "2025-05-14T20:00:00"
+        }
+      ],
+      "forfeitOnly": false,
       "compositeId": "Fwen-EU-075e7708-cfa4-4b30-a033-4246520f605a",
       "isFinals": false
     },
@@ -2787,6 +3365,23 @@
           "deaths": 1
         }
       ],
+      "matches": [
+        {
+          "id": "3dc62445-bb99-46a0-b447-f465d88478c8",
+          "opponent": "WhyDaRumGone",
+          "owner_score": 3,
+          "opponent_score": 1,
+          "date": "2025-04-05T13:00:00"
+        },
+        {
+          "id": "0bd51806-ce6a-4f48-af65-a9104aa0d24b",
+          "opponent": "Elinaedara",
+          "owner_score": 2,
+          "opponent_score": 3,
+          "date": "2025-05-05T01:00:00"
+        }
+      ],
+      "forfeitOnly": false,
       "compositeId": "Buuloki-NA-075e7708-cfa4-4b30-a033-4246520f605a",
       "isFinals": false
     },
@@ -2904,6 +3499,44 @@
           "deaths": 1
         }
       ],
+      "matches": [
+        {
+          "id": "3dc62445-bb99-46a0-b447-f465d88478c8",
+          "opponent": "Buuloki",
+          "owner_score": 3,
+          "opponent_score": 1,
+          "date": "2025-04-05T13:00:00"
+        },
+        {
+          "id": "5c409d0a-0b87-49a8-b071-c597ba8e0c1b",
+          "opponent": "Domiel",
+          "owner_score": 3,
+          "opponent_score": 2,
+          "date": "2025-04-07T17:00:00"
+        },
+        {
+          "id": "a97349c7-17d5-4a2b-98c5-df4861fbb6c2",
+          "opponent": "Deevus",
+          "owner_score": 2,
+          "opponent_score": 3,
+          "date": "2025-04-12T14:00:00"
+        },
+        {
+          "id": "78808702-7373-4b64-a699-9e5ca3e153ec",
+          "opponent": "Trianthe",
+          "owner_score": 1,
+          "opponent_score": 3,
+          "date": "2025-05-09T21:00:00"
+        },
+        {
+          "id": "2684c749-d155-4e90-a946-5589fbbbcc9f",
+          "opponent": "Woxbc",
+          "owner_score": 3,
+          "opponent_score": 0,
+          "date": "2025-06-14T18:00:00"
+        }
+      ],
+      "forfeitOnly": false,
       "compositeId": "WhyDaRumGone-NA-075e7708-cfa4-4b30-a033-4246520f605a",
       "isFinals": false
     },
@@ -3039,6 +3672,23 @@
           "deaths": 1
         }
       ],
+      "matches": [
+        {
+          "id": "84ea438f-d5f8-406b-a837-7ae36d3d4ad0",
+          "opponent": "Fwen",
+          "owner_score": 3,
+          "opponent_score": 2,
+          "date": "2025-04-07T21:00:00"
+        },
+        {
+          "id": "8dab5e21-36e1-408d-a0f4-fed8df1dfb18",
+          "opponent": "Bebark",
+          "owner_score": 3,
+          "opponent_score": 2,
+          "date": "2025-03-29T21:00:00"
+        }
+      ],
+      "forfeitOnly": false,
       "compositeId": "Kemirkele-EU-075e7708-cfa4-4b30-a033-4246520f605a",
       "isFinals": false
     },
@@ -3192,6 +3842,37 @@
           "deaths": 1
         }
       ],
+      "matches": [
+        {
+          "id": "96a212d7-d223-46d4-b3c6-8e763cf19148",
+          "opponent": "Deevus",
+          "owner_score": 0,
+          "opponent_score": 3,
+          "date": "2025-04-07T23:00:00"
+        },
+        {
+          "id": "7fece26d-4e7d-4408-854d-47d36fbc9fc7",
+          "opponent": "Asomyrh",
+          "owner_score": 0,
+          "opponent_score": 3,
+          "date": "2025-04-17T19:00:00"
+        },
+        {
+          "id": "387037bd-79d4-4b52-9d25-2a711f72b137",
+          "opponent": "Nemo",
+          "owner_score": 3,
+          "opponent_score": 0,
+          "date": "2025-05-01T20:00:00"
+        },
+        {
+          "id": "1381faa1-e0c1-4d93-99e8-220d7f8c20f2",
+          "opponent": "Lobombre",
+          "owner_score": 3,
+          "opponent_score": 0,
+          "date": "2025-05-04T21:00:00"
+        }
+      ],
+      "forfeitOnly": false,
       "compositeId": "Nokomanida-NA-075e7708-cfa4-4b30-a033-4246520f605a",
       "isFinals": false
     },
@@ -3279,6 +3960,23 @@
           "deaths": 1
         }
       ],
+      "matches": [
+        {
+          "id": "96a212d7-d223-46d4-b3c6-8e763cf19148",
+          "opponent": "Nokomanida",
+          "owner_score": 0,
+          "opponent_score": 3,
+          "date": "2025-04-07T23:00:00"
+        },
+        {
+          "id": "a97349c7-17d5-4a2b-98c5-df4861fbb6c2",
+          "opponent": "WhyDaRumGone",
+          "owner_score": 2,
+          "opponent_score": 3,
+          "date": "2025-04-12T14:00:00"
+        }
+      ],
+      "forfeitOnly": false,
       "compositeId": "Deevus-NA-075e7708-cfa4-4b30-a033-4246520f605a",
       "isFinals": false
     },
@@ -3378,6 +4076,23 @@
           "deaths": 1
         }
       ],
+      "matches": [
+        {
+          "id": "32c18ffd-112a-4618-90ef-71c3a8d21e83",
+          "opponent": "Woxbc",
+          "owner_score": 3,
+          "opponent_score": 0,
+          "date": "2025-04-07T19:00:00"
+        },
+        {
+          "id": "9ede554d-bc9a-4ce8-a347-04b1dfde89b9",
+          "opponent": "Trianthe",
+          "owner_score": 0,
+          "opponent_score": 3,
+          "date": "2025-04-28T19:00:00"
+        }
+      ],
+      "forfeitOnly": false,
       "compositeId": "GalaxyRock-NA-075e7708-cfa4-4b30-a033-4246520f605a",
       "isFinals": false
     },
@@ -3447,6 +4162,16 @@
           "deaths": 1
         }
       ],
+      "matches": [
+        {
+          "id": "5c409d0a-0b87-49a8-b071-c597ba8e0c1b",
+          "opponent": "WhyDaRumGone",
+          "owner_score": 3,
+          "opponent_score": 2,
+          "date": "2025-04-07T17:00:00"
+        }
+      ],
+      "forfeitOnly": false,
       "compositeId": "Domiel-NA-075e7708-cfa4-4b30-a033-4246520f605a",
       "isFinals": false
     },
@@ -3558,6 +4283,23 @@
           "deaths": 1
         }
       ],
+      "matches": [
+        {
+          "id": "3fb8d017-cefa-4ea0-95a5-5c2eb85e122b",
+          "opponent": "Lobombre",
+          "owner_score": 3,
+          "opponent_score": 1,
+          "date": "2025-04-09T18:30:00"
+        },
+        {
+          "id": "59b399d4-e977-45b8-a46e-93c16275236f",
+          "opponent": "Trianthe",
+          "owner_score": 3,
+          "opponent_score": 0,
+          "date": "2025-04-19T12:00:00"
+        }
+      ],
+      "forfeitOnly": false,
       "compositeId": "Lunatick-NA-075e7708-cfa4-4b30-a033-4246520f605a",
       "isFinals": false
     },
@@ -3639,6 +4381,16 @@
           "deaths": 1
         }
       ],
+      "matches": [
+        {
+          "id": "8eaabdee-bc17-4f48-b744-5c3355be96fe",
+          "opponent": "Des",
+          "owner_score": 3,
+          "opponent_score": 1,
+          "date": "2025-04-11T20:00:00"
+        }
+      ],
+      "forfeitOnly": false,
       "compositeId": "DarkPuffin-NA-075e7708-cfa4-4b30-a033-4246520f605a",
       "isFinals": false
     },
@@ -3738,6 +4490,44 @@
           "deaths": 0
         }
       ],
+      "matches": [
+        {
+          "id": "955cf35f-d97e-48aa-baf9-416c273bccc8",
+          "opponent": "Isabella",
+          "owner_score": 3,
+          "opponent_score": 1,
+          "date": "2025-04-15T10:00:00"
+        },
+        {
+          "id": "dcc533db-f959-40a0-8723-3a6b6ce9acb8",
+          "opponent": "Panseit",
+          "owner_score": 3,
+          "opponent_score": 0,
+          "date": "2025-04-28T15:00:00"
+        },
+        {
+          "id": "11ac238b-1e17-47fd-a309-71591b3661d3",
+          "opponent": "Zariah",
+          "owner_score": 3,
+          "opponent_score": 0,
+          "date": "2025-05-13T20:00:00"
+        },
+        {
+          "id": "fae6486d-b946-42f6-918f-0c0d98dede7a",
+          "opponent": "Fwen",
+          "owner_score": 0,
+          "opponent_score": 3,
+          "date": "2025-05-14T20:00:00"
+        },
+        {
+          "id": "1c87d15f-0991-483c-9356-36d3f9440b32",
+          "opponent": "Bebark",
+          "owner_score": 3,
+          "opponent_score": 0,
+          "date": "2025-04-13T14:00:00"
+        }
+      ],
+      "forfeitOnly": false,
       "compositeId": "Tanixion-EU-075e7708-cfa4-4b30-a033-4246520f605a",
       "isFinals": false
     },
@@ -3837,6 +4627,23 @@
           "deaths": 1
         }
       ],
+      "matches": [
+        {
+          "id": "32e2879d-cfbb-46ab-b437-19a9a818351c",
+          "opponent": "Gooskaffur",
+          "owner_score": 3,
+          "opponent_score": 0,
+          "date": "2025-04-01T22:00:00"
+        },
+        {
+          "id": "7fece26d-4e7d-4408-854d-47d36fbc9fc7",
+          "opponent": "Nokomanida",
+          "owner_score": 0,
+          "opponent_score": 3,
+          "date": "2025-04-17T19:00:00"
+        }
+      ],
+      "forfeitOnly": false,
       "compositeId": "Asomyrh-NA-075e7708-cfa4-4b30-a033-4246520f605a",
       "isFinals": false
     },
@@ -3960,6 +4767,23 @@
           "deaths": 1
         }
       ],
+      "matches": [
+        {
+          "id": "0c6ad6bf-6c5d-42fa-b07b-aebd5d032fa0",
+          "opponent": "Lleyla",
+          "owner_score": 3,
+          "opponent_score": 2,
+          "date": "2025-04-14T19:15:00"
+        },
+        {
+          "id": "733091a6-26f3-4c76-b6c2-39997fc2b171",
+          "opponent": "Stonedove",
+          "owner_score": 3,
+          "opponent_score": 0,
+          "date": "2025-04-12T14:00:00"
+        }
+      ],
+      "forfeitOnly": false,
       "compositeId": "Olopa-NA-075e7708-cfa4-4b30-a033-4246520f605a",
       "isFinals": false
     },
@@ -4053,6 +4877,23 @@
           "deaths": 1
         }
       ],
+      "matches": [
+        {
+          "id": "511c07a3-7a62-4631-b522-15ae5bd6fa99",
+          "opponent": "Lobombre",
+          "owner_score": 0,
+          "opponent_score": 3,
+          "date": "2025-06-28T21:00:00"
+        },
+        {
+          "id": "56ae9a78-c1b3-4099-b6f6-a94882564f35",
+          "opponent": "Woxbc",
+          "owner_score": 3,
+          "opponent_score": 1,
+          "date": "2025-06-28T22:30:00"
+        }
+      ],
+      "forfeitOnly": false,
       "compositeId": "Gooskaffur-NA Finals-075e7708-cfa4-4b30-a033-4246520f605a",
       "isFinals": true
     },
@@ -4146,6 +4987,23 @@
           "deaths": 1
         }
       ],
+      "matches": [
+        {
+          "id": "511c07a3-7a62-4631-b522-15ae5bd6fa99",
+          "opponent": "Gooskaffur",
+          "owner_score": 0,
+          "opponent_score": 3,
+          "date": "2025-06-28T21:00:00"
+        },
+        {
+          "id": "aa002b22-c26d-4c98-967e-e800f02670de",
+          "opponent": "Deevus",
+          "owner_score": 0,
+          "opponent_score": 3,
+          "date": "2025-06-28T22:00:00"
+        }
+      ],
+      "forfeitOnly": false,
       "compositeId": "Lobombre-NA Finals-075e7708-cfa4-4b30-a033-4246520f605a",
       "isFinals": true
     },
@@ -4233,6 +5091,23 @@
           "deaths": 0
         }
       ],
+      "matches": [
+        {
+          "id": "c1f03564-f35b-4ca3-9144-2b675a545b8f",
+          "opponent": "Bebark",
+          "owner_score": 3,
+          "opponent_score": 0,
+          "date": "2025-06-29T20:00:00"
+        },
+        {
+          "id": "eea87533-adf3-4ab2-8721-3097b65654e7",
+          "opponent": "Fwen",
+          "owner_score": 0,
+          "opponent_score": 3,
+          "date": "2025-06-29T22:00:00"
+        }
+      ],
+      "forfeitOnly": false,
       "compositeId": "Tanixion-EU Finals-075e7708-cfa4-4b30-a033-4246520f605a",
       "isFinals": true
     },
@@ -4356,6 +5231,23 @@
           "deaths": 1
         }
       ],
+      "matches": [
+        {
+          "id": "c1f03564-f35b-4ca3-9144-2b675a545b8f",
+          "opponent": "Tanixion",
+          "owner_score": 3,
+          "opponent_score": 0,
+          "date": "2025-06-29T20:00:00"
+        },
+        {
+          "id": "2792b818-bef1-4824-a8b2-774a5c83f8c6",
+          "opponent": "Isabella",
+          "owner_score": 3,
+          "opponent_score": 1,
+          "date": "2025-06-30T18:00:00"
+        }
+      ],
+      "forfeitOnly": false,
       "compositeId": "Bebark-EU Finals-075e7708-cfa4-4b30-a033-4246520f605a",
       "isFinals": true
     },
@@ -4485,6 +5377,23 @@
           "deaths": 1
         }
       ],
+      "matches": [
+        {
+          "id": "59c55e4e-749f-447c-8c8b-ef9cfbc84db8",
+          "opponent": "Isabella",
+          "owner_score": 3,
+          "opponent_score": 2,
+          "date": "2025-06-29T21:00:00"
+        },
+        {
+          "id": "eea87533-adf3-4ab2-8721-3097b65654e7",
+          "opponent": "Tanixion",
+          "owner_score": 0,
+          "opponent_score": 3,
+          "date": "2025-06-29T22:00:00"
+        }
+      ],
+      "forfeitOnly": false,
       "compositeId": "Fwen-EU Finals-075e7708-cfa4-4b30-a033-4246520f605a",
       "isFinals": true
     },
@@ -4602,6 +5511,23 @@
           "deaths": 1
         }
       ],
+      "matches": [
+        {
+          "id": "59c55e4e-749f-447c-8c8b-ef9cfbc84db8",
+          "opponent": "Fwen",
+          "owner_score": 3,
+          "opponent_score": 2,
+          "date": "2025-06-29T21:00:00"
+        },
+        {
+          "id": "2792b818-bef1-4824-a8b2-774a5c83f8c6",
+          "opponent": "Bebark",
+          "owner_score": 3,
+          "opponent_score": 1,
+          "date": "2025-06-30T18:00:00"
+        }
+      ],
+      "forfeitOnly": false,
       "compositeId": "Isabella-EU Finals-075e7708-cfa4-4b30-a033-4246520f605a",
       "isFinals": true
     },
@@ -4713,6 +5639,16 @@
           "deaths": 1
         }
       ],
+      "matches": [
+        {
+          "id": "1a580245-bc0f-4433-89c2-fce79185d598",
+          "opponent": "Woxbc",
+          "owner_score": 4,
+          "opponent_score": 3,
+          "date": "2025-07-05T17:00:00"
+        }
+      ],
+      "forfeitOnly": false,
       "compositeId": "Tanixion-World Finals-075e7708-cfa4-4b30-a033-4246520f605a",
       "isFinals": true
     },
@@ -4794,6 +5730,16 @@
           "deaths": 1
         }
       ],
+      "matches": [
+        {
+          "id": "1a580245-bc0f-4433-89c2-fce79185d598",
+          "opponent": "Tanixion",
+          "owner_score": 4,
+          "opponent_score": 3,
+          "date": "2025-07-05T17:00:00"
+        }
+      ],
+      "forfeitOnly": false,
       "compositeId": "Woxbc-World Finals-075e7708-cfa4-4b30-a033-4246520f605a",
       "isFinals": true
     }

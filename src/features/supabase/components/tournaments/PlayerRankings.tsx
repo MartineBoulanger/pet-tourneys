@@ -619,7 +619,7 @@ export const PlayerRankings = ({
                       ) : (
                         <Paragraph className='bg-background p-5 rounded-lg text-center'>
                           {
-                            'Player has been removed/dropped from the tournament.'
+                            'Player has been removed from the tournament.'
                           }
                         </Paragraph>
                       )}

@@ -59,99 +59,152 @@ export function TournamentPlayersList({
 
           {expandedPlayers[player.playerName] && (
             <div className='bg-light-grey p-2.5 lg:p-5 rounded-b-lg'>
-              <div className='flex flex-wrap flex-col lg:flex-row gap-2.5 mb-2.5'>
-                <OverviewCard title='Matches Won' value={player.wins} />
-                <OverviewCard title='Matches Lost' value={player.losses} />
-                <OverviewCard
-                  title='Total Win Rate'
-                  value={`${player.winRate}%`}
-                />
-              </div>
+              {player.forfeitOnly ? (
+                <Paragraph className='bg-light-grey p-2.5 lg:p-5 rounded-b-lg text-center'>
+                  {'Player has been removed from the tournament.'}
+                </Paragraph>
+              ) : (
+                <>
+                  <div className='flex flex-wrap flex-col lg:flex-row gap-2.5 mb-2.5'>
+                    <OverviewCard title='Matches Won' value={player.wins} />
+                    <OverviewCard title='Matches Lost' value={player.losses} />
+                    <OverviewCard
+                      title='Total Win Rate'
+                      value={`${player.winRate}%`}
+                    />
+                  </div>
 
-              <div className='grid grid-cols-1 lg:grid-cols-2 gap-2.5'>
-                <div className='bg-background p-2.5 lg:p-5 rounded-lg'>
-                  <Heading
-                    as='h3'
-                    className='text-xl text-muted-foreground mb-2.5'
-                  >
-                    {'Most Used Pet'}
-                  </Heading>
-                  {player.mostUsedPet.timesUsed > 0 ? (
-                    <div>
-                      <Paragraph className='text-md text-humanoid font-bold'>
-                        {player.mostUsedPet.petName}
-                      </Paragraph>
-                      <Paragraph className='text-sm'>
-                        {'Used '}
-                        {player.mostUsedPet.timesUsed}
-                        {' times'}
-                      </Paragraph>
-                      <Paragraph className='text-sm'>
-                        {player.mostUsedPet.kills}
-                        {' kills'}
-                      </Paragraph>
+                  <div className='grid grid-cols-1 lg:grid-cols-2 gap-2.5'>
+                    <div className='bg-background p-2.5 lg:p-5 rounded-lg'>
+                      <Heading
+                        as='h3'
+                        className='text-xl text-muted-foreground mb-2.5'
+                      >
+                        {'Most Used Pet'}
+                      </Heading>
+                      {player.mostUsedPet.timesUsed > 0 ? (
+                        <div>
+                          <Paragraph className='text-md text-humanoid font-bold'>
+                            {player.mostUsedPet.petName}
+                          </Paragraph>
+                          <Paragraph className='text-sm'>
+                            {'Used '}
+                            {player.mostUsedPet.timesUsed}
+                            {' times'}
+                          </Paragraph>
+                          <Paragraph className='text-sm'>
+                            {player.mostUsedPet.kills}
+                            {' kills'}
+                          </Paragraph>
+                        </div>
+                      ) : (
+                        <Paragraph className='p-2.5 lg:p-5 rounded-lg bg-light-grey text-center shadow-md'>
+                          {'No most used pet data found.'}
+                        </Paragraph>
+                      )}
                     </div>
-                  ) : (
-                    <Paragraph className='p-2.5 lg:p-5 rounded-lg bg-light-grey text-center shadow-md'>
-                      {'No most used pet data found.'}
-                    </Paragraph>
-                  )}
-                </div>
 
-                <div className='bg-background p-2.5 lg:p-5 rounded-lg'>
-                  <Heading
-                    as='h3'
-                    className='text-xl text-muted-foreground mb-2.5'
-                  >
-                    {'The Nemesis Pet'}
-                  </Heading>
-                  {player.mostProblematicPet.timesLostAgainst > 0 ? (
-                    <div>
-                      <Paragraph className='text-md text-humanoid font-bold'>
-                        {player.mostProblematicPet.petName}
-                      </Paragraph>
-                      <Paragraph className='text-sm'>
-                        {'Lost against '}
-                        {player.mostProblematicPet.timesLostAgainst}
-                        {' times'}
-                      </Paragraph>
+                    <div className='bg-background p-2.5 lg:p-5 rounded-lg'>
+                      <Heading
+                        as='h3'
+                        className='text-xl text-muted-foreground mb-2.5'
+                      >
+                        {'The Nemesis Pet'}
+                      </Heading>
+                      {player.mostProblematicPet.timesLostAgainst > 0 ? (
+                        <div>
+                          <Paragraph className='text-md text-humanoid font-bold'>
+                            {player.mostProblematicPet.petName}
+                          </Paragraph>
+                          <Paragraph className='text-sm'>
+                            {'Lost against '}
+                            {player.mostProblematicPet.timesLostAgainst}
+                            {' times'}
+                          </Paragraph>
+                        </div>
+                      ) : (
+                        <Paragraph className='p-2.5 lg:p-5 rounded-lg bg-light-grey text-center shadow-md'>
+                          {'No nemesis pet data found.'}
+                        </Paragraph>
+                      )}
                     </div>
-                  ) : (
-                    <Paragraph className='p-2.5 lg:p-5 rounded-lg bg-light-grey text-center shadow-md'>
-                      {'No nemesis pet data found.'}
-                    </Paragraph>
-                  )}
-                </div>
-              </div>
+                  </div>
 
-              <div className='mt-2.5 lg:mt-5'>
-                <Heading as='h4' className='text-lg font-bold'>
-                  {"Overall Player's Pet Usage"}
-                </Heading>
-                <div className='overflow-x-auto'>
-                  <table className='min-w-full rounded-lg overflow-hidden'>
-                    <thead className='bg-background text-left'>
-                      <tr className='border-b border-medium-grey'>
-                        <th className='text-left py-2 px-4'>{'Pet Name'}</th>
-                        <th className='text-left py-2 px-4'>{'Times Used'}</th>
-                        <th className='text-left py-2 px-4'>{'Kills'}</th>
-                      </tr>
-                    </thead>
-                    <tbody className='bg-medium-grey'>
-                      {player.petStatistics.map((pet) => (
-                        <tr
-                          key={pet.petName}
-                          className='border-b border-light-grey'
-                        >
-                          <td className='py-2 px-4'>{pet.petName}</td>
-                          <td className='py-2 px-4'>{pet.timesUsed}</td>
-                          <td className='py-2 px-4'>{pet.kills}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              </div>
+                  <div className='mt-2.5 lg:mt-5'>
+                    <Heading as='h4' className='text-lg font-bold'>
+                      {'Matches Played'}
+                    </Heading>
+                    {player.matches.length > 0 ? (
+                      <div className='overflow-x-auto'>
+                        <table className='min-w-full rounded-lg overflow-hidden'>
+                          <thead className='bg-background text-left'>
+                            <tr className='border-b border-medium-grey'>
+                              <th className='text-left py-2 px-4'>
+                                {'Opponent'}
+                              </th>
+                              <th className='text-left py-2 px-4'>{'Score'}</th>
+                              <th className='text-left py-2 px-4'>{'Date'}</th>
+                            </tr>
+                          </thead>
+                          <tbody className='bg-medium-grey'>
+                            {player.matches.map((match) => (
+                              <tr
+                                key={match.id}
+                                className='border-b border-light-grey'
+                              >
+                                <td className='py-2 px-4'>{match.opponent}</td>
+                                <td className='py-2 px-4'>
+                                  {match.owner_score} - {match.opponent_score}
+                                </td>
+                                <td className='py-2 px-4'>
+                                  {new Date(match.date).toLocaleDateString()}
+                                </td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </div>
+                    ) : (
+                      <Paragraph className='bg-background p-5 rounded-lg text-center'>
+                        {'No player matches data found.'}
+                      </Paragraph>
+                    )}
+                  </div>
+
+                  <div className='mt-2.5 lg:mt-5'>
+                    <Heading as='h4' className='text-lg font-bold'>
+                      {'Pet Usage'}
+                    </Heading>
+                    <div className='overflow-x-auto'>
+                      <table className='min-w-full rounded-lg overflow-hidden'>
+                        <thead className='bg-background text-left'>
+                          <tr className='border-b border-medium-grey'>
+                            <th className='text-left py-2 px-4'>
+                              {'Pet Name'}
+                            </th>
+                            <th className='text-left py-2 px-4'>
+                              {'Times Used'}
+                            </th>
+                            <th className='text-left py-2 px-4'>{'Kills'}</th>
+                          </tr>
+                        </thead>
+                        <tbody className='bg-medium-grey'>
+                          {player.petStatistics.map((pet) => (
+                            <tr
+                              key={pet.petName}
+                              className='border-b border-light-grey'
+                            >
+                              <td className='py-2 px-4'>{pet.petName}</td>
+                              <td className='py-2 px-4'>{pet.timesUsed}</td>
+                              <td className='py-2 px-4'>{pet.kills}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </>
+              )}
             </div>
           )}
         </div>
