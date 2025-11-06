@@ -1,12 +1,14 @@
 import { notFound } from 'next/navigation';
-import { HallOfFame } from '@/features/supabase/components/hall-of-fame/HallOfFame';
+import { HofDesktop } from '@/features/supabase/components/hall-of-fame/HofDesktop';
+import { HofMobile } from '@/features/supabase/components/hall-of-fame/HofMobile';
 import { loadHallOfFameData } from '@/features/supabase/utils/loadJsonData';
 import { Container, PageHeading, PageMenu } from '@/components/ui';
 import { Links } from '@/lib/types';
 
 export async function generateMetadata() {
   return {
-    title: 'Hall of Fame - World Champions',
+    title: 'Hall of Fame',
+    description: "Pet Masters League's Hall of Fame",
     alternates: {
       canonical: `${process.env.BASE_URL!}/tournaments/hall-of-fame`,
     },
@@ -41,7 +43,12 @@ export default async function HallOfFamePage() {
       <PageHeading heading='Hall of Fame'>
         <PageMenu links={links} />
       </PageHeading>
-      <HallOfFame data={data} />
+      <div className='lg:hidden'>
+        <HofMobile data={data} />
+      </div>
+      <div className='hidden lg:block'>
+        <HofDesktop data={data} />
+      </div>
     </Container>
   );
 }

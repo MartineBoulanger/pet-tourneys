@@ -6,6 +6,7 @@ import { DownloadRulesButton } from '@/features/cms/components/rules/DownloadRul
 export async function generateMetadata() {
   return {
     title: 'League Rules',
+    description: "Pet Masters League's seasonal rules",
     alternates: {
       canonical: `${process.env.BASE_URL!}/tournaments/rules`,
     },

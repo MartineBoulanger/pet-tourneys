@@ -5,6 +5,7 @@ import { PrizesList } from '@/features/cms/components/prizes/PrizesList';
 export async function generateMetadata() {
   return {
     title: 'League Prizes',
+    description: "Pet Masters League's seasonal prizes",
     alternates: {
       canonical: `${process.env.BASE_URL!}/tournaments/prizes`,
     },

@@ -17,6 +17,7 @@ export async function generateMetadata({ params }: { params: PageParams }) {
   const { id } = await params;
   return {
     title: 'League Details',
+    description: "Pet Masters League season's detail page",
     alternates: {
       canonical: `${process.env.BASE_URL!}/tournaments/${id}`,
     },

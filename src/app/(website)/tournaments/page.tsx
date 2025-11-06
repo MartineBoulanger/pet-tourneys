@@ -15,6 +15,7 @@ import { Links } from '@/lib/types';
 export async function generateMetadata() {
   return {
     title: 'Leagues',
+    description: "Pet Masters League's tournaments list page",
     alternates: {
       canonical: `${process.env.BASE_URL!}/tournaments`,
     },
