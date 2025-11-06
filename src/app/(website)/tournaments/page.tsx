@@ -59,10 +59,15 @@ export default async function TournamentsPage({
       url: `/tournaments/prizes`,
       text: 'Prizes',
     },
+    {
+      id: 3,
+      url: `/tournaments/hall-of-fame`,
+      text: 'Hall of Fame',
+    },
   ];
 
   return (
-    <Container className='lg:px-5'>
+    <Container>
       <PageHeading heading='Leagues'>
         <PageMenu links={links} />
       </PageHeading>

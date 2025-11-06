@@ -11,7 +11,26 @@ export type PlayerRankingsData = {
   regions: string[];
 };
 
-type JsonData = PetData | PlayerRankingsData | null;
+export type HallOfFameData = {
+  season: string;
+  tournamentName: string;
+  champion: {
+    name: string;
+    regionFlag: string;
+    guild?: string;
+    avatar?: string;
+  };
+  runnerUp: {
+    name: string;
+  };
+  finalsLink: string;
+  mostUsedPet?: {
+    name?: string;
+    image?: string;
+  };
+}[];
+
+type JsonData = PetData | PlayerRankingsData | HallOfFameData | null;
 
 type JsonResponse<T extends JsonData = JsonData> = {
   success: boolean;
@@ -56,6 +75,7 @@ async function fetchJsonSafe<T extends JsonData>(
   }
 }
 
+// Function to load the pet data JSON file
 export async function loadPetsData(): Promise<PetData> {
   const jsonPath = `${process.env.BASE_URL!}/json-files/pets-data.json`;
   const result = await fetchJsonSafe<PetData>(jsonPath);
@@ -68,6 +88,7 @@ export async function loadPetsData(): Promise<PetData> {
   return result.data || [];
 }
 
+// Function to load the player data JSON file
 export async function loadPlayerData(id: string) {
   const jsonPath = `${process.env
     .BASE_URL!}/json-files/rankings-data/player-rankings-${id.slice(
@@ -92,4 +113,17 @@ export async function loadPlayerData(id: string) {
     console.error('Supabase also failed:', supabaseError);
     return { records: [], regions: [] };
   }
+}
+
+// Function to load the hall of fame data JSON file
+export async function loadHallOfFameData() {
+  const jsonPath = `${process.env.BASE_URL!}/json-files/hof.json`;
+  const result = await fetchJsonSafe<HallOfFameData>(jsonPath);
+
+  if (!result.success) {
+    console.log('No JSON hall of fame data available, using empty data');
+    return [];
+  }
+
+  return result.data || [];
 }

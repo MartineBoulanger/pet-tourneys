@@ -20,6 +20,11 @@ export default function TournamentsPrizesPage() {
     },
     {
       id: 2,
+      url: `/tournaments/hall-of-fame`,
+      text: 'Hall of Fame',
+    },
+    {
+      id: 3,
       url: '/tournaments',
       text: 'Leagues List',
     },
