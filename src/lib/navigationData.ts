@@ -37,6 +37,11 @@ export const headerData: NavigationData = [
         url: '/tournaments/prizes',
         text: 'Prizes',
       },
+      {
+        id: 3,
+        url: '/tournaments/hall-of-fame',
+        text: 'Hall of Fame',
+      },
     ],
   },
   {

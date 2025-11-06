@@ -1,0 +1,36 @@
+[
+  {
+    "season": "Pet Battle PvP Tournament Season 2",
+    "champion": {
+      "name": "Tanixion",
+      "regionFlag": "https://flagcdn.com/w40/eu.png",
+      "guild": "",
+      "avatar": "https://res.cloudinary.com/dubqvghx7/image/upload/v1762162187/pml-images/tanixion.png"
+    },
+    "runnerUp": {
+      "name": "Woxbc"
+    },
+    "finalsLink": "https://youtu.be/v-2wF8MEPfs?si=EhfVgZAZKZuWlt1y",
+    "mostUsedPet": {
+      "name": "Cobbleshell",
+      "image": "https://res.cloudinary.com/dubqvghx7/image/upload/v1762162785/pml-images/80%20copy.png"
+    }
+  },
+  {
+    "season": "Pet Battle PvP Tournament Season 1",
+    "champion": {
+      "name": "Tanixion",
+      "regionFlag": "https://flagcdn.com/w40/eu.png",
+      "guild": "",
+      "avatar": ""
+    },
+    "runnerUp": {
+      "name": "Woxbc"
+    },
+    "finalsLink": "https://youtu.be/42Q_0X_SSuc?si=4NAJDjWoLnBUzzao",
+    "mostUsedPet": {
+      "name": "",
+      "image": ""
+    }
+  }
+]
