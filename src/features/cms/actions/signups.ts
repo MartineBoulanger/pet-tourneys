@@ -15,15 +15,10 @@ export async function createSignup(data: Partial<Signup>) {
 
     // Validate each image has required fields
     for (const image of data.images) {
-      if (
-        !image.image ||
-        !image.imageName?.trim() ||
-        !image.signupUrl?.trim()
-      ) {
+      if (!image.image || !image.imageName?.trim()) {
         return {
           success: false,
-          error:
-            'All signup items must have Image ID, Image Name, and Signup URL',
+          error: 'All signup items must have Image ID, and Image Name',
         };
       }
     }
@@ -34,8 +29,8 @@ export async function createSignup(data: Partial<Signup>) {
     const processedImages = data.images.map((image, index) => ({
       image: image.image || null,
       imageName: image.imageName.trim(),
-      imageAlt: image.imageAlt?.trim() || undefined,
-      signupUrl: image.signupUrl.trim(),
+      imageAlt: image.imageAlt?.trim() || '',
+      signupUrl: image.signupUrl?.trim() || '',
       order: image.order || index + 1,
     }));
 
@@ -85,15 +80,10 @@ export async function updateSignup(signupId: string, data: Partial<Signup>) {
 
     // Validate each image has required fields
     for (const image of data.images) {
-      if (
-        !image.image ||
-        !image.imageName?.trim() ||
-        !image.signupUrl?.trim()
-      ) {
+      if (!image.image || !image.imageName?.trim()) {
         return {
           success: false,
-          error:
-            'All signup items must have Image ID, Image Name, and Signup URL',
+          error: 'All signup items must have Image ID, and Image Name',
         };
       }
     }
@@ -104,8 +94,8 @@ export async function updateSignup(signupId: string, data: Partial<Signup>) {
     const processedImages = data.images.map((image, index) => ({
       image: image.image || null,
       imageName: image.imageName.trim(),
-      imageAlt: image.imageAlt?.trim() || undefined,
-      signupUrl: image.signupUrl.trim(),
+      imageAlt: image.imageAlt?.trim() || '',
+      signupUrl: image.signupUrl?.trim() || '',
       order: image.order || index + 1,
     }));
 

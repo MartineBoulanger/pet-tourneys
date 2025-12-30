@@ -169,7 +169,7 @@ export function ScheduleForm({
   return (
     <div className='bg-background rounded-lg p-2.5 lg:p-5'>
       <Heading as='h3' className='text-xl text-humanoid mb-2.5'>
-        {schedule ? 'Edit Signup' : 'Create Signup'}
+        {schedule ? 'Edit Schedule' : 'Create Schedule'}
       </Heading>
 
       <form onSubmit={handleSubmit} className='space-y-2.5'>
@@ -274,7 +274,6 @@ export function ScheduleForm({
                     onChange={(e) =>
                       updateImage(index, 'imageName', e.target.value)
                     }
-                    required
                   />
 
                   <Input
@@ -286,7 +285,6 @@ export function ScheduleForm({
                     onChange={(e) =>
                       updateImage(index, 'imageDate', e.target.value)
                     }
-                    required
                   />
                 </div>
               </div>
