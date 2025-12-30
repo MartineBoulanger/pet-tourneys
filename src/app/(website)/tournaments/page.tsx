@@ -15,6 +15,7 @@ import { Links } from '@/lib/types';
 export async function generateMetadata() {
   return {
     title: 'Leagues',
+    description: "Pet Masters League's tournaments list page",
     alternates: {
       canonical: `${process.env.BASE_URL!}/tournaments`,
     },
@@ -59,10 +60,15 @@ export default async function TournamentsPage({
       url: `/tournaments/prizes`,
       text: 'Prizes',
     },
+    {
+      id: 3,
+      url: `/tournaments/hall-of-fame`,
+      text: 'Hall of Fame',
+    },
   ];
 
   return (
-    <Container className='lg:px-5'>
+    <Container>
       <PageHeading heading='Leagues'>
         <PageMenu links={links} />
       </PageHeading>
