@@ -59,9 +59,6 @@ const nextConfig: NextConfig = {
     serverActions: {
       bodySizeLimit: '10mb',
     },
-    ...(process.env.NODE_ENV === 'development'
-      ? { browserDebugInfoInTerminal: true }
-      : {}),
   },
 };
 
