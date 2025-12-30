@@ -2,7 +2,7 @@ import { NextFetchEvent, NextRequest, NextResponse } from 'next/server';
 import { createServerClient } from '@supabase/ssr';
 import { CustomMiddleware } from './chain';
 
-export const withSupabase = (middleware: CustomMiddleware) => {
+export const withSupabase = (proxy: CustomMiddleware) => {
   return async (
     request: NextRequest,
     event: NextFetchEvent,
@@ -67,6 +67,6 @@ export const withSupabase = (middleware: CustomMiddleware) => {
       return NextResponse.redirect(url);
     }
 
-    return middleware(request, event, response);
+    return proxy(request, event, response);
   };
 };
