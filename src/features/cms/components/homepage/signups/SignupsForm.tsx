@@ -278,7 +278,6 @@ export function SignupForm({ signup, onSuccess, onCancel }: SignupFormProps) {
                     onChange={(e) =>
                       updateImage(index, 'signupUrl', e.target.value)
                     }
-                    required
                   />
 
                   <Input

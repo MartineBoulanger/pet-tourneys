@@ -16,14 +16,10 @@ export async function createSchedule(data: Partial<Schedule>) {
       };
 
     for (const image of data.images) {
-      if (
-        !image.imageName?.trim() ||
-        !image.image ||
-        !image.imageDate?.trim()
-      ) {
+      if (!image.image) {
         return {
           success: false,
-          error: 'All schedule items must have image ID, image name, and date',
+          error: 'All schedule items must have image',
         };
       }
     }
@@ -32,8 +28,8 @@ export async function createSchedule(data: Partial<Schedule>) {
 
     const processedImages = data.images.map((image, index) => ({
       image: image.image || null,
-      imageName: image.imageName.trim(),
-      imageDate: image.imageDate.trim(),
+      imageName: image.imageName?.trim() || '',
+      imageDate: image.imageDate?.trim() || '',
       order: image.order || index + 1,
     }));
 
@@ -88,14 +84,10 @@ export async function updateSchedule(
 
     // Validate each image has required fields
     for (const image of data.images) {
-      if (
-        !image.image ||
-        !image.imageName?.trim() ||
-        !image.imageDate?.trim()
-      ) {
+      if (!image.image) {
         return {
           success: false,
-          error: 'All schedule items must have Image ID, Image Name, and Date',
+          error: 'All schedule items must have Image',
         };
       }
     }
@@ -104,8 +96,8 @@ export async function updateSchedule(
 
     const processedImages = data.images.map((image, index) => ({
       image: image.image || null,
-      imageName: image.imageName.trim(),
-      imageDate: image.imageDate.trim(),
+      imageName: image.imageName?.trim() || "",
+      imageDate: image.imageDate?.trim() || "",
       order: image.order || index + 1,
     }));
 

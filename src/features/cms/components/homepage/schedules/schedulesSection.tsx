@@ -92,12 +92,16 @@ export function ScheduleSection({ schedule }: SchedulesSectionProps) {
 
             {/* Title overlay */}
             <div className='absolute bottom-0 left-0 right-0 bg-gradient-to-t from-background/90  to-transparent p-2.5'>
-              <Heading as='h3' className='text-foreground font-bold text-2xl'>
-                {item.imageName}
-              </Heading>
-              <Paragraph className='text-humanoid font-semibold text-sm'>
-                {item.imageDate}
-              </Paragraph>
+              {item.imageName && (
+                <Heading as='h3' className='text-foreground font-bold text-2xl'>
+                  {item.imageName}
+                </Heading>
+              )}
+              {item.imageDate && (
+                <Paragraph className='text-humanoid font-semibold text-sm'>
+                  {item.imageDate}
+                </Paragraph>
+              )}
             </div>
           </div>
         ))}
