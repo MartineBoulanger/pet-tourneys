@@ -28,7 +28,7 @@ export const partnersData: PartnersData = [
   {
     name: 'Valor',
     image:
-      'https://res.cloudinary.com/dubqvghx7/image/upload/v1759700606/pml-images/valor-shirt.png',
+      'https://res.cloudinary.com/dubqvghx7/image/upload/v1767115618/pml-images/valor-shirt.png',
     link: 'https://vlrgaming.com/',
   },
   {
