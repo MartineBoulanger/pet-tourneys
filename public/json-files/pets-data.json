@@ -10795,9 +10795,9 @@
     "expansion": "Mists of Pandaria",
     "isHordeOnly": "",
     "isAllianceOnly": "",
-    "icon": "",
-    "image": "",
-    "description": ""
+    "icon": "https://res.cloudinary.com/dubqvghx7/image/upload/v1758666111/pml-pet-icons/rabbit.png",
+    "image": "https://res.cloudinary.com/dubqvghx7/image/upload/v1767479490/pml-pet-images/tolai-hare-pup.jpg",
+    "description": "Tolai hare pups are sent from their dens at a young age to find their own way."
   },
   {
     "petID": "731",
@@ -13219,9 +13219,9 @@
     "expansion": "Mists of Pandaria",
     "isHordeOnly": "",
     "isAllianceOnly": "",
-    "icon": "",
-    "image": "",
-    "description": ""
+    "icon": "https://res.cloudinary.com/dubqvghx7/image/upload/v1767479920/pml-pet-icons/green_direhorn.png",
+    "image": "https://res.cloudinary.com/dubqvghx7/image/upload/v1767479946/pml-pet-images/stunted-direhorn.jpg",
+    "description": "Even at this tiny size, Direhorns are known to wreak havoc on unsuspecting victims."
   },
   {
     "petID": "1185",
@@ -37051,9 +37051,9 @@
     "expansion": "Dragonflight",
     "isHordeOnly": "",
     "isAllianceOnly": "",
-    "icon": "",
-    "image": "",
-    "description": ""
+    "icon": "https://res.cloudinary.com/dubqvghx7/image/upload/v1767479682/pml-pet-icons/foxwyvernpetblack.png",
+    "image": "https://res.cloudinary.com/dubqvghx7/image/upload/v1767479722/pml-pet-images/black-slyvern-pup.jpg",
+    "description": "Above the vast green plains and rolling hills the slyvern fly, leaving only tiny shadows on the ground to mark their path through the sky."
   },
   {
     "petID": "3269",
@@ -42331,9 +42331,9 @@
     "expansion": "Dragonflight",
     "isHordeOnly": "",
     "isAllianceOnly": "",
-    "icon": "",
-    "image": "",
-    "description": ""
+    "icon": "https://res.cloudinary.com/dubqvghx7/image/upload/v1767479281/pml-pet-icons/snoozles.png",
+    "image": "https://res.cloudinary.com/dubqvghx7/image/upload/v1767479327/pml-pet-images/snoozles.jpg",
+    "description": "Snoozles was once given a choice between life in the timeless beautiful snowfields and life in a warm home with pet treats. We know which one he chose."
   },
   {
     "petID": "4297",

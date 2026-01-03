@@ -1,9 +1,10 @@
 import { BattleLog, BattleRound } from '../types';
 
 export function parseBattleLog(rawLog: string) {
-  const battles = rawLog.split(
-    '-------------------------------------------------------------------------------------------'
-  );
+  const battles = rawLog
+    .split(/\n-{5,}\n/)
+    .map((b) => b.trim())
+    .filter(Boolean);
   const parsedBattles: BattleLog[] = [];
 
   for (const battle of battles) {
