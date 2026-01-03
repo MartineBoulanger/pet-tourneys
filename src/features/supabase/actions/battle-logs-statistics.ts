@@ -64,7 +64,7 @@ export async function getTournamentBattleStats(
       value: matches?.filter((m) => m.region === 'CN').length || 0,
     },
     {
-      name: 'Other',
+      name: 'Finals',
       value:
         matches?.filter((m) => !['EU', 'NA', 'OCE', 'CN'].includes(m.region))
           .length || 0,

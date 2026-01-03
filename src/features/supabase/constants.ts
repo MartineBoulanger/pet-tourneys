@@ -56,7 +56,7 @@ export const regionsColors = {
   NA: '#d52824',
   OCE: '#2d9318',
   CN: '#FFBB28',
-  Other: '#99988f',
+  Finals: '#a56dfd',
 };
 
 // Define color palette for types (extend as needed)
