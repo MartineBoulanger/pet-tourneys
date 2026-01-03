@@ -178,7 +178,7 @@ export const footerData: FooterData = [
   },
   {
     id: 3,
-    url: 'https://www.google.com/url?q=https%3A%2F%2Fwww.paypal.com%2Fncp%2Fpayment%2F9PRLQWUF22E3Q&sa=D&sntz=1&usg=AOvVaw1IhWJF7DQUhPGjUpTmJwVY',
+    url: 'https://www.paypal.com/donate/?hosted_button_id=9DXG8Z3SRSE2A',
     Icon: FaPaypal,
     name: 'Prize Support',
   },
