@@ -19,12 +19,12 @@ export const partnersData: PartnersData = [
       'https://res.cloudinary.com/dubqvghx7/image/upload/v1759700586/pml-images/starship-shirt.png',
     link: 'https://www.starshipeu.org/',
   },
-  {
-    name: 'Paws Your Game',
-    image:
-      'https://res.cloudinary.com/dubqvghx7/image/upload/v1759700605/pml-images/paws-shirt.png',
-    link: 'https://pawsyourgame.donordrive.com/',
-  },
+  // {
+  //   name: 'Paws Your Game',
+  //   image:
+  //     'https://res.cloudinary.com/dubqvghx7/image/upload/v1759700605/pml-images/paws-shirt.png',
+  //   link: 'https://pawsyourgame.donordrive.com/',
+  // },
   {
     name: 'Valor',
     image:
