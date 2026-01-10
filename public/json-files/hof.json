@@ -1,5 +1,22 @@
 [
   {
+    "season": "Pet Masters League Season 3",
+    "champion": {
+      "name": "Woxbc",
+      "regionFlag": "https://flagcdn.com/w40/us.png",
+      "guild": "",
+      "avatar": "https://res.cloudinary.com/dubqvghx7/image/upload/v1768081821/pml-images/Woxbc-s3.png"
+    },
+    "runnerUp": {
+      "name": "Baldorax"
+    },
+    "finalsLink": "",
+    "mostUsedPet": {
+      "name": "Mechanical Pandaren Dragonling",
+      "image": "https://res.cloudinary.com/dubqvghx7/image/upload/v1768082153/pml-images/MPD-s2.png"
+    }
+  },
+  {
     "season": "Pet Battle PvP Tournament Season 2",
     "champion": {
       "name": "Tanixion",
