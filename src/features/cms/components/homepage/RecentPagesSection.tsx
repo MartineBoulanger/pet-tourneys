@@ -2,21 +2,24 @@ import Link from 'next/link';
 import { Page } from '@/features/cms/types';
 import { getTypeLabel } from '@/features/cms/utils';
 import { Heading, Container, Paragraph } from '@/components/ui';
+import { RecentGuides } from './RecentGuides';
+import { HallOfFame } from './HallOfFame';
 
 type RecentPagesSectionProps = {
   data: {
     type: string;
     pages: Page[];
   }[];
+  guides: Page[];
 };
 
-export function RecentPagesSection({ data }: RecentPagesSectionProps) {
+export function RecentPagesSection({ data, guides }: RecentPagesSectionProps) {
   return (
     <Container className='grid gap-2.5 lg:gap-5 lg:grid-cols-3 py-2.5 lg:py-5'>
       {data.map(({ type, pages }) => (
         <div
           key={type}
-          className='rounded-lg bg-background p-2.5 lg:p-5 shadow-md flex flex-col gap-5 justify-between'
+          className='rounded-lg bg-background p-2.5 lg:px-5 shadow-md flex flex-col gap-5 justify-between'
         >
           <div className='space-y-5'>
             <Heading
@@ -31,7 +34,7 @@ export function RecentPagesSection({ data }: RecentPagesSectionProps) {
                       href={`/${type}/${page.slug}`}
                       className='btn-link flex justify-between items-center rounded-lg p-2.5 bg-light-grey hover:bg-blue-grey'
                     >
-                      <span className='text-sm text-foreground'>
+                      <span className='text-sm text-foreground lg:w-[80%] lg:truncate'>
                         {page.title}
                       </span>
                       <time
@@ -59,6 +62,12 @@ export function RecentPagesSection({ data }: RecentPagesSectionProps) {
           ) : null}
         </div>
       ))}
+
+      {/* Column 3 */}
+      <div className='flex flex-col gap-2.5 lg:gap-5'>
+        <HallOfFame />
+        {guides && <RecentGuides pages={guides} />}
+      </div>
     </Container>
   );
 }

@@ -21,6 +21,10 @@ export default async function HomePage() {
     'guides',
   ]);
 
+  // Separate guides from other page types
+  const pages = data.filter((d) => d.type !== 'guides');
+  const guides = data.find((d) => d.type === 'guides')?.pages ?? [];
+
   return (
     <>
       {announcement.success &&
@@ -30,7 +34,7 @@ export default async function HomePage() {
           <AnnouncementSection announcement={announcement.announcement} />
         </Container>
       ) : null}
-      <RecentPagesSection data={data} />
+      <RecentPagesSection data={pages} guides={guides} />
       {(signup.success && signup.signup && signup.signup.isVisible) ||
       (schedule.success && schedule.schedule && schedule.schedule.isVisible) ? (
         <div className='my-5 py-5 bg-light-grey'>

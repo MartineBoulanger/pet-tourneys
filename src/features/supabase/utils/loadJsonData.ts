@@ -116,6 +116,7 @@ export async function loadPlayerData(id: string) {
 }
 
 // Function to load the hall of fame data JSON file
+// TODO: make it possible to set this data in Supabase instead of hardcoding or MongoDB
 export async function loadHallOfFameData() {
   const jsonPath = `${process.env.BASE_URL!}/json-files/hof.json`;
   const result = await fetchJsonSafe<HallOfFameData>(jsonPath);

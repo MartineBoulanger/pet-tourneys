@@ -16,6 +16,7 @@ export async function generateMetadata() {
 }
 
 export default async function HallOfFamePage() {
+  // TODO: make it possible to set this data in Supabase instead of hardcoding or MongoDB
   const data = await loadHallOfFameData();
 
   if (!data) return notFound();
