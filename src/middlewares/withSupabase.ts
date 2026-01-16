@@ -8,6 +8,42 @@ export const withSupabase = (proxy: CustomMiddleware) => {
     event: NextFetchEvent,
     response: NextResponse
   ) => {
+    const pathname = request.nextUrl.pathname;
+
+    // Skip voor:
+    // - API routes
+    // - Static files (_next, assets, etc.)
+    // - Favicon, sitemap, robots.txt
+    // - Public files & pages that don't need auth
+    // add check here for paths that do not need to be protected
+    const shouldSkip =
+      pathname.startsWith('/_next') ||
+      pathname.startsWith('/api') ||
+      pathname.startsWith('/auth') ||
+      pathname.includes('/register') ||
+      pathname.includes('/forgot-password') ||
+      pathname.includes('/reset-password') ||
+      pathname.includes('/analyze-tool') ||
+      pathname.includes('/resources') ||
+      pathname.includes('/privacy-policy') ||
+      pathname.startsWith('/tournaments') ||
+      pathname.startsWith('/guides') ||
+      pathname.startsWith('/articles') ||
+      pathname.startsWith('/pet-reviews') ||
+      pathname.startsWith('/json-files') ||
+      pathname.includes('.') || // files met extensies zoals .js, .css, .png
+      pathname.startsWith('/favicon.ico') ||
+      pathname.startsWith('/sitemap.xml') ||
+      pathname.startsWith('/robots.txt') ||
+      pathname.startsWith('/manifest') ||
+      pathname.startsWith('/public/') ||
+      pathname.endsWith('/') ||
+      pathname === '/login';
+
+    if (shouldSkip) {
+      return NextResponse.next();
+    }
+
     let supabaseResponse = NextResponse.next({
       request,
     });
@@ -35,33 +71,10 @@ export const withSupabase = (proxy: CustomMiddleware) => {
       }
     );
 
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
+    const { data } = await supabase.auth.getClaims();
+    const user = data?.claims;
 
-    // add check here for paths that do not need to be protected
-    if (
-      !user &&
-      !request.nextUrl.pathname.includes('/login') &&
-      !request.nextUrl.pathname.includes('/register') &&
-      !request.nextUrl.pathname.includes('/forgot-password') &&
-      !request.nextUrl.pathname.includes('/reset-password') &&
-      !request.nextUrl.pathname.includes('/analyze-tool') &&
-      !request.nextUrl.pathname.includes('/resources') &&
-      !request.nextUrl.pathname.includes('/privacy-policy') &&
-      !request.nextUrl.pathname.startsWith('/tournaments') &&
-      !request.nextUrl.pathname.startsWith('/guides') &&
-      !request.nextUrl.pathname.startsWith('/articles') &&
-      !request.nextUrl.pathname.startsWith('/pet-reviews') &&
-      !request.nextUrl.pathname.startsWith('/json-files') &&
-      !request.nextUrl.pathname.startsWith('/auth') &&
-      !request.nextUrl.pathname.endsWith('/sitemap.xml') &&
-      !request.nextUrl.pathname.endsWith('/robots.txt') &&
-      !request.nextUrl.pathname.endsWith('/manifest.json') &&
-      !request.nextUrl.pathname.endsWith('/manifest.webmanifest') &&
-      !request.nextUrl.pathname.endsWith('/')
-    ) {
-      // no user, potentially respond by redirecting the user to the login page
+    if (!user && !pathname.includes('/login')) {
       const url = request.nextUrl.clone();
       url.pathname = '/login';
       return NextResponse.redirect(url);
