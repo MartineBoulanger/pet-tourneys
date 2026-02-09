@@ -172,7 +172,7 @@ export const footerData: FooterData = [
   },
   {
     id: 2,
-    url: 'https://www.patreon.com/WarcraftPetBattleTournaments',
+    url: 'https://www.patreon.com/cw/PetMastersLeague',
     Icon: FaPatreon,
     name: 'Support Us',
   },
