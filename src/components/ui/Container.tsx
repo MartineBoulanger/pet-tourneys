@@ -1,17 +1,18 @@
 import { ReactNode } from 'react';
 import { cn } from '@/utils/cn';
 
-interface ContainerProps {
+export const Container = ({
+  className,
+  children,
+}: {
   className?: string;
   children: ReactNode;
-}
-
-export const Container = ({ className, children }: ContainerProps) => {
+}) => {
   return (
     <div
       className={cn(
         'max-w-screen-2xl mx-auto my-5 px-5 lg:px-2.5 relative',
-        className
+        className,
       )}
     >
       {children}

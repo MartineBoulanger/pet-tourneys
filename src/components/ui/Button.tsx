@@ -1,13 +1,5 @@
-import { ButtonHTMLAttributes, DetailedHTMLProps } from 'react';
+import { ButtonProps } from '@/types/components.types';
 import { cn } from '@/utils/cn';
-
-interface ButtonProps
-  extends DetailedHTMLProps<
-    ButtonHTMLAttributes<HTMLButtonElement>,
-    HTMLButtonElement
-  > {
-  variant?: 'primary' | 'secondary' | 'link';
-}
 
 export const Button = ({
   variant = 'primary',
@@ -20,8 +12,9 @@ export const Button = ({
       className={cn(
         variant === 'primary' && 'btn-submit',
         variant === 'secondary' && 'btn-cancel',
+        variant === 'inverted' && 'btn-inverted',
         variant === 'link' && 'btn-link',
-        className
+        className,
       )}
       {...props}
     >

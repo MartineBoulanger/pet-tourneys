@@ -1,27 +1,7 @@
 'use client';
 
-import { DetailedHTMLProps, InputHTMLAttributes } from 'react';
+import { InputProps } from '@/types/components.types';
 import { cn } from '@/utils/cn';
-
-interface InputProps
-  extends Omit<
-    DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>,
-    'required' | 'type'
-  > {
-  label?: string;
-  id: string;
-  name: string;
-  type?:
-    | 'text'
-    | 'email'
-    | 'password'
-    | 'search'
-    | 'number'
-    | 'date'
-    | 'datetime-local'
-    | 'url';
-  required?: boolean;
-}
 
 export const Input = ({
   label,
@@ -41,8 +21,8 @@ export const Input = ({
         name={name}
         required={required}
         className={cn(
-          'block w-full p-2 border rounded-md text-background bg-foreground mt-0.5',
-          className
+          'block w-full p-2 border rounded-md text-background bg-foreground mt-0.5 ring-humanoid focus:ring-2 focus:ring-humanoid focus:outline-none',
+          className,
         )}
         {...props}
       />

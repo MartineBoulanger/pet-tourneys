@@ -1,5 +1,6 @@
 .prose {
   max-width: 100%;
+  width: 100%;
 }
 
 .prose h1,
@@ -15,6 +16,10 @@
 .prose p {
   line-height: 1.4;
   margin-bottom: 15px;
+}
+
+.prose p:last-of-type {
+  margin-bottom: 0;
 }
 
 .prose ul,
@@ -36,10 +41,14 @@
   margin-bottom: 0;
 }
 
-.prose a,
 .prose strong {
   color: #11a7f5;
 }
+
+.prose a {
+  color: #8ec5ff;
+}
+
 .prose a:hover {
   text-decoration: underline;
 }

@@ -3,21 +3,12 @@ import { Toaster } from 'sonner';
 import { FaCheck, FaInfo } from 'react-icons/fa';
 import { IoWarningOutline } from 'react-icons/io5';
 import { BiErrorAlt } from 'react-icons/bi';
-import { roboto, warcraft, brutals, brutalsTilted } from '@/styles/fonts';
+import { roboto, brutals, brutalsTilted } from '@/styles/fonts';
 import '@/styles/globals.css';
-import '@/styles/prose.css';
-import {
-  getAdminSession,
-  getAuthorSession,
-  getUserSession,
-} from '@/features/supabase/actions/auth';
-import { CookieBanner } from '@/features/cookie-banner/CookieBanner';
-import { Footer } from '@/components/footer/Footer';
 import { Header } from '@/components/header/Header';
+import { Footer } from '@/components/footer/Footer';
 import { BottomNavigation } from '@/components/navigation/BottomNavigation';
-import { ScrollToTop } from '@/components/ui';
-
-export const revalidate = 3600;
+import { CookieBannerWrapper } from '@/components/cookie-banner/CookieBannerWrapper';
 
 export const metadata: Metadata = {
   title: {
@@ -45,34 +36,23 @@ export const viewport: Viewport = {
   colorScheme: 'dark',
 };
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const user = await getUserSession();
-  const admin = await getAdminSession();
-  const author = await getAuthorSession();
-  const isAdminOrAuthor =
-    user?.user?.id === admin?.admin.id
-      ? admin?.admin
-      : user?.user?.id === author?.author?.id
-      ? author?.author
-      : user?.user;
-
   return (
     <html lang='en'>
       <body
-        className={`${roboto.variable} ${warcraft.variable} ${brutals.variable} ${brutalsTilted.variable} antialiased font-sans`}
+        className={`${roboto.variable} $${brutals.variable} ${brutalsTilted.variable} antialiased font-sans`}
       >
         <Header />
         <main className='min-h-[85vh] relative'>{children}</main>
         <Footer />
-        <BottomNavigation user={isAdminOrAuthor} />
-        <ScrollToTop />
+        <BottomNavigation />
         <Toaster
-          expand
-          position='top-center'
+          expand={true}
+          position='bottom-right'
           icons={{
             success: <FaCheck />,
             info: <FaInfo />,
@@ -80,7 +60,7 @@ export default async function RootLayout({
             error: <BiErrorAlt />,
           }}
         />
-        <CookieBanner />
+        <CookieBannerWrapper />
       </body>
     </html>
   );

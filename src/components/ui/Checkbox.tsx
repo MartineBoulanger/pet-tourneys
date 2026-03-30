@@ -1,18 +1,7 @@
 'use client';
 
-import { DetailedHTMLProps, InputHTMLAttributes } from 'react';
+import { CheckboxProps } from '@/types/components.types';
 import { cn } from '@/utils/cn';
-
-interface CheckboxProps
-  extends Omit<
-    DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>,
-    'required'
-  > {
-  label?: string;
-  id: string;
-  name: string;
-  required?: boolean;
-}
 
 export const Checkbox = ({
   label,
@@ -23,13 +12,16 @@ export const Checkbox = ({
   ...props
 }: CheckboxProps) => {
   return (
-    <label className='flex items-center gap-2.5'>
+    <label className='flex items-center gap-2.5 cursor-pointer'>
       <input
         id={id}
         type='checkbox'
         name={name}
         required={required}
-        className={cn('block border rounded-lg bg-foreground', className)}
+        className={cn(
+          'block border rounded-lg bg-foreground cursor-pointer ring-humanoid focus:ring-1 focus:ring-humanoid focus:outline-none accent-humanoid',
+          className,
+        )}
         {...props}
       />
       {label ? label : null}

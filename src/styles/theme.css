@@ -60,8 +60,7 @@
   /* theme fonts */
   --font-sans: var(--font-roboto);
   --font-serif: var(--font-charm);
-  --font-warcraft: var(--font-warcraft);
-  --font-brutals: var(--font-brutals);
+  --font-brutals-normal: var(--font-brutals-normal);
   --font-brutals-tilted: var(--font-brutals-tilted);
 }
 

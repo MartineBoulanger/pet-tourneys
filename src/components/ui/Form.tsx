@@ -1,23 +1,7 @@
-import { HTMLProps } from 'react';
 import { cn } from '@/utils/cn';
 import { Button } from './Button';
 import { FormErrorMessage } from './FormErrorMessage';
-
-export interface FormProps extends HTMLProps<HTMLFormElement> {
-  handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
-  button1?: {
-    variant?: 'secondary' | 'link' | 'primary' | undefined;
-    type?: 'button' | 'submit' | 'reset' | undefined;
-    text?: string;
-  };
-  button2?: {
-    variant?: 'secondary' | 'link' | 'primary' | undefined;
-    type?: 'button' | 'submit' | 'reset' | undefined;
-    text?: string;
-  };
-  handleClick?: () => void; // if a onClick is needed, use the button2 prop, only this button has the onClick set
-  message?: string;
-}
+import { FormProps } from '@/types/components.types';
 
 export const Form = ({
   handleSubmit,
@@ -26,19 +10,22 @@ export const Form = ({
   handleClick,
   message,
   className,
+  btnClassName,
   children,
 }: FormProps) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className={cn(
-        'p-2.5 lg:p-5 bg-background rounded-lg flex flex-col w-full gap-2.5',
-        className
-      )}
+      className={cn('bg-background rounded-lg flex flex-col w-full', className)}
     >
-      {children}
+      <div className='p-2.5 lg:p-5'>{children}</div>
       {button1 || button2 ? (
-        <div className='flex gap-2.5 self-end mt-2.5'>
+        <div
+          className={cn(
+            'flex items-center justify-center lg:justify-end gap-2.5 p-2.5 lg:p-5 w-full',
+            btnClassName,
+          )}
+        >
           {button1 && (
             <Button
               variant={button1.variant}

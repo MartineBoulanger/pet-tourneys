@@ -1,18 +1,19 @@
+'use client';
+
 import Link from 'next/link';
 import Image from 'next/image';
 import { FaDiscord } from 'react-icons/fa';
 import { BiLogIn } from 'react-icons/bi';
-import { Logout } from '@/features/supabase/components/auth/Logout';
-import {
-  getUserSession,
-  getAdminSession,
-  getAuthorSession,
-} from '@/features/supabase/actions/auth';
+import { Logout } from '@/components/auth/Logout';
+import { useUser } from '@/hooks/useUser';
 
-export const AdminNav = async () => {
-  const user = await getUserSession();
-  const admin = await getAdminSession();
-  const author = await getAuthorSession();
+export const AdminNav = () => {
+  const { user, loaded } = useUser();
+
+  if (!loaded) return null;
+
+  const admin = user && user?.role === 'admin';
+  const author = user && user?.role === 'author';
 
   return (
     <div className='w-full py-2.5 px-5 hidden lg:flex lg:items-center'>
@@ -35,17 +36,15 @@ export const AdminNav = async () => {
       {admin || author ? (
         <>
           <Link
-            href='/admin'
+            href='/admin-panel'
             className='btn-link w-6 h-6'
             title='Admin Panel'
             aria-label='Admin Panel'
           >
             <span>
               <Image
-                src={
-                  admin?.admin?.avatar_url || author?.author?.avatar_url || ''
-                }
-                alt={admin?.admin?.username || author?.author?.username || ''}
+                src={user?.avatar_url || ''}
+                alt={user?.username || ''}
                 width={20}
                 height={20}
                 style={{

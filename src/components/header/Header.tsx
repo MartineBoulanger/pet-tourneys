@@ -1,6 +1,6 @@
 import { Logo } from './Logo';
-import { AdminNav } from '../navigation/AdminNav';
-import { Menu } from '../navigation/Menu';
+import { AdminNav } from '@/components/navigation/AdminNav';
+import { Menu } from '@/components/navigation/Menu';
 
 export async function Header() {
   return (
