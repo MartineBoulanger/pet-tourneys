@@ -1,16 +1,15 @@
+export const dynamic = 'force-dynamic'; // TODO: dit is een snelle oplossing voor nu, moet anders geaan worden deze hele sitemap
 import type { MetadataRoute } from 'next';
-import { getTournamentsForForm } from '@/features/supabase/actions/tournaments';
-import { getMatches } from '@/features/supabase/actions/matches';
-import { getPagesByType } from '@/features/cms/actions/pages';
+import { getLeaguesForForm } from '@/actions/supabase/api-schema/leagues/getLeagues';
+import { getMatches } from '@/actions/supabase/api-schema/matches/getMatches';
+import { getPages } from '@/actions/supabase/cms-schema/pages/getPages';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const url = process.env.BASE_URL!;
-  const {
-    data: { tournaments },
-  } = await getTournamentsForForm();
-  const guidesPages = await getPagesByType('guides');
-  const articlesPages = await getPagesByType('articles');
-  const reviewsPages = await getPagesByType('pet-reviews');
+  const { data: leagues } = await getLeaguesForForm();
+  const guidesPages = await getPages('guides');
+  const articlesPages = await getPages('articles');
+  const reviewsPages = await getPages('pet-reviews');
   // Base URLs that don't depend on dynamic data
   const staticUrls = [
     {
@@ -20,19 +19,19 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 1,
     },
     {
-      url: `${url}/tournaments`,
+      url: `${url}/leagues`,
       lastModified: new Date(),
       changeFrequency: 'monthly' as const,
       priority: 0.8,
     },
     {
-      url: `${url}/tournaments/rules`,
+      url: `${url}/leagues/rules`,
       lastModified: new Date(),
       changeFrequency: 'monthly' as const,
       priority: 0.8,
     },
     {
-      url: `${url}/tournaments/prizes`,
+      url: `${url}/leagues/prizes`,
       lastModified: new Date(),
       changeFrequency: 'monthly' as const,
       priority: 0.8,
@@ -44,7 +43,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.8,
     },
     {
-      url: `${url}/privacy-policy`,
+      url: `${url}/cookies-policy`,
       lastModified: new Date(),
       changeFrequency: 'monthly' as const,
       priority: 0.8,
@@ -73,57 +72,63 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'monthly' as const,
       priority: 0.8,
     },
+    {
+      url: `${url}/pets`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.8,
+    },
   ];
 
-  if (!tournaments || tournaments.length === 0) {
+  if (!leagues || leagues.length === 0) {
     return staticUrls;
   }
 
   // Process tournaments and their matches in parallel
   const tournamentEntries = await Promise.all(
-    tournaments.map(async (tournament) => {
+    leagues.map(async (tournament) => {
       const matches = await getMatches(tournament.id);
 
       const tournamentEntry = {
-        url: `${url}/tournaments/${tournament.id}`,
+        url: `${url}/leagues/${tournament.id}`,
         lastModified: new Date(tournament.created_at || new Date()),
         changeFrequency: 'monthly' as const,
         priority: 0.8,
       };
 
       const tournamentStatisticsEntry = {
-        url: `${url}/tournaments/${tournament.id}/statistics`,
+        url: `${url}/leagues/${tournament.id}/statistics`,
         lastModified: new Date(tournament.created_at || new Date()),
         changeFrequency: 'monthly' as const,
         priority: 0.8,
       };
 
       const tournamentPetsStatisticsEntry = {
-        url: `${url}/tournaments/${tournament.id}/statistics/pet-stats`,
+        url: `${url}/leagues/${tournament.id}/statistics/pets`,
         lastModified: new Date(tournament.created_at || new Date()),
         changeFrequency: 'monthly' as const,
         priority: 0.8,
       };
 
       const matchEntries =
-        matches?.map((match) => ({
-          url: `${url}/tournaments/${tournament.id}/matches/${match.id}`,
+        matches?.data?.map((match) => ({
+          url: `${url}/leagues/${tournament.id}/match/${match.id}`,
           lastModified: new Date(match.date || new Date()),
           changeFrequency: 'monthly' as const,
           priority: 0.5,
         })) || [];
 
       const matchStatsEntries =
-        matches?.map((match) => ({
-          url: `${url}/tournaments/${tournament.id}/matches/${match.id}/statistics?matchId=${match.id}`,
+        matches?.data?.map((match) => ({
+          url: `${url}/leagues/${tournament.id}/match/${match.id}/statistics?matchId=${match.id}`,
           lastModified: new Date(match.date || new Date()),
           changeFrequency: 'monthly' as const,
           priority: 0.5,
         })) || [];
 
       const matchPetsStatsEntries =
-        matches?.map((match) => ({
-          url: `${url}/tournaments/${tournament.id}/matches/${match.id}/statistics/pet-stats?matchId=${match.id}`,
+        matches?.data?.map((match) => ({
+          url: `${url}/leagues/${tournament.id}/match/${match.id}/statistics/pets?matchId=${match.id}`,
           lastModified: new Date(match.date || new Date()),
           changeFrequency: 'monthly' as const,
           priority: 0.5,
@@ -137,15 +142,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         ...matchStatsEntries,
         ...matchPetsStatsEntries,
       ];
-    })
+    }),
   );
 
   // Flatten the array of arrays into a single array
   const dynamicUrls = tournamentEntries.flat();
 
   // Use this as example for other pages
-  const allGuides = guidesPages
-    .map((guide: { slug: string }) => {
+  const allGuides = guidesPages?.data
+    ?.map((guide: { slug: string }) => {
       const guideEntry = {
         url: `${url}/guides/${guide.slug}`,
         lastModified: new Date(),
@@ -156,8 +161,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     })
     .flat();
 
-  const allArticles = articlesPages
-    .map((article: { slug: string }) => {
+  const allArticles = articlesPages?.data
+    ?.map((article: { slug: string }) => {
       const articleEntry = {
         url: `${url}/articles/${article.slug}`,
         lastModified: new Date(),
@@ -168,8 +173,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     })
     .flat();
 
-  const allReviews = reviewsPages
-    .map((review: { slug: string }) => {
+  const allReviews = reviewsPages?.data
+    ?.map((review: { slug: string }) => {
       const reviewEntry = {
         url: `${url}/pet-reviews/${review.slug}`,
         lastModified: new Date(),
@@ -183,8 +188,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   return [
     ...staticUrls,
     ...dynamicUrls,
-    ...allGuides,
-    ...allArticles,
-    ...allReviews,
+    ...(allGuides || []),
+    ...(allArticles || []),
+    ...(allReviews || []),
   ];
 }

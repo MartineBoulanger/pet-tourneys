@@ -1,7 +1,8 @@
 import Link from 'next/link';
 import { FiExternalLink } from 'react-icons/fi';
 import { FaRegCopyright } from 'react-icons/fa';
-import { footerData, socialsData } from '@/lib/navigationData';
+import { footerData } from '@/lib/navigation-data/footer';
+import { socialsData } from '@/lib/navigation-data/socials';
 
 export const Footer = async () => {
   return (
@@ -30,8 +31,7 @@ export const Footer = async () => {
             href={url}
             target='_blank'
           >
-            <Icon /> <span>{name}</span>{' '}
-            <FiExternalLink className='w-3 h-3' />
+            <Icon /> <span>{name}</span> <FiExternalLink className='w-3 h-3' />
           </Link>
         ))}
       </div>
@@ -40,10 +40,10 @@ export const Footer = async () => {
         <span className='mr-1'>{new Date().getFullYear()}</span>
         <span>{'- Pet Masters League'}</span>
         <Link
-          href='/privacy-policy'
+          href='/cookies-policy'
           className='btn-link text-light-blue italic underline ml-2.5 text-xs'
         >
-          {'privacy-policy'}
+          {'cookies-policy'}
         </Link>
       </div>
     </footer>

@@ -1,19 +1,14 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
 import { useState } from 'react';
 import { IoMdClose } from 'react-icons/io';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import { GiHamburgerMenu } from 'react-icons/gi';
-import { headerData } from '@/lib/navigationData';
+import { headerData } from '@/lib/navigation-data/header';
 import { cn } from '@/utils/cn';
-import { Button } from '../ui';
-
-interface MenuProps {
-  className?: string;
-  buttonVariant?: 'link' | 'primary' | 'secondary' | undefined;
-}
+import { Button } from '@/components/ui';
+import { MenuProps } from '@/types/components.types';
 
 export const Menu = ({ className, buttonVariant = 'primary' }: MenuProps) => {
   const [isOpen, setOpen] = useState<boolean>(false);
@@ -46,7 +41,7 @@ export const Menu = ({ className, buttonVariant = 'primary' }: MenuProps) => {
       {isOpen && (
         <div
           className='fixed inset-0 bg-transparent'
-          onClick={() => setOpen(false)} 
+          onClick={() => setOpen(false)}
         />
       )}
 
@@ -77,25 +72,10 @@ export const Menu = ({ className, buttonVariant = 'primary' }: MenuProps) => {
                       'btn-link flex items-center justify-center gap-2.5 capitalize w-full py-2.5 hover:bg-blue-grey hover:text-foreground',
                       isDropdown
                         ? 'border-b border-blue-grey rounded-b-none'
-                        : ''
+                        : '',
                     )}
                     onClick={toggleDropdown}
                   >
-                    <span className='max-w-[40px] max-h-[40px]'>
-                      <Image
-                        src={link.imageSrc}
-                        alt={link.linkText}
-                        width={40}
-                        height={40}
-                        style={{
-                          width: 'auto',
-                          height: 'auto',
-                        }}
-                        className='w-full h-full object-cover'
-                        loading='lazy'
-                        unoptimized
-                      />
-                    </span>
                     <span>{link.linkText}</span>
                     <span>
                       {isDropdown ? <FaChevronUp /> : <FaChevronDown />}
@@ -106,7 +86,7 @@ export const Menu = ({ className, buttonVariant = 'primary' }: MenuProps) => {
                       <Link
                         className={cn(
                           'btn-link font-normal flex items-center justify-center gap-2.5 w-full py-2.5  border-blue-grey hover:bg-blue-grey hover:text-foreground',
-                          isDropdown ? '' : ''
+                          isDropdown ? '' : '',
                         )}
                         key={link.id}
                         href={link.url}
@@ -141,21 +121,6 @@ export const Menu = ({ className, buttonVariant = 'primary' }: MenuProps) => {
                   title={link.linkText}
                   aria-label={link.linkText}
                 >
-                  <span className='max-w-[40px] max-h-[40px]'>
-                    <Image
-                      src={link.imageSrc}
-                      alt={link.linkText}
-                      width={40}
-                      height={40}
-                      style={{
-                        width: 'auto',
-                        height: 'auto',
-                      }}
-                      className='w-full h-full object-cover'
-                      loading='lazy'
-                      unoptimized
-                    />
-                  </span>
                   <span>{link.linkText}</span>
                 </Link>
               );

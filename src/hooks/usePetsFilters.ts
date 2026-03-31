@@ -1,17 +1,14 @@
 'use client';
 
 import { useState, useMemo } from 'react';
-import { Pet } from '@/features/supabase/components/statistics/types';
-import { petTypeColors } from '@/features/supabase/constants';
-import { BattleStatistics, TournamentPetStat } from '@/features/supabase/types';
-import { PETS_PER_PAGE } from '@/utils/constants';
+import {
+  PET_TYPE_COLORS,
+  LeaguePetStat,
+  // PetBreed,
+} from '@/types/supabase.types';
+import { UsePetsFiltersProps } from '@/types/hooks.types';
 
-interface UsePetsFiltersProps {
-  petData: Pet[];
-  petStats: TournamentPetStat[];
-  battleStats?: BattleStatistics;
-  isMatchView?: boolean;
-}
+const PETS_PER_PAGE = 30;
 
 export const usePetsFilters = ({
   petData,
@@ -38,8 +35,8 @@ export const usePetsFilters = ({
   // local data to use for the pets data and the list
   const petPerformance = battleStats?.petPerformance || {};
   const petSwapDetails = battleStats?.petSwapDetails || {};
-  const petStatsMap = new Map<string, TournamentPetStat>();
-  petStats.forEach((stat) => {
+  const petStatsMap = new Map<string, LeaguePetStat>();
+  petStats?.forEach((stat) => {
     petStatsMap.set(stat.pet_data.name, stat);
   });
 
@@ -49,35 +46,29 @@ export const usePetsFilters = ({
       const matchesSearch =
         pet.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         [
-          pet.ability1,
-          pet.ability2,
-          pet.ability3,
-          pet.ability4,
-          pet.ability5,
-          pet.ability6,
+          pet.ability_1,
+          pet.ability_2,
+          pet.ability_3,
+          pet.ability_4,
+          pet.ability_5,
+          pet.ability_6,
         ].some(
           (ability) =>
-            ability && ability.toLowerCase().includes(searchTerm.toLowerCase())
+            ability && ability.toLowerCase().includes(searchTerm.toLowerCase()),
         ) ||
-        pet.petID.includes(searchTerm);
+        pet.id == Number(searchTerm);
 
       const matchesType = !filters.type || pet.type === filters.type;
       const matchesExpansion =
         !filters.expansion || pet.expansion === filters.expansion;
       const matchesBreed =
         !filters.breed ||
-        (pet.availableBreeds &&
-          pet.availableBreeds
-            .split(',')
-            .map((b) => b.trim())
-            .includes(filters.breed));
+        (pet.breeds && pet.breeds.map((b) => b.trim()).includes(filters.breed));
       const matchesSource = !filters.source || pet.source === filters.source;
-      const matchesTradable = !filters.tradable || pet.isTradable === 'Yes';
-      const matchesCapturable =
-        !filters.capturable || pet.isCapturable === 'Yes';
-      const matchesAlliance =
-        !filters.isAllianceOnly || pet.isAllianceOnly === 'Yes';
-      const matchesHorde = !filters.isHordeOnly || pet.isHordeOnly === 'Yes';
+      const matchesTradable = !filters.tradable || pet.is_tradable;
+      const matchesCapturable = !filters.capturable || pet.is_capturable;
+      const matchesAlliance = !filters.isAllianceOnly || pet.is_alliance;
+      const matchesHorde = !filters.isHordeOnly || pet.is_horde;
 
       return (
         matchesSearch &&
@@ -231,7 +222,7 @@ export const usePetsFilters = ({
   const totalPages = Math.ceil(filteredPets.length / PETS_PER_PAGE);
   const currentPetData = filteredPets.slice(
     (currentPage - 1) * PETS_PER_PAGE,
-    currentPage * PETS_PER_PAGE
+    currentPage * PETS_PER_PAGE,
   );
 
   // show/hide pet data in dropdown
@@ -284,9 +275,9 @@ export const usePetsFilters = ({
     petData.forEach((pet) => {
       types.add(pet.type);
       expansions.add(pet.expansion);
-      sources.add(pet.source);
-      if (pet.availableBreeds) {
-        pet.availableBreeds.split(',').forEach((breed) => {
+      sources.add(pet.source || '');
+      if (pet.breeds) {
+        pet.breeds.forEach((breed) => {
           breeds.add(breed.trim());
         });
       }
@@ -374,13 +365,14 @@ export const usePetsFilters = ({
 
   // getting the color from each pet type
   const getTypeColor = (type: string) => {
-    return petTypeColors[type as keyof typeof petTypeColors];
+    return PET_TYPE_COLORS[type as keyof typeof PET_TYPE_COLORS];
   };
 
   // set all available breed per pet in an array of strings
-  const setAvailableBreedToArray = (breeds: string) => {
-    return breeds.split(',').map((breed) => breed.trim());
-  };
+  // TODO: this is probably not needed anymore since the breeds get saved as an array in Supabase
+  // const setAvailableBreedToArray = (breeds: PetBreed) => {
+  //   return breeds.split(',').map((breed) => breed.trim());
+  // };
 
   return {
     uniqueStats,
@@ -399,6 +391,6 @@ export const usePetsFilters = ({
     filters,
     getPetStats,
     getTypeColor,
-    setAvailableBreedToArray,
+    // setAvailableBreedToArray,
   };
 };

@@ -2,11 +2,8 @@ User-Agent: *
 Allow: /
 Disallow: *?page
 Disallow: /login
-Disallow: /register
-Disallow: /reset-password
-Disallow: /forgot-password
-Disallow: /admin
-Disallow: /admin/*
+Disallow: /admin-panel
+Disallow: /admin-panel/*
 Disallow: /auth/*
 
 Sitemap: https://www.petmastersleague.com/sitemap.xml

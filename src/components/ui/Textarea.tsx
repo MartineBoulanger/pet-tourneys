@@ -1,22 +1,7 @@
 'use client';
 
-import { DetailedHTMLProps, TextareaHTMLAttributes } from 'react';
+import { TextareaProps } from '@/types/components.types';
 import { cn } from '@/utils/cn';
-
-interface TextareaProps
-  extends Omit<
-    DetailedHTMLProps<
-      TextareaHTMLAttributes<HTMLTextAreaElement>,
-      HTMLTextAreaElement
-    >,
-    'required' | 'rows'
-  > {
-  label: string;
-  id: string;
-  name: string;
-  rows: number;
-  required?: boolean;
-}
 
 export const Textarea = ({
   label,
@@ -36,8 +21,8 @@ export const Textarea = ({
         required={required}
         rows={rows}
         className={cn(
-          'block w-full p-2 border rounded-md text-background bg-foreground mt-0.5',
-          className
+          'block w-full p-2 border rounded-md text-background bg-foreground mt-0.5 ring-humanoid focus:ring-2 focus:ring-humanoid focus:outline-none',
+          className,
         )}
         {...props}
       />

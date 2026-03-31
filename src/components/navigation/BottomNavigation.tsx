@@ -1,21 +1,26 @@
+'use client';
+
 import Link from 'next/link';
 import Image from 'next/image';
 import { FaDiscord } from 'react-icons/fa';
 import { BiLogIn } from 'react-icons/bi';
 import { cn } from '@/utils/cn';
-import { Profile } from '@/features/supabase/types';
-import { Logout } from '@/features/supabase/components/auth/Logout';
+import { Logout } from '@/components/auth/Logout';
 import { Menu } from './Menu';
+import { useUser } from '@/hooks/useUser';
 
-interface BottomNavigationProps {
-  user?: Profile | null;
-}
+export const BottomNavigation = () => {
+  const { user, loaded } = useUser();
 
-export const BottomNavigation = ({ user }: BottomNavigationProps) => {
+  if (!loaded) return null;
+
+  const admin = user && user?.role === 'admin';
+  const author = user && user?.role === 'author';
+
   return (
     <div
       className={cn(
-        'fixed bottom-0 left-0 right-0 py-2.5 bg-background flex items-center justify-evenly lg:hidden z-50'
+        'fixed bottom-0 left-0 right-0 py-2.5 bg-background flex items-center justify-evenly lg:hidden z-50',
       )}
     >
       {/* login and logout button */}
@@ -34,10 +39,10 @@ export const BottomNavigation = ({ user }: BottomNavigationProps) => {
       <div className='w-0.5 h-10 rounded-lg bg-blue-grey' />
 
       {/* Admin panel button */}
-      {user?.role === 'admin' || user?.role === 'author' ? (
+      {admin || author ? (
         <>
           <Link
-            href='/admin'
+            href='/admin-panel'
             className='btn-link px-5 flex justify-center'
             title='Admin Panel'
             aria-label='Admin Panel'

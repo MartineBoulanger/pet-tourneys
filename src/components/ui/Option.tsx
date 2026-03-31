@@ -1,7 +1,4 @@
-interface OptionProps {
-  value: string;
-  label: string;
-}
+import { OptionProps } from '@/types/components.types';
 
 export const Option = ({ value, label }: OptionProps) => {
   return (

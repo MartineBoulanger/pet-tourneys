@@ -1,10 +1,4 @@
-import { HTMLProps, ReactNode } from 'react';
-
-type HeadingTags = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
-interface HeadingProps extends HTMLProps<HTMLHeadingElement> {
-  as?: HeadingTags;
-  children: ReactNode;
-}
+import { HeadingProps } from '@/types/components.types';
 
 export const Heading = ({
   as = 'h1',
