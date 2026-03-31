@@ -3,7 +3,6 @@
 import { revalidatePath } from 'next/cache';
 import { commentsTable } from '@/actions/supabase/actions';
 import { Comment } from '@/types/supabase.types';
-// import { getUserSession } from '@/actions/supabase/api-schema/auth/getUserSession';
 
 // =================================================
 // Update comment
@@ -16,11 +15,6 @@ export async function updateComment(
   try {
     if (!id) return { success: false, error: 'ID is required' };
     if (!data.content) return { success: false, error: 'Content is required' };
-
-    // const session = await getUserSession();
-    // if (!session || !session.user) {
-    //   return { success: false, error: 'Not authenticated' };
-    // }
 
     const updateData = {
       content: data.content.trim(),

@@ -1,7 +1,6 @@
 'use server';
 
 import { revalidatePath } from 'next/cache';
-// import { sbApiStatic } from '@/lib/supabase/static';
 import { sbServer } from '@/lib/supabase/server';
 import { SCHEMA, Action, League } from '@/types/supabase.types';
 

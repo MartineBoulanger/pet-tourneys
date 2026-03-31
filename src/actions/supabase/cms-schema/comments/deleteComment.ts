@@ -2,7 +2,6 @@
 
 import { revalidatePath } from 'next/cache';
 import { commentsTable } from '@/actions/supabase/actions';
-// import { getUserSession } from '@/actions/supabase/api-schema/auth/getUserSession';
 
 // =================================================
 // Delete comment
@@ -10,11 +9,6 @@ import { commentsTable } from '@/actions/supabase/actions';
 export async function deleteComment(id: string, path: string) {
   try {
     if (!id) return { success: false, error: 'ID is required' };
-
-    // const session = await getUserSession();
-    // if (!session || !session.user) {
-    //   return { success: false, error: 'Not authenticated' };
-    // }
 
     const comm = await commentsTable();
     const { error } = await comm.delete().eq('id', id);

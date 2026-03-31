@@ -36,3 +36,9 @@ export async function sbServer() {
     cookies: await getCookieHandler(),
   });
 }
+
+export async function sbTypedServer<T>() {
+  return createServerClient<T>(supabaseUrl, supabaseKey, {
+    cookies: await getCookieHandler(),
+  });
+}

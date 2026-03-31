@@ -1,6 +1,5 @@
 'use server';
 
-// import { sbApiStatic } from '@/lib/supabase/static';
 import { sbServer } from '@/lib/supabase/server';
 import { SCHEMA, League, Match } from '@/types/supabase.types';
 import { apiTable } from '@/actions/supabase/actions';
