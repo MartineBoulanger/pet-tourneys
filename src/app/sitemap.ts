@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic'; // TODO: dit is een snelle oplossing voor nu, moet anders geaan worden deze hele sitemap
 import type { MetadataRoute } from 'next';
 import { getLeaguesForForm } from '@/actions/supabase/api-schema/leagues/getLeagues';
 import { getMatches } from '@/actions/supabase/api-schema/matches/getMatches';
