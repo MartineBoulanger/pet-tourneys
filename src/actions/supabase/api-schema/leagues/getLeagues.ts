@@ -1,6 +1,7 @@
 'use server';
 
-import { sbApiStatic } from '@/lib/supabase/static';
+// import { sbApiStatic } from '@/lib/supabase/static';
+import { sbServer } from '@/lib/supabase/server';
 import { SCHEMA, League, Match } from '@/types/supabase.types';
 import { apiTable } from '@/actions/supabase/actions';
 
@@ -16,7 +17,7 @@ export const getLeagues = async (
   data?: League[];
   totalPages?: number;
 }> => {
-  const supabase = await sbApiStatic();
+  const supabase = await sbServer();
 
   const { data, count, error } = await supabase
     .schema(SCHEMA.API)
@@ -50,7 +51,7 @@ export const getLeaguesForForm = async (): Promise<{
   error?: string;
   data?: League[];
 }> => {
-  const supabase = await sbApiStatic();
+  const supabase = await sbServer();
 
   const { data, error } = await supabase
     .schema(SCHEMA.API)
@@ -80,7 +81,7 @@ export const getLeague = async (
   error?: string;
   data?: League;
 }> => {
-  const supabase = await sbApiStatic();
+  const supabase = await sbServer();
 
   const { data, error } = await supabase
     .schema(SCHEMA.API)
@@ -115,7 +116,7 @@ export const getLeagueDetails = async (
     matches?: Match[];
   };
 }> => {
-  const supabase = await sbApiStatic();
+  const supabase = await sbServer();
   const m = await apiTable('matches', id);
 
   // First get the league details

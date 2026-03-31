@@ -1,7 +1,8 @@
 'use server';
 
 import { revalidatePath } from 'next/cache';
-import { sbApiStatic } from '@/lib/supabase/static';
+// import { sbApiStatic } from '@/lib/supabase/static';
+import { sbServer } from '@/lib/supabase/server';
 import { SCHEMA, Action, League } from '@/types/supabase.types';
 
 // =================================================
@@ -9,7 +10,7 @@ import { SCHEMA, Action, League } from '@/types/supabase.types';
 // - per league there are matches, etc. tables
 // =================================================
 export async function manageTables(action: Action, id: string) {
-  const supabase = await sbApiStatic();
+  const supabase = await sbServer();
 
   const { error } = await supabase
     .schema(SCHEMA.API)
@@ -49,7 +50,7 @@ export async function createLeague(data: Partial<League>) {
     updated_at: new Date().toISOString(),
   };
 
-  const supabase = await sbApiStatic();
+  const supabase = await sbServer();
 
   // Create new tournament
   const { data: tournament, error } = await supabase

@@ -1,41 +1,27 @@
 import { NextResponse, type NextRequest } from 'next/server';
 import { createServerClient } from '@supabase/ssr';
 
+// Voeg hier alle routes toe die beschermd moeten worden
+const PROTECTED_ROUTES = ['/admin-panel'];
+
 export default async function updateSession(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
-  // Skip voor:
-  // - API routes
-  // - Static files (_next, assets, etc.)
-  // - Favicon, sitemap, robots.txt
-  // - Public files & pages that don't need auth
-  const shouldSkip =
-    pathname.startsWith('/_next') ||
-    pathname.startsWith('/api') ||
-    pathname.startsWith('/auth') ||
-    pathname.includes('/analyze-tool') ||
-    pathname.includes('/resources') ||
-    pathname.includes('/privacy-policy') ||
-    pathname.includes('/cookies-policy') ||
-    pathname.startsWith('/leagues') ||
-    pathname.startsWith('/pets') ||
-    pathname.startsWith('/guides') ||
-    pathname.startsWith('/articles') ||
-    pathname.startsWith('/pet-reviews') ||
-    pathname.startsWith('/json-files') ||
-    pathname.includes('.') || // files met extensies zoals .js, .css, .png
-    pathname.startsWith('/favicon.ico') ||
-    pathname.startsWith('/sitemap.xml') ||
-    pathname.startsWith('/robots.txt') ||
-    pathname.startsWith('/manifest') ||
-    pathname.startsWith('/public/') ||
-    pathname.endsWith('/') ||
-    pathname === '/login';
-  if (shouldSkip) {
+
+  // Alleen checken als route protected is
+  const isProtected = PROTECTED_ROUTES.some((route) =>
+    pathname.startsWith(route),
+  );
+
+  if (!isProtected) {
     return NextResponse.next();
   }
-  let supabaseResponse = NextResponse.next({ request });
+
+  // Alleen hier Supabase call
+  let response = NextResponse.next({ request });
+
   const supabaseUrl = process.env.SUPABASE_URL!;
   const supabaseKey = process.env.SUPABASE_ANON_KEY!;
+
   const supabase = createServerClient(supabaseUrl, supabaseKey, {
     cookies: {
       getAll() {
@@ -45,23 +31,25 @@ export default async function updateSession(request: NextRequest) {
         cookiesToSet.forEach(({ name, value }) =>
           request.cookies.set(name, value),
         );
-        supabaseResponse = NextResponse.next({
-          request,
-        });
+
+        response = NextResponse.next({ request });
+
         cookiesToSet.forEach(({ name, value, options }) =>
-          supabaseResponse.cookies.set(name, value, options),
+          response.cookies.set(name, value, options),
         );
       },
     },
   });
-  const { data } = await supabase.auth.getClaims();
-  const user = data?.claims;
-  if (!user && !pathname.includes('/login')) {
+
+  const { data } = await supabase.auth.getUser();
+
+  if (!data?.user) {
     const url = request.nextUrl.clone();
     url.pathname = '/login';
     return NextResponse.redirect(url);
   }
-  return supabaseResponse;
+
+  return response;
 }
 
 export const config = {

@@ -1,7 +1,8 @@
 'use server';
 
 import { revalidatePath } from 'next/cache';
-import { sbApiStatic } from '@/lib/supabase/static';
+// import { sbApiStatic } from '@/lib/supabase/static';
+import { sbServer } from '@/lib/supabase/server';
 import { SCHEMA, League } from '@/types/supabase.types';
 
 // =================================================
@@ -20,7 +21,7 @@ export async function updateLeague(id: string, data: Partial<League>) {
     updated_at: new Date().toISOString(),
   };
 
-  const supabase = await sbApiStatic();
+  const supabase = await sbServer();
 
   const { error } = await supabase
     .schema(SCHEMA.API)
