@@ -7,14 +7,16 @@ import { createServerClient } from '@supabase/ssr';
 // - used mainly for the pets and cms schema tables
 // ==================================================
 export async function sbStatic<T>() {
-  const supabaseUrl = process.env.SUPABASE_URL!;
-  const supabaseKey = process.env.SUPABASE_ANON_KEY!;
-  return createServerClient<T>(supabaseUrl, supabaseKey, {
-    cookies: {
-      getAll: () => [],
-      setAll: () => {},
+  return createServerClient<T>(
+    process.env.SUPABASE_URL!,
+    process.env.SUPABASE_ANON_KEY!,
+    {
+      cookies: {
+        getAll: () => [],
+        setAll: () => {},
+      },
     },
-  });
+  );
 }
 
 // ==================================================
@@ -22,12 +24,14 @@ export async function sbStatic<T>() {
 // - used mainly for the api schema tables
 // ==================================================
 export async function sbApiStatic() {
-  const supabaseUrl = process.env.SUPABASE_URL!;
-  const supabaseKey = process.env.SUPABASE_ANON_KEY!;
-  return createServerClient(supabaseUrl, supabaseKey, {
-    cookies: {
-      getAll: () => [],
-      setAll: () => {},
+  return createServerClient(
+    process.env.SUPABASE_URL!,
+    process.env.SUPABASE_ANON_KEY!,
+    {
+      cookies: {
+        getAll: () => [],
+        setAll: () => {},
+      },
     },
-  });
+  );
 }
