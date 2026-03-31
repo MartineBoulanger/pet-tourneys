@@ -1,9 +1,6 @@
 import { NextResponse, type NextRequest } from 'next/server';
 import { createServerClient } from '@supabase/ssr';
 
-const supabaseUrl = process.env.SUPABASE_URL!;
-const supabaseKey = process.env.SUPABASE_ANON_KEY!;
-
 export default async function updateSession(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
   // Skip voor:
@@ -37,6 +34,8 @@ export default async function updateSession(request: NextRequest) {
     return NextResponse.next();
   }
   let supabaseResponse = NextResponse.next({ request });
+  const supabaseUrl = process.env.SUPABASE_URL!;
+  const supabaseKey = process.env.SUPABASE_ANON_KEY!;
   const supabase = createServerClient(supabaseUrl, supabaseKey, {
     cookies: {
       getAll() {

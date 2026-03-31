@@ -1,13 +1,12 @@
 import { createBrowserClient } from '@supabase/ssr';
 
-const supabaseUrl = process.env.SUPABASE_URL!;
-const supabaseKey = process.env.SUPABASE_ANON_KEY!;
-
 // ==================================================
 // client with types from Supabase
 // - used mainly for the pets and cms schema tables
 // ==================================================
 export function sbClient<T>() {
+  const supabaseUrl = process.env.SUPABASE_URL!;
+  const supabaseKey = process.env.SUPABASE_ANON_KEY!;
   return createBrowserClient<T>(supabaseUrl, supabaseKey);
 }
 
@@ -16,5 +15,7 @@ export function sbClient<T>() {
 // - used mainly for the api schema tables
 // ==================================================
 export function sbApiClient() {
+  const supabaseUrl = process.env.SUPABASE_URL!;
+  const supabaseKey = process.env.SUPABASE_ANON_KEY!;
   return createBrowserClient(supabaseUrl, supabaseKey);
 }

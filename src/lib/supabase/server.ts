@@ -3,9 +3,6 @@
 import { createServerClient, CookieOptions } from '@supabase/ssr';
 import { cookies } from 'next/headers';
 
-const supabaseUrl = process.env.SUPABASE_URL!;
-const supabaseKey = process.env.SUPABASE_ANON_KEY!;
-
 const getCookieHandler = async () => {
   const cookieStore = await cookies();
   return {
@@ -32,6 +29,8 @@ const getCookieHandler = async () => {
 // server client for the authentication handling
 // ==================================================
 export async function sbServer() {
+  const supabaseUrl = process.env.SUPABASE_URL!;
+  const supabaseKey = process.env.SUPABASE_ANON_KEY!;
   return createServerClient(supabaseUrl, supabaseKey, {
     cookies: await getCookieHandler(),
   });
