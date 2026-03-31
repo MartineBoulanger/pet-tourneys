@@ -1,14 +1,14 @@
 import { createBrowserClient } from '@supabase/ssr';
 
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
+
 // ==================================================
 // client with types from Supabase
 // - used mainly for the pets and cms schema tables
 // ==================================================
 export function sbClient<T>() {
-  return createBrowserClient<T>(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-  );
+  return createBrowserClient<T>(supabaseUrl, supabaseKey);
 }
 
 // ==================================================
@@ -16,8 +16,5 @@ export function sbClient<T>() {
 // - used mainly for the api schema tables
 // ==================================================
 export function sbApiClient() {
-  return createBrowserClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-  );
+  return createBrowserClient(supabaseUrl, supabaseKey);
 }

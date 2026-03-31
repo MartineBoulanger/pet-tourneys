@@ -15,7 +15,7 @@ export async function GET() {
     .eq('id', data?.user.id)
     .limit(1)
     .single();
-  console.log(user);
+
   if (userError || !user) {
     return Response.json({ user: null });
   }

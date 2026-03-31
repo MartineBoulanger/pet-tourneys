@@ -1,7 +1,8 @@
 'use server';
 
 import { revalidatePath } from 'next/cache';
-import { sbApiStatic } from '@/lib/supabase/static';
+// import { sbApiStatic } from '@/lib/supabase/static';
+import { sbServer } from '@/lib/supabase/server';
 import { manageTables } from './createLeague';
 import { SCHEMA } from '@/types/supabase.types';
 
@@ -9,7 +10,7 @@ import { SCHEMA } from '@/types/supabase.types';
 // Delete a league
 // =================================================
 export async function deleteLeague(id: string) {
-  const supabase = await sbApiStatic();
+  const supabase = await sbServer();
   const { error: err } = await manageTables('drop', id);
 
   if (err) {

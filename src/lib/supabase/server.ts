@@ -25,15 +25,14 @@ const getCookieHandler = async () => {
   };
 };
 
+const supabaseUrl = process.env.SUPABASE_URL!;
+const supabaseKey = process.env.SUPABASE_ANON_KEY!;
+
 // ==================================================
 // server client for the authentication handling
 // ==================================================
 export async function sbServer() {
-  return createServerClient(
-    process.env.SUPABASE_URL!,
-    process.env.SUPABASE_ANON_KEY!,
-    {
-      cookies: await getCookieHandler(),
-    },
-  );
+  return createServerClient(supabaseUrl, supabaseKey, {
+    cookies: await getCookieHandler(),
+  });
 }
