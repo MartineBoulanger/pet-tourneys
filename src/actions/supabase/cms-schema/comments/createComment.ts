@@ -3,7 +3,6 @@
 import { revalidatePath } from 'next/cache';
 import { commentsTable } from '@/actions/supabase/actions';
 import { Comment } from '@/types/supabase.types';
-// import { getUserSession } from '@/actions/supabase/api-schema/auth/getUserSession';
 
 // =================================================
 // Create comment
@@ -13,12 +12,6 @@ export async function createComment(data: Partial<Comment>, path: string) {
     if (!data.pageid) return { success: false, error: 'Invalid page ID' };
     if (!data.content?.trim())
       return { success: false, error: 'Content is required' };
-
-    // const session = await getUserSession();
-    // if (!session || !session.user) {
-    //   return { success: false, error: 'You must be logged in to comment' };
-    // }
-    // const profile = session && session.user;
 
     const commentData = {
       pageid: data.pageid,
