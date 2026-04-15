@@ -14,6 +14,7 @@ import { Pagination } from '@/components/layout/Pagination';
 import { usePetsFilters } from '@/hooks/usePetsFilters';
 import { PetStatsListProps, PET_TYPE_IMAGES } from '@/types/supabase.types';
 import { PetControls } from './PetControls';
+import { PetIcon, PetImage } from '@/components/pets/PetMedia';
 
 export function PetStatsList({
   petData,
@@ -91,15 +92,8 @@ export function PetStatsList({
                   className='bg-transparent flex items-center justify-between w-full text-left p-0 pr-2.5 lg:pr-5'
                 >
                   <div className='flex items-center'>
-                    <div className='flex items-center h-[40px] w-[40px] mr-2.5'>
-                      <Image
-                        src={pet.icon?.secure_url || ''}
-                        alt={pet.name}
-                        className='w-full h-full object-contain'
-                        width={40}
-                        height={40}
-                        loading='lazy'
-                      />
+                    <div className='mr-2.5'>
+                      <PetIcon pet={pet} />
                     </div>
                     {isTopUsed && (
                       <div className='mr-2.5'>
@@ -122,12 +116,15 @@ export function PetStatsList({
                 {expandedPets[pet.name] && (
                   <div className='p-2.5 grid grid-cols-1 lg:grid-cols-3 gap-y-2.5 lg:gap-2.5 bg-light-grey rounded-b-lg'>
                     <div className='col-span-2 space-y-2.5'>
-                      <div className='p-2.5 lg:p-5 rounded-lg bg-background shadow-md'>
-                        <Paragraph className='italic text-center'>
-                          &ldquo;{pet.description}&ldquo;
-                        </Paragraph>
-                      </div>
-
+                      {pet?.description ? (
+                        <div className='p-2.5 lg:p-5 rounded-lg bg-background shadow-md'>
+                          <Paragraph className='italic text-center'>
+                            &ldquo;{pet.description}&ldquo;
+                          </Paragraph>
+                        </div>
+                      ) : (
+                        <div className='p-2.5 lg:p-5 rounded-lg bg-background shadow-md' />
+                      )}
                       <div className='grid grid-cols-1 lg:grid-cols-2 gap-2.5 mt-2.5'>
                         <div className='p-2.5 lg:p-5 rounded-lg bg-background shadow-md relative'>
                           <Heading
@@ -318,15 +315,9 @@ export function PetStatsList({
                     </div>
 
                     <div>
-                      <Image
-                        src={pet.image?.secure_url || ''}
-                        alt={pet.name}
-                        className='w-full h-auto rounded-lg object-cover'
-                        width={100}
-                        height={100}
-                        loading='lazy'
-                        unoptimized
-                      />
+                      <div className='w-full h-auto rounded-lg overflow-hidden'>
+                        <PetImage pet={pet} />
+                      </div>
                       {availableBreeds.length > 0 && (
                         <div className='rounded-lg overflow-hidden bg-background shadow-md mt-2.5'>
                           <div className='overflow-x-auto'>

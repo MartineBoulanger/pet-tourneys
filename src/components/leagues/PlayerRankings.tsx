@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { IoCheckmark, IoClose } from 'react-icons/io5';
 import { OverviewCard } from '@/components/layout/OverviewCard';
-import { PET_TYPE_IMAGES, PET_TYPE_COLORS } from '@/types/supabase.types';
+import { PET_TYPE_IMAGES, PET_TYPE_COLORS, Pet } from '@/types/supabase.types';
 import { PlayerRankingsProps } from '@/types/components.types';
 import { sortPlayerRecords } from '@/utils/supabase/sortPlayerRecords';
 import { Heading, Paragraph, Button } from '@/components/ui';
@@ -14,6 +14,7 @@ import { Tabs } from '@/components/layout/Tabs';
 import { Tab } from '@/components/layout/Tab';
 import { cn } from '@/utils/cn';
 import { MedalIcon } from '@/assets/MedalIcon';
+import { PlayerPetImage, PlayerPetCardImage } from '@/components/pets/PetMedia';
 
 const PLAYERS_PER_PAGE = 10;
 
@@ -171,19 +172,7 @@ export const PlayerRankings = ({
                                       {' kills'}
                                     </Paragraph>
                                   </div>
-                                  <div className='w-[100px] lg:w-[125px] h-[100px] lg:h-[125px]'>
-                                    <Image
-                                      src={mostUsedPet?.image?.secure_url || ''}
-                                      alt={
-                                        mostUsedPet?.name ||
-                                        player.mostUsedPet.petName
-                                      }
-                                      className='w-full h-full rounded-lg object-cover'
-                                      width={90}
-                                      height={90}
-                                      loading='lazy'
-                                    />
-                                  </div>
+                                  <PlayerPetImage pet={mostUsedPet as Pet} />
                                 </div>
                               ) : (
                                 <Paragraph className='p-2.5 lg:p-5 rounded-lg bg-light-grey text-center shadow-md'>
@@ -215,19 +204,7 @@ export const PlayerRankings = ({
                                       {' times'}
                                     </Paragraph>
                                   </div>
-                                  <div className='w-[100px] lg:w-[125px] h-[100px] lg:h-[125px]'>
-                                    <Image
-                                      src={nemesisPet?.image?.secure_url || ''}
-                                      alt={
-                                        nemesisPet?.name ||
-                                        player.mostProblematicPet.petName
-                                      }
-                                      className='w-full h-full rounded-lg object-cover'
-                                      width={90}
-                                      height={90}
-                                      loading='lazy'
-                                    />
-                                  </div>
+                                  <PlayerPetImage pet={nemesisPet as Pet} />
                                 </div>
                               ) : (
                                 <Paragraph className='p-2.5 lg:p-5 rounded-lg bg-light-grey text-center shadow-md'>
@@ -359,22 +336,9 @@ export const PlayerRankings = ({
                                           <td colSpan={4} className='p-0'>
                                             <div className='space-y-2.5 lg:space-y-5 p-2.5 lg:p-5 bg-background relative grid grid-cols-1 lg:grid-cols-3 gap-2.5 lg:gap-5'>
                                               <div>
-                                                <div className='w-full lg:w-[300px] h-auto lg:h-[300px]'>
-                                                  <Image
-                                                    src={
-                                                      petDetails?.image
-                                                        ?.secure_url || ''
-                                                    }
-                                                    alt={
-                                                      petDetails?.name ||
-                                                      pet.petName
-                                                    }
-                                                    className='w-full h-full rounded-lg object-cover'
-                                                    width={100}
-                                                    height={100}
-                                                    loading='lazy'
-                                                  />
-                                                </div>
+                                                <PlayerPetCardImage
+                                                  pet={petDetails as Pet}
+                                                />
                                               </div>
                                               <div>
                                                 <Heading
@@ -559,22 +523,24 @@ export const PlayerRankings = ({
                                                 </div>
                                               </div>
                                             </div>
-                                            <div className='p-2.5 lg:p-5 bg-background'>
-                                              <div
-                                                style={{
-                                                  color:
-                                                    PET_TYPE_COLORS[
-                                                      petDetails?.type as keyof typeof PET_TYPE_COLORS
-                                                    ],
-                                                }}
-                                              >
-                                                <Paragraph className='italic text-center'>
-                                                  &ldquo;
-                                                  {petDetails?.description}
-                                                  &ldquo;
-                                                </Paragraph>
+                                            {petDetails?.description && (
+                                              <div className='p-2.5 lg:p-5 bg-background'>
+                                                <div
+                                                  style={{
+                                                    color:
+                                                      PET_TYPE_COLORS[
+                                                        petDetails?.type as keyof typeof PET_TYPE_COLORS
+                                                      ],
+                                                  }}
+                                                >
+                                                  <Paragraph className='italic text-center'>
+                                                    &ldquo;
+                                                    {petDetails.description}
+                                                    &ldquo;
+                                                  </Paragraph>
+                                                </div>
                                               </div>
-                                            </div>
+                                            )}
                                           </td>
                                         </tr>
                                       ),

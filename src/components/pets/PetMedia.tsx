@@ -5,7 +5,7 @@ import { Pet, PET_TYPE_IMAGES } from '@/types/supabase.types';
 // Pet icon for the title on pet details page
 export function PetIcon({ pet }: { pet: Pet }) {
   return (
-    <div className='flex items-center h-[40px] w-[40px] mt-1'>
+    <div className='flex items-center h-[40px] w-[40px]'>
       {pet.icon ? (
         <Image
           src={pet.icon?.secure_url || ''}
@@ -16,7 +16,7 @@ export function PetIcon({ pet }: { pet: Pet }) {
           loading='lazy'
         />
       ) : (
-        <div className='w-[40px] h-[40px] bg-light-grey flex items-center justify-center rounded-md'>
+        <div className='w-[40px] h-[40px] bg-medium-grey flex items-center justify-center rounded-md'>
           <MdOutlineImageNotSupported className='h-4 w-4 text-foreground' />
         </div>
       )}
@@ -27,7 +27,7 @@ export function PetIcon({ pet }: { pet: Pet }) {
 // Pet image for the pet details page
 export function PetImage({ pet }: { pet: Pet }) {
   return (
-    <div className='w-full lg:w-[400px] h-full lg:h-[400px] flex items-center justify-center rounded-lg  overflow-hidden bg-background shadow-sm justify-self-center'>
+    <div className='w-full lg:w-[400px] h-full lg:h-[400px] flex items-center justify-center rounded-lg overflow-hidden bg-background shadow-sm justify-self-center'>
       {pet.image ? (
         <Image
           src={pet.image.secure_url}
@@ -38,7 +38,7 @@ export function PetImage({ pet }: { pet: Pet }) {
           loading='lazy'
         />
       ) : (
-        <div className='w-[400px] h-[400px] bg-light-grey flex items-center justify-center'>
+        <div className='w-[400px] h-[400px] bg-medium-grey flex items-center justify-center'>
           <MdOutlineImageNotSupported className='w-20 h-20' />
         </div>
       )}
@@ -60,7 +60,7 @@ export function PetCardImage({ pet }: { pet: Pet }) {
           loading='lazy'
         />
       ) : (
-        <div className='w-20 h-20 bg-light-grey flex items-center justify-center rounded-md'>
+        <div className='w-20 h-20 bg-medium-grey flex items-center justify-center rounded-md'>
           <MdOutlineImageNotSupported className='w-8 h-8' />
         </div>
       )}
@@ -80,6 +80,50 @@ export function PetTypeImage({ pet }: { pet: Pet }) {
         className='w-full h-full object-cover'
         loading='lazy'
       />
+    </div>
+  );
+}
+
+// Pet image for the most used and nemesis pet in the player rankings page
+export function PlayerPetImage({ pet }: { pet: Pet }) {
+  return (
+    <div className='w-[100px] lg:w-[125px] h-[100px] lg:h-[125px]'>
+      {pet.image ? (
+        <Image
+          src={pet?.image?.secure_url || ''}
+          alt={pet?.name || 'Unknown Pet'}
+          className='w-full h-full rounded-lg object-cover'
+          width={90}
+          height={90}
+          loading='lazy'
+        />
+      ) : (
+        <div className='w-full h-full bg-medium-grey flex items-center justify-center rounded-md'>
+          <MdOutlineImageNotSupported className='w-8 h-8' />
+        </div>
+      )}
+    </div>
+  );
+}
+
+// Pet Image for the pet details in the pets list on the player rankings page
+export function PlayerPetCardImage({ pet }: { pet: Pet }) {
+  return (
+    <div className='w-full lg:w-[300px] h-auto lg:h-[300px]'>
+      {pet.image ? (
+        <Image
+          src={pet?.image?.secure_url || ''}
+          alt={pet?.name || 'Unknown Pet'}
+          className='w-full h-full rounded-lg object-cover'
+          width={100}
+          height={100}
+          loading='lazy'
+        />
+      ) : (
+        <div className='w-full h-full bg-medium-grey flex items-center justify-center rounded-md'>
+          <MdOutlineImageNotSupported className='w-10 h-10' />
+        </div>
+      )}
     </div>
   );
 }
