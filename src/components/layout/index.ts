@@ -4,6 +4,7 @@ export * from './Banner';
 export * from './Carousel';
 export * from './DownloadImageButton';
 export * from './DownloadRulesButton';
+export * from './DownloadLeagueUsedPets';
 export * from './ImageCard';
 export * from './ImageGrid';
 export * from './ImageModal';

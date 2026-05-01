@@ -6,6 +6,7 @@ import { Container, Heading, Paragraph } from '@/components/ui';
 import { PageParams, PageSearchParams } from '@/types/global.types';
 import { Links } from '@/types/navigation-types';
 import { PageMenu } from '@/components/navigation/PageMenu';
+import { DownloadLeagueUsedPets } from '@/components/layout';
 
 export async function generateMetadata({ params }: { params: PageParams }) {
   const { id } = await params;
@@ -88,6 +89,10 @@ export default async function LeagueDetailsPage({
         </span>
       </Paragraph>
       <PageMenu links={links} />
+      <div className='flex justify-center md:justify-end gap-2.5 my-2.5 lg:mb-5'>
+        {/* TODO: download button for statistics as PDF - this is for later because more complex */}
+        <DownloadLeagueUsedPets id={data.league.id} name={data.league.name} />
+      </div>
       {matches && matches.length > 0 ? (
         <MatchList
           matches={matches}
