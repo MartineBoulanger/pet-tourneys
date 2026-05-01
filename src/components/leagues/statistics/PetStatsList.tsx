@@ -11,7 +11,7 @@ import { StrongPetIcon, WeakPetIcon } from '@/assets/PetStrengthIcons';
 import { cn } from '@/utils/cn';
 import { Button, Heading, Paragraph } from '@/components/ui';
 import { Pagination } from '@/components/layout/Pagination';
-import { usePetsFilters } from '@/hooks/usePetsFilters';
+import { usePetsStatsFilters } from '@/hooks/usePetsStatsFilters';
 import { PetStatsListProps, PET_TYPE_IMAGES } from '@/types/supabase.types';
 import { PetControls } from './PetControls';
 import { PetIcon, PetImage } from '@/components/pets/PetMedia';
@@ -39,7 +39,7 @@ export function PetStatsList({
     handlePageChange,
     getPetStats,
     getTypeColor,
-  } = usePetsFilters({ petData, petStats, battleStats, isMatchView });
+  } = usePetsStatsFilters({ petData, petStats, battleStats, isMatchView });
 
   const topUsedPets = useMemo(() => {
     return [...petStats]

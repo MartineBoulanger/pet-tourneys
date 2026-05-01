@@ -34,9 +34,9 @@ export type UseManagerOptions<T extends { id: string; invisible?: boolean }> = {
 };
 
 // =================================================
-// Pets filter type
+// Pets Statistics filter type
 // =================================================
-export type UsePetsFiltersProps = {
+export type UsePetsStatsFiltersProps = {
   petData: Pet[];
   petStats?: LeaguePetStat[];
   battleStats?: BattleStatistics;

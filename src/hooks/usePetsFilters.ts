@@ -2,395 +2,203 @@
 
 import { useState, useMemo } from 'react';
 import {
-  PET_TYPE_COLORS,
-  LeaguePetStat,
-  // PetBreed,
+  AffixConfig,
+  Pet,
+  PetFilters,
+  UniqueStats,
 } from '@/types/supabase.types';
-import { UsePetsFiltersProps } from '@/types/hooks.types';
 
 const PETS_PER_PAGE = 30;
 
-export const usePetsFilters = ({
-  petData,
-  petStats,
-  battleStats,
-  isMatchView = false,
-}: UsePetsFiltersProps) => {
-  // states to set and to use
-  const [expandedPets, setExpandedPets] = useState<Record<string, boolean>>({});
-  const [currentPage, setCurrentPage] = useState(1);
+const defaultFilters: PetFilters = {
+  type: '',
+  expansion: '',
+  source: '',
+  breed: '',
+  tradable: false,
+  capturable: false,
+  isAllianceOnly: false,
+  isHordeOnly: false,
+  isVanity: false,
+  battleOnly: false,
+  pmlAffix: '',
+};
+
+// affixes set hardcoded here -- change or add when needed
+const PML_AFFIXES: Record<string, AffixConfig> = {
+  affix1: {
+    types: ['Aquatic', 'Undead', 'Dragonkin', 'Mechanical', 'Magic'],
+    expansions: [],
+  },
+  affix2: {
+    types: [],
+    expansions: [
+      'The Burning Crusade',
+      'Battle for Azeroth',
+      'Shadowlands',
+      'Cataclysm',
+      'Warlods of Dreanor',
+      'Midnight',
+    ],
+  },
+  affix3: {
+    types: ['Beast', 'Critter', 'Elemental', 'Flying', 'Humanoid'],
+    expansions: [],
+  },
+  affix4: {
+    types: [],
+    expansions: [
+      'Classic',
+      'Wrath of the Lich King',
+      'Legion',
+      'Mists of Pandaria',
+      'Dragonflight',
+      'Midnight',
+    ],
+  },
+};
+
+export const usePetsFilters = (pets: Pet[]) => {
   const [searchTerm, setSearchTerm] = useState('');
-  const [sortOption, setSortOption] = useState('played-desc');
-  const [filters, setFilters] = useState({
-    type: '',
-    expansion: '',
-    breed: '',
-    source: '',
-    tradable: false,
-    capturable: false,
-    isHordeOnly: false,
-    isAllianceOnly: false,
-  });
+  const [filters, setFilters] = useState<PetFilters>(defaultFilters);
+  const [currentPage, setCurrentPage] = useState(1);
 
-  // local data to use for the pets data and the list
-  const petPerformance = battleStats?.petPerformance || {};
-  const petSwapDetails = battleStats?.petSwapDetails || {};
-  const petStatsMap = new Map<string, LeaguePetStat>();
-  petStats?.forEach((stat) => {
-    petStatsMap.set(stat.pet_data.name, stat);
-  });
+  const uniqueStats = useMemo<UniqueStats>(() => {
+    const types = new Set<string>();
+    const expansions = new Set<string>();
+    const sources = new Set<string>();
+    const breeds = new Set<string>();
 
-  // filtering, sorting and searching the pet data
+    pets.forEach((pet) => {
+      if (pet.type) types.add(pet.type);
+      if (pet.expansion) expansions.add(pet.expansion);
+      if (pet.source) sources.add(pet.source);
+      if (pet.breeds) pet.breeds.forEach((b) => breeds.add(b.trim()));
+    });
+
+    return {
+      types: Array.from(types).sort(),
+      expansions: Array.from(expansions).sort(),
+      sources: Array.from(sources).sort(),
+      breeds: Array.from(breeds).sort(),
+    };
+  }, [pets]);
+
+  const activeFilterCount = useMemo(() => {
+    let count = 0;
+    if (filters.type) count++;
+    if (filters.expansion) count++;
+    if (filters.source) count++;
+    if (filters.breed) count++;
+    if (filters.tradable) count++;
+    if (filters.capturable) count++;
+    if (filters.isAllianceOnly) count++;
+    if (filters.isHordeOnly) count++;
+    if (filters.isVanity) count++;
+    if (filters.battleOnly) count++;
+    if (filters.pmlAffix) count++;
+    return count;
+  }, [filters]);
+
   const filteredPets = useMemo(() => {
-    const result = petData.filter((pet) => {
-      const matchesSearch =
-        pet.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        [
+    const lower = searchTerm.toLowerCase();
+
+    return pets.filter((pet) => {
+      if (searchTerm) {
+        const matchesName = pet.name.toLowerCase().includes(lower);
+        const matchesId = pet.id === Number(searchTerm);
+        const matchesExpansion = pet.expansion?.toLowerCase().includes(lower);
+        const matchesAbility = [
           pet.ability_1,
           pet.ability_2,
           pet.ability_3,
           pet.ability_4,
           pet.ability_5,
           pet.ability_6,
-        ].some(
-          (ability) =>
-            ability && ability.toLowerCase().includes(searchTerm.toLowerCase()),
-        ) ||
-        pet.id == Number(searchTerm);
+        ].some((a) => a?.toLowerCase().includes(lower));
 
-      const matchesType = !filters.type || pet.type === filters.type;
-      const matchesExpansion =
-        !filters.expansion || pet.expansion === filters.expansion;
-      const matchesBreed =
-        !filters.breed ||
-        (pet.breeds && pet.breeds.map((b) => b.trim()).includes(filters.breed));
-      const matchesSource = !filters.source || pet.source === filters.source;
-      const matchesTradable = !filters.tradable || pet.is_tradable;
-      const matchesCapturable = !filters.capturable || pet.is_capturable;
-      const matchesAlliance = !filters.isAllianceOnly || pet.is_alliance;
-      const matchesHorde = !filters.isHordeOnly || pet.is_horde;
+        if (
+          !matchesName &&
+          !matchesId &&
+          !matchesExpansion &&
+          !matchesAbility
+        ) {
+          return false;
+        }
+      }
 
-      return (
-        matchesSearch &&
-        matchesType &&
-        matchesExpansion &&
-        matchesBreed &&
-        matchesSource &&
-        matchesTradable &&
-        matchesCapturable &&
-        matchesAlliance &&
-        matchesHorde &&
-        petStatsMap.has(pet.name)
-      );
+      if (filters.type && pet.type !== filters.type) return false;
+      if (filters.expansion && pet.expansion !== filters.expansion)
+        return false;
+      if (filters.source && pet.source !== filters.source) return false;
+      if (
+        filters.breed &&
+        !(pet.breeds && pet.breeds.map((b) => b.trim()).includes(filters.breed))
+      )
+        return false;
+      if (filters.tradable && !pet.is_tradable) return false;
+      if (filters.capturable && !pet.is_capturable) return false;
+      if (filters.isAllianceOnly && !pet.is_alliance) return false;
+      if (filters.isHordeOnly && !pet.is_horde) return false;
+      if (filters.isVanity && !pet.is_vanity) return false;
+      if (filters.battleOnly && pet.is_vanity) return false;
+      if (filters.pmlAffix && pet.is_vanity) return false;
+
+      // affixes filters, add here more when needed
+      if (filters.pmlAffix) {
+        const affix = PML_AFFIXES[filters.pmlAffix];
+        if (affix.types.length > 0 && !affix.types.includes(pet.type))
+          return false;
+        if (
+          affix.expansions.length > 0 &&
+          !affix.expansions.includes(pet.expansion)
+        )
+          return false;
+      }
+
+      return true;
     });
+  }, [pets, searchTerm, filters]);
 
-    switch (sortOption) {
-      case 'name-asc':
-        result.sort((a, b) => a.name.localeCompare(b.name));
-        break;
-      case 'name-desc':
-        result.sort((a, b) => b.name.localeCompare(a.name));
-        break;
-      case 'played-asc':
-        result.sort((a, b) => {
-          const statA = petStatsMap.get(a.name)?.total_played || 0;
-          const statB = petStatsMap.get(b.name)?.total_played || 0;
-          return statA - statB;
-        });
-        break;
-      case 'played-desc':
-        result.sort((a, b) => {
-          const statA = petStatsMap.get(a.name)?.total_played || 0;
-          const statB = petStatsMap.get(b.name)?.total_played || 0;
-          return statB - statA;
-        });
-        break;
-      case 'wins-asc':
-        result.sort((a, b) => {
-          const statA = petStatsMap.get(a.name)?.wins || 0;
-          const statB = petStatsMap.get(b.name)?.wins || 0;
-          return statA - statB;
-        });
-        break;
-      case 'wins-desc':
-        result.sort((a, b) => {
-          const statA = petStatsMap.get(a.name)?.wins || 0;
-          const statB = petStatsMap.get(b.name)?.wins || 0;
-          return statB - statA;
-        });
-        break;
-      case 'winrate-asc':
-        result.sort((a, b) => {
-          const statA = petStatsMap.get(a.name)?.win_rate || 0;
-          const statB = petStatsMap.get(b.name)?.win_rate || 0;
-          return statA - statB;
-        });
-        break;
-      case 'winrate-desc':
-        result.sort((a, b) => {
-          const statA = petStatsMap.get(a.name)?.win_rate || 0;
-          const statB = petStatsMap.get(b.name)?.win_rate || 0;
-          return statB - statA;
-        });
-        break;
-      case 'losses-asc':
-        result.sort((a, b) => {
-          const statA = petStatsMap.get(a.name)?.losses || 0;
-          const statB = petStatsMap.get(b.name)?.losses || 0;
-          return statA - statB;
-        });
-        break;
-      case 'losses-desc':
-        result.sort((a, b) => {
-          const statA = petStatsMap.get(a.name)?.losses || 0;
-          const statB = petStatsMap.get(b.name)?.losses || 0;
-          return statB - statA;
-        });
-        break;
-      case 'matches-asc':
-        result.sort((a, b) => {
-          const statA = petStatsMap.get(a.name)?.match_count || 0;
-          const statB = petStatsMap.get(b.name)?.match_count || 0;
-          return statA - statB;
-        });
-        break;
-      case 'matches-desc':
-        result.sort((a, b) => {
-          const statA = petStatsMap.get(a.name)?.match_count || 0;
-          const statB = petStatsMap.get(b.name)?.match_count || 0;
-          return statB - statA;
-        });
-        break;
-      case 'kills-asc':
-        result.sort((a, b) => {
-          const statA = petPerformance[a.name]?.kills || 0;
-          const statB = petPerformance[b.name]?.kills || 0;
-          return statA - statB;
-        });
-        break;
-      case 'kills-desc':
-        result.sort((a, b) => {
-          const statA = petPerformance[a.name]?.kills || 0;
-          const statB = petPerformance[b.name]?.kills || 0;
-          return statB - statA;
-        });
-        break;
-      case 'deaths-asc':
-        result.sort((a, b) => {
-          const statA = petPerformance[a.name]?.deaths || 0;
-          const statB = petPerformance[b.name]?.deaths || 0;
-          return statA - statB;
-        });
-        break;
-      case 'deaths-desc':
-        result.sort((a, b) => {
-          const statA = petPerformance[a.name]?.deaths || 0;
-          const statB = petPerformance[b.name]?.deaths || 0;
-          return statB - statA;
-        });
-        break;
-      case 'swaps-asc':
-        result.sort((a, b) => {
-          const statA = petSwapDetails[a.name] || 0;
-          const statB = petSwapDetails[b.name] || 0;
-          return statA - statB;
-        });
-        break;
-      case 'swaps-desc':
-        result.sort((a, b) => {
-          const statA = petSwapDetails[a.name] || 0;
-          const statB = petSwapDetails[b.name] || 0;
-          return statB - statA;
-        });
-        break;
-      default:
-        break;
-    }
-
-    return result;
-  }, [
-    petData,
-    petStatsMap,
-    searchTerm,
-    sortOption,
-    filters,
-    petPerformance,
-    petSwapDetails,
-  ]);
-
-  // pagination
   const totalPages = Math.ceil(filteredPets.length / PETS_PER_PAGE);
-  const currentPetData = filteredPets.slice(
+  const paginatedPets = filteredPets.slice(
     (currentPage - 1) * PETS_PER_PAGE,
     currentPage * PETS_PER_PAGE,
   );
 
-  // show/hide pet data in dropdown
-  const togglePet = (petName: string) => {
-    setExpandedPets((prev) => ({
-      ...prev,
-      [petName]: !prev[petName],
-    }));
+  const handleFilterChange = (key: string, value: string | boolean) => {
+    setFilters((prev) => ({ ...prev, [key]: value }));
+    setCurrentPage(1);
   };
 
-  // pagination page change
+  const handleSearch = (value: string) => {
+    setSearchTerm(value);
+    setCurrentPage(1);
+  };
+
+  const handleResetFilters = () => {
+    setFilters(defaultFilters);
+    setSearchTerm('');
+    setCurrentPage(1);
+  };
+
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  // setting the change of the filter(s)
-  const handleFilterChange = (key: string, value: string | boolean) => {
-    setFilters((prev) => ({
-      ...prev,
-      [key]: value,
-    }));
-    setCurrentPage(1); // Reset to first page when filters change
-  };
-
-  // reset all filters, sorting and search
-  const resetFilters = () => {
-    setSearchTerm('');
-    setSortOption('played-desc');
-    setFilters({
-      type: '',
-      expansion: '',
-      breed: '',
-      source: '',
-      tradable: false,
-      capturable: false,
-      isAllianceOnly: false,
-      isHordeOnly: false,
-    });
-    setCurrentPage(1);
-  };
-
-  // get unique values for filter dropdowns
-  const uniqueStats = useMemo(() => {
-    const types = new Set<string>();
-    const expansions = new Set<string>();
-    const sources = new Set<string>();
-    const breeds = new Set<string>();
-
-    petData.forEach((pet) => {
-      types.add(pet.type);
-      expansions.add(pet.expansion);
-      sources.add(pet.source || '');
-      if (pet.breeds) {
-        pet.breeds.forEach((breed) => {
-          breeds.add(breed.trim());
-        });
-      }
-    });
-
-    return {
-      types: Array.from(types).sort(),
-      expansions: Array.from(expansions).sort(),
-      sources: Array.from(sources)
-        .sort()
-        .filter((s) => s !== ''),
-      breeds: Array.from(breeds).sort(),
-    };
-  }, [petData]);
-
-  // function that is used inside the mapping, to get the correct battle stats data per pet
-  const getPetStats = (name: string) => {
-    const stats = petStatsMap.get(name);
-    const breeds = stats?.breed_stats.map((bs) => ({
-      ...bs,
-      normalizedBreed: bs.breed.trim(),
-    }));
-    const winRate = stats?.win_rate || 0;
-    const kills = petPerformance[name]?.kills || 0;
-    const played = stats?.total_played || 1;
-    const totalPlayed = stats?.total_played || 0;
-    const totalMatches = stats?.match_count || 0;
-
-    const killRatio = kills / played;
-    let strength: 'strong' | 'weak' | 'average' = 'average';
-
-    if (killRatio > 0.8) strength = 'strong';
-    else if (killRatio < 0.15) strength = 'weak';
-
-    let graphData = [];
-    if (isMatchView) {
-      graphData = [
-        {
-          name: 'Kills',
-          value: petPerformance[name]?.kills || 0,
-        },
-        {
-          name: 'Deaths',
-          value: petPerformance[name]?.deaths || 0,
-        },
-        {
-          name: 'Swaps',
-          value: petSwapDetails[name] || 0,
-        },
-      ];
-    } else {
-      graphData = [
-        {
-          name: 'Wins',
-          value: stats?.wins || 0,
-        },
-        {
-          name: 'Kills',
-          value: petPerformance[name]?.kills || 0,
-        },
-        {
-          name: 'Losses',
-          value: stats?.losses || 0,
-        },
-        {
-          name: 'Deaths',
-          value: petPerformance[name]?.deaths || 0,
-        },
-        {
-          name: 'Swaps',
-          value: petSwapDetails[name] || 0,
-        },
-      ];
-    }
-    return {
-      stats,
-      breeds,
-      graphData,
-      winRate,
-      strength,
-      totalMatches,
-      totalPlayed,
-    };
-  };
-
-  // getting the color from each pet type
-  const getTypeColor = (type: string) => {
-    return PET_TYPE_COLORS[type as keyof typeof PET_TYPE_COLORS];
-  };
-
-  // set all available breed per pet in an array of strings
-  // TODO: this is probably not needed anymore since the breeds get saved as an array in Supabase
-  // const setAvailableBreedToArray = (breeds: PetBreed) => {
-  //   return breeds.split(',').map((breed) => breed.trim());
-  // };
-
   return {
     uniqueStats,
-    resetFilters,
-    handleFilterChange,
-    handlePageChange,
-    togglePet,
+    activeFilterCount,
     totalPages,
-    currentPetData,
-    expandedPets,
     currentPage,
+    paginatedPets,
     searchTerm,
-    setSearchTerm,
-    sortOption,
-    setSortOption,
     filters,
-    getPetStats,
-    getTypeColor,
-    // setAvailableBreedToArray,
+    filteredPets,
+    handleFilterChange,
+    handleSearch,
+    handleResetFilters,
+    handlePageChange,
   };
 };
