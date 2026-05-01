@@ -50,6 +50,14 @@ export function PetFilters({
   uniqueStats,
   onFilterChange,
 }: PetFiltersProps) {
+  const affixOptions = [
+    { value: '', label: 'All' },
+    { value: 'affix1', label: 'Affix 1 (Week 1-2)' },
+    { value: 'affix2', label: 'Affix 2 (Week 3-4)' },
+    { value: 'affix3', label: 'Affix 3 (Week 5-6)' },
+    { value: 'affix4', label: 'Affix 4 (Week 7-8)' },
+  ];
+
   return (
     <div className='bg-background border border-medium-grey rounded-lg p-4 space-y-4'>
       {/* Select filters grid */}
@@ -111,11 +119,32 @@ export function PetFilters({
           onChange={onFilterChange}
         />
         <CheckboxFilter
-          label='Non Combat Pets'
+          label='Combat pets only'
+          filterKey='battleOnly'
+          checked={filters.battleOnly}
+          onChange={onFilterChange}
+        />
+        <CheckboxFilter
+          label='Non combat pets only'
           filterKey='isVanity'
           checked={filters.isVanity}
           onChange={onFilterChange}
         />
+      </div>
+
+      {/* Select PML affixes filters */}
+      <div className='grid sm:grid-cols-2 lg:grid-cols-4 pt-2 border-t border-medium-grey'>
+        <Select
+          label='PML Season 4 Affixes'
+          id='PML Season 4 Affixes'
+          name='PML Season 4 Affixes'
+          value={filters.pmlAffix}
+          onChange={(e) => onFilterChange('pmlAffix', e.target.value)}
+        >
+          {affixOptions.map((opt) => (
+            <Option key={opt.value} value={opt.value} label={opt.label} />
+          ))}
+        </Select>
       </div>
     </div>
   );
