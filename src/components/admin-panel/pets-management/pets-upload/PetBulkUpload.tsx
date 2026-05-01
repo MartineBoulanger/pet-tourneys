@@ -7,7 +7,7 @@ import * as XLSX from 'xlsx';
 import { createPetsInBulk } from '@/actions/supabase/pets-schema/pets/createPet';
 import { ExcelPetRow, UpdateMode } from '@/types/supabase.types';
 import { toastError, toastSuccess } from '@/utils/toast';
-import { Button, Heading, Container, Paragraph } from '@/components/ui';
+import { Button, Heading, Paragraph } from '@/components/ui';
 
 // Helper function to convert to plain object
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

@@ -439,6 +439,10 @@ export type PetUsageData = {
   times_played: number[];
 };
 
+export type PetExtractedData = PetUsageData & {
+  total_played: number;
+};
+
 export type UploadProps = {
   player1: string;
   player2: string;
@@ -455,6 +459,20 @@ export type StatDistribution = {
   health: Record<number, number>;
   power: Record<number, number>;
   speed: Record<number, number>;
+};
+
+export type ExportPet = {
+  id: number;
+  name: string;
+  type: string;
+  baseStats?: {
+    health?: number;
+    power?: number;
+    speed?: number;
+  };
+  statsRaw: string[];
+  breeds: string[];
+  totalPlayed: number;
 };
 
 // =================================================
