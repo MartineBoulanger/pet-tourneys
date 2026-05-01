@@ -27,7 +27,6 @@ export async function getUsedPetsPerLeagueForExport(id: string) {
     return {
       id: db?.id ?? -1,
       name: p.name,
-      image: db?.image,
       type: db?.type ?? p.type,
       baseStats: {
         health: db?.base_health ?? 0,

@@ -464,7 +464,6 @@ export type StatDistribution = {
 export type ExportPet = {
   id: number;
   name: string;
-  image: any;
   type: string;
   baseStats?: {
     health?: number;
