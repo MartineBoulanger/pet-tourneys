@@ -7,6 +7,7 @@ import {
   Pet,
   PetFilters as Filters,
   UniqueStats,
+  AffixConfig,
 } from '@/types/supabase.types';
 import { Pagination } from '@/components/layout/Pagination';
 import { Button, Paragraph } from '@/components/ui';
@@ -25,6 +26,8 @@ const defaultFilters: Filters = {
   isAllianceOnly: false,
   isHordeOnly: false,
   isVanity: false,
+  battleOnly: false,
+  pmlAffix: '',
 };
 
 export const PetGrid = ({ pets }: { pets: Pet[] }) => {
@@ -65,8 +68,44 @@ export const PetGrid = ({ pets }: { pets: Pet[] }) => {
     if (filters.isAllianceOnly) count++;
     if (filters.isHordeOnly) count++;
     if (filters.isVanity) count++;
+    if (filters.battleOnly) count++;
+    if (filters.pmlAffix) count++;
     return count;
   }, [filters]);
+
+  // affixes set hardcoded here -- change or add when needed
+  const PML_AFFIXES: Record<string, AffixConfig> = {
+    affix1: {
+      types: ['Aquatic', 'Undead', 'Dragonkin', 'Mechanical', 'Magic'],
+      expansions: [],
+    },
+    affix2: {
+      types: [],
+      expansions: [
+        'The Burning Crusade',
+        'Battle for Azeroth',
+        'Shadowlands',
+        'Cataclysm',
+        'Warlods of Dreanor',
+        'Midnight',
+      ],
+    },
+    affix3: {
+      types: ['Beast', 'Critter', 'Elemental', 'Flying', 'Humanoid'],
+      expansions: [],
+    },
+    affix4: {
+      types: [],
+      expansions: [
+        'Classic',
+        'Wrath of the Lich King',
+        'Legion',
+        'Mists of Pandaria',
+        'Dragonflight',
+        'Midnight',
+      ],
+    },
+  };
 
   const filteredPets = useMemo(() => {
     const lower = searchTerm.toLowerCase();
@@ -82,7 +121,7 @@ export const PetGrid = ({ pets }: { pets: Pet[] }) => {
           pet.ability_3,
           pet.ability_4,
           pet.ability_5,
-          pet.ability_5,
+          pet.ability_6,
         ].some((a) => a?.toLowerCase().includes(lower));
 
         if (
@@ -109,6 +148,20 @@ export const PetGrid = ({ pets }: { pets: Pet[] }) => {
       if (filters.isAllianceOnly && !pet.is_alliance) return false;
       if (filters.isHordeOnly && !pet.is_horde) return false;
       if (filters.isVanity && !pet.is_vanity) return false;
+      if (filters.battleOnly && pet.is_vanity) return false;
+      if (filters.pmlAffix && pet.is_vanity) return false;
+
+      // affixes filters, add here more when needed
+      if (filters.pmlAffix) {
+        const affix = PML_AFFIXES[filters.pmlAffix];
+        if (affix.types.length > 0 && !affix.types.includes(pet.type))
+          return false;
+        if (
+          affix.expansions.length > 0 &&
+          !affix.expansions.includes(pet.expansion)
+        )
+          return false;
+      }
 
       return true;
     });

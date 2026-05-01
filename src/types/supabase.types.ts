@@ -730,6 +730,8 @@ export type PetFilters = {
   isAllianceOnly: boolean;
   isHordeOnly: boolean;
   isVanity: boolean;
+  battleOnly: boolean;
+  pmlAffix: string;
 };
 
 export type UniqueStats = {
@@ -737,4 +739,9 @@ export type UniqueStats = {
   expansions: string[];
   sources: string[];
   breeds: string[];
+};
+
+export type AffixConfig = {
+  types: string[];
+  expansions: string[];
 };
