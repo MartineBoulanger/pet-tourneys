@@ -37,7 +37,7 @@ const PML_AFFIXES: Record<string, AffixConfig> = {
       'Battle for Azeroth',
       'Shadowlands',
       'Cataclysm',
-      'Warlods of Dreanor',
+      'Warlords of Draenor',
       'Midnight',
     ],
   },
