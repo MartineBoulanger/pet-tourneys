@@ -6,8 +6,9 @@ import { cn } from '@/utils/cn';
 import { Button } from '@/components/ui';
 import { getUsedPetsPerLeagueForExport } from '@/actions/supabase/api-schema/statistics/getUsedPetsPerLeague';
 import * as XLSX from 'xlsx';
+import { toastError } from '@/utils/toast';
 
-export function DownloadLeagueUsedPets({
+export function DownloadLeagueUsedPetsButton({
   id,
   name,
   className,
@@ -22,9 +23,9 @@ export function DownloadLeagueUsedPets({
     setIsLoading(true);
 
     try {
-      const data = await getUsedPetsPerLeagueForExport(id);
+      const { data, error } = await getUsedPetsPerLeagueForExport(id);
 
-      if (!data) return;
+      if (error) toastError(error);
 
       const sheetData = data?.map((pet) => ({
         ID: pet.id,
@@ -38,9 +39,10 @@ export function DownloadLeagueUsedPets({
         Total_Played: pet.totalPlayed,
       }));
 
-      const orderedPets = sheetData.sort(
-        (a, b) => (b.Total_Played ?? 0) - (a.Total_Played ?? 0),
-      );
+      const orderedPets =
+        sheetData?.sort(
+          (a, b) => (b.Total_Played ?? 0) - (a.Total_Played ?? 0),
+        ) || [];
       const safeName = name.replace(/[\\/:*?"<>|]/g, '');
       const filename = 'Used Pets - ' + safeName;
 

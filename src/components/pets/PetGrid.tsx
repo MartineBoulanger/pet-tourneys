@@ -9,6 +9,7 @@ import { Button, Paragraph } from '@/components/ui';
 import { PetFilters } from './PetFilters';
 import { PetSearch } from './PetSearch';
 import { usePetsFilters } from '@/hooks/usePetsFilters';
+import { DownloadAllPetsButton } from '@/components/layout';
 
 export const PetGrid = ({ pets }: { pets: Pet[] }) => {
   const [filtersOpen, setFiltersOpen] = useState(false);
@@ -65,9 +66,12 @@ export const PetGrid = ({ pets }: { pets: Pet[] }) => {
       )}
 
       {/* Result count */}
-      <Paragraph className='text-sm text-foreground/50'>
-        {`Showing ${paginatedPets.length} of ${filteredPets.length} pets`}
-      </Paragraph>
+      <div className='flex justify-between items-center mt-2.5 lg:mt-5 mb-2.5'>
+        <Paragraph className='text-sm text-foreground/50'>
+          {`Showing ${paginatedPets.length} of ${filteredPets.length} pets`}
+        </Paragraph>
+        <DownloadAllPetsButton />
+      </div>
 
       {/* Grid */}
       {paginatedPets.length > 0 ? (
