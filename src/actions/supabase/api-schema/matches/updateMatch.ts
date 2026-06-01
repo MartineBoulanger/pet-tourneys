@@ -23,6 +23,8 @@ export async function updateMatchWithLogs(
       owner: string;
       date: string;
       region: string;
+      week: string | null;
+      affix: string | null;
     };
     newLogsText?: string | null;
     newPetUsageText?: string | null;
@@ -35,7 +37,10 @@ export async function updateMatchWithLogs(
   try {
     // 1. Update match metadata (always happens)
     const { error: matchError } = await m
-      .update(matchUpdates)
+      .update({
+        ...matchUpdates,
+        week: matchUpdates.week !== null ? Number(matchUpdates.week) : null,
+      })
       .eq('id', matchId);
 
     if (matchError) {
@@ -113,8 +118,17 @@ export async function updateMatchWithLogs(
       }
 
       if (petUsage.length > 0) {
+        const weekValue =
+          matchUpdates.week !== '' ? Number(matchUpdates.week) : null;
+        const affixValue = matchUpdates.affix || null;
+
         const { error: insertPetError } = await pu.insert(
-          petUsage.map((pet) => ({ ...pet, match_id: matchId })),
+          petUsage.map((pet) => ({
+            ...pet,
+            match_id: matchId,
+            week: weekValue,
+            affix: affixValue,
+          })),
         );
 
         if (insertPetError) {
@@ -122,12 +136,19 @@ export async function updateMatchWithLogs(
           throw insertPetError;
         }
 
+        const petsWithContext = petUsage.map((pet) => ({
+          ...pet,
+          weeks: weekValue != null ? [weekValue] : [],
+          affixes: affixValue != null ? [affixValue] : [],
+        }));
+
         // Update tournament stats if needed
-        await updateLeaguePetStats(id, petUsage);
+        await updateLeaguePetStats(id, petsWithContext);
       }
     }
 
     revalidatePath(`/admin-panel/leagues/${id}/matches`);
+    revalidatePath('/');
 
     return { success: true };
   } catch (error) {

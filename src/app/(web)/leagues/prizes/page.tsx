@@ -1,6 +1,8 @@
 import { Container, Heading } from '@/components/ui';
 import { PrizesList } from '@/components/cms/prizes/PrizesList';
 
+export const dynamic = 'force-dynamic';
+
 export async function generateMetadata() {
   return {
     title: 'League Prizes',

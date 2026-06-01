@@ -25,6 +25,8 @@ export function UploadForm({
     petUsage: initialData?.petUsage || '',
     tournament_id: initialData?.tournament_id || '',
     region: initialData?.region || '',
+    week: initialData?.week || '',
+    affix: initialData?.affix || '',
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -66,6 +68,10 @@ export function UploadForm({
       return;
     }
 
+    // Coerce week to a number or undefined
+    const weekValue = formData.week !== '' ? formData.week : null;
+    const affixValue = formData.affix || null;
+
     try {
       let result;
 
@@ -81,6 +87,8 @@ export function UploadForm({
           is_forfeit: true,
           logs: '',
           petUsage: '',
+          week: weekValue || null,
+          affix: affixValue || null,
         });
       } else {
         // Normal log upload
@@ -92,6 +100,8 @@ export function UploadForm({
                 owner: formData.owner,
                 date: formData.date,
                 region: formData.region,
+                week: weekValue,
+                affix: affixValue,
               },
               newLogsText: formData.logs,
               newPetUsageText: formData.petUsage,
@@ -105,6 +115,8 @@ export function UploadForm({
               petUsage: formData.petUsage,
               tournament_id: formData.tournament_id,
               region: formData.region,
+              week: weekValue,
+              affix: affixValue,
             });
       }
 
@@ -126,6 +138,8 @@ export function UploadForm({
         petUsage: '',
         tournament_id: '',
         region: '',
+        week: '',
+        affix: '',
       });
 
       toast.success('Success!', {
@@ -235,6 +249,23 @@ export function UploadForm({
             value={formData.region}
             onChange={handleChange}
             required
+          />
+          <Input
+            label='Week Number'
+            id='week'
+            name='week'
+            type='number'
+            value={formData.week}
+            onChange={handleChange}
+          />
+          <Input
+            label='Affix'
+            id='affix'
+            name='affix'
+            type='text'
+            value={formData.affix}
+            onChange={handleChange}
+            placeholder='e.g. Affix 1'
           />
         </div>
         <Textarea

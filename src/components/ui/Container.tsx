@@ -11,7 +11,7 @@ export const Container = ({
   return (
     <div
       className={cn(
-        'max-w-screen-2xl mx-auto my-5 px-5 lg:px-2.5 relative',
+        'max-w-screen-2xl mx-auto my-5 px-5 2xl:px-0 relative',
         className,
       )}
     >

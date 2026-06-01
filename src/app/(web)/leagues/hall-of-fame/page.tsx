@@ -3,6 +3,8 @@ import { HofMobile } from '@/components/cms/hall-of-fame/HallofFameMobile';
 import { Container, Heading } from '@/components/ui';
 import { getHalloffame } from '@/actions/supabase/cms-schema/halloffame/getHalloffame';
 
+export const dynamic = 'force-dynamic';
+
 export async function generateMetadata() {
   return {
     title: 'League Hall of Fame',

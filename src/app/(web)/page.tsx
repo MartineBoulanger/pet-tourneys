@@ -10,6 +10,10 @@ import { SchedulesSection } from '@/components/cms/SchedulesSection';
 import { RecentPagesSection } from '@/components/cms/RecentPagesSection';
 import { HomePageLinks } from '@/components/cms/HomePageLinks';
 import { PartnerGallery } from '@/components/cms/PartnerGallery';
+import { LiveSection } from '@/components/cms/LiveSection';
+import { cn } from '@/utils/cn';
+
+export const dynamic = 'force-dynamic';
 
 export default async function HomePage() {
   const announcement = await getAnnouncement();
@@ -28,24 +32,32 @@ export default async function HomePage() {
 
   return (
     <>
+      <LiveSection />
       {announcement.success &&
       announcement.data &&
       announcement?.data?.isvisible ? (
-        <Container className='my-0 py-10'>
+        <Container className='mt-0 pt-5 lg:pt-10'>
           <AnnouncementsSection announcement={announcement.data} />
         </Container>
       ) : null}
       <RecentPagesSection result={pages || []} guides={guides} />
       {signup.success && signup.data && signup.data.isvisible ? (
         <div className='bg-light-grey'>
-          <Container className='my-0 py-10'>
+          <Container
+            className={cn(
+              'my-0 py-5 lg:py-10',
+              schedule.success && schedule.data && schedule.data.isvisible
+                ? 'pb-0 lg:pb-0'
+                : '',
+            )}
+          >
             <SignupSection signup={signup.data} />
           </Container>
         </div>
       ) : null}
       {schedule.success && schedule.data && schedule.data.isvisible ? (
         <div className='bg-light-grey'>
-          <Container className='my-0 py-10'>
+          <Container className='my-0 py-5 lg:py-10'>
             <SchedulesSection schedule={schedule.data} />
           </Container>
         </div>

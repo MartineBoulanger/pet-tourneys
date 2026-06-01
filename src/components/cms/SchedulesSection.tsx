@@ -29,7 +29,7 @@ export function SchedulesSection({ schedule }: { schedule: Schedule }) {
     }));
 
   return (
-    <div className='bg-background rounded-lg shadow-md p-2.5 lg:p-5'>
+    <div className='bg-background rounded-lg shadow-md p-2.5 lg:px-5'>
       <Heading
         as='h2'
         className='text-2xl lg:text-3xl text-foreground/90 mx-auto'

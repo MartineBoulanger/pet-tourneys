@@ -69,6 +69,8 @@ export default async function AdminLeagueMatchesPage({
           tournament_id: id,
           logs: '',
           petUsage: '',
+          week: match?.week || '',
+          affix: match?.affix || '',
         }}
         match_id={matchId}
         isEditMode
