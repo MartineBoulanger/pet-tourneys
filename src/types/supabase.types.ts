@@ -589,6 +589,35 @@ export type UpdateMode = 'skip' | 'update' | 'overwrite';
 export const VALID_BREEDS = PetsConstants['pets']['Enums']['breeds'];
 export type ValidBreed = (typeof VALID_BREEDS)[number];
 
+export type TypeMatchup = {
+  strong: PetType[];
+  weak: PetType[];
+};
+
+export type AbilityDetails = {
+  description: string | null;
+  effect: string | null;
+  hitChance: number | null;
+};
+
+export type BlizzardPetAbility = {
+  id: number;
+  name: string;
+  battle_pet_type: { id: number; type: string; name: string };
+  cooldown: number;
+  rounds: number;
+  media: { key: { href: string }; id: number };
+};
+
+export type BlizzardPetAbilityMedia = {
+  key: string;
+  value: string;
+  file_data_id: number;
+};
+
+export type Ability = PetsDB['pets']['Tables']['abilities']['Row'];
+export type Family = PetsDB['pets']['Tables']['families']['Row'];
+
 // =================================================
 // Local types for the cms schema
 // =================================================
