@@ -1,4 +1,5 @@
 export * from './AbilitiesCard';
+export * from './AbilityTooltip';
 export * from './AutoCarousel';
 export * from './Banner';
 export * from './Carousel';

@@ -1,64 +1,70 @@
-import { Pet, PET_TYPE_COLORS } from '@/types/supabase.types';
+'use client';
+
+import { Pet, PET_TYPE_COLORS, FullAbility } from '@/types/supabase.types';
 import { Heading, Paragraph } from '@/components/ui';
+import { useAbilityTooltip } from '@/context/AbilityTooltipContext';
 
 export function PetAbilities({
   pet,
   petTypeColor,
+  abilities,
 }: {
   pet: Pet;
   petTypeColor: PET_TYPE_COLORS;
+  abilities: Record<string, FullAbility>;
 }) {
+  const { showTooltip, hideTooltip, updatePosition } = useAbilityTooltip();
+
+  const ABILITY_LEVELS: Record<string, string> = {
+    ability_1: 'Lvl 1',
+    ability_2: 'Lvl 2',
+    ability_3: 'Lvl 4',
+    ability_4: 'Lvl 10',
+    ability_5: 'Lvl 15',
+    ability_6: 'Lvl 20',
+  };
+
+  const ABILITY_ORDER = [
+    'ability_1',
+    'ability_4',
+    'ability_2',
+    'ability_5',
+    'ability_3',
+    'ability_6',
+  ];
+
+  const hasAnyAbility = ABILITY_ORDER.some((key) => pet[key as keyof Pet]);
+  if (!hasAnyAbility) return null;
+
   return (
-    (pet.ability_1 ||
-      pet.ability_2 ||
-      pet.ability_3 ||
-      pet.ability_4 ||
-      pet.ability_5 ||
-      pet.ability_6) && (
-      <div>
-        <div className='rounded-full w-full max-w-[720px] h-[2px] my-5 bg-medium-grey' />
-        <Heading as='h2' className='mb-5' style={{ color: petTypeColor }}>
-          {'Abilities'}
-        </Heading>
-        <div className='grid grid-cols-2 gap-5'>
-          {pet.ability_1 && (
-            <Paragraph>
-              <span className='text-foreground/60'>{'Lvl 1 - '}</span>
-              {pet.ability_1}
-            </Paragraph>
-          )}
-          {pet.ability_2 && (
-            <Paragraph>
-              <span className='text-foreground/60'>{'Lvl 2 - '}</span>
-              {pet.ability_2}
-            </Paragraph>
-          )}
-          {pet.ability_3 && (
-            <Paragraph>
-              <span className='text-foreground/60'>{'Lvl 4 - '}</span>
-              {pet.ability_3}
-            </Paragraph>
-          )}
-          {pet.ability_4 && (
-            <Paragraph>
-              <span className='text-foreground/60'>{'Lvl 10 - '}</span>
-              {pet.ability_4}
-            </Paragraph>
-          )}
-          {pet.ability_5 && (
-            <Paragraph>
-              <span className='text-foreground/60'>{'Lvl 15 - '}</span>
-              {pet.ability_5}
-            </Paragraph>
-          )}
-          {pet.ability_6 && (
-            <Paragraph>
-              <span className='text-foreground/60'>{'Lvl 20 - '}</span>
-              {pet.ability_6}
-            </Paragraph>
-          )}
-        </div>
+    <>
+      <div className='rounded-full w-full max-w-[600px] h-[2px] my-5 bg-medium-grey' />
+      <Heading as='h2' className='mb-5' style={{ color: petTypeColor }}>
+        {'Abilities'}
+      </Heading>
+      <div className='grid grid-cols-2 gap-2.5 max-w-[650px]'>
+        {ABILITY_ORDER.map((key) => {
+          const name = pet[key as keyof Pet] as string | null;
+          const ability = abilities[key];
+          if (!name) return null;
+          return (
+            <div
+              key={key}
+              className='cursor-pointer'
+              onMouseEnter={(e) => showTooltip(ability, e)}
+              onMouseLeave={hideTooltip}
+              onMouseMove={updatePosition}
+            >
+              <Paragraph>
+                <span className='text-foreground/60'>
+                  {ABILITY_LEVELS[key]} -{' '}
+                </span>
+                {name}
+              </Paragraph>
+            </div>
+          );
+        })}
       </div>
-    )
+    </>
   );
 }

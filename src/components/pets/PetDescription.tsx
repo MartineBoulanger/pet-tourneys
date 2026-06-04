@@ -10,7 +10,7 @@ export function PetDescription({
 }) {
   return (
     pet.description && (
-      <div className='md:mt-10 max-w-[720px]'>
+      <div className='md:mt-10 max-w-[600px]'>
         <Heading as='h2' className='mb-2.5' style={{ color: petTypeColor }}>
           {'Description'}
         </Heading>

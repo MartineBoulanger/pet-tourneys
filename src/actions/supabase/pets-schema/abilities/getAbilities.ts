@@ -1,6 +1,7 @@
 'use server';
 
 import { abilitiesTable } from '@/actions/supabase/actions';
+// import { getPetType } from '../families/getFamilies';
 import { Ability } from '@/types/supabase.types';
 
 // =================================================
@@ -9,9 +10,9 @@ import { Ability } from '@/types/supabase.types';
 export async function getAbilities() {
   try {
     const abs = await abilitiesTable();
-    const { data, error } = await abs.select('*');
+    const { data, error } = await abs.select(`*, families(*)`);
     if (error) return { success: false, error: error.message };
-    return { success: true, data: data as Ability[] };
+    return { success: true, data };
   } catch (error) {
     console.error('Get Abilities Error:', error);
     return { success: false, error: (error as Error).message };
@@ -21,12 +22,14 @@ export async function getAbilities() {
 // =================================================
 // Get ability by name
 // =================================================
-export async function getAbilityByName(name: string) {
+export async function getAbilitiesByNames(names: string[]) {
   try {
     const abs = await abilitiesTable();
-    const { data, error } = await abs.select('*').eq('name', name).single();
+    const { data, error } = await abs
+      .select(`*, families(*)`)
+      .in('name', names);
     if (error) return { success: false, error: error.message };
-    return { success: true, data: data as Ability };
+    return { success: true, data };
   } catch (error) {
     console.error('Get Pet Ability Error:', error);
     return { success: false, error: (error as Error).message };

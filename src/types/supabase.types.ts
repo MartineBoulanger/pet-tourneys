@@ -618,6 +618,10 @@ export type BlizzardPetAbilityMedia = {
 export type Ability = PetsDB['pets']['Tables']['abilities']['Row'];
 export type Family = PetsDB['pets']['Tables']['families']['Row'];
 
+export type FullAbility = Ability & {
+  families: Family;
+};
+
 // =================================================
 // Local types for the cms schema
 // =================================================
