@@ -1,19 +1,16 @@
 'use client';
 
-import { Pet, PET_TYPE_COLORS, FullAbility } from '@/types/supabase.types';
+import Image from 'next/image';
+import { Pet, PetAbilitiesProps } from '@/types/supabase.types';
 import { Heading, Paragraph } from '@/components/ui';
-import { useAbilityTooltip } from '@/context/AbilityTooltipContext';
+import { useTooltip } from '@/context/TooltipContext';
 
 export function PetAbilities({
   pet,
   petTypeColor,
   abilities,
-}: {
-  pet: Pet;
-  petTypeColor: PET_TYPE_COLORS;
-  abilities: Record<string, FullAbility>;
-}) {
-  const { showTooltip, hideTooltip, updatePosition } = useAbilityTooltip();
+}: PetAbilitiesProps) {
+  const { showAbilityTooltip, hideTooltip, updatePosition } = useTooltip();
 
   const ABILITY_LEVELS: Record<string, string> = {
     ability_1: 'Lvl 1',
@@ -51,15 +48,23 @@ export function PetAbilities({
             <div
               key={key}
               className='cursor-pointer'
-              onMouseEnter={(e) => showTooltip(ability, e)}
+              onMouseEnter={(e) => showAbilityTooltip(ability, e)}
               onMouseLeave={hideTooltip}
               onMouseMove={updatePosition}
             >
-              <Paragraph>
+              <Paragraph className='flex gap-1.5'>
                 <span className='text-foreground/60'>
-                  {ABILITY_LEVELS[key]} -{' '}
+                  {`${ABILITY_LEVELS[key]} -`}
                 </span>
-                {name}
+                <span className='flex gap-1.5'>
+                  <Image
+                    src={ability.icon ?? ''}
+                    alt={name}
+                    width={18}
+                    height={18}
+                  />
+                  {name}
+                </span>
               </Paragraph>
             </div>
           );

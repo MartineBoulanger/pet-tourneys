@@ -1,25 +1,42 @@
-import { Pet, PET_TYPE_COLORS } from '@/types/supabase.types';
+'use client';
+
+import Image from 'next/image';
+import { PET_TYPE_IMAGES, PetInformationProps } from '@/types/supabase.types';
 import { Heading, Paragraph } from '@/components/ui';
+import { useTooltip } from '@/context/TooltipContext';
 
 export function PetInformation({
   pet,
   petTypeColor,
-}: {
-  pet: Pet;
-  petTypeColor: PET_TYPE_COLORS;
-}) {
+  family,
+}: PetInformationProps) {
+  const { showFamilyTooltip, hideTooltip, updatePosition } = useTooltip();
+
   return (
     <div>
       <Heading as='h2' className='mb-2.5' style={{ color: petTypeColor }}>
         {'Information'}
       </Heading>
-      <div
-        className='grid grid-cols-3 gap-5
-                    '
-      >
+      <div className='grid grid-cols-3 gap-5'>
         <div>
           <Paragraph className='text-sm text-foreground/60'>{'Type'}</Paragraph>
-          <Paragraph className='text-md font-semibold'>{pet.type}</Paragraph>
+          <div
+            className='cursor-pointer'
+            onMouseEnter={(e) => showFamilyTooltip(family, e)}
+            onMouseLeave={hideTooltip}
+            onMouseMove={updatePosition}
+          >
+            <Paragraph className='flex items-center gap-2 text-md font-semibold'>
+              {pet.type}
+              <Image
+                src={PET_TYPE_IMAGES[pet.type]}
+                alt={pet.type}
+                width={20}
+                height={20}
+                className='border border-foreground/80 p-0.5 rounded-full bg-background'
+              />
+            </Paragraph>
+          </div>
         </div>
 
         <div>

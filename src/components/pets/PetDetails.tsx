@@ -1,6 +1,11 @@
 import { Alliance } from '@/assets/Alliance';
 import { Horde } from '@/assets/Horde';
-import { Pet, PET_TYPE_COLORS, FullAbility } from '@/types/supabase.types';
+import {
+  Pet,
+  PET_TYPE_COLORS,
+  FullAbility,
+  Family,
+} from '@/types/supabase.types';
 import { PetImage, PetTypeImage } from './PetMedia';
 import { PetInformation } from './PetInformation';
 import { PetBaseStats } from './PetBaseStats';
@@ -8,6 +13,7 @@ import { PetBreeds } from './PetBreeds';
 import { PetAbilities } from './PetAbilities';
 import { PetDescription } from './PetDescription';
 import { getAbilitiesByNames } from '@/actions/supabase/pets-schema/abilities/getAbilities';
+import { getPetType } from '@/actions/supabase/pets-schema/families/getFamilies';
 
 export async function PetDetails({ pet }: { pet: Pet }) {
   const petTypeColor =
@@ -22,9 +28,13 @@ export async function PetDetails({ pet }: { pet: Pet }) {
     pet.ability_6,
   ].filter((n): n is string => !!n);
 
-  const { success, data, error } = await getAbilitiesByNames(abilityNames);
-  if (!success && !data) return null;
-  if (error) throw new Error(error);
+  const [abilitiesResult, familyResult] = await Promise.all([
+    getAbilitiesByNames(abilityNames),
+    getPetType(pet.type),
+  ]);
+
+  const { success, data, error } = abilitiesResult;
+  if (!success && error) throw new Error(error);
 
   const abilitiesByName = Object.fromEntries(
     (data ?? []).map((a) => [a.name, a]),
@@ -57,6 +67,10 @@ export async function PetDetails({ pet }: { pet: Pet }) {
       }),
   };
 
+  const { success: typeSucc, data: familyData, error: typeErr } = familyResult;
+  if (!typeSucc && typeErr) throw new Error(typeErr);
+  const family = familyData as Family;
+
   return (
     <div className='bg-background p-2.5 lg:p-5 rounded-lg relative'>
       <div className='grid md:grid-cols-2 gap-2.5 lg:gap-5'>
@@ -64,7 +78,11 @@ export async function PetDetails({ pet }: { pet: Pet }) {
         <PetImage pet={pet} />
         {/* Details */}
         <div className='space-y-2.5 lg:space-y-5 mt-2.5'>
-          <PetInformation pet={pet} petTypeColor={petTypeColor} />
+          <PetInformation
+            pet={pet}
+            petTypeColor={petTypeColor}
+            family={family}
+          />
           <div className='rounded-full w-full h-[2px] my-5 bg-medium-grey' />
           <PetBaseStats pet={pet} petTypeColor={petTypeColor} />
           <div className='rounded-full w-full h-[2px] my-5 bg-medium-grey' />

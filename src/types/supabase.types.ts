@@ -795,6 +795,50 @@ export type PetUsageRow = {
   affix: string | null;
 };
 
+type PetDetails = {
+  pet: Pet;
+  petTypeColor: PET_TYPE_COLORS;
+};
+
+export type PetAbilitiesProps = PetDetails & {
+  abilities: Record<string, FullAbility>;
+};
+
+export type PetInformationProps = PetDetails & {
+  family: Family;
+};
+
+type Tooltip = {
+  x: number;
+  y: number;
+};
+
+export type AbilityTooltipProps = Tooltip & { ability: FullAbility };
+export type PetTypeTooltipProps = Tooltip & { type: Family };
+
+type AbilityTooltipState = {
+  kind: 'ability';
+  data: FullAbility;
+  x: number;
+  y: number;
+};
+
+type FamilyTooltipState = {
+  kind: 'family';
+  data: Family;
+  x: number;
+  y: number;
+};
+
+export type TooltipState = AbilityTooltipState | FamilyTooltipState | null;
+
+export type TooltipContextValue = {
+  showAbilityTooltip: (ability: FullAbility, e: React.MouseEvent) => void;
+  showFamilyTooltip: (family: Family, e: React.MouseEvent) => void;
+  hideTooltip: () => void;
+  updatePosition: (e: React.MouseEvent) => void;
+};
+
 // =================================================
 // Local types for the pets page
 // =================================================

@@ -9,7 +9,7 @@ import { Header } from '@/components/header/Header';
 import { Footer } from '@/components/footer/Footer';
 import { BottomNavigation } from '@/components/navigation/BottomNavigation';
 import { CookieBannerWrapper } from '@/components/cookie-banner/CookieBannerWrapper';
-import { AbilityTooltipProvider } from '@/context/AbilityTooltipContext';
+import { TooltipProvider } from '@/context/TooltipContext';
 
 export const metadata: Metadata = {
   title: {
@@ -48,9 +48,9 @@ export default function RootLayout({
         className={`${roboto.variable} $${brutals.variable} ${brutalsTilted.variable} antialiased font-sans`}
       >
         <Header />
-        <AbilityTooltipProvider>
+        <TooltipProvider>
           <main className='min-h-[85vh] relative'>{children}</main>
-        </AbilityTooltipProvider>
+        </TooltipProvider>
         <Footer />
         <BottomNavigation />
         <Toaster
