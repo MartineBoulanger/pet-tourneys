@@ -18,7 +18,7 @@ export async function uploadLog(props: UploadProps) {
   const pu = await apiTable('pet_usage', tournament_id);
 
   try {
-    // 🟡 FORFEIT LOGIC
+    // FORFEIT LOGIC
     if (is_forfeit) {
       const winner = matchData.owner;
       const match = {
@@ -112,15 +112,24 @@ export async function uploadLog(props: UploadProps) {
       match_id: match.id,
       pet_data: pet.pet_data,
       total_played: pet.total_played,
+      week: match.week,
+      affix: match.affix,
     }));
 
     const { error: petUsageError } = await pu.insert(matchPetUsages);
 
     if (petUsageError) throw petUsageError;
 
-    await updateLeaguePetStats(tournament_id, parsedPets);
+    const petsWithContext = parsedPets.map((pet) => ({
+      ...pet,
+      weeks: match.week !== null ? [match.week] : [],
+      affixes: match.affix !== null ? [match.affix] : [],
+    }));
+
+    await updateLeaguePetStats(tournament_id, petsWithContext);
 
     revalidatePath(`/admin-panel/leagues/${tournament_id}/matches`);
+    revalidatePath('/');
 
     return {
       success: true,

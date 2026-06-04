@@ -4,6 +4,8 @@ import { Container, Heading, Paragraph } from '@/components/ui';
 import { PagesList } from '@/components/cms/pages/PagesList';
 import { getPages } from '@/actions/supabase/cms-schema/pages/getPages';
 
+export const dynamic = 'force-dynamic';
+
 export async function generateMetadata() {
   return {
     title: 'Guides',

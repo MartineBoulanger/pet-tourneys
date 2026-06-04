@@ -166,6 +166,8 @@ export type Match = {
   player1: string;
   player2: string;
   region: string;
+  week: string | null;
+  affix: string | null;
 };
 
 export type UploadFormProps = {
@@ -179,6 +181,8 @@ export type UploadFormProps = {
     petUsage: string;
     tournament_id: string;
     region: string;
+    week: string;
+    affix: string;
   };
   match_id?: string;
   isEditMode?: boolean;
@@ -413,6 +417,11 @@ export type PetUsage = LeaguePetData & {
   match_id: string;
 };
 
+export type LeaguePetDataWithContext = LeaguePetData & {
+  weeks: number[];
+  affixes: string[];
+};
+
 export type BreedStats = {
   breed: string;
   stats: string;
@@ -453,6 +462,8 @@ export type UploadProps = {
   tournament_id: string;
   region: string;
   is_forfeit?: boolean;
+  week?: string | null;
+  affix?: string | null;
 };
 
 export type StatDistribution = {
@@ -748,6 +759,40 @@ export type ChartData = {
   petUsageData: Array<PetUsageChartData>;
   petTypeData: Array<ChartDataItem>;
   petBreedData: Array<ChartDataItem>;
+};
+
+export type PlayerStanding = {
+  player: string;
+  wins: number;
+  losses: number;
+  draws: number;
+  points: number;
+};
+
+export type TopPet = {
+  name: string;
+  image: string | null;
+  total_played: number;
+};
+
+export type LiveSectionData = {
+  tournamentId: string;
+  tournamentName: string;
+  standingsByRegion: Record<string, PlayerStanding[]>;
+  regions: string[];
+  topPetOverall: TopPet | null;
+  topPetByAffix: Record<string, TopPet>;
+  topPetByWeek: Record<number, TopPet>;
+  availableAffixes: string[];
+  availableWeeks: number[];
+};
+
+type PetRowData = { name?: string } & Record<string, unknown>;
+export type PetUsageRow = {
+  pet_data: PetRowData | null;
+  total_played: number;
+  week: number | null;
+  affix: string | null;
 };
 
 // =================================================

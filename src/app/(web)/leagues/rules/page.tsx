@@ -2,6 +2,8 @@ import { Container, Heading } from '@/components/ui';
 import { RulesList } from '@/components/cms/rules/RulesList';
 import { DownloadRulesButton } from '@/components/layout/DownloadRulesButton';
 
+export const dynamic = 'force-dynamic';
+
 export async function generateMetadata() {
   return {
     title: 'League Rules',

@@ -13,6 +13,8 @@ export * from './ImageModal';
 export * from './Modal';
 export * from './OverviewCard';
 export * from './Pagination';
+export * from './PetBadge';
+export * from './RegionCard';
 export * from './DeletePopUp';
 export * from './RichTextEditor';
 export * from './ScrollToTop';

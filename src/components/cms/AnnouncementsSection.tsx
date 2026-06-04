@@ -38,11 +38,6 @@ export function AnnouncementsSection({
           <Image
             src={announcement.image.secure_url}
             alt={announcement.title || 'Announcement image'}
-            style={{
-              maxHeight: 'calc(90vh - 350px)',
-              width: 'auto',
-              height: 'auto',
-            }}
             className='w-full h-full mx-auto object-cover rounded-lg overflow-hidden'
             width={announcement.image.width}
             height={announcement.image.height}

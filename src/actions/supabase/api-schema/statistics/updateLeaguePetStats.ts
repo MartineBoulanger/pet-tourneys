@@ -1,12 +1,15 @@
 'use server';
 
 import { apiTable } from '@/actions/supabase/actions';
-import { LeaguePetData } from '@/types/supabase.types';
+import {
+  LeaguePetData,
+  LeaguePetDataWithContext,
+} from '@/types/supabase.types';
 import { mergePetData } from '@/utils/supabase/mergePetData';
 
 export async function updateLeaguePetStats(
   id: string,
-  newPets: LeaguePetData[],
+  newPets: LeaguePetDataWithContext[],
 ) {
   const lps = await apiTable('tournament_pet_stats', id);
 
@@ -29,6 +32,18 @@ export async function updateLeaguePetStats(
           newPet.pet_data,
         ),
         total_played: existingPet.total_played + newPet.total_played,
+        weeks: [
+          ...new Set([
+            ...((existingPet.weeks as number[] | null) ?? []),
+            ...(newPet.weeks ?? []),
+          ]),
+        ],
+        affixes: [
+          ...new Set([
+            ...((existingPet.affixes as string[] | null) ?? []),
+            ...(newPet.affixes ?? []),
+          ]),
+        ],
       };
 
       const res = lps
@@ -45,6 +60,8 @@ export async function updateLeaguePetStats(
           tournament_id: id,
           pet_data: newPet.pet_data,
           total_played: newPet.total_played,
+          weeks: newPet.weeks,
+          affixes: newPet.affixes,
         }),
       );
     }

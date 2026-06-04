@@ -5,12 +5,12 @@ import { Container, Heading } from '@/components/ui';
 
 export const HomePageLinks = () => {
   return (
-    <Container className='flex flex-wrap items-center justify-center gap-2.5 lg:gap-5 order-1 lg:order-0 lg:my-10'>
+    <Container className='grid grid-cols-1 md:grid-cols-3 gap-2.5 lg:gap-5 order-1 lg:order-0 lg:my-10'>
       {homepageLinks.map((l) => (
         <Link
           key={l.id}
           href={l.url}
-          className='p-2.5 bg-light-grey shadow-md rounded-lg flex self-stretch w-full min-[850]:w-[30%]'
+          className='p-2.5 bg-light-grey shadow-md rounded-lg'
           title={l.linkText}
           aria-label={l.linkText}
         >
