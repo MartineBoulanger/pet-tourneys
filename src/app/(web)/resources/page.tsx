@@ -1,6 +1,8 @@
 import { Container, Heading, Paragraph } from '@/components/ui';
 import { ResourcesList } from '@/components/cms/resources/ResourcesList';
 
+export const dynamic = 'force-dynamic';
+
 export async function generateMetadata() {
   return {
     title: 'Resources',

@@ -10,7 +10,7 @@ export function RecentPagesSection({
   guides,
 }: RecentPagesSectionProps) {
   return (
-    <Container className='grid gap-2.5 lg:gap-5 lg:grid-cols-3 py-2.5 lg:py-5'>
+    <Container className='grid gap-2.5 lg:gap-5 lg:grid-cols-3 py-0 lg:py-5'>
       {result.map(({ type, data }) => (
         <div
           key={type}
