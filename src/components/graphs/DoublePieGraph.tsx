@@ -1,12 +1,20 @@
 'use client';
 
-import { Cell, PieChart, Pie, Tooltip, PieLabelRenderProps } from 'recharts';
+import {
+  PieSectorShapeProps,
+  Sector,
+  PieChart,
+  Pie,
+  Tooltip,
+  PieLabelRenderProps,
+} from 'recharts';
 import { capitalizeWord } from '@/utils/capitalizeWord';
 import { useWindowSize } from '@/hooks/useWindowSize';
 import { GraphWrapper } from './GraphWrapper';
 import { DoublePieGraphProps } from '@/types/graphs.types';
 import { CustomTooltip } from './CustomTooltip';
 import { calculatePercentage } from '@/utils/calculatePercentage';
+import { Paragraph } from '@/components/ui';
 
 export const DoublePieGraph = ({
   data,
@@ -21,9 +29,9 @@ export const DoublePieGraph = ({
 
   if (!data || !data2 || data.length === 0 || data2.length === 0) {
     return (
-      <p className='text-center bg-background rounded-lg p-2.5 lg:p-5'>
+      <Paragraph className='text-center bg-background rounded-lg p-2.5 lg:p-5'>
         {'No double pie chart data available.'}
-      </p>
+      </Paragraph>
     );
   }
 
@@ -58,7 +66,7 @@ export const DoublePieGraph = ({
         fontWeight='bold'
       >
         {showWholeLabel
-          ? `${capitalizeWord((name ?? '').slice(0, 2))}: ${value}`
+          ? `${name?.includes('/') ? name : capitalizeWord(name ?? '').charAt(0)}: ${value}`
           : value}
       </text>
     );
@@ -95,10 +103,32 @@ export const DoublePieGraph = ({
         fontSize={isMobile ? 10 : 12}
         fontWeight='bold'
       >
-        {showWholeLabel ? `${capitalizeWord(name ?? '')}: ${value}` : value}
+        {showWholeLabel
+          ? `${name?.includes('/') ? name : capitalizeWord(name ?? '')}: ${value}`
+          : value}
       </text>
     );
   };
+
+  const MyCustomInnerPie = (props: PieSectorShapeProps) => (
+    <Sector
+      {...props}
+      fill={
+        fillColors ? fillColors[props.name as keyof typeof fillColors] : color
+      }
+    />
+  );
+
+  const MyCustomOuterPie = (props: PieSectorShapeProps) => (
+    <Sector
+      {...props}
+      fill={
+        fillColors2
+          ? fillColors2[props.name as keyof typeof fillColors2]
+          : color
+      }
+    />
+  );
 
   return (
     <GraphWrapper className='p-2.5 lg:p-5 h-[425px] lg:h-[450px]'>
@@ -124,18 +154,8 @@ export const DoublePieGraph = ({
           dataKey='value'
           label={renderCustomizedLabelInnerPie}
           labelLine={false}
-        >
-          {data.map((entry, index) => (
-            <Cell
-              key={`${entry.name}-cell-${index}`}
-              fill={
-                fillColors
-                  ? fillColors[entry.name as keyof typeof fillColors]
-                  : color
-              }
-            />
-          ))}
-        </Pie>
+          shape={MyCustomInnerPie}
+        ></Pie>
 
         <Pie
           data={data2}
@@ -144,18 +164,8 @@ export const DoublePieGraph = ({
           dataKey='value'
           label={renderCustomizedLabelOuterPie}
           paddingAngle={3}
-        >
-          {data2.map((entry, index) => (
-            <Cell
-              key={`${entry.name}-cell-${index}`}
-              fill={
-                fillColors2
-                  ? fillColors2[entry.name as keyof typeof fillColors2]
-                  : color
-              }
-            />
-          ))}
-        </Pie>
+          shape={MyCustomOuterPie}
+        ></Pie>
       </PieChart>
     </GraphWrapper>
   );

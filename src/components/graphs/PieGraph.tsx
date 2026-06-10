@@ -1,7 +1,8 @@
 'use client';
 
 import {
-  Cell,
+  PieSectorShapeProps,
+  Sector,
   PieChart,
   Pie,
   Tooltip,
@@ -13,6 +14,7 @@ import { capitalizeWord } from '@/utils/capitalizeWord';
 import { GraphWrapper } from './GraphWrapper';
 import { GraphsProps, DataType } from '@/types/graphs.types';
 import { CustomTooltip } from './CustomTooltip';
+import { Paragraph } from '@/components/ui';
 
 export const PieGraph = ({
   data,
@@ -21,14 +23,15 @@ export const PieGraph = ({
   fillColors,
   color = '#303030',
   tooltip,
+  capitalize = false,
 }: GraphsProps<DataType>) => {
   const { isMobile } = useWindowSize();
 
   if (!data || data.length === 0) {
     return (
-      <p className='text-center bg-background rounded-lg p-2.5 lg:p-5'>
+      <Paragraph className='text-center bg-background rounded-lg p-2.5 lg:p-5'>
         {'No pie chart data available.'}
-      </p>
+      </Paragraph>
     );
   }
 
@@ -55,17 +58,32 @@ export const PieGraph = ({
         fontSize={isMobile ? 12 : 14}
         fontWeight='bold'
       >
-        {showWholeLabel ? `${capitalizeWord(name || '')}: ${value}` : value}
+        {showWholeLabel
+          ? `${capitalize ? capitalizeWord(name ?? '') : name}: ${value}`
+          : value}
       </text>
     );
   };
+
+  const MyCustomPie = (props: PieSectorShapeProps) => (
+    <Sector
+      {...props}
+      fill={
+        fillColors ? fillColors[props.name as keyof typeof fillColors] : color
+      }
+    />
+  );
 
   return (
     <GraphWrapper className='p-2.5 lg:p-5 h-[425px] lg:h-[450px]'>
       <PieChart>
         <Tooltip
           content={(props) => (
-            <CustomTooltip {...props} prefix={tooltip} capitalize />
+            <CustomTooltip
+              {...props}
+              prefix={tooltip}
+              capitalize={capitalize}
+            />
           )}
         />
 
@@ -77,18 +95,8 @@ export const PieGraph = ({
           label={renderCustomizedLabel}
           labelLine={false}
           stroke='#f1f1f1'
-        >
-          {data.map((entry, index) => (
-            <Cell
-              key={`${entry.name}-cell-${index}`}
-              fill={
-                fillColors
-                  ? fillColors[entry.name as keyof typeof fillColors]
-                  : color
-              }
-            />
-          ))}
-        </Pie>
+          shape={MyCustomPie}
+        ></Pie>
 
         {showLegend ? <Legend /> : null}
       </PieChart>

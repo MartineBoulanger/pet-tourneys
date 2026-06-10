@@ -31,6 +31,7 @@ export type GraphsProps<T> = {
   showLegend?: boolean;
   color?: string;
   showWholeLabel?: boolean;
+  capitalize?: boolean;
 };
 
 // =================================================

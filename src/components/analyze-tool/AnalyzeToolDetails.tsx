@@ -179,6 +179,7 @@ export const AnalyzeToolDetails = ({
                     data={battleResults.filter((m) => m.value !== 0)}
                     tooltip={'Result Count: '}
                     fillColors={RESULTS_COLORS}
+                    capitalize
                   />
                 )}
               </div>
@@ -329,6 +330,7 @@ export const AnalyzeToolDetails = ({
                         data={swaps}
                         tooltip={'Swaps done: '}
                         fillColors={SWAPS_COLORS}
+                        capitalize
                       />
                     )}
                   </div>
@@ -407,12 +409,12 @@ export const AnalyzeToolDetails = ({
                       );
                     }
                     return (
-                      <p
+                      <Paragraph
                         key={`${category}-${index}`}
                         className='text-center bg-background rounded-lg py-5'
                       >
                         {'No abilities data available.'}
-                      </p>
+                      </Paragraph>
                     );
                   })}
               </div>
