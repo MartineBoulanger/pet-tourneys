@@ -1,11 +1,6 @@
 import { Alliance } from '@/assets/Alliance';
 import { Horde } from '@/assets/Horde';
-import {
-  Pet,
-  PET_TYPE_COLORS,
-  FullAbility,
-  Family,
-} from '@/types/supabase.types';
+import { Pet, PET_TYPE_COLORS, Family } from '@/types/supabase.types';
 import { PetImage, PetTypeImage } from './PetMedia';
 import { PetInformation } from './PetInformation';
 import { PetBaseStats } from './PetBaseStats';
@@ -15,6 +10,7 @@ import { PetDescription } from './PetDescription';
 import { getAbilitiesByNames } from '@/actions/supabase/pets-schema/abilities/getAbilities';
 import { getPetType } from '@/actions/supabase/pets-schema/families/getFamilies';
 import Link from 'next/link';
+import { buildAbilitySlotMap } from '@/utils/blizzard/buildAbilitySlotMap';
 
 export async function PetDetails({ pet }: { pet: Pet }) {
   const petTypeColor =
@@ -41,32 +37,7 @@ export async function PetDetails({ pet }: { pet: Pet }) {
     (data ?? []).map((a) => [a.name, a]),
   );
 
-  const abilities: Record<string, FullAbility> = {
-    ...(pet.ability_1 &&
-      abilitiesByName[pet.ability_1] && {
-        ability_1: abilitiesByName[pet.ability_1],
-      }),
-    ...(pet.ability_2 &&
-      abilitiesByName[pet.ability_2] && {
-        ability_2: abilitiesByName[pet.ability_2],
-      }),
-    ...(pet.ability_3 &&
-      abilitiesByName[pet.ability_3] && {
-        ability_3: abilitiesByName[pet.ability_3],
-      }),
-    ...(pet.ability_4 &&
-      abilitiesByName[pet.ability_4] && {
-        ability_4: abilitiesByName[pet.ability_4],
-      }),
-    ...(pet.ability_5 &&
-      abilitiesByName[pet.ability_5] && {
-        ability_5: abilitiesByName[pet.ability_5],
-      }),
-    ...(pet.ability_6 &&
-      abilitiesByName[pet.ability_6] && {
-        ability_6: abilitiesByName[pet.ability_6],
-      }),
-  };
+  const abilities = buildAbilitySlotMap(pet, abilitiesByName);
 
   const { success: typeSucc, data: familyData, error: typeErr } = familyResult;
   if (!typeSucc && typeErr) throw new Error(typeErr);
@@ -105,6 +76,7 @@ export async function PetDetails({ pet }: { pet: Pet }) {
           pet={pet}
           petTypeColor={petTypeColor}
           abilities={abilities}
+          showHeading
         />
         {/* Pet Type Image on background */}
         <PetTypeImage pet={pet} />

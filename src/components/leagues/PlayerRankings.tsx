@@ -15,6 +15,8 @@ import { Tab } from '@/components/layout/Tab';
 import { cn } from '@/utils/cn';
 import { MedalIcon } from '@/assets/MedalIcon';
 import { PlayerPetImage, PlayerPetCardImage } from '@/components/pets/PetMedia';
+import { PetAbilities } from '@/components/pets/PetAbilities';
+import { buildAbilitySlotMap } from '@/utils/blizzard/buildAbilitySlotMap';
 
 const PLAYERS_PER_PAGE = 10;
 
@@ -22,6 +24,7 @@ export const PlayerRankings = ({
   records,
   regions,
   id,
+  abilitiesByName,
 }: PlayerRankingsProps) => {
   const [expandedPlayers, setExpandedPlayers] = useState<
     Record<string, boolean>
@@ -473,7 +476,7 @@ export const PlayerRankings = ({
                                                 </div>
                                                 <Heading
                                                   as='h3'
-                                                  className='text-xl font-bold mt-2.5 lg:mt-5'
+                                                  className='text-xl font-bold my-2.5 lg:mt-5'
                                                   style={{
                                                     color:
                                                       PET_TYPE_COLORS[
@@ -483,44 +486,21 @@ export const PlayerRankings = ({
                                                 >
                                                   {'Abilities'}
                                                 </Heading>
-                                                <div className='space-y-1 mt-2.5'>
-                                                  <Paragraph className='font-light'>
-                                                    <span className='font-bold'>
-                                                      {'Lvl 1: '}
-                                                    </span>
-                                                    {petDetails?.ability_1}
-                                                  </Paragraph>
-                                                  <Paragraph className='font-light'>
-                                                    <span className='font-bold'>
-                                                      {'Lvl 2: '}
-                                                    </span>
-                                                    {petDetails?.ability_2}
-                                                  </Paragraph>
-                                                  <Paragraph className='font-light'>
-                                                    <span className='font-bold'>
-                                                      {'Lvl 4: '}
-                                                    </span>
-                                                    {petDetails?.ability_3}
-                                                  </Paragraph>
-                                                  <Paragraph className='font-light'>
-                                                    <span className='font-bold'>
-                                                      {'Lvl 10: '}
-                                                    </span>
-                                                    {petDetails?.ability_4}
-                                                  </Paragraph>
-                                                  <Paragraph className='font-light'>
-                                                    <span className='font-bold'>
-                                                      {'Lvl 15: '}
-                                                    </span>
-                                                    {petDetails?.ability_5}
-                                                  </Paragraph>
-                                                  <Paragraph className='font-light'>
-                                                    <span className='font-bold'>
-                                                      {'Lvl 20: '}
-                                                    </span>
-                                                    {petDetails?.ability_6}
-                                                  </Paragraph>
-                                                </div>
+                                                {petDetails && (
+                                                  <PetAbilities
+                                                    pet={petDetails}
+                                                    petTypeColor={
+                                                      PET_TYPE_COLORS[
+                                                        petDetails.type as keyof typeof PET_TYPE_COLORS
+                                                      ]
+                                                    }
+                                                    abilities={buildAbilitySlotMap(
+                                                      petDetails,
+                                                      abilitiesByName,
+                                                    )}
+                                                    isOnlyMobileView
+                                                  />
+                                                )}
                                               </div>
                                             </div>
                                             {petDetails?.description && (

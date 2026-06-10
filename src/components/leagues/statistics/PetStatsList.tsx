@@ -15,9 +15,12 @@ import { usePetsStatsFilters } from '@/hooks/usePetsStatsFilters';
 import { PetStatsListProps, PET_TYPE_IMAGES } from '@/types/supabase.types';
 import { PetControls } from './PetControls';
 import { PetIcon, PetImage } from '@/components/pets/PetMedia';
+import { PetAbilities } from '@/components/pets/PetAbilities';
+import { buildAbilitySlotMap } from '@/utils/blizzard/buildAbilitySlotMap';
 
 export function PetStatsList({
   petData,
+  abilitiesByName,
   petStats,
   battleStats,
   isMatchView = false,
@@ -78,7 +81,6 @@ export function PetStatsList({
             } = getPetStats(pet.name);
             const typeColor = getTypeColor(pet.type);
             const availableBreeds = pet.breeds || [];
-            // setAvailableBreedToArray(pet?.breeds) || [];
 
             if (!stats) return null;
 
@@ -274,43 +276,18 @@ export function PetStatsList({
                       <div className='p-2.5 lg:p-5 rounded-lg bg-background shadow-md'>
                         <Heading
                           as='h3'
-                          className='text-xl font-bold'
+                          className='text-xl font-bold mb-2.5'
                           style={{
                             color: typeColor,
                           }}
                         >
                           {'Abilities'}
                         </Heading>
-                        <div className='grid grid-cols-2 gap-2.5 lg:gap-5 mt-2.5'>
-                          <div className='space-y-1'>
-                            <Paragraph className='font-light'>
-                              <span className='font-bold'>{'Lvl 1: '}</span>
-                              {pet.ability_1}
-                            </Paragraph>
-                            <Paragraph className='font-light'>
-                              <span className='font-bold'>{'Lvl 2: '}</span>
-                              {pet.ability_2}
-                            </Paragraph>
-                            <Paragraph className='font-light'>
-                              <span className='font-bold'>{'Lvl 4: '}</span>
-                              {pet.ability_3}
-                            </Paragraph>
-                          </div>
-                          <div className='space-y-1'>
-                            <Paragraph className='font-light'>
-                              <span className='font-bold'>{'Lvl 10: '}</span>
-                              {pet.ability_4}
-                            </Paragraph>
-                            <Paragraph className='font-light'>
-                              <span className='font-bold'>{'Lvl 15: '}</span>
-                              {pet.ability_5}
-                            </Paragraph>
-                            <Paragraph className='font-light'>
-                              <span className='font-bold'>{'Lvl 20: '}</span>
-                              {pet.ability_6}
-                            </Paragraph>
-                          </div>
-                        </div>
+                        <PetAbilities
+                          pet={pet}
+                          petTypeColor={typeColor}
+                          abilities={buildAbilitySlotMap(pet, abilitiesByName)}
+                        />
                       </div>
                     </div>
 

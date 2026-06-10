@@ -4,11 +4,14 @@ import Image from 'next/image';
 import { Pet, PetAbilitiesProps } from '@/types/supabase.types';
 import { Heading, Paragraph } from '@/components/ui';
 import { useTooltip } from '@/context/TooltipContext';
+import { cn } from '@/utils/cn';
 
 export function PetAbilities({
   pet,
   petTypeColor,
   abilities,
+  showHeading = false,
+  isOnlyMobileView = false,
 }: PetAbilitiesProps) {
   const { showAbilityTooltip, hideTooltip, updatePosition } = useTooltip();
 
@@ -30,17 +33,39 @@ export function PetAbilities({
     'ability_6',
   ];
 
-  const hasAnyAbility = ABILITY_ORDER.some((key) => pet[key as keyof Pet]);
+  const NORMAL_ORDER = [
+    'ability_1',
+    'ability_2',
+    'ability_3',
+    'ability_4',
+    'ability_5',
+    'ability_6',
+  ];
+
+  const hasAnyAbility = (isOnlyMobileView ? NORMAL_ORDER : ABILITY_ORDER).some(
+    (key) => pet[key as keyof Pet],
+  );
   if (!hasAnyAbility) return null;
 
   return (
     <>
-      <div className='rounded-full w-full max-w-[600px] h-[2px] my-5 bg-medium-grey' />
-      <Heading as='h2' className='mb-5' style={{ color: petTypeColor }}>
-        {'Abilities'}
-      </Heading>
-      <div className='grid grid-cols-2 gap-2.5 max-w-[650px]'>
-        {ABILITY_ORDER.map((key) => {
+      {showHeading && (
+        <>
+          <div className='rounded-full w-full max-w-[600px] h-[2px] my-5 bg-medium-grey' />
+          <Heading as='h2' className='mb-5' style={{ color: petTypeColor }}>
+            {'Abilities'}
+          </Heading>
+        </>
+      )}
+      <div
+        className={cn(
+          'grid gap-2.5 max-w-[650px]',
+          isOnlyMobileView
+            ? 'grid-cols-1'
+            : 'grid-cols-1 min-[480px]:grid-cols-2',
+        )}
+      >
+        {(isOnlyMobileView ? NORMAL_ORDER : ABILITY_ORDER).map((key) => {
           const name = pet[key as keyof Pet] as string | null;
           const ability = abilities[key];
           if (!name) return null;

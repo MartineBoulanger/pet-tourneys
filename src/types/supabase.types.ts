@@ -738,6 +738,7 @@ export type ChartsProps<T> = {
 
 export type PetStatsListProps = {
   petData: Pet[];
+  abilitiesByName: Record<string, FullAbility>;
   petStats: LeaguePetStat[];
   battleStats?: BattleStatistics;
   isMatchView?: boolean;
@@ -802,6 +803,8 @@ type PetDetails = {
 
 export type PetAbilitiesProps = PetDetails & {
   abilities: Record<string, FullAbility>;
+  showHeading?: boolean;
+  isOnlyMobileView?: boolean;
 };
 
 export type PetInformationProps = PetDetails & {
