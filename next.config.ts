@@ -47,7 +47,7 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'images.ctfassets.net', // Contentful images may not be needed anymore soon
+        hostname: 'render.worldofwarcraft.com',
         port: '',
         pathname: '/**',
         search: '',

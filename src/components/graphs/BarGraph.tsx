@@ -6,6 +6,7 @@ import { GraphWrapper } from './GraphWrapper';
 import { BarGraphProps } from '@/types/graphs.types';
 import { RechartsDevtools } from '@recharts/devtools';
 import { CustomTooltip } from './CustomTooltip';
+import { Paragraph } from '@/components/ui';
 
 export const BarGraph = ({
   data,
@@ -17,9 +18,9 @@ export const BarGraph = ({
 
   if (!data || data.length === 0) {
     return (
-      <p className='text-center bg-background rounded-lg p-2.5 lg:p-5'>
+      <Paragraph className='text-center bg-background rounded-lg p-2.5 lg:p-5'>
         {'No pie chart data available.'}
-      </p>
+      </Paragraph>
     );
   }
 

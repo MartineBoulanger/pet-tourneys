@@ -106,6 +106,7 @@ export const BattleCharts = ({
                 data={battleResults.filter((m) => m?.value !== 0)}
                 tooltip={'Result Count: '}
                 fillColors={RESULTS_COLORS}
+                capitalize
               />
             ) : (
               <Paragraph className='w-full bg-background text-center py-5 rounded-lg'>

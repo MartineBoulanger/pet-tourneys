@@ -18,6 +18,7 @@ export const HallOfFame = async () => {
               src={latest.avatar?.secure_url}
               alt={latest.champion}
               fill
+              sizes='80px'
               className='object-contain'
             />
           </div>

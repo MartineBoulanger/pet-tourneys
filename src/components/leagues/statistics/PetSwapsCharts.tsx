@@ -12,9 +12,9 @@ export const PetSwapsCharts = ({
 }: PetBattleLogProps) => {
   if (!battleStats) {
     return (
-      <p className='text-center bg-background rounded-lg py-5'>
+      <Paragraph className='text-center bg-background rounded-lg py-5'>
         {'No pet swaps data available.'}
-      </p>
+      </Paragraph>
     );
   }
 
@@ -64,6 +64,7 @@ export const PetSwapsCharts = ({
                 data={swaps}
                 tooltip={'Swaps done: '}
                 fillColors={SWAPS_COLORS}
+                capitalize
               />
             ) : (
               <Paragraph className='text-center py-10'>

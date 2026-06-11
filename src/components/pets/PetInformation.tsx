@@ -1,25 +1,21 @@
-import { Pet, PET_TYPE_COLORS } from '@/types/supabase.types';
+import { PetInformationProps } from '@/types/supabase.types';
 import { Heading, Paragraph } from '@/components/ui';
+import { PetType } from '@/components/pets/PetType';
 
 export function PetInformation({
   pet,
   petTypeColor,
-}: {
-  pet: Pet;
-  petTypeColor: PET_TYPE_COLORS;
-}) {
+  family,
+}: PetInformationProps) {
   return (
     <div>
       <Heading as='h2' className='mb-2.5' style={{ color: petTypeColor }}>
         {'Information'}
       </Heading>
-      <div
-        className='grid grid-cols-3 gap-5
-                    '
-      >
+      <div className='grid grid-cols-3 gap-5'>
         <div>
           <Paragraph className='text-sm text-foreground/60'>{'Type'}</Paragraph>
-          <Paragraph className='text-md font-semibold'>{pet.type}</Paragraph>
+          <PetType type={pet.type} family={family} className='font-semibold' />
         </div>
 
         <div>

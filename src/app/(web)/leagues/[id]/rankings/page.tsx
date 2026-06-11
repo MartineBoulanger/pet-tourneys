@@ -6,6 +6,8 @@ import { Container, Heading, Paragraph } from '@/components/ui';
 import { PageMenu } from '@/components/navigation/PageMenu';
 import { Links } from '@/types/navigation-types';
 import { PageParams } from '@/types/global.types';
+import { getAbilitiesByNames } from '@/actions/supabase/pets-schema/abilities/getAbilities';
+import { getPetTypes } from '@/actions/supabase/pets-schema/families/getFamilies';
 
 export async function generateMetadata({ params }: { params: PageParams }) {
   const { id } = await params;
@@ -70,6 +72,36 @@ export default async function RankingsPage({ params }: { params: PageParams }) {
     },
   ];
 
+  // After getting records, collect all ability names from all pets across all players
+  const allAbilityNames = records
+    .flatMap((player) => player.pets)
+    .flatMap((pet) => [
+      pet.ability_1,
+      pet.ability_2,
+      pet.ability_3,
+      pet.ability_4,
+      pet.ability_5,
+      pet.ability_6,
+    ])
+    .filter((n): n is string => !!n);
+
+  // Deduplicate — many pets share abilities
+  const uniqueAbilityNames = [...new Set(allAbilityNames)];
+
+  // One query for all abilities across all pets
+  const [abilitiesResult, familyResult] = await Promise.all([
+    getAbilitiesByNames(uniqueAbilityNames),
+    getPetTypes(),
+  ]);
+
+  const abilitiesByName = Object.fromEntries(
+    (abilitiesResult.data ?? []).map((a) => [a.name, a]),
+  );
+
+  const familiesByType = Object.fromEntries(
+    (familyResult.data ?? []).map((f) => [f.type, f]),
+  );
+
   return (
     <Container className='lg:px-5'>
       <Heading>{'Rankings'}</Heading>
@@ -77,7 +109,13 @@ export default async function RankingsPage({ params }: { params: PageParams }) {
         {data.league.name}
       </Paragraph>
       <PageMenu links={links} />
-      <PlayerRankings records={records} regions={regions} id={data.league.id} />
+      <PlayerRankings
+        records={records}
+        regions={regions}
+        id={data.league.id}
+        abilitiesByName={abilitiesByName}
+        familiesByType={familiesByType}
+      />
     </Container>
   );
 }

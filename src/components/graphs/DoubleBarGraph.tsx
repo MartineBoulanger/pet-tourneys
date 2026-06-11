@@ -6,6 +6,7 @@ import { GraphWrapper } from './GraphWrapper';
 import { DoubleBarGraphProps } from '@/types/graphs.types';
 import { CustomTooltip } from './CustomTooltip';
 import { CustomLegend } from './CustomLegend';
+import { Paragraph } from '@/components/ui';
 
 export const DoubleBarGraph = ({
   data,
@@ -21,9 +22,9 @@ export const DoubleBarGraph = ({
 
   if (!data || data.length === 0) {
     return (
-      <p className='text-center bg-background rounded-lg p-2.5 lg:p-5'>
+      <Paragraph className='text-center bg-background rounded-lg p-2.5 lg:p-5'>
         {'No double bar chart data available.'}
-      </p>
+      </Paragraph>
     );
   }
 

@@ -600,6 +600,39 @@ export type UpdateMode = 'skip' | 'update' | 'overwrite';
 export const VALID_BREEDS = PetsConstants['pets']['Enums']['breeds'];
 export type ValidBreed = (typeof VALID_BREEDS)[number];
 
+export type TypeMatchup = {
+  strong: PetType[];
+  weak: PetType[];
+};
+
+export type AbilityDetails = {
+  description: string | null;
+  effect: string | null;
+  hitChance: number | null;
+};
+
+export type BlizzardPetAbility = {
+  id: number;
+  name: string;
+  battle_pet_type: { id: number; type: string; name: string };
+  cooldown: number;
+  rounds: number;
+  media: { key: { href: string }; id: number };
+};
+
+export type BlizzardPetAbilityMedia = {
+  key: string;
+  value: string;
+  file_data_id: number;
+};
+
+export type Ability = PetsDB['pets']['Tables']['abilities']['Row'];
+export type Family = PetsDB['pets']['Tables']['families']['Row'];
+
+export type FullAbility = Ability & {
+  families: Family;
+};
+
 // =================================================
 // Local types for the cms schema
 // =================================================
@@ -705,6 +738,8 @@ export type ChartsProps<T> = {
 
 export type PetStatsListProps = {
   petData: Pet[];
+  abilitiesByName: Record<string, FullAbility>;
+  familiesByType: Record<string, Family>;
   petStats: LeaguePetStat[];
   battleStats?: BattleStatistics;
   isMatchView?: boolean;
@@ -760,6 +795,58 @@ export type PetUsageRow = {
   total_played: number;
   week: number | null;
   affix: string | null;
+};
+
+type PetDetails = {
+  pet: Pet;
+  petTypeColor: PET_TYPE_COLORS;
+};
+
+export type PetAbilitiesProps = PetDetails & {
+  abilities: Record<string, FullAbility>;
+  showHeading?: boolean;
+  isOnlyMobileView?: boolean;
+};
+
+export type PetInformationProps = PetDetails & {
+  family: Family;
+};
+
+export type PetTypeProps = {
+  type: PetType;
+  family: Family;
+  className?: string;
+};
+
+type Tooltip = {
+  x: number;
+  y: number;
+};
+
+export type AbilityTooltipProps = Tooltip & { ability: FullAbility };
+export type PetTypeTooltipProps = Tooltip & { type: Family };
+
+type AbilityTooltipState = {
+  kind: 'ability';
+  data: FullAbility;
+  x: number;
+  y: number;
+};
+
+type FamilyTooltipState = {
+  kind: 'family';
+  data: Family;
+  x: number;
+  y: number;
+};
+
+export type TooltipState = AbilityTooltipState | FamilyTooltipState | null;
+
+export type TooltipContextValue = {
+  showAbilityTooltip: (ability: FullAbility, e: React.MouseEvent) => void;
+  showFamilyTooltip: (family: Family, e: React.MouseEvent) => void;
+  hideTooltip: () => void;
+  updatePosition: (e: React.MouseEvent) => void;
 };
 
 // =================================================

@@ -1,5 +1,6 @@
 import { capitalizeWord } from '@/utils/capitalizeWord';
 import { CustomTooltipProps } from '@/types/graphs.types';
+import { Paragraph } from '@/components/ui';
 
 export function CustomTooltip({
   active,
@@ -19,25 +20,25 @@ export function CustomTooltip({
 
   return (
     <div className='bg-light-grey p-2.5 rounded-lg shadow-md'>
-      <p className='font-bold text-humanoid'>
+      <Paragraph className='font-bold text-humanoid'>
         {isRadial ? payload[0]?.payload?.name : displayTitle}
-      </p>
+      </Paragraph>
       {items ? (
         // Custom items passed in (for DoubleBarGraph etc.)
         items.map((item, i) => (
-          <p key={i}>
+          <Paragraph key={i}>
             {item.label}
             {item.prefix}
             {item.value ?? payload[i]?.value}
-          </p>
+          </Paragraph>
         ))
       ) : (
         // Single value (for BarGraph etc.)
-        <p>
+        <Paragraph>
           {prefix}
           {payload[0]?.payload?.value}
           {getPercentage && ` (${getPercentage(dataItem?.value, payload[0])})`}
-        </p>
+        </Paragraph>
       )}
     </div>
   );

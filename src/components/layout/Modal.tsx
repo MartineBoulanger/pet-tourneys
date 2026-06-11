@@ -7,15 +7,15 @@ import { ModalProps } from '@/types/components.types';
 
 export function Modal({ children, className, onClose, show }: ModalProps) {
   return show ? (
-    <div className='fixed inset-0 flex items-center justify-center z-[99999]'>
+    <div className='fixed inset-0 flex items-center justify-center z-[99]'>
       <div
-        className='absolute inset-0 bg-background/95 z-[99999]'
+        className='absolute inset-0 bg-background/95 z-[99]'
         onClick={onClose}
       />
 
       <div
         className={cn(
-          'relative z-[99999] bg-light-grey rounded-lg shadow-md',
+          'relative z-[99] bg-light-grey rounded-lg shadow-md',
           'max-w-full max-h-[90vh] w-full lg:max-w-[512px] mx-5 lg:mx-0',
           'overflow-y-auto',
           className,
@@ -28,7 +28,7 @@ export function Modal({ children, className, onClose, show }: ModalProps) {
         >
           <IoMdClose className='w-5 h-5' />
         </Button>
-        <div className='p-2.5 lg:p-5 z-[99999]'>{children}</div>
+        <div className='p-2.5 lg:p-5 z-[99]'>{children}</div>
       </div>
     </div>
   ) : null;

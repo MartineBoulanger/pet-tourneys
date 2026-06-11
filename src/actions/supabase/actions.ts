@@ -27,8 +27,16 @@ export const petsTable = async () => {
   const supabase = await sbTypedServer<PetsDB>();
   return supabase.schema(SCHEMA.PETS).from('pets');
 };
-// TODO: Abilities & family table should still be made & placed here
-// - whenever I add those tables to the pets schema
+
+export const abilitiesTable = async () => {
+  const supabase = await sbTypedServer<PetsDB>();
+  return supabase.schema(SCHEMA.PETS).from('abilities');
+};
+
+export const familiesTable = async () => {
+  const supabase = await sbTypedServer<PetsDB>();
+  return supabase.schema(SCHEMA.PETS).from('families');
+};
 
 // ==================================================
 // CMS schema tables

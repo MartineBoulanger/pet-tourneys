@@ -59,30 +59,38 @@ export async function LiveSection() {
                     <PetBadge pet={topPetOverall} label='Season' />
                   )}
                 </div>
-                <div className='w-full h-0.5 my-2.5 sm:my-5 rounded-xl bg-medium-grey/50' />
-                <div className='grid grid-cols-2 sm:grid-cols-3 gap-2.5'>
-                  {availableAffixes.map((affix) =>
-                    topPetByAffix[affix] ? (
-                      <PetBadge
-                        key={affix}
-                        pet={topPetByAffix[affix]}
-                        label={affix}
-                      />
-                    ) : null,
-                  )}
-                </div>
-                <div className='w-full h-0.5 my-2.5 sm:my-5 rounded-xl bg-medium-grey/50' />
-                <div className='grid grid-cols-2 sm:grid-cols-3 gap-2.5'>
-                  {availableWeeks.map((week) =>
-                    topPetByWeek[week] ? (
-                      <PetBadge
-                        key={week}
-                        pet={topPetByWeek[week]}
-                        label={`Week ${week}`}
-                      />
-                    ) : null,
-                  )}
-                </div>
+                {availableAffixes && (
+                  <>
+                    <div className='w-full h-0.5 my-2.5 sm:my-5 rounded-xl bg-medium-grey/50' />
+                    <div className='grid grid-cols-2 sm:grid-cols-3 gap-2.5'>
+                      {availableAffixes.map((affix) =>
+                        topPetByAffix[affix] ? (
+                          <PetBadge
+                            key={affix}
+                            pet={topPetByAffix[affix]}
+                            label={affix}
+                          />
+                        ) : null,
+                      )}
+                    </div>
+                  </>
+                )}
+                {availableWeeks && (
+                  <>
+                    <div className='w-full h-0.5 my-2.5 sm:my-5 rounded-xl bg-medium-grey/50' />
+                    <div className='grid grid-cols-2 sm:grid-cols-3 gap-2.5'>
+                      {availableWeeks.map((week) =>
+                        topPetByWeek[week] ? (
+                          <PetBadge
+                            key={week}
+                            pet={topPetByWeek[week]}
+                            label={`Week ${week}`}
+                          />
+                        ) : null,
+                      )}
+                    </div>
+                  </>
+                )}
               </>
             )}
           </div>

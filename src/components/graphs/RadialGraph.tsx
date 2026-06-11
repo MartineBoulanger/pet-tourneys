@@ -1,10 +1,11 @@
 'use client';
 
-import { Cell, RadialBarChart, RadialBar, Tooltip, Legend } from 'recharts';
+import { Sector, RadialBarChart, RadialBar, Tooltip, Legend } from 'recharts';
 import { useWindowSize } from '@/hooks/useWindowSize';
 import { GraphWrapper } from './GraphWrapper';
 import { GraphsProps, DataTypeWithFill } from '@/types/graphs.types';
 import { CustomTooltip } from './CustomTooltip';
+import { Paragraph } from '@/components/ui';
 
 export const RadialGraph = ({
   data,
@@ -15,9 +16,9 @@ export const RadialGraph = ({
 
   if (!data || data.length === 0) {
     return (
-      <p className='text-center bg-background rounded-lg py-5'>
+      <Paragraph className='text-center bg-background rounded-lg py-5'>
         {'No radial chart data available.'}
-      </p>
+      </Paragraph>
     );
   }
 
@@ -47,19 +48,11 @@ export const RadialGraph = ({
             fontSize: 11,
             fontWeight: 'bold',
           }}
-          background={{ fill: '#303030' }}
-        >
-          {data.map((entry, index) => (
-            <Cell key={`${entry.name}-cell-${index}`} fill={entry.fill} />
-          ))}
-        </RadialBar>
+          background={{ fill: '#202020' }}
+          shape={(props) => <Sector {...props} fill={props.fill} />}
+        ></RadialBar>
         {showLegend ? (
-          <Legend
-            layout='horizontal'
-            verticalAlign='bottom'
-            align='center'
-            // margin={{ bottom: 20, top: -40, right: 20, left: 20 }}
-          />
+          <Legend layout='horizontal' verticalAlign='bottom' align='center' />
         ) : null}
       </RadialBarChart>
     </GraphWrapper>

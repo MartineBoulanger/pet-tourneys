@@ -13,6 +13,7 @@ import { useWindowSize } from '@/hooks/useWindowSize';
 import { GraphWrapper } from './GraphWrapper';
 import { RadarGraphProps } from '@/types/graphs.types';
 import { CustomTooltip } from './CustomTooltip';
+import { Paragraph } from '@/components/ui';
 
 export const RadarGraph = ({
   data,
@@ -27,9 +28,9 @@ export const RadarGraph = ({
 
   if (!data || data.length === 0) {
     return (
-      <p className='text-center bg-background rounded-lg py-5'>
+      <Paragraph className='text-center bg-background rounded-lg py-5'>
         {'No radar chart data available.'}
-      </p>
+      </Paragraph>
     );
   }
 
@@ -48,7 +49,7 @@ export const RadarGraph = ({
         <Tooltip
           content={(props) => <CustomTooltip {...props} prefix={tooltip} />}
         />
-        <PolarGrid style={{ stroke: '#666666' }} />
+        <PolarGrid style={{ stroke: '#303030' }} />
         <PolarAngleAxis
           dataKey='name'
           tick={{ fontSize: isMobile ? 12 : 14, fill: '#f1f1f1', width: 100 }}
@@ -56,8 +57,8 @@ export const RadarGraph = ({
         <PolarRadiusAxis
           angle={angle}
           orientation='left'
-          tick={{ fontSize: 10, fill: '#999999' }}
-          stroke='#666666'
+          tick={{ fontSize: 10, fill: '#666666' }}
+          stroke='#303030'
         />
         <Radar
           name={radarName}

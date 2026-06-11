@@ -14,6 +14,80 @@ export type PetsDB = {
   };
   pets: {
     Tables: {
+      abilities: {
+        Row: {
+          cooldown: number | null;
+          description: string | null;
+          effect: string | null;
+          hit_chance: number | null;
+          icon: string | null;
+          id: number;
+          name: string;
+          rounds: number | null;
+          seeded_at: string | null;
+          type: PetsDB['pets']['Enums']['types'];
+        };
+        Insert: {
+          cooldown?: number | null;
+          description?: string | null;
+          effect?: string | null;
+          hit_chance?: number | null;
+          icon?: string | null;
+          id: number;
+          name: string;
+          rounds?: number | null;
+          seeded_at?: string | null;
+          type: PetsDB['pets']['Enums']['types'];
+        };
+        Update: {
+          cooldown?: number | null;
+          description?: string | null;
+          effect?: string | null;
+          hit_chance?: number | null;
+          icon?: string | null;
+          id?: number;
+          name?: string;
+          rounds?: number | null;
+          seeded_at?: string | null;
+          type?: PetsDB['pets']['Enums']['types'];
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'fk_ability_type';
+            columns: ['type'];
+            isOneToOne: false;
+            referencedRelation: 'families';
+            referencedColumns: ['type'];
+          },
+        ];
+      };
+      families: {
+        Row: {
+          passive: string;
+          strong_vs: PetsDB['pets']['Enums']['types'] | null;
+          takes_less_from: PetsDB['pets']['Enums']['types'] | null;
+          takes_more_from: PetsDB['pets']['Enums']['types'] | null;
+          type: PetsDB['pets']['Enums']['types'];
+          weak_vs: PetsDB['pets']['Enums']['types'] | null;
+        };
+        Insert: {
+          passive: string;
+          strong_vs?: PetsDB['pets']['Enums']['types'] | null;
+          takes_less_from?: PetsDB['pets']['Enums']['types'] | null;
+          takes_more_from?: PetsDB['pets']['Enums']['types'] | null;
+          type: PetsDB['pets']['Enums']['types'];
+          weak_vs?: PetsDB['pets']['Enums']['types'] | null;
+        };
+        Update: {
+          passive?: string;
+          strong_vs?: PetsDB['pets']['Enums']['types'] | null;
+          takes_less_from?: PetsDB['pets']['Enums']['types'] | null;
+          takes_more_from?: PetsDB['pets']['Enums']['types'] | null;
+          type?: PetsDB['pets']['Enums']['types'];
+          weak_vs?: PetsDB['pets']['Enums']['types'] | null;
+        };
+        Relationships: [];
+      };
       pets: {
         Row: {
           ability_1: string | null;

@@ -1,6 +1,14 @@
 'use client';
 
-import { ScatterChart, Scatter, XAxis, YAxis, Tooltip, Cell } from 'recharts';
+import {
+  ScatterChart,
+  Scatter,
+  XAxis,
+  YAxis,
+  Tooltip,
+  ScatterShapeProps,
+  Symbols,
+} from 'recharts';
 import { useWindowSize } from '@/hooks/useWindowSize';
 import { GraphWrapper } from './GraphWrapper';
 import { ScatterGraphProps } from '@/types/graphs.types';
@@ -22,6 +30,14 @@ export const ScatterGraph = ({
       </p>
     );
   }
+
+  const MyCustomSymbol = (props: ScatterShapeProps) => (
+    <Symbols
+      {...props}
+      fill={colors ? colors[props.index % colors.length] : color}
+      type='diamond'
+    />
+  );
 
   return (
     <GraphWrapper className='p-2.5 lg:p-5 h-[425px] lg:h-[450px]'>
@@ -59,14 +75,7 @@ export const ScatterGraph = ({
           tick={{ fontSize: isMobile ? 12 : 14 }}
           domain={['dataMin', 'dataMax']}
         />
-        <Scatter data={data} shape='diamond'>
-          {data.map((entry, index) => (
-            <Cell
-              key={`${entry.name}-cell-${index}`}
-              fill={colors ? colors[index % colors.length] : color}
-            />
-          ))}
-        </Scatter>
+        <Scatter data={data} shape={MyCustomSymbol} />
       </ScatterChart>
     </GraphWrapper>
   );
