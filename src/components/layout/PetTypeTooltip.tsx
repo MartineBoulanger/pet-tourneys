@@ -6,7 +6,7 @@ import { Heading, Paragraph } from '@/components/ui';
 export function PetTypeTooltip({ type, x, y }: PetTypeTooltipProps) {
   return (
     <div
-      className='fixed z-50 max-w-[400px] pointer-events-none'
+      className='fixed z-[999] max-w-[400px] pointer-events-none'
       style={{ left: x + 12, top: y + 12 }}
     >
       <div className='flex flex-col justify-between p-5 rounded-lg bg-background/95 border border-foreground/80 gap-2.5 shadow-md'>
