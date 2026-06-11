@@ -145,13 +145,13 @@ export function PetStatsList({
                               <span className='font-bold'>{'Pet ID: '}</span>
                               {pet.id}
                             </Paragraph>
-                            <Paragraph className='font-light flex gap-1'>
+                            <div className='font-light flex gap-1'>
                               <span className='font-bold'>{'Type: '}</span>
                               <PetType
                                 type={pet.type}
                                 family={familiesByType[pet.type]}
                               />
-                            </Paragraph>
+                            </div>
                             <Paragraph className='font-light'>
                               <span className='font-bold'>{'Source: '}</span>
                               {pet.source}

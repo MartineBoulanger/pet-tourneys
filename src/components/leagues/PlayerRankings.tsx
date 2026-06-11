@@ -365,7 +365,7 @@ export const PlayerRankings = ({
                                                     </span>
                                                     {petDetails?.id}
                                                   </Paragraph>
-                                                  <Paragraph className='font-light flex gap-1'>
+                                                  <div className='font-light flex gap-1'>
                                                     <span className='font-bold'>
                                                       {'Type: '}
                                                     </span>
@@ -379,7 +379,7 @@ export const PlayerRankings = ({
                                                         }
                                                       />
                                                     )}
-                                                  </Paragraph>
+                                                  </div>
                                                   <Paragraph className='font-light'>
                                                     <span className='font-bold'>
                                                       {'Source: '}
