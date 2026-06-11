@@ -739,6 +739,7 @@ export type ChartsProps<T> = {
 export type PetStatsListProps = {
   petData: Pet[];
   abilitiesByName: Record<string, FullAbility>;
+  familiesByType: Record<string, Family>;
   petStats: LeaguePetStat[];
   battleStats?: BattleStatistics;
   isMatchView?: boolean;
@@ -809,6 +810,12 @@ export type PetAbilitiesProps = PetDetails & {
 
 export type PetInformationProps = PetDetails & {
   family: Family;
+};
+
+export type PetTypeProps = {
+  type: PetType;
+  family: Family;
+  className?: string;
 };
 
 type Tooltip = {

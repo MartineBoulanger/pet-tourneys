@@ -17,3 +17,18 @@ export async function getPetType(type: PetType) {
     return { success: false, error: (error as Error).message };
   }
 }
+
+// =================================================
+// Get all pet types
+// =================================================
+export async function getPetTypes() {
+  try {
+    const types = await familiesTable();
+    const { data, error } = await types.select('*');
+    if (error) return { success: false, error: error.message };
+    return { success: true, data };
+  } catch (error) {
+    console.error('Get Pet Types Error:', error);
+    return { success: false, error: (error as Error).message };
+  }
+}

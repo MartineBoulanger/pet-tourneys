@@ -13,6 +13,7 @@ import { PageMenu } from '@/components/navigation/PageMenu';
 import { Links } from '@/types/navigation-types';
 import { PageParams, MatchSearchParams } from '@/types/global.types';
 import { getAbilitiesByNames } from '@/actions/supabase/pets-schema/abilities/getAbilities';
+import { getPetTypes } from '@/actions/supabase/pets-schema/families/getFamilies';
 
 export async function generateMetadata({ params }: { params: PageParams }) {
   const { id } = await params;
@@ -93,11 +94,18 @@ export default async function PetsStatisticsPage({
     .filter((n): n is string => !!n);
 
   // One query for all abilities across all pets
-  const { data: abilitiesData } = await getAbilitiesByNames(petAbilityNames);
+  const [abilitiesResult, familyResult] = await Promise.all([
+    getAbilitiesByNames(petAbilityNames),
+    getPetTypes(),
+  ]);
 
   // Map by name for lookup in the list component
   const abilitiesByName = Object.fromEntries(
-    (abilitiesData ?? []).map((a) => [a.name, a]),
+    (abilitiesResult.data ?? []).map((a) => [a.name, a]),
+  );
+
+  const familiesByType = Object.fromEntries(
+    (familyResult.data ?? []).map((f) => [f.type, f]),
   );
 
   // make links data for the dropdown menu on the page
@@ -136,6 +144,7 @@ export default async function PetsStatisticsPage({
         <PetStatsList
           petData={petsWithStats || []}
           abilitiesByName={abilitiesByName}
+          familiesByType={familiesByType}
           petStats={stats}
           battleStats={battleStats.battleStats}
           isMatchView={isMatchView}

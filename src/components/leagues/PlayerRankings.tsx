@@ -17,6 +17,7 @@ import { MedalIcon } from '@/assets/MedalIcon';
 import { PlayerPetImage, PlayerPetCardImage } from '@/components/pets/PetMedia';
 import { PetAbilities } from '@/components/pets/PetAbilities';
 import { buildAbilitySlotMap } from '@/utils/blizzard/buildAbilitySlotMap';
+import { PetType } from '@/components/pets/PetType';
 
 const PLAYERS_PER_PAGE = 10;
 
@@ -25,6 +26,7 @@ export const PlayerRankings = ({
   regions,
   id,
   abilitiesByName,
+  familiesByType,
 }: PlayerRankingsProps) => {
   const [expandedPlayers, setExpandedPlayers] = useState<
     Record<string, boolean>
@@ -363,11 +365,20 @@ export const PlayerRankings = ({
                                                     </span>
                                                     {petDetails?.id}
                                                   </Paragraph>
-                                                  <Paragraph className='font-light'>
+                                                  <Paragraph className='font-light flex gap-1'>
                                                     <span className='font-bold'>
                                                       {'Type: '}
                                                     </span>
-                                                    {petDetails?.type}
+                                                    {petDetails && (
+                                                      <PetType
+                                                        type={petDetails.type}
+                                                        family={
+                                                          familiesByType[
+                                                            petDetails.type
+                                                          ]
+                                                        }
+                                                      />
+                                                    )}
                                                   </Paragraph>
                                                   <Paragraph className='font-light'>
                                                     <span className='font-bold'>

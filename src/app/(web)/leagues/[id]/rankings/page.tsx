@@ -7,7 +7,7 @@ import { PageMenu } from '@/components/navigation/PageMenu';
 import { Links } from '@/types/navigation-types';
 import { PageParams } from '@/types/global.types';
 import { getAbilitiesByNames } from '@/actions/supabase/pets-schema/abilities/getAbilities';
-import { buildAbilitySlotMap } from '@/utils/blizzard/buildAbilitySlotMap';
+import { getPetTypes } from '@/actions/supabase/pets-schema/families/getFamilies';
 
 export async function generateMetadata({ params }: { params: PageParams }) {
   const { id } = await params;
@@ -88,10 +88,18 @@ export default async function RankingsPage({ params }: { params: PageParams }) {
   // Deduplicate — many pets share abilities
   const uniqueAbilityNames = [...new Set(allAbilityNames)];
 
-  const { data: abilitiesData } = await getAbilitiesByNames(uniqueAbilityNames);
+  // One query for all abilities across all pets
+  const [abilitiesResult, familyResult] = await Promise.all([
+    getAbilitiesByNames(uniqueAbilityNames),
+    getPetTypes(),
+  ]);
 
   const abilitiesByName = Object.fromEntries(
-    (abilitiesData ?? []).map((a) => [a.name, a]),
+    (abilitiesResult.data ?? []).map((a) => [a.name, a]),
+  );
+
+  const familiesByType = Object.fromEntries(
+    (familyResult.data ?? []).map((f) => [f.type, f]),
   );
 
   return (
@@ -106,6 +114,7 @@ export default async function RankingsPage({ params }: { params: PageParams }) {
         regions={regions}
         id={data.league.id}
         abilitiesByName={abilitiesByName}
+        familiesByType={familiesByType}
       />
     </Container>
   );

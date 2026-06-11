@@ -16,11 +16,13 @@ import { PetStatsListProps, PET_TYPE_IMAGES } from '@/types/supabase.types';
 import { PetControls } from './PetControls';
 import { PetIcon, PetImage } from '@/components/pets/PetMedia';
 import { PetAbilities } from '@/components/pets/PetAbilities';
+import { PetType } from '@/components/pets/PetType';
 import { buildAbilitySlotMap } from '@/utils/blizzard/buildAbilitySlotMap';
 
 export function PetStatsList({
   petData,
   abilitiesByName,
+  familiesByType,
   petStats,
   battleStats,
   isMatchView = false,
@@ -143,9 +145,12 @@ export function PetStatsList({
                               <span className='font-bold'>{'Pet ID: '}</span>
                               {pet.id}
                             </Paragraph>
-                            <Paragraph className='font-light'>
+                            <Paragraph className='font-light flex gap-1'>
                               <span className='font-bold'>{'Type: '}</span>
-                              {pet.type}
+                              <PetType
+                                type={pet.type}
+                                family={familiesByType[pet.type]}
+                              />
                             </Paragraph>
                             <Paragraph className='font-light'>
                               <span className='font-bold'>{'Source: '}</span>

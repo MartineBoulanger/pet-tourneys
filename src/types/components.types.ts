@@ -32,6 +32,7 @@ import {
   EnhancedPlayerRecord,
   UniqueStats,
   FullAbility,
+  Family,
 } from './supabase.types';
 
 // =================================================
@@ -627,6 +628,7 @@ export type PlayerRankingsProps = {
   regions: string[];
   id: string;
   abilitiesByName: Record<string, FullAbility>;
+  familiesByType: Record<string, Family>;
 };
 
 // =================================================
