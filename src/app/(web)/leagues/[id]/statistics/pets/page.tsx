@@ -14,6 +14,7 @@ import { Links } from '@/types/navigation-types';
 import { PageParams, MatchSearchParams } from '@/types/global.types';
 import { getAbilitiesByNames } from '@/actions/supabase/pets-schema/abilities/getAbilities';
 import { getPetTypes } from '@/actions/supabase/pets-schema/families/getFamilies';
+import { DownloadLeagueUsedPetsButton } from '@/components/layout';
 
 export async function generateMetadata({ params }: { params: PageParams }) {
   const { id } = await params;
@@ -140,6 +141,9 @@ export default async function PetsStatisticsPage({
         )}
       </div>
       <PageMenu links={links} />
+      <div className='flex justify-center md:justify-end gap-2.5 my-2.5 lg:mb-5'>
+        <DownloadLeagueUsedPetsButton id={id} name={entityName} />
+      </div>
       {stats && (
         <PetStatsList
           petData={petsWithStats || []}

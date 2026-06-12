@@ -8,6 +8,7 @@ export * from './DownloadImageButton';
 export * from './DownloadRulesButton';
 export * from './DownloadLeagueUsedPetsButton';
 export * from './DownloadAllPetsButton';
+export * from './DownloadStatisticsPDFButton';
 export * from './ImageCard';
 export * from './ImageGrid';
 export * from './ImageModal';
