@@ -43,6 +43,8 @@ export default async function StatisticsPage({
   let battleStats;
   let title = 'League Statistics';
   let entityName = '';
+  let matchRegion = '';
+  let matchOwner = '';
   let chartData: ChartData = {
     petUsageData: [],
     petTypeData: [],
@@ -57,6 +59,8 @@ export default async function StatisticsPage({
     battleStats = await getMatchBattleStats(id, matchId);
     title = 'Match Statistics';
     entityName = `${match.data?.player1} vs ${match.data?.player2}`;
+    matchRegion = `${match.data?.region}`;
+    matchOwner = `${match.data?.owner}`;
     chartData = {
       petUsageData: stats.slice(0, 10).map((pet) => ({
         name: pet.pet_data.name,
@@ -193,6 +197,8 @@ export default async function StatisticsPage({
           battleStats={battleStats}
           isMatchView={isMatchView}
           chartData={chartData}
+          matchRegion={matchRegion}
+          matchOwner={matchOwner}
         />
       </div>
       <div className='mt-5'>

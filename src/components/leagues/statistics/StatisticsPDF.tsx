@@ -1,168 +1,11 @@
 'use client';
 
-import {
-  Document,
-  Page,
-  Text,
-  View,
-  StyleSheet,
-  Image,
-} from '@react-pdf/renderer';
-import {
-  LeaguePetStat,
-  BattleLogsStats,
-  ChartData,
-} from '@/types/supabase.types';
-import { abilitiesCategoryNames } from '@/lib/logs-data/abilitiesCategoryNames';
-import { transformPetSwapData } from '@/utils/supabase/transformPetSwapData';
+import { Document, Page, Text, View, Image } from '@react-pdf/renderer';
 import { capitalizeWord } from '@/utils/capitalizeWord';
-
-const styles = StyleSheet.create({
-  page: {
-    padding: 30,
-    fontFamily: 'Helvetica',
-    backgroundColor: '#ffffff',
-  },
-  title: {
-    fontSize: 22,
-    fontWeight: 'bold',
-    marginBottom: 4,
-  },
-  subtitle: {
-    fontSize: 11,
-    color: '#666666',
-    marginBottom: 20,
-  },
-  section: {
-    marginBottom: 20,
-  },
-  sectionTitle: {
-    fontSize: 14,
-    fontWeight: 'bold',
-    marginBottom: 8,
-    paddingBottom: 4,
-    borderBottomWidth: 1,
-    borderBottomColor: '#e5e7eb',
-  },
-  row: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingVertical: 4,
-    borderBottomWidth: 1,
-    borderBottomColor: '#f3f4f6',
-  },
-  rowHeading: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingVertical: 4,
-    borderBottomWidth: 1,
-    borderBottomColor: '#f3f4f6',
-    fontSize: 12,
-    fontWeight: 'bold',
-    backgroundColor: '#f3f4f6',
-    marginBottom: 4,
-  },
-  label: {
-    fontSize: 11,
-    color: '#374151',
-    fontWeight: 'bold',
-  },
-  value: {
-    fontSize: 10,
-    color: '#111827',
-  },
-  paragraph: {
-    fontSize: 10,
-    marginBottom: 20,
-    color: '#303030',
-  },
-  tableHeader: {
-    flexDirection: 'row',
-    backgroundColor: '#f3f4f6',
-    padding: 6,
-    marginTop: 4,
-  },
-  tableRow: {
-    flexDirection: 'row',
-    padding: 6,
-    borderBottomWidth: 1,
-    borderBottomColor: '#f3f4f6',
-  },
-  col1: { width: '35%', fontSize: 9 },
-  col2: { width: '15%', fontSize: 9, textAlign: 'center' },
-  col3: { width: '15%', fontSize: 9, textAlign: 'center' },
-  col4: { width: '15%', fontSize: 9, textAlign: 'center' },
-  col5: { width: '20%', fontSize: 9, textAlign: 'center' },
-  colHeader: { fontWeight: 'bold' },
-  statGrid: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: 8,
-    marginTop: 4,
-  },
-  statBox: {
-    width: '30%',
-    backgroundColor: '#f9fafb',
-    padding: 8,
-    borderRadius: 4,
-  },
-  statBoxLabel: {
-    fontSize: 8,
-    color: '#6b7280',
-    marginBottom: 2,
-  },
-  statBoxValue: {
-    fontSize: 14,
-    fontWeight: 'bold',
-    color: '#111827',
-  },
-  coverPage: {
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: '100%',
-    width: '100%',
-    padding: 40,
-    fontFamily: 'Helvetica',
-    backgroundColor: '#ffffff',
-  },
-  coverTitle: {
-    fontSize: 32,
-    marginBottom: 20,
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
-  coverSubtitle: {
-    fontSize: 18,
-    color: '#374151',
-    fontWeight: 'bold',
-    marginBottom: 40,
-    textAlign: 'center',
-  },
-  coverImage: {
-    width: 250,
-    height: 250,
-    marginBottom: 40,
-  },
-  coverMeta: {
-    fontSize: 12,
-    color: '#666666',
-    position: 'absolute',
-    bottom: 30,
-    left: 0,
-    right: 0,
-    textAlign: 'center',
-    fontStyle: 'italic',
-  },
-});
-
-type Props = {
-  leagueName: string;
-  petStats: LeaguePetStat[];
-  battleStats: BattleLogsStats;
-  chartData: ChartData;
-  isMatchView?: boolean;
-};
+import { transformPetSwapData } from '@/utils/supabase/transformPetSwapData';
+import { StatisticsPDFProps } from '@/types/supabase.types';
+import { abilitiesCategoryNames } from '@/lib/logs-data/abilitiesCategoryNames';
+import { styles } from '@/styles/StatisticsPDFStyles';
 
 export function StatisticsPDF({
   leagueName,
@@ -170,7 +13,9 @@ export function StatisticsPDF({
   battleStats,
   chartData,
   isMatchView = false,
-}: Props) {
+  matchRegion = '',
+  matchOwner = '',
+}: StatisticsPDFProps) {
   const general = battleStats.generalStats;
   const bStats = battleStats.battleStats;
   const abilityStats = battleStats.abilityStats;
@@ -238,9 +83,29 @@ export function StatisticsPDF({
     <Document>
       {/* Cover page */}
       <Page size='A4' style={styles.coverPage}>
-        <Image src={'~/PML_Logo.jpg'} style={styles.coverImage} />
+        <Image src={'/PMLFinalBlack.png'} style={styles.coverImage} />
         <Text style={styles.coverTitle}>{'Statistics Report'}</Text>
-        <Text style={styles.coverSubtitle}>{leagueName}</Text>
+        <Text
+          style={
+            isMatchView
+              ? styles.coverSubtitle
+              : [styles.coverSubtitle, styles.coverMarginBottom]
+          }
+        >
+          {leagueName}
+        </Text>
+        {isMatchView ? (
+          <>
+            <Text
+              style={styles.coverMatchOwnerTitle}
+            >{`Logs From ${matchOwner}`}</Text>
+            <Text
+              style={[styles.coverMatchRegionTitle, styles.coverMarginBottom]}
+            >
+              {`Region : ${matchRegion}`}
+            </Text>
+          </>
+        ) : null}
         <Text style={styles.coverMeta}>
           {'Generated on '}
           {new Date().toLocaleDateString()}
@@ -258,10 +123,14 @@ export function StatisticsPDF({
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>{'General Statistics'}</Text>
           <View style={styles.statGrid}>
-            <View style={styles.statBox}>
-              <Text style={styles.statBoxLabel}>{'Total Matches'}</Text>
-              <Text style={styles.statBoxValue}>{safeStats.totalMatches}</Text>
-            </View>
+            {isMatchView ? null : (
+              <View style={styles.statBox}>
+                <Text style={styles.statBoxLabel}>{'Total Matches'}</Text>
+                <Text style={styles.statBoxValue}>
+                  {safeStats.totalMatches}
+                </Text>
+              </View>
+            )}
             <View style={styles.statBox}>
               <Text style={styles.statBoxLabel}>{'Total Battles'}</Text>
               <Text style={styles.statBoxValue}>{safeStats.totalBattles}</Text>
@@ -286,31 +155,35 @@ export function StatisticsPDF({
           ))}
         </View>
 
-        {/* Match Results */}
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>{'Match Scores Distribution'}</Text>
-          {safeStats.matchResults.map((r) => (
-            <View style={styles.row} key={r.name}>
-              <Text style={styles.label}>{r.name}</Text>
-              <Text style={styles.value}>{r.value}</Text>
+        {isMatchView ? null : (
+          <>
+            {/* Match Results */}
+            <View style={styles.section}>
+              <Text style={styles.sectionTitle}>
+                {'Match Scores Distribution'}
+              </Text>
+              {safeStats.matchResults.map((r) => (
+                <View style={styles.row} key={r.name}>
+                  <Text style={styles.label}>{r.name}</Text>
+                  <Text style={styles.value}>{r.value}</Text>
+                </View>
+              ))}
             </View>
-          ))}
-        </View>
 
-        {/* Matches by Region */}
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>{'Matches by Region'}</Text>
-          {safeStats.matchesByRegion
-            .filter((r) => r.value > 0)
-            .map((r) => (
-              <View key={r.name} style={styles.row}>
-                <Text style={styles.label}>{r.name}</Text>
-                <Text style={styles.value}>{r.value}</Text>
-              </View>
-            ))}
-        </View>
-
-        {/*  */}
+            {/* Matches by Region */}
+            <View style={styles.section}>
+              <Text style={styles.sectionTitle}>{'Matches by Region'}</Text>
+              {safeStats.matchesByRegion
+                .filter((r) => r.value > 0)
+                .map((r) => (
+                  <View key={r.name} style={styles.row}>
+                    <Text style={styles.label}>{r.name}</Text>
+                    <Text style={styles.value}>{r.value}</Text>
+                  </View>
+                ))}
+            </View>
+          </>
+        )}
       </Page>
 
       {/* Page 2 - Pet Stats */}
@@ -358,6 +231,21 @@ export function StatisticsPDF({
           <Text
             style={styles.sectionTitle}
           >{`Pet Swaps - ${totalSwaps} total -- Top 10 shown down here`}</Text>
+          {/* Player swaps */}
+          {isMatchView ? (
+            <View style={styles.section}>
+              <View style={styles.statGrid}>
+                {swaps.map((s, index) => (
+                  <View style={styles.statBox} key={`${s.name}-${index}`}>
+                    <Text
+                      style={styles.statBoxLabel}
+                    >{`${capitalizeWord(s.name)} Total`}</Text>
+                    <Text style={styles.statBoxValue}>{s.value}</Text>
+                  </View>
+                ))}
+              </View>
+            </View>
+          ) : null}
           {petSwaps.map((pet, index) => (
             <View style={styles.row} key={`${pet.name}-${index}`}>
               <Text style={styles.label}>{pet.name}</Text>
@@ -413,22 +301,49 @@ export function StatisticsPDF({
             style={styles.sectionTitle}
           >{`Used Pets - ${petStats.length} total`}</Text>
           {/* Table Header */}
-          <View style={styles.tableHeader}>
-            <Text style={[styles.col1, styles.colHeader]}>{'Pet'}</Text>
-            <Text style={[styles.col2, styles.colHeader]}>{'Type'}</Text>
-            <Text style={[styles.col3, styles.colHeader]}>{'Played'}</Text>
-            <Text style={[styles.col4, styles.colHeader]}>{'Wins/Losses'}</Text>
-            <Text style={[styles.col5, styles.colHeader]}>{'Win Rate'}</Text>
-          </View>
-          {petStats.map((pet) => (
-            <View style={styles.tableRow} key={pet.pet_data.name}>
-              <Text style={styles.col1}>{pet.pet_data.name}</Text>
-              <Text style={styles.col2}>{pet.pet_data.type}</Text>
-              <Text style={styles.col3}>{pet.total_played}</Text>
-              <Text style={styles.col4}>{pet.w_l}</Text>
-              <Text style={styles.col5}>{`${pet.win_rate}%`}</Text>
-            </View>
-          ))}
+          {isMatchView ? (
+            <>
+              <View style={styles.tableHeader}>
+                <Text style={[styles.col1, styles.colHeader]}>{'Pet'}</Text>
+                <Text style={[styles.col2, styles.colHeader]}></Text>
+                <Text style={[styles.col3, styles.colHeader]}></Text>
+                <Text style={[styles.col4, styles.colHeader]}>{'Type'}</Text>
+                <Text style={[styles.col5, styles.colHeader]}>{'Played'}</Text>
+              </View>
+              {petStats.map((pet) => (
+                <View style={styles.tableRow} key={pet.pet_data.name}>
+                  <Text style={styles.col1}>{pet.pet_data.name}</Text>
+                  <Text style={styles.col2}></Text>
+                  <Text style={styles.col3}></Text>
+                  <Text style={styles.col4}>{pet.pet_data.type}</Text>
+                  <Text style={styles.col5}>{pet.total_played}</Text>
+                </View>
+              ))}
+            </>
+          ) : (
+            <>
+              <View style={styles.tableHeader}>
+                <Text style={[styles.col1, styles.colHeader]}>{'Pet'}</Text>
+                <Text style={[styles.col2, styles.colHeader]}>{'Type'}</Text>
+                <Text style={[styles.col3, styles.colHeader]}>{'Played'}</Text>
+                <Text style={[styles.col4, styles.colHeader]}>
+                  {'Wins/Losses'}
+                </Text>
+                <Text style={[styles.col5, styles.colHeader]}>
+                  {'Win Rate'}
+                </Text>
+              </View>
+              {petStats.map((pet) => (
+                <View style={styles.tableRow} key={pet.pet_data.name}>
+                  <Text style={styles.col1}>{pet.pet_data.name}</Text>
+                  <Text style={styles.col2}>{pet.pet_data.type}</Text>
+                  <Text style={styles.col3}>{pet.total_played}</Text>
+                  <Text style={styles.col4}>{pet.w_l}</Text>
+                  <Text style={styles.col5}>{`${pet.win_rate}%`}</Text>
+                </View>
+              ))}
+            </>
+          )}
         </View>
       </Page>
 

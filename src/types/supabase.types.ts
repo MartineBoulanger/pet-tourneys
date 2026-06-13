@@ -849,6 +849,27 @@ export type TooltipContextValue = {
   updatePosition: (e: React.MouseEvent) => void;
 };
 
+export type DownloadStatisticsPDFButtonProps = {
+  leagueName: string;
+  petStats: LeaguePetStat[];
+  battleStats: BattleLogsStats;
+  isMatchView?: boolean;
+  className?: string;
+  chartData: ChartData;
+  matchRegion?: string;
+  matchOwner?: string;
+};
+
+export type StatisticsPDFProps = {
+  leagueName: string;
+  petStats: LeaguePetStat[];
+  battleStats: BattleLogsStats;
+  chartData: ChartData;
+  isMatchView?: boolean;
+  matchRegion?: string;
+  matchOwner?: string;
+};
+
 // =================================================
 // Local types for the pets page
 // =================================================

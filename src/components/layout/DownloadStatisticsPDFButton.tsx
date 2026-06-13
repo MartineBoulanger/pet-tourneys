@@ -4,22 +4,9 @@ import { useState } from 'react';
 import { pdf } from '@react-pdf/renderer';
 import { FaFileDownload } from 'react-icons/fa';
 import { Button } from '@/components/ui';
-import { StatisticsPDF } from '@/components/leagues/statistics/StatisticsPDF';
-import {
-  LeaguePetStat,
-  BattleLogsStats,
-  ChartData,
-} from '@/types/supabase.types';
 import { cn } from '@/utils/cn';
-
-type Props = {
-  leagueName: string;
-  petStats: LeaguePetStat[];
-  battleStats: BattleLogsStats;
-  isMatchView?: boolean;
-  className?: string;
-  chartData: ChartData;
-};
+import { DownloadStatisticsPDFButtonProps } from '@/types/supabase.types';
+import { StatisticsPDF } from '@/components/leagues/statistics/StatisticsPDF';
 
 export function DownloadStatisticsPDFButton({
   leagueName,
@@ -28,7 +15,9 @@ export function DownloadStatisticsPDFButton({
   isMatchView,
   className,
   chartData,
-}: Props) {
+  matchRegion = '',
+  matchOwner = '',
+}: DownloadStatisticsPDFButtonProps) {
   const [loading, setLoading] = useState(false);
 
   async function handleDownload() {
@@ -41,6 +30,8 @@ export function DownloadStatisticsPDFButton({
           battleStats={battleStats}
           isMatchView={isMatchView}
           chartData={chartData}
+          matchRegion={matchRegion}
+          matchOwner={matchOwner}
         />,
       ).toBlob();
 

@@ -8,7 +8,7 @@ import { getMostUsedPets } from '@/utils/supabase/getMostUsedPets';
 import { analyzeUsedAbilities } from '@/utils/supabase/analyzeUsedAbilities';
 import { parseBattleStatistics } from '@/utils/supabase/parseBattleStats';
 import { abilitiesCategoryNames } from '@/lib/logs-data/abilitiesCategoryNames';
-import { styles } from '@/utils/PDFStyleSheet';
+import { styles } from '@/styles/AnalyzeToolPDFStyleSheet';
 
 export function GeneratePDF({
   parsedBattleLogs,
@@ -39,7 +39,7 @@ export function GeneratePDF({
     <Document>
       {/* ========== COVER PAGE ========== */}
       <Page size='A4' style={styles.coverPage}>
-        <Image src={'/PML_Logo.jpg'} style={styles.coverImage} />
+        <Image src={'/PML_Logo.png'} style={styles.coverImage} />
         <Text style={styles.coverTitle}>{'Battle Logs Statistics Report'}</Text>
         <Text style={styles.coverSubtitle}>
           {playerName || 'Anonymous Battler'}
