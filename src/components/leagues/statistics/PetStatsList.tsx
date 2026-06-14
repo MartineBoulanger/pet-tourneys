@@ -216,6 +216,7 @@ export function PetStatsList({
                                 height={250}
                                 className='w-full h-full object-cover'
                                 loading='lazy'
+                                unoptimized
                               />
                             </div>
                           </div>

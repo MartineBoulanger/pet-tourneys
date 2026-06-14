@@ -55,7 +55,7 @@ export function SchedulesSection({ schedule }: { schedule: Schedule }) {
                     className='w-full h-full object-cover'
                     width={item.image?.width || 400}
                     height={item.image?.height || 350}
-                    unoptimized
+                    // unoptimized
                   />
                 </div>
               </div>

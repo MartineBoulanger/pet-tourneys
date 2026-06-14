@@ -14,7 +14,7 @@ import { getMatch } from '@/actions/supabase/api-schema/matches/getMatches';
 import { Heading, Paragraph, Container } from '@/components/ui';
 import { PageMenu } from '@/components/navigation/PageMenu';
 import { PageParams, MatchSearchParams } from '@/types/global.types';
-import { Links } from '@/types/navigation-types';
+import { Links } from '@/types/navigation.types';
 import { DownloadStatisticsPDFButton } from '@/components/layout';
 
 export async function generateMetadata({ params }: { params: PageParams }) {

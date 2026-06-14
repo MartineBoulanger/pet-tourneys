@@ -10,7 +10,7 @@ import { LeaguePetStat } from '@/types/supabase.types';
 import { getAllPets } from '@/actions/supabase/pets-schema/pets/getPets';
 import { Heading, Paragraph, Container } from '@/components/ui';
 import { PageMenu } from '@/components/navigation/PageMenu';
-import { Links } from '@/types/navigation-types';
+import { Links } from '@/types/navigation.types';
 import { PageParams, MatchSearchParams } from '@/types/global.types';
 import { getAbilitiesByNames } from '@/actions/supabase/pets-schema/abilities/getAbilities';
 import { getPetTypes } from '@/actions/supabase/pets-schema/families/getFamilies';

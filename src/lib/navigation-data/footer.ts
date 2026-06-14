@@ -1,6 +1,6 @@
 import { FaShoppingBag, FaPatreon, FaPaypal } from 'react-icons/fa';
 import { GrResources } from 'react-icons/gr';
-import { FooterData } from '@/types/navigation-types';
+import { FooterData } from '@/types/navigation.types';
 
 export const footerData: FooterData = [
   {

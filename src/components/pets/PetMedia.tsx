@@ -14,6 +14,7 @@ export function PetIcon({ pet }: { pet: Pet }) {
           width={40}
           height={40}
           loading='lazy'
+          unoptimized
         />
       ) : (
         <div className='w-[40px] h-[40px] bg-medium-grey flex items-center justify-center rounded-md'>
@@ -79,6 +80,7 @@ export function PetTypeImage({ pet }: { pet: Pet }) {
         height={250}
         className='w-full h-full object-cover'
         loading='lazy'
+        unoptimized
       />
     </div>
   );

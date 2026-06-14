@@ -23,7 +23,8 @@ export function PetType({ type, family, className }: PetTypeProps) {
           alt={type}
           width={20}
           height={20}
-          className='border border-foreground/80 p-0.5 rounded-full bg-background'
+          className='w-5 h-5 border border-foreground/80 p-0.5 rounded-full bg-background'
+          unoptimized
         />
       </Paragraph>
     </div>

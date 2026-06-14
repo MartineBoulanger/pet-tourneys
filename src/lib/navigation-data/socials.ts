@@ -6,7 +6,7 @@ import {
   FaTiktok,
 } from 'react-icons/fa';
 import { FaBluesky } from 'react-icons/fa6';
-import { FooterData } from '@/types/navigation-types';
+import { FooterData } from '@/types/navigation.types';
 
 export const socialsData: FooterData = [
   {

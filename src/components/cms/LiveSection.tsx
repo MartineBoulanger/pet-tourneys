@@ -34,9 +34,9 @@ export async function LiveSection() {
                 {/* Live pulse indicator */}
                 <span className='relative flex h-2.5 w-2.5'>
                   <span className='animate-ping absolute inline-flex h-full w-full rounded-full bg-light-red opacity-75' />
-                  <span className='relative inline-flex rounded-full h-2.5 w-2.5 bg-red' />
+                  <span className='relative inline-flex rounded-full h-2.5 w-2.5 bg-red-400' />
                 </span>
-                <span className='text-sm font-bold uppercase tracking-widest text-red'>
+                <span className='text-sm font-bold uppercase tracking-widest text-red-400'>
                   {'Live'}
                 </span>
               </div>

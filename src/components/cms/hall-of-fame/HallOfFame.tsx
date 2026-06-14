@@ -20,6 +20,7 @@ export const HallOfFame = async () => {
               fill
               sizes='80px'
               className='object-contain'
+              unoptimized
             />
           </div>
         ) : null}
@@ -38,6 +39,8 @@ export const HallOfFame = async () => {
                 alt='Region'
                 width={28}
                 height={28}
+                className='w-7 h-7 object-contain'
+                unoptimized
               />
             ) : null}
             <span>{`Winner of ${latest?.season}`}</span>

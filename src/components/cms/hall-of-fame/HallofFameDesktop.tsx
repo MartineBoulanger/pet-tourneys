@@ -48,7 +48,8 @@ export function HofDesktop({ data }: { data: HallOfFame[] }) {
                     alt={entry.champion}
                     width={85}
                     height={85}
-                    className='rounded-md overflow-hidden object-contain'
+                    className='w-21.5 h-21.5 rounded-md overflow-hidden object-contain'
+                    unoptimized
                   />
                 )}
                 <Heading as='h2'>{entry.champion}</Heading>
@@ -59,6 +60,8 @@ export function HofDesktop({ data }: { data: HallOfFame[] }) {
                     alt='region flag'
                     width={28}
                     height={28}
+                    className='w-7 h-7 object-contain'
+                    unoptimized
                   />
                 )}
 
@@ -97,7 +100,8 @@ export function HofDesktop({ data }: { data: HallOfFame[] }) {
                           alt={entry.petname || ''}
                           width={65}
                           height={65}
-                          className='rounded-md overflow-hidden object-contain'
+                          className='h-16.5 w-16.5 rounded-md overflow-hidden object-contain'
+                          unoptimized
                         />
                       )}
                       <Heading

@@ -4,7 +4,7 @@ import { getPaginatedMatches } from '@/actions/supabase/api-schema/matches/getMa
 import { MatchList } from '@/components/leagues/MatchList';
 import { Container, Heading, Paragraph } from '@/components/ui';
 import { PageParams, PageSearchParams } from '@/types/global.types';
-import { Links } from '@/types/navigation-types';
+import { Links } from '@/types/navigation.types';
 import { PageMenu } from '@/components/navigation/PageMenu';
 
 export async function generateMetadata({ params }: { params: PageParams }) {

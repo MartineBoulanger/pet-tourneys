@@ -23,6 +23,7 @@ export const HomePageLinks = () => {
                 height={100}
                 className='w-full h-full object-contain'
                 loading='lazy'
+                unoptimized
               />
             </span>
             <span className='text-center'>

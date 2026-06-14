@@ -4,7 +4,7 @@ import { getPlayerRecords } from '@/actions/supabase/api-schema/matches/getPlaye
 import { PlayerRankings } from '@/components/leagues/PlayerRankings';
 import { Container, Heading, Paragraph } from '@/components/ui';
 import { PageMenu } from '@/components/navigation/PageMenu';
-import { Links } from '@/types/navigation-types';
+import { Links } from '@/types/navigation.types';
 import { PageParams } from '@/types/global.types';
 import { getAbilitiesByNames } from '@/actions/supabase/pets-schema/abilities/getAbilities';
 import { getPetTypes } from '@/actions/supabase/pets-schema/families/getFamilies';

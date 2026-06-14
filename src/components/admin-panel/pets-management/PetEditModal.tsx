@@ -21,6 +21,7 @@ export function PetEditModal({ pet, onClose, onSuccess }: PetEditModalProps) {
             className='w-10 h-10 mr-2.5 lg:mr-5 inline-block'
             width={24}
             height={24}
+            unoptimized
           />
         ) : null}
         {pet.name}

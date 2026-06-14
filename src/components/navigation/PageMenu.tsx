@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Links } from '@/types/navigation-types';
+import { Links } from '@/types/navigation.types';
 
 export function PageMenu({ links }: { links: Links }) {
   return (

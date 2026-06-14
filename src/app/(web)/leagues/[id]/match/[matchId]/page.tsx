@@ -3,7 +3,7 @@ import { MatchScore } from '@/components/leagues/MatchScore';
 import { getMatchDetails } from '@/actions/supabase/api-schema/matches/getMatches';
 import { Container, Heading, Paragraph } from '@/components/ui';
 import { PageMenu } from '@/components/navigation/PageMenu';
-import { Links } from '@/types/navigation-types';
+import { Links } from '@/types/navigation.types';
 import { MatchPageParams } from '@/types/global.types';
 
 export async function generateMetadata({

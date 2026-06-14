@@ -18,6 +18,7 @@ export function AbilityTooltip({ ability, x, y }: AbilityTooltipProps) {
                 alt={ability.name}
                 height={40}
                 width={40}
+                unoptimized
               />
             )}
             <Heading as='h2' className='text-foreground tracking-wider'>
@@ -30,6 +31,7 @@ export function AbilityTooltip({ ability, x, y }: AbilityTooltipProps) {
             height={40}
             width={40}
             className='border border-foreground/80 p-1 rounded-full bg-black'
+            unoptimized
           />
         </div>
         <div className='h-[1px] w-full bg-light-grey rounded-full' />
@@ -65,6 +67,7 @@ export function AbilityTooltip({ ability, x, y }: AbilityTooltipProps) {
                   height={18}
                   width={18}
                   className='border border-foreground/80 p-0.5 rounded-full bg-black'
+                  unoptimized
                 />
                 {ability.families.strong_vs}
               </span>
@@ -79,6 +82,7 @@ export function AbilityTooltip({ ability, x, y }: AbilityTooltipProps) {
                   height={18}
                   width={18}
                   className='border border-foreground/80 p-0.5 rounded-full bg-black'
+                  unoptimized
                 />
                 {ability.families.weak_vs}
               </span>
