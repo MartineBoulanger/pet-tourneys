@@ -26,7 +26,7 @@ export const BarGraph = ({
 
   return (
     <GraphWrapper className='p-2.5 lg:p-5 h-[425px] lg:h-[450px]'>
-      <BarChart data={data} layout='horizontal'>
+      <BarChart data={data} layout='horizontal' width='100%' height='100%'>
         <Tooltip
           content={(props) => (
             <CustomTooltip {...props} prefix={tooltip} capitalize />

@@ -48,8 +48,8 @@ export const ScatterGraph = ({
           bottom: -10,
           left: -20,
         }}
-        width={isMobile ? 350 : 500}
-        height={isMobile ? 350 : 500}
+        width='100%'
+        height='100%'
       >
         <Tooltip
           content={(props) => (

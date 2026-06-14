@@ -83,7 +83,7 @@ export function GeneratePDF({
         </Text>
       </Page>
 
-      {/* ========== OVERALL MATCH STATISTICS PAGE ========== */}
+      {/* ========== MATCH STATISTICS PAGE ========== */}
       <Page size='A4' style={[styles.page, styles.bgColor]}>
         {/* Title */}
         <Text style={[styles.pageTitle, styles.fontBold, styles.bottomXS]}>
@@ -172,7 +172,7 @@ export function GeneratePDF({
         </View>
       </Page>
 
-      {/* ========== BATTLE LOGS OVERVIEW PAGE ========== */}
+      {/* ========== BATTLE STATISTICS PAGE ========== */}
       <Page size='A4' style={[styles.page, styles.bgColor]}>
         <Text style={[styles.pageTitle, styles.fontBold, styles.bottomXS]}>
           {'Battle Statistics'}
@@ -273,7 +273,7 @@ export function GeneratePDF({
         ))}
       </Page>
 
-      {/* ========== OVERALL PET USAGE STATISTICS PAGE ========== */}
+      {/* ========== PET STATISTICS PAGE ========== */}
       <Page size='A4' style={[styles.page, styles.bgColor]}>
         <Text style={[styles.pageTitle, styles.fontBold, styles.bottomXS]}>
           {'Pet Statistics'}
@@ -504,7 +504,7 @@ export function GeneratePDF({
         </View>
       </Page>
 
-      {/* ========== OVERALL PET PERFORMANCE STATISTICS PAGE ========== */}
+      {/* ========== PET USAGE STATISTICS PAGE ========== */}
       <Page size='A4' style={[styles.page, styles.bgColor]}>
         <Text style={[styles.pageTitle, styles.fontBold, styles.bottomXS]}>
           {'Pet Usage Statistics'}

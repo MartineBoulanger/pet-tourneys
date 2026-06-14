@@ -3,18 +3,39 @@
 import { apiTable, petsTable } from '@/actions/supabase/actions';
 import { PetExtractedData, ExportPet, Pet } from '@/types/supabase.types';
 
-export async function getUsedPetsPerLeagueForExport(id: string) {
+export async function getUsedPetsPerLeagueForExport(
+  id: string,
+  matchId?: string,
+) {
   try {
-    const lps = await apiTable('tournament_pet_stats', id);
-    const { data: stats, error: statsError } = await lps.select('*');
-    if (statsError) return { error: statsError.message };
+    let extractedPets: PetExtractedData[] = [];
 
-    const extractedPets: PetExtractedData[] = stats
-      .map((stat) => ({
-        ...stat.pet_data,
-        total_played: stat.total_played,
-      }))
-      .filter(Boolean);
+    if (matchId) {
+      const pu = await apiTable('pet_usage', id);
+      const { data: stats, error: statsError } = await pu
+        .select('*')
+        .eq('match_id', matchId);
+
+      if (statsError) return { error: statsError.message };
+
+      extractedPets = stats
+        .map((stat) => ({
+          ...stat.pet_data,
+          total_played: stat.total_played,
+        }))
+        .filter(Boolean);
+    } else {
+      const lps = await apiTable('tournament_pet_stats', id);
+      const { data: stats, error: statsError } = await lps.select('*');
+      if (statsError) return { error: statsError.message };
+
+      extractedPets = stats
+        .map((stat) => ({
+          ...stat.pet_data,
+          total_played: stat.total_played,
+        }))
+        .filter(Boolean);
+    }
 
     const uniqueNames = [...new Set(extractedPets.map((p) => p.name))];
 

@@ -33,6 +33,8 @@ export const RadialGraph = ({
         startAngle={0}
         endAngle={180}
         barSize={isMobile ? 20 : 30}
+        width='100%'
+        height='100%'
       >
         <Tooltip
           content={(props) => (

@@ -142,7 +142,11 @@ export default async function PetsStatisticsPage({
       </div>
       <PageMenu links={links} />
       <div className='flex justify-center md:justify-end gap-2.5 my-2.5 lg:mb-5'>
-        <DownloadLeagueUsedPetsButton id={id} name={entityName} />
+        <DownloadLeagueUsedPetsButton
+          id={id}
+          matchId={matchId}
+          name={entityName}
+        />
       </div>
       {stats && (
         <PetStatsList
