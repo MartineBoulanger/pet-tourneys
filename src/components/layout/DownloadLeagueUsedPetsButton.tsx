@@ -10,10 +10,12 @@ import { toastError } from '@/utils/toast';
 
 export function DownloadLeagueUsedPetsButton({
   id,
+  matchId,
   name,
   className,
 }: {
   id: string;
+  matchId?: string;
   name: string;
   className?: string;
 }) {
@@ -23,7 +25,7 @@ export function DownloadLeagueUsedPetsButton({
     setIsLoading(true);
 
     try {
-      const { data, error } = await getUsedPetsPerLeagueForExport(id);
+      const { data, error } = await getUsedPetsPerLeagueForExport(id, matchId);
 
       if (error) toastError(error);
 

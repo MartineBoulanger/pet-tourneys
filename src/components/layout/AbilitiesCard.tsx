@@ -104,6 +104,8 @@ export function AbilitiesCard({ category, abilities }: AbilitiesCardProps) {
                       alt={abilityName}
                       width={18}
                       height={18}
+                      className='w-4.5 h-4.5 object-contain'
+                      unoptimized
                     />
                     {abilityName}
                   </li>

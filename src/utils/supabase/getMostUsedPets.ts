@@ -6,7 +6,7 @@ import { BattleLog } from '@/types/supabase.types';
 // =================================================
 export function getMostUsedPets(
   battles: BattleLog[],
-  limit = 8,
+  limit = 20,
 ): Array<{
   name: string;
   count: number;

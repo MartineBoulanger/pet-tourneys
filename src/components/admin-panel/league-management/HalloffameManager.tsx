@@ -101,6 +101,7 @@ export function HalloffameManager() {
                         alt='region flag'
                         width={28}
                         height={28}
+                        unoptimized
                       />
                     </Heading>
 

@@ -1,5 +1,5 @@
 'use client';
-// TODO: fix the whole flow of creating matches, leagues, etc. It's a mess right now with all the revalidations and redirects. Maybe we can use SWR or something to manage the state better on the client side.
+
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { toastError, toastSuccess } from '@/utils/toast';

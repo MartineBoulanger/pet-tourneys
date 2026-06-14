@@ -1,4 +1,4 @@
-import { NavigationData } from '@/types/navigation-types';
+import { NavigationData } from '@/types/navigation.types';
 
 export const adminData: NavigationData = [
   {

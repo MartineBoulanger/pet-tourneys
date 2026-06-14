@@ -47,13 +47,12 @@ export function Modal({ image, onClose, onDelete }: ModalProps) {
               alt={image.public_id}
               width={image.width}
               height={image.height}
-              className='max-w-full max-h-full object-contain rounded-lg overflow-hidden'
+              className='w-full h-full object-contain rounded-lg overflow-hidden'
               style={{
                 maxHeight: 'calc(90vh - 350px)',
                 width: 'auto',
                 height: 'auto',
               }}
-              unoptimized
             />
           </div>
 

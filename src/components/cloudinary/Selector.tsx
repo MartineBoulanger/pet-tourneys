@@ -247,9 +247,7 @@ export default function Selector({
                         className='w-full h-full object-cover'
                         width={image.width}
                         height={image.height}
-                        loading='lazy' // Add lazy loading
-                        placeholder='blur' // Optional: add blur effect
-                        blurDataURL='data:image/...' // Optional: tiny base64 placeholder
+                        loading='lazy'
                       />
                       <Paragraph className='absolute bottom-0 left-0 w-full p-2.5 truncate z-50 bg-background/70'>
                         {image.public_id.split('/').pop()}

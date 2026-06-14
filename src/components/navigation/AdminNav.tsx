@@ -51,8 +51,9 @@ export const AdminNav = () => {
                   width: 'auto',
                   height: 'auto',
                 }}
-                className='rounded-full'
+                className='w-full h-full rounded-full object-cover'
                 loading='lazy'
+                unoptimized
               />
             </span>
           </Link>

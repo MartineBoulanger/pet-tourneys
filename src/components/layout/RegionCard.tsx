@@ -19,8 +19,8 @@ export function RegionCard({
         <span
           className={cn(
             'text-humanoid font-brutals-tilted tracking-wider',
-            region.includes('NA') ? 'text-beast' : '',
-            region.includes('World') ? 'text-dragonkin' : '',
+            region.includes('NA') ? 'text-red-400' : '',
+            region.includes('World') ? 'text-green-500' : '',
           )}
         >
           {region}
@@ -43,10 +43,10 @@ export function RegionCard({
                   <td className='py-2.5 pr-5 font-medium text-sm truncate max-w-[120px]'>
                     {s.player}
                   </td>
-                  <td className='py-2.5 pr-2.5 text-center text-sm text-green/90'>
+                  <td className='py-2.5 pr-2.5 text-center text-sm text-green-500'>
                     {`${s.wins}W`}
                   </td>
-                  <td className='py-2.5 pr-2.5 text-center text-sm text-red/90'>
+                  <td className='py-2.5 pr-2.5 text-center text-sm text-red-400'>
                     {`${s.losses}L`}
                   </td>
                   <td className='py-2.5 pl-2.5 text-right text-sm font-bold'>

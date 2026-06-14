@@ -43,7 +43,7 @@ export const BottomNavigation = () => {
         <>
           <Link
             href='/admin-panel'
-            className='btn-link px-5 flex justify-center'
+            className='btn-link w-6 h-6 mx-5 flex justify-center'
             title='Admin Panel'
             aria-label='Admin Panel'
           >
@@ -57,8 +57,9 @@ export const BottomNavigation = () => {
                   width: 'auto',
                   height: 'auto',
                 }}
-                className='rounded-full'
+                className='w-full h-full rounded-full object-contain'
                 loading='lazy'
+                unoptimized
               />
             </span>
           </Link>

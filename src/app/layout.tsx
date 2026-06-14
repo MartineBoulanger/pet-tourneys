@@ -45,7 +45,8 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body
-        className={`${roboto.variable} $${brutals.variable} ${brutalsTilted.variable} antialiased font-sans`}
+        suppressHydrationWarning // ignores the injections from browser extensions - this to avoid the hydration errors
+        className={`${roboto.variable} ${brutals.variable} ${brutalsTilted.variable} antialiased font-sans`}
       >
         <Header />
         <TooltipProvider>

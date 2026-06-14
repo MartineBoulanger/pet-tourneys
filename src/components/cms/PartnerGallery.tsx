@@ -34,13 +34,8 @@ export const PartnerGallery = ({ data, className }: PartnersGalleryProps) => {
                     alt={partner.partner}
                     width={150}
                     height={250}
-                    style={{
-                      width: 'auto',
-                      height: 'auto',
-                    }}
                     className='w-full h-full object-contain'
                     loading='lazy'
-                    unoptimized
                   />
                 ) : null}
               </span>

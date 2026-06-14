@@ -17,6 +17,7 @@ export function PetTypeTooltip({ type, x, y }: PetTypeTooltipProps) {
             height={40}
             width={40}
             className='border border-foreground/80 p-1 rounded-full bg-background'
+            unoptimized
           />
           <Heading as='h2' className='text-foreground tracking-wider'>
             {type.type}
@@ -39,6 +40,7 @@ export function PetTypeTooltip({ type, x, y }: PetTypeTooltipProps) {
                 height={18}
                 width={18}
                 className='border border-foreground/80 p-0.5 rounded-full'
+                unoptimized
               />
               {type.takes_more_from}
             </span>
@@ -54,6 +56,7 @@ export function PetTypeTooltip({ type, x, y }: PetTypeTooltipProps) {
                 height={18}
                 width={18}
                 className='border border-foreground/80 p-0.5 rounded-full'
+                unoptimized
               />
               {type.takes_less_from}
             </span>

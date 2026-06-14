@@ -76,7 +76,7 @@ export const PieGraph = ({
 
   return (
     <GraphWrapper className='p-2.5 lg:p-5 h-[425px] lg:h-[450px]'>
-      <PieChart>
+      <PieChart width='100%' height='100%'>
         <Tooltip
           content={(props) => (
             <CustomTooltip

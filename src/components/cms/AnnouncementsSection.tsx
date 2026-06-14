@@ -42,7 +42,6 @@ export function AnnouncementsSection({
             width={announcement.image.width}
             height={announcement.image.height}
             priority
-            unoptimized
           />
         </div>
       ) : null}

@@ -59,7 +59,7 @@ export function SignupSection({ signup }: { signup: Signup }) {
                         className='object-cover transition-transform duration-300 group-hover:scale-105'
                         width={item.image?.width || 400}
                         height={item.image?.height || 350}
-                        unoptimized
+                        // unoptimized
                       />
                     </div>
 
@@ -109,7 +109,7 @@ export function SignupSection({ signup }: { signup: Signup }) {
                       className='object-cover transition-transform duration-300 group-hover:scale-105'
                       width={item.image?.width || 400}
                       height={item.image?.height || 350}
-                      unoptimized
+                      // unoptimized
                     />
                   </div>
 

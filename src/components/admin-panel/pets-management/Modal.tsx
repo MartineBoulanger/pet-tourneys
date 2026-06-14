@@ -29,6 +29,7 @@ export function PetModal({ pet, onClose, onEdit, onDelete }: PetModalProps) {
             className='w-10 h-10 mr-2.5 lg:mr-5 inline-block'
             width={24}
             height={24}
+            unoptimized
           />
         ) : null}
         {pet.name}
@@ -43,6 +44,7 @@ export function PetModal({ pet, onClose, onEdit, onDelete }: PetModalProps) {
               className='w-full rounded-lg shadow-md'
               width={400}
               height={400}
+              unoptimized
             />
           ) : (
             <div className='w-100 h-100 bg-dark-grey rounded-lg flex items-center justify-center'>

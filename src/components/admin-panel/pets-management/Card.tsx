@@ -55,6 +55,7 @@ export function PetCard({
               width={80}
               height={80}
               unoptimized
+              loading='eager'
             />
           ) : (
             <div

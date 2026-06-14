@@ -14,7 +14,8 @@ import { getMatch } from '@/actions/supabase/api-schema/matches/getMatches';
 import { Heading, Paragraph, Container } from '@/components/ui';
 import { PageMenu } from '@/components/navigation/PageMenu';
 import { PageParams, MatchSearchParams } from '@/types/global.types';
-import { Links } from '@/types/navigation-types';
+import { Links } from '@/types/navigation.types';
+import { DownloadStatisticsPDFButton } from '@/components/layout';
 
 export async function generateMetadata({ params }: { params: PageParams }) {
   const { id } = await params;
@@ -42,6 +43,8 @@ export default async function StatisticsPage({
   let battleStats;
   let title = 'League Statistics';
   let entityName = '';
+  let matchRegion = '';
+  let matchOwner = '';
   let chartData: ChartData = {
     petUsageData: [],
     petTypeData: [],
@@ -56,6 +59,8 @@ export default async function StatisticsPage({
     battleStats = await getMatchBattleStats(id, matchId);
     title = 'Match Statistics';
     entityName = `${match.data?.player1} vs ${match.data?.player2}`;
+    matchRegion = `${match.data?.region}`;
+    matchOwner = `${match.data?.owner}`;
     chartData = {
       petUsageData: stats.slice(0, 10).map((pet) => ({
         name: pet.pet_data.name,
@@ -185,6 +190,17 @@ export default async function StatisticsPage({
         )}
       </div>
       <PageMenu links={links} />
+      <div className='flex justify-center sm:justify-end items-center mt-2.5 lg:mt-5 mb-2.5'>
+        <DownloadStatisticsPDFButton
+          leagueName={entityName}
+          petStats={stats}
+          battleStats={battleStats}
+          isMatchView={isMatchView}
+          chartData={chartData}
+          matchRegion={matchRegion}
+          matchOwner={matchOwner}
+        />
+      </div>
       <div className='mt-5'>
         <PetCharts chartData={chartData || null} data={stats || null} />
         <BattleCharts

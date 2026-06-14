@@ -54,10 +54,12 @@ const nextConfig: NextConfig = {
       },
     ],
     formats: ['image/avif', 'image/webp'],
+    minimumCacheTTL: 2678400, // 31 days
+    maximumResponseBody: 5_000_000, // image size limitation set to 5MB instead of 50MB
   },
   experimental: {
     serverActions: {
-      bodySizeLimit: '10mb',
+      bodySizeLimit: '10mb', // serves for uploading the images to Cloudinary
     },
   },
 };

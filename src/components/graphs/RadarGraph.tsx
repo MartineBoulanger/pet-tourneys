@@ -45,6 +45,8 @@ export const RadarGraph = ({
         cy='50%'
         outerRadius={isMobile ? '65%' : '70%'}
         data={data}
+        width='100%'
+        height='100%'
       >
         <Tooltip
           content={(props) => <CustomTooltip {...props} prefix={tooltip} />}
