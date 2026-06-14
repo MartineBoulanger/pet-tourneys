@@ -8,7 +8,7 @@ import { getMostUsedPets } from '@/utils/supabase/getMostUsedPets';
 import { analyzeUsedAbilities } from '@/utils/supabase/analyzeUsedAbilities';
 import { parseBattleStatistics } from '@/utils/supabase/parseBattleStats';
 import { abilitiesCategoryNames } from '@/lib/logs-data/abilitiesCategoryNames';
-import { styles } from '@/styles/AnalyzeToolPDFStyleSheet';
+import { styles } from '@/styles/PDFStyleSheet';
 
 export function GeneratePDF({
   parsedBattleLogs,
@@ -19,7 +19,7 @@ export function GeneratePDF({
   const wins = parsedBattleLogs.filter((b) => b.result === 'WIN').length;
   const losses = parsedBattleLogs.filter((b) => b.result === 'LOSS').length;
   const draws = parsedBattleLogs.filter((b) => b.result === 'DRAW').length;
-  const mostUsedPets = getMostUsedPets(parsedBattleLogs, 5);
+  const mostUsedPets = getMostUsedPets(parsedBattleLogs);
   const battleStats = parseBattleStatistics(parsedBattleLogs);
   const usedAbilities = analyzeUsedAbilities(parsedBattleLogs);
 
@@ -35,65 +35,160 @@ export function GeneratePDF({
     petPerformance: battleStats.petPerformance || {},
   };
 
+  // Totals per type
+  const typeStats = parsedPetUsage.reduce<Record<string, number>>(
+    (acc, pet) => {
+      const type = pet.pet_data.type;
+      acc[type] = (acc[type] || 0) + pet.total_played;
+      return acc;
+    },
+    {},
+  );
+
+  const sortedTypes = Object.entries(typeStats).sort((a, b) => b[1] - a[1]);
+
+  // Totals per breed — each pet has parallel arrays of breeds + times_played
+  const breedStats = parsedPetUsage.reduce<Record<string, number>>(
+    (acc, pet) => {
+      pet.pet_data.breeds.forEach((breed: string, i: number) => {
+        const count = pet.pet_data.times_played[i] || 0;
+        acc[breed] = (acc[breed] || 0) + count;
+      });
+      return acc;
+    },
+    {},
+  );
+
+  const sortedBreeds = Object.entries(breedStats).sort((a, b) => b[1] - a[1]);
+
   return (
     <Document>
       {/* ========== COVER PAGE ========== */}
-      <Page size='A4' style={styles.coverPage}>
-        <Image src={'/PML_Logo.png'} style={styles.coverImage} />
-        <Text style={styles.coverTitle}>{'Battle Logs Statistics Report'}</Text>
-        <Text style={styles.coverSubtitle}>
+      <Page size='A4' style={[styles.coverPage, styles.bgColor]}>
+        <Image
+          src={'/PMLFinalBlack.jpg'}
+          style={[styles.coverImage, styles.bottomXL]}
+        />
+        <Text style={[styles.coverTitle, styles.fontBold, styles.bottomBase]}>
+          {'Statistics Report'}
+        </Text>
+        <Text style={[styles.coverSubtitle, styles.fontBold, styles.bottomXL]}>
           {playerName || 'Anonymous Battler'}
         </Text>
-        <Text style={styles.coverMeta}>
+        <Text
+          style={[styles.textSize10, styles.textColorGrey, styles.coverFooter]}
+        >
           {'Generated on '}
           {new Date().toLocaleDateString()}
         </Text>
       </Page>
 
       {/* ========== OVERALL MATCH STATISTICS PAGE ========== */}
-      <Page size='A4' style={styles.page}>
+      <Page size='A4' style={[styles.page, styles.bgColor]}>
         {/* Title */}
-        <Text style={styles.header}>{'Overall Match Statistics'}</Text>
-        <View style={styles.blocksGrid}>
-          <View style={styles.overviewBlock}>
-            <Text style={styles.overviewBlockTitle}>{'Total Battles'}</Text>
-            <Text style={styles.overviewBlockValue}>{totalBattles}</Text>
+        <Text style={[styles.pageTitle, styles.fontBold, styles.bottomXS]}>
+          {'Match Statistics'}
+        </Text>
+        <Text
+          style={[styles.textColorGrey, styles.textSize10, styles.bottomBase]}
+        >
+          {playerName || 'Anonymous Battler'}
+        </Text>
+
+        <View style={styles.bottomBase}>
+          <Text
+            style={[
+              styles.sectionTitle,
+              styles.fontBold,
+              styles.bottomSM,
+              styles.bottomBorder,
+            ]}
+          >
+            {'General Statistics'}
+          </Text>
+
+          <View style={[styles.flexRow, styles.blockGrid]}>
+            <View style={styles.viewBlock}>
+              <Text
+                style={[
+                  styles.viewBlockLabel,
+                  styles.textSize10,
+                  styles.bottomXS,
+                ]}
+              >
+                {'Total Battles'}
+              </Text>
+              <Text style={[styles.viewBlockValue, styles.fontBold]}>
+                {totalBattles}
+              </Text>
+            </View>
+            <View style={styles.viewBlock}>
+              <Text
+                style={[
+                  styles.viewBlockLabel,
+                  styles.textSize10,
+                  styles.bottomXS,
+                ]}
+              >
+                {'Avg Battle Duration'}
+              </Text>
+              <Text style={[styles.viewBlockValue, styles.fontBold]}>
+                {calculateAverageDuration(parsedBattleLogs)}
+              </Text>
+            </View>
           </View>
-          <View style={styles.overviewBlock}>
-            <Text style={styles.overviewBlockTitle}>{'Wins'}</Text>
-            <Text style={styles.overviewBlockValue}>{wins}</Text>
-          </View>
-          <View style={styles.overviewBlock}>
-            <Text style={styles.overviewBlockTitle}>{'Losses'}</Text>
-            <Text style={styles.overviewBlockValue}>{losses}</Text>
-          </View>
-          <View style={styles.overviewBlock}>
-            <Text style={styles.overviewBlockTitle}>{'Draws'}</Text>
-            <Text style={styles.overviewBlockValue}>{draws}</Text>
-          </View>
-          <View style={styles.overviewBlock}>
-            <Text style={styles.overviewBlockTitle}>
-              {'Avg Battle Duration'}
+        </View>
+
+        <View style={styles.bottomBase}>
+          <Text
+            style={[
+              styles.sectionTitle,
+              styles.fontBold,
+              styles.bottomSM,
+              styles.bottomBorder,
+            ]}
+          >
+            {'Battle Results'}
+          </Text>
+
+          <View style={[styles.flexRow, styles.row, styles.bottomBorder]}>
+            <Text style={[styles.textSize11, styles.label, styles.fontBold]}>
+              {'Wins'}
             </Text>
-            <Text style={styles.overviewBlockValue}>
-              {calculateAverageDuration(parsedBattleLogs)}
+            <Text style={[styles.textSize10, styles.value]}>{wins}</Text>
+          </View>
+          <View style={[styles.flexRow, styles.row, styles.bottomBorder]}>
+            <Text style={[styles.textSize11, styles.label, styles.fontBold]}>
+              {'Losses'}
             </Text>
+            <Text style={[styles.textSize10, styles.value]}>{losses}</Text>
+          </View>
+          <View style={[styles.flexRow, styles.row, styles.bottomBorder]}>
+            <Text style={[styles.textSize11, styles.label, styles.fontBold]}>
+              {'Draws'}
+            </Text>
+            <Text style={[styles.textSize10, styles.value]}>{draws}</Text>
           </View>
         </View>
       </Page>
 
       {/* ========== BATTLE LOGS OVERVIEW PAGE ========== */}
-      <Page size='A4' style={styles.page}>
-        <Text style={styles.header}>{'Battle Logs Overview'}</Text>
+      <Page size='A4' style={[styles.page, styles.bgColor]}>
+        <Text style={[styles.pageTitle, styles.fontBold, styles.bottomXS]}>
+          {'Battle Statistics'}
+        </Text>
+        <Text
+          style={[styles.textColorGrey, styles.textSize10, styles.bottomBase]}
+        >
+          {playerName || 'Anonymous Battler'}
+        </Text>
+
         {parsedBattleLogs.map((battle, index) => (
-          <View
-            key={index}
-            style={[styles.overviewBlock, { width: '100%', marginBottom: 8 }]}
-          >
-            <View
-              style={{ flexDirection: 'row', justifyContent: 'space-between' }}
-            >
-              <Text style={styles.battleHeader}>
+          <View key={index} style={[styles.bottomBase, styles.bottomBorder]}>
+            <View style={[styles.flexRow, styles.row]}>
+              <Text
+                style={[styles.battleHeader, styles.bottomSM, styles.fontBold]}
+              >
                 {'Battle '}
                 {index + 1}
                 {' • '}
@@ -102,32 +197,57 @@ export function GeneratePDF({
               <Text
                 style={
                   battle.result === 'WIN'
-                    ? styles.winText
+                    ? [styles.resultText, styles.paddingSM, styles.winText]
                     : battle.result === 'LOSS'
-                      ? styles.lossText
-                      : styles.drawText
+                      ? [styles.resultText, styles.paddingSM, styles.lossText]
+                      : [styles.resultText, styles.paddingSM, styles.drawText]
                 }
               >
                 {battle.result}
               </Text>
             </View>
-            <View style={styles.players}>
-              <View style={styles.petList}>
-                <Text style={styles.playerTeamHeader}>{'Your Team'}</Text>
-                <View style={styles.petList}>
+
+            <View style={[styles.flexRow, styles.paddingSM, styles.players]}>
+              <View style={styles.teamList}>
+                <Text
+                  style={[
+                    styles.teamHeader,
+                    styles.bottomSM,
+                    styles.fontBold,
+                    styles.playerTeamHeader,
+                  ]}
+                >
+                  {'Your Team'}
+                </Text>
+                <View style={styles.teamList}>
                   {battle.player_team?.map((pet: string, i: number) => (
-                    <Text key={`player-${i}`} style={styles.petItem}>
+                    <Text
+                      key={`player-${i}`}
+                      style={[styles.teamListItem, styles.bottomXS]}
+                    >
                       {'• '}
                       {pet}
                     </Text>
                   ))}
                 </View>
               </View>
-              <View style={styles.petList}>
-                <Text style={styles.opponentTeamHeader}>{'Opponent Team'}</Text>
-                <View style={styles.petList}>
+              <View style={styles.teamList}>
+                <Text
+                  style={[
+                    styles.teamHeader,
+                    styles.bottomSM,
+                    styles.fontBold,
+                    styles.opponentTeamHeader,
+                  ]}
+                >
+                  {'Opponent Team'}
+                </Text>
+                <View style={styles.teamList}>
                   {battle.opponent_team?.map((pet: string, i: number) => (
-                    <Text key={`opponent-${i}`} style={styles.petItem}>
+                    <Text
+                      key={`opponent-${i}`}
+                      style={[styles.teamListItem, styles.bottomXS]}
+                    >
                       {'• '}
                       {pet}
                     </Text>
@@ -135,7 +255,15 @@ export function GeneratePDF({
                 </View>
               </View>
             </View>
-            <Text style={styles.battleInfo}>
+
+            <Text
+              style={[
+                styles.battleInfo,
+                styles.textSize10,
+                styles.paddingSM,
+                styles.bottomSM,
+              ]}
+            >
               {'Duration: '}
               {battle.duration}
               {' • Rounds: '}
@@ -146,41 +274,288 @@ export function GeneratePDF({
       </Page>
 
       {/* ========== OVERALL PET USAGE STATISTICS PAGE ========== */}
-      <Page size='A4' style={styles.page}>
-        <Text style={styles.header}>{'Overall Pet Usage Statistics'}</Text>
+      <Page size='A4' style={[styles.page, styles.bgColor]}>
+        <Text style={[styles.pageTitle, styles.fontBold, styles.bottomXS]}>
+          {'Pet Statistics'}
+        </Text>
+        <Text
+          style={[styles.textColorGrey, styles.textSize10, styles.bottomBase]}
+        >
+          {playerName || 'Anonymous Battler'}
+        </Text>
+
+        <View style={styles.bottomBase}>
+          <Text
+            style={[
+              styles.sectionTitle,
+              styles.fontBold,
+              styles.bottomSM,
+              styles.bottomBorder,
+            ]}
+          >
+            {'Pet Types'}
+          </Text>
+          {sortedTypes.map(([type, count], index) => (
+            <View
+              style={[styles.flexRow, styles.row, styles.bottomBorder]}
+              key={`${type}-${index}`}
+            >
+              <Text style={[styles.textSize11, styles.label, styles.fontBold]}>
+                {type}
+              </Text>
+              <Text style={[styles.textSize10, styles.value]}>{count}</Text>
+            </View>
+          ))}
+        </View>
+
+        <View style={styles.bottomBase}>
+          <Text
+            style={[
+              styles.sectionTitle,
+              styles.fontBold,
+              styles.bottomSM,
+              styles.bottomBorder,
+            ]}
+          >
+            {'Pet Breeds'}
+          </Text>
+          {sortedBreeds.map(([breed, count], index) => (
+            <View
+              style={[styles.flexRow, styles.row, styles.bottomBorder]}
+              key={`${breed}-${index}`}
+            >
+              <Text style={[styles.textSize11, styles.label, styles.fontBold]}>
+                {breed}
+              </Text>
+              <Text style={[styles.textSize10, styles.value]}>{count}</Text>
+            </View>
+          ))}
+        </View>
+
+        <View style={styles.bottomBase}>
+          <Text
+            style={[
+              styles.sectionTitle,
+              styles.fontBold,
+              styles.bottomSM,
+              styles.bottomBorder,
+            ]}
+          >{`Weather Conditions Applied - ${safeStats.totalWeatherChanges} total`}</Text>
+          {Object.entries(safeStats.weatherChanges.byType)
+            .sort((a, b) => b[1] - a[1])
+            .map(([weather, count]) => (
+              <View
+                style={[styles.flexRow, styles.row, styles.bottomBorder]}
+                key={weather}
+              >
+                <Text
+                  style={[styles.textSize11, styles.label, styles.fontBold]}
+                >
+                  {weather}
+                </Text>
+                <Text style={[styles.textSize10, styles.value]}>{count}</Text>
+              </View>
+            ))}
+        </View>
+
+        <View style={styles.bottomBase}>
+          <Text
+            style={[
+              styles.sectionTitle,
+              styles.fontBold,
+              styles.bottomSM,
+              styles.bottomBorder,
+            ]}
+          >{`Pet Swaps -- Top 10 shown down here`}</Text>
+          <View style={styles.bottomBase}>
+            <View style={[styles.flexRow, styles.blockGrid]}>
+              <View style={styles.viewBlock}>
+                <Text
+                  style={[
+                    styles.viewBlockLabel,
+                    styles.textSize10,
+                    styles.bottomXS,
+                  ]}
+                >{`Player Total`}</Text>
+                <Text style={[styles.viewBlockValue, styles.fontBold]}>
+                  {safeStats.totalPetSwaps.player}
+                </Text>
+              </View>
+              <View style={styles.viewBlock}>
+                <Text
+                  style={[
+                    styles.viewBlockLabel,
+                    styles.textSize10,
+                    styles.bottomXS,
+                  ]}
+                >{`Opponent Total`}</Text>
+                <Text style={[styles.viewBlockValue, styles.fontBold]}>
+                  {safeStats.totalPetSwaps.opponent}
+                </Text>
+              </View>
+            </View>
+          </View>
+
+          {Object.entries(safeStats.petSwapDetails)
+            .sort((a, b) => b[1] - a[1])
+            .slice(0, 10)
+            .map(([pet, totalSwaps], index) => (
+              <View
+                style={[styles.flexRow, styles.row, styles.bottomBorder]}
+                key={`${pet}-${index}`}
+              >
+                <Text
+                  style={[styles.textSize11, styles.label, styles.fontBold]}
+                >
+                  {pet}
+                </Text>
+                <Text style={[styles.textSize10, styles.value]}>
+                  {totalSwaps}
+                </Text>
+              </View>
+            ))}
+        </View>
+
+        <View style={styles.bottomBase}>
+          <Text
+            style={[
+              styles.sectionTitle,
+              styles.fontBold,
+              styles.bottomSM,
+              styles.bottomBorder,
+            ]}
+          >
+            {'Pet Assassination'}
+          </Text>
+          <View style={[styles.flexRow, styles.blockGrid]}>
+            <View style={styles.viewBlock}>
+              <Text
+                style={[
+                  styles.viewBlockLabel,
+                  styles.textSize10,
+                  styles.bottomXS,
+                ]}
+              >
+                {'Total Kills'}
+              </Text>
+              <Text style={[styles.viewBlockValue, styles.fontBold]}>
+                {safeStats.totalKills}
+              </Text>
+            </View>
+            <View style={styles.viewBlock}>
+              <Text
+                style={[
+                  styles.viewBlockLabel,
+                  styles.textSize10,
+                  styles.bottomXS,
+                ]}
+              >
+                {'Total Deaths'}
+              </Text>
+              <Text style={[styles.viewBlockValue, styles.fontBold]}>
+                {safeStats.totalDeaths}
+              </Text>
+            </View>
+          </View>
+        </View>
+
+        <View style={styles.bottomBase}>
+          <Text
+            style={[
+              styles.sectionTitle,
+              styles.fontBold,
+              styles.bottomSM,
+              styles.bottomBorder,
+            ]}
+          >{`Pet Assassins -- Top 10 shown down here`}</Text>
+          <View style={[styles.flexRow, styles.tableHeader, styles.paddingSM]}>
+            <Text style={[styles.col1, styles.fontBold, styles.textSize10]}>
+              {'Pet'}
+            </Text>
+            <Text
+              style={[styles.col2, styles.fontBold, styles.textSize10]}
+            ></Text>
+            <Text
+              style={[styles.col3, styles.fontBold, styles.textSize10]}
+            ></Text>
+            <Text style={[styles.col4, styles.fontBold, styles.textSize10]}>
+              {'Kills'}
+            </Text>
+            <Text style={[styles.col5, styles.fontBold, styles.textSize10]}>
+              {'Deaths'}
+            </Text>
+          </View>
+          {Object.entries(safeStats.petPerformance)
+            .filter(([pet]) => pet)
+            .sort((a, b) => (b[1]?.kills || 0) - (a[1]?.kills || 0))
+            .slice(0, 10)
+            .map(([pet, performance], index) => (
+              <View
+                style={[styles.flexRow, styles.paddingSM, styles.bottomBorder]}
+                key={`${pet}-${index}`}
+              >
+                <Text style={styles.col1}>{pet}</Text>
+                <Text style={styles.col2}></Text>
+                <Text style={styles.col2}></Text>
+                <Text style={styles.col4}>{performance?.kills || 0}</Text>
+                <Text style={styles.col5}>{performance?.deaths || 0}</Text>
+              </View>
+            ))}
+        </View>
+      </Page>
+
+      {/* ========== OVERALL PET PERFORMANCE STATISTICS PAGE ========== */}
+      <Page size='A4' style={[styles.page, styles.bgColor]}>
+        <Text style={[styles.pageTitle, styles.fontBold, styles.bottomXS]}>
+          {'Pet Usage Statistics'}
+        </Text>
+        <Text
+          style={[styles.textColorGrey, styles.textSize10, styles.bottomBase]}
+        >
+          {playerName || 'Anonymous Battler'}
+        </Text>
+
         {mostUsedPets.length > 0 && (
-          <View style={{ marginBottom: 8 }}>
-            <Text style={styles.sectionHeader}>{'Top 5 Most Used Pets'}</Text>
-            <View style={styles.tableRow}>
-              <Text style={[styles.tableCell, styles.tableHeader]}>
+          <View style={styles.bottomBase}>
+            <Text
+              style={[
+                styles.sectionTitle,
+                styles.fontBold,
+                styles.bottomSM,
+                styles.bottomBorder,
+              ]}
+            >
+              {'Used By Overview'}
+            </Text>
+            <View
+              style={[styles.flexRow, styles.tableHeader, styles.paddingSM]}
+            >
+              <Text style={[styles.col1, styles.fontBold, styles.textSize10]}>
                 {'Pet'}
               </Text>
-              <Text style={[styles.tableCell, styles.tableHeader]}>
+              <Text
+                style={[styles.col2, styles.fontBold, styles.textSize10]}
+              ></Text>
+              <Text
+                style={[styles.col3, styles.fontBold, styles.textSize10]}
+              ></Text>
+              <Text style={[styles.col4, styles.fontBold, styles.textSize10]}>
                 {'Total Uses'}
               </Text>
-              <Text style={[styles.tableCell, styles.tableHeader]}>
-                {'Player Uses'}
-              </Text>
-              <Text style={[styles.tableCell, styles.tableHeader]}>
-                {'Opponent Uses'}
-              </Text>
-              <Text style={[styles.tableCell, styles.tableHeader]}>
-                {'Team'}
+              <Text style={[styles.col5, styles.fontBold, styles.textSize10]}>
+                {'Used By'}
               </Text>
             </View>
             {mostUsedPets.map((pet, index) => (
               <View
                 key={index}
-                style={[
-                  styles.tableRow,
-                  { backgroundColor: index % 2 === 0 ? '#f1f1f1' : '#ffffff' },
-                ]}
+                style={[styles.flexRow, styles.paddingSM, styles.bottomBorder]}
               >
-                <Text style={styles.tableCell}>{pet.name}</Text>
-                <Text style={styles.tableCell}>{pet.count}</Text>
-                <Text style={styles.tableCell}>{pet.playerCount || '-'}</Text>
-                <Text style={styles.tableCell}>{pet.opponentCount || '-'}</Text>
-                <Text style={styles.tableCell}>
+                <Text style={styles.col1}>{pet.name}</Text>
+                <Text style={styles.col2}></Text>
+                <Text style={styles.col3}></Text>
+                <Text style={styles.col4}>{pet.count}</Text>
+                <Text style={styles.col5}>
                   {pet.team === 'player'
                     ? 'Player'
                     : pet.team === 'opponent'
@@ -192,200 +567,89 @@ export function GeneratePDF({
           </View>
         )}
         {parsedPetUsage.length > 0 && (
-          <View style={{ marginBottom: 8 }}>
-            <Text style={[styles.sectionHeader, { marginTop: 30 }]}>
-              {'Pet Usage List'}
+          <View style={styles.bottomBase}>
+            <Text
+              style={[
+                styles.sectionTitle,
+                styles.fontBold,
+                styles.bottomSM,
+                styles.bottomBorder,
+              ]}
+            >
+              {'Used Pets Overview'}
             </Text>
-            <View style={styles.tableRow}>
-              <Text style={[styles.tableCell, styles.tableHeader]}>
+            <View
+              style={[styles.flexRow, styles.tableHeader, styles.paddingSM]}
+            >
+              <Text style={[styles.col1, styles.fontBold, styles.textSize10]}>
                 {'Pet'}
               </Text>
-              <Text style={[styles.tableCell, styles.tableHeader]}>
+              <Text style={[styles.col2, styles.fontBold, styles.textSize10]}>
                 {'Type'}
               </Text>
-              <Text style={[styles.tableCell, styles.tableHeader]}>
+              <Text style={[styles.col3, styles.fontBold, styles.textSize10]}>
                 {'Breeds'}
               </Text>
-              <Text style={[styles.tableCell, styles.tableHeader]}>
-                {'Played Per Breed'}
+              <Text style={[styles.col4, styles.fontBold, styles.textSize10]}>
+                {'Played/Breed'}
               </Text>
-              <Text style={[styles.tableCell, styles.tableHeader]}>
+              <Text style={[styles.col5, styles.fontBold, styles.textSize10]}>
                 {'Total Played'}
               </Text>
             </View>
             {parsedPetUsage.map((pet, index) => (
               <View
                 key={index}
-                style={[
-                  styles.tableRow,
-                  { backgroundColor: index % 2 === 0 ? '#f1f1f1' : '#ffffff' },
-                ]}
+                style={[styles.flexRow, styles.paddingSM, styles.bottomBorder]}
               >
-                <Text style={styles.tableCell}>{pet.pet_data.name}</Text>
-                <Text style={styles.tableCell}>{pet.pet_data.type}</Text>
-                <Text style={styles.tableCell}>
+                <Text style={styles.col1}>{pet.pet_data.name}</Text>
+                <Text style={styles.col2}>{pet.pet_data.type}</Text>
+                <Text style={styles.col3}>
                   {pet.pet_data.breeds.join(', ')}
                 </Text>
-                <Text style={styles.tableCell}>
+                <Text style={styles.col4}>
                   {pet.pet_data.times_played.join(', ')}
                 </Text>
-                <Text style={styles.tableCell}>{pet.total_played}</Text>
+                <Text style={styles.col5}>{pet.total_played}</Text>
               </View>
             ))}
           </View>
         )}
       </Page>
 
-      {/* ========== OVERALL PET PERFORMANCE STATISTICS PAGE ========== */}
-      <Page size='A4' style={styles.page}>
-        <Text style={styles.header}>
-          {'Overall Pet Performance Statistics'}
-        </Text>
-        <View style={styles.blocksGrid}>
-          <View style={styles.overviewBlock}>
-            <Text style={styles.overviewBlockTitle}>{'Pet Kills'}</Text>
-            <Text style={styles.overviewBlockValue}>
-              {safeStats.totalKills}
-            </Text>
-          </View>
-          <View style={styles.overviewBlock}>
-            <Text style={styles.overviewBlockTitle}>{'Pet Deaths'}</Text>
-            <Text style={styles.overviewBlockValue}>
-              {safeStats.totalDeaths}
-            </Text>
-          </View>
-        </View>
-        {safeStats.petPerformance &&
-          Object.keys(safeStats.petPerformance).length > 0 && (
-            <View style={{ marginBottom: 8 }}>
-              <Text style={[styles.sectionHeader, { marginTop: 30 }]}>
-                {'Pet Performance List'}
-              </Text>
-              <View style={styles.tableRow}>
-                <Text style={[styles.tableCell, styles.tableHeader]}>
-                  {'Pet'}
-                </Text>
-                <Text style={[styles.tableCell, styles.tableHeader]}>
-                  {'Kills'}
-                </Text>
-                <Text style={[styles.tableCell, styles.tableHeader]}>
-                  {'Deaths'}
-                </Text>
-              </View>
-              {Object.entries(safeStats.petPerformance)
-                .filter(([pet]) => pet)
-                .sort((a, b) => (b[1]?.kills || 0) - (a[1]?.kills || 0))
-                .map(([pet, performance], index) => (
-                  <View
-                    key={pet}
-                    style={[
-                      styles.tableRow,
-                      {
-                        backgroundColor:
-                          index % 2 === 0 ? '#f1f1f1' : '#ffffff',
-                      },
-                    ]}
-                  >
-                    <Text style={styles.tableCell}>{pet}</Text>
-                    <Text style={styles.tableCell}>
-                      {performance?.kills || 0}
-                    </Text>
-                    <Text style={styles.tableCell}>
-                      {performance?.deaths || 0}
-                    </Text>
-                  </View>
-                ))}
-            </View>
-          )}
-      </Page>
-
-      {/* ========== OVERALL PET SWAPS STATISTICS PAGE ========== */}
-      <Page size='A4' style={styles.page}>
-        <Text style={styles.header}>{'Overall Pet Swaps Statistics'}</Text>
-        <View style={styles.blocksGrid}>
-          <View style={styles.overviewBlock}>
-            <Text style={styles.overviewBlockTitle}>
-              {'Total Swaps Player'}
-            </Text>
-            <Text style={styles.overviewBlockValue}>
-              {safeStats.totalPetSwaps.player}
-            </Text>
-          </View>
-          <View style={styles.overviewBlock}>
-            <Text style={styles.overviewBlockTitle}>
-              {'Total Swaps Opponent'}
-            </Text>
-            <Text style={styles.overviewBlockValue}>
-              {safeStats.totalPetSwaps.opponent}
-            </Text>
-          </View>
-        </View>
-        <Text style={[styles.sectionHeader, { marginTop: 30 }]}>
-          {'Pet Swaps List'}
-        </Text>
-        <View style={styles.tableRow}>
-          <Text style={[styles.tableCell, styles.tableHeader]}>{'Pet'}</Text>
-          <Text style={[styles.tableCell, styles.tableHeader]}>{'Swaps'}</Text>
-        </View>
-        {Object.entries(safeStats.petSwapDetails)
-          .sort((a, b) => b[1] - a[1])
-          .map(([pet, totalSwaps], index) => (
-            <View
-              key={pet}
-              style={[
-                styles.tableRow,
-                { backgroundColor: index % 2 === 0 ? '#f1f1f1' : '#ffffff' },
-              ]}
-            >
-              <Text style={styles.tableCell}>{pet}</Text>
-              <Text style={styles.tableCell}>{totalSwaps}</Text>
-            </View>
-          ))}
-      </Page>
-
-      {/* ========== OVERALL WEATHER CONDITIONS STATISTICS PAGE ========== */}
-      <Page size='A4' style={styles.page}>
-        <Text style={styles.header}>
-          {'Overall Weather Conditions Statistics'}
-        </Text>
-        <View style={[styles.overviewBlock, { width: '100%' }]}>
-          <Text style={styles.overviewBlockTitle}>
-            {'Total Weather Conditions'}
-          </Text>
-          <Text style={styles.overviewBlockValue}>
-            {safeStats.totalWeatherChanges}
-          </Text>
-        </View>
-        <Text style={[styles.sectionHeader, { marginTop: 30 }]}>
-          {'Weather Condition Applied'}
-        </Text>
-        <View style={styles.blocksGrid}>
-          {Object.entries(safeStats.weatherChanges.byType)
-            .sort((a, b) => b[1] - a[1])
-            .map(([weather, count]) => (
-              <View key={weather} style={styles.overviewBlock}>
-                <Text style={styles.overviewBlockTitle}>{weather}</Text>
-                <Text style={styles.overviewBlockValue}>{count}</Text>
-              </View>
-            ))}
-        </View>
-      </Page>
-
       {/* ========== OVERALL PET ABILITIES STATISTICS PAGE ========== */}
-      <Page size='A4' style={styles.page}>
-        <Text style={styles.header}>{'Overall Pet Abilities Statistics'}</Text>
-        <View style={[styles.overviewBlock, { width: '100%' }]}>
-          <Text style={styles.overviewBlockTitle}>
-            {'Total Unique Abilities Used'}
-          </Text>
-          <Text style={styles.overviewBlockValue}>
-            {usedAbilities.totalUniqueAbilitiesUsed}
-          </Text>
-        </View>
-        <Text style={[styles.sectionHeader, { marginTop: 30 }]}>
-          {'All Used Abilities Per Category'}
+      <Page size='A4' style={[styles.page, styles.bgColor]}>
+        <Text style={[styles.pageTitle, styles.fontBold, styles.bottomXS]}>
+          {'Pet Abilities Statistics'}
         </Text>
-        <View style={styles.blocksGrid}>
+        <Text
+          style={[styles.textColorGrey, styles.textSize10, styles.bottomBase]}
+        >
+          {playerName || 'Anonymous Battler'}
+        </Text>
+
+        <Text
+          style={[
+            styles.paragraph,
+            styles.textSize10,
+            styles.bottomBase,
+            styles.paddingSM,
+          ]}
+        >
+          {
+            'Down here you will see each category where a pet ability can belong to, together with the number of abilities used from the category. The total of abilities used is the number of unique abilities used, because an ability can belong to multiple categories.'
+          }
+        </Text>
+
+        <View style={styles.bottomBase}>
+          <Text
+            style={[
+              styles.sectionTitle,
+              styles.fontBold,
+              styles.bottomSM,
+              styles.bottomBorder,
+            ]}
+          >{`Used Abilities - ${usedAbilities.totalUniqueAbilitiesUsed} total`}</Text>
           {(
             Object.entries(usedAbilities) as [
               keyof AbilityCategories,
@@ -393,22 +657,30 @@ export function GeneratePDF({
             ][]
           )
             .filter(([_, abilities]) => abilities && abilities.length > 0)
-            .map(([category, abilities], index) => (
-              <View key={index} style={styles.overviewBlock}>
-                <Text style={styles.overviewBlockTitle}>
-                  {abilitiesCategoryNames[category]} ({abilities.length})
-                </Text>
-                <Text style={styles.overviewBlockValueList}>
-                  {abilities.map((ability, i) => (
-                    <Text key={i} style={{ marginBottom: 4 }}>
-                      {'• '}
-                      {ability}
-                      {'\n'}
+            .map(([category, abilities], index) => {
+              if (Array.isArray(abilities) && abilities.length > 0) {
+                const categoryLabel =
+                  abilitiesCategoryNames[
+                    category as keyof typeof abilitiesCategoryNames
+                  ] || category;
+                return (
+                  <View
+                    style={[styles.flexRow, styles.row, styles.bottomBorder]}
+                    key={`${category}-${index}`}
+                  >
+                    <Text
+                      style={[styles.textSize11, styles.label, styles.fontBold]}
+                    >
+                      {categoryLabel}
                     </Text>
-                  ))}
-                </Text>
-              </View>
-            ))}
+                    <Text style={[styles.textSize10, styles.value]}>
+                      {abilities.length}
+                    </Text>
+                  </View>
+                );
+              }
+              return null;
+            })}
         </View>
       </Page>
     </Document>
