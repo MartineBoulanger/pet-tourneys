@@ -31,7 +31,7 @@ export function GeneratePDF({
     weatherChanges: battleStats.weatherChanges || { total: 0, byType: {} },
     totalWeatherChanges: battleStats.totalWeatherChanges || 0,
     totalDeaths: battleStats.totalDeaths || 0,
-    totalKills: battleStats.totalDeaths || 0,
+    totalKills: battleStats.totalKills || 0,
     petPerformance: battleStats.petPerformance || {},
   };
 
