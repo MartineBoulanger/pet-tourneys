@@ -152,6 +152,7 @@ export default function Selector({
                   className='w-32 h-32 object-cover rounded-lg'
                   width={image.width}
                   height={image.height}
+                  unoptimized
                 />
                 <Button
                   type='button'
@@ -248,6 +249,7 @@ export default function Selector({
                         width={image.width}
                         height={image.height}
                         loading='lazy'
+                        unoptimized
                       />
                       <Paragraph className='absolute bottom-0 left-0 w-full p-2.5 truncate z-50 bg-background/70'>
                         {image.public_id.split('/').pop()}

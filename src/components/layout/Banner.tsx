@@ -16,6 +16,7 @@ export function Banner({ bannerimage, className = '' }: BannerProps) {
         width={bannerimage.width}
         height={bannerimage.height}
         className='h-full w-full object-cover'
+        unoptimized
       />
       <div className='absolute inset-0 bg-gradient-to-b from-background/70 via-background/80 to-background' />
     </div>

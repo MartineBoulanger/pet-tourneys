@@ -25,6 +25,7 @@ export const PageCard = ({ page, index }: { page: Page; index: number }) => {
             }}
             width={page.bannerimage.width}
             height={page.bannerimage.height}
+            unoptimized
           />
         ) : (
           <Image
@@ -40,7 +41,6 @@ export const PageCard = ({ page, index }: { page: Page; index: number }) => {
             width={500}
             height={500}
             priority={index === 0}
-            unoptimized
           />
         )}
         <Link

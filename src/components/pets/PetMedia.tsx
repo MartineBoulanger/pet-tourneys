@@ -37,6 +37,7 @@ export function PetImage({ pet }: { pet: Pet }) {
           width={400}
           height={400}
           loading='lazy'
+          unoptimized
         />
       ) : (
         <div className='w-[400px] h-[400px] bg-medium-grey flex items-center justify-center'>
@@ -59,6 +60,7 @@ export function PetCardImage({ pet }: { pet: Pet }) {
           width={80}
           height={80}
           loading='lazy'
+          unoptimized
         />
       ) : (
         <div className='w-20 h-20 bg-medium-grey flex items-center justify-center rounded-md'>
@@ -98,6 +100,7 @@ export function PlayerPetImage({ pet }: { pet: Pet }) {
           width={90}
           height={90}
           loading='lazy'
+          unoptimized
         />
       ) : (
         <div className='w-full h-full bg-medium-grey flex items-center justify-center rounded-md'>
@@ -120,6 +123,7 @@ export function PlayerPetCardImage({ pet }: { pet: Pet }) {
           width={100}
           height={100}
           loading='lazy'
+          unoptimized
         />
       ) : (
         <div className='w-full h-full bg-medium-grey flex items-center justify-center rounded-md'>

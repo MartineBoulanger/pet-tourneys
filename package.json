@@ -11,7 +11,7 @@
     "gen-types:api": "npx supabase gen types typescript --project-id sixzjnpdrixxkkkjaaai --schema api > src/types/api.types.ts",
     "gen-types:pets": "npx supabase gen types typescript --project-id sixzjnpdrixxkkkjaaai --schema pets > src/types/pets.types.ts",
     "gen-types:cms": "npx supabase gen types typescript --project-id sixzjnpdrixxkkkjaaai --schema cms > src/types/cms.types.ts",
-    "seed-abilities": "npx tsx src/actions/supabase/pets-schema/abilities/seedAbilities.ts"
+    "seed-abilities": "npx tsx src/actions/supabase/pets-schema/abilities/seedAbilitiesPlaywright.ts"
   },
   "dependencies": {
     "@react-pdf/renderer": "^4.3.2",
@@ -44,6 +44,9 @@
     "@types/react-dom": "19.2.3",
     "eslint": "^9.36.0",
     "eslint-config-next": "16.1.1",
+    "playwright": "^1.61.1",
+    "playwright-extra": "^4.3.6",
+    "puppeteer-extra-plugin-stealth": "^2.11.2",
     "tailwind-merge": "^3.5.0",
     "tailwindcss": "^4.1.13",
     "typescript": "^5.9.2"

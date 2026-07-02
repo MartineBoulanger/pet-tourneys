@@ -53,6 +53,7 @@ export function Modal({ image, onClose, onDelete }: ModalProps) {
                 width: 'auto',
                 height: 'auto',
               }}
+              unoptimized
             />
           </div>
 

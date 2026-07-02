@@ -21,6 +21,7 @@ export function ImageCard({ image, isDownloadable = false }: ImageCardProps) {
               fill
               className='object-cover lg:group-hover:scale-110 transition-transform duration-500'
               sizes='(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw'
+              unoptimized
             />
 
             {/* Hover overlay */}

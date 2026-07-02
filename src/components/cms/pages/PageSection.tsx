@@ -40,6 +40,7 @@ export function PageSection({ section }: { section: Section }) {
                 }}
                 width={image.width}
                 height={image.height}
+                unoptimized
               />
             </div>
           )
@@ -77,6 +78,7 @@ export function PageSection({ section }: { section: Section }) {
                 }}
                 width={image.width}
                 height={image.height}
+                unoptimized
               />
               <div className='rounded-full w-40 h-1 my-5 mx-auto bg-humanoid' />
               <div
@@ -134,6 +136,7 @@ export function PageSection({ section }: { section: Section }) {
                   }}
                   width={image.width}
                   height={image.height}
+                  unoptimized
                 />
                 <div className='lg:hidden rounded-full w-40 h-1 my-5 mx-auto bg-humanoid' />
                 <div className='hidden lg:block rounded-full h-40 w-1 mx-5 my-auto bg-humanoid' />

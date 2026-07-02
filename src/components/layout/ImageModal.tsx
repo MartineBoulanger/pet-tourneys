@@ -33,6 +33,7 @@ export function ImageModal({
             className='w-full h-full object-cover'
             width={image.width}
             height={image.height}
+            unoptimized
           />
         </div>
         {isDownloadable && (
