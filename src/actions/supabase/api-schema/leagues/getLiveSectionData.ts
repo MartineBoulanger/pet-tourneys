@@ -10,6 +10,7 @@ import {
 } from '@/types/supabase.types';
 import { apiTable, petsTable } from '@/actions/supabase/actions';
 import { getUsedPetsPerLeagueForExport } from '@/actions/supabase/api-schema/statistics/getUsedPetsPerLeague';
+import { fetchAllTableRows } from '@/utils/supabase/fetchAllTableRows';
 
 // =================================================
 // Get data for the live section on the homepage
@@ -111,13 +112,12 @@ export async function getLiveSectionData(): Promise<{
       standingsByRegion[region] = players.slice(0, 4);
     }
 
-    const { data: petUsageRows, error: puErr } = await petUsageTable.select(
-      'pet_data, total_played, week, affix',
+    const petUsage = await fetchAllTableRows<PetUsageRow>(
+      async (from, to) =>
+        await petUsageTable
+          .select('pet_data, total_played, week, affix')
+          .range(from, to),
     );
-
-    if (puErr) throw new Error(puErr.message);
-
-    const petUsage = (petUsageRows ?? []) as PetUsageRow[];
 
     const petNames = [
       ...new Set(
