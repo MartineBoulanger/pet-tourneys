@@ -785,12 +785,14 @@ export type LiveSectionData = {
   topPetOverall: TopPet | null;
   topPetByAffix: Record<string, TopPet>;
   topPetByWeek: Record<number, TopPet>;
+  topPetByRegion: Record<string, TopPet>;
   availableAffixes: string[];
   availableWeeks: number[];
 };
 
 type PetRowData = { name?: string } & Record<string, unknown>;
 export type PetUsageRow = {
+  match_id: string;
   pet_data: PetRowData | null;
   total_played: number;
   week: number | null;

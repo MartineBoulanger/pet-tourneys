@@ -47,7 +47,7 @@ export async function getLiveSectionData(): Promise<{
 
     // 2. Fetch all matches (only the columns we need)
     const { data: matches, error: mErr } = await matchesTable.select(
-      'owner, outcome, region, is_forfeit, player1, player2',
+      'id, owner, outcome, region, is_forfeit, player1, player2',
     );
 
     if (mErr) throw new Error(mErr.message);
@@ -115,7 +115,7 @@ export async function getLiveSectionData(): Promise<{
     const petUsage = await fetchAllTableRows<PetUsageRow>(
       async (from, to) =>
         await petUsageTable
-          .select('pet_data, total_played, week, affix')
+          .select('match_id, pet_data, total_played, week, affix')
           .range(from, to),
     );
 
@@ -222,6 +222,33 @@ export async function getLiveSectionData(): Promise<{
       }
     }
 
+    const matchRegionMap: Record<string, string> = {};
+    for (const m of matches ?? []) {
+      if (m.id) matchRegionMap[m.id] = m.region ?? 'Unknown';
+    }
+
+    const topPetByRegion: Record<string, TopPet> = {};
+    for (const region of regions) {
+      const petTotals: Record<string, { name: string; total: number }> = {};
+      for (const r of petUsage.filter(
+        (r) => matchRegionMap[r.match_id] === region,
+      )) {
+        const name = r.pet_data?.name ?? 'Unknown';
+        if (!petTotals[name]) petTotals[name] = { name, total: 0 };
+        petTotals[name].total += r.total_played;
+      }
+      const best = Object.values(petTotals).sort(
+        (a, b) => b.total - a.total,
+      )[0];
+      if (best) {
+        topPetByRegion[region] = {
+          name: best.name,
+          image: imageMap[best.name] ?? null,
+          total_played: best.total,
+        };
+      }
+    }
+
     const availableAffixes = allAffixes;
     const availableWeeks = allWeeks;
 
@@ -235,6 +262,7 @@ export async function getLiveSectionData(): Promise<{
         topPetOverall,
         topPetByAffix,
         topPetByWeek,
+        topPetByRegion,
         availableAffixes,
         availableWeeks,
       },

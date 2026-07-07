@@ -16,12 +16,16 @@ export async function LiveSection() {
     topPetOverall,
     topPetByAffix,
     topPetByWeek,
+    topPetByRegion,
     availableAffixes,
     availableWeeks,
   } = data;
 
   const hasPetData =
-    topPetOverall || availableAffixes.length > 0 || availableWeeks.length > 0;
+    topPetOverall ||
+    availableAffixes.length > 0 ||
+    availableWeeks.length > 0 ||
+    topPetByRegion;
 
   return (
     <div className='bg-light-grey p-5'>
@@ -45,78 +49,94 @@ export async function LiveSection() {
               </Heading>
             </div>
 
-            {/* Pet stats */}
-            {hasPetData && (
-              <>
-                <Heading
-                  as='h3'
-                  className='text-xs font-bold uppercase tracking-widest mb-2.5 lg:mb-5'
-                >
-                  {'Most Used Pet by...'}
-                </Heading>
-                <div className='grid grid-cols-2 sm:grid-cols-3 gap-2.5'>
-                  {topPetOverall && (
-                    <PetBadge pet={topPetOverall} label='Season' />
-                  )}
-                </div>
-                {availableAffixes && (
-                  <>
-                    <div className='w-full h-0.5 my-2.5 sm:my-5 rounded-xl bg-medium-grey/50' />
-                    <div className='grid grid-cols-2 sm:grid-cols-3 gap-2.5'>
-                      {availableAffixes.map((affix) =>
-                        topPetByAffix[affix] ? (
-                          <PetBadge
-                            key={affix}
-                            pet={topPetByAffix[affix]}
-                            label={affix}
-                          />
-                        ) : null,
-                      )}
-                    </div>
-                  </>
-                )}
-                {availableWeeks && (
-                  <>
-                    <div className='w-full h-0.5 my-2.5 sm:my-5 rounded-xl bg-medium-grey/50' />
-                    <div className='grid grid-cols-2 sm:grid-cols-3 gap-2.5'>
-                      {availableWeeks.map((week) =>
-                        topPetByWeek[week] ? (
-                          <PetBadge
-                            key={week}
-                            pet={topPetByWeek[week]}
-                            label={`Week ${week}`}
-                          />
-                        ) : null,
-                      )}
-                    </div>
-                  </>
-                )}
-              </>
-            )}
-          </div>
+            {/* Standings grid */}
 
-          {/* Standings grid */}
-          <div className='flex flex-col'>
-            {regions.length > 0 ? (
-              <>
-                <Heading
-                  as='h3'
-                  className='text-xs font-bold uppercase tracking-widest mb-2.5 lg:mb-5'
-                >
-                  {'Top 4 — by Region'}
-                </Heading>
-                <div className='grid sm:grid-cols-2 gap-2.5 lg:gap-5'>
-                  {regions.map((region) => (
-                    <RegionCard
-                      key={region}
-                      region={region}
-                      standings={standingsByRegion[region] ?? []}
-                    />
-                  ))}
-                </div>
-              </>
-            ) : null}
+            <div className='flex flex-col'>
+              {regions.length > 0 ? (
+                <>
+                  <Heading
+                    as='h3'
+                    className='text-xs font-bold uppercase tracking-widest mb-2.5 lg:mb-5'
+                  >
+                    {'Top 4 — by Region'}
+                  </Heading>
+                  <div className='grid sm:grid-cols-2 gap-2.5 lg:gap-5'>
+                    {regions.map((region) => (
+                      <RegionCard
+                        key={region}
+                        region={region}
+                        standings={standingsByRegion[region] ?? []}
+                      />
+                    ))}
+                  </div>
+                </>
+              ) : null}
+            </div>
           </div>
+          {/* Pet stats */}
+          {hasPetData && (
+            <div>
+              <Heading
+                as='h3'
+                className='text-xs font-bold uppercase tracking-widest mb-2.5 lg:mb-5'
+              >
+                {'Most Used Pet by...'}
+              </Heading>
+              <div className='grid grid-cols-2 sm:grid-cols-3 gap-2.5'>
+                {topPetOverall && (
+                  <PetBadge pet={topPetOverall} label='Season' />
+                )}
+              </div>
+              {regions.length > 0 && (
+                <>
+                  <div className='w-full h-0.5 my-2.5 sm:my-5 rounded-xl bg-medium-grey/50' />
+                  <div className='grid grid-cols-2 sm:grid-cols-3 gap-2.5'>
+                    {regions.map((region) =>
+                      topPetByRegion[region] ? (
+                        <PetBadge
+                          key={region}
+                          pet={topPetByRegion[region]}
+                          label={region}
+                        />
+                      ) : null,
+                    )}
+                  </div>
+                </>
+              )}
+              {availableAffixes && (
+                <>
+                  <div className='w-full h-0.5 my-2.5 sm:my-5 rounded-xl bg-medium-grey/50' />
+                  <div className='grid grid-cols-2 sm:grid-cols-3 gap-2.5'>
+                    {availableAffixes.map((affix) =>
+                      topPetByAffix[affix] ? (
+                        <PetBadge
+                          key={affix}
+                          pet={topPetByAffix[affix]}
+                          label={affix}
+                        />
+                      ) : null,
+                    )}
+                  </div>
+                </>
+              )}
+              {availableWeeks && (
+                <>
+                  <div className='w-full h-0.5 my-2.5 sm:my-5 rounded-xl bg-medium-grey/50' />
+                  <div className='grid grid-cols-2 sm:grid-cols-3 gap-2.5'>
+                    {availableWeeks.map((week) =>
+                      topPetByWeek[week] ? (
+                        <PetBadge
+                          key={week}
+                          pet={topPetByWeek[week]}
+                          label={`Week ${week}`}
+                        />
+                      ) : null,
+                    )}
+                  </div>
+                </>
+              )}
+            </div>
+          )}
         </div>
       </Container>
     </div>
