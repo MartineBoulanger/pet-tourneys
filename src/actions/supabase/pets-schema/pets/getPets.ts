@@ -1,10 +1,10 @@
 'use server';
 
+import { revalidatePath } from 'next/cache';
 import { petsTable } from '@/actions/supabase/actions';
 import { Pet } from '@/types/supabase.types';
 import { fetchAllTableRows } from '@/utils/supabase/fetchAllTableRows';
 import { parseCloudinaryImage } from '@/utils/supabase/parseCloudinaryImage';
-import { revalidatePath } from 'next/cache';
 
 // =================================================
 // Get paginated pets

@@ -60,4 +60,10 @@ export const headerData: NavigationData = [
     linkText: 'Analyze Tool',
     text: 'Want to check your personal battle statistics? Check out the analyze tool and download the PDF of your battle result!',
   },
+  {
+    id: 8,
+    url: '/rematch-import-tool',
+    linkText: 'Rematch Import Tool',
+    text: 'Stepping over to the addon PetMatch? Use this tool to get your teams from the Rematch.lua file and turn it into import strings for PetMatch',
+  },
 ];

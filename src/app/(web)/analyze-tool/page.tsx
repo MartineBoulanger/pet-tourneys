@@ -14,7 +14,7 @@ export default function AnalyzerPage() {
   return (
     <Container className='lg:px-5'>
       <Heading className='text-center'>{'Pet Battle Logs Analyzer'}</Heading>
-      <Paragraph className='text-center max-w-[600px] mx-auto text-humanois'>
+      <Paragraph className='text-center max-w-[600px] mx-auto text-humanoid'>
         {'Analyze your personal pet battle logs.'}
       </Paragraph>
       <Paragraph className='text-center mb-5 max-w-[800px] mx-auto text-sm text-foreground/70'>
