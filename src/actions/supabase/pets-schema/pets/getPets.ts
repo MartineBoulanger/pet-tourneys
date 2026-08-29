@@ -121,3 +121,67 @@ export async function getPet(id: number) {
     return { success: false, error: (error as Error).message };
   }
 }
+
+// =================================================
+// Get pet types by species IDs
+// - used for leveling queue import
+// =================================================
+
+enum PET_TYPES {
+  HUMANOID = 1,
+  DRAGONKIN = 2,
+  FLYING = 3,
+  UNDEAD = 4,
+  CRITTER = 5,
+  MAGIC = 6,
+  ELEMENTAL = 7,
+  BEAST = 8,
+  AQUATIC = 9,
+  MECHANICAL = 10,
+}
+
+export const getPetTypesBySpeciesIds = async (speciesIds: number[]) => {
+  try {
+    const uniqueSpeciesIds = [...new Set(speciesIds)];
+
+    if (!uniqueSpeciesIds.length) {
+      return {
+        success: true,
+        data: {} as Record<number, number>,
+      };
+    }
+
+    const pets = await petsTable();
+
+    const { data, error } = await pets
+      .select('id, type')
+      .in('id', uniqueSpeciesIds);
+
+    if (error) {
+      console.error('Supabase error:', error);
+
+      return {
+        success: false,
+        error: error.message,
+      };
+    }
+
+    const petTypes: Record<number, number> = {};
+
+    for (const pet of data ?? []) {
+      const key = pet.type.toUpperCase() as keyof typeof PET_TYPES;
+      const type = PET_TYPES[key];
+      petTypes[pet.id] = type;
+    }
+
+    return {
+      success: true,
+      data: petTypes,
+    };
+  } catch (error) {
+    return {
+      success: false,
+      error: (error as Error).message,
+    };
+  }
+};

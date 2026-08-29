@@ -6,12 +6,16 @@ import {
   buildRematchData,
   parseBattleScripts,
 } from '@/utils/rematch-import/parser';
+import { buildPmqQueueExport } from '@/utils/rematch-import/queue-export';
 
 import type {
+  PmqQueueExport,
   RematchImportData,
   RematchSources,
   UseRematchImportResult,
 } from '@/types/rematch-import.types';
+
+import { getPetTypesBySpeciesIds } from '@/actions/supabase/pets-schema/pets/getPets';
 
 const initialSources: RematchSources = {
   teams: null,
@@ -27,19 +31,23 @@ function readFile(file: File): Promise<string> {
 export function useRematchImport(): UseRematchImportResult {
   const [sources, setSources] = useState<RematchSources>(initialSources);
   const [data, setData] = useState<RematchImportData | null>(null);
+  const [queueExport, setQueueExport] = useState<PmqQueueExport | null>(null);
   const [query, setQuery] = useState('');
   const [status, setStatus] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [isReading, setIsReading] = useState(false);
 
-  const rebuild = useCallback((nextSources: RematchSources) => {
+  const rebuild = useCallback(async (nextSources: RematchSources) => {
     setError(null);
+    setQueueExport(null);
 
     if (!nextSources.teams) {
       setData(null);
+
       setStatus(
         `Loaded ${nextSources.scriptsName}. Add Rematch.lua to generate the import strings.`,
       );
+
       return;
     }
 
@@ -52,13 +60,29 @@ export function useRematchImport(): UseRematchImportResult {
 
       if (!parsed) {
         setData(null);
-        setError(
-          'No Rematch5SavedTeams block in that file. Log out of WoW once so the addon writes its SavedVariables, then try again.',
-        );
+
+        setError('No usable Rematch SavedVariables were found.');
+
         return;
       }
 
       setData(parsed);
+
+      if (parsed.queue && parsed.queue.pets.length) {
+        const speciesIds = parsed.queue.pets.flatMap((pet) =>
+          pet.parts ? [pet.parts.species] : [],
+        );
+
+        const petTypes = await getPetTypesBySpeciesIds(speciesIds);
+        if (!petTypes.success || !petTypes.data) {
+          throw new Error(petTypes.error ?? 'Could not retrieve pet types.');
+        }
+        const exportData = buildPmqQueueExport(parsed.queue, petTypes.data);
+
+        setQueueExport(exportData);
+      }
+
+      const queueCount = parsed.queue?.pets.length ?? 0;
 
       let message = `${parsed.teamCount} ${
         parsed.teamCount === 1 ? 'team' : 'teams'
@@ -68,18 +92,20 @@ export function useRematchImport(): UseRematchImportResult {
 
       if (nextSources.scripts) {
         message += `, ${parsed.scripted} with a battle script`;
-      } else {
-        message +=
-          '. No scripts yet — upload tdBattlePetScript.lua too if you want the teams to have their battle scripts';
       }
 
-      setStatus(`${message}.`);
+      message += `. ${queueCount} ${
+        queueCount === 1 ? 'pet' : 'pets'
+      } in the levelling queue.`;
+
+      setStatus(message);
     } catch (cause) {
-      console.error('Unable to parse SavedVariables:', cause);
+      console.error(cause);
+
       setData(null);
-      setError(
-        'That file did not parse as SavedVariables. Make sure it is the .lua itself, not a .bak copy.',
-      );
+      setQueueExport(null);
+
+      setError('The SavedVariables could not be parsed.');
     }
   }, []);
 
@@ -134,7 +160,7 @@ export function useRematchImport(): UseRematchImportResult {
         }
 
         setSources(nextSources);
-        rebuild(nextSources);
+        await rebuild(nextSources);
       } catch (cause) {
         console.error('Unable to read SavedVariables:', cause);
 
@@ -179,6 +205,7 @@ export function useRematchImport(): UseRematchImportResult {
 
   return {
     data,
+    queueExport,
     query,
     setQuery,
     status,

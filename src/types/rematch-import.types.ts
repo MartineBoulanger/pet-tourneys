@@ -32,6 +32,7 @@ export type RematchImportData = {
   tabs: RematchTab[];
   teamCount: number;
   scripted: number;
+  queue: LevellingQueue | null;
 };
 
 export type BattleScriptMap = Record<string, string>;
@@ -55,6 +56,7 @@ export interface RematchImportState {
 
 export interface UseRematchImportResult {
   data: RematchImportData | null;
+  queueExport: PmqQueueExport | null;
   query: string;
   setQuery: (query: string) => void;
   status: string;
@@ -86,4 +88,40 @@ export interface PetSlotProps {
 export interface CopyButtonProps extends PropsWithChildren {
   text: string;
   variant?: 'primary' | 'secondary' | 'link' | 'inverted' | undefined;
+}
+
+export interface LevellingQueuePetParts {
+  species: number;
+  breed: number;
+  level: number;
+  rarity: number;
+}
+
+export interface LevellingQueuePet {
+  tag: string;
+  added: string;
+  parts: LevellingQueuePetParts | null;
+}
+
+export interface LevellingQueue {
+  pets: LevellingQueuePet[];
+}
+
+export interface PmqQueuePet {
+  species: number;
+  breed: number;
+  level: number;
+  rarity: number;
+  type: number;
+}
+
+export interface PmqQueueExport {
+  pets: PmqQueuePet[];
+  string: string;
+  missingTypes: number[];
+}
+
+export interface LevellingQueueProps {
+  queue: LevellingQueue | null;
+  exportData: PmqQueueExport | null;
 }

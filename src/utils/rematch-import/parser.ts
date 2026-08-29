@@ -5,6 +5,8 @@ import type {
   RematchImportData,
   RematchTab,
   RematchTeam,
+  LevellingQueue,
+  LevellingQueuePetParts,
 } from '@/types/rematch-import.types';
 
 const BASE_32 = '0123456789ABCDEFGHIJKLMNOPQRSTUV';
@@ -43,6 +45,26 @@ export function encodeBase32(value: number): string {
   }
 
   return output;
+}
+
+export function decodeBase32(value: string): number | null {
+  if (!value.length) {
+    return null;
+  }
+
+  let number = 0;
+
+  for (const character of value.toUpperCase()) {
+    const digit = BASE_32.indexOf(character);
+
+    if (digit < 0) {
+      return null;
+    }
+
+    number = number * 32 + digit;
+  }
+
+  return number;
 }
 
 export function findLuaBlock(source: string, name: string): string | null {
@@ -348,9 +370,18 @@ export function buildRematchData(
   scriptMap: BattleScriptMap = {},
 ): RematchImportData | null {
   const text = source.replace(/\r\n/g, '\n');
+  const queue = buildLevellingQueue(text);
   const teamBlock = findLuaBlock(text, 'Rematch5SavedTeams');
 
   if (!teamBlock) {
+    if (queue) {
+      return {
+        tabs: [],
+        teamCount: 0,
+        scripted: 0,
+        queue,
+      };
+    }
     return null;
   }
 
@@ -503,5 +534,120 @@ export function buildRematchData(
     tabs,
     teamCount: Object.keys(teamsById).length,
     scripted,
+    queue,
+  };
+}
+
+function findBalancedBlock(source: string, start: number): string | null {
+  const braceStart = source.indexOf('{', start);
+
+  if (braceStart === -1) {
+    return null;
+  }
+
+  let depth = 0;
+  let inString = false;
+  let escaped = false;
+
+  for (let index = braceStart; index < source.length; index++) {
+    const character = source[index];
+
+    if (inString) {
+      if (escaped) {
+        escaped = false;
+      } else if (character === '\\') {
+        escaped = true;
+      } else if (character === '"') {
+        inString = false;
+      }
+
+      continue;
+    }
+
+    if (character === '"') {
+      inString = true;
+    } else if (character === '{') {
+      depth++;
+    } else if (character === '}') {
+      depth--;
+
+      if (depth === 0) {
+        return source.slice(braceStart, index + 1);
+      }
+    }
+  }
+
+  return null;
+}
+
+function findKeyBlock(source: string, key: string): string | null {
+  const expression = new RegExp(`\\[\\s*"${key}"\\s*\\]\\s*=\\s*\\{`);
+
+  const match = expression.exec(source);
+
+  if (!match) {
+    return null;
+  }
+
+  return findBalancedBlock(source, match.index);
+}
+
+export function decodeQueueTag(tag: string): LevellingQueuePetParts | null {
+  if (!tag || tag.length < 5 || !tag.startsWith('Q')) {
+    return null;
+  }
+
+  const level = decodeBase32(tag.charAt(1));
+  const rarity = decodeBase32(tag.charAt(2));
+  const breed = decodeBase32(tag.charAt(3));
+  const species = decodeBase32(tag.slice(4));
+
+  if (level === null || rarity === null || breed === null || species === null) {
+    return null;
+  }
+
+  return {
+    species,
+    breed,
+    level,
+    rarity,
+  };
+}
+
+export function buildLevellingQueue(source: string): LevellingQueue | null {
+  const settingsBlock = findLuaBlock(source, 'Rematch5Settings');
+
+  if (!settingsBlock) {
+    return null;
+  }
+
+  const queueBlock = findKeyBlock(settingsBlock, 'LevelingQueue');
+
+  if (!queueBlock) {
+    return null;
+  }
+
+  const table = parseLuaTable(queueBlock);
+
+  const pets = toList(table)
+    .filter(isLuaTable)
+    .flatMap((entry) => {
+      const petTag = asString(entry.petTag);
+
+      if (!petTag) {
+        return [];
+      }
+
+      return [
+        {
+          tag: petTag,
+          parts: decodeQueueTag(petTag),
+          added: asString(entry.added) ?? '',
+        },
+      ];
+    });
+
+  return {
+    pets,
   };
 }
