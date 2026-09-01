@@ -5,8 +5,16 @@ import type {
   RematchImportData,
   RematchTab,
   RematchTeam,
+  PetMatchSpecialSlot,
+  PetMatchTeam,
   LevellingQueue,
   LevellingQueuePetParts,
+  RematchPetTagParts,
+  PetMatchFolder,
+  PetMatchConvertedData,
+  PetMatchLevellingQueue,
+  PetMatchSettings,
+  PetMatchDatabase,
 } from '@/types/rematch-import.types';
 
 const BASE_32 = '0123456789ABCDEFGHIJKLMNOPQRSTUV';
@@ -365,6 +373,60 @@ export function parseBattleScripts(source: string): BattleScriptMap | null {
   return map;
 }
 
+export function decodeRematchPetTag(tag: string): RematchPetTagParts | null {
+  if (!tag) {
+    return null;
+  }
+
+  if (tag === 'ZL') {
+    return {
+      type: 'leveling',
+      rawPetTag: tag,
+    };
+  }
+
+  if (tag.startsWith('ZR')) {
+    const petType = decodeBase32(tag.slice(2));
+
+    if (petType === null) {
+      return null;
+    }
+
+    return {
+      type: 'random',
+      petType,
+      rawPetTag: tag,
+    };
+  }
+
+  if (tag.length < 5) {
+    return null;
+  }
+
+  const ability1 = decodeBase32(tag.charAt(0));
+  const ability2 = decodeBase32(tag.charAt(1));
+  const ability3 = decodeBase32(tag.charAt(2));
+  const breed = decodeBase32(tag.charAt(3));
+  const species = decodeBase32(tag.slice(4));
+
+  if (
+    ability1 === null ||
+    ability2 === null ||
+    ability3 === null ||
+    breed === null ||
+    species === null
+  ) {
+    return null;
+  }
+
+  return {
+    type: 'pet',
+    abilities: [ability1, ability2, ability3],
+    breed,
+    species,
+  };
+}
+
 export function buildRematchData(
   source: string,
   scriptMap: BattleScriptMap = {},
@@ -397,13 +459,26 @@ export function buildRematchData(
 
     const targetsTable = isLuaTable(value.targets) ? value.targets : undefined;
     const tagsTable = isLuaTable(value.tags) ? value.tags : undefined;
+    const petsTable = isLuaTable(value.pets) ? value.pets : undefined;
 
     const targets = slots(targetsTable)
       .map((target) => (asNumber(target) ? target : null))
       .filter((target): target is number => target !== null);
 
-    const pets = slots(tagsTable).map((pet) =>
+    const petTags = slots(tagsTable).map((tag) =>
+      typeof tag === 'string' ? tag : '',
+    );
+
+    const pets = slots(petsTable).map((pet) =>
       typeof pet === 'string' ? pet : '',
+    );
+
+    const decodedPetTags = petTags.map((tag) =>
+      tag ? decodeRematchPetTag(tag) : null,
+    );
+
+    const breeds = decodedPetTags.map((decoded) =>
+      decoded?.type === 'pet' ? decoded.breed : null,
     );
 
     const name = asString(value.name) ?? '(unnamed team)';
@@ -429,9 +504,9 @@ export function buildRematchData(
     let importString = [
       name,
       npc,
-      pets[0] ?? '',
-      pets[1] ?? '',
-      pets[2] ?? '',
+      petTags[0] ?? '',
+      petTags[1] ?? '',
+      petTags[2] ?? '',
       '',
     ].join(':');
 
@@ -445,9 +520,18 @@ export function buildRematchData(
       npc,
       npcId,
       extraTargets: Math.max(targets.length - 1, 0),
+
       pets,
+      petTags,
+      decodedPetTags,
+      breeds,
+      abilities: [],
+
       groupId: asString(value.groupID) ?? String(value.groupID ?? ''),
+
       hasScript: Boolean(code),
+      script: code?.trim() ?? '',
+
       importString,
     };
   }
@@ -501,7 +585,9 @@ export function buildRematchData(
       id: groupId,
       name: tabName,
       color: asString(value.color) ?? null,
+
       teams: [...ordered].sort((a, b) => a.name.localeCompare(b.name)),
+
       exportBlock: [
         `__ ${tabName} __`,
         '',
@@ -632,22 +718,185 @@ export function buildLevellingQueue(source: string): LevellingQueue | null {
   const pets = toList(table)
     .filter(isLuaTable)
     .flatMap((entry) => {
+      const petID = asString(entry.petID);
       const petTag = asString(entry.petTag);
 
-      if (!petTag) {
+      if (!petID || !petTag) {
         return [];
       }
 
       return [
         {
+          petID,
           tag: petTag,
           parts: decodeQueueTag(petTag),
           added: asString(entry.added) ?? '',
+          preferred: entry.preferred === true,
         },
       ];
     });
 
   return {
     pets,
+  };
+}
+
+function createPetMatchId(): string {
+  return Math.floor(Math.random() * Number.MAX_SAFE_INTEGER).toString(16);
+}
+
+function buildPetMatchLevellingQueue(
+  queue: LevellingQueue | null,
+): PetMatchLevellingQueue {
+  const pets = queue?.pets.map((pet) => pet.petID).filter(Boolean) ?? [];
+
+  return {
+    pets,
+    initialized: true,
+    knownPets: {},
+  };
+}
+
+function buildDefaultPetMatchSettings(): PetMatchSettings {
+  return {
+    summonedPetMode: 'keep',
+    animations: true,
+    petCardTeamsEnabled: true,
+    autoAddNewPetsToLevellingQueue: true,
+    petCardVisibilityMode: 'both',
+    theme: 'Dark',
+    petCardLevellingQueueEnabled: true,
+    debug: false,
+    ui: {
+      teamCardMode: 'comfortable',
+      teamSortMode: 'favorites',
+    },
+    petListBreedPosition: 'right',
+    compactPetListRows: false,
+    showTooltips: true,
+    petCardInteractionMode: 'both',
+    petCardPetListEnabled: true,
+    levellingQueueAutoAddMode: 'disabled',
+    showPetListBreed: true,
+    duplicateTeamMode: 'replace',
+    scale: 1,
+  };
+}
+
+export function buildPetMatchDatabase(
+  data: RematchImportData,
+): PetMatchDatabase {
+  const converted = buildPetMatchData(data);
+
+  return {
+    version: 1,
+    cache: {},
+    characters: {},
+    profileKeys: {},
+    global: {
+      settings: {},
+    },
+    profiles: {
+      Default: {
+        folders: converted.folders,
+        teams: converted.teams,
+        levellingQueue: converted.levellingQueue,
+        settings: buildDefaultPetMatchSettings(),
+        activeTeam: {},
+        tags: {},
+        favorites: {},
+      },
+    },
+  };
+}
+
+export function buildPetMatchTeam(
+  team: RematchTeam,
+  folderID: string,
+  timestamp = Math.floor(Date.now() / 1000),
+): PetMatchTeam {
+  const specialSlots: Record<number, PetMatchSpecialSlot> = {};
+
+  team.decodedPetTags.forEach((tag, index) => {
+    if (!tag) return;
+
+    const slot = index + 1;
+
+    if (tag.type === 'leveling') {
+      specialSlots[slot] = {
+        type: 'leveling',
+        rawPetTag: tag.rawPetTag,
+      };
+
+      return;
+    }
+
+    if (tag.type === 'random') {
+      specialSlots[slot] = {
+        type: 'random',
+        petType: tag.petType,
+        rawPetTag: tag.rawPetTag,
+      };
+    }
+  });
+
+  const pets = team.pets.filter(
+    (pet, index) => pet && team.decodedPetTags[index]?.type === 'pet',
+  );
+
+  const breeds = team.breeds.filter((breed): breed is number => breed !== null);
+
+  return {
+    id: createPetMatchId(),
+    name: team.name,
+    pets,
+    breeds,
+    abilities: team.abilities,
+    folderID,
+    specialSlots,
+    targetNPCIDs: team.npcId !== null ? [team.npcId] : [],
+    script: team.script,
+    notes: '',
+    description: '',
+    strategy: '',
+    tags: [],
+    favorite: false,
+    importSource: 'rematch',
+    createdBy: 'PetMatch',
+    created: timestamp,
+    modified: timestamp,
+  };
+}
+
+export function buildPetMatchData(
+  data: RematchImportData,
+): PetMatchConvertedData {
+  const now = Math.floor(Date.now() / 1000);
+
+  const folders: Record<string, PetMatchFolder> = {};
+  const teams: Record<string, PetMatchTeam> = {};
+
+  data.tabs.forEach((tab, tabIndex) => {
+    const folderID = createPetMatchId();
+
+    folders[folderID] = {
+      id: folderID,
+      name: tab.name,
+      order: tabIndex + 1,
+      created: now,
+      modified: now,
+    };
+
+    for (const team of tab.teams) {
+      const petMatchTeam = buildPetMatchTeam(team, folderID, now);
+
+      teams[petMatchTeam.id] = petMatchTeam;
+    }
+  });
+
+  return {
+    folders,
+    teams,
+    levellingQueue: buildPetMatchLevellingQueue(data.queue),
   };
 }

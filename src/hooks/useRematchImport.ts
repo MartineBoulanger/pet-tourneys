@@ -3,6 +3,7 @@
 import { useCallback, useMemo, useState } from 'react';
 
 import {
+  buildPetMatchDatabase,
   buildRematchData,
   parseBattleScripts,
 } from '@/utils/rematch-import/parser';
@@ -16,6 +17,8 @@ import type {
 } from '@/types/rematch-import.types';
 
 import { getPetTypesBySpeciesIds } from '@/actions/supabase/pets-schema/pets/getPets';
+import { addAbilitiesToRematchData } from '@/utils/rematch-import/resolve-pet-abilities';
+import { serializePetMatchDatabase } from '@/utils/rematch-import/petmatch-lua-serializer';
 
 const initialSources: RematchSources = {
   teams: null,
@@ -36,10 +39,12 @@ export function useRematchImport(): UseRematchImportResult {
   const [status, setStatus] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [isReading, setIsReading] = useState(false);
+  const [petMatchLua, setPetMatchLua] = useState('');
 
   const rebuild = useCallback(async (nextSources: RematchSources) => {
     setError(null);
     setQueueExport(null);
+    setPetMatchLua('');
 
     if (!nextSources.teams) {
       setData(null);
@@ -60,13 +65,16 @@ export function useRematchImport(): UseRematchImportResult {
 
       if (!parsed) {
         setData(null);
-
         setError('No usable Rematch SavedVariables were found.');
-
         return;
       }
 
-      setData(parsed);
+      const enriched = await addAbilitiesToRematchData(parsed);
+      const petMatchDatabase = buildPetMatchDatabase(enriched);
+      const petMatchLua = serializePetMatchDatabase(petMatchDatabase);
+
+      setPetMatchLua(petMatchLua);
+      setData(enriched);
 
       if (parsed.queue && parsed.queue.pets.length) {
         const speciesIds = parsed.queue.pets.flatMap((pet) =>
@@ -104,8 +112,13 @@ export function useRematchImport(): UseRematchImportResult {
 
       setData(null);
       setQueueExport(null);
+      setPetMatchLua('');
 
-      setError('The SavedVariables could not be parsed.');
+      setError(
+        cause instanceof Error
+          ? cause.message
+          : 'The SavedVariables could not be processed.',
+      );
     }
   }, []);
 
@@ -206,6 +219,7 @@ export function useRematchImport(): UseRematchImportResult {
   return {
     data,
     queueExport,
+    petMatchLua,
     query,
     setQuery,
     status,

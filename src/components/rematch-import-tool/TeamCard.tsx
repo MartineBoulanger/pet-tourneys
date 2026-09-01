@@ -35,12 +35,12 @@ export function TeamCard({ team }: TeamCardProps) {
       </div>
 
       <div className='my-2.5 flex flex-wrap items-center gap-2.5'>
-        {team.pets.map((pet, index) => (
+        {team.petTags.map((pet, index) => (
           <PetSlot key={`${team.id}-${index}`} value={pet} />
         ))}
 
         <span className='text-xs text-foreground/80'>
-          {'abilities · speciesID'}
+          {'abilities · breed · species'}
         </span>
       </div>
 

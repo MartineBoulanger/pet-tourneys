@@ -15,9 +15,35 @@ export type RematchTeam = {
   npcId: number | null;
   extraTargets: number;
   pets: string[];
+  petTags: string[];
+  decodedPetTags: Array<RematchPetTagParts | null>;
+  breeds: Array<number | null>;
+  abilities: ResolvedPetAbilities[];
   groupId: string;
   hasScript: boolean;
+  script: string;
   importString: string;
+};
+
+export type PetMatchTeam = {
+  id: string;
+  name: string;
+  pets: string[];
+  breeds: number[];
+  abilities: ResolvedPetAbilities[];
+  folderID: string;
+  specialSlots: Record<number, PetMatchSpecialSlot>;
+  targetNPCIDs: number[];
+  script: string;
+  notes: string;
+  description: string;
+  strategy: string;
+  tags: string[];
+  favorite: boolean;
+  importSource: 'rematch';
+  createdBy: 'PetMatch';
+  created: number;
+  modified: number;
 };
 
 export type RematchTab = {
@@ -57,6 +83,7 @@ export interface RematchImportState {
 export interface UseRematchImportResult {
   data: RematchImportData | null;
   queueExport: PmqQueueExport | null;
+  petMatchLua: string;
   query: string;
   setQuery: (query: string) => void;
   status: string;
@@ -97,11 +124,13 @@ export interface LevellingQueuePetParts {
   rarity: number;
 }
 
-export interface LevellingQueuePet {
+export type LevellingQueuePet = {
+  petID: string;
   tag: string;
-  added: string;
   parts: LevellingQueuePetParts | null;
-}
+  added: string;
+  preferred: boolean;
+};
 
 export interface LevellingQueue {
   pets: LevellingQueuePet[];
@@ -125,3 +154,119 @@ export interface LevellingQueueProps {
   queue: LevellingQueue | null;
   exportData: PmqQueueExport | null;
 }
+
+export type PetMatchSpecialSlot =
+  | {
+      type: 'leveling';
+      rawPetTag: string;
+    }
+  | {
+      type: 'random';
+      petType: number;
+      rawPetTag: string;
+    };
+
+export type RematchPetTagParts =
+  | {
+      type: 'pet';
+      abilities: [number, number, number];
+      breed: number;
+      species: number;
+    }
+  | {
+      type: 'leveling';
+      rawPetTag: string;
+    }
+  | {
+      type: 'random';
+      petType: number;
+      rawPetTag: string;
+    };
+
+export type SpeciesAbilities = [number, number, number, number, number, number];
+
+export type SpeciesAbilityMap = Record<number, SpeciesAbilities>;
+
+export type PetAbilityIds = [
+  number | null,
+  number | null,
+  number | null,
+  number | null,
+  number | null,
+  number | null,
+];
+
+export type PetAbilitiesBySpecies = Record<number, PetAbilityIds>;
+
+export type PetMatchFolder = {
+  id: string;
+  name: string;
+  order: number;
+  created: number;
+  modified: number;
+};
+
+export type PetMatchConvertedData = {
+  folders: Record<string, PetMatchFolder>;
+  teams: Record<string, PetMatchTeam>;
+  levellingQueue: PetMatchLevellingQueue;
+};
+
+export type ResolvedPetAbilities = [
+  number | null,
+  number | null,
+  number | null,
+];
+
+export type PetMatchLevellingQueue = {
+  pets: string[];
+  initialized: boolean;
+  knownPets: Record<string, boolean>;
+};
+
+export type PetMatchSettings = {
+  summonedPetMode: 'keep';
+  animations: boolean;
+  petCardTeamsEnabled: boolean;
+  autoAddNewPetsToLevellingQueue: boolean;
+  petCardVisibilityMode: 'both';
+  theme: 'Dark';
+  petCardLevellingQueueEnabled: boolean;
+  debug: boolean;
+  ui: {
+    teamCardMode: 'comfortable';
+    teamSortMode: 'favorites';
+  };
+  petListBreedPosition: 'right';
+  compactPetListRows: boolean;
+  showTooltips: boolean;
+  petCardInteractionMode: 'both';
+  petCardPetListEnabled: boolean;
+  levellingQueueAutoAddMode: 'disabled';
+  showPetListBreed: boolean;
+  duplicateTeamMode: 'replace';
+  scale: number;
+};
+
+export type PetMatchProfile = {
+  folders: Record<string, PetMatchFolder>;
+  teams: Record<string, PetMatchTeam>;
+  levellingQueue: PetMatchLevellingQueue;
+  settings: PetMatchSettings;
+  activeTeam: Record<string, never>;
+  tags: Record<string, never>;
+  favorites: Record<string, never>;
+};
+
+export type PetMatchDatabase = {
+  version: number;
+  cache: Record<string, never>;
+  characters: Record<string, never>;
+  profileKeys: Record<string, never>;
+  global: {
+    settings: Record<string, never>;
+  };
+  profiles: {
+    Default: PetMatchProfile;
+  };
+};

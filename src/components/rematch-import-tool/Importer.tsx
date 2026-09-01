@@ -8,15 +8,17 @@ import { FileDropZone } from './FileDropZone';
 import { Tab } from './Tab';
 import { CopyButton } from './CopyButton';
 import { LevellingQueue } from './LevellingQueue';
+import { DownloadLuaButton } from './DownloadLuaButton';
 
 import { useRematchImport } from '@/hooks/useRematchImport';
 
-type ImportView = 'teams' | 'levelling-queue';
+type ImportView = 'teams' | 'levelling-queue' | 'petmatch-file';
 
 export function Importer() {
   const {
     data,
     queueExport,
+    petMatchLua,
     query,
     setQuery,
     status,
@@ -100,6 +102,24 @@ export function Importer() {
               {'Levelling Queue'}
               <span className='ml-2 text-xs text-humanoid'>{queueCount}</span>
             </Button>
+
+            <Button
+              type='button'
+              role='tab'
+              variant='link'
+              aria-selected={view === 'petmatch-file'}
+              onClick={() => setView('petmatch-file')}
+              className={`
+                            px-4 py-2.5 border-b-2 border-transparent
+                            ${
+                              view === 'petmatch-file'
+                                ? 'border-b-2 border-humanoid text-foreground rounded-none'
+                                : 'text-muted-foreground'
+                            }
+                          `}
+            >
+              {'PetMatch.lua'}
+            </Button>
           </div>
 
           {view === 'teams' && (
@@ -158,6 +178,29 @@ export function Importer() {
 
           {view === 'levelling-queue' && (
             <LevellingQueue queue={data.queue} exportData={queueExport} />
+          )}
+
+          {view === 'petmatch-file' && (
+            <div className='pt-5'>
+              <Paragraph>
+                {
+                  'Download the converted PetMatch.lua file and place it in your World of Warcraft SavedVariables folder. Make sure World of Warcraft is completely closed before replacing the existing PetMatch.lua file, otherwise the changes will not be saved. The default location for the SavedVariables folder is: World of Warcraft/_retail_/WTF/Account/<YourAccountName>/SavedVariables. If there is already a PetMatch.lua file in that folder, you can replace it with the new one. You can scroll through the whole file down here, if you prefer to only copy pieces of the file, but it makes more sense to just download the file and replace the existing one.'
+                }
+              </Paragraph>
+
+              <div className='my-5 h-1 w-20 rounded-full bg-humanoid mx-auto' />
+
+              <div className='flex items-center justify-end mb-5'>
+                <DownloadLuaButton
+                  content={petMatchLua}
+                  filename='PetMatch.lua'
+                />
+              </div>
+
+              <pre className='max-h-[500px] overflow-auto whitespace-pre-wrap rounded-lg bg-light-grey p-5 text-sm'>
+                {petMatchLua}
+              </pre>
+            </div>
           )}
         </div>
       )}

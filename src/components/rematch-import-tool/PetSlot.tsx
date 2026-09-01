@@ -21,14 +21,17 @@ export function PetSlot({ value }: PetSlotProps) {
   }
 
   const abilities = value.slice(0, 3);
-  const species = value.slice(3);
+  const breed = value.charAt(3);
+  const species = value.slice(4);
 
   return (
     <div className='flex overflow-hidden rounded-md border border-humanoid bg-background text-sm shadow-sm'>
-      <span className='px-2 py-1 tracking-wider border-r border-humanoid text-foreground'>
+      <span className='px-2 py-1 tracking-wider text-foreground'>
         {abilities}
       </span>
-
+      <span className='px-2 py-1 tracking-wider border-x border-humanoid text-humanoid shadow-inner'>
+        {breed}
+      </span>
       <span className='px-2 py-1 tracking-wider text-foreground'>
         {species}
       </span>
