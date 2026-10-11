@@ -15,6 +15,7 @@ import type {
   PetMatchLevellingQueue,
   PetMatchSettings,
   PetMatchDatabase,
+  RematchPreferences,
 } from '@/types/rematch-import.types';
 
 const BASE_32 = '0123456789ABCDEFGHIJKLMNOPQRSTUV';
@@ -312,6 +313,20 @@ function toList(table?: LuaTable): LuaValue[] {
   return output;
 }
 
+function encodeRematchPreferences(preferences: RematchPreferences): string {
+  const { minHP, allowMM, expectedDD, maxHP, minXP, maxXP } = preferences;
+
+  const hasPreferences = [minHP, allowMM, expectedDD, maxHP, minXP, maxXP].some(
+    (value) => value !== undefined,
+  );
+
+  if (!hasPreferences) {
+    return '';
+  }
+
+  return `P:${minHP ?? ''}:${allowMM ? '1' : ''}:${expectedDD ?? ''}:${maxHP ?? ''}:${minXP ?? ''}:${maxXP ?? ''}:`;
+}
+
 function escapeNotes(value: string): string {
   return value
     .replace(/\r\n/g, '\n')
@@ -501,6 +516,9 @@ export function buildRematchData(
       scripted++;
     }
 
+    const preferences = parseRematchPreferences(value.preferences);
+    const preferencesExport = encodeRematchPreferences(preferences);
+
     let importString = [
       name,
       npc,
@@ -509,6 +527,10 @@ export function buildRematchData(
       petTags[2] ?? '',
       '',
     ].join(':');
+
+    if (preferencesExport) {
+      importString += `:${preferencesExport}`;
+    }
 
     if (notes) {
       importString += `:N:${escapeNotes(notes)}`;
@@ -526,7 +548,7 @@ export function buildRematchData(
       decodedPetTags,
       breeds,
       abilities: [],
-
+      preferences: parseRematchPreferences(value.preferences),
       groupId: asString(value.groupID) ?? String(value.groupID ?? ''),
 
       hasScript: Boolean(code),
@@ -759,27 +781,34 @@ function buildPetMatchLevellingQueue(
 
 function buildDefaultPetMatchSettings(): PetMatchSettings {
   return {
-    summonedPetMode: 'keep',
-    animations: true,
-    petCardTeamsEnabled: true,
-    autoAddNewPetsToLevellingQueue: true,
-    petCardVisibilityMode: 'both',
-    theme: 'Dark',
-    petCardLevellingQueueEnabled: true,
-    debug: false,
-    ui: {
-      teamCardMode: 'comfortable',
-      teamSortMode: 'favorites',
-    },
-    petListBreedPosition: 'right',
-    compactPetListRows: false,
-    showTooltips: true,
-    petCardInteractionMode: 'both',
-    petCardPetListEnabled: true,
-    levellingQueueAutoAddMode: 'disabled',
-    showPetListBreed: true,
-    duplicateTeamMode: 'replace',
     scale: 1,
+    debug: false,
+    selectedFolderKey: '__UNSORTED__',
+    selectedTeamID: null,
+    teamSortMode: 'name',
+
+    ui: {
+      theme: 'dark',
+      petCardBackground: 'marble',
+      compactPetListRows: false,
+      teamCardHeightMode: 'normal',
+      petTypeFilterDisplayMode: 'both',
+      petListBreedPosition: 'right',
+    },
+
+    duplicateTeamMode: 'replace',
+    petCardInteractionMode: 'hover',
+    petCardPetListEnabled: true,
+    petCardTeamsEnabled: true,
+    petCardLevellingQueueEnabled: true,
+    petCardTargetEnabled: true,
+    levellingQueueAutoAddMode: 'disabled',
+    summonedPetMode: 'keep',
+    restorePreviousSummonedPet: false,
+    autoOpenNotesOnPvEBattle: false,
+    autoOpenPetJournalAfterBattle: true,
+    statusBarClearMode: 'all',
+    targetTeamLoadMode: 'off',
   };
 }
 
@@ -826,6 +855,15 @@ export function buildPetMatchTeam(
       specialSlots[slot] = {
         type: 'leveling',
         rawPetTag: tag.rawPetTag,
+        ...(team.preferences.minXP !== undefined && {
+          minimumLevel: team.preferences.minXP,
+        }),
+        ...(team.preferences.maxXP !== undefined && {
+          maximumLevel: team.preferences.maxXP,
+        }),
+        ...(team.preferences.minHP !== undefined && {
+          minimumHealth: team.preferences.minHP,
+        }),
       };
 
       return;
@@ -852,6 +890,7 @@ export function buildPetMatchTeam(
     pets,
     breeds,
     abilities: team.abilities,
+    preferences: team.preferences,
     folderID,
     specialSlots,
     targetNPCIDs: team.npcId !== null ? [team.npcId] : [],
@@ -899,4 +938,34 @@ export function buildPetMatchData(
     teams,
     levellingQueue: buildPetMatchLevellingQueue(data.queue),
   };
+}
+
+function parseRematchPreferences(value: LuaValue): RematchPreferences {
+  if (!isLuaTable(value)) {
+    return {};
+  }
+
+  const preferences: RematchPreferences = {};
+
+  const numericKeys = [
+    'minHP',
+    'expectedDD',
+    'maxHP',
+    'minXP',
+    'maxXP',
+  ] as const;
+
+  for (const key of numericKeys) {
+    const number = asNumber(value[key]);
+
+    if (number !== null) {
+      preferences[key] = number;
+    }
+  }
+
+  if (typeof value.allowMM === 'boolean') {
+    preferences.allowMM = value.allowMM;
+  }
+
+  return preferences;
 }

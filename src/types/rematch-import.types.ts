@@ -19,6 +19,7 @@ export type RematchTeam = {
   decodedPetTags: Array<RematchPetTagParts | null>;
   breeds: Array<number | null>;
   abilities: ResolvedPetAbilities[];
+  preferences: RematchPreferences;
   groupId: string;
   hasScript: boolean;
   script: string;
@@ -37,6 +38,7 @@ export type PetMatchTeam = {
   script: string;
   notes: string;
   description: string;
+  preferences: RematchPreferences;
   strategy: string;
   tags: string[];
   favorite: boolean;
@@ -159,11 +161,18 @@ export type PetMatchSpecialSlot =
   | {
       type: 'leveling';
       rawPetTag: string;
+      minimumLevel?: number;
+      maximumLevel?: number;
+      minimumHealth?: number;
+      level?: number;
+      rarity?: number;
     }
   | {
       type: 'random';
       petType: number;
       rawPetTag: string;
+      level?: number;
+      rarity?: number;
     };
 
 export type RematchPetTagParts =
@@ -225,27 +234,34 @@ export type PetMatchLevellingQueue = {
 };
 
 export type PetMatchSettings = {
-  summonedPetMode: 'keep';
-  animations: boolean;
-  petCardTeamsEnabled: boolean;
-  autoAddNewPetsToLevellingQueue: boolean;
-  petCardVisibilityMode: 'both';
-  theme: 'Dark';
-  petCardLevellingQueueEnabled: boolean;
-  debug: boolean;
-  ui: {
-    teamCardMode: 'comfortable';
-    teamSortMode: 'favorites';
-  };
-  petListBreedPosition: 'right';
-  compactPetListRows: boolean;
-  showTooltips: boolean;
-  petCardInteractionMode: 'both';
-  petCardPetListEnabled: boolean;
-  levellingQueueAutoAddMode: 'disabled';
-  showPetListBreed: boolean;
-  duplicateTeamMode: 'replace';
   scale: number;
+  debug: boolean;
+  selectedFolderKey: '__UNSORTED__';
+  selectedTeamID: null;
+  teamSortMode: 'name';
+
+  ui: {
+    theme: 'dark';
+    petCardBackground: 'marble';
+    compactPetListRows: boolean;
+    teamCardHeightMode: 'normal';
+    petTypeFilterDisplayMode: 'both';
+    petListBreedPosition: 'right';
+  };
+
+  duplicateTeamMode: 'replace';
+  petCardInteractionMode: 'hover';
+  petCardPetListEnabled: boolean;
+  petCardTeamsEnabled: boolean;
+  petCardLevellingQueueEnabled: boolean;
+  petCardTargetEnabled: boolean;
+  levellingQueueAutoAddMode: 'disabled';
+  summonedPetMode: 'keep';
+  restorePreviousSummonedPet: boolean;
+  autoOpenNotesOnPvEBattle: boolean;
+  autoOpenPetJournalAfterBattle: boolean;
+  statusBarClearMode: 'all';
+  targetTeamLoadMode: 'off';
 };
 
 export type PetMatchProfile = {
@@ -269,4 +285,13 @@ export type PetMatchDatabase = {
   profiles: {
     Default: PetMatchProfile;
   };
+};
+
+export type RematchPreferences = {
+  minHP?: number;
+  allowMM?: boolean;
+  expectedDD?: number;
+  maxHP?: number;
+  minXP?: number;
+  maxXP?: number;
 };
