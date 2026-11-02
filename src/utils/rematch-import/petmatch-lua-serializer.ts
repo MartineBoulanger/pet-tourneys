@@ -82,7 +82,9 @@ function serializeObject(
 
   for (const [key, entryValue] of entries) {
     const luaKey =
-      parentKey === 'specialSlots' && /^\d+$/.test(key)
+      (parentKey === 'specialSlots' || parentKey === 'species') &&
+      /^\d+$/.test(key) &&
+      Number.isSafeInteger(Number(key))
         ? `[${key}]`
         : `["${escapeLuaString(key)}"]`;
 

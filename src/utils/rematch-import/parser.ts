@@ -16,6 +16,7 @@ import type {
   PetMatchSettings,
   PetMatchDatabase,
   RematchPreferences,
+  RematchPetNotes,
 } from '@/types/rematch-import.types';
 
 const BASE_32 = '0123456789ABCDEFGHIJKLMNOPQRSTUV';
@@ -448,6 +449,7 @@ export function buildRematchData(
 ): RematchImportData | null {
   const text = source.replace(/\r\n/g, '\n');
   const queue = buildLevellingQueue(text);
+  const petNotes = parseRematchPetNotes(text);
   const teamBlock = findLuaBlock(text, 'Rematch5SavedTeams');
 
   if (!teamBlock) {
@@ -457,6 +459,7 @@ export function buildRematchData(
         teamCount: 0,
         scripted: 0,
         queue,
+        petNotes,
       };
     }
     return null;
@@ -643,6 +646,7 @@ export function buildRematchData(
     teamCount: Object.keys(teamsById).length,
     scripted,
     queue,
+    petNotes,
   };
 }
 
@@ -698,6 +702,39 @@ function findKeyBlock(source: string, key: string): string | null {
   }
 
   return findBalancedBlock(source, match.index);
+}
+
+export function parseRematchPetNotes(source: string): RematchPetNotes {
+  const settingsBlock = findLuaBlock(source, 'Rematch5Settings');
+
+  if (!settingsBlock) {
+    return {};
+  }
+
+  const notesBlock = findKeyBlock(settingsBlock, 'PetNotes');
+
+  if (!notesBlock) {
+    return {};
+  }
+
+  const rawNotes = parseLuaTable(notesBlock);
+  const petNotes: RematchPetNotes = {};
+
+  for (const [key, value] of Object.entries(rawNotes)) {
+    const speciesID = Number(key);
+
+    if (!Number.isSafeInteger(speciesID) || speciesID <= 0) {
+      continue;
+    }
+
+    if (typeof value !== 'string' || !value.trim()) {
+      continue;
+    }
+
+    petNotes[speciesID] = value;
+  }
+
+  return petNotes;
 }
 
 export function decodeQueueTag(tag: string): LevellingQueuePetParts | null {
@@ -809,6 +846,8 @@ function buildDefaultPetMatchSettings(): PetMatchSettings {
     autoOpenPetJournalAfterBattle: true,
     statusBarClearMode: 'all',
     targetTeamLoadMode: 'off',
+    cageConfirmationMode: 'default',
+    releaseConfirmationMode: 'default',
   };
 }
 
@@ -830,6 +869,10 @@ export function buildPetMatchDatabase(
         folders: converted.folders,
         teams: converted.teams,
         levellingQueue: converted.levellingQueue,
+        petNotes: {
+          pets: {},
+          species: data.petNotes,
+        },
         settings: buildDefaultPetMatchSettings(),
         activeTeam: {},
         tags: {},

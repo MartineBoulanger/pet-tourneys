@@ -56,11 +56,14 @@ export type RematchTab = {
   exportBlock: string;
 };
 
+export type RematchPetNotes = Record<number, string>;
+
 export type RematchImportData = {
   tabs: RematchTab[];
   teamCount: number;
   scripted: number;
   queue: LevellingQueue | null;
+  petNotes: RematchPetNotes;
 };
 
 export type BattleScriptMap = Record<string, string>;
@@ -262,12 +265,20 @@ export type PetMatchSettings = {
   autoOpenPetJournalAfterBattle: boolean;
   statusBarClearMode: 'all';
   targetTeamLoadMode: 'off';
+  cageConfirmationMode: 'default';
+  releaseConfirmationMode: 'default';
+};
+
+export type PetMatchPetNotes = {
+  pets: Record<string, string>;
+  species: Record<number, string>;
 };
 
 export type PetMatchProfile = {
   folders: Record<string, PetMatchFolder>;
   teams: Record<string, PetMatchTeam>;
   levellingQueue: PetMatchLevellingQueue;
+  petNotes: PetMatchPetNotes;
   settings: PetMatchSettings;
   activeTeam: Record<string, never>;
   tags: Record<string, never>;
