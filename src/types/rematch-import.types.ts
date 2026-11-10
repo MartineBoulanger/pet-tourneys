@@ -29,8 +29,8 @@ export type RematchTeam = {
 export type PetMatchTeam = {
   id: string;
   name: string;
-  pets: string[];
-  breeds: number[];
+  pets: (string | null)[];
+  breeds: (number | null)[];
   abilities: ResolvedPetAbilities[];
   folderID: string;
   specialSlots: Record<number, PetMatchSpecialSlot>;

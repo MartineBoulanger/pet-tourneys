@@ -54,6 +54,10 @@ function serializeArray(values: unknown[], level: number): string {
   const lines: string[] = ['{'];
 
   values.forEach((value, index) => {
+    if (value === null || value === undefined) {
+      return;
+    }
+
     lines.push(
       `${indent(level + 1)}[${index + 1}] = ${serializeLuaValue(
         value,

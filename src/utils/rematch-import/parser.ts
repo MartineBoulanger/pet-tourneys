@@ -921,11 +921,13 @@ export function buildPetMatchTeam(
     }
   });
 
-  const pets = team.pets.filter(
-    (pet, index) => pet && team.decodedPetTags[index]?.type === 'pet',
+  const pets = team.pets.map((pet, index) =>
+    team.decodedPetTags[index]?.type === 'pet' && pet ? pet : null,
   );
 
-  const breeds = team.breeds.filter((breed): breed is number => breed !== null);
+  const breeds = team.breeds.map((breed, index) =>
+    team.decodedPetTags[index]?.type === 'pet' ? breed : null,
+  );
 
   return {
     id: createPetMatchId(),
